@@ -2,8 +2,11 @@
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
 			   xmlns:mx="library://ns.adobe.com/flex/halo" 
-			   minWidth="1024" minHeight="768">
+			   xmlns:components="com.lookbackon.ccj.view.components.*">
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
+	
+	<!-- Views here -->
+	<components:ChessBoard/>
 </s:Application>
