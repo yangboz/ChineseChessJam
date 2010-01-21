@@ -7,9 +7,6 @@
 		 xmlns:paint="com.degrafa.paint.*" 
 		 xmlns:geometry="com.degrafa.geometry.*" 
 		 xmlns:transform="com.degrafa.transform.*">
-	<s:layout>
-		<s:VerticalLayout/>
-	</s:layout>
 	<fx:Script>
 		<![CDATA[
 			//--------------------------------------------------------------------------

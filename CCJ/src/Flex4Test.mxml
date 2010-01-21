@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/halo"
+			   minWidth="1024" minHeight="768"
+			   creationComplete="application1_creationCompleteHandler(event)" >
+	<fx:Script>
+		<![CDATA[
+			import com.lookbackon.ccj.model.vo.BitBoard;
+			
+			import de.polygonal.ds.Array2;
+			
+			import mx.events.FlexEvent;
+			
+			
+			private var blackPieces:BitBoard;
+			private var redPieces:Array2;
+			protected function application1_creationCompleteHandler(event:FlexEvent):void
+			{
+				// TODO Auto-generated method stub
+				
+				blackPieces = new BitBoard(9,9);
+				blackPieces.setBitt(0,2,true);
+				blackPieces.setBitt(0,3,true);
+				trace(blackPieces.dump());
+				blackPieces.setAll();
+				trace(blackPieces.dump());
+				blackPieces.clear();
+				trace(blackPieces.dump());
+				/* for(var x:uint=1;x<=32768;x<<=4)
+				{
+					trace(x.toString(16),(x<<1).toString(16),(x<<2).toString(16),(x<<3).toString(16));
+				}
+				var index:int = 2;
+				trace(index & 0x40);  */
+				redPieces = new Array2(9,9);
+				redPieces.sett(0,2,1);
+				redPieces.sett(0,3,1);
+				trace(redPieces.dump());
+			}
+
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<s:ArrayList id="arrList" source="[Red,Orange,Yellow,Green,Blue]"/>
+		
+		<fx:Component className="ico">
+			<s:Graphic>
+				<s:states>
+					<s:State name="up"/>
+					<s:State name="over"/>
+					<s:State name="down"/>
+					<s:State name="disable"/>
+				</s:states>
+				<s:Ellipse width="80" height="80">
+					<s:fill>
+						<s:SolidColor color="red" color.over="green" color.down="blue"/>
+					</s:fill>
+				</s:Ellipse>
+			</s:Graphic>
+		</fx:Component>
+		
+	</fx:Declarations>
+	<s:VGroup horizontalCenter="0" verticalCenter="0">
+		<s:Label text="--start"/>
+		<mx:HBox>
+			<s:Graphic>
+				<s:Rect width="100" height="100">
+					<s:fill>
+						<s:SolidColor id="sc" color="0xffccdd"/>
+					</s:fill>
+					<s:stroke>
+						<s:SolidColorStroke color="0xffeeff" weight="2"/>
+					</s:stroke>
+				</s:Rect>
+			</s:Graphic>
+		</mx:HBox>
+		<mx:LinkButton icon="{ico}" />
+	</s:VGroup>
+</s:Application>
