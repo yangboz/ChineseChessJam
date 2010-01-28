@@ -74,7 +74,7 @@ package com.lookbackon.ccj.model.vo
 				result = result.concat("\n","\t");
 				for(var w:int=0;w<width;w++)
 				{
-					result = result.concat("[",this.getBit(w*h).toString(),"]");
+					result = result.concat("[",this.getBit(this.width*h+w).toString(),"]");
 				}
 			}
 			result = result.concat("\n","}","]");

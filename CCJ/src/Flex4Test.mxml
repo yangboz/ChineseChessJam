@@ -7,26 +7,30 @@
 	<fx:Script>
 		<![CDATA[
 			import com.lookbackon.ccj.model.vo.BitBoard;
+			import com.lookbackon.ccj.utils.LogUtil;
 			
 			import de.polygonal.ds.Array2;
 			
 			import mx.events.FlexEvent;
+			import mx.logging.ILogger;
+			import mx.logging.LogEventLevel;
 			
-			
+			private static const LOG:ILogger  = LogUtil.getLogger(Flex4Test);
 			private var blackPieces:BitBoard;
 			private var redPieces:Array2;
 			protected function application1_creationCompleteHandler(event:FlexEvent):void
 			{
 				// TODO Auto-generated method stub
-				
 				blackPieces = new BitBoard(9,9);
 				blackPieces.setBitt(0,2,true);
 				blackPieces.setBitt(0,3,true);
-				trace(blackPieces.dump());
+				blackPieces.setBitt(2,3,true);
+				blackPieces.setBitt(7,7,true);
+				LOG.debug(blackPieces.dump());
 				blackPieces.setAll();
-				trace(blackPieces.dump());
+				LOG.debug(blackPieces.dump());
 				blackPieces.clear();
-				trace(blackPieces.dump());
+				LOG.debug(blackPieces.dump());
 				/* for(var x:uint=1;x<=32768;x<<=4)
 				{
 					trace(x.toString(16),(x<<1).toString(16),(x<<2).toString(16),(x<<3).toString(16));
@@ -34,9 +38,10 @@
 				var index:int = 2;
 				trace(index & 0x40);  */
 				redPieces = new Array2(9,9);
-				redPieces.sett(0,2,1);
-				redPieces.sett(0,3,1);
-				trace(redPieces.dump());
+				redPieces.sett(2,0,1);
+				redPieces.sett(3,0,1);
+//				trace(redPieces.dump());
+				LOG.debug(redPieces.dump());
 			}
 
 		]]>
@@ -61,7 +66,13 @@
 				</s:Ellipse>
 			</s:Graphic>
 		</fx:Component>
-		
+		<s:TraceTarget fieldSeparator="->"
+					   includeCategory="true"
+					   includeDate="false"
+					   includeLevel="true"
+					   includeTime="true"
+					   level="{LogEventLevel.ALL}"
+					   />
 	</fx:Declarations>
 	<s:VGroup horizontalCenter="0" verticalCenter="0">
 		<s:Label text="--start"/>
