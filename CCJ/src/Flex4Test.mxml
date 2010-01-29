@@ -42,6 +42,7 @@
 				redPieces.sett(3,0,1);
 //				trace(redPieces.dump());
 				LOG.debug(redPieces.dump());
+				
 			}
 
 		]]>
