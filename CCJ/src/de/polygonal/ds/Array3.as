@@ -207,7 +207,7 @@ package de.polygonal.ds
 			
 			for (var x:int = 0; x < _w; x++)
 				for (var y:int = 0; y < _h; y++)
-					a.set(x, y, _a[int(offset + (y * _w) + x)]);
+					a.sett(x, y, _a[int(offset + (y * _w) + x)]);
 			
 			return a;
 		}

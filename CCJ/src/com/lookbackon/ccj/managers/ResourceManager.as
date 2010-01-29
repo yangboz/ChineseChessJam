@@ -12,7 +12,7 @@ package com.lookbackon.ccj.managers
 	import mx.resources.ResourceBundle;
 	import mx.resources.ResourceManager;
 	
-	[Event(name="LoadCustomResourceBundleComplete")]
+	/*[Event(name="LoadCustomResourceBundleComplete")]*/
 	/**
 	 * 
 	 * @author Knight.zhou

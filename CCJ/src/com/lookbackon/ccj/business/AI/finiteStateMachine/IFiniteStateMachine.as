@@ -1,6 +1,6 @@
 package com.lookbackon.ccj.business.AI.finiteStateMachine
 {
-	import com.saybot.vworld.business.AI.FSM.states.IState;
+	import com.lookbackon.ccj.business.AI.finiteStateMachine.states.IState;
 	
 	/**
 	 * Our FiniteStateMachine must implment this interface.

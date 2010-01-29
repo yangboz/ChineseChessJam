@@ -1,5 +1,6 @@
 package com.lookbackon.ccj.business.AI.finiteStateMachine
 {
+	import com.lookbackon.ccj.business.AI.finiteStateMachine.states.IState;
 	import com.lookbackon.ccj.utils.LogUtil;
 	
 	import mx.logging.ILogger;
@@ -123,10 +124,7 @@ package com.lookbackon.ccj.business.AI.finiteStateMachine
 				currentState.exit();
 			}
 			previousState = currentState;
-			if(Boolean(s.therblig))
-			{
-				globalState = s;
-			}
+			globalState = s;
 			currentState = s;
 			LOG.info("previousState:{0}||globalState:{1}||currentState:{2}",
 				previousState==null?previousState:previousState.description,
