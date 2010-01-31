@@ -38,21 +38,21 @@ package com.lookbackon.ccj.model.vo
 		public var allPieces:Vector.<int>;
 		public var player:int;//1:blue,0:red;
 		//blue
-		public var bluePawns:BitBoard;//
-		public var blueCastles:BitBoard;
-		public var blueKnights:BitBoard;
-		public var blueBishops:BitBoard;
-		public var blueOfficals:BitBoard;
-		public var blueMarshal:BitBoard;
-		public var blueCannons:BitBoard;
+		public var bluePawns:BitBoard;//14
+		public var blueCastles:BitBoard;//12
+		public var blueKnights:BitBoard;//11
+		public var blueBishops:BitBoard;//10
+		public var blueOfficals:BitBoard;//9
+		public var blueMarshal:BitBoard;//8
+		public var blueCannons:BitBoard;//13
 		//red
-		public var redPawns:BitBoard;
-		public var redCastles:BitBoard;
-		public var redKnights:BitBoard;
-		public var redBishops:BitBoard;
-		public var redOfficals:BitBoard;
-		public var redMarshal:BitBoard;
-		public var redCannons:BitBoard;
+		public var redPawns:BitBoard;//22
+		public var redCastles:BitBoard;//20
+		public var redKnights:BitBoard;//19
+		public var redBishops:BitBoard;//18
+		public var redOfficals:BitBoard;//17
+		public var redMarshal:BitBoard;//16
+		public var redCannons:BitBoard;//21
 		//TODO.other structs.
 		//--------------------------------------------------------------------------
 		//

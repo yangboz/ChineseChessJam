@@ -3,10 +3,15 @@
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
 			   xmlns:mx="library://ns.adobe.com/flex/halo" 
 			   xmlns:components="com.lookbackon.ccj.view.components.*">
+	<s:layout>
+		<s:BasicLayout/>
+	</s:layout>
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
 	
 	<!-- Views here -->
-	<components:ChessBoard/>
+	<components:ChessBoard left="50" right="50" top="30" bottom="30"/>
+	<components:ChessGasket/>
+	<components:ChessPiece/>
 </s:Application>
