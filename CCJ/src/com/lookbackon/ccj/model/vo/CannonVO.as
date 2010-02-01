@@ -1,17 +1,18 @@
 package com.lookbackon.ccj.model.vo
 {
-	import com.lookbackon.ds.BitBoard;
+	import com.lookbackon.ccj.utils.MathUtil;
+
 	/**
 	 * 
 	 * @author Knight.zhou
 	 * 
 	 */	
-	public class CastleVO extends ChessVOBase
+	public class CannonVO extends ChessVOBase
 	{
-		public function CastleVO(width:int, height:int, rowIndex:int, colIndex:int)
+		public function CannonVO(width:int, height:int, rowIndex:int, colIndex:int)
 		{
 			//TODO: implement function
-			super(width, height,rowIndex,colIndex);
+			super(width, height, rowIndex, colIndex);
 		}
 		override protected function initialization(rowIndex:int, colIndex:int) : void
 		{
@@ -24,7 +25,7 @@ package com.lookbackon.ccj.model.vo
 					{
 						for(var hh:int=0;hh<this.width;hh++)
 						{
-							if(hh!=rowIndex)
+							if(MathUtil.transactAbs(hh-rowIndex)!=1)
 							{
 								this.setBitt(rowIndex,hh,true);
 							}
@@ -35,7 +36,7 @@ package com.lookbackon.ccj.model.vo
 					{
 						for(var v:int=0;v<this.height;v++)
 						{
-							if(v!=colIndex)
+							if(MathUtil.transactAbs(v-colIndex)!=1)
 							{
 								this.setBitt(v,colIndex,true);
 							}

@@ -15,6 +15,12 @@ package com.lookbackon.ccj.model.vo
 			super(width, height);
 			this.initialization(rowIndex,colIndex);
 		}
+		/**
+		 * 
+		 * @param the rowIndex you wanna set bit flag.
+		 * @param the colIndex you wanna set big flag.
+		 * @see mx.utils.BitFlagUtil#update
+		 */
 		virtual protected function initialization( rowIndex:int, colIndex:int):void
 		{
 			//TODO: override function.
