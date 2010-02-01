@@ -1,4 +1,4 @@
-package com.lookbackon.ccj.model.vo
+package com.lookbackon.ds
 {
 	import de.polygonal.ds.BitVector;
 	/**
@@ -57,7 +57,7 @@ package com.lookbackon.ccj.model.vo
 		 */		
 		override public function toString() : String
 		{
-			return "[BitBoard, size=" + this.(width*height) + "]";
+			return "[BitBoard, size=" + (width*height) + "]";
 		}
 		/**
 		 * Dump out a string representing the current object.

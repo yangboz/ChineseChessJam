@@ -1,5 +1,7 @@
 package com.lookbackon.ccj.model.vo
 {
+	import com.lookbackon.ds.BitBoard;
+
 	/**
 	 * 
 	 * @author Knight.zhou
@@ -61,7 +63,7 @@ package com.lookbackon.ccj.model.vo
 		//--------------------------------------------------------------------------
 		public function ChessPosition()
 		{
-			allPieces = new Vector.<int>(81,true);
+			allPieces = new Vector.<int>(90,true);
 			
 		}
 	}

@@ -6,8 +6,9 @@
 			   creationComplete="application1_creationCompleteHandler(event)" >
 	<fx:Script>
 		<![CDATA[
-			import com.lookbackon.ccj.model.vo.BitBoard;
+			import com.lookbackon.ccj.model.vo.CastleVO;
 			import com.lookbackon.ccj.utils.LogUtil;
+			import com.lookbackon.ds.BitBoard;
 			
 			import de.polygonal.ds.Array2;
 			
@@ -21,11 +22,12 @@
 			protected function application1_creationCompleteHandler(event:FlexEvent):void
 			{
 				// TODO Auto-generated method stub
-				blackPieces = new BitBoard(9,9);
+				blackPieces = new BitBoard(9,10);
 				blackPieces.setBitt(0,2,true);
 				blackPieces.setBitt(0,3,true);
 				blackPieces.setBitt(2,3,true);
 				blackPieces.setBitt(7,7,true);
+				LOG.debug("blackPieces.getBitt(2,3):{0}",blackPieces.getBitt(2,3).toString());
 				LOG.debug(blackPieces.dump());
 				blackPieces.setAll();
 				LOG.debug(blackPieces.dump());
@@ -43,6 +45,8 @@
 //				trace(redPieces.dump());
 				LOG.debug(redPieces.dump());
 				
+				var castleVO:CastleVO = new CastleVO(9,10,0,0);
+				LOG.debug("castleVO:{0}",castleVO.dump());
 			}
 
 		]]>
