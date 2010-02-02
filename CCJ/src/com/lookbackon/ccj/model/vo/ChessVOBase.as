@@ -24,6 +24,7 @@ package com.lookbackon.ccj.model.vo
 		virtual protected function initialization( rowIndex:int, colIndex:int):void
 		{
 			//TODO: override function.
+			throw new Error("Virtual function initialized!!!");
 		}
 	}
 }

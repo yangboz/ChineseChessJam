@@ -8,6 +8,7 @@
 		<![CDATA[
 			import com.lookbackon.ccj.model.vo.CannonVO;
 			import com.lookbackon.ccj.model.vo.CastleVO;
+			import com.lookbackon.ccj.model.vo.KnightVO;
 			import com.lookbackon.ccj.utils.LogUtil;
 			import com.lookbackon.ds.BitBoard;
 			
@@ -45,10 +46,12 @@
 				redPieces.sett(3,0,1);
 //				trace(redPieces.dump());
 				LOG.debug(redPieces.dump());
-				/* var castleVO:CastleVO = new CastleVO(9,10,1,1);
+				/* var castleVO:CastleVO = new CastleVO(9,10,3,3);
 				LOG.debug("castleVO:{0}",castleVO.dump()); */
-				var cannonVO:CannonVO = new CannonVO(9,10,1,1);
-				LOG.debug("cannonVO:{0}",cannonVO.dump());
+				/* var cannonVO:CannonVO = new CannonVO(9,10,1,1);
+				LOG.debug("cannonVO:{0}",cannonVO.dump()); */
+				var knightVO:KnightVO = new KnightVO(9,10,1,1);
+				LOG.debug("knightVO:{0}",knightVO.dump());
 			}
 
 		]]>

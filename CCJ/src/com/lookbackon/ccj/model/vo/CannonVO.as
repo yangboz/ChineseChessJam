@@ -16,6 +16,9 @@ package com.lookbackon.ccj.model.vo
 		}
 		override protected function initialization(rowIndex:int, colIndex:int) : void
 		{
+			// s - *
+			// -
+			// *
 			for(var h:int=0;h<this.height;h++)
 			{
 				for(var w:int=0;w<this.width;w++)
@@ -25,7 +28,7 @@ package com.lookbackon.ccj.model.vo
 					{
 						for(var hh:int=0;hh<this.width;hh++)
 						{
-							if(MathUtil.transactAbs(hh-rowIndex)!=1)
+							if(MathUtil.transactAbs(hh-rowIndex)!=1 && hh!=colIndex)
 							{
 								this.setBitt(rowIndex,hh,true);
 							}
@@ -36,12 +39,13 @@ package com.lookbackon.ccj.model.vo
 					{
 						for(var v:int=0;v<this.height;v++)
 						{
-							if(MathUtil.transactAbs(v-colIndex)!=1)
+							if(MathUtil.transactAbs(v-colIndex)!=1 && v!=rowIndex)
 							{
 								this.setBitt(v,colIndex,true);
 							}
 						}
 					}
+					//iteself
 				}
 			}
 		}

@@ -15,6 +15,9 @@ package com.lookbackon.ccj.model.vo
 		}
 		override protected function initialization(rowIndex:int, colIndex:int) : void
 		{
+			//    *
+			// ***s*****
+			//    *
 			for(var h:int=0;h<this.height;h++)
 			{
 				for(var w:int=0;w<this.width;w++)
