@@ -9,11 +9,17 @@ package com.lookbackon.ccj.model.vo
 	 */	
 	public class CannonVO extends ChessVOBase
 	{
+		/**
+		 * @inheritDoc
+		 */
 		public function CannonVO(width:int, height:int, rowIndex:int, colIndex:int)
 		{
 			//TODO: implement function
 			super(width, height, rowIndex, colIndex);
 		}
+		/**
+		 * @inheritDoc
+		 */
 		override protected function initialization(rowIndex:int, colIndex:int) : void
 		{
 			// s - *

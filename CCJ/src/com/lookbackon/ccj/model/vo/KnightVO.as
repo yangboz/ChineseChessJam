@@ -7,11 +7,17 @@ package com.lookbackon.ccj.model.vo
 	 */	
 	public class KnightVO extends ChessVOBase
 	{
+		/**
+		 * @inheritDoc
+		 */
 		public function KnightVO(width:int, height:int, rowIndex:int, colIndex:int)
 		{
 			//TODO: implement function
 			super(width, height, rowIndex, colIndex);
 		}
+		/**
+		 * @inheritDoc
+		 */
 		override protected function initialization(rowIndex:int, colIndex:int) : void
 		{
 			// * - - - *

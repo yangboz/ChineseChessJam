@@ -6,9 +6,8 @@
 			   creationComplete="application1_creationCompleteHandler(event)" >
 	<fx:Script>
 		<![CDATA[
-			import com.lookbackon.ccj.model.vo.CannonVO;
-			import com.lookbackon.ccj.model.vo.CastleVO;
-			import com.lookbackon.ccj.model.vo.KnightVO;
+			import com.lookbackon.ccj.model.vo.BishopVO;
+			import com.lookbackon.ccj.model.vo.OfficalVO;
 			import com.lookbackon.ccj.utils.LogUtil;
 			import com.lookbackon.ds.BitBoard;
 			
@@ -50,8 +49,12 @@
 				LOG.debug("castleVO:{0}",castleVO.dump()); */
 				/* var cannonVO:CannonVO = new CannonVO(9,10,1,1);
 				LOG.debug("cannonVO:{0}",cannonVO.dump()); */
-				var knightVO:KnightVO = new KnightVO(9,10,1,1);
-				LOG.debug("knightVO:{0}",knightVO.dump());
+				/* var knightVO:KnightVO = new KnightVO(9,10,1,1);
+				LOG.debug("knightVO:{0}",knightVO.dump()); */
+				var bishopVO:BishopVO = new BishopVO(9,10,2,4);
+				LOG.debug("bishopVO:{0}",bishopVO.dump());
+				var officalVO:OfficalVO = new OfficalVO(9,10,0,3);
+				LOG.debug("officalVO:{0}",officalVO.dump());
 			}
 
 		]]>

@@ -9,6 +9,14 @@ package com.lookbackon.ccj.model.vo
 	 */	
 	public class ChessVOBase extends BitBoard
 	{
+		/**
+		 * 
+		 * @param the width value of bitboard;
+		 * @param the height value of bitboard;
+		 * @param the rowIndex of destination point;
+		 * @param the colIndex of destination point;
+		 * 
+		 */		
 		public function ChessVOBase(width:int, height:int, rowIndex:int, colIndex:int)
 		{
 			//TODO: implement function
