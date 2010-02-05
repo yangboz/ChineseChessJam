@@ -1,6 +1,9 @@
 package com.lookbackon.ds
 {
+	import com.lookbackon.ccj.errors.CcjErrors;
+	
 	import de.polygonal.ds.BitVector;
+
 	/**
 	 * 
 	 * @author Knight.zhou
@@ -50,7 +53,14 @@ package com.lookbackon.ds
 		 */		
 		public function setBitt(row:int,column:int,b:Boolean):void
 		{
-			this.setBit((row*width+column),b);
+			var index:int = (row*width+column);
+			if(index>=0&&index<=width*height)
+			{
+				this.setBit(index,b);
+			}else
+			{
+				throw new CcjErrors(CcjErrors.INVALID_CHESS_VO);
+			}
 		}
 		/**
 		 * @inheritDoc

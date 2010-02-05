@@ -22,27 +22,28 @@ package com.lookbackon.ccj.model.vo
 		{
 			//* -
 			//- *
-			if(rowIndex==0)
+			var colIndexOffset:int = (colIndex==3?1:-1);
+			//row index(0,7);
+			if(rowIndex==0 || rowIndex==7)
 			{
-				if(colIndex==3)
-				{
-					this.setBitt(rowIndex+1,colIndex+1,true);
-				}
-				if(colIndex==5)
-				{
-					this.setBitt(rowIndex+1,colIndex-1,true);
-				}
+				//bottom
+				this.setBitt(rowIndex+1,colIndex+colIndexOffset,true);
 			}
-			if(rowIndex==0)
+			//row index(1,8);
+			if(rowIndex==1 || rowIndex==8)
 			{
-				if(colIndex==3)
-				{
-					this.setBitt(rowIndex-1,colIndex+1,true);
-				}
-				if(colIndex==5)
-				{
-					this.setBitt(rowIndex-1,colIndex-1,true);
-				}
+				//top
+				this.setBitt(rowIndex-1,colIndex-1,true);
+				this.setBitt(rowIndex-1,colIndex+1,true);
+				//bottom
+				this.setBitt(rowIndex+1,colIndex-1,true);
+				this.setBitt(rowIndex+1,colIndex+1,true);
+			}
+			//row index(2,9);
+			if(rowIndex==2 || rowIndex==9)
+			{
+				//top
+				this.setBitt(rowIndex-1,colIndex+colIndexOffset,true);
 			}
 		}
 	}

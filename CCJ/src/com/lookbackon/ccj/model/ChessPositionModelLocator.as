@@ -1,5 +1,6 @@
-package com.lookbackon.ccj.model.vo
+package com.lookbackon.ccj.model
 {
+	import com.lookbackon.ccj.errors.CcjErrors;
 	import com.lookbackon.ds.BitBoard;
 
 	/**
@@ -7,13 +8,15 @@ package com.lookbackon.ccj.model.vo
 	 * @author Knight.zhou
 	 * 
 	 */	
-	public class ChessPosition
+	public class ChessPositionModelLocator
 	{
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
+		//Singleton instance of ChessPositionModelLocator;
+		private static var instance:ChessPositionModelLocator;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -61,10 +64,38 @@ package com.lookbackon.ccj.model.vo
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function ChessPosition()
+		public function ChessPositionModelLocator(access:Private)
 		{
-			allPieces = new Vector.<int>(90,true);
-			
+			if (access != null) {
+				if (instance == null) {
+					instance=this;
+					allPieces = new Vector.<int>(90,true);
+				}
+			} else {
+				throw new CcjErrors(CcjErrors.INITIALIZE_SINGLETON_CLASS);
+			}
 		}
+		//--------------------------------------------------------------------------
+		//
+		//  Methods
+		//
+		//--------------------------------------------------------------------------	
+		/**
+		 *
+		 * @return the singleton instance of ChessPositionModelLocator
+		 *
+		 */
+		public static function getInstance():ChessPositionModelLocator {
+			if (instance == null) {
+				instance=new ChessPositionModelLocator(new Private());
+			}
+			return instance;
+		}
+
 	}
+}
+/**
+ *Inner class which restricts construtor access to Private
+ */
+internal class Private {
 }
