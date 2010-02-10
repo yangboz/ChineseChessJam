@@ -135,7 +135,11 @@ package com.lookbackon.ccj.business.factory
 				position[1]*ChessBoard.LATTICE_WIDTH + myChessPiece.height/2 -25;
 			myChessPiece.toolTip = myChessPiece.name;
 			myChessPiece.enabled = (myChessPiece.name!="");
-			return myChessPiece;
+			if(myChessPiece.enabled)
+			{
+				return myChessPiece;
+			}
+			return null;
 		}
 		/**
 		 * 

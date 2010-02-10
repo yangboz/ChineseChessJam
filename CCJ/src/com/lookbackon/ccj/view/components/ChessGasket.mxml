@@ -8,12 +8,11 @@
 		 >
 	<fx:Script>
 		<![CDATA[
-			//--------------------------------------------------------------------------
-			//
-			//  Imports
-			//
-			//--------------------------------------------------------------------------
+			import mx.core.IUIComponent;
+			import mx.core.IVisualElement;
+			import mx.events.DragEvent;
 			import mx.events.FlexEvent;
+			import mx.managers.DragManager;
 			//--------------------------------------------------------------------------
 			//
 			//  Properties(implement)
@@ -33,9 +32,26 @@
 			//  Methods
 			//
 			//--------------------------------------------------------------------------
+			//group1_creationCompleteHandler
 			protected function group1_creationCompleteHandler(event:FlexEvent):void
 			{
 				// TODO Auto-generated method stub
+				this.addEventListener(DragEvent.DRAG_ENTER,dragEnterHandler);
+				this.addEventListener(DragEvent.DRAG_DROP,dragDropHandler);
+			}
+			//dragEnterHandler
+			private function dragEnterHandler(event:DragEvent):void
+			{
+				DragManager.acceptDragDrop(event.currentTarget as IUIComponent);
+				DragManager.showFeedback(DragManager.LINK);
+			}
+			//dragDropHandler
+			private function dragDropHandler(event:DragEvent):void
+			{
+				//FIXME:after next move should remove previous element.
+//				this.addElement(event.dragInitiator as IVisualElement);
+				event.dragInitiator.move(this.x,this.y);
+//				event.currentTarget.addElement(event.dragInitiator as IVisualElement);
 			}
 
 		]]>

@@ -47,7 +47,10 @@
 				{
 					for(var vv:int=0;vv<CcjConstants.CHESS_BOARD_V_LINES;vv++)
 					{
-						this.addElement( ChessFactory.createChessPiece([hh,vv]) );
+						if(ChessFactory.createChessPiece([hh,vv])!=null)
+						{
+							this.addElement( ChessFactory.createChessPiece([hh,vv]) );
+						}
 					}
 				}
 			}

@@ -9,7 +9,9 @@
 		<![CDATA[
 			import com.lookbackon.ccj.business.fsm.ChessAgent;
 			
+			import mx.core.IUIComponent;
 			import mx.events.FlexEvent;
+			import mx.managers.DragManager;
 			//--------------------------------------------------------------------------
 			//
 			//  Variables
@@ -44,6 +46,13 @@
 			{
 				// TODO Auto-generated method stub
 				this.agent = new ChessAgent(this.name,this,null);
+				// add event listener
+				this.addEventListener(MouseEvent.MOUSE_DOWN,mouseDownHandler);
+			}
+			
+			private function mouseDownHandler(event:MouseEvent):void
+			{
+				DragManager.doDrag(event.currentTarget as IUIComponent,null,event);
 			}
 		]]>
 	</fx:Script>
