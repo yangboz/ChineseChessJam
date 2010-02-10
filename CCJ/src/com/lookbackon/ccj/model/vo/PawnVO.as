@@ -25,9 +25,8 @@ package com.lookbackon.ccj.model.vo
 			//left or right
 			this.setBitt(rowIndex,colIndex+1,true);
 			this.setBitt(rowIndex,colIndex-1,true);
-			//top or bottom
+			//only top
 			this.setBitt(rowIndex+1,colIndex,true);
-			this.setBitt(rowIndex-1,colIndex,true);
 			//TODO:
 			//before over river and territory.
 			//after over river and territory.

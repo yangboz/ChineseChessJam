@@ -6,7 +6,7 @@
 			   creationComplete="application1_creationCompleteHandler(event)" >
 	<fx:Script>
 		<![CDATA[
-			import com.lookbackon.ccj.model.vo.MarshalVO;
+			import com.lookbackon.ccj.CcjConstants;
 			import com.lookbackon.ccj.model.vo.PawnVO;
 			import com.lookbackon.ccj.utils.LogUtil;
 			import com.lookbackon.ds.BitBoard;
@@ -57,7 +57,7 @@
 				LOG.debug("officalVO:{0}",officalVO.dump()); */
 				/* var marshallVO:MarshalVO = new MarshalVO(9,10,1,4);
 				LOG.debug("marshallVO:{0}",marshallVO.dump()); */
-				var pawnVO:PawnVO = new PawnVO(9,10,1,4);
+				var pawnVO:PawnVO = new PawnVO(9,10,3,4);
 				LOG.debug("pawnVO:{0}",pawnVO.dump());
 			}
 

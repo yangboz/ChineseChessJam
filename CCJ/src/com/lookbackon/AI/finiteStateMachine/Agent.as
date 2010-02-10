@@ -1,7 +1,7 @@
 package com.lookbackon.AI.finiteStateMachine
 {
-	import mx.controls.SWFLoader;
 	import mx.controls.TextArea;
+	import mx.core.IUIComponent;
 	import mx.core.UIComponent;
 	
 	/**
@@ -17,8 +17,8 @@ package com.lookbackon.AI.finiteStateMachine
 	{
 		private var fsm:FiniteStateMachine;
 		public var name:String = "unnamed";
-		public var carrier:UIComponent;
-		public var traceTarget:TextArea;
+		public var carrier:IUIComponent;
+		public var traceTarget:IUIComponent;
 		/**
 		 * 
 		 * @param the name of agent;
@@ -26,7 +26,7 @@ package com.lookbackon.AI.finiteStateMachine
 		 * @param the agen's traceTarget;
 		 * 
 		 */		
-		public function Agent(name:String,carrier:UIComponent,traceTarget:TextArea=null)
+		public function Agent(name:String,carrier:IUIComponent,traceTarget:IUIComponent=null)
 		{
 			fsm = new FiniteStateMachine(this);
 			this.name = name;
