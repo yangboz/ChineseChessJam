@@ -2,7 +2,44 @@
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
 		 xmlns:mx="library://ns.adobe.com/flex/halo" 
-		 width="50" height="50">
+		 width="50" height="50"
+		 implements="com.lookbackon.ccj.view.components.IChessGasket" 
+		 creationComplete="group1_creationCompleteHandler(event)" 
+		 >
+	<fx:Script>
+		<![CDATA[
+			//--------------------------------------------------------------------------
+			//
+			//  Imports
+			//
+			//--------------------------------------------------------------------------
+			import mx.events.FlexEvent;
+			//--------------------------------------------------------------------------
+			//
+			//  Properties(implement)
+			//
+			//--------------------------------------------------------------------------
+			private var _position:Array;
+			public function get position():Array
+			{
+				return _position;
+			}
+			public function set position(value:Array):void
+			{
+				_position = value;
+			}
+			//--------------------------------------------------------------------------
+			//
+			//  Methods
+			//
+			//--------------------------------------------------------------------------
+			protected function group1_creationCompleteHandler(event:FlexEvent):void
+			{
+				// TODO Auto-generated method stub
+			}
+
+		]]>
+	</fx:Script>
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>

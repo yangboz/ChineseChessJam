@@ -1,8 +1,7 @@
 package com.lookbackon.AI.finiteStateMachine
 {
-	import mx.controls.TextArea;
 	import mx.core.IUIComponent;
-	import mx.core.UIComponent;
+	import mx.core.IVisualElement;
 	
 	/**
 	 * The agent uses an instance of the FiniteStateMachine class the handle its AI.
@@ -17,8 +16,8 @@ package com.lookbackon.AI.finiteStateMachine
 	{
 		private var fsm:FiniteStateMachine;
 		public var name:String = "unnamed";
-		public var carrier:IUIComponent;
-		public var traceTarget:IUIComponent;
+		public var carrier:IVisualElement;
+		public var traceTarget:IVisualElement;
 		/**
 		 * 
 		 * @param the name of agent;
@@ -26,7 +25,7 @@ package com.lookbackon.AI.finiteStateMachine
 		 * @param the agen's traceTarget;
 		 * 
 		 */		
-		public function Agent(name:String,carrier:IUIComponent,traceTarget:IUIComponent=null)
+		public function Agent(name:String,carrier:IVisualElement,traceTarget:IVisualElement=null)
 		{
 			fsm = new FiniteStateMachine(this);
 			this.name = name;

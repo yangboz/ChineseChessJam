@@ -2,16 +2,62 @@
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
 			   xmlns:mx="library://ns.adobe.com/flex/halo" 
-			   xmlns:components="com.lookbackon.ccj.view.components.*">
+			   xmlns:components="com.lookbackon.ccj.view.components.*"
+			   creationComplete="application1_creationCompleteHandler(event)" >
 	<s:layout>
 		<s:BasicLayout/>
 	</s:layout>
+	<fx:Script>
+		<![CDATA[
+			import com.lookbackon.ccj.CcjConstants;
+			import com.lookbackon.ccj.business.factory.ChessFactory;
+			import com.lookbackon.ccj.model.ChessPositionModelLocator;
+			
+			import mx.events.FlexEvent;
+			//--------------------------------------------------------------------------
+			//
+			//  Variables
+			//
+			//--------------------------------------------------------------------------
+			[Bindable]
+			private var chessPositionModelLocator:ChessPositionModelLocator = ChessPositionModelLocator.getInstance();
+			//----------------------------------
+			//  CONSTANTS
+			//----------------------------------
+			
+			//--------------------------------------------------------------------------
+			//
+			//  Methods
+			//
+			//--------------------------------------------------------------------------
+			//  application1_creationCompleteHandler
+			protected function application1_creationCompleteHandler(event:FlexEvent):void
+			{
+				// TODO Auto-generated method stub
+				//create chess gasket
+				for(var h:int=0;h<CcjConstants.CHESS_BOARD_H_LINES;h++)
+				{
+					for(var v:int=0;v<CcjConstants.CHESS_BOARD_V_LINES;v++)
+					{
+						this.addElement( ChessFactory.createChessGasket([h,v]) );
+					}
+				}
+				//create chess piece
+				for(var hh:int=0;hh<CcjConstants.CHESS_BOARD_H_LINES;hh++)
+				{
+					for(var vv:int=0;vv<CcjConstants.CHESS_BOARD_V_LINES;vv++)
+					{
+						this.addElement( ChessFactory.createChessPiece([hh,vv]) );
+					}
+				}
+			}
+
+		]]>
+	</fx:Script>
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
 	
 	<!-- Views here -->
-	<components:ChessBoard left="50" right="50" top="30" bottom="30"/>
-	<components:ChessGasket/>
-	<components:ChessPiece/>
+	<components:ChessBoard left="50" right="50" top="25" bottom="25"/>
 </s:Application>

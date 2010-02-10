@@ -9,8 +9,8 @@ package com.lookbackon.ccj
 	{
 		//about chess board
 		public static const CHESS_BOARD_VIEW_SCALE_XY:Number = 1.5;
-		public static const CHESS_BOARD_WIDTH:int  = 9;
-		public static const CHESS_BOARD_HEIGHT:int = 10;
+		public static const CHESS_BOARD_H_LINES:int  = 9;
+		public static const CHESS_BOARD_V_LINES:int = 10;
 		//chessPieceType
 		//blue
 		public static const BLUE_PAWN:String 		= "-pawn";
