@@ -25,35 +25,23 @@ package com.lookbackon.ccj.model.vo
 			// s - *
 			// -
 			// *
-			for(var h:int=0;h<this.height;h++)
+			//horizontally.
+			for(var hh:int=0;hh<this.width;hh++)
 			{
-				for(var w:int=0;w<this.width;w++)
+				if(MathUtil.transactAbs(hh-colIndex)>1)
 				{
-					//horizontally.
-					if(h==rowIndex)
-					{
-						for(var hh:int=0;hh<this.width;hh++)
-						{
-							if(MathUtil.transactAbs(hh-rowIndex)!=1 && hh!=colIndex)
-							{
-								this.setBitt(rowIndex,hh,true);
-							}
-						}
-					}
-					//vertically.
-					if(h==colIndex)
-					{
-						for(var v:int=0;v<this.height;v++)
-						{
-							if(MathUtil.transactAbs(v-colIndex)!=1 && v!=rowIndex)
-							{
-								this.setBitt(v,colIndex,true);
-							}
-						}
-					}
-					//iteself
+					this.setBitt(rowIndex,hh,true);
 				}
 			}
+			//vertically.
+			for(var v:int=0;v<this.height;v++)
+			{
+				if(MathUtil.transactAbs(v-rowIndex)>1)
+				{
+					this.setBitt(v,colIndex,true);
+				}
+			}
+			//iteself
 		}
 	}
 }

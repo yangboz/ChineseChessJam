@@ -20,36 +20,45 @@ package com.lookbackon.ccj.model.vo
 		 */
 		override protected function initialization(rowIndex:int, colIndex:int) : void
 		{
+			// - * - * -
 			// * - - - *
 			// - - s - -
 			// * - - - *
-			//left
-			if(colIndex>=2)
+			// - * - * -
+			if(rowIndex<=8 && colIndex>=2)
 			{
-				//top
-				if(rowIndex>=1)
-				{
-					this.setBitt(rowIndex-1,colIndex-2,true);
-				}
-				//bottom
-				if(rowIndex<=9)
-				{
-					this.setBitt(rowIndex+1,colIndex-2,true);
-				}
+				this.setBitt(rowIndex+1,colIndex-2,true);
 			}
-			//right
-			if(colIndex<=6)
+			if(rowIndex<=8 && colIndex<=6)
 			{
-				//top
-				if(rowIndex>=1)
-				{
-					this.setBitt(rowIndex-1,colIndex+2,true);
-				}
-				//bottom
-				if(rowIndex<=9)
-				{
-					this.setBitt(rowIndex+1,colIndex+2,true);
-				}
+				this.setBitt(rowIndex+1,colIndex+2,true);
+			}
+			//
+			if(rowIndex>=1 && colIndex>=2)
+			{
+				this.setBitt(rowIndex-1,colIndex-2,true);
+			}
+			if(rowIndex>=1 && colIndex<=6)
+			{
+				this.setBitt(rowIndex-1,colIndex+2,true);
+			}
+			//
+			if(rowIndex<=7 && colIndex>=1)
+			{
+				this.setBitt(rowIndex+2,colIndex-1,true);
+			}
+			if(rowIndex<=7 && colIndex<=7)
+			{
+				this.setBitt(rowIndex+2,colIndex+1,true);
+			}
+			//
+			if(rowIndex>=2 && colIndex>=1)
+			{
+				this.setBitt(rowIndex-2,colIndex-1,true);
+			}
+			if(rowIndex>=2 && colIndex<=7)
+			{
+				this.setBitt(rowIndex-2,colIndex+1,true);
 			}
 		}
 	}

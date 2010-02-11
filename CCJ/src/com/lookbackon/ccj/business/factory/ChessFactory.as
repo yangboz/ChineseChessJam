@@ -1,6 +1,15 @@
 package com.lookbackon.ccj.business.factory
 {
 	import com.lookbackon.ccj.CcjConstants;
+	import com.lookbackon.ccj.model.vo.BishopVO;
+	import com.lookbackon.ccj.model.vo.CannonVO;
+	import com.lookbackon.ccj.model.vo.CastleVO;
+	import com.lookbackon.ccj.model.vo.ChessVOBase;
+	import com.lookbackon.ccj.model.vo.ConductVO;
+	import com.lookbackon.ccj.model.vo.KnightVO;
+	import com.lookbackon.ccj.model.vo.MarshalVO;
+	import com.lookbackon.ccj.model.vo.OfficalVO;
+	import com.lookbackon.ccj.model.vo.PawnVO;
 	import com.lookbackon.ccj.view.components.ChessBoard;
 	import com.lookbackon.ccj.view.components.ChessGasket;
 	import com.lookbackon.ccj.view.components.ChessPiece;
@@ -25,6 +34,9 @@ package com.lookbackon.ccj.business.factory
 			//TODO: implement function
 			var myChessPiece:ChessPiece = new ChessPiece();
 			var chessPieceType:String 	= "";
+			//data
+			myChessPiece.position = position;
+			//
 			switch(position.toString())
 			{
 				//about blue
@@ -128,19 +140,21 @@ package com.lookbackon.ccj.business.factory
 				default:
 					break;
 			}
-			myChessPiece.name = chessPieceType;
+			//view
+			myChessPiece.label =myChessPiece.name = chessPieceType;
 			myChessPiece.x = 
 				position[0]*ChessBoard.LATTICE_WIDTH - myChessPiece.width/2 +50;
 			myChessPiece.y = 
 				position[1]*ChessBoard.LATTICE_WIDTH + myChessPiece.height/2 -25;
-			myChessPiece.label = myChessPiece.name;
+			//set color to identify.
 			var textColor:uint = 0xff0000;//blue.
 			if(myChessPiece.name.indexOf("+")!=-1)
 			{
-				textColor = 0x00ffff;//red	
+				textColor = 0x0000ff;//red	
 			}
 			myChessPiece.setStyle("color",textColor);
 			myChessPiece.setStyle("fillColor",textColor);
+			//avoid duplicate usless components.
 			if(myChessPiece.name!="")
 			{
 				return myChessPiece;
@@ -164,6 +178,45 @@ package com.lookbackon.ccj.business.factory
 				position[1]*ChessBoard.LATTICE_WIDTH + myChessGasket.height/2 -25;
 			myChessGasket.toolTip = position.toString();
 			return myChessGasket;
+		}
+		/**
+		 * 
+		 * @param conductVO has property target(type is chessPiece) and newPosition([0,1]).
+		 * @return precise chess value object(prototype is chessVOBase).
+		 * 
+		 */		
+		public static function generateChessPieceVO(conductVO:ConductVO):ChessVOBase
+		{
+			var colIndex:int = conductVO.target.position[0];
+			var rowIndex:int = conductVO.target.position[1];
+			var chessVO:ChessVOBase;
+			switch(conductVO.target.name)
+			{
+				case CcjConstants.BLUE_BISHOP:
+					chessVO = new BishopVO(9,10,rowIndex,colIndex);
+					break;
+				case CcjConstants.BLUE_CANNON:
+					chessVO = new CannonVO(9,10,rowIndex,colIndex);
+					break;
+				case CcjConstants.BLUE_CASTLE:
+					chessVO = new CastleVO(9,10,rowIndex,colIndex);
+					break;
+				case CcjConstants.BLUE_KNIGHT:
+					chessVO = new KnightVO(9,10,rowIndex,colIndex);
+					break;
+				case CcjConstants.BLUE_MARSHAL:
+					chessVO = new MarshalVO(9,10,rowIndex,colIndex);
+					break;
+				case CcjConstants.BLUE_OFFICAL:
+					chessVO = new OfficalVO(9,10,rowIndex,colIndex);
+					break;
+				case CcjConstants.BLUE_PAWN:
+					chessVO = new PawnVO(9,10,rowIndex,colIndex);
+					break;
+				default:
+					break;
+			}
+			return chessVO;
 		}
 	}
 }

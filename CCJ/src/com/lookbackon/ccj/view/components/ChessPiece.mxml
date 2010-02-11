@@ -62,6 +62,7 @@
 			//  Methods
 			//
 			//--------------------------------------------------------------------------
+			//button1_creationCompleteHandler
 			protected function button1_creationCompleteHandler(event:FlexEvent):void
 			{
 				// TODO Auto-generated method stub
@@ -73,16 +74,10 @@
 				// add event listener
 				this.addEventListener(MouseEvent.MOUSE_DOWN,mouseDownHandler);
 			}
-			
+			//mouseDownHandler
 			private function mouseDownHandler(event:MouseEvent):void
 			{
-				var myConductVO:ConductVO = new ConductVO();
-				myConductVO.target = this;
-				myConductVO.newPosition = this.position;
-				if(ChessPieceManager.doMoveValidation(myConductVO))
-				{
-					DragManager.doDrag(event.currentTarget as IUIComponent,null,event);
-				}
+				DragManager.doDrag(event.currentTarget as IUIComponent,null,event);
 			}
 		]]>
 	</fx:Script>

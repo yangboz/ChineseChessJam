@@ -1,6 +1,5 @@
 package com.lookbackon.ccj.model.vo
 {
-	import com.lookbackon.ds.BitBoard;
 	/**
 	 * 
 	 * @author Knight.zhou
@@ -24,34 +23,23 @@ package com.lookbackon.ccj.model.vo
 			//    *
 			// ***s*****
 			//    *
-			for(var h:int=0;h<this.height;h++)
+			//horizontally.
+			for(var hh:int=0;hh<this.width;hh++)
 			{
-				for(var w:int=0;w<this.width;w++)
+				if(hh!=colIndex)
 				{
-					//horizontally.
-					if(h==rowIndex)
-					{
-						for(var hh:int=0;hh<this.width;hh++)
-						{
-							if(hh!=rowIndex)
-							{
-								this.setBitt(rowIndex,hh,true);
-							}
-						}
-					}
-					//vertically.
-					if(h==colIndex)
-					{
-						for(var v:int=0;v<this.height;v++)
-						{
-							if(v!=colIndex)
-							{
-								this.setBitt(v,colIndex,true);
-							}
-						}
-					}
+					this.setBitt(rowIndex,hh,true);
 				}
 			}
+			//vertically.
+			for(var v:int=0;v<this.height;v++)
+			{
+				if(v!=rowIndex)
+				{
+					this.setBitt(v,colIndex,true);
+				}
+			}
+			//iteself
 		}
 	}
 }

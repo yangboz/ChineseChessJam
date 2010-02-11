@@ -21,35 +21,62 @@ package com.lookbackon.ccj.model.vo
 		override protected function initialization(rowIndex:int, colIndex:int) : void
 		{
 			//TODO: implement function
-			//left or right
-			if(colIndex!=5)
+			//blue
+			if(rowIndex>=7)
 			{
-				this.setBitt(rowIndex,colIndex+1,true);
-			}
-			if(colIndex!=3)
-			{
-				this.setBitt(rowIndex,colIndex-1,true);
-			}
-			//up or bottom
-			if(rowIndex!=2 || rowIndex!=9)
-			{
-				this.setBitt(rowIndex+1,colIndex,true);
-			}
-			if(rowIndex!=0 || rowIndex!=7)
-			{
-				this.setBitt(rowIndex-1,colIndex,true);
-			}
-			//marshall face to face.
-			if(rowIndex>=0&&rowIndex<=2)
-			{
-				this.setBitt(7,colIndex,true);
-				this.setBitt(8,colIndex,true);
-				this.setBitt(9,colIndex,true);
-			}else
-			{
+				//marshall face to face.
 				this.setBitt(0,colIndex,true);
 				this.setBitt(1,colIndex,true);
 				this.setBitt(2,colIndex,true);
+				//itself
+				//right
+				if(colIndex<5)
+				{
+					this.setBitt(rowIndex,colIndex+1,true);
+				}
+				//left
+				if(colIndex>4)
+				{
+					this.setBitt(rowIndex,colIndex-1,true);
+				}
+				//top
+				if(rowIndex>7)
+				{
+					this.setBitt(rowIndex-1,colIndex,true);
+				}
+				//bottom
+				if(rowIndex<9)
+				{
+					this.setBitt(rowIndex+1,colIndex,true);
+				}
+			}else
+			//red	
+			{
+				//marshall face to face.
+				this.setBitt(7,colIndex,true);
+				this.setBitt(8,colIndex,true);
+				this.setBitt(9,colIndex,true);
+				//itself
+				//right
+				if(colIndex<5)
+				{
+					this.setBitt(rowIndex,colIndex+1,true);
+				}
+				//left
+				if(colIndex>4)
+				{
+					this.setBitt(rowIndex,colIndex-1,true);
+				}
+				//top
+				if(rowIndex<2)
+				{
+					this.setBitt(rowIndex+1,colIndex,true);
+				}
+				//bottom
+				if(rowIndex>0)
+				{
+					this.setBitt(rowIndex-1,colIndex,true);
+				}
 			}
 		}
 	}
