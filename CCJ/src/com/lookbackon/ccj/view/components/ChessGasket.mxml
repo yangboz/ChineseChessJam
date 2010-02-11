@@ -70,6 +70,8 @@
 				//update chess piece position.
 				event.dragInitiator.x = 0;
 				event.dragInitiator.y = 0;
+				//update data.
+				ChessPiece(event.dragInitiator).position = this.position;
 			}
 
 		]]>

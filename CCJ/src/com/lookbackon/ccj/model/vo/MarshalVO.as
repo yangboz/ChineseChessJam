@@ -35,7 +35,7 @@ package com.lookbackon.ccj.model.vo
 					this.setBitt(rowIndex,colIndex+1,true);
 				}
 				//left
-				if(colIndex>4)
+				if(colIndex>3)
 				{
 					this.setBitt(rowIndex,colIndex-1,true);
 				}
@@ -63,7 +63,7 @@ package com.lookbackon.ccj.model.vo
 					this.setBitt(rowIndex,colIndex+1,true);
 				}
 				//left
-				if(colIndex>4)
+				if(colIndex>3)
 				{
 					this.setBitt(rowIndex,colIndex-1,true);
 				}

@@ -23,49 +23,38 @@ package com.lookbackon.ccj.model.vo
 			// * - -
 			// - - -
 			// - - *
-			if(rowIndex==0 || rowIndex==9)
+			if(rowIndex==0)
 			{
-				if(colIndex==2 || colIndex==6)
-				{
-					this.setBitt(rowIndex+2,colIndex-2,true);
-					this.setBitt(rowIndex+2,colIndex+2,true);
-				}
+				this.setBitt(rowIndex+2,colIndex-2,true);
+				this.setBitt(rowIndex+2,colIndex+2,true);
 			}
 			if(rowIndex==2 || rowIndex==7)
 			{
-				if(colIndex==0)
-				{
-					this.setBitt(rowIndex-2,colIndex+2,true);
-					this.setBitt(rowIndex+2,colIndex+2,true);
-				}
-				if(colIndex==4)
-				{
-					this.setBitt(rowIndex-2,colIndex+2,true);
-					this.setBitt(rowIndex-2,colIndex-2,true);
-					this.setBitt(rowIndex+2,colIndex-2,true);
-					this.setBitt(rowIndex+2,colIndex+2,true);
-				}
-				if(colIndex==8)
+				if(colIndex>2)
 				{
 					this.setBitt(rowIndex-2,colIndex-2,true);
 					this.setBitt(rowIndex+2,colIndex-2,true);
+				}
+				if(colIndex<6)
+				{
+					this.setBitt(rowIndex-2,colIndex+2,true);
+					this.setBitt(rowIndex+2,colIndex+2,true);
 				}
 			}
 			if(rowIndex==4)
 			{
-				if(colIndex==2 || colIndex==6)
-				{
-					this.setBitt(rowIndex-2,colIndex-2,true);
-					this.setBitt(rowIndex-2,colIndex+2,true);
-				}
+				this.setBitt(rowIndex-2,colIndex-2,true);
+				this.setBitt(rowIndex-2,colIndex+2,true);
 			}
 			if(rowIndex==5)
 			{
-				if(colIndex==2 || colIndex==6)
-				{
-					this.setBitt(rowIndex+2,colIndex-2,true);
-					this.setBitt(rowIndex+2,colIndex+2,true);
-				}
+				this.setBitt(rowIndex+2,colIndex-2,true);
+				this.setBitt(rowIndex+2,colIndex+2,true);
+			}
+			if(rowIndex==9)
+			{
+				this.setBitt(rowIndex-2,colIndex-2,true);
+				this.setBitt(rowIndex-2,colIndex+2,true);
 			}
 		}
 	}

@@ -193,24 +193,31 @@ package com.lookbackon.ccj.business.factory
 			switch(conductVO.target.name)
 			{
 				case CcjConstants.BLUE_BISHOP:
+				case CcjConstants.RED_BISHOP:
 					chessVO = new BishopVO(9,10,rowIndex,colIndex);
 					break;
 				case CcjConstants.BLUE_CANNON:
+				case CcjConstants.RED_CANNON:
 					chessVO = new CannonVO(9,10,rowIndex,colIndex);
 					break;
 				case CcjConstants.BLUE_CASTLE:
+				case CcjConstants.RED_CASTLE:
 					chessVO = new CastleVO(9,10,rowIndex,colIndex);
 					break;
 				case CcjConstants.BLUE_KNIGHT:
+				case CcjConstants.RED_KNIGHT:
 					chessVO = new KnightVO(9,10,rowIndex,colIndex);
 					break;
 				case CcjConstants.BLUE_MARSHAL:
+				case CcjConstants.RED_MARSHAL:
 					chessVO = new MarshalVO(9,10,rowIndex,colIndex);
 					break;
 				case CcjConstants.BLUE_OFFICAL:
+				case CcjConstants.RED_OFFICAL:
 					chessVO = new OfficalVO(9,10,rowIndex,colIndex);
 					break;
 				case CcjConstants.BLUE_PAWN:
+				case CcjConstants.RED_PAWN:
 					chessVO = new PawnVO(9,10,rowIndex,colIndex);
 					break;
 				default:
