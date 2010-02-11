@@ -7,9 +7,7 @@ package com.lookbackon.ccj.view.components
 	 * @author Knight.zhou
 	 * 
 	 */	
-	public interface IChessGasket extends IVisualElement
+	public interface IChessGasket extends IVisualElement,IPosition
 	{
-		function set position(value:Array):void;
-		function get position():Array;
 	}
 }

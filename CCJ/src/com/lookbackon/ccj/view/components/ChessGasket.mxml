@@ -8,6 +8,9 @@
 		 >
 	<fx:Script>
 		<![CDATA[
+			import com.lookbackon.ccj.managers.ChessPieceManager;
+			import com.lookbackon.ccj.model.vo.ConductVO;
+			
 			import mx.core.IUIComponent;
 			import mx.core.IVisualElement;
 			import mx.events.DragEvent;
@@ -18,6 +21,9 @@
 			//  Properties(implement)
 			//
 			//--------------------------------------------------------------------------
+			//----------------------------------
+			//  position
+			//----------------------------------
 			private var _position:Array;
 			public function get position():Array
 			{
@@ -42,16 +48,28 @@
 			//dragEnterHandler
 			private function dragEnterHandler(event:DragEvent):void
 			{
-				DragManager.acceptDragDrop(event.currentTarget as IUIComponent);
-				DragManager.showFeedback(DragManager.LINK);
+				var myConductVO:ConductVO = new ConductVO();
+				myConductVO.target = event.dragInitiator as ChessPiece;
+				myConductVO.newPosition = this.position;
+				if(ChessPieceManager.doMoveValidation(myConductVO))
+				{
+					DragManager.acceptDragDrop(event.currentTarget as IUIComponent);
+					DragManager.showFeedback(DragManager.LINK);
+				}
 			}
 			//dragDropHandler
 			private function dragDropHandler(event:DragEvent):void
 			{
-				//FIXME:after next move should remove previous element.
-//				this.addElement(event.dragInitiator as IVisualElement);
-				event.dragInitiator.move(this.x,this.y);
-//				event.currentTarget.addElement(event.dragInitiator as IVisualElement);
+				//hold gasket skin,then remove previous chess piece.
+				if(this.numElements>=2)
+				{
+					this.removeElementAt(1);
+				}
+				//add chess piece position.
+				this.addElement(event.dragInitiator as IVisualElement);
+				//update chess piece position.
+				event.dragInitiator.x = 0;
+				event.dragInitiator.y = 0;
 			}
 
 		]]>

@@ -8,6 +8,11 @@
 	<fx:Script>
 		<![CDATA[
 			import com.lookbackon.ccj.business.fsm.ChessAgent;
+			import com.lookbackon.ccj.business.fsm.states.AttackState;
+			import com.lookbackon.ccj.business.fsm.states.DefenseState;
+			import com.lookbackon.ccj.business.fsm.states.TerminatedState;
+			import com.lookbackon.ccj.managers.ChessPieceManager;
+			import com.lookbackon.ccj.model.vo.ConductVO;
 			
 			import mx.core.IUIComponent;
 			import mx.events.FlexEvent;
@@ -17,6 +22,9 @@
 			//  Variables
 			//
 			//--------------------------------------------------------------------------
+			public var attackState:AttackState;
+			public var defenseState:DefenseState;
+			public var terminatedState:TerminatedState;
 			//----------------------------------
 			//  CONSTANTS
 			//----------------------------------
@@ -37,6 +45,18 @@
 			{
 				_agent = value;
 			}
+			//----------------------------------
+			//  position
+			//----------------------------------
+			private var _position:Array;
+			public function get position():Array
+			{
+				return _position;
+			}
+			public function set position(value:Array):void
+			{
+				_position = value;
+			}
 			//--------------------------------------------------------------------------
 			//
 			//  Methods
@@ -45,14 +65,24 @@
 			protected function button1_creationCompleteHandler(event:FlexEvent):void
 			{
 				// TODO Auto-generated method stub
+				// finite state machine initialization.
 				this.agent = new ChessAgent(this.name,this,null);
+				this.attackState = new AttackState(this.agent,null,"Attack");
+				this.defenseState = new DefenseState(this.agent,null,"Defense");
+				this.terminatedState = new TerminatedState(this.agent,null,"Terminate");
 				// add event listener
 				this.addEventListener(MouseEvent.MOUSE_DOWN,mouseDownHandler);
 			}
 			
 			private function mouseDownHandler(event:MouseEvent):void
 			{
-				DragManager.doDrag(event.currentTarget as IUIComponent,null,event);
+				var myConductVO:ConductVO = new ConductVO();
+				myConductVO.target = this;
+				myConductVO.newPosition = this.position;
+				if(ChessPieceManager.doMoveValidation(myConductVO))
+				{
+					DragManager.doDrag(event.currentTarget as IUIComponent,null,event);
+				}
 			}
 		]]>
 	</fx:Script>

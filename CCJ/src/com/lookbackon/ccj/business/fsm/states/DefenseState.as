@@ -1,40 +1,30 @@
 package com.lookbackon.ccj.business.fsm.states
 {
-	import com.lookbackon.AI.finiteStateMachine.states.IState;
+	import com.lookbackon.ccj.business.fsm.ChessAgent;
+	
 	/**
 	 * 
 	 * @author Knight.zhou
 	 * 
 	 */	
-	public class DefenseState implements IState
+	public class DefenseState extends StateBase
 	{
-		public function DefenseState()
+		public function DefenseState(agent:ChessAgent,resource:*,description:String=null)
+		{
+			super(agent,resource,description);
+		}
+		
+		override public function enter():void
 		{
 			//TODO: implement function
 		}
 		
-		public function set description(value:String):void
+		override public function exit():void
 		{
 			//TODO: implement function
 		}
 		
-		public function get description():String
-		{
-			//TODO: implement function
-			return null;
-		}
-		
-		public function enter():void
-		{
-			//TODO: implement function
-		}
-		
-		public function exit():void
-		{
-			//TODO: implement function
-		}
-		
-		public function update(time:Number=0):void
+		override public function update(time:Number=0):void
 		{
 			//TODO: implement function
 		}

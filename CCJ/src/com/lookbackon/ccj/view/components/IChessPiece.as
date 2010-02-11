@@ -9,7 +9,7 @@ package com.lookbackon.ccj.view.components
 	 * @author Knight.zhou
 	 * 
 	 */	
-	public interface IChessPiece extends IVisualElement
+	public interface IChessPiece extends IVisualElement,IPosition
 	{
 		function set agent(value:ChessAgent):void;
 		function get agent():ChessAgent;

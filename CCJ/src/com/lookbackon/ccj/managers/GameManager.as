@@ -8,7 +8,7 @@ package com.lookbackon.ccj.managers
 	public class GameManager
 	{
 		private static var searching:ISearchingBase;
-		protected static function restartGame():void
+		protected static function startGame():void
 		{
 			//todo:
 		}

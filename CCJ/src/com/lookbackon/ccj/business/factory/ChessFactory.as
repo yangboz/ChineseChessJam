@@ -133,9 +133,15 @@ package com.lookbackon.ccj.business.factory
 				position[0]*ChessBoard.LATTICE_WIDTH - myChessPiece.width/2 +50;
 			myChessPiece.y = 
 				position[1]*ChessBoard.LATTICE_WIDTH + myChessPiece.height/2 -25;
-			myChessPiece.toolTip = myChessPiece.name;
-			myChessPiece.enabled = (myChessPiece.name!="");
-			if(myChessPiece.enabled)
+			myChessPiece.label = myChessPiece.name;
+			var textColor:uint = 0xff0000;//blue.
+			if(myChessPiece.name.indexOf("+")!=-1)
+			{
+				textColor = 0x00ffff;//red	
+			}
+			myChessPiece.setStyle("color",textColor);
+			myChessPiece.setStyle("fillColor",textColor);
+			if(myChessPiece.name!="")
 			{
 				return myChessPiece;
 			}
