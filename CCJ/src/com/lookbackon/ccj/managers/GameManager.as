@@ -1,6 +1,9 @@
 package com.lookbackon.ccj.managers
 {
 	import com.lookbackon.AI.searching.ISearchingBase;
+	import com.lookbackon.ccj.view.components.ChessPiece;
+
+	/*
 	 * A player manager class to maintain turn-based game.
 	 * @author Knight.zhou
 	 * 
@@ -8,7 +11,7 @@ package com.lookbackon.ccj.managers
 	public class GameManager
 	{
 		private static var searching:ISearchingBase;
-		protected static function startGame():void
+		public static function startGame():void
 		{
 			//todo:
 		}

@@ -1,6 +1,7 @@
 package com.lookbackon.ccj.business.factory
 {
 	import com.lookbackon.ccj.CcjConstants;
+	import com.lookbackon.ccj.model.ChessPositionModelLocator;
 	import com.lookbackon.ccj.model.vo.BishopVO;
 	import com.lookbackon.ccj.model.vo.CannonVO;
 	import com.lookbackon.ccj.model.vo.CastleVO;
@@ -25,7 +26,7 @@ package com.lookbackon.ccj.business.factory
 	{
 		/**
 		 * 
-		 * @param chessPieceType
+		 * @param position chessPiece's position in array2.
 		 * @return ChessPiece component with implement IChessPiece
 		 * 
 		 */		
@@ -150,10 +151,18 @@ package com.lookbackon.ccj.business.factory
 			var textColor:uint = 0xff0000;//blue.
 			if(myChessPiece.name.indexOf("+")!=-1)
 			{
-				textColor = 0x0000ff;//red	
+				textColor = 0x0000ff;//red
+			}else
+			{
+//				myChessPiece.enabled = false;
 			}
 			myChessPiece.setStyle("color",textColor);
 			myChessPiece.setStyle("fillColor",textColor);
+			//restore flag value to chess position.
+			ChessPositionModelLocator.getInstance().allPieces.sett(
+				position[0],
+				position[1],
+				generateChessPieceFlag(chessPieceType) );
 			//avoid duplicate usless components.
 			if(myChessPiece.name!="")
 			{
@@ -193,30 +202,44 @@ package com.lookbackon.ccj.business.factory
 			switch(conductVO.target.name)
 			{
 				case CcjConstants.BLUE_BISHOP:
+					chessVO = new BishopVO(9,10,rowIndex,colIndex,1);
+					break;
 				case CcjConstants.RED_BISHOP:
 					chessVO = new BishopVO(9,10,rowIndex,colIndex);
 					break;
 				case CcjConstants.BLUE_CANNON:
+					chessVO = new CannonVO(9,10,rowIndex,colIndex,1);
+					break;
 				case CcjConstants.RED_CANNON:
 					chessVO = new CannonVO(9,10,rowIndex,colIndex);
 					break;
 				case CcjConstants.BLUE_CASTLE:
+					chessVO = new CastleVO(9,10,rowIndex,colIndex,1);
+					break;
 				case CcjConstants.RED_CASTLE:
 					chessVO = new CastleVO(9,10,rowIndex,colIndex);
 					break;
 				case CcjConstants.BLUE_KNIGHT:
+					chessVO = new KnightVO(9,10,rowIndex,colIndex,1);
+					break;
 				case CcjConstants.RED_KNIGHT:
 					chessVO = new KnightVO(9,10,rowIndex,colIndex);
 					break;
 				case CcjConstants.BLUE_MARSHAL:
+					chessVO = new MarshalVO(9,10,rowIndex,colIndex,1);
+					break;
 				case CcjConstants.RED_MARSHAL:
 					chessVO = new MarshalVO(9,10,rowIndex,colIndex);
 					break;
 				case CcjConstants.BLUE_OFFICAL:
+					chessVO = new OfficalVO(9,10,rowIndex,colIndex,1);
+					break;
 				case CcjConstants.RED_OFFICAL:
 					chessVO = new OfficalVO(9,10,rowIndex,colIndex);
 					break;
 				case CcjConstants.BLUE_PAWN:
+					chessVO = new PawnVO(9,10,rowIndex,colIndex,1);
+					break;
 				case CcjConstants.RED_PAWN:
 					chessVO = new PawnVO(9,10,rowIndex,colIndex);
 					break;
@@ -224,6 +247,66 @@ package com.lookbackon.ccj.business.factory
 					break;
 			}
 			return chessVO;
+		}
+		/**
+		 * 
+		 * @param chessPieceType the chess piece's type(e.g. RedPawn,BlueCannon)
+		 * @return int value
+		 * @private //A. 0表示空格(没有棋子)；
+		 * @private //B. 8~14依次表示红方的帅、仕、相、马、车、炮和兵；
+		 * @private //C. 16~22依次表示蓝方的将、士、象、马、车、炮和卒。
+		 */		
+		private static function generateChessPieceFlag(chessPieceType:String):int
+		{
+			var result:int = 0;
+			switch(chessPieceType)
+			{
+				case CcjConstants.BLUE_BISHOP:
+					result = 18;
+					break;
+				case CcjConstants.RED_BISHOP:
+					result = 10;
+					break;
+				case CcjConstants.BLUE_CANNON:
+					result = 21;
+					break;
+				case CcjConstants.RED_CANNON:
+					result = 13;
+					break;
+				case CcjConstants.BLUE_CASTLE:
+					result = 20;
+					break;
+				case CcjConstants.RED_CASTLE:
+					result = 12;
+					break;
+				case CcjConstants.BLUE_KNIGHT:
+					result = 19;
+					break;
+				case CcjConstants.RED_KNIGHT:
+					result = 11;
+					break;
+				case CcjConstants.BLUE_MARSHAL:
+					result = 16;
+					break;
+				case CcjConstants.RED_MARSHAL:
+					result = 8;
+					break;
+				case CcjConstants.BLUE_OFFICAL:
+					result = 17;
+					break;
+				case CcjConstants.RED_OFFICAL:
+					result = 9;
+					break;
+				case CcjConstants.BLUE_PAWN:
+					result = 22;
+					break;
+				case CcjConstants.RED_PAWN:
+					result = 14;
+					break;
+				default:
+					break;
+			}
+			return result;
 		}
 	}
 }

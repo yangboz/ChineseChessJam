@@ -1,10 +1,11 @@
 package com.lookbackon.AI.searching
 {
-	import com.godpaper.twoHitOne.vo.ConductVO;
+	import com.lookbackon.ccj.model.vo.ConductVO;
 	
 	import de.polygonal.ds.Array2;
 	
 	import mx.collections.ArrayCollection;
+
 	/**
 	 * The basic gameAI behaviors to be implemented.
 	 * @author Knight-errant
