@@ -28,5 +28,8 @@ package com.lookbackon.ccj
 		public static const RED_OFFICAL:String 		= "offcial+";
 		public static const RED_MARSHAL:String		= "marshal+";
 		public static const RED_CANNON:String		= "cannon+";
+		//about p2p
+		public static const STRATUS_ADDRESS:String 	= "rtmfp://stratus.adobe.com/";
+		public static const STRATUS_DEV_KEY:String  = "40a1c5b634bc4f531ad7757f-2e3cf422214e";
 	}
 }
