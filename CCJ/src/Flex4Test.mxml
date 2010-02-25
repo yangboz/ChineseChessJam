@@ -134,9 +134,8 @@
 				}
 			}
 			
-			private function sendMessage(msg:String):void
+			private function sendMessage():void
 			{
-				LOG.debug("sendMessage:{0}",msg);
 				var message:Object = new Object();
 				message.sender = this.netGroup.convertPeerIDToGroupAddress(this.netConnection.nearID);
 				message.user = this.myUserLabel.text;
@@ -203,8 +202,8 @@
 		</mx:TextArea>
 		<s:HGroup>
 			<s:Label id="myUserLabel" text="{user}"/>
-			<s:TextInput id="myTextInput"/>
-			<mx:LinkButton id="myLinkButton" label="OK" enabled="{connected}"/>
+			<s:TextInput id="myTextInput" enter="sendMessage()"/>
+			<mx:LinkButton id="myLinkButton" label="OK" enabled="{connected}" click="sendMessage()"/>
 		</s:HGroup>
 	</s:VGroup>
 </s:Application>
