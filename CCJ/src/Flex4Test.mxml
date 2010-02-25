@@ -16,14 +16,25 @@
 			import mx.events.FlexEvent;
 			import mx.logging.ILogger;
 			import mx.logging.LogEventLevel;
+			import mx.managers.CursorManager;
 			
 			private static const LOG:ILogger  = LogUtil.getLogger(Flex4Test);
+			
 			private var blackPieces:BitBoard;
 			private var redPieces:Array2;
+			private var netConnection:NetConnection;
+			[Bindable]
+			private var user:String;
+			[Bindable]
+			private var connected:Boolean;
+			
+			private var groupSpec:GroupSpecifier;
+			private var netGroup:NetGroup;
+			
 			protected function application1_creationCompleteHandler(event:FlexEvent):void
 			{
 				// TODO Auto-generated method stub
-				blackPieces = new BitBoard(9,10);
+				/* blackPieces = new BitBoard(9,10);
 				blackPieces.setBitt(0,2,true);
 				blackPieces.setBitt(0,3,true);
 				blackPieces.setBitt(2,3,true);
@@ -33,7 +44,7 @@
 				blackPieces.setAll();
 				LOG.debug(blackPieces.dump());
 				blackPieces.clear();
-				LOG.debug(blackPieces.dump());
+				LOG.debug(blackPieces.dump()); */
 				/* for(var x:uint=1;x<=32768;x<<=4)
 				{
 					trace(x.toString(16),(x<<1).toString(16),(x<<2).toString(16),(x<<3).toString(16));
@@ -59,8 +70,93 @@
 				LOG.debug("marshallVO:{0}",marshallVO.dump()); */
 				var pawnVO:PawnVO = new PawnVO(9,10,3,4);
 				LOG.debug("pawnVO:{0}",pawnVO.dump());
+				//test p2p
+				this.setupNetConnection();
 			}
-
+			
+			/* File -> New -> Flex Project
+			Link new playerglobal.swc (FP10.1 API) to your project in Project Properties 
+			and set compiler version in Flex Compiler to 10.1.0			
+			Step 2: Connect to Stratus
+			First of all we need to setup NetConnection to Adobe Stratus. 
+			That’s easy part. */
+			private function setupNetConnection():void
+			{
+				this.netConnection = new NetConnection();
+				this.netConnection.addEventListener(NetStatusEvent.NET_STATUS,netStatusHandler);
+				this.netConnection.connect(CcjConstants.STRATUS_ADDRESS.concat(CcjConstants.STRATUS_DEV_KEY));
+				CursorManager.setBusyCursor();
+				this.myLabel.text = "Connecting...";
+			}
+			/* We need to setup P2P group and connect to it. 
+			GroupSpecifier is a class, which let’s you 
+			to define all the parameters of the group. 
+			First you give it a name - in this case “myGroup/g1″. 
+			Then you set it to use serverChannel, to let it communicate with Stratus. 
+			Finally we enable Posting. That’s all you have to do to define the P2P Group.
+			Then we have to define the actual NetGroup. 
+			groupspecWithAuthorizations() returns String 
+			- it’s a group identifier. Now you probably ask, 
+			what’s the difference between groupspecWithoutAuthorizations() 
+			and groupspecWithAuthorizations(). 
+			If you set a posting or multicast password, 
+			the one “with” can post or multicast, the one “without” is receive-only. */
+			private function setupGroup():void
+			{
+				groupSpec = new GroupSpecifier("myGroup/g1");
+				groupSpec.serverChannelEnabled = true;
+				groupSpec.postingEnabled = true;
+				
+				this.netGroup = new NetGroup(this.netConnection,this.groupSpec.groupspecWithAuthorizations());
+				this.netGroup.addEventListener(NetStatusEvent.NET_STATUS,netStatusHandler);
+				
+				this.user = "user"+Math.round(Math.random()*10000);
+				
+			}
+			
+			private function netStatusHandler(event:NetStatusEvent):void
+			{
+				this.myLabel.text = event.info.code;
+				switch(event.info.code)
+				{
+					case "NetConnection.Connect.Success":
+						setupGroup();
+						break;
+					case "NetGroup.Connect.Success":
+						connected = true;
+						CursorManager.removeBusyCursor();
+						break;
+					case "NetGroup.Posting.Notify":
+						receiveMessage(event.info.message);
+						break;
+					default:
+						break;
+				}
+			}
+			
+			private function sendMessage(msg:String):void
+			{
+				LOG.debug("sendMessage:{0}",msg);
+				var message:Object = new Object();
+				message.sender = this.netGroup.convertPeerIDToGroupAddress(this.netConnection.nearID);
+				message.user = this.myUserLabel.text;
+				message.text = this.myTextInput.text;
+				
+				this.netGroup.post(message);
+				
+				this.receiveMessage(message);
+				
+				this.myTextInput.text = "";
+			}
+			
+			private function receiveMessage(message:Object):void{
+				write(message.user+": "+message.text);
+			}
+			
+			private function write(txt:String):void{
+				this.myTextArea.text += txt+"\n";
+			}
+			
 		]]>
 	</fx:Script>
 	
@@ -92,19 +188,23 @@
 					   />
 	</fx:Declarations>
 	<s:VGroup horizontalCenter="0" verticalCenter="0">
-		<s:Label text="--start"/>
-		<mx:HBox>
-			<s:Graphic>
-				<s:Rect width="100" height="100">
-					<s:fill>
-						<s:SolidColor id="sc" color="0xffccdd"/>
-					</s:fill>
-					<s:stroke>
-						<s:SolidColorStroke color="0xffeeff" weight="2"/>
-					</s:stroke>
-				</s:Rect>
-			</s:Graphic>
-		</mx:HBox>
-		<mx:LinkButton icon="{ico}" />
+		<!--<s:Graphic>
+			<s:Rect width="200" height="200">
+				<s:fill>
+					<s:SolidColor id="sc" color="0xffccdd"/>
+				</s:fill>
+				<s:stroke>
+					<s:SolidColorStroke color="0xffeeff" weight="2"/>
+				</s:stroke>
+			</s:Rect>
+		</s:Graphic>-->
+		<s:Label id="myLabel" text="start"/>
+		<mx:TextArea id="myTextArea" width="200" height="200">
+		</mx:TextArea>
+		<s:HGroup>
+			<s:Label id="myUserLabel" text="{user}"/>
+			<s:TextInput id="myTextInput"/>
+			<mx:LinkButton id="myLinkButton" label="OK" enabled="{connected}"/>
+		</s:HGroup>
 	</s:VGroup>
 </s:Application>
