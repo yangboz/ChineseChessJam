@@ -42,101 +42,65 @@ package com.lookbackon.ccj.business.factory
 			{
 				//about blue
 				case "0,0":
-					chessPieceType = CcjConstants.BLUE_CASTLE;
+				case "8,0":
+					chessPieceType = CcjConstants.BLUE_CASTLE.label;
 					break;
 				case "1,0":
-					chessPieceType = CcjConstants.BLUE_KNIGHT;
+				case "7,0":
+					chessPieceType = CcjConstants.BLUE_KNIGHT.label;
 					break;
 				case "2,0":
-					chessPieceType = CcjConstants.BLUE_BISHOP;
+				case "6,0":
+					chessPieceType = CcjConstants.BLUE_BISHOP.label;
 					break;
 				case "3,0":
-					chessPieceType = CcjConstants.BLUE_OFFICAL;
+				case "5,0":
+					chessPieceType = CcjConstants.BLUE_OFFICAL.label;
 					break;
 				case "4,0":
-					chessPieceType = CcjConstants.BLUE_MARSHAL;
-					break;
-				case "5,0":
-					chessPieceType = CcjConstants.BLUE_OFFICAL;
-					break;
-				case "6,0":
-					chessPieceType = CcjConstants.BLUE_BISHOP;
-					break;
-				case "7,0":
-					chessPieceType = CcjConstants.BLUE_KNIGHT;
-					break;
-				case "8,0":
-					chessPieceType = CcjConstants.BLUE_CASTLE;
+					chessPieceType = CcjConstants.BLUE_MARSHAL.label;
 					break;
 				case "1,2":
-					chessPieceType = CcjConstants.BLUE_CANNON;
-					break;
 				case "7,2":
-					chessPieceType = CcjConstants.BLUE_CANNON;
+					chessPieceType = CcjConstants.BLUE_CANNON.label;
 					break;
 				case "0,3":
-					chessPieceType = CcjConstants.BLUE_PAWN;
-					break;
 				case "2,3":
-					chessPieceType = CcjConstants.BLUE_PAWN;
-					break;
 				case "4,3":
-					chessPieceType = CcjConstants.BLUE_PAWN;
-					break;
 				case "6,3":
-					chessPieceType = CcjConstants.BLUE_PAWN;
-					break;
 				case "8,3":
-					chessPieceType = CcjConstants.BLUE_PAWN;
+					chessPieceType = CcjConstants.BLUE_PAWN.label;
 					break;
 				//about red
 				case "0,9":
-					chessPieceType = CcjConstants.RED_CASTLE;
+				case "8,9":
+					chessPieceType = CcjConstants.RED_CASTLE.label;
 					break;
 				case "1,9":
-					chessPieceType = CcjConstants.RED_KNIGHT;
+				case "7,9":
+					chessPieceType = CcjConstants.RED_KNIGHT.label;
 					break;
 				case "2,9":
-					chessPieceType = CcjConstants.RED_BISHOP;
+				case "6,9":
+					chessPieceType = CcjConstants.RED_BISHOP.label;
 					break;
 				case "3,9":
-					chessPieceType = CcjConstants.RED_OFFICAL;
+				case "5,9":
+					chessPieceType = CcjConstants.RED_OFFICAL.label;
 					break;
 				case "4,9":
-					chessPieceType = CcjConstants.RED_MARSHAL;
-					break;
-				case "5,9":
-					chessPieceType = CcjConstants.RED_OFFICAL;
-					break;
-				case "6,9":
-					chessPieceType = CcjConstants.RED_BISHOP;
-					break;
-				case "7,9":
-					chessPieceType = CcjConstants.RED_KNIGHT;
-					break;
-				case "8,9":
-					chessPieceType = CcjConstants.RED_CASTLE;
+					chessPieceType = CcjConstants.RED_MARSHAL.label;
 					break;
 				case "1,7":
-					chessPieceType = CcjConstants.RED_CANNON;
-					break;
 				case "7,7":
-					chessPieceType = CcjConstants.RED_CANNON;
+					chessPieceType = CcjConstants.RED_CANNON.label;
 					break;
 				case "0,6":
-					chessPieceType = CcjConstants.RED_PAWN;
-					break;
 				case "2,6":
-					chessPieceType = CcjConstants.RED_PAWN;
-					break;
 				case "4,6":
-					chessPieceType = CcjConstants.RED_PAWN;
-					break;
 				case "6,6":
-					chessPieceType = CcjConstants.RED_PAWN;
-					break;
 				case "8,6":
-					chessPieceType = CcjConstants.RED_PAWN;
+					chessPieceType = CcjConstants.RED_PAWN.label;
 					break;
 				default:
 					break;

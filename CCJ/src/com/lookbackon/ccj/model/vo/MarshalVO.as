@@ -1,5 +1,8 @@
 package com.lookbackon.ccj.model.vo
 {
+	import com.lookbackon.ccj.CcjConstants;
+	import com.lookbackon.ccj.model.ChessPositionModelLocator;
+
 	/**
 	 * 
 	 * @author Knight.zhou
@@ -21,61 +24,142 @@ package com.lookbackon.ccj.model.vo
 		override protected function initialization(rowIndex:int, colIndex:int,flag:int=0) : void
 		{
 			//TODO: implement function
+			var getCols:Array = ChessPositionModelLocator.getInstance().allPieces.getCol(colIndex);
+			var getIndex:int = getCols.indexOf(CcjConstants.RED_MARSHAL);
+			var getColsReverse:Array = getCols.reverse();
 			//blue
 			if(rowIndex>=7)
 			{
-				//marshall face to face.
-				this.setBitt(0,colIndex,true);
-				this.setBitt(1,colIndex,true);
-				this.setBitt(2,colIndex,true);
-				//itself
 				//right
 				if(colIndex<5)
 				{
-					this.setBitt(rowIndex,colIndex+1,true);
+					//several amendments.
+					//avoid marshall face to face.
+					if(getIndex==-1)
+					{
+						this.setBitt(rowIndex,colIndex+1,true);
+					}else
+					{
+						if(getCols[getCols.length-1]!=CcjConstants.RED_MARSHAL)
+						{
+							this.setBitt(rowIndex,colIndex+1,true);
+						}
+					}
 				}
 				//left
 				if(colIndex>3)
 				{
-					this.setBitt(rowIndex,colIndex-1,true);
+					//several amendments.
+					//avoid marshall face to face.
+					if(getIndex==-1)
+					{
+						this.setBitt(rowIndex,colIndex-1,true);
+					}else
+					{
+						if(getCols[getCols.length-1]!=CcjConstants.RED_MARSHAL)
+						{
+							this.setBitt(rowIndex,colIndex-1,true);
+						}
+					}
 				}
 				//top
 				if(rowIndex>7)
 				{
-					this.setBitt(rowIndex-1,colIndex,true);
+					//several amendments.
+					//avoid marshall face to face.
+					if(getIndex==-1)
+					{
+						this.setBitt(rowIndex-1,colIndex,true);
+					}else
+					{
+						if(getCols[getCols.length-1]!=CcjConstants.RED_MARSHAL)
+						{
+							this.setBitt(rowIndex-1,colIndex,true);
+						}
+					}
 				}
 				//bottom
 				if(rowIndex<9)
 				{
-					this.setBitt(rowIndex+1,colIndex,true);
+					//several amendments.
+					//avoid marshall face to face.
+					if(getIndex==-1)
+					{
+						this.setBitt(rowIndex+1,colIndex,true);
+					}else
+					{
+						if(getCols[getCols.length-1]!=CcjConstants.RED_MARSHAL)
+						{
+							this.setBitt(rowIndex+1,colIndex,true);
+						}
+					}
 				}
 			}else
 			//red	
 			{
-				//marshall face to face.
-				this.setBitt(7,colIndex,true);
-				this.setBitt(8,colIndex,true);
-				this.setBitt(9,colIndex,true);
-				//itself
 				//right
 				if(colIndex<5)
 				{
-					this.setBitt(rowIndex,colIndex+1,true);
+					//several amendments.
+					//avoid marshall face to face.
+					if(getIndex==-1)
+					{
+						this.setBitt(rowIndex,colIndex+1,true);
+					}else
+					{
+						if(getColsReverse[getCols.length-1]!=CcjConstants.BLUE_MARSHAL)
+						{
+							this.setBitt(rowIndex,colIndex+1,true);
+						}
+					}
 				}
 				//left
 				if(colIndex>3)
 				{
-					this.setBitt(rowIndex,colIndex-1,true);
+					//several amendments.
+					//avoid marshall face to face.
+					if(getIndex==-1)
+					{
+						this.setBitt(rowIndex,colIndex-1,true);
+					}else
+					{
+						if(getColsReverse[getCols.length-1]!=CcjConstants.BLUE_MARSHAL)
+						{
+							this.setBitt(rowIndex,colIndex-1,true);
+						}
+					}
 				}
 				//top
 				if(rowIndex<2)
 				{
-					this.setBitt(rowIndex+1,colIndex,true);
+					//several amendments.
+					//avoid marshall face to face.
+					if(getIndex==-1)
+					{
+						this.setBitt(rowIndex+1,colIndex,true);
+					}else
+					{
+						if(getColsReverse[getCols.length-1]!=CcjConstants.BLUE_MARSHAL)
+						{
+							this.setBitt(rowIndex+1,colIndex,true);
+						}
+					}
 				}
 				//bottom
 				if(rowIndex>0)
 				{
-					this.setBitt(rowIndex-1,colIndex,true);
+					//several amendments.
+					//avoid marshall face to face.
+					if(getIndex==-1)
+					{
+						this.setBitt(rowIndex-1,colIndex,true);
+					}else
+					{
+						if(getColsReverse[getCols.length-1]!=CcjConstants.BLUE_MARSHAL)
+						{
+							this.setBitt(rowIndex-1,colIndex,true);
+						}
+					}
 				}
 			}
 		}

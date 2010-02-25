@@ -1,5 +1,7 @@
 package com.lookbackon.ccj.model.vo
 {
+	import com.lookbackon.ccj.model.ChessPositionModelLocator;
+
 	/**
 	 * 
 	 * @author Knight.zhou
@@ -25,36 +27,73 @@ package com.lookbackon.ccj.model.vo
 			// - - *
 			if(rowIndex==0)
 			{
-				this.setBitt(rowIndex+2,colIndex-2,true);
-				this.setBitt(rowIndex+2,colIndex+2,true);
+				//several amendments.
+				if(!ChessPositionModelLocator.getInstance().allPieces.gett(colIndex-1,rowIndex+1))
+				{
+					this.setBitt(rowIndex+2,colIndex-2,true);
+				}
+				if(!ChessPositionModelLocator.getInstance().allPieces.gett(colIndex+1,rowIndex+1))
+				{
+					this.setBitt(rowIndex+2,colIndex+2,true);
+				}
 			}
 			if(rowIndex==2 || rowIndex==7)
 			{
 				if(colIndex>2)
 				{
-					this.setBitt(rowIndex-2,colIndex-2,true);
-					this.setBitt(rowIndex+2,colIndex-2,true);
+					if(!ChessPositionModelLocator.getInstance().allPieces.gett(colIndex-1,rowIndex-1))
+					{
+						this.setBitt(rowIndex-2,colIndex-2,true);
+					}
+					if(!ChessPositionModelLocator.getInstance().allPieces.gett(colIndex+1,rowIndex-1))
+					{
+						this.setBitt(rowIndex+2,colIndex-2,true);
+					}
 				}
 				if(colIndex<6)
 				{
-					this.setBitt(rowIndex-2,colIndex+2,true);
-					this.setBitt(rowIndex+2,colIndex+2,true);
+					if(!ChessPositionModelLocator.getInstance().allPieces.gett(colIndex-1,rowIndex+1))
+					{
+						this.setBitt(rowIndex-2,colIndex+2,true);
+					}
+					if(!ChessPositionModelLocator.getInstance().allPieces.gett(colIndex+1,rowIndex+1))
+					{
+						this.setBitt(rowIndex+2,colIndex+2,true);
+					}
 				}
 			}
 			if(rowIndex==4)
 			{
-				this.setBitt(rowIndex-2,colIndex-2,true);
-				this.setBitt(rowIndex-2,colIndex+2,true);
+				if(!ChessPositionModelLocator.getInstance().allPieces.gett(colIndex-1,rowIndex-1))
+				{
+					this.setBitt(rowIndex-2,colIndex-2,true);
+				}
+				if(!ChessPositionModelLocator.getInstance().allPieces.gett(colIndex-1,rowIndex+1))
+				{
+					this.setBitt(rowIndex-2,colIndex+2,true);
+				}
 			}
 			if(rowIndex==5)
 			{
-				this.setBitt(rowIndex+2,colIndex-2,true);
-				this.setBitt(rowIndex+2,colIndex+2,true);
+				if(!ChessPositionModelLocator.getInstance().allPieces.gett(colIndex+1,rowIndex-1))
+				{
+					this.setBitt(rowIndex+2,colIndex-2,true);
+				}
+				if(!ChessPositionModelLocator.getInstance().allPieces.gett(colIndex-1,rowIndex+1))
+				{
+					this.setBitt(rowIndex+2,colIndex+2,true);
+				}
 			}
 			if(rowIndex==9)
 			{
-				this.setBitt(rowIndex-2,colIndex-2,true);
-				this.setBitt(rowIndex-2,colIndex+2,true);
+				if(!ChessPositionModelLocator.getInstance().allPieces.gett(colIndex-1,rowIndex-1))
+				{
+					this.setBitt(rowIndex-2,colIndex-2,true);
+				}
+				if(!ChessPositionModelLocator.getInstance().allPieces.gett(colIndex-1,rowIndex+1))
+				{
+					this.setBitt(rowIndex-2,colIndex+2,true);
+				}
 			}
 		}
 	}

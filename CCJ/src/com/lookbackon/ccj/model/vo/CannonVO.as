@@ -1,5 +1,6 @@
 package com.lookbackon.ccj.model.vo
 {
+	import com.lookbackon.ccj.model.ChessPositionModelLocator;
 	import com.lookbackon.ccj.utils.MathUtil;
 
 	/**
@@ -25,12 +26,21 @@ package com.lookbackon.ccj.model.vo
 			// s - *
 			// -
 			// *
+			var getRows:Array = ChessPositionModelLocator.getInstance().allPieces.getRow(rowIndex);
+			var getCols:Array = ChessPositionModelLocator.getInstance().allPieces.getCol(colIndex);
 			//horizontally.
 			for(var hh:int=0;hh<this.width;hh++)
 			{
 				if(MathUtil.transactAbs(hh-colIndex)>1)
 				{
-					this.setBitt(rowIndex,hh,true);
+					//several amendments.
+					if(getRows[hh])
+					{
+						this.setBitt(rowIndex,hh+1,true);
+					}else
+					{
+						this.setBitt(rowIndex,hh,true);
+					}
 				}
 			}
 			//vertically.
@@ -38,7 +48,13 @@ package com.lookbackon.ccj.model.vo
 			{
 				if(MathUtil.transactAbs(v-rowIndex)>1)
 				{
-					this.setBitt(v,colIndex,true);
+					if(getCols[v])
+					{
+						this.setBitt(v+1,colIndex,true);
+					}else
+					{
+						this.setBitt(v,colIndex,true);
+					}
 				}
 			}
 			//iteself
