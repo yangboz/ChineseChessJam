@@ -31,6 +31,10 @@
 			private var groupSpec:GroupSpecifier;
 			private var netGroup:NetGroup;
 			
+			//about p2p
+			public static const STRATUS_ADDRESS:String 	= "rtmfp://stratus.adobe.com/";
+			public static const STRATUS_DEV_KEY:String  = "40a1c5b634bc4f531ad7757f-2e3cf422214e";
+			
 			protected function application1_creationCompleteHandler(event:FlexEvent):void
 			{
 				// TODO Auto-generated method stub
@@ -84,7 +88,7 @@
 			{
 				this.netConnection = new NetConnection();
 				this.netConnection.addEventListener(NetStatusEvent.NET_STATUS,netStatusHandler);
-				this.netConnection.connect(CcjConstants.STRATUS_ADDRESS.concat(CcjConstants.STRATUS_DEV_KEY));
+				this.netConnection.connect(STRATUS_ADDRESS.concat(STRATUS_DEV_KEY));
 				CursorManager.setBusyCursor();
 				this.myLabel.text = "Connecting...";
 			}

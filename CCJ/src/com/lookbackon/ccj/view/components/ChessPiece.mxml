@@ -10,7 +10,6 @@
 			import com.lookbackon.ccj.business.fsm.ChessAgent;
 			import com.lookbackon.ccj.business.fsm.states.AttackState;
 			import com.lookbackon.ccj.business.fsm.states.DefenseState;
-			import com.lookbackon.ccj.business.fsm.states.TerminatedState;
 			import com.lookbackon.ccj.managers.ChessPieceManager;
 			import com.lookbackon.ccj.model.vo.ConductVO;
 			
@@ -24,7 +23,6 @@
 			//--------------------------------------------------------------------------
 			public var attackState:AttackState;
 			public var defenseState:DefenseState;
-			public var terminatedState:TerminatedState;
 			//----------------------------------
 			//  CONSTANTS
 			//----------------------------------
@@ -70,7 +68,6 @@
 				this.agent = new ChessAgent(this.name,this,null);
 				this.attackState = new AttackState(this.agent,null,"Attack");
 				this.defenseState = new DefenseState(this.agent,null,"Defense");
-				this.terminatedState = new TerminatedState(this.agent,null,"Terminate");
 				// add event listener
 				this.addEventListener(MouseEvent.MOUSE_DOWN,mouseDownHandler);
 			}

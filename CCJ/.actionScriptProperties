@@ -16,6 +16,7 @@
     <application path="Flex4Test.mxml"/>
     <application path="P2PChat.mxml"/>
     <application path="Main.mxml"/>
+    <application path="MathTest.mxml"/>
   </applications>
   <modules/>
   <buildCSSFiles/>

@@ -15,7 +15,6 @@
 			//
 			//--------------------------------------------------------------------------
 			import mx.graphics.SolidColorStroke;
-			import com.lookbackon.ccj.CcjConstants;
 			//--------------------------------------------------------------------------
 			//
 			//  Variables
@@ -24,10 +23,10 @@
 			//----------------------------------
 			//  CONSTANTS
 			//----------------------------------
-			private static const SCALE_XY:Number		= CcjConstants.CHESS_BOARD_VIEW_SCALE_XY;
-			private static const TOTAL_H_LINES:Number 	= CcjConstants.CHESS_BOARD_V_LINES;
-			private static const TOTAL_V_LINES:Number 	= CcjConstants.CHESS_BOARD_H_LINES;
-			private static const BOARD_WIDTH:Number 	= 400*SCALE_XY;
+			public static const SCALE_XY:Number			= 1.5;
+			public static const TOTAL_H_LINES:Number 	= 9;
+			public static const TOTAL_V_LINES:Number 	= 10;
+			public static const BOARD_WIDTH:Number 		= 400*SCALE_XY;
 			public static const BOARD_HEIGHT:Number 	= 450*SCALE_XY;
 			public static const LATTICE_WIDTH:Number	= 50*SCALE_XY;
 			//----------------------------------

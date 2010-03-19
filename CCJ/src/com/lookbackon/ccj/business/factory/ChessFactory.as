@@ -165,46 +165,46 @@ package com.lookbackon.ccj.business.factory
 			var chessVO:ChessVOBase;
 			switch(conductVO.target.name)
 			{
-				case CcjConstants.BLUE_BISHOP:
+				case CcjConstants.BLUE_BISHOP.label:
 					chessVO = new BishopVO(9,10,rowIndex,colIndex,1);
 					break;
-				case CcjConstants.RED_BISHOP:
+				case CcjConstants.RED_BISHOP.label:
 					chessVO = new BishopVO(9,10,rowIndex,colIndex);
 					break;
-				case CcjConstants.BLUE_CANNON:
+				case CcjConstants.BLUE_CANNON.label:
 					chessVO = new CannonVO(9,10,rowIndex,colIndex,1);
 					break;
-				case CcjConstants.RED_CANNON:
+				case CcjConstants.RED_CANNON.label:
 					chessVO = new CannonVO(9,10,rowIndex,colIndex);
 					break;
-				case CcjConstants.BLUE_CASTLE:
+				case CcjConstants.BLUE_CASTLE.label:
 					chessVO = new CastleVO(9,10,rowIndex,colIndex,1);
 					break;
-				case CcjConstants.RED_CASTLE:
+				case CcjConstants.RED_CASTLE.label:
 					chessVO = new CastleVO(9,10,rowIndex,colIndex);
 					break;
-				case CcjConstants.BLUE_KNIGHT:
+				case CcjConstants.BLUE_KNIGHT.label:
 					chessVO = new KnightVO(9,10,rowIndex,colIndex,1);
 					break;
-				case CcjConstants.RED_KNIGHT:
+				case CcjConstants.RED_KNIGHT.label:
 					chessVO = new KnightVO(9,10,rowIndex,colIndex);
 					break;
-				case CcjConstants.BLUE_MARSHAL:
+				case CcjConstants.BLUE_MARSHAL.label:
 					chessVO = new MarshalVO(9,10,rowIndex,colIndex,1);
 					break;
-				case CcjConstants.RED_MARSHAL:
+				case CcjConstants.RED_MARSHAL.label:
 					chessVO = new MarshalVO(9,10,rowIndex,colIndex);
 					break;
-				case CcjConstants.BLUE_OFFICAL:
+				case CcjConstants.BLUE_OFFICAL.label:
 					chessVO = new OfficalVO(9,10,rowIndex,colIndex,1);
 					break;
-				case CcjConstants.RED_OFFICAL:
+				case CcjConstants.RED_OFFICAL.label:
 					chessVO = new OfficalVO(9,10,rowIndex,colIndex);
 					break;
-				case CcjConstants.BLUE_PAWN:
+				case CcjConstants.BLUE_PAWN.label:
 					chessVO = new PawnVO(9,10,rowIndex,colIndex,1);
 					break;
-				case CcjConstants.RED_PAWN:
+				case CcjConstants.RED_PAWN.label:
 					chessVO = new PawnVO(9,10,rowIndex,colIndex);
 					break;
 				default:
