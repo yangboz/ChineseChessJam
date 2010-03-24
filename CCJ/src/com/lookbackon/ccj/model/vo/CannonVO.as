@@ -29,7 +29,7 @@ package com.lookbackon.ccj.model.vo
 			var getRows:Array = ChessPositionModelLocator.getInstance().allPieces.getRow(rowIndex);
 			var getCols:Array = ChessPositionModelLocator.getInstance().allPieces.getCol(colIndex);
 			//horizontally.
-			for(var hh:int=0;hh<this.width;hh++)
+			for(var hh:int=0;hh<this.column;hh++)
 			{
 				if(MathUtil.transactAbs(hh-colIndex)>1)
 				{
@@ -44,7 +44,7 @@ package com.lookbackon.ccj.model.vo
 				}
 			}
 			//vertically.
-			for(var v:int=0;v<this.height;v++)
+			for(var v:int=0;v<this.row;v++)
 			{
 				if(MathUtil.transactAbs(v-rowIndex)>1)
 				{

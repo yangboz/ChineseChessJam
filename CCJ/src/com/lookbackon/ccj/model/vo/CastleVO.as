@@ -24,7 +24,7 @@ package com.lookbackon.ccj.model.vo
 			// ***s*****
 			//    *
 			//horizontally.
-			for(var hh:int=0;hh<this.width;hh++)
+			for(var hh:int=0;hh<this.column;hh++)
 			{
 				if(hh!=colIndex)
 				{
@@ -32,7 +32,7 @@ package com.lookbackon.ccj.model.vo
 				}
 			}
 			//vertically.
-			for(var v:int=0;v<this.height;v++)
+			for(var v:int=0;v<this.row;v++)
 			{
 				if(v!=rowIndex)
 				{

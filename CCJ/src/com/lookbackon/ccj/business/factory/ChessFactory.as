@@ -43,7 +43,7 @@ package com.lookbackon.ccj.business.factory
 				//about blue
 				case "0,0":
 				case "8,0":
-					chessPieceType = CcjConstants.BLUE_CASTLE.label;
+					chessPieceType = CcjConstants.BLUE_ROOK.label;
 					break;
 				case "1,0":
 				case "7,0":
@@ -74,7 +74,7 @@ package com.lookbackon.ccj.business.factory
 				//about red
 				case "0,9":
 				case "8,9":
-					chessPieceType = CcjConstants.RED_CASTLE.label;
+					chessPieceType = CcjConstants.RED_ROOK.label;
 					break;
 				case "1,9":
 				case "7,9":
@@ -177,10 +177,10 @@ package com.lookbackon.ccj.business.factory
 				case CcjConstants.RED_CANNON.label:
 					chessVO = new CannonVO(9,10,rowIndex,colIndex);
 					break;
-				case CcjConstants.BLUE_CASTLE.label:
+				case CcjConstants.BLUE_ROOK.label:
 					chessVO = new CastleVO(9,10,rowIndex,colIndex,1);
 					break;
-				case CcjConstants.RED_CASTLE.label:
+				case CcjConstants.RED_ROOK.label:
 					chessVO = new CastleVO(9,10,rowIndex,colIndex);
 					break;
 				case CcjConstants.BLUE_KNIGHT.label:
@@ -237,10 +237,10 @@ package com.lookbackon.ccj.business.factory
 				case CcjConstants.RED_CANNON:
 					result = 13;
 					break;
-				case CcjConstants.BLUE_CASTLE:
+				case CcjConstants.BLUE_ROOK:
 					result = 20;
 					break;
-				case CcjConstants.RED_CASTLE:
+				case CcjConstants.RED_ROOK:
 					result = 12;
 					break;
 				case CcjConstants.BLUE_KNIGHT:

@@ -4,7 +4,20 @@ package com.lookbackon.ccj.model.vo
 	import com.lookbackon.ds.BitBoard;
 
 	/**
+	 * This is our bitboard:
+	 * ---------
+	 * rkbomobkr
 	 * 
+	 *  c     c
+	 * p p p p p
+	 * 
+	 * 
+	 * 
+	 * P P P P P
+	 *  C     C
+	 * 
+	 * RKBOMOBKR
+	 * ---------
 	 * @author Knight.zhou
 	 * 
 	 */	

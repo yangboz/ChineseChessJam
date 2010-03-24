@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
-			   xmlns:mx="library://ns.adobe.com/flex/halo"
 			   minWidth="1024" minHeight="768"
-			   creationComplete="application1_creationCompleteHandler(event)" >
+			   creationComplete="application1_creationCompleteHandler(event)" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" >
 	<fx:Script>
 		<![CDATA[
 			import com.lookbackon.ccj.CcjConstants;
@@ -202,8 +202,8 @@
 			</s:Rect>
 		</s:Graphic>-->
 		<s:Label id="myLabel" text="start"/>
-		<mx:TextArea id="myTextArea" width="200" height="200">
-		</mx:TextArea>
+		<s:TextArea id="myTextArea" width="200" height="200">
+		</s:TextArea>
 		<s:HGroup>
 			<s:Label id="myUserLabel" text="{user}"/>
 			<s:TextInput id="myTextInput" enter="sendMessage()"/>

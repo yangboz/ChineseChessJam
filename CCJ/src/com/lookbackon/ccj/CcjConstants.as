@@ -19,21 +19,21 @@ package com.lookbackon.ccj
 		//----------------------------------
 		//chessPieceType
 		//blue
-		public static const BLUE_PAWN:CcjConstants 		= new CcjConstants("pawn-",22);
-		public static const BLUE_CASTLE:CcjConstants 	= new CcjConstants("castle-",20);
-		public static const BLUE_KNIGHT:CcjConstants	= new CcjConstants("knight-",19);
-		public static const BLUE_BISHOP:CcjConstants	= new CcjConstants("bishop-",18);
-		public static const BLUE_OFFICAL:CcjConstants 	= new CcjConstants("offcial-",16);
-		public static const BLUE_MARSHAL:CcjConstants	= new CcjConstants("marshal-",17);
-		public static const BLUE_CANNON:CcjConstants	= new CcjConstants("cannon-",21);
+		public static const BLUE_PAWN:CcjConstants 		= new CcjConstants("p",22);//pawn-
+		public static const BLUE_ROOK:CcjConstants 		= new CcjConstants("r",20);//castle-
+		public static const BLUE_KNIGHT:CcjConstants	= new CcjConstants("k",19);//knight-
+		public static const BLUE_BISHOP:CcjConstants	= new CcjConstants("b",18);//bishop-
+		public static const BLUE_OFFICAL:CcjConstants 	= new CcjConstants("o",16);//offcial-
+		public static const BLUE_MARSHAL:CcjConstants	= new CcjConstants("m",17);//marshal-
+		public static const BLUE_CANNON:CcjConstants	= new CcjConstants("c",21);//cannon-
 		//red
-		public static const RED_PAWN:CcjConstants 		= new CcjConstants("pawn+",14);
-		public static const RED_CASTLE:CcjConstants 	= new CcjConstants("castle+",12);
-		public static const RED_KNIGHT:CcjConstants		= new CcjConstants("knight+",11);
-		public static const RED_BISHOP:CcjConstants		= new CcjConstants("bishop+",10);
-		public static const RED_OFFICAL:CcjConstants 	= new CcjConstants("offcial+",8);
-		public static const RED_MARSHAL:CcjConstants	= new CcjConstants("marshal+",9);
-		public static const RED_CANNON:CcjConstants		= new CcjConstants("cannon+",13);
+		public static const RED_PAWN:CcjConstants 		= new CcjConstants("P",14);//pawn+
+		public static const RED_ROOK:CcjConstants 		= new CcjConstants("R",12);//castle+
+		public static const RED_KNIGHT:CcjConstants		= new CcjConstants("K",11);//knight+
+		public static const RED_BISHOP:CcjConstants		= new CcjConstants("B",10);//bishop+
+		public static const RED_OFFICAL:CcjConstants 	= new CcjConstants("O",8);//offcial+
+		public static const RED_MARSHAL:CcjConstants	= new CcjConstants("M",9);//marshal+
+		public static const RED_CANNON:CcjConstants		= new CcjConstants("C",13);//cannon+
 		//--------------------------------------------------------------------------
 		//
 		//  Constructor

@@ -27,6 +27,9 @@ package com.lookbackon.ccj.model
 		public var allPieces:Array2;
 //		public var allPieces:Vector.<int>;
 		public var player:int;//1:blue,0:red;
+		//
+		private var _bluePieces:BitBoard;
+		private var _redPieces:BitBoard;
 		//TODO.other structs.
 		//--------------------------------------------------------------------------
 		//
@@ -44,6 +47,33 @@ package com.lookbackon.ccj.model
 			} else {
 				throw new CcjErrors(CcjErrors.INITIALIZE_SINGLETON_CLASS);
 			}
+		}
+		//--------------------------------------------------------------------------
+		//
+		//  Properties
+		//
+		//--------------------------------------------------------------------------
+		//----------------------------------
+		//  bluePieces
+		//----------------------------------
+		public function get bluePieces():BitBoard
+		{
+			return _bluePieces;
+		}
+		public function set bluePieces(value:BitBoard):void
+		{
+			_bluePieces = value;
+		}
+		//----------------------------------
+		//  redPieces
+		//----------------------------------
+		public function get redPieces():BitBoard
+		{
+			return _redPieces;
+		}
+		public function set redPieces(value:BitBoard):void
+		{
+			_redPieces = value;
 		}
 		//--------------------------------------------------------------------------
 		//
