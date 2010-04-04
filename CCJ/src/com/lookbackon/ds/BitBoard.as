@@ -73,7 +73,7 @@ package com.lookbackon.ds
 			{
 				for(var w:int=0;w<_column;w++)
 				{
-					bb.setBitt(h,w,(value.getBitt(h,w)&this.getBitt(h,w)));
+					bb.setBitt(h,w,Boolean((value.getBitt(h,w)&this.getBitt(h,w))));
 				}
 			}
 			return bb;
@@ -88,7 +88,7 @@ package com.lookbackon.ds
 			{
 				for(var w:int=0;w<_column;w++)
 				{
-					bb.setBitt(h,w,~this.getBitt(h,w));
+					bb.setBitt(h,w,Boolean(~this.getBitt(h,w)));
 				}
 			}
 			return bb;
@@ -103,7 +103,7 @@ package com.lookbackon.ds
 			{
 				for(var w:int=0;w<_column;w++)
 				{
-					bb.setBitt(h,w,(value.getBitt(h,w)|this.getBitt(h,w)));
+					bb.setBitt(h,w,Boolean((value.getBitt(h,w)|this.getBitt(h,w))));
 				}
 			}
 			return bb;
@@ -118,7 +118,7 @@ package com.lookbackon.ds
 			{
 				for(var w:int=0;w<_column;w++)
 				{
-					bb.setBitt(h,w,(value.getBitt(h,w)^this.getBitt(h,w)));
+					bb.setBitt(h,w,Boolean((value.getBitt(h,w)^this.getBitt(h,w))));
 				}
 			}
 			return bb;
@@ -178,7 +178,7 @@ package com.lookbackon.ds
 			{
 				for(var w:int=0;w<_column;w++)
 				{
-					bb.setBitt(h,w,this.getBitt(h,w));
+					bb.setBitt(h,w,Boolean(this.getBitt(h,w)));
 				}
 			}
 			return bb;

@@ -73,18 +73,17 @@ package com.lookbackon.ccj.managers
 			iEventDispatcher.addEventListener(ResourceEvent.PROGRESS,loadResourcesModuleProgressHandler);
 			iEventDispatcher.addEventListener(ResourceEvent.ERROR,loadResourcesModuleErrorHandler);
 		}
-		//
-		//speech progress
+		//load module progress
 		private function loadResourcesModuleProgressHandler(event:ResourceEvent):void
 		{
 			//			LOG.debug("Load Resources Modules[{0}] Progress...",this.resourceNameIndex);
 		}
-		//speech error
+		//load module error
 		private function loadResourcesModuleErrorHandler(event:ResourceEvent):void
 		{
 			LOG.fatal("Load Resources Bundle Modules[{0}] Error!!!",this.resourceNameIndex);
 		}
-		//speech complete
+		//load module complete
 		private function loadResourcesModuleComplete(event:ResourceEvent):void
 		{
 			//

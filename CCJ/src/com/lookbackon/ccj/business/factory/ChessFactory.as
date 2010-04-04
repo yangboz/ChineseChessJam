@@ -123,10 +123,12 @@ package com.lookbackon.ccj.business.factory
 			myChessPiece.setStyle("color",textColor);
 			myChessPiece.setStyle("fillColor",textColor);
 			//restore flag value to chess position.
-			ChessPositionModelLocator.getInstance().allPieces.sett(
+			ChessPositionModelLocator.getInstance().allPieces.setBitt
+			(
 				position[0],
 				position[1],
-				generateChessPieceFlag(chessPieceType) );
+				Boolean(generateChessPieceFlag(chessPieceType))
+			);
 			//avoid duplicate usless components.
 			if(myChessPiece.name!="")
 			{

@@ -28,11 +28,11 @@ package com.lookbackon.ccj.model.vo
 			if(rowIndex==0)
 			{
 				//several amendments.
-				if(!ChessPositionModelLocator.getInstance().allPieces.gett(colIndex-1,rowIndex+1))
+				if(!ChessPositionModelLocator.getInstance().allPieces.getBitt(colIndex-1,rowIndex+1))
 				{
 					this.setBitt(rowIndex+2,colIndex-2,true);
 				}
-				if(!ChessPositionModelLocator.getInstance().allPieces.gett(colIndex+1,rowIndex+1))
+				if(!ChessPositionModelLocator.getInstance().allPieces.getBitt(colIndex+1,rowIndex+1))
 				{
 					this.setBitt(rowIndex+2,colIndex+2,true);
 				}
@@ -41,22 +41,22 @@ package com.lookbackon.ccj.model.vo
 			{
 				if(colIndex>2)
 				{
-					if(!ChessPositionModelLocator.getInstance().allPieces.gett(colIndex-1,rowIndex-1))
+					if(!ChessPositionModelLocator.getInstance().allPieces.getBitt(colIndex-1,rowIndex-1))
 					{
 						this.setBitt(rowIndex-2,colIndex-2,true);
 					}
-					if(!ChessPositionModelLocator.getInstance().allPieces.gett(colIndex+1,rowIndex-1))
+					if(!ChessPositionModelLocator.getInstance().allPieces.getBitt(colIndex+1,rowIndex-1))
 					{
 						this.setBitt(rowIndex+2,colIndex-2,true);
 					}
 				}
 				if(colIndex<6)
 				{
-					if(!ChessPositionModelLocator.getInstance().allPieces.gett(colIndex-1,rowIndex+1))
+					if(!ChessPositionModelLocator.getInstance().allPieces.getBitt(colIndex-1,rowIndex+1))
 					{
 						this.setBitt(rowIndex-2,colIndex+2,true);
 					}
-					if(!ChessPositionModelLocator.getInstance().allPieces.gett(colIndex+1,rowIndex+1))
+					if(!ChessPositionModelLocator.getInstance().allPieces.getBitt(colIndex+1,rowIndex+1))
 					{
 						this.setBitt(rowIndex+2,colIndex+2,true);
 					}
@@ -64,33 +64,33 @@ package com.lookbackon.ccj.model.vo
 			}
 			if(rowIndex==4)
 			{
-				if(!ChessPositionModelLocator.getInstance().allPieces.gett(colIndex-1,rowIndex-1))
+				if(!ChessPositionModelLocator.getInstance().allPieces.getBitt(colIndex-1,rowIndex-1))
 				{
 					this.setBitt(rowIndex-2,colIndex-2,true);
 				}
-				if(!ChessPositionModelLocator.getInstance().allPieces.gett(colIndex-1,rowIndex+1))
+				if(!ChessPositionModelLocator.getInstance().allPieces.getBitt(colIndex-1,rowIndex+1))
 				{
 					this.setBitt(rowIndex-2,colIndex+2,true);
 				}
 			}
 			if(rowIndex==5)
 			{
-				if(!ChessPositionModelLocator.getInstance().allPieces.gett(colIndex+1,rowIndex-1))
+				if(!ChessPositionModelLocator.getInstance().allPieces.getBitt(colIndex+1,rowIndex-1))
 				{
 					this.setBitt(rowIndex+2,colIndex-2,true);
 				}
-				if(!ChessPositionModelLocator.getInstance().allPieces.gett(colIndex-1,rowIndex+1))
+				if(!ChessPositionModelLocator.getInstance().allPieces.getBitt(colIndex-1,rowIndex+1))
 				{
 					this.setBitt(rowIndex+2,colIndex+2,true);
 				}
 			}
 			if(rowIndex==9)
 			{
-				if(!ChessPositionModelLocator.getInstance().allPieces.gett(colIndex-1,rowIndex-1))
+				if(!ChessPositionModelLocator.getInstance().allPieces.getBitt(colIndex-1,rowIndex-1))
 				{
 					this.setBitt(rowIndex-2,colIndex-2,true);
 				}
-				if(!ChessPositionModelLocator.getInstance().allPieces.gett(colIndex-1,rowIndex+1))
+				if(!ChessPositionModelLocator.getInstance().allPieces.getBitt(colIndex-1,rowIndex+1))
 				{
 					this.setBitt(rowIndex-2,colIndex+2,true);
 				}

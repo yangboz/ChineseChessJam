@@ -6,6 +6,7 @@ package com.lookbackon.ccj.model
 	import de.polygonal.ds.Array2;
 
 	/**
+	 * A singleton model hold Chess Position.
 	 * 
 	 * @author Knight.zhou
 	 * 
@@ -24,7 +25,7 @@ package com.lookbackon.ccj.model
 		//  CONSTANTS
 		//----------------------------------
 		//generation.
-		public var allPieces:Array2;
+		private var _allPieces:BitBoard;
 //		public var allPieces:Vector.<int>;
 		public var player:int;//1:blue,0:red;
 		//
@@ -42,7 +43,8 @@ package com.lookbackon.ccj.model
 				if (instance == null) {
 					instance=this;
 //					allPieces = new Vector.<int>(90,true);
-					allPieces = new Array2(9,10);
+//					allPieces = new Array2(9,10);
+					allPieces = new BitBoard(10,9);
 				}
 			} else {
 				throw new CcjErrors(CcjErrors.INITIALIZE_SINGLETON_CLASS);
@@ -54,12 +56,65 @@ package com.lookbackon.ccj.model
 		//
 		//--------------------------------------------------------------------------
 		//----------------------------------
+		//  allPieces
+		//----------------------------------
+		/**
+		 * 
+		 * @return our bitboard:(allPieces)
+		 * ---------
+		 * rkbomobkr
+		 * .........
+		 * .c.....c.
+		 * p.p.p.p.p
+		 * .........
+		 * ......... 
+		 * P.P.P.P.P
+		 * .C.....C.
+		 * .........
+		 * RKBOMOBKR
+		 * ---------
+		 * 
+		 */		
+		public function get allPieces():BitBoard
+		{
+			return _allPieces;
+		}
+		/**
+		 * 
+		 * @param value a BitBoard representation of allPieces.
+		 * 
+		 */		
+		public function set allPieces(value:BitBoard):void
+		{
+			_allPieces = value;
+		}
+		//----------------------------------
 		//  bluePieces
 		//----------------------------------
+		/**
+		 * 
+		 * @return a BitBoard as follows:
+		 * ---------
+		 * 000000000
+		 * 000000000
+		 * 000000000
+		 * 000000000
+		 * 101010101
+		 * 010000010
+		 * 000000000
+		 * 111111111
+		 * ---------
+		 * 
+		 */		
 		public function get bluePieces():BitBoard
 		{
 			return _bluePieces;
 		}
+		/**
+		 * 
+		 * @param value a BitBoard representation of bluePieces.
+		 * 
+		 */		
 		public function set bluePieces(value:BitBoard):void
 		{
 			_bluePieces = value;
@@ -67,10 +122,31 @@ package com.lookbackon.ccj.model
 		//----------------------------------
 		//  redPieces
 		//----------------------------------
+		/**
+		 * 
+		 * @return a BitBoard as follows:
+		 * ---------
+		 * 111111111
+		 * 000000000
+		 * 010000010
+		 * 000000000
+		 * 101010101
+		 * 000000000
+		 * 000000000
+		 * 000000000
+		 * 000000000
+		 * ---------
+		 * 
+		 */		
 		public function get redPieces():BitBoard
 		{
 			return _redPieces;
 		}
+		/**
+		 * 
+		 * @param value a BitBoard representation of redPieces.
+		 * 
+		 */		
 		public function set redPieces(value:BitBoard):void
 		{
 			_redPieces = value;
@@ -85,8 +161,10 @@ package com.lookbackon.ccj.model
 		 * @return the singleton instance of ChessPositionModelLocator
 		 *
 		 */
-		public static function getInstance():ChessPositionModelLocator {
-			if (instance == null) {
+		public static function getInstance():ChessPositionModelLocator 
+		{
+			if (instance == null) 
+			{
 				instance=new ChessPositionModelLocator(new Private());
 			}
 			return instance;
@@ -97,5 +175,6 @@ package com.lookbackon.ccj.model
 /**
  *Inner class which restricts construtor access to Private
  */
-internal class Private {
+internal class Private 
+{
 }

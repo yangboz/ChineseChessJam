@@ -30,7 +30,7 @@ package com.lookbackon.ccj.model.vo
 			if(rowIndex<=8 && colIndex>=2)
 			{
 				//several amendments.
-				if(!ChessPositionModelLocator.getInstance().allPieces.gett(colIndex-1,rowIndex+1))
+				if(!ChessPositionModelLocator.getInstance().allPieces.getBitt(colIndex-1,rowIndex+1))
 				{
 					this.setBitt(rowIndex+1,colIndex-2,true);
 				}
@@ -38,7 +38,7 @@ package com.lookbackon.ccj.model.vo
 			if(rowIndex<=8 && colIndex<=6)
 			{
 				//several amendments.
-				if(!ChessPositionModelLocator.getInstance().allPieces.gett(colIndex+1,rowIndex+1))
+				if(!ChessPositionModelLocator.getInstance().allPieces.getBitt(colIndex+1,rowIndex+1))
 				{
 					this.setBitt(rowIndex+1,colIndex+2,true);
 				}
@@ -47,7 +47,7 @@ package com.lookbackon.ccj.model.vo
 			if(rowIndex>=1 && colIndex>=2)
 			{
 				//several amendments.
-				if(!ChessPositionModelLocator.getInstance().allPieces.gett(colIndex+1,rowIndex-1))
+				if(!ChessPositionModelLocator.getInstance().allPieces.getBitt(colIndex+1,rowIndex-1))
 				{
 					this.setBitt(rowIndex-1,colIndex-2,true);
 				}
@@ -55,7 +55,7 @@ package com.lookbackon.ccj.model.vo
 			if(rowIndex>=1 && colIndex<=6)
 			{
 				//several amendments.
-				if(!ChessPositionModelLocator.getInstance().allPieces.gett(colIndex-1,rowIndex+1))
+				if(!ChessPositionModelLocator.getInstance().allPieces.getBitt(colIndex-1,rowIndex+1))
 				{
 					this.setBitt(rowIndex-1,colIndex+2,true);
 				}
@@ -64,7 +64,7 @@ package com.lookbackon.ccj.model.vo
 			if(rowIndex<=7 && colIndex>=1)
 			{
 				//several amendments.
-				if(!ChessPositionModelLocator.getInstance().allPieces.gett(colIndex+1,rowIndex-1))
+				if(!ChessPositionModelLocator.getInstance().allPieces.getBitt(colIndex+1,rowIndex-1))
 				{
 					this.setBitt(rowIndex+2,colIndex-1,true);
 				}
@@ -72,7 +72,7 @@ package com.lookbackon.ccj.model.vo
 			if(rowIndex<=7 && colIndex<=7)
 			{
 				//several amendments.
-				if(!ChessPositionModelLocator.getInstance().allPieces.gett(colIndex+1,rowIndex+1))
+				if(!ChessPositionModelLocator.getInstance().allPieces.getBitt(colIndex+1,rowIndex+1))
 				{
 					this.setBitt(rowIndex+2,colIndex+1,true);
 				}
@@ -81,7 +81,7 @@ package com.lookbackon.ccj.model.vo
 			if(rowIndex>=2 && colIndex>=1)
 			{
 				//several amendments.
-				if(!ChessPositionModelLocator.getInstance().allPieces.gett(colIndex-1,rowIndex-1))
+				if(!ChessPositionModelLocator.getInstance().allPieces.getBitt(colIndex-1,rowIndex-1))
 				{
 					this.setBitt(rowIndex-2,colIndex-1,true);
 				}
@@ -89,7 +89,7 @@ package com.lookbackon.ccj.model.vo
 			if(rowIndex>=2 && colIndex<=7)
 			{
 				//several amendments.
-				if(!ChessPositionModelLocator.getInstance().allPieces.gett(colIndex-1,rowIndex+1))
+				if(!ChessPositionModelLocator.getInstance().allPieces.getBitt(colIndex-1,rowIndex+1))
 				{
 					this.setBitt(rowIndex-2,colIndex+1,true);
 				}

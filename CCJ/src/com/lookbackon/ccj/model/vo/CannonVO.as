@@ -26,7 +26,7 @@ package com.lookbackon.ccj.model.vo
 			// s - *
 			// -
 			// *
-			var getRows:Array = ChessPositionModelLocator.getInstance().allPieces.getRow(rowIndex);
+			/*var getRows:Array = ChessPositionModelLocator.getInstance().allPieces.getRow(rowIndex);
 			var getCols:Array = ChessPositionModelLocator.getInstance().allPieces.getCol(colIndex);
 			//horizontally.
 			for(var hh:int=0;hh<this.column;hh++)
@@ -56,7 +56,7 @@ package com.lookbackon.ccj.model.vo
 						this.setBitt(v,colIndex,true);
 					}
 				}
-			}
+			}*/
 			//iteself
 		}
 	}

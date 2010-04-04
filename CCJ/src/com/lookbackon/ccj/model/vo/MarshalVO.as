@@ -24,7 +24,7 @@ package com.lookbackon.ccj.model.vo
 		override protected function initialization(rowIndex:int, colIndex:int,flag:int=0) : void
 		{
 			//TODO: implement function
-			var getCols:Array = ChessPositionModelLocator.getInstance().allPieces.getCol(colIndex);
+			/*var getCols:Array = ChessPositionModelLocator.getInstance().allPieces.getCol(colIndex);
 			var getIndex:int = getCols.indexOf(CcjConstants.RED_MARSHAL);
 			var getColsReverse:Array = getCols.reverse();
 			//blue
@@ -161,7 +161,7 @@ package com.lookbackon.ccj.model.vo
 						}
 					}
 				}
-			}
+			}*/
 		}
 	}
 }
