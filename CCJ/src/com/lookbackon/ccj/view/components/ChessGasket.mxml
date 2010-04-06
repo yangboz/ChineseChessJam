@@ -8,14 +8,27 @@
 		 >
 	<fx:Script>
 		<![CDATA[
+			import com.lookbackon.ccj.business.factory.ChessFactory;
 			import com.lookbackon.ccj.managers.ChessPieceManager;
+			import com.lookbackon.ccj.model.ChessPositionModelLocator;
 			import com.lookbackon.ccj.model.vos.ConductVO;
+			import com.lookbackon.ccj.utils.LogUtil;
 			
 			import mx.core.IUIComponent;
 			import mx.core.IVisualElement;
 			import mx.events.DragEvent;
 			import mx.events.FlexEvent;
+			import mx.logging.ILogger;
 			import mx.managers.DragManager;
+			//--------------------------------------------------------------------------
+			//
+			//  Variables
+			//
+			//--------------------------------------------------------------------------
+			//----------------------------------
+			//  CONSTANTS
+			//----------------------------------
+			private static const LOG:ILogger = LogUtil.getLogger(ChessGasket);
 			//--------------------------------------------------------------------------
 			//
 			//  Properties(implement)
@@ -74,6 +87,12 @@
 				event.dragInitiator.y = 0;
 				//update data.
 				ChessPiece(event.dragInitiator).position = this.position;
+				var conductVO:ConductVO = new ConductVO();
+				conductVO.newPosition = this.position;
+				conductVO.target = ChessPiece(event.dragInitiator);
+				ChessPiece(event.dragInitiator).chessVO = ChessFactory.generateChessPieceVO(conductVO);
+				//
+				LOG.info("after move,allPieces:{0}",ChessPositionModelLocator.getInstance().allPieces.dump());
 				// remove event listener
 				this.removeEventListener(DragEvent.DRAG_DROP,dragDropHandler);
 			}

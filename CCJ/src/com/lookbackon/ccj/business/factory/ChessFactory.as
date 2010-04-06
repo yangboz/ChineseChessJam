@@ -26,7 +26,7 @@ package com.lookbackon.ccj.business.factory
 	{
 		//
 		public static const FLAG_RED:int  = 0;
-		public static const FLAG_BLUE:int = 0;
+		public static const FLAG_BLUE:int = 1;
 		/**
 		 * 
 		 * @param position chessPiece's position in array2.
@@ -40,8 +40,6 @@ package com.lookbackon.ccj.business.factory
 			var myChessPiece:ChessPiece = new ChessPiece();
 			var chessPieceType:String 	= "";
 			var chessPieceValue:int;
-			//data
-			myChessPiece.position = position;
 			//
 			switch(position.toString())
 			{
@@ -50,36 +48,30 @@ package com.lookbackon.ccj.business.factory
 				case "8,0":
 					chessPieceType = CcjConstants.BLUE_ROOK.label;
 					chessPieceValue = CcjConstants.BLUE_ROOK.value;
-					ChessPositionModelLocator.getInstance().blueRook.setBitt(position[1],position[0],true);
 					break;
 				case "1,0":
 				case "7,0":
 					chessPieceType = CcjConstants.BLUE_KNIGHT.label;
 					chessPieceValue = CcjConstants.BLUE_KNIGHT.value;
-					ChessPositionModelLocator.getInstance().blueKnight.setBitt(position[1],position[0],true);
 					break;
 				case "2,0":
 				case "6,0":
 					chessPieceType = CcjConstants.BLUE_BISHOP.label;
 					chessPieceValue = CcjConstants.BLUE_BISHOP.value;
-					ChessPositionModelLocator.getInstance().blueBishop.setBitt(position[1],position[0],true);
 					break;
 				case "3,0":
 				case "5,0":
 					chessPieceType = CcjConstants.BLUE_OFFICAL.label;
 					chessPieceValue = CcjConstants.BLUE_OFFICAL.value;
-					ChessPositionModelLocator.getInstance().blueOffical.setBitt(position[1],position[0],true);
 					break;
 				case "4,0":
 					chessPieceType = CcjConstants.BLUE_MARSHAL.label;
 					chessPieceValue = CcjConstants.BLUE_MARSHAL.value;
-					ChessPositionModelLocator.getInstance().blueMarshal.setBitt(position[1],position[0],true);
 					break;
 				case "1,2":
 				case "7,2":
 					chessPieceType = CcjConstants.BLUE_CANNON.label;
 					chessPieceValue = CcjConstants.BLUE_CANNON.value;
-					ChessPositionModelLocator.getInstance().blueCannon.setBitt(position[1],position[0],true);
 					break;
 				case "0,3":
 				case "2,3":
@@ -88,43 +80,36 @@ package com.lookbackon.ccj.business.factory
 				case "8,3":
 					chessPieceType = CcjConstants.BLUE_PAWN.label;
 					chessPieceValue = CcjConstants.BLUE_PAWN.value;
-					ChessPositionModelLocator.getInstance().bluePawn.setBitt(position[1],position[0],true);
 					break;
 				//about red
 				case "0,9":
 				case "8,9":
 					chessPieceType = CcjConstants.RED_ROOK.label;
 					chessPieceValue = CcjConstants.RED_ROOK.value;
-					ChessPositionModelLocator.getInstance().redRook.setBitt(position[1],position[0],true);
 					break;
 				case "1,9":
 				case "7,9":
 					chessPieceType = CcjConstants.RED_KNIGHT.label;
 					chessPieceValue = CcjConstants.RED_KNIGHT.value;
-					ChessPositionModelLocator.getInstance().redKnight.setBitt(position[1],position[0],true);
 					break;
 				case "2,9":
 				case "6,9":
 					chessPieceType = CcjConstants.RED_BISHOP.label;
 					chessPieceValue = CcjConstants.RED_BISHOP.value;
-					ChessPositionModelLocator.getInstance().redBishop.setBitt(position[1],position[0],true);
 					break;
 				case "3,9":
 				case "5,9":
 					chessPieceType = CcjConstants.RED_OFFICAL.label;
 					chessPieceValue = CcjConstants.RED_OFFICAL.value;
-					ChessPositionModelLocator.getInstance().redOffical.setBitt(position[1],position[0],true);
 					break;
 				case "4,9":
 					chessPieceType = CcjConstants.RED_MARSHAL.label;
 					chessPieceValue = CcjConstants.RED_MARSHAL.value;
-					ChessPositionModelLocator.getInstance().redMarshal.setBitt(position[1],position[0],true);
 					break;
 				case "1,7":
 				case "7,7":
 					chessPieceType = CcjConstants.RED_CANNON.label;
 					chessPieceValue = CcjConstants.RED_CANNON.value;
-					ChessPositionModelLocator.getInstance().redCannon.setBitt(position[1],position[0],true);
 					break;
 				case "0,6":
 				case "2,6":
@@ -133,7 +118,6 @@ package com.lookbackon.ccj.business.factory
 				case "8,6":
 					chessPieceType = CcjConstants.RED_PAWN.label;
 					chessPieceValue = CcjConstants.RED_PAWN.value;
-					ChessPositionModelLocator.getInstance().redPawn.setBitt(position[1],position[0],true);
 					break;
 				default:
 					break;
@@ -155,6 +139,12 @@ package com.lookbackon.ccj.business.factory
 			}
 			myChessPiece.setStyle("color",textColor);
 			myChessPiece.setStyle("fillColor",textColor);
+			//data
+			myChessPiece.position = position;
+			//generateChessPieceVO
+			var conductVO:ConductVO = new ConductVO();
+			conductVO.target = myChessPiece;
+			myChessPiece.chessVO = ChessFactory.generateChessPieceVO(conductVO);
 			//avoid duplicate usless components.
 			if(myChessPiece.name!="")
 			{
@@ -195,45 +185,59 @@ package com.lookbackon.ccj.business.factory
 			{
 				case CcjConstants.BLUE_BISHOP.label:
 					chessVO = new BishopVO(9,10,rowIndex,colIndex,1);
+					ChessPositionModelLocator.getInstance().blueRook.setBitt(rowIndex,colIndex,true);
 					break;
 				case CcjConstants.RED_BISHOP.label:
 					chessVO = new BishopVO(9,10,rowIndex,colIndex);
+					ChessPositionModelLocator.getInstance().redBishop.setBitt(rowIndex,colIndex,true);
 					break;
 				case CcjConstants.BLUE_CANNON.label:
 					chessVO = new CannonVO(9,10,rowIndex,colIndex,1);
+					ChessPositionModelLocator.getInstance().blueCannon.setBitt(rowIndex,colIndex,true);
 					break;
 				case CcjConstants.RED_CANNON.label:
 					chessVO = new CannonVO(9,10,rowIndex,colIndex);
+					ChessPositionModelLocator.getInstance().redCannon.setBitt(rowIndex,colIndex,true);
 					break;
 				case CcjConstants.BLUE_ROOK.label:
 					chessVO = new RookVO(9,10,rowIndex,colIndex,1);
+					ChessPositionModelLocator.getInstance().blueRook.setBitt(rowIndex,colIndex,true);
 					break;
 				case CcjConstants.RED_ROOK.label:
 					chessVO = new RookVO(9,10,rowIndex,colIndex);
+					ChessPositionModelLocator.getInstance().redRook.setBitt(rowIndex,colIndex,true);
 					break;
 				case CcjConstants.BLUE_KNIGHT.label:
 					chessVO = new KnightVO(9,10,rowIndex,colIndex,1);
+					ChessPositionModelLocator.getInstance().blueKnight.setBitt(rowIndex,colIndex,true);
 					break;
 				case CcjConstants.RED_KNIGHT.label:
 					chessVO = new KnightVO(9,10,rowIndex,colIndex);
+					ChessPositionModelLocator.getInstance().redKnight.setBitt(rowIndex,colIndex,true);
 					break;
 				case CcjConstants.BLUE_MARSHAL.label:
 					chessVO = new MarshalVO(9,10,rowIndex,colIndex,1);
+					ChessPositionModelLocator.getInstance().blueMarshal.setBitt(rowIndex,colIndex,true);
 					break;
 				case CcjConstants.RED_MARSHAL.label:
 					chessVO = new MarshalVO(9,10,rowIndex,colIndex);
+					ChessPositionModelLocator.getInstance().redMarshal.setBitt(rowIndex,colIndex,true);
 					break;
 				case CcjConstants.BLUE_OFFICAL.label:
 					chessVO = new OfficalVO(9,10,rowIndex,colIndex,1);
+					ChessPositionModelLocator.getInstance().blueOffical.setBitt(rowIndex,colIndex,true);
 					break;
 				case CcjConstants.RED_OFFICAL.label:
 					chessVO = new OfficalVO(9,10,rowIndex,colIndex);
+					ChessPositionModelLocator.getInstance().redOffical.setBitt(rowIndex,colIndex,true);
 					break;
 				case CcjConstants.BLUE_PAWN.label:
 					chessVO = new PawnVO(9,10,rowIndex,colIndex,1);
+					ChessPositionModelLocator.getInstance().bluePawn.setBitt(rowIndex,colIndex,true);
 					break;
 				case CcjConstants.RED_PAWN.label:
 					chessVO = new PawnVO(9,10,rowIndex,colIndex);
+					ChessPositionModelLocator.getInstance().redPawn.setBitt(rowIndex,colIndex,true);
 					break;
 				default:
 					break;

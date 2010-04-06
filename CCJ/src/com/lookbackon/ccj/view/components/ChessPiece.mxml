@@ -12,6 +12,7 @@
 			import com.lookbackon.ccj.business.fsm.states.DefenseState;
 			import com.lookbackon.ccj.managers.ChessPieceManager;
 			import com.lookbackon.ccj.model.vos.ConductVO;
+			import com.lookbackon.ccj.model.vos.cvo.IChessVO;
 			
 			import mx.core.IUIComponent;
 			import mx.events.FlexEvent;
@@ -56,6 +57,18 @@
 				_position = value;
 				//update ChessPositionModelLocator.
 			}
+			//----------------------------------
+			//  chessVO
+			//----------------------------------
+			private var _chessVO:IChessVO;
+			public function get chessVO():IChessVO
+			{
+				return _chessVO;
+			}
+			public function set chessVO(value:IChessVO):void
+			{
+				_chessVO = value;
+			}
 			//--------------------------------------------------------------------------
 			//
 			//  Methods
@@ -77,7 +90,7 @@
 			{
 				DragManager.doDrag(event.currentTarget as IUIComponent,null,event);
 				// remove event listener
-				this.removeEventListener(MouseEvent.MOUSE_DOWN,mouseDownHandler);
+//				this.removeEventListener(MouseEvent.MOUSE_DOWN,mouseDownHandler);
 			}
 		]]>
 	</fx:Script>

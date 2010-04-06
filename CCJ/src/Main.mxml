@@ -61,9 +61,16 @@
 				}
 				//init data struct.
 				LOG.debug("redRook:{0}",chessPositionModelLocator.redRook.dump());
-				LOG.debug("redPieces:{0}",chessPositionModelLocator.redPieces.dump());
-				LOG.debug("bluePieces:{0}",chessPositionModelLocator.bluePieces.dump());
-				LOG.debug("allPieces:{0}",chessPositionModelLocator.allPieces.dump());
+				LOG.debug("redKnight:{0}",chessPositionModelLocator.redKnight.dump());
+				LOG.debug("redBishop:{0}",chessPositionModelLocator.redBishop.dump());
+				LOG.debug("redOffical:{0}",chessPositionModelLocator.redOffical.dump());
+				LOG.debug("redMarshal:{0}",chessPositionModelLocator.redMarshal.dump());
+				LOG.debug("redCannon:{0}",chessPositionModelLocator.redCannon.dump());
+				LOG.debug("redPawn:{0}",chessPositionModelLocator.redPawn.dump());
+				//
+				LOG.info("redPieces:{0}",chessPositionModelLocator.redPieces.dump());
+				LOG.info("bluePieces:{0}",chessPositionModelLocator.bluePieces.dump());
+				LOG.info("allPieces:{0}",chessPositionModelLocator.allPieces.dump());
 				//GameManager start.
 				GameManager.startGame();
 			}
@@ -77,7 +84,7 @@
 					   includeDate="false"
 					   includeLevel="true"
 					   includeTime="true"
-					   level="{LogEventLevel.DEBUG}"
+					   level="{LogEventLevel.INFO}"
 					   />
 	</fx:Declarations>
 	

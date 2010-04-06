@@ -1,9 +1,11 @@
 package com.lookbackon.ccj.managers
 {
 	import com.lookbackon.ccj.business.factory.ChessFactory;
-	import com.lookbackon.ccj.model.vos.cvo.ChessVO;
+	import com.lookbackon.ccj.model.ChessPositionModelLocator;
 	import com.lookbackon.ccj.model.vos.ConductVO;
+	import com.lookbackon.ccj.model.vos.cvo.ChessVO;
 	import com.lookbackon.ccj.utils.LogUtil;
+	import com.lookbackon.ccj.view.components.ChessPiece;
 	
 	import mx.logging.ILogger;
 
@@ -25,30 +27,18 @@ package com.lookbackon.ccj.managers
 		{
 			var result:Boolean = true;
 			//begin:
-			LOG.debug("move validate begin at:{0}",new Date().getMilliseconds());
+			var beginTime:uint = new Date().getMilliseconds();
+			LOG.info("move validate begin at:{0}",beginTime);
 			//chess piece change state(view).
 			conductVO.target.agent.getFSM().changeState(conductVO.target.attackState);
 			//TODO:
 			//chess piece move (logic) check.
-			result = doNewPositionValidation(conductVO); 
+			result = Boolean(conductVO.target.chessVO.moves.getBitt(conductVO.newPosition[1],conductVO.newPosition[0]));
+			LOG.info("doMoveValidation result:{0}",result);
 			//end
-			LOG.debug("move validate end at:{0}",new Date().getMilliseconds());
+			var endTime:uint = new Date().getMilliseconds();
+			LOG.info("move validate end at:{0}||duration:{1}",endTime,endTime-beginTime);
 			return result;
-		}
-		/**
-		 * @private 
-		 * @param conductVO the objct(which)contains target and new position info.
-		 * @return the new position validate result.
-		 * 
-		 */		
-		private static function doNewPositionValidation(conductVO:ConductVO):Boolean
-		{
-			var chessVO:ChessVO = ChessFactory.generateChessPieceVO(conductVO);
-			LOG.debug("chessVO:{0}",chessVO.dump());
-			LOG.debug("x:{0}||y:{1}",conductVO.newPosition[1],conductVO.newPosition[0]);
-			var result:Boolean = Boolean(chessVO.getBitt(conductVO.newPosition[1],conductVO.newPosition[0]));
-			LOG.debug("result:{0}",result.toString());
-			return result; 
 		}
 	}
 }
