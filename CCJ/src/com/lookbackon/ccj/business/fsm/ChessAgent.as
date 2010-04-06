@@ -31,7 +31,7 @@ package com.lookbackon.ccj.business.fsm
 		{
 			//TODO: implement function
 			super(name, carrier, traceTarget);
-			LOG.debug( "{0} say:Hello!",name);
+//			LOG.info("{0} say:Hello!",name);
 		}
 		//--------------------------------------------------------------------------
 		//

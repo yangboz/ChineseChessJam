@@ -7,7 +7,7 @@
 	<fx:Script>
 		<![CDATA[
 			import com.lookbackon.ccj.CcjConstants;
-			import com.lookbackon.ccj.model.vo.PawnVO;
+			import com.lookbackon.ccj.model.vos.cvo.PawnVO;
 			import com.lookbackon.ccj.utils.LogUtil;
 			import com.lookbackon.ds.BitBoard;
 			

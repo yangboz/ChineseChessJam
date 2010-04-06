@@ -5,6 +5,19 @@ package com.lookbackon.ds
 	import de.polygonal.ds.BitVector;
 
 	/**
+	 * Pros and Cons of Using BitBoard Flags:
+	 * Pros:
+     * Efficient: Very small storage space to hold a lot of information.
+     * Efficient: Ultra-fast (actually fastest possible) for making programmatic decisions, 
+	 * especially when looking for combinations of attributes or options.
+     * Efficient: Concise storage means fast data transfer.
+     * Extensible:  New code does not "break" old code.  Additional (new) data can be packed into 
+	 * the same variable without causing backward compatibility problems.
+     * Extensible:  New data does not require new database schema or changed record layouts.  
+	 * Only the program code changes.
+	 * Cons:
+     * Idiomatic.  Not all programmers understand what's going on.  
+	 * Possible increased documentation requirements.
 	 * 
 	 * @author Knight.zhou
 	 * 
@@ -155,6 +168,7 @@ package com.lookbackon.ds
 				this.setBit(index,b);
 			}else
 			{
+				return;//Maybe handle this illegal operation.
 				throw new CcjErrors(CcjErrors.INVALID_CHESS_VO);
 			}
 		}

@@ -1,8 +1,8 @@
 package com.lookbackon.ccj.managers
 {
 	import com.lookbackon.ccj.business.factory.ChessFactory;
-	import com.lookbackon.ccj.model.vo.ChessVOBase;
-	import com.lookbackon.ccj.model.vo.ConductVO;
+	import com.lookbackon.ccj.model.vos.cvo.ChessVO;
+	import com.lookbackon.ccj.model.vos.ConductVO;
 	import com.lookbackon.ccj.utils.LogUtil;
 	
 	import mx.logging.ILogger;
@@ -43,7 +43,7 @@ package com.lookbackon.ccj.managers
 		 */		
 		private static function doNewPositionValidation(conductVO:ConductVO):Boolean
 		{
-			var chessVO:ChessVOBase = ChessFactory.generateChessPieceVO(conductVO);
+			var chessVO:ChessVO = ChessFactory.generateChessPieceVO(conductVO);
 			LOG.debug("chessVO:{0}",chessVO.dump());
 			LOG.debug("x:{0}||y:{1}",conductVO.newPosition[1],conductVO.newPosition[0]);
 			var result:Boolean = Boolean(chessVO.getBitt(conductVO.newPosition[1],conductVO.newPosition[0]));

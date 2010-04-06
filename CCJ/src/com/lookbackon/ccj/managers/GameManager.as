@@ -3,9 +3,10 @@ package com.lookbackon.ccj.managers
 	import com.lookbackon.AI.searching.ISearchingBase;
 	import com.lookbackon.ccj.view.components.ChessPiece;
 
-	/*
+	/**
 	 * A player manager class to maintain turn-based game.
-	 * @author Knight.zhou
+	 * 
+	 * @author knight.zhou
 	 * 
 	 */	
 	public class GameManager

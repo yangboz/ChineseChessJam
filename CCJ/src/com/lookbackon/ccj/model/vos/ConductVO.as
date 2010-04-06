@@ -1,4 +1,4 @@
-package com.lookbackon.ccj.model.vo
+package com.lookbackon.ccj.model.vos
 {
 	import com.lookbackon.ccj.view.components.ChessPiece;
 	

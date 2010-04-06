@@ -2,15 +2,15 @@ package com.lookbackon.ccj.business.factory
 {
 	import com.lookbackon.ccj.CcjConstants;
 	import com.lookbackon.ccj.model.ChessPositionModelLocator;
-	import com.lookbackon.ccj.model.vo.BishopVO;
-	import com.lookbackon.ccj.model.vo.CannonVO;
-	import com.lookbackon.ccj.model.vo.CastleVO;
-	import com.lookbackon.ccj.model.vo.ChessVOBase;
-	import com.lookbackon.ccj.model.vo.ConductVO;
-	import com.lookbackon.ccj.model.vo.KnightVO;
-	import com.lookbackon.ccj.model.vo.MarshalVO;
-	import com.lookbackon.ccj.model.vo.OfficalVO;
-	import com.lookbackon.ccj.model.vo.PawnVO;
+	import com.lookbackon.ccj.model.vos.ConductVO;
+	import com.lookbackon.ccj.model.vos.cvo.BishopVO;
+	import com.lookbackon.ccj.model.vos.cvo.CannonVO;
+	import com.lookbackon.ccj.model.vos.cvo.ChessVO;
+	import com.lookbackon.ccj.model.vos.cvo.KnightVO;
+	import com.lookbackon.ccj.model.vos.cvo.MarshalVO;
+	import com.lookbackon.ccj.model.vos.cvo.OfficalVO;
+	import com.lookbackon.ccj.model.vos.cvo.PawnVO;
+	import com.lookbackon.ccj.model.vos.cvo.RookVO;
 	import com.lookbackon.ccj.view.components.ChessBoard;
 	import com.lookbackon.ccj.view.components.ChessGasket;
 	import com.lookbackon.ccj.view.components.ChessPiece;
@@ -24,17 +24,22 @@ package com.lookbackon.ccj.business.factory
 	 */	
 	public class ChessFactory
 	{
+		//
+		public static const FLAG_RED:int  = 0;
+		public static const FLAG_BLUE:int = 0;
 		/**
 		 * 
 		 * @param position chessPiece's position in array2.
+		 * @param flag chessPices's side flag.(red/blue).
 		 * @return ChessPiece component with implement IChessPiece
 		 * 
 		 */		
-		public static function createChessPiece(position:Array):IChessPiece
+		public static function createChessPiece(position:Array,flag:int=0):IChessPiece
 		{
 			//TODO: implement function
 			var myChessPiece:ChessPiece = new ChessPiece();
 			var chessPieceType:String 	= "";
+			var chessPieceValue:int;
 			//data
 			myChessPiece.position = position;
 			//
@@ -44,25 +49,37 @@ package com.lookbackon.ccj.business.factory
 				case "0,0":
 				case "8,0":
 					chessPieceType = CcjConstants.BLUE_ROOK.label;
+					chessPieceValue = CcjConstants.BLUE_ROOK.value;
+					ChessPositionModelLocator.getInstance().blueRook.setBitt(position[1],position[0],true);
 					break;
 				case "1,0":
 				case "7,0":
 					chessPieceType = CcjConstants.BLUE_KNIGHT.label;
+					chessPieceValue = CcjConstants.BLUE_KNIGHT.value;
+					ChessPositionModelLocator.getInstance().blueKnight.setBitt(position[1],position[0],true);
 					break;
 				case "2,0":
 				case "6,0":
 					chessPieceType = CcjConstants.BLUE_BISHOP.label;
+					chessPieceValue = CcjConstants.BLUE_BISHOP.value;
+					ChessPositionModelLocator.getInstance().blueBishop.setBitt(position[1],position[0],true);
 					break;
 				case "3,0":
 				case "5,0":
 					chessPieceType = CcjConstants.BLUE_OFFICAL.label;
+					chessPieceValue = CcjConstants.BLUE_OFFICAL.value;
+					ChessPositionModelLocator.getInstance().blueOffical.setBitt(position[1],position[0],true);
 					break;
 				case "4,0":
 					chessPieceType = CcjConstants.BLUE_MARSHAL.label;
+					chessPieceValue = CcjConstants.BLUE_MARSHAL.value;
+					ChessPositionModelLocator.getInstance().blueMarshal.setBitt(position[1],position[0],true);
 					break;
 				case "1,2":
 				case "7,2":
 					chessPieceType = CcjConstants.BLUE_CANNON.label;
+					chessPieceValue = CcjConstants.BLUE_CANNON.value;
+					ChessPositionModelLocator.getInstance().blueCannon.setBitt(position[1],position[0],true);
 					break;
 				case "0,3":
 				case "2,3":
@@ -70,30 +87,44 @@ package com.lookbackon.ccj.business.factory
 				case "6,3":
 				case "8,3":
 					chessPieceType = CcjConstants.BLUE_PAWN.label;
+					chessPieceValue = CcjConstants.BLUE_PAWN.value;
+					ChessPositionModelLocator.getInstance().bluePawn.setBitt(position[1],position[0],true);
 					break;
 				//about red
 				case "0,9":
 				case "8,9":
 					chessPieceType = CcjConstants.RED_ROOK.label;
+					chessPieceValue = CcjConstants.RED_ROOK.value;
+					ChessPositionModelLocator.getInstance().redRook.setBitt(position[1],position[0],true);
 					break;
 				case "1,9":
 				case "7,9":
 					chessPieceType = CcjConstants.RED_KNIGHT.label;
+					chessPieceValue = CcjConstants.RED_KNIGHT.value;
+					ChessPositionModelLocator.getInstance().redKnight.setBitt(position[1],position[0],true);
 					break;
 				case "2,9":
 				case "6,9":
 					chessPieceType = CcjConstants.RED_BISHOP.label;
+					chessPieceValue = CcjConstants.RED_BISHOP.value;
+					ChessPositionModelLocator.getInstance().redBishop.setBitt(position[1],position[0],true);
 					break;
 				case "3,9":
 				case "5,9":
 					chessPieceType = CcjConstants.RED_OFFICAL.label;
+					chessPieceValue = CcjConstants.RED_OFFICAL.value;
+					ChessPositionModelLocator.getInstance().redOffical.setBitt(position[1],position[0],true);
 					break;
 				case "4,9":
 					chessPieceType = CcjConstants.RED_MARSHAL.label;
+					chessPieceValue = CcjConstants.RED_MARSHAL.value;
+					ChessPositionModelLocator.getInstance().redMarshal.setBitt(position[1],position[0],true);
 					break;
 				case "1,7":
 				case "7,7":
 					chessPieceType = CcjConstants.RED_CANNON.label;
+					chessPieceValue = CcjConstants.RED_CANNON.value;
+					ChessPositionModelLocator.getInstance().redCannon.setBitt(position[1],position[0],true);
 					break;
 				case "0,6":
 				case "2,6":
@@ -101,6 +132,8 @@ package com.lookbackon.ccj.business.factory
 				case "6,6":
 				case "8,6":
 					chessPieceType = CcjConstants.RED_PAWN.label;
+					chessPieceValue = CcjConstants.RED_PAWN.value;
+					ChessPositionModelLocator.getInstance().redPawn.setBitt(position[1],position[0],true);
 					break;
 				default:
 					break;
@@ -113,7 +146,7 @@ package com.lookbackon.ccj.business.factory
 				position[1]*ChessBoard.LATTICE_WIDTH + myChessPiece.height/2 -25;
 			//set color to identify.
 			var textColor:uint = 0xff0000;//blue.
-			if(myChessPiece.name.indexOf("+")!=-1)
+			if(chessPieceValue<16)
 			{
 				textColor = 0x0000ff;//red
 			}else
@@ -122,13 +155,6 @@ package com.lookbackon.ccj.business.factory
 			}
 			myChessPiece.setStyle("color",textColor);
 			myChessPiece.setStyle("fillColor",textColor);
-			//restore flag value to chess position.
-			ChessPositionModelLocator.getInstance().allPieces.setBitt
-			(
-				position[0],
-				position[1],
-				Boolean(generateChessPieceFlag(chessPieceType))
-			);
 			//avoid duplicate usless components.
 			if(myChessPiece.name!="")
 			{
@@ -160,11 +186,11 @@ package com.lookbackon.ccj.business.factory
 		 * @return precise chess value object(prototype is chessVOBase).
 		 * 
 		 */		
-		public static function generateChessPieceVO(conductVO:ConductVO):ChessVOBase
+		public static function generateChessPieceVO(conductVO:ConductVO):ChessVO
 		{
 			var colIndex:int = conductVO.target.position[0];
 			var rowIndex:int = conductVO.target.position[1];
-			var chessVO:ChessVOBase;
+			var chessVO:ChessVO;
 			switch(conductVO.target.name)
 			{
 				case CcjConstants.BLUE_BISHOP.label:
@@ -180,10 +206,10 @@ package com.lookbackon.ccj.business.factory
 					chessVO = new CannonVO(9,10,rowIndex,colIndex);
 					break;
 				case CcjConstants.BLUE_ROOK.label:
-					chessVO = new CastleVO(9,10,rowIndex,colIndex,1);
+					chessVO = new RookVO(9,10,rowIndex,colIndex,1);
 					break;
 				case CcjConstants.RED_ROOK.label:
-					chessVO = new CastleVO(9,10,rowIndex,colIndex);
+					chessVO = new RookVO(9,10,rowIndex,colIndex);
 					break;
 				case CcjConstants.BLUE_KNIGHT.label:
 					chessVO = new KnightVO(9,10,rowIndex,colIndex,1);

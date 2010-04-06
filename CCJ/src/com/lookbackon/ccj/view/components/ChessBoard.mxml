@@ -45,8 +45,8 @@
 		</degrafa:strokes>
 		<!-- Horizontal lines and Vertical lines. -->
 		<degrafa:GeometryGroup>
-			<repeaters:HorizontalLineRepeater count="{TOTAL_H_LINES}" stroke="{blackStroke}" x="0" x1="{BOARD_WIDTH}" y="0" moveOffsetY="{LATTICE_WIDTH}"/> 
-			<repeaters:VerticalLineRepeater count="{TOTAL_V_LINES}" stroke="{blackStroke}" y="0" y1="{BOARD_HEIGHT}" x="0" moveOffsetX="{LATTICE_WIDTH}"/> 
+			<repeaters:HorizontalLineRepeater count="{TOTAL_V_LINES}" stroke="{blackStroke}" x="0" x1="{BOARD_WIDTH}" y="0" moveOffsetY="{LATTICE_WIDTH}"/> 
+			<repeaters:VerticalLineRepeater count="{TOTAL_H_LINES}" stroke="{blackStroke}" y="0" y1="{BOARD_HEIGHT}" x="0" moveOffsetX="{LATTICE_WIDTH}"/> 
 		</degrafa:GeometryGroup>
 		<!-- Intersect lines . -->
 		<degrafa:GeometryGroup>

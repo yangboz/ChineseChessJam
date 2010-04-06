@@ -1,6 +1,6 @@
 package com.lookbackon.AI.searching
 {
-	import com.lookbackon.ccj.model.vo.ConductVO;
+	import com.lookbackon.ccj.model.vos.ConductVO;
 	
 	import de.polygonal.ds.Array2;
 	

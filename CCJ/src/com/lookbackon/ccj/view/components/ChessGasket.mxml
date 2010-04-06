@@ -9,7 +9,7 @@
 	<fx:Script>
 		<![CDATA[
 			import com.lookbackon.ccj.managers.ChessPieceManager;
-			import com.lookbackon.ccj.model.vo.ConductVO;
+			import com.lookbackon.ccj.model.vos.ConductVO;
 			
 			import mx.core.IUIComponent;
 			import mx.core.IVisualElement;
@@ -56,6 +56,8 @@
 					DragManager.acceptDragDrop(event.currentTarget as IUIComponent);
 					DragManager.showFeedback(DragManager.LINK);
 				}
+				// remove event listener
+				this.removeEventListener(DragEvent.DRAG_ENTER,dragEnterHandler);
 			}
 			//dragDropHandler
 			private function dragDropHandler(event:DragEvent):void
@@ -72,6 +74,8 @@
 				event.dragInitiator.y = 0;
 				//update data.
 				ChessPiece(event.dragInitiator).position = this.position;
+				// remove event listener
+				this.removeEventListener(DragEvent.DRAG_DROP,dragDropHandler);
 			}
 
 		]]>
