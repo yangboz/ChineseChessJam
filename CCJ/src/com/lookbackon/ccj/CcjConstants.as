@@ -18,7 +18,7 @@ package com.lookbackon.ccj
 		//  CONSTANTS
 		//----------------------------------
 		//chessPieceType
-		//blue
+		//blue(at top)
 		public static const BLUE_PAWN:CcjConstants 		= new CcjConstants("p",22);//pawn-
 		public static const BLUE_ROOK:CcjConstants 		= new CcjConstants("r",20);//castle-
 		public static const BLUE_KNIGHT:CcjConstants	= new CcjConstants("k",19);//knight-
@@ -26,7 +26,7 @@ package com.lookbackon.ccj
 		public static const BLUE_OFFICAL:CcjConstants 	= new CcjConstants("o",16);//offcial-
 		public static const BLUE_MARSHAL:CcjConstants	= new CcjConstants("m",17);//marshal-
 		public static const BLUE_CANNON:CcjConstants	= new CcjConstants("c",21);//cannon-
-		//red
+		//red(at bottom)
 		public static const RED_PAWN:CcjConstants 		= new CcjConstants("P",14);//pawn+
 		public static const RED_ROOK:CcjConstants 		= new CcjConstants("R",12);//castle+
 		public static const RED_KNIGHT:CcjConstants		= new CcjConstants("K",11);//knight+

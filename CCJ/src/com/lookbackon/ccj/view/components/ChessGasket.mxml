@@ -70,7 +70,7 @@
 					DragManager.showFeedback(DragManager.LINK);
 				}
 				// remove event listener
-				this.removeEventListener(DragEvent.DRAG_ENTER,dragEnterHandler);
+//				this.removeEventListener(DragEvent.DRAG_ENTER,dragEnterHandler);
 			}
 			//dragDropHandler
 			private function dragDropHandler(event:DragEvent):void
@@ -86,15 +86,17 @@
 				event.dragInitiator.x = 0;
 				event.dragInitiator.y = 0;
 				//update data.
-				ChessPiece(event.dragInitiator).position = this.position;
 				var conductVO:ConductVO = new ConductVO();
 				conductVO.newPosition = this.position;
 				conductVO.target = ChessPiece(event.dragInitiator);
-				ChessPiece(event.dragInitiator).chessVO = ChessFactory.generateChessPieceVO(conductVO);
+				//set new chessVO.
+				ChessPiece(event.dragInitiator).chessVO = ChessFactory.generateChessPieceVO(conductVO,true);
+				//set new position.
+				ChessPiece(event.dragInitiator).position = this.position;
 				//
 				LOG.info("after move,allPieces:{0}",ChessPositionModelLocator.getInstance().allPieces.dump());
 				// remove event listener
-				this.removeEventListener(DragEvent.DRAG_DROP,dragDropHandler);
+//				this.removeEventListener(DragEvent.DRAG_DROP,dragDropHandler);
 			}
 
 		]]>
@@ -104,10 +106,10 @@
 	</fx:Declarations>
 	<s:Rect width="100%" height="100%">
 		<s:stroke>
-			<s:SolidColorStroke color="blue"/>
+			<s:SolidColorStroke color="black"/>
 		</s:stroke>
 		<s:fill>
-			<s:SolidColor color="blue"/>
+			<s:SolidColor color="black"/>
 		</s:fill>
 	</s:Rect>
 </s:Group>

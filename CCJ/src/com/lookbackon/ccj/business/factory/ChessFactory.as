@@ -11,11 +11,14 @@ package com.lookbackon.ccj.business.factory
 	import com.lookbackon.ccj.model.vos.cvo.OfficalVO;
 	import com.lookbackon.ccj.model.vos.cvo.PawnVO;
 	import com.lookbackon.ccj.model.vos.cvo.RookVO;
+	import com.lookbackon.ccj.utils.LogUtil;
 	import com.lookbackon.ccj.view.components.ChessBoard;
 	import com.lookbackon.ccj.view.components.ChessGasket;
 	import com.lookbackon.ccj.view.components.ChessPiece;
 	import com.lookbackon.ccj.view.components.IChessGasket;
 	import com.lookbackon.ccj.view.components.IChessPiece;
+	
+	import mx.logging.ILogger;
 
 	/**
 	 * 
@@ -25,6 +28,8 @@ package com.lookbackon.ccj.business.factory
 	public class ChessFactory
 	{
 		//
+		private static const LOG:ILogger  =  LogUtil.getLogger(ChessFactory);
+		
 		public static const FLAG_RED:int  = 0;
 		public static const FLAG_BLUE:int = 1;
 		/**
@@ -130,7 +135,7 @@ package com.lookbackon.ccj.business.factory
 				position[1]*ChessBoard.LATTICE_WIDTH + myChessPiece.height/2 -25;
 			//set color to identify.
 			var textColor:uint = 0xff0000;//blue.
-			if(chessPieceValue<16)
+			if(chessPieceValue>=16)
 			{
 				textColor = 0x0000ff;//red
 			}else
@@ -173,136 +178,138 @@ package com.lookbackon.ccj.business.factory
 		/**
 		 * 
 		 * @param conductVO has property target(type is chessPiece) and newPosition([0,1]).
+		 * @param clearFirst a flag indicator clear bitBoard first.
 		 * @return precise chess value object(prototype is chessVOBase).
 		 * 
 		 */		
-		public static function generateChessPieceVO(conductVO:ConductVO):ChessVO
+		public static function generateChessPieceVO(conductVO:ConductVO,clearFirst:Boolean=false):ChessVO
 		{
-			var colIndex:int = conductVO.target.position[0];
-			var rowIndex:int = conductVO.target.position[1];
+			var oColIndex:int = conductVO.target.position[0];
+			var oRowIndex:int = conductVO.target.position[1];
+			if(clearFirst)
+			{
+				var nColIndex:int = conductVO.newPosition[0];
+				var nRowIndex:int = conductVO.newPosition[1];
+			}
 			var chessVO:ChessVO;
 			switch(conductVO.target.name)
 			{
 				case CcjConstants.BLUE_BISHOP.label:
-					chessVO = new BishopVO(9,10,rowIndex,colIndex,1);
-					ChessPositionModelLocator.getInstance().blueRook.setBitt(rowIndex,colIndex,true);
+					chessVO = new BishopVO(9,10,oRowIndex,oColIndex,1);
+					if(clearFirst)
+					{
+						ChessPositionModelLocator.getInstance().blueBishop.setBitt(oRowIndex,oColIndex,false);
+					}
+					ChessPositionModelLocator.getInstance().blueBishop.setBitt(nRowIndex,nColIndex,true);
 					break;
 				case CcjConstants.RED_BISHOP.label:
-					chessVO = new BishopVO(9,10,rowIndex,colIndex);
-					ChessPositionModelLocator.getInstance().redBishop.setBitt(rowIndex,colIndex,true);
+					chessVO = new BishopVO(9,10,oRowIndex,oColIndex);
+					if(clearFirst)
+					{
+						ChessPositionModelLocator.getInstance().redBishop.setBitt(oRowIndex,oColIndex,false);
+					}
+					ChessPositionModelLocator.getInstance().redBishop.setBitt(nRowIndex,nColIndex,true);
 					break;
 				case CcjConstants.BLUE_CANNON.label:
-					chessVO = new CannonVO(9,10,rowIndex,colIndex,1);
-					ChessPositionModelLocator.getInstance().blueCannon.setBitt(rowIndex,colIndex,true);
+					chessVO = new CannonVO(9,10,oRowIndex,oColIndex,1);
+					if(clearFirst)
+					{
+						ChessPositionModelLocator.getInstance().blueCannon.setBitt(oRowIndex,oColIndex,false);
+					}
+					ChessPositionModelLocator.getInstance().blueCannon.setBitt(nRowIndex,nColIndex,true);
 					break;
 				case CcjConstants.RED_CANNON.label:
-					chessVO = new CannonVO(9,10,rowIndex,colIndex);
-					ChessPositionModelLocator.getInstance().redCannon.setBitt(rowIndex,colIndex,true);
+					chessVO = new CannonVO(9,10,oRowIndex,oColIndex);
+					if(clearFirst)
+					{
+						ChessPositionModelLocator.getInstance().redCannon.setBitt(oRowIndex,oColIndex,false);
+					}
+					ChessPositionModelLocator.getInstance().redCannon.setBitt(nRowIndex,nColIndex,true);
 					break;
 				case CcjConstants.BLUE_ROOK.label:
-					chessVO = new RookVO(9,10,rowIndex,colIndex,1);
-					ChessPositionModelLocator.getInstance().blueRook.setBitt(rowIndex,colIndex,true);
+					chessVO = new RookVO(9,10,oRowIndex,oColIndex,1);
+					if(clearFirst)
+					{
+						ChessPositionModelLocator.getInstance().blueRook.setBitt(oRowIndex,oColIndex,false);
+					}
+					ChessPositionModelLocator.getInstance().blueRook.setBitt(nRowIndex,nColIndex,true);
 					break;
 				case CcjConstants.RED_ROOK.label:
-					chessVO = new RookVO(9,10,rowIndex,colIndex);
-					ChessPositionModelLocator.getInstance().redRook.setBitt(rowIndex,colIndex,true);
+					chessVO = new RookVO(9,10,oRowIndex,oColIndex);
+					if(clearFirst)
+					{
+						ChessPositionModelLocator.getInstance().redRook.setBitt(oRowIndex,oColIndex,false);
+					}
+					ChessPositionModelLocator.getInstance().redRook.setBitt(nRowIndex,nColIndex,true);
 					break;
 				case CcjConstants.BLUE_KNIGHT.label:
-					chessVO = new KnightVO(9,10,rowIndex,colIndex,1);
-					ChessPositionModelLocator.getInstance().blueKnight.setBitt(rowIndex,colIndex,true);
+					chessVO = new KnightVO(9,10,oRowIndex,oColIndex,1);
+					if(clearFirst)
+					{
+						ChessPositionModelLocator.getInstance().blueKnight.setBitt(oRowIndex,oColIndex,false);
+					}
+					ChessPositionModelLocator.getInstance().blueKnight.setBitt(nRowIndex,nColIndex,true);
 					break;
 				case CcjConstants.RED_KNIGHT.label:
-					chessVO = new KnightVO(9,10,rowIndex,colIndex);
-					ChessPositionModelLocator.getInstance().redKnight.setBitt(rowIndex,colIndex,true);
+					chessVO = new KnightVO(9,10,oRowIndex,oColIndex);
+					if(clearFirst)
+					{
+						ChessPositionModelLocator.getInstance().redKnight.setBitt(oRowIndex,oColIndex,false);
+					}
+					ChessPositionModelLocator.getInstance().redKnight.setBitt(nRowIndex,nColIndex,true);
 					break;
 				case CcjConstants.BLUE_MARSHAL.label:
-					chessVO = new MarshalVO(9,10,rowIndex,colIndex,1);
-					ChessPositionModelLocator.getInstance().blueMarshal.setBitt(rowIndex,colIndex,true);
+					chessVO = new MarshalVO(9,10,oRowIndex,oColIndex,1);
+					if(clearFirst)
+					{
+						ChessPositionModelLocator.getInstance().blueMarshal.setBitt(oRowIndex,oColIndex,false);
+					}
+					ChessPositionModelLocator.getInstance().blueMarshal.setBitt(nRowIndex,nColIndex,true);
 					break;
 				case CcjConstants.RED_MARSHAL.label:
-					chessVO = new MarshalVO(9,10,rowIndex,colIndex);
-					ChessPositionModelLocator.getInstance().redMarshal.setBitt(rowIndex,colIndex,true);
+					chessVO = new MarshalVO(9,10,oRowIndex,oColIndex);
+					if(clearFirst)
+					{
+						ChessPositionModelLocator.getInstance().redMarshal.setBitt(oRowIndex,oColIndex,false);
+					}
+					ChessPositionModelLocator.getInstance().redMarshal.setBitt(nRowIndex,nColIndex,true);
 					break;
 				case CcjConstants.BLUE_OFFICAL.label:
-					chessVO = new OfficalVO(9,10,rowIndex,colIndex,1);
-					ChessPositionModelLocator.getInstance().blueOffical.setBitt(rowIndex,colIndex,true);
+					chessVO = new OfficalVO(9,10,oRowIndex,oColIndex,1);
+					if(clearFirst)
+					{
+						ChessPositionModelLocator.getInstance().blueOffical.setBitt(oRowIndex,oColIndex,false);
+					}
+					ChessPositionModelLocator.getInstance().blueOffical.setBitt(nRowIndex,nColIndex,true);
 					break;
 				case CcjConstants.RED_OFFICAL.label:
-					chessVO = new OfficalVO(9,10,rowIndex,colIndex);
-					ChessPositionModelLocator.getInstance().redOffical.setBitt(rowIndex,colIndex,true);
+					chessVO = new OfficalVO(9,10,oRowIndex,oColIndex);
+					if(clearFirst)
+					{
+						ChessPositionModelLocator.getInstance().redOffical.setBitt(oRowIndex,oColIndex,false);
+					}
+					ChessPositionModelLocator.getInstance().redOffical.setBitt(nRowIndex,nColIndex,true);
 					break;
 				case CcjConstants.BLUE_PAWN.label:
-					chessVO = new PawnVO(9,10,rowIndex,colIndex,1);
-					ChessPositionModelLocator.getInstance().bluePawn.setBitt(rowIndex,colIndex,true);
+					chessVO = new PawnVO(9,10,oRowIndex,oColIndex,1);
+					if(clearFirst)
+					{
+						ChessPositionModelLocator.getInstance().bluePawn.setBitt(oRowIndex,oColIndex,false);
+					}
+					ChessPositionModelLocator.getInstance().bluePawn.setBitt(nRowIndex,nColIndex,true);
 					break;
 				case CcjConstants.RED_PAWN.label:
-					chessVO = new PawnVO(9,10,rowIndex,colIndex);
-					ChessPositionModelLocator.getInstance().redPawn.setBitt(rowIndex,colIndex,true);
+					chessVO = new PawnVO(9,10,oRowIndex,oColIndex);
+					if(clearFirst)
+					{
+						ChessPositionModelLocator.getInstance().redPawn.setBitt(oRowIndex,oColIndex,false);
+					}
+					ChessPositionModelLocator.getInstance().redPawn.setBitt(nRowIndex,nColIndex,true);
 					break;
 				default:
 					break;
 			}
 			return chessVO;
-		}
-		/**
-		 * 
-		 * @param chessPieceType the chess piece's type(e.g. RedPawn,BlueCannon)
-		 * @return int value
-		 * @private //A. 0表示空格(没有棋子)；
-		 * @private //B. 8~14依次表示红方的帅、仕、相、马、车、炮和兵；
-		 * @private //C. 16~22依次表示蓝方的将、士、象、马、车、炮和卒。
-		 */		
-		private static function generateChessPieceFlag(chessPieceType:String):int
-		{
-			var result:int = 0;
-			switch(chessPieceType)
-			{
-				case CcjConstants.BLUE_BISHOP:
-					result = 18;
-					break;
-				case CcjConstants.RED_BISHOP:
-					result = 10;
-					break;
-				case CcjConstants.BLUE_CANNON:
-					result = 21;
-					break;
-				case CcjConstants.RED_CANNON:
-					result = 13;
-					break;
-				case CcjConstants.BLUE_ROOK:
-					result = 20;
-					break;
-				case CcjConstants.RED_ROOK:
-					result = 12;
-					break;
-				case CcjConstants.BLUE_KNIGHT:
-					result = 19;
-					break;
-				case CcjConstants.RED_KNIGHT:
-					result = 11;
-					break;
-				case CcjConstants.BLUE_MARSHAL:
-					result = 16;
-					break;
-				case CcjConstants.RED_MARSHAL:
-					result = 8;
-					break;
-				case CcjConstants.BLUE_OFFICAL:
-					result = 17;
-					break;
-				case CcjConstants.RED_OFFICAL:
-					result = 9;
-					break;
-				case CcjConstants.BLUE_PAWN:
-					result = 22;
-					break;
-				case CcjConstants.RED_PAWN:
-					result = 14;
-					break;
-				default:
-					break;
-			}
-			return result;
 		}
 	}
 }
