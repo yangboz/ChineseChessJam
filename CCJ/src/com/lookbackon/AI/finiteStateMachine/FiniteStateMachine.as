@@ -126,7 +126,7 @@ package com.lookbackon.AI.finiteStateMachine
 			previousState = currentState;
 			globalState = s;
 			currentState = s;
-			LOG.info("previousState:{0}||globalState:{1}||currentState:{2}",
+			LOG.debug("previousState:{0}||globalState:{1}||currentState:{2}",
 				previousState==null?previousState:previousState.description,
 				globalState==null?globalState:globalState.description,
 				currentState==null?currentState:currentState.description);

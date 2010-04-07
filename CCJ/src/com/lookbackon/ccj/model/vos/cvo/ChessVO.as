@@ -1,7 +1,10 @@
 package com.lookbackon.ccj.model.vos.cvo
 {
 	import com.lookbackon.ccj.errors.CcjErrors;
+	import com.lookbackon.ccj.utils.LogUtil;
 	import com.lookbackon.ds.BitBoard;
+	
+	import mx.logging.ILogger;
 
 	/**
 	 * This is our bitboard:
@@ -34,6 +37,7 @@ package com.lookbackon.ccj.model.vos.cvo
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
+		private static const LOG:ILogger = LogUtil.getLogger(ChessVO);
 		//--------------------------------------------------------------------------
 		//
 		//  Constructor
@@ -77,6 +81,7 @@ package com.lookbackon.ccj.model.vos.cvo
 		public function set occupies(value:BitBoard):void
 		{
 			_occupies = value;
+			LOG.info("anew occupies:{0}",value.dump());
 		}
 		//----------------------------------
 		//  moves(implements)
@@ -93,6 +98,7 @@ package com.lookbackon.ccj.model.vos.cvo
 		public function set moves(value:BitBoard):void
 		{
 			_moves = value;
+			LOG.info("anew moves:{0}",value.dump());
 		}
 		//----------------------------------
 		//  captures(implements)
@@ -109,6 +115,7 @@ package com.lookbackon.ccj.model.vos.cvo
 		public function set captures(value:BitBoard):void
 		{
 			_captures = value;
+			LOG.info("anew captures:{0}",value.dump());
 		}
 		//--------------------------------------------------------------------------
 		//

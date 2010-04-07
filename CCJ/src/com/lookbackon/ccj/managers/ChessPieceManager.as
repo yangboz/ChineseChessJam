@@ -28,16 +28,16 @@ package com.lookbackon.ccj.managers
 			var result:Boolean = true;
 			//begin:
 			var beginTime:uint = new Date().getMilliseconds();
-			LOG.info("move validate begin at:{0}",beginTime);
+//			LOG.info("move validate begin at:{0}",beginTime);
 			//chess piece change state(view).
 			conductVO.target.agent.getFSM().changeState(conductVO.target.attackState);
 			//TODO:
 			//chess piece move (logic) check.
 			result = Boolean(conductVO.target.chessVO.moves.getBitt(conductVO.newPosition[1],conductVO.newPosition[0]));
-			LOG.info("doMoveValidation result:{0}",result);
+//			LOG.info("doMoveValidation result:{0}",result);
 			//end
 			var endTime:uint = new Date().getMilliseconds();
-			LOG.info("move validate end at:{0}||duration:{1}",endTime,endTime-beginTime);
+//			LOG.info("move validate end at:{0}||duration:{1}",endTime,endTime-beginTime);
 			return result;
 		}
 	}

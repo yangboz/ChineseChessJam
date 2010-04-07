@@ -90,6 +90,7 @@
 				conductVO.newPosition = this.position;
 				conductVO.target = ChessPiece(event.dragInitiator);
 				//set new chessVO.
+				LOG.info("before move,oldChessVO:{0}",conductVO.dump());
 				ChessPiece(event.dragInitiator).chessVO = ChessFactory.generateChessPieceVO(conductVO,true);
 				//set new position.
 				ChessPiece(event.dragInitiator).position = this.position;

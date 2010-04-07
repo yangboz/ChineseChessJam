@@ -21,7 +21,8 @@ package com.lookbackon.ccj.model.vos
 		 */
 		public function dump():String
 		{
-			var s:String = "ConductVO{";
+			var s:String = "ConductVO";
+			s += "\n{";
 			s += "\n" + "\t";
 			s += "target:"+target+","+"newPosition:"+newPosition;
 			s += "\n}";
