@@ -53,9 +53,10 @@
 				{
 					for(var vv:int=0;vv<ChessBoard.TOTAL_V_LINES;vv++)
 					{
-						if(ChessFactory.createChessPiece([hh,vv])!=null)
+						var chessPiece:IChessPiece = ChessFactory.createChessPiece([hh,vv]);
+						if(chessPiece!=null)
 						{
-							this.addElement( ChessFactory.createChessPiece([hh,vv]) );
+							this.addElement( chessPiece );
 						}
 					}
 				}
