@@ -137,6 +137,32 @@ package com.lookbackon.ds
 			return bb;
 		}
 		//----------------------------------
+		//  rotate45(IBitBoard)
+		//----------------------------------
+		public function rotate45():BitBoard
+		{
+			//TODO:
+			return new BitBoard(0,0);
+		}
+		//----------------------------------
+		//  rotate90(IBitBoard)
+		//----------------------------------
+		/**
+		 * @return Fliped rows with cols and vice versa.
+		 */		
+		public function rotate90():BitBoard
+		{
+			var bb:BitBoard = new BitBoard(_row,_column);
+			for(var w:int=0;w<_column;w++)
+			{
+				for(var h:int=0;h<_row;h++)
+				{
+					bb.setBitt(h,w,Boolean(this.getBitt(_column-w,_row-h)));
+				}
+			}
+			return bb;
+		}
+		//----------------------------------
 		//  getBitt
 		//----------------------------------
 		/**
@@ -220,7 +246,7 @@ package com.lookbackon.ds
 		/**
 		 * Dump out a string representing the current object.
 		 * 
-		 * @return A string representing the current object.
+		 * @return A "human-readable" string representing the current object.
 		 */	
 		public function dump():String
 		{

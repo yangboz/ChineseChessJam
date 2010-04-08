@@ -72,6 +72,7 @@
 				LOG.info("redPieces:{0}",chessPositionModelLocator.redPieces.dump());
 				LOG.info("bluePieces:{0}",chessPositionModelLocator.bluePieces.dump());
 				LOG.info("allPieces:{0}",chessPositionModelLocator.allPieces.dump());
+				LOG.info("allPieces rotate90:{0}",chessPositionModelLocator.allPieces.rotate90().dump());
 				//GameManager start.
 				GameManager.startGame();
 			}

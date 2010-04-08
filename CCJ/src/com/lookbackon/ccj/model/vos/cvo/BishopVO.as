@@ -31,7 +31,11 @@ package com.lookbackon.ccj.model.vos.cvo
 			//serveral admental(象田心问题)
 			if(!ChessPositionModelLocator.getInstance().allPieces.getBitt(rowIndex+1,colIndex+1))
 			{
-				this.occupies.setBitt(rowIndex+2,colIndex+2,true);
+				//serveral admental(象过河问题)
+				if(flag==ChessFactory.FLAG_BLUE && rowIndex<=4)
+				{
+					this.occupies.setBitt(rowIndex+2,colIndex+2,true);
+				}
 			}
 			if(!ChessPositionModelLocator.getInstance().allPieces.getBitt(rowIndex+1,colIndex-1))
 			{
