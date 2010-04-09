@@ -9,11 +9,10 @@ package com.lookbackon.ccj.model.vos
 	 * @author knight.zhou
 	 * 
 	 */
-	[Bindable]
 	public class ConductVO extends EventDispatcher
 	{
-		public var target:ChessPiece;  
-		public var newPosition:Array;
+		[Bindable]public var target:ChessPiece;  
+		[Bindable]public var newPosition:Array;
 		/**
 		 * Prints out all elements (for debug/demo purposes).
 		 * 
