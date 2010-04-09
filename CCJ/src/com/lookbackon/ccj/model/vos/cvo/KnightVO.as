@@ -29,53 +29,38 @@ package com.lookbackon.ccj.model.vos.cvo
 			// - - s - -
 			// * - - - *
 			// - * - * -
-			if(rowIndex<=8 && colIndex>=2)
+			//serveral admental(马撇脚问题)
+			//left direction.
+			if(!ChessPositionModelLocator.getInstance().allPieces.getBitt(rowIndex,colIndex-1))
 			{
 				//several amendments.
 				this.occupies.setBitt(rowIndex+1,colIndex-2,true);
-			}
-			if(rowIndex<=8 && colIndex<=6)
-			{
-				//several amendments.
-				this.occupies.setBitt(rowIndex+1,colIndex+2,true);
-			}
-			//
-			if(rowIndex>=1 && colIndex>=2)
-			{
-				//several amendments.
 				this.occupies.setBitt(rowIndex-1,colIndex-2,true);
 			}
-			if(rowIndex>=1 && colIndex<=6)
-			{
-				//several amendments.
-				this.occupies.setBitt(rowIndex-1,colIndex+2,true);
-			}
-			//
-			if(rowIndex<=7 && colIndex>=1)
+			//up direction.
+			if(!ChessPositionModelLocator.getInstance().allPieces.getBitt(rowIndex-1,colIndex))
 			{
 				//several amendments.
 				this.occupies.setBitt(rowIndex+2,colIndex-1,true);
+				this.occupies.setBitt(rowIndex-2,colIndex+1,true);
 			}
-			if(rowIndex<=7 && colIndex<=7)
+			//right direction.
+			if(!ChessPositionModelLocator.getInstance().allPieces.getBitt(rowIndex,colIndex+1))
 			{
 				//several amendments.
-				this.occupies.setBitt(rowIndex+2,colIndex+1,true);
+				this.occupies.setBitt(rowIndex+1,colIndex+2,true);
+				this.occupies.setBitt(rowIndex-1,colIndex+2,true);
 			}
-			//
-			if(rowIndex>=2 && colIndex>=1)
-			{
-				//several amendments.
-				this.occupies.setBitt(rowIndex-2,colIndex-1,true);
-			}
-			if(rowIndex>=2 && colIndex<=7)
+			//down direction.
+			if(!ChessPositionModelLocator.getInstance().allPieces.getBitt(rowIndex+1,colIndex))
 			{
 				//several amendments.
 				this.occupies.setBitt(rowIndex-2,colIndex+1,true);
+				this.occupies.setBitt(rowIndex-2,colIndex-1,true);
 			}
 			//about legal moves.
 			if(flag==ChessFactory.FLAG_RED)
 			{
-				//serveral admental(马撇脚问题)
 				this.moves = this.occupies.xor(this.occupies.and(ChessPositionModelLocator.getInstance().redPieces));
 			}
 			if(flag==ChessFactory.FLAG_BLUE)
