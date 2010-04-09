@@ -197,157 +197,171 @@ package com.lookbackon.ccj.business.factory
 			switch(conductVO.target.name)
 			{
 				case CcjConstants.BLUE_BISHOP.label:
-					chessVO = new BishopVO(9,10,oRowIndex,oColIndex,1);
 					if(resetFirst)
 					{
 						ChessPositionModelLocator.getInstance().blueBishop.setBitt(oRowIndex,oColIndex,false);
 						ChessPositionModelLocator.getInstance().blueBishop.setBitt(nRowIndex,nColIndex,true);
+						chessVO = new BishopVO(9,10,nRowIndex,nColIndex,1);
 					}else
 					{
 						ChessPositionModelLocator.getInstance().blueBishop.setBitt(oRowIndex,oColIndex,true);
+						chessVO = new BishopVO(9,10,oRowIndex,oColIndex,1);
 					}
 					break;
 				case CcjConstants.RED_BISHOP.label:
-					chessVO = new BishopVO(9,10,oRowIndex,oColIndex);
 					if(resetFirst)
 					{
 						ChessPositionModelLocator.getInstance().redBishop.setBitt(oRowIndex,oColIndex,false);
 						ChessPositionModelLocator.getInstance().redBishop.setBitt(nRowIndex,nColIndex,true);
+						chessVO = new BishopVO(9,10,nRowIndex,nColIndex);
 					}else
 					{
 						ChessPositionModelLocator.getInstance().redBishop.setBitt(oRowIndex,oColIndex,true);	
+						chessVO = new BishopVO(9,10,oRowIndex,oColIndex);
 					}
 					break;
 				case CcjConstants.BLUE_CANNON.label:
-					chessVO = new CannonVO(9,10,oRowIndex,oColIndex,1);
 					if(resetFirst)
 					{
 						ChessPositionModelLocator.getInstance().blueCannon.setBitt(oRowIndex,oColIndex,false);
 						ChessPositionModelLocator.getInstance().blueCannon.setBitt(nRowIndex,nColIndex,true);
+						chessVO = new CannonVO(9,10,nRowIndex,nColIndex,1);
 					}else
 					{
 						ChessPositionModelLocator.getInstance().blueCannon.setBitt(oRowIndex,oColIndex,true);
+						chessVO = new CannonVO(9,10,oRowIndex,oColIndex,1);
 					}
 					break;
 				case CcjConstants.RED_CANNON.label:
-					chessVO = new CannonVO(9,10,oRowIndex,oColIndex);
 					if(resetFirst)
 					{
 						ChessPositionModelLocator.getInstance().redCannon.setBitt(oRowIndex,oColIndex,false);
 						ChessPositionModelLocator.getInstance().redCannon.setBitt(nRowIndex,nColIndex,true);
+						chessVO = new CannonVO(9,10,nRowIndex,nColIndex);
 					}else
 					{
 						ChessPositionModelLocator.getInstance().redCannon.setBitt(oRowIndex,oColIndex,true);
+						chessVO = new CannonVO(9,10,oRowIndex,oColIndex);
 					}
 					break;
 				case CcjConstants.BLUE_ROOK.label:
-					chessVO = new RookVO(9,10,oRowIndex,oColIndex,1);
 					if(resetFirst)
 					{
 						ChessPositionModelLocator.getInstance().blueRook.setBitt(oRowIndex,oColIndex,false);
 						ChessPositionModelLocator.getInstance().blueRook.setBitt(nRowIndex,nColIndex,true);
+						chessVO = new RookVO(9,10,nRowIndex,nColIndex,1);
 					}else
 					{
 						ChessPositionModelLocator.getInstance().blueRook.setBitt(oRowIndex,oColIndex,true);
+						chessVO = new RookVO(9,10,oRowIndex,oColIndex,1);
 					}
 					break;
 				case CcjConstants.RED_ROOK.label:
-					chessVO = new RookVO(9,10,oRowIndex,oColIndex);
 					if(resetFirst)
 					{
 						ChessPositionModelLocator.getInstance().redRook.setBitt(oRowIndex,oColIndex,false);
 						ChessPositionModelLocator.getInstance().redRook.setBitt(nRowIndex,nColIndex,true);
+						chessVO = new RookVO(9,10,nRowIndex,nColIndex);
 					}else
 					{
 						ChessPositionModelLocator.getInstance().redRook.setBitt(oRowIndex,oColIndex,true);
+						chessVO = new RookVO(9,10,oRowIndex,oColIndex);
 					}
 					break;
 				case CcjConstants.BLUE_KNIGHT.label:
-					chessVO = new KnightVO(9,10,oRowIndex,oColIndex,1);
 					if(resetFirst)
 					{
 						ChessPositionModelLocator.getInstance().blueKnight.setBitt(oRowIndex,oColIndex,false);
 						ChessPositionModelLocator.getInstance().blueKnight.setBitt(nRowIndex,nColIndex,true);
+						chessVO = new KnightVO(9,10,nRowIndex,nColIndex,1);
 					}else
 					{
 						ChessPositionModelLocator.getInstance().blueKnight.setBitt(oRowIndex,oColIndex,true);
+						chessVO = new KnightVO(9,10,oRowIndex,oColIndex,1);
 					}
 					break;
 				case CcjConstants.RED_KNIGHT.label:
-					chessVO = new KnightVO(9,10,oRowIndex,oColIndex);
 					if(resetFirst)
 					{
 						ChessPositionModelLocator.getInstance().redKnight.setBitt(oRowIndex,oColIndex,false);
 						ChessPositionModelLocator.getInstance().redKnight.setBitt(nRowIndex,nColIndex,true);
+						chessVO = new KnightVO(9,10,nRowIndex,nColIndex);
 					}else
 					{
 						ChessPositionModelLocator.getInstance().redKnight.setBitt(oRowIndex,oColIndex,true);
+						chessVO = new KnightVO(9,10,oRowIndex,oColIndex);
 					}
 					break;
 				case CcjConstants.BLUE_MARSHAL.label:
-					chessVO = new MarshalVO(9,10,oRowIndex,oColIndex,1);
 					if(resetFirst)
 					{
 						ChessPositionModelLocator.getInstance().blueMarshal.setBitt(oRowIndex,oColIndex,false);
 						ChessPositionModelLocator.getInstance().blueMarshal.setBitt(nRowIndex,nColIndex,true);
+						chessVO = new MarshalVO(9,10,nRowIndex,nColIndex,1);
 					}else
 					{
 						ChessPositionModelLocator.getInstance().blueMarshal.setBitt(oRowIndex,oColIndex,true);	
+						chessVO = new MarshalVO(9,10,oRowIndex,oColIndex,1);
 					}
 					break;
 				case CcjConstants.RED_MARSHAL.label:
-					chessVO = new MarshalVO(9,10,oRowIndex,oColIndex);
 					if(resetFirst)
 					{
 						ChessPositionModelLocator.getInstance().redMarshal.setBitt(oRowIndex,oColIndex,false);
 						ChessPositionModelLocator.getInstance().redMarshal.setBitt(nRowIndex,nColIndex,true);
+						chessVO = new MarshalVO(9,10,nRowIndex,nColIndex);
 					}else
 					{
 						ChessPositionModelLocator.getInstance().redMarshal.setBitt(oRowIndex,oColIndex,true);
+						chessVO = new MarshalVO(9,10,oRowIndex,oColIndex);
 					}
 					break;
 				case CcjConstants.BLUE_OFFICAL.label:
-					chessVO = new OfficalVO(9,10,oRowIndex,oColIndex,1);
 					if(resetFirst)
 					{
 						ChessPositionModelLocator.getInstance().blueOffical.setBitt(oRowIndex,oColIndex,false);
 						ChessPositionModelLocator.getInstance().blueOffical.setBitt(nRowIndex,nColIndex,true);
+						chessVO = new OfficalVO(9,10,nRowIndex,nColIndex,1);
 					}else
 					{
 						ChessPositionModelLocator.getInstance().blueOffical.setBitt(oRowIndex,oColIndex,true);
+						chessVO = new OfficalVO(9,10,oRowIndex,oColIndex,1);
 					}
 					break;
 				case CcjConstants.RED_OFFICAL.label:
-					chessVO = new OfficalVO(9,10,oRowIndex,oColIndex);
 					if(resetFirst)
 					{
 						ChessPositionModelLocator.getInstance().redOffical.setBitt(oRowIndex,oColIndex,false);
 						ChessPositionModelLocator.getInstance().redOffical.setBitt(nRowIndex,nColIndex,true);
+						chessVO = new OfficalVO(9,10,nRowIndex,nColIndex);
 					}else
 					{
 						ChessPositionModelLocator.getInstance().redOffical.setBitt(oRowIndex,oColIndex,true);
+						chessVO = new OfficalVO(9,10,oRowIndex,oColIndex);
 					}
 					break;
 				case CcjConstants.BLUE_PAWN.label:
-					chessVO = new PawnVO(9,10,oRowIndex,oColIndex,1);
 					if(resetFirst)
 					{
 						ChessPositionModelLocator.getInstance().bluePawn.setBitt(oRowIndex,oColIndex,false);
 						ChessPositionModelLocator.getInstance().bluePawn.setBitt(nRowIndex,nColIndex,true);
+						chessVO = new PawnVO(9,10,nRowIndex,nColIndex,1);
 					}else
 					{
 						ChessPositionModelLocator.getInstance().bluePawn.setBitt(oRowIndex,oColIndex,true);
+						chessVO = new PawnVO(9,10,oRowIndex,oColIndex,1);
 					}
 					break;
 				case CcjConstants.RED_PAWN.label:
-					chessVO = new PawnVO(9,10,oRowIndex,oColIndex);
 					if(resetFirst)
 					{
 						ChessPositionModelLocator.getInstance().redPawn.setBitt(oRowIndex,oColIndex,false);
 						ChessPositionModelLocator.getInstance().redPawn.setBitt(nRowIndex,nColIndex,true);
+						chessVO = new PawnVO(9,10,nRowIndex,nColIndex);
 					}else
 					{
 						ChessPositionModelLocator.getInstance().redPawn.setBitt(oRowIndex,oColIndex,true);
+						chessVO = new PawnVO(9,10,oRowIndex,oColIndex);
 					}
 					break;
 				default:
@@ -355,7 +369,9 @@ package com.lookbackon.ccj.business.factory
 			}
 			if(chessVO!=null)
 			{
-//				LOG.info("chessVO:{0}",chessVO.dump());
+				LOG.info("generateChessPieceVO.occupies:{0}",chessVO.occupies.dump());
+				LOG.info("generateChessPieceVO.moves:{0}",chessVO.moves.dump());
+				LOG.info("generateChessPieceVO.captures:{0}",chessVO.captures.dump());
 			}
 			return chessVO;
 		}

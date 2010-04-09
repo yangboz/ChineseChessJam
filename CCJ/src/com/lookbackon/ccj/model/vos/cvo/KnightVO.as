@@ -75,6 +75,7 @@ package com.lookbackon.ccj.model.vos.cvo
 			//about legal moves.
 			if(flag==ChessFactory.FLAG_RED)
 			{
+				//serveral admental(马撇脚问题)
 				this.moves = this.occupies.xor(this.occupies.and(ChessPositionModelLocator.getInstance().redPieces));
 			}
 			if(flag==ChessFactory.FLAG_BLUE)

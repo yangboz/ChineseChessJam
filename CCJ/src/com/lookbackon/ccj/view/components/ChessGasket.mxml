@@ -12,6 +12,7 @@
 			import com.lookbackon.ccj.managers.ChessPieceManager;
 			import com.lookbackon.ccj.model.ChessPositionModelLocator;
 			import com.lookbackon.ccj.model.vos.ConductVO;
+			import com.lookbackon.ccj.model.vos.cvo.ChessVO;
 			import com.lookbackon.ccj.utils.LogUtil;
 			
 			import mx.core.IUIComponent;

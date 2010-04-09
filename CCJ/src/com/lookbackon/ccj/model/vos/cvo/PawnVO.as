@@ -35,6 +35,7 @@ package com.lookbackon.ccj.model.vos.cvo
 			//about legal moves.
 			if(flag==ChessFactory.FLAG_RED)
 			{
+				//serveral admental(兵横向移动问题)
 				this.moves = this.occupies.xor(this.occupies.and(ChessPositionModelLocator.getInstance().redPieces));
 			}
 			if(flag==ChessFactory.FLAG_BLUE)
@@ -44,6 +45,7 @@ package com.lookbackon.ccj.model.vos.cvo
 			//about attacked captures.
 			if(flag==ChessFactory.FLAG_RED)
 			{
+				//serveral admental(兵后退问题)
 				this.captures = this.occupies.and(ChessPositionModelLocator.getInstance().bluePieces);
 			}
 			if(flag==ChessFactory.FLAG_BLUE)

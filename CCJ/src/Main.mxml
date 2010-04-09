@@ -73,6 +73,8 @@
 				LOG.info("bluePieces:{0}",chessPositionModelLocator.bluePieces.dump());
 				LOG.info("allPieces:{0}",chessPositionModelLocator.allPieces.dump());
 				LOG.info("allPieces rotate90:{0}",chessPositionModelLocator.allPieces.rotate90().dump());
+				LOG.info("allPieces rotate90.bitCount:{0}",chessPositionModelLocator.allPieces.bitCount);
+				LOG.info("allPieces rotate90.cellCount:{0}",chessPositionModelLocator.allPieces.cellCount);
 				//GameManager start.
 				GameManager.startGame();
 			}

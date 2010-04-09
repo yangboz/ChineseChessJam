@@ -137,27 +137,30 @@ package com.lookbackon.ds
 			return bb;
 		}
 		//----------------------------------
-		//  rotate45(IBitBoard)
+		//  rotate45=(IBitBoard)
 		//----------------------------------
+		/**
+		 * @return Fliped rows with cols such as clockwise rotatation 45 degree.
+		 */	
 		public function rotate45():BitBoard
 		{
 			//TODO:
 			return new BitBoard(0,0);
 		}
 		//----------------------------------
-		//  rotate90(IBitBoard)
+		//  rotate90=(IBitBoard)
 		//----------------------------------
 		/**
-		 * @return Fliped rows with cols and vice versa.
+		 * @return Fliped rows with cols such as clockwise rotatation 90 degree.
 		 */		
 		public function rotate90():BitBoard
 		{
 			var bb:BitBoard = new BitBoard(_row,_column);
-			for(var w:int=0;w<_column;w++)
+			for(var w:int=0;w<_row;w++)
 			{
-				for(var h:int=0;h<_row;h++)
+				for(var h:int=0;h<_column;h++)
 				{
-					bb.setBitt(h,w,Boolean(this.getBitt(_column-w,_row-h)));
+					bb.setBitt(h,w,Boolean(this.getBitt(w,h)));
 				}
 			}
 			return bb;

@@ -3,6 +3,7 @@ package com.lookbackon.ccj.model.vos.cvo
 	import com.lookbackon.ccj.CcjConstants;
 	import com.lookbackon.ccj.business.factory.ChessFactory;
 	import com.lookbackon.ccj.model.ChessPositionModelLocator;
+	import com.lookbackon.ccj.utils.MathUtil;
 
 	/**
 	 * 
@@ -32,22 +33,58 @@ package com.lookbackon.ccj.model.vos.cvo
 			if(!ChessPositionModelLocator.getInstance().allPieces.getBitt(rowIndex+1,colIndex+1))
 			{
 				//serveral admental(象过河问题)
-				if(flag==ChessFactory.FLAG_BLUE && rowIndex<=4)
+				if(flag==ChessFactory.FLAG_BLUE)
+				{
+					if(rowIndex<4)
+					{
+						this.occupies.setBitt(rowIndex+2,colIndex+2,true);
+					}
+				}else
 				{
 					this.occupies.setBitt(rowIndex+2,colIndex+2,true);
 				}
 			}
 			if(!ChessPositionModelLocator.getInstance().allPieces.getBitt(rowIndex+1,colIndex-1))
 			{
-				this.occupies.setBitt(rowIndex+2,colIndex-2,true);
+				//serveral admental(象过河问题)
+				if(flag==ChessFactory.FLAG_BLUE)
+				{
+					if(rowIndex<4)
+					{
+						this.occupies.setBitt(rowIndex+2,colIndex-2,true);
+					}
+				}else
+				{
+					this.occupies.setBitt(rowIndex+2,colIndex-2,true);
+				}
 			}
 			if(!ChessPositionModelLocator.getInstance().allPieces.getBitt(rowIndex-1,colIndex+1))
 			{
-				this.occupies.setBitt(rowIndex-2,colIndex+2,true);
+				//serveral admental(象过河问题)
+				if(flag==ChessFactory.FLAG_RED)
+				{
+					if(rowIndex>5)
+					{
+						this.occupies.setBitt(rowIndex-2,colIndex+2,true);
+					}
+				}else
+				{
+					this.occupies.setBitt(rowIndex-2,colIndex+2,true);
+				}
 			}
 			if(!ChessPositionModelLocator.getInstance().allPieces.getBitt(rowIndex-1,colIndex-1))
 			{
-				this.occupies.setBitt(rowIndex-2,colIndex-2,true);
+				//serveral admental(象过河问题)
+				if(flag==ChessFactory.FLAG_RED)
+				{
+					if(rowIndex>5)
+					{
+						this.occupies.setBitt(rowIndex-2,colIndex-2,true);
+					}
+				}else
+				{
+					this.occupies.setBitt(rowIndex-2,colIndex-2,true);
+				}
 			}
 			//about legal moves.
 			if(flag==ChessFactory.FLAG_RED)

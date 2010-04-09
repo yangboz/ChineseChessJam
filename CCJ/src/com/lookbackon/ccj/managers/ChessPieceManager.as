@@ -30,7 +30,7 @@ package com.lookbackon.ccj.managers
 			var beginTime:uint = new Date().getMilliseconds();
 //			LOG.info("move validate begin at:{0}",beginTime);
 			//chess piece change state(view).
-			conductVO.target.agent.getFSM().changeState(conductVO.target.attackState);
+//			conductVO.target.agent.getFSM().changeState(conductVO.target.attackState);
 			//TODO:
 			//chess piece move (logic) check.
 			result = Boolean(conductVO.target.chessVO.moves.getBitt(conductVO.newPosition[1],conductVO.newPosition[0]));
