@@ -81,7 +81,7 @@ package com.lookbackon.ds
 		//----------------------------------
 		public function and(value:BitBoard):BitBoard
 		{
-			var bb:BitBoard = new BitBoard(value.column,value.row);
+			var bb:BitBoard = new BitBoard(this.column,this.row);
 			for(var h:int=0;h<_row;h++)
 			{
 				for(var w:int=0;w<_column;w++)
@@ -111,7 +111,7 @@ package com.lookbackon.ds
 		//----------------------------------
 		public function or(value:BitBoard):BitBoard
 		{
-			var bb:BitBoard = new BitBoard(value.column,value.row);
+			var bb:BitBoard = new BitBoard(this.column,this.row);
 			for(var h:int=0;h<_row;h++)
 			{
 				for(var w:int=0;w<_column;w++)
@@ -126,7 +126,7 @@ package com.lookbackon.ds
 		//----------------------------------
 		public function xor(value:BitBoard):BitBoard
 		{
-			var bb:BitBoard = new BitBoard(value.column,value.row);
+			var bb:BitBoard = new BitBoard(this.column,this.row);
 			for(var h:int=0;h<_row;h++)
 			{
 				for(var w:int=0;w<_column;w++)
@@ -140,6 +140,7 @@ package com.lookbackon.ds
 		//  rotate45=(IBitBoard)
 		//----------------------------------
 		/**
+		 * notice:this function is suitable for which board column equals to row.
 		 * @return Fliped rows with cols such as clockwise rotatation 45 degree.
 		 */	
 		public function rotate45():BitBoard

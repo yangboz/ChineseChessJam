@@ -13,6 +13,7 @@
 			import com.lookbackon.ccj.business.factory.ChessFactory;
 			import com.lookbackon.ccj.managers.GameManager;
 			import com.lookbackon.ccj.model.ChessPositionModelLocator;
+			import com.lookbackon.ccj.model.vos.ConductVO;
 			import com.lookbackon.ccj.utils.LogUtil;
 			import com.lookbackon.ccj.view.components.ChessPiece;
 			import com.lookbackon.ccj.view.components.IChessPiece;
@@ -27,6 +28,11 @@
 			//--------------------------------------------------------------------------
 			[Bindable]
 			private var chessPositionModelLocator:ChessPositionModelLocator = ChessPositionModelLocator.getInstance();
+			//
+			private var chessPieces:Array = [];
+			//
+			[Bindable]
+			private var logFilters:Array = ["com.lookbackon.ccj.business.factory.ChessFactory"];
 			//----------------------------------
 			//  CONSTANTS
 			//----------------------------------
@@ -53,30 +59,34 @@
 				{
 					for(var vv:int=0;vv<ChessBoard.TOTAL_V_LINES;vv++)
 					{
-						var chessPiece:IChessPiece = ChessFactory.createChessPiece([hh,vv]);
-						if(chessPiece!=null)
+						var iChessPiece:IChessPiece = ChessFactory.createChessPiece([hh,vv]);
+						if(iChessPiece!=null)
 						{
-							this.addElement( chessPiece );
+							this.addElement( iChessPiece );
+							this.chessPieces.push(iChessPiece);
 						}
 					}
 				}
-				//init data struct.
-				LOG.debug("redRook:{0}",chessPositionModelLocator.redRook.dump());
-				LOG.debug("redKnight:{0}",chessPositionModelLocator.redKnight.dump());
-				LOG.debug("redBishop:{0}",chessPositionModelLocator.redBishop.dump());
-				LOG.debug("redOffical:{0}",chessPositionModelLocator.redOffical.dump());
-				LOG.debug("redMarshal:{0}",chessPositionModelLocator.redMarshal.dump());
-				LOG.debug("redCannon:{0}",chessPositionModelLocator.redCannon.dump());
-				LOG.debug("redPawn:{0}",chessPositionModelLocator.redPawn.dump());
-				//
+				//create chess pieces' chessVO
+				for(var cp:int=0;cp<this.chessPieces.length;cp++)
+				{
+					var chessPiece:ChessPiece = this.chessPieces[cp] as ChessPiece;
+					//generateChessPieceVO
+					var conductVO:ConductVO = new ConductVO();
+					conductVO.target = chessPiece;
+					conductVO.newPosition = chessPiece.position;
+					chessPiece.chessVO = ChessFactory.generateChessPieceVO(conductVO);
+				}
+				//init data struct.@seechessPositionModelLocator dump info.
 				LOG.info("redPieces:{0}",chessPositionModelLocator.redPieces.dump());
 				LOG.info("bluePieces:{0}",chessPositionModelLocator.bluePieces.dump());
 				LOG.info("allPieces:{0}",chessPositionModelLocator.allPieces.dump());
+				//
 				LOG.info("allPieces rotate90:{0}",chessPositionModelLocator.allPieces.rotate90().dump());
 				LOG.info("allPieces rotate90.bitCount:{0}",chessPositionModelLocator.allPieces.bitCount);
 				LOG.info("allPieces rotate90.cellCount:{0}",chessPositionModelLocator.allPieces.cellCount);
 				//GameManager start.
-				GameManager.startGame();
+//				GameManager.startGame();
 			}
 
 		]]>
@@ -90,6 +100,7 @@
 					   includeTime="true"
 					   level="{LogEventLevel.INFO}"
 					   />
+		<!-- filters="{logFilters}" -->
 	</fx:Declarations>
 	
 	<!-- Views here -->

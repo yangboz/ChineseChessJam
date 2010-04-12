@@ -3,6 +3,7 @@ package com.lookbackon.ccj.model.vos.cvo
 	import com.lookbackon.ccj.CcjConstants;
 	import com.lookbackon.ccj.business.factory.ChessFactory;
 	import com.lookbackon.ccj.model.ChessPositionModelLocator;
+	import com.lookbackon.ds.BitBoard;
 
 	/**
 	 * 
@@ -43,6 +44,8 @@ package com.lookbackon.ccj.model.vos.cvo
 				}
 			}
 			//about legal moves.
+			LOG.info("redPieces:{0}",ChessPositionModelLocator.getInstance().redPieces.dump());
+			LOG.info("bluePieces:{0}",ChessPositionModelLocator.getInstance().bluePieces.dump());
 			if(flag==ChessFactory.FLAG_RED)
 			{
 				this.moves = this.occupies.xor(this.occupies.and(ChessPositionModelLocator.getInstance().redPieces));
@@ -54,11 +57,11 @@ package com.lookbackon.ccj.model.vos.cvo
 			//about attacked captures.
 			if(flag==ChessFactory.FLAG_RED)
 			{
-				this.captures = this.occupies.and(ChessPositionModelLocator.getInstance().bluePieces);
+				this.captures = this.moves.and(ChessPositionModelLocator.getInstance().bluePieces);
 			}
 			if(flag==ChessFactory.FLAG_BLUE)
 			{
-				this.captures = this.occupies.and(ChessPositionModelLocator.getInstance().redPieces);
+				this.captures = this.moves.and(ChessPositionModelLocator.getInstance().redPieces);
 			}
 		}
 	}

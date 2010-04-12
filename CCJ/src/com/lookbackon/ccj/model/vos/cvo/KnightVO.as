@@ -41,7 +41,7 @@ package com.lookbackon.ccj.model.vos.cvo
 			if(!ChessPositionModelLocator.getInstance().allPieces.getBitt(rowIndex-1,colIndex))
 			{
 				//several amendments.
-				this.occupies.setBitt(rowIndex+2,colIndex-1,true);
+				this.occupies.setBitt(rowIndex-2,colIndex-1,true);
 				this.occupies.setBitt(rowIndex-2,colIndex+1,true);
 			}
 			//right direction.
@@ -55,8 +55,8 @@ package com.lookbackon.ccj.model.vos.cvo
 			if(!ChessPositionModelLocator.getInstance().allPieces.getBitt(rowIndex+1,colIndex))
 			{
 				//several amendments.
-				this.occupies.setBitt(rowIndex-2,colIndex+1,true);
-				this.occupies.setBitt(rowIndex-2,colIndex-1,true);
+				this.occupies.setBitt(rowIndex+2,colIndex+1,true);
+				this.occupies.setBitt(rowIndex+2,colIndex-1,true);
 			}
 			//about legal moves.
 			if(flag==ChessFactory.FLAG_RED)
@@ -70,11 +70,11 @@ package com.lookbackon.ccj.model.vos.cvo
 			//about attacked captures.
 			if(flag==ChessFactory.FLAG_RED)
 			{
-				this.captures = this.occupies.and(ChessPositionModelLocator.getInstance().bluePieces);
+				this.captures = this.moves.and(ChessPositionModelLocator.getInstance().bluePieces);
 			}
 			if(flag==ChessFactory.FLAG_BLUE)
 			{
-				this.captures = this.occupies.and(ChessPositionModelLocator.getInstance().redPieces);
+				this.captures = this.moves.and(ChessPositionModelLocator.getInstance().redPieces);
 			}
 		}
 	}

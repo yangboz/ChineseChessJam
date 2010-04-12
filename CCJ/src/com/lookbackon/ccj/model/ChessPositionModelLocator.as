@@ -8,10 +8,13 @@ package com.lookbackon.ccj.model
 	import com.lookbackon.ccj.model.vos.cvo.OfficalVO;
 	import com.lookbackon.ccj.model.vos.cvo.PawnVO;
 	import com.lookbackon.ccj.model.vos.cvo.RookVO;
+	import com.lookbackon.ccj.utils.LogUtil;
 	import com.lookbackon.ds.BitBoard;
 	
 	import de.polygonal.ds.Array2;
-
+	
+	import mx.logging.ILogger;
+	
 	/**
 	 * A singleton model hold Chess Position.
 	 * 
@@ -31,27 +34,28 @@ package com.lookbackon.ccj.model
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
+		private static const LOG:ILogger = LogUtil.getLogger(ChessPositionModelLocator);
 		//generation.
 		//
-		private var _bluePieces:BitBoard;
-		private var _redPieces:BitBoard;
+		private var _bluePieces:BitBoard	= new BitBoard(9,10);
+		private var _redPieces:BitBoard		= new BitBoard(9,10);
 		//special.
 		//red
-		private var _redRook:BitBoard;
-		private var _redKnight:BitBoard;
-		private var _redBishop:BitBoard;
-		private var _redOffical:BitBoard;
-		private var _redMarshal:BitBoard;
-		private var _redCannon:BitBoard;
-		private var _redPawn:BitBoard;
+		private var _redRook:BitBoard		= new BitBoard(9,10);
+		private var _redKnight:BitBoard		= new BitBoard(9,10);
+		private var _redBishop:BitBoard		= new BitBoard(9,10);
+		private var _redOffical:BitBoard	= new BitBoard(9,10);
+		private var _redMarshal:BitBoard	= new BitBoard(9,10);
+		private var _redCannon:BitBoard		= new BitBoard(9,10);
+		private var _redPawn:BitBoard		= new BitBoard(9,10);
 		//blue
-		private var _blueRook:BitBoard;
-		private var _blueKnight:BitBoard;
-		private var _blueBishop:BitBoard;
-		private var _blueOffical:BitBoard;
-		private var _blueMarshal:BitBoard;
-		private var _blueCannon:BitBoard;
-		private var _bluePawn:BitBoard;
+		private var _blueRook:BitBoard		= new BitBoard(9,10);
+		private var _blueKnight:BitBoard	= new BitBoard(9,10);
+		private var _blueBishop:BitBoard	= new BitBoard(9,10);
+		private var _blueOffical:BitBoard	= new BitBoard(9,10);
+		private var _blueMarshal:BitBoard	= new BitBoard(9,10);
+		private var _blueCannon:BitBoard	= new BitBoard(9,10);
+		private var _bluePawn:BitBoard		= new BitBoard(9,10);
 		//TODO.other structs.
 		//--------------------------------------------------------------------------
 		//
@@ -63,27 +67,6 @@ package com.lookbackon.ccj.model
 			if (access != null) {
 				if (instance == null) {
 					instance=this;
-//					allPieces = new Vector.<int>(90,true);
-//					allPieces = new Array2(9,10);
-					//red
-					redRook = new BitBoard(9,10);
-					redKnight = new BitBoard(9,10);
-					redBishop = new BitBoard(9,10);
-					redOffical = new BitBoard(9,10);
-					redMarshal = new BitBoard(9,10);
-					redCannon = new BitBoard(9,10);
-					redPawn = new BitBoard(9,10);
-					//blue
-					blueRook = new BitBoard(9,10);
-					blueKnight = new BitBoard(9,10);
-					blueBishop = new BitBoard(9,10);
-					blueOffical = new BitBoard(9,10);
-					blueMarshal = new BitBoard(9,10);
-					blueCannon = new BitBoard(9,10);
-					bluePawn = new BitBoard(9,10);
-					//
-					redPieces = new BitBoard(9,10);
-					bluePieces = new BitBoard(9,10);
 				}
 			} else {
 				throw new CcjErrors(CcjErrors.INITIALIZE_SINGLETON_CLASS);
@@ -138,7 +121,7 @@ package com.lookbackon.ccj.model
 		 */		
 		public function get bluePieces():BitBoard
 		{
-			return blueRook.or(blueKnight.or(blueBishop.or(blueOffical.or(blueMarshal.or(blueCannon.or(bluePawn))))));
+			return _bluePieces;
 		}
 		/**
 		 * 
@@ -148,6 +131,7 @@ package com.lookbackon.ccj.model
 		public function set bluePieces(value:BitBoard):void
 		{
 			_bluePieces = value;
+			LOG.info("bluePieces:{0}",value.dump());
 		}
 		//----------------------------------
 		//  redPieces
@@ -170,7 +154,7 @@ package com.lookbackon.ccj.model
 		 */		
 		public function get redPieces():BitBoard
 		{
-			return redRook.or(redKnight.or(redBishop.or(redOffical.or(redMarshal.or(redCannon.or(redPawn))))));
+			return 	_redPieces;
 		}
 		/**
 		 * 
@@ -180,6 +164,7 @@ package com.lookbackon.ccj.model
 		public function set redPieces(value:BitBoard):void
 		{
 			_redPieces = value;
+			LOG.info("redPieces:{0}",value.dump());
 		}
 		//----------------------------------
 		//  redRook
@@ -191,6 +176,7 @@ package com.lookbackon.ccj.model
 		public function set redRook(value:BitBoard):void
 		{
 			_redRook = value;
+			LOG.info("redRook:{0}",value.dump());
 		}
 		//----------------------------------
 		//  redKnight
@@ -202,6 +188,7 @@ package com.lookbackon.ccj.model
 		public function set redKnight(value:BitBoard):void
 		{
 			_redKnight = value;
+			LOG.info("redKnight:{0}",value.dump());
 		}
 		//----------------------------------
 		//  redBishop
@@ -213,6 +200,7 @@ package com.lookbackon.ccj.model
 		public function set redBishop(value:BitBoard):void
 		{
 			_redBishop = value;
+			LOG.info("redBishop:{0}",value.dump());
 		}
 		//----------------------------------
 		//  redOffical
@@ -224,6 +212,7 @@ package com.lookbackon.ccj.model
 		public function set redOffical(value:BitBoard):void
 		{
 			_redOffical = value;
+			LOG.info("redOffical:{0}",value.dump());
 		}
 		//----------------------------------
 		//  redMarshal
@@ -235,6 +224,7 @@ package com.lookbackon.ccj.model
 		public function set redMarshal(value:BitBoard):void
 		{
 			_redMarshal = value;
+			LOG.info("redMarshal:{0}",value.dump());
 		}
 		//----------------------------------
 		//  redCannon
@@ -246,6 +236,7 @@ package com.lookbackon.ccj.model
 		public function set redCannon(value:BitBoard):void
 		{
 			_redCannon = value;
+			LOG.info("redCannon:{0}",value.dump());
 		}
 		//----------------------------------
 		//  redPawn
@@ -257,6 +248,7 @@ package com.lookbackon.ccj.model
 		public function set redPawn(value:BitBoard):void
 		{
 			_redPawn = value;
+			LOG.info("redPawn:{0}",value.dump());
 		}
 		//----------------------------------
 		//  blueRook
@@ -268,6 +260,7 @@ package com.lookbackon.ccj.model
 		public function set blueRook(value:BitBoard):void
 		{
 			_blueRook = value;
+			LOG.info("blueRook:{0}",value.dump());
 		}
 		//----------------------------------
 		//  blueKnight
@@ -279,6 +272,7 @@ package com.lookbackon.ccj.model
 		public function set blueKnight(value:BitBoard):void
 		{
 			_blueKnight = value;
+			LOG.info("blueKnight:{0}",value.dump());
 		}
 		//----------------------------------
 		//  blueBishop
@@ -290,6 +284,7 @@ package com.lookbackon.ccj.model
 		public function set blueBishop(value:BitBoard):void
 		{
 			_blueBishop = value;
+			LOG.info("blueBishop:{0}",value.dump());
 		}
 		//----------------------------------
 		//  blueOffical
@@ -301,6 +296,7 @@ package com.lookbackon.ccj.model
 		public function set blueOffical(value:BitBoard):void
 		{
 			_blueOffical = value;
+			LOG.info("blueOffical:{0}",value.dump());
 		}
 		//----------------------------------
 		//  blueMarshal
@@ -312,6 +308,7 @@ package com.lookbackon.ccj.model
 		public function set blueMarshal(value:BitBoard):void
 		{
 			_blueMarshal = value;
+			LOG.info("blueMarshal:{0}",value.dump());
 		}
 		//----------------------------------
 		//  blueCannon
@@ -323,6 +320,7 @@ package com.lookbackon.ccj.model
 		public function set blueCannon(value:BitBoard):void
 		{
 			_blueCannon = value;
+			LOG.info("blueCannon:{0}",value.dump());
 		}
 		//----------------------------------
 		//  bluePawn
@@ -334,6 +332,7 @@ package com.lookbackon.ccj.model
 		public function set bluePawn(value:BitBoard):void
 		{
 			_bluePawn = value;
+			LOG.info("bluePawn:{0}",value.dump());
 		}
 		//--------------------------------------------------------------------------
 		//
