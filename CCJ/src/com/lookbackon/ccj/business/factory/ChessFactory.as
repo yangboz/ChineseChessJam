@@ -189,15 +189,15 @@ package com.lookbackon.ccj.business.factory
 		/**
 		 * 
 		 * @param conductVO has property target(type is chessPiece) and newPosition([0,1]).
-		 * @param resetFirst a flag indicator reset bitBoard first.
+		 * @param isInceptive a flag indicator bitBoard's value whether first inceptive.
 		 * @return precise chess value object(prototype is chessVOBase).
 		 * 
 		 */		
-		public static function generateChessPieceVO(conductVO:ConductVO,resetFirst:Boolean=false):ChessVO
+		public static function generateChessPieceVO(conductVO:ConductVO,isInceptive:Boolean=false):ChessVO
 		{
 			var oColIndex:int = conductVO.target.position[0];
 			var oRowIndex:int = conductVO.target.position[1];
-			if(resetFirst)
+			if(isInceptive)
 			{
 				var nColIndex:int = conductVO.newPosition[0];
 				var nRowIndex:int = conductVO.newPosition[1];
@@ -207,7 +207,7 @@ package com.lookbackon.ccj.business.factory
 			switch(conductVO.target.name)
 			{
 				case CcjConstants.BLUE_BISHOP.label:
-					if(resetFirst)
+					if(isInceptive)
 					{
 						ChessPositionModelLocator.getInstance().bluePieces.setBitt(oRowIndex,oColIndex,false);
 						ChessPositionModelLocator.getInstance().bluePieces.setBitt(nRowIndex,nColIndex,true);
@@ -217,9 +217,15 @@ package com.lookbackon.ccj.business.factory
 						ChessPositionModelLocator.getInstance().bluePieces.setBitt(oRowIndex,oColIndex,true);
 						chessVO = new BishopVO(9,10,oRowIndex,oColIndex,1);
 					}
+					if(chessVO!=null)
+					{
+						LOG.info("{0}.occupies:{1}",flash.utils.getQualifiedClassName(chessVO),chessVO.occupies.dump());
+						LOG.info("{0}.moves:{1}",flash.utils.getQualifiedClassName(chessVO),chessVO.moves.dump());
+						LOG.info("{0}.captures:{1}",flash.utils.getQualifiedClassName(chessVO),chessVO.captures.dump());
+					}
 					break;
 				case CcjConstants.RED_BISHOP.label:
-					if(resetFirst)
+					if(isInceptive)
 					{
 						ChessPositionModelLocator.getInstance().redPieces.setBitt(oRowIndex,oColIndex,false);
 						ChessPositionModelLocator.getInstance().redPieces.setBitt(nRowIndex,nColIndex,true);
@@ -231,7 +237,7 @@ package com.lookbackon.ccj.business.factory
 					}
 					break;
 				case CcjConstants.BLUE_CANNON.label:
-					if(resetFirst)
+					if(isInceptive)
 					{
 						ChessPositionModelLocator.getInstance().bluePieces.setBitt(oRowIndex,oColIndex,false);
 						ChessPositionModelLocator.getInstance().bluePieces.setBitt(nRowIndex,nColIndex,true);
@@ -243,7 +249,7 @@ package com.lookbackon.ccj.business.factory
 					}
 					break;
 				case CcjConstants.RED_CANNON.label:
-					if(resetFirst)
+					if(isInceptive)
 					{
 						ChessPositionModelLocator.getInstance().redPieces.setBitt(oRowIndex,oColIndex,false);
 						ChessPositionModelLocator.getInstance().redPieces.setBitt(nRowIndex,nColIndex,true);
@@ -255,7 +261,7 @@ package com.lookbackon.ccj.business.factory
 					}
 					break;
 				case CcjConstants.BLUE_ROOK.label:
-					if(resetFirst)
+					if(isInceptive)
 					{
 						ChessPositionModelLocator.getInstance().bluePieces.setBitt(oRowIndex,oColIndex,false);
 						ChessPositionModelLocator.getInstance().bluePieces.setBitt(nRowIndex,nColIndex,true);
@@ -267,7 +273,7 @@ package com.lookbackon.ccj.business.factory
 					}
 					break;
 				case CcjConstants.RED_ROOK.label:
-					if(resetFirst)
+					if(isInceptive)
 					{
 						ChessPositionModelLocator.getInstance().redPieces.setBitt(oRowIndex,oColIndex,false);
 						ChessPositionModelLocator.getInstance().redPieces.setBitt(nRowIndex,nColIndex,true);
@@ -279,7 +285,7 @@ package com.lookbackon.ccj.business.factory
 					}
 					break;
 				case CcjConstants.BLUE_KNIGHT.label:
-					if(resetFirst)
+					if(isInceptive)
 					{
 						ChessPositionModelLocator.getInstance().bluePieces.setBitt(oRowIndex,oColIndex,false);
 						ChessPositionModelLocator.getInstance().bluePieces.setBitt(nRowIndex,nColIndex,true);
@@ -291,7 +297,7 @@ package com.lookbackon.ccj.business.factory
 					}
 					break;
 				case CcjConstants.RED_KNIGHT.label:
-					if(resetFirst)
+					if(isInceptive)
 					{
 						ChessPositionModelLocator.getInstance().redPieces.setBitt(oRowIndex,oColIndex,false);
 						ChessPositionModelLocator.getInstance().redPieces.setBitt(nRowIndex,nColIndex,true);
@@ -303,7 +309,7 @@ package com.lookbackon.ccj.business.factory
 					}
 					break;
 				case CcjConstants.BLUE_MARSHAL.label:
-					if(resetFirst)
+					if(isInceptive)
 					{
 						ChessPositionModelLocator.getInstance().bluePieces.setBitt(oRowIndex,oColIndex,false);
 						ChessPositionModelLocator.getInstance().bluePieces.setBitt(nRowIndex,nColIndex,true);
@@ -315,7 +321,7 @@ package com.lookbackon.ccj.business.factory
 					}
 					break;
 				case CcjConstants.RED_MARSHAL.label:
-					if(resetFirst)
+					if(isInceptive)
 					{
 						ChessPositionModelLocator.getInstance().redPieces.setBitt(oRowIndex,oColIndex,false);
 						ChessPositionModelLocator.getInstance().redPieces.setBitt(nRowIndex,nColIndex,true);
@@ -327,7 +333,7 @@ package com.lookbackon.ccj.business.factory
 					}
 					break;
 				case CcjConstants.BLUE_OFFICAL.label:
-					if(resetFirst)
+					if(isInceptive)
 					{
 						ChessPositionModelLocator.getInstance().bluePieces.setBitt(oRowIndex,oColIndex,false);
 						ChessPositionModelLocator.getInstance().bluePieces.setBitt(nRowIndex,nColIndex,true);
@@ -339,7 +345,7 @@ package com.lookbackon.ccj.business.factory
 					}
 					break;
 				case CcjConstants.RED_OFFICAL.label:
-					if(resetFirst)
+					if(isInceptive)
 					{
 						ChessPositionModelLocator.getInstance().redPieces.setBitt(oRowIndex,oColIndex,false);
 						ChessPositionModelLocator.getInstance().redPieces.setBitt(nRowIndex,nColIndex,true);
@@ -351,7 +357,7 @@ package com.lookbackon.ccj.business.factory
 					}
 					break;
 				case CcjConstants.BLUE_PAWN.label:
-					if(resetFirst)
+					if(isInceptive)
 					{
 						ChessPositionModelLocator.getInstance().bluePieces.setBitt(oRowIndex,oColIndex,false);
 						ChessPositionModelLocator.getInstance().bluePieces.setBitt(nRowIndex,nColIndex,true);
@@ -363,7 +369,7 @@ package com.lookbackon.ccj.business.factory
 					}
 					break;
 				case CcjConstants.RED_PAWN.label:
-					if(resetFirst)
+					if(isInceptive)
 					{
 						ChessPositionModelLocator.getInstance().redPieces.setBitt(oRowIndex,oColIndex,false);
 						ChessPositionModelLocator.getInstance().redPieces.setBitt(nRowIndex,nColIndex,true);
@@ -376,12 +382,6 @@ package com.lookbackon.ccj.business.factory
 					break;
 				default:
 					break;
-			}
-			if(chessVO!=null)
-			{
-				LOG.info("{0}.occupies:{1}",flash.utils.getQualifiedClassName(chessVO),chessVO.occupies.dump());
-				LOG.info("{0}.moves:{1}",flash.utils.getQualifiedClassName(chessVO),chessVO.moves.dump());
-				LOG.info("{0}.captures:{1}",flash.utils.getQualifiedClassName(chessVO),chessVO.captures.dump());
 			}
 			return chessVO;
 		}

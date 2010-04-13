@@ -87,8 +87,8 @@ package com.lookbackon.ccj.model.vos.cvo
 				}
 			}
 			//about legal moves.
-			LOG.info("redPieces:{0}",ChessPositionModelLocator.getInstance().redPieces.dump());
-			LOG.info("bluePieces:{0}",ChessPositionModelLocator.getInstance().bluePieces.dump());
+//			LOG.info("redPieces:{0}",ChessPositionModelLocator.getInstance().redPieces.dump());
+//			LOG.info("bluePieces:{0}",ChessPositionModelLocator.getInstance().bluePieces.dump());
 			if(flag==ChessFactory.FLAG_RED)
 			{
 				this.moves = this.occupies.xor(this.occupies.and(ChessPositionModelLocator.getInstance().redPieces));

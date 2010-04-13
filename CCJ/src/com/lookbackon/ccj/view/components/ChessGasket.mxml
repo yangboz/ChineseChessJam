@@ -91,10 +91,11 @@
 				conductVO.newPosition = this.position;
 				conductVO.target = ChessPiece(event.dragInitiator);
 				//set new chessVO.
-				LOG.info("before move,oldChessVO:{0}",conductVO.dump());
+				LOG.info("before move,old chess position:{0}",conductVO.target.position.toString());
 				ChessPiece(event.dragInitiator).chessVO = ChessFactory.generateChessPieceVO(conductVO,true);
 				//set new position.
 				ChessPiece(event.dragInitiator).position = this.position;
+				LOG.info("after move,new chess position:{0}",ChessPiece(event.dragInitiator).position.toString());
 				//
 				LOG.info("after move,allPieces:{0}",ChessPositionModelLocator.getInstance().allPieces.dump());
 				// remove event listener

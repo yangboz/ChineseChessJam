@@ -78,13 +78,13 @@
 					chessPiece.chessVO = ChessFactory.generateChessPieceVO(conductVO);
 				}
 				//init data struct.@seechessPositionModelLocator dump info.
-				LOG.info("redPieces:{0}",chessPositionModelLocator.redPieces.dump());
-				LOG.info("bluePieces:{0}",chessPositionModelLocator.bluePieces.dump());
-				LOG.info("allPieces:{0}",chessPositionModelLocator.allPieces.dump());
+				LOG.debug("redPieces:{0}",chessPositionModelLocator.redPieces.dump());
+				LOG.debug("bluePieces:{0}",chessPositionModelLocator.bluePieces.dump());
+				LOG.debug("allPieces:{0}",chessPositionModelLocator.allPieces.dump());
 				//
-				LOG.info("allPieces rotate90:{0}",chessPositionModelLocator.allPieces.rotate90().dump());
-				LOG.info("allPieces rotate90.bitCount:{0}",chessPositionModelLocator.allPieces.bitCount);
-				LOG.info("allPieces rotate90.cellCount:{0}",chessPositionModelLocator.allPieces.cellCount);
+				LOG.debug("allPieces rotate90:{0}",chessPositionModelLocator.allPieces.rotate90().dump());
+				LOG.debug("allPieces rotate90.bitCount:{0}",chessPositionModelLocator.allPieces.bitCount);
+				LOG.debug("allPieces rotate90.cellCount:{0}",chessPositionModelLocator.allPieces.cellCount);
 				//GameManager start.
 //				GameManager.startGame();
 			}
