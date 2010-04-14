@@ -10,7 +10,7 @@
 		<![CDATA[
 			import com.lookbackon.ccj.business.factory.ChessFactory;
 			import com.lookbackon.ccj.managers.ChessPieceManager;
-			import com.lookbackon.ccj.model.ChessPositionModelLocator;
+			import com.lookbackon.ccj.model.ChessPiecesModel;
 			import com.lookbackon.ccj.model.vos.ConductVO;
 			import com.lookbackon.ccj.model.vos.cvo.ChessVO;
 			import com.lookbackon.ccj.utils.LogUtil;
@@ -97,7 +97,7 @@
 				ChessPiece(event.dragInitiator).position = this.position;
 				LOG.info("after move,new chess position:{0}",ChessPiece(event.dragInitiator).position.toString());
 				//
-				LOG.info("after move,allPieces:{0}",ChessPositionModelLocator.getInstance().allPieces.dump());
+				LOG.info("after move,allPieces:{0}",ChessPiecesModel.getInstance().allPieces.dump());
 				// remove event listener
 //				this.removeEventListener(DragEvent.DRAG_DROP,dragDropHandler);
 			}

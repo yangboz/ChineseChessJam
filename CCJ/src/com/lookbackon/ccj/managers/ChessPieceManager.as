@@ -1,7 +1,7 @@
 package com.lookbackon.ccj.managers
 {
 	import com.lookbackon.ccj.business.factory.ChessFactory;
-	import com.lookbackon.ccj.model.ChessPositionModelLocator;
+	import com.lookbackon.ccj.model.ChessPiecesModel;
 	import com.lookbackon.ccj.model.vos.ConductVO;
 	import com.lookbackon.ccj.model.vos.cvo.ChessVO;
 	import com.lookbackon.ccj.utils.LogUtil;

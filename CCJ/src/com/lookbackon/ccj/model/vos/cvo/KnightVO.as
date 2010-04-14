@@ -2,7 +2,7 @@ package com.lookbackon.ccj.model.vos.cvo
 {
 	import com.lookbackon.ccj.CcjConstants;
 	import com.lookbackon.ccj.business.factory.ChessFactory;
-	import com.lookbackon.ccj.model.ChessPositionModelLocator;
+	import com.lookbackon.ccj.model.ChessPiecesModel;
 
 	/**
 	 * 
@@ -31,28 +31,28 @@ package com.lookbackon.ccj.model.vos.cvo
 			// - * - * -
 			//serveral admental(马撇脚问题)
 			//left direction.
-			if(!ChessPositionModelLocator.getInstance().allPieces.getBitt(rowIndex,colIndex-1))
+			if(!ChessPiecesModel.getInstance().allPieces.getBitt(rowIndex,colIndex-1))
 			{
 				//several amendments.
 				this.occupies.setBitt(rowIndex+1,colIndex-2,true);
 				this.occupies.setBitt(rowIndex-1,colIndex-2,true);
 			}
 			//up direction.
-			if(!ChessPositionModelLocator.getInstance().allPieces.getBitt(rowIndex-1,colIndex))
+			if(!ChessPiecesModel.getInstance().allPieces.getBitt(rowIndex-1,colIndex))
 			{
 				//several amendments.
 				this.occupies.setBitt(rowIndex-2,colIndex-1,true);
 				this.occupies.setBitt(rowIndex-2,colIndex+1,true);
 			}
 			//right direction.
-			if(!ChessPositionModelLocator.getInstance().allPieces.getBitt(rowIndex,colIndex+1))
+			if(!ChessPiecesModel.getInstance().allPieces.getBitt(rowIndex,colIndex+1))
 			{
 				//several amendments.
 				this.occupies.setBitt(rowIndex+1,colIndex+2,true);
 				this.occupies.setBitt(rowIndex-1,colIndex+2,true);
 			}
 			//down direction.
-			if(!ChessPositionModelLocator.getInstance().allPieces.getBitt(rowIndex+1,colIndex))
+			if(!ChessPiecesModel.getInstance().allPieces.getBitt(rowIndex+1,colIndex))
 			{
 				//several amendments.
 				this.occupies.setBitt(rowIndex+2,colIndex+1,true);
@@ -61,20 +61,20 @@ package com.lookbackon.ccj.model.vos.cvo
 			//about legal moves.
 			if(flag==ChessFactory.FLAG_RED)
 			{
-				this.moves = this.occupies.xor(this.occupies.and(ChessPositionModelLocator.getInstance().redPieces));
+				this.moves = this.occupies.xor(this.occupies.and(ChessPiecesModel.getInstance().redPieces));
 			}
 			if(flag==ChessFactory.FLAG_BLUE)
 			{
-				this.moves = this.occupies.xor(this.occupies.and(ChessPositionModelLocator.getInstance().bluePieces));
+				this.moves = this.occupies.xor(this.occupies.and(ChessPiecesModel.getInstance().bluePieces));
 			}
 			//about attacked captures.
 			if(flag==ChessFactory.FLAG_RED)
 			{
-				this.captures = this.moves.and(ChessPositionModelLocator.getInstance().bluePieces);
+				this.captures = this.moves.and(ChessPiecesModel.getInstance().bluePieces);
 			}
 			if(flag==ChessFactory.FLAG_BLUE)
 			{
-				this.captures = this.moves.and(ChessPositionModelLocator.getInstance().redPieces);
+				this.captures = this.moves.and(ChessPiecesModel.getInstance().redPieces);
 			}
 		}
 	}

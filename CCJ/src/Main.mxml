@@ -12,7 +12,7 @@
 			import com.lookbackon.ccj.CcjConstants;
 			import com.lookbackon.ccj.business.factory.ChessFactory;
 			import com.lookbackon.ccj.managers.GameManager;
-			import com.lookbackon.ccj.model.ChessPositionModelLocator;
+			import com.lookbackon.ccj.model.ChessPiecesModel;
 			import com.lookbackon.ccj.model.vos.ConductVO;
 			import com.lookbackon.ccj.utils.LogUtil;
 			import com.lookbackon.ccj.view.components.ChessPiece;
@@ -21,13 +21,14 @@
 			import mx.events.FlexEvent;
 			import mx.logging.ILogger;
 			import mx.logging.LogEventLevel;
+			
 			//--------------------------------------------------------------------------
 			//
 			//  Variables
 			//
 			//--------------------------------------------------------------------------
 			[Bindable]
-			private var chessPositionModelLocator:ChessPositionModelLocator = ChessPositionModelLocator.getInstance();
+			private var chessPositionModelLocator:ChessPiecesModel = ChessPiecesModel.getInstance();
 			//
 			private var chessPieces:Array = [];
 			//

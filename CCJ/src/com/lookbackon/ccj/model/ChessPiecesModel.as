@@ -16,13 +16,12 @@ package com.lookbackon.ccj.model
 	import mx.logging.ILogger;
 	
 	/**
-	 * A singleton model hold Chess Position.
+	 * A singleton model hold all Chess Pieces's information.
 	 * 
 	 * @author Knight.zhou
 	 * 
 	 */	
-	[Bindable]
-	public class ChessPositionModelLocator
+	public class ChessPiecesModel
 	{
 		//--------------------------------------------------------------------------
 		//
@@ -30,11 +29,11 @@ package com.lookbackon.ccj.model
 		//
 		//--------------------------------------------------------------------------
 		//Singleton instance of ChessPositionModelLocator;
-		private static var instance:ChessPositionModelLocator;
+		private static var instance:ChessPiecesModel;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:ILogger = LogUtil.getLogger(ChessPositionModelLocator);
+		private static const LOG:ILogger = LogUtil.getLogger(ChessPiecesModel);
 		//generation.
 		//
 		private var _bluePieces:BitBoard	= new BitBoard(9,10);
@@ -62,7 +61,7 @@ package com.lookbackon.ccj.model
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function ChessPositionModelLocator(access:Private)
+		public function ChessPiecesModel(access:Private)
 		{
 			if (access != null) {
 				if (instance == null) {
@@ -341,14 +340,14 @@ package com.lookbackon.ccj.model
 		//--------------------------------------------------------------------------	
 		/**
 		 *
-		 * @return the singleton instance of ChessPositionModelLocator
+		 * @return the singleton instance of ChessPositionModel
 		 *
 		 */
-		public static function getInstance():ChessPositionModelLocator 
+		public static function getInstance():ChessPiecesModel 
 		{
 			if (instance == null) 
 			{
-				instance=new ChessPositionModelLocator(new Private());
+				instance=new ChessPiecesModel(new Private());
 			}
 			return instance;
 		}
