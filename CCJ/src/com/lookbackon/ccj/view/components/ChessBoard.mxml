@@ -9,30 +9,8 @@
 		 xmlns:transform="com.degrafa.transform.*">
 	<fx:Script>
 		<![CDATA[
-			//--------------------------------------------------------------------------
-			//
-			//  Imports
-			//
-			//--------------------------------------------------------------------------
+			import com.lookbackon.ccj.CcjConstants;
 			import mx.graphics.SolidColorStroke;
-			//--------------------------------------------------------------------------
-			//
-			//  Variables
-			//
-			//--------------------------------------------------------------------------
-			//----------------------------------
-			//  CONSTANTS
-			//----------------------------------
-			public static const SCALE_XY:Number			= 1.5;
-			public static const TOTAL_H_LINES:Number 	= 9;
-			public static const TOTAL_V_LINES:Number 	= 10;
-			public static const BOARD_WIDTH:Number 		= 400*SCALE_XY;
-			public static const BOARD_HEIGHT:Number 	= 450*SCALE_XY;
-			public static const LATTICE_WIDTH:Number	= 50*SCALE_XY;
-			//----------------------------------
-			//  private
-			//----------------------------------
-			
 		]]>
 	</fx:Script>
 	<fx:Declarations>
@@ -45,18 +23,18 @@
 		</degrafa:strokes>
 		<!-- Horizontal lines and Vertical lines. -->
 		<degrafa:GeometryGroup>
-			<repeaters:HorizontalLineRepeater count="{TOTAL_V_LINES}" stroke="{blackStroke}" x="0" x1="{BOARD_WIDTH}" y="0" moveOffsetY="{LATTICE_WIDTH}"/> 
-			<repeaters:VerticalLineRepeater count="{TOTAL_H_LINES}" stroke="{blackStroke}" y="0" y1="{BOARD_HEIGHT}" x="0" moveOffsetX="{LATTICE_WIDTH}"/> 
+			<repeaters:HorizontalLineRepeater count="{CcjConstants.BOARD_V_LINES}" stroke="{blackStroke}" x="0" x1="{CcjConstants.BOARD_WIDTH}" y="0" moveOffsetY="{CcjConstants.BOARD_LATTICE}"/> 
+			<repeaters:VerticalLineRepeater count="{CcjConstants.BOARD_H_LINES}" stroke="{blackStroke}" y="0" y1="{CcjConstants.BOARD_HEIGHT}" x="0" moveOffsetX="{CcjConstants.BOARD_LATTICE}"/> 
 		</degrafa:GeometryGroup>
 		<!-- Intersect lines . -->
 		<degrafa:GeometryGroup>
-			<geometry:Line x="{LATTICE_WIDTH*3}" y="0" x1="{LATTICE_WIDTH*5}" y1="{LATTICE_WIDTH*2}" stroke="{blackStroke}">
+			<geometry:Line x="{CcjConstants.BOARD_LATTICE*3}" y="0" x1="{CcjConstants.BOARD_LATTICE*5}" y1="{CcjConstants.BOARD_LATTICE*2}" stroke="{blackStroke}">
 			</geometry:Line>
-			<geometry:Line x="{LATTICE_WIDTH*5}" y="0" x1="{LATTICE_WIDTH*3}" y1="{LATTICE_WIDTH*2}" stroke="{blackStroke}">
+			<geometry:Line x="{CcjConstants.BOARD_LATTICE*5}" y="0" x1="{CcjConstants.BOARD_LATTICE*3}" y1="{CcjConstants.BOARD_LATTICE*2}" stroke="{blackStroke}">
 			</geometry:Line>
-			<geometry:Line x="{LATTICE_WIDTH*3}" y="{BOARD_HEIGHT}" x1="{LATTICE_WIDTH*5}" y1="{BOARD_HEIGHT-100*SCALE_XY}" stroke="{blackStroke}">
+			<geometry:Line x="{CcjConstants.BOARD_LATTICE*3}" y="{CcjConstants.BOARD_HEIGHT}" x1="{CcjConstants.BOARD_LATTICE*5}" y1="{CcjConstants.BOARD_HEIGHT-100*CcjConstants.BOARD_SCALE_XY}" stroke="{blackStroke}">
 			</geometry:Line>
-			<geometry:Line x="{LATTICE_WIDTH*5}" y="{BOARD_HEIGHT}" x1="{LATTICE_WIDTH*3}" y1="{BOARD_HEIGHT-100*SCALE_XY}" stroke="{blackStroke}">
+			<geometry:Line x="{CcjConstants.BOARD_LATTICE*5}" y="{CcjConstants.BOARD_HEIGHT}" x1="{CcjConstants.BOARD_LATTICE*3}" y1="{CcjConstants.BOARD_HEIGHT-100*CcjConstants.BOARD_SCALE_XY}" stroke="{blackStroke}">
 			</geometry:Line>
 		</degrafa:GeometryGroup>
 	</degrafa:Surface>

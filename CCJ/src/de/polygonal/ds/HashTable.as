@@ -47,10 +47,10 @@ package de.polygonal.ds
 			return hashString(i.toString());
 		}
 		
-		private var _table:Array;
+		protected var _table:Array;
 		private var _hash:Function;
 		
-		private var _size:int;
+		protected var _size:int;
 		private var _divisor:int;
 		private var _count:int;
 		

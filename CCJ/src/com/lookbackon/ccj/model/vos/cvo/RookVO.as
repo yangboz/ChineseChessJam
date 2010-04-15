@@ -1,6 +1,6 @@
 package com.lookbackon.ccj.model.vos.cvo
 {
-	import com.lookbackon.ccj.CcjConstants;
+	import com.lookbackon.ccj.ChessPiecesConstants;
 	import com.lookbackon.ccj.business.factory.ChessFactory;
 	import com.lookbackon.ccj.model.ChessPiecesModel;
 	import com.lookbackon.ds.BitBoard;

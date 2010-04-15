@@ -1,7 +1,6 @@
 package com.lookbackon.ds
 {
 	import de.polygonal.ds.HashTable;
-	import de.polygonal.math.PM_PRNG;
 	/**
 	 * These old hashes defined my requirements:
 	 * The keys are unaligned variable-length byte arrays.
@@ -36,19 +35,27 @@ package com.lookbackon.ds
 	 */	
 	public class ZobristHashTable extends HashTable
 	{
-		private static var pm_prng:PM_PRNG = new PM_PRNG();
-		
-		public function ZobristHashTable(size:int)
+		public function ZobristHashTable(size:int,zobristKey:int)
 		{
 			//TODO: implement function
-			super(size, ZobristHashTable.hashZobrist());
+			super(size, 
+				  function():int{
+									return HashTable.hashInt(zobristKey);
+							    }
+				 );
 		}
 		/**
-		 * A simple function for zobrist hashing.
+		 * @inheritDoc
 		 */
-		public static function hashZobrist():int
+		override public function dump():String
 		{
-			return pm_prng.nextInt();
+			var s:String = "ZobristHashTable:\n";
+			for (var i:int = 0; i < _size; i++)
+			{
+				if (_table[i])
+					s += "[" + i + "]" + "\n" + _table[i];
+			}
+			return s;
 		}
 	}
 }

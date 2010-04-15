@@ -62,10 +62,12 @@ package com.lookbackon.ccj
 		public var color:int;//chess colour
 		public var type:int;//chess type.
 		public var position:int;//chess position.
+		public var key:int;//zobrist hash table key.
 		public function ZobristConstants()
 		{
 			//TODO: implement function 
 			var pmPRNG:PM_PRNG = new PM_PRNG();
+			this.key = pmPRNG.nextInt();
 			this.type = pmPRNG.nextInt();
 			this.color = pmPRNG.nextInt();
 			this.position = pmPRNG.nextInt();

@@ -10,6 +10,7 @@
 	<fx:Script>
 		<![CDATA[
 			import com.lookbackon.ccj.CcjConstants;
+			import com.lookbackon.ccj.ChessPiecesConstants;
 			import com.lookbackon.ccj.business.factory.ChessFactory;
 			import com.lookbackon.ccj.managers.GameManager;
 			import com.lookbackon.ccj.model.ChessPiecesModel;
@@ -28,7 +29,7 @@
 			//
 			//--------------------------------------------------------------------------
 			[Bindable]
-			private var chessPositionModelLocator:ChessPiecesModel = ChessPiecesModel.getInstance();
+			private var chessPositionModel:ChessPiecesModel = ChessPiecesModel.getInstance();
 			//
 			private var chessPieces:Array = [];
 			//
@@ -48,17 +49,17 @@
 			{
 				// TODO Auto-generated method stub
 				//create chess gaskets.
-				for(var h:int=0;h<ChessBoard.TOTAL_H_LINES;h++)
+				for(var h:int=0;h<CcjConstants.BOARD_H_LINES;h++)
 				{
-					for(var v:int=0;v<ChessBoard.TOTAL_V_LINES;v++)
+					for(var v:int=0;v<CcjConstants.BOARD_V_LINES;v++)
 					{
 						this.addElement( ChessFactory.createChessGasket([h,v]) );
 					}
 				}
 				//create chess piece
-				for(var hh:int=0;hh<ChessBoard.TOTAL_H_LINES;hh++)
+				for(var hh:int=0;hh<CcjConstants.BOARD_H_LINES;hh++)
 				{
-					for(var vv:int=0;vv<ChessBoard.TOTAL_V_LINES;vv++)
+					for(var vv:int=0;vv<CcjConstants.BOARD_V_LINES;vv++)
 					{
 						var iChessPiece:IChessPiece = ChessFactory.createChessPiece([hh,vv]);
 						if(iChessPiece!=null)
@@ -79,13 +80,13 @@
 					chessPiece.chessVO = ChessFactory.generateChessPieceVO(conductVO);
 				}
 				//init data struct.@seechessPositionModelLocator dump info.
-				LOG.debug("redPieces:{0}",chessPositionModelLocator.redPieces.dump());
-				LOG.debug("bluePieces:{0}",chessPositionModelLocator.bluePieces.dump());
-				LOG.debug("allPieces:{0}",chessPositionModelLocator.allPieces.dump());
+				LOG.debug("redPieces:{0}",chessPositionModel.redPieces.dump());
+				LOG.debug("bluePieces:{0}",chessPositionModel.bluePieces.dump());
+				LOG.debug("allPieces:{0}",chessPositionModel.allPieces.dump());
 				//
-				LOG.debug("allPieces rotate90:{0}",chessPositionModelLocator.allPieces.rotate90().dump());
-				LOG.debug("allPieces rotate90.bitCount:{0}",chessPositionModelLocator.allPieces.bitCount);
-				LOG.debug("allPieces rotate90.cellCount:{0}",chessPositionModelLocator.allPieces.cellCount);
+				LOG.debug("allPieces rotate90:{0}",chessPositionModel.allPieces.rotate90().dump());
+				LOG.debug("allPieces rotate90.bitCount:{0}",chessPositionModel.allPieces.bitCount);
+				LOG.debug("allPieces rotate90.cellCount:{0}",chessPositionModel.allPieces.cellCount);
 				//GameManager start.
 //				GameManager.startGame();
 			}
