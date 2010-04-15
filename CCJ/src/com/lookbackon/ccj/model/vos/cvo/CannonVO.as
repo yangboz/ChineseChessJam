@@ -29,6 +29,7 @@ package com.lookbackon.ccj.model.vos.cvo
 			// -
 			// *
 			//about occupies.
+			//serveral admental(炮隔子吃子问题)
 			for(var r:int=0;r<this.row;r++)
 			{
 				if(r!=rowIndex)

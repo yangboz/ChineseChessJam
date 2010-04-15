@@ -25,6 +25,7 @@ package com.lookbackon.ccj.model.vos.cvo
 		override public function initialization(rowIndex:int, colIndex:int,flag:int=0) : void
 		{
 			//TODO: implement function
+			//serveral admental(将对面问题)
 			//about occupies.
 			this.occupies.setBitt(rowIndex,colIndex+1,true);
 			this.occupies.setBitt(rowIndex,colIndex-1,true);

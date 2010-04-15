@@ -33,7 +33,7 @@ package com.lookbackon.ccj.model.vos.cvo
 			// - - -
 			// - - *
 			//about occupies.
-			//serveral admental(象田心问题)
+			//serveral admental(象田心问题，象过河问题)
 			if(!ChessPiecesModel.getInstance().allPieces.getBitt(rowIndex+1,colIndex+1))
 			{
 				//serveral admental(象过河问题)

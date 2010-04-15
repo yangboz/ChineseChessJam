@@ -206,12 +206,6 @@ package com.lookbackon.ccj.business.factory
 						ChessPiecesModel.getInstance().bluePieces.setBitt(oRowIndex,oColIndex,true);
 						chessVO = new BishopVO(9,10,oRowIndex,oColIndex,1);
 					}
-					if(chessVO!=null)
-					{
-						LOG.info("{0}.occupies:{1}",flash.utils.getQualifiedClassName(chessVO),chessVO.occupies.dump());
-						LOG.info("{0}.moves:{1}",flash.utils.getQualifiedClassName(chessVO),chessVO.moves.dump());
-						LOG.info("{0}.captures:{1}",flash.utils.getQualifiedClassName(chessVO),chessVO.captures.dump());
-					}
 					break;
 				case ChessPiecesConstants.RED_BISHOP.label:
 					if(isInceptive)
@@ -259,6 +253,12 @@ package com.lookbackon.ccj.business.factory
 					{
 						ChessPiecesModel.getInstance().bluePieces.setBitt(oRowIndex,oColIndex,true);
 						chessVO = new RookVO(9,10,oRowIndex,oColIndex,1);
+					}
+					if(chessVO!=null)
+					{
+						LOG.info("{0}.occupies:{1}",flash.utils.getQualifiedClassName(chessVO),chessVO.occupies.dump());
+						LOG.info("{0}.moves:{1}",flash.utils.getQualifiedClassName(chessVO),chessVO.moves.dump());
+						LOG.info("{0}.captures:{1}",flash.utils.getQualifiedClassName(chessVO),chessVO.captures.dump());
 					}
 					break;
 				case ChessPiecesConstants.RED_ROOK.label:

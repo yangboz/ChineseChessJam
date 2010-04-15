@@ -101,7 +101,7 @@ package com.lookbackon.ds
 			{
 				for(var w:int=0;w<_column;w++)
 				{
-					bb.setBitt(h,w,Boolean(~this.getBitt(h,w)));
+					bb.setBitt(h,w,!Boolean(this.getBitt(h,w)));
 				}
 			}
 			return bb;

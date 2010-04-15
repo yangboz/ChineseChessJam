@@ -29,20 +29,15 @@ package com.lookbackon.ccj.model.vos.cvo
 			//    *
 			// ***s*****
 			//    *
+			//Notice:serveral admental(车越子移动/吃子问题)
 			//about occupies.
 			for(var r:int=0;r<this.row;r++)
 			{
-				if(r!=rowIndex)
-				{
-					this.occupies.setBitt(r,colIndex,true);
-				}
+				this.occupies.setBitt(r,colIndex,true);
 			}
-			for(var c:int=0;c<this.row;c++)
+			for(var c:int=0;c<this.column;c++)
 			{
-				if(c!=colIndex)
-				{
-					this.occupies.setBitt(rowIndex,c,true);
-				}
+				this.occupies.setBitt(rowIndex,c,true);
 			}
 			//about legal moves.
 //			LOG.info("redPieces:{0}",ChessPositionModelLocator.getInstance().redPieces.dump());
@@ -64,6 +59,7 @@ package com.lookbackon.ccj.model.vos.cvo
 			{
 				this.captures = this.moves.and(ChessPiecesModel.getInstance().redPieces);
 			}
+			//
 		}
 	}
 }

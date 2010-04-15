@@ -27,6 +27,7 @@ package com.lookbackon.ccj.model.vos.cvo
 			//* -
 			//- *
 			//TODO: implement function
+			//Notice:serveral admental(防守将问题)
 			//about occupies.
 			this.occupies.setBitt(rowIndex+1,colIndex+1,true);
 			this.occupies.setBitt(rowIndex+1,colIndex-1,true);

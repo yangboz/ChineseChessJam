@@ -28,7 +28,7 @@ package com.lookbackon.ccj.model.vos.cvo
 			//* -
 			//TODO: implement function
 			//about occupies.
-			//serveral admental(兵横向移动问题)
+			//Notice:serveral admental(兵横向移动问题,兵后退问题)
 			//right or left direction.
 			if(flag==CcjConstants.FLAG_BLUE)
 			{
