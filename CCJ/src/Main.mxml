@@ -53,7 +53,7 @@
 				{
 					for(var v:int=0;v<CcjConstants.BOARD_V_LINES;v++)
 					{
-						this.addElement( ChessFactory.createChessGasket([h,v]) );
+						this.addElement( ChessFactory.createChessGasket(new Point(h,v)) );
 					}
 				}
 				//create chess piece
@@ -61,7 +61,7 @@
 				{
 					for(var vv:int=0;vv<CcjConstants.BOARD_V_LINES;vv++)
 					{
-						var iChessPiece:IChessPiece = ChessFactory.createChessPiece([hh,vv]);
+						var iChessPiece:IChessPiece = ChessFactory.createChessPiece(new Point(hh,vv));
 						if(iChessPiece!=null)
 						{
 							this.addElement( iChessPiece );

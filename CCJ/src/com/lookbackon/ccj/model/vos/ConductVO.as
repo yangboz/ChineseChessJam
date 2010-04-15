@@ -3,6 +3,7 @@ package com.lookbackon.ccj.model.vos
 	import com.lookbackon.ccj.view.components.ChessPiece;
 	
 	import flash.events.EventDispatcher;
+	import flash.geom.Point;
 
 	/**
 	 * 
@@ -12,7 +13,7 @@ package com.lookbackon.ccj.model.vos
 	public class ConductVO extends EventDispatcher
 	{
 		[Bindable]public var target:ChessPiece;  
-		[Bindable]public var newPosition:Array;
+		[Bindable]public var newPosition:Point;
 		/**
 		 * Prints out all elements (for debug/demo purposes).
 		 * 
@@ -23,7 +24,7 @@ package com.lookbackon.ccj.model.vos
 			var s:String = "ConductVO";
 			s += "\n{";
 			s += "\n" + "\t";
-			s += "target:"+target+","+"newPosition:"+newPosition;
+			s += "target:"+target+","+"newPosition:"+newPosition.toString();
 			s += "\n}";
 			return s;
 		}

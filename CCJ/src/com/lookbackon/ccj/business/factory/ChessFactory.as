@@ -18,6 +18,7 @@ package com.lookbackon.ccj.business.factory
 	import com.lookbackon.ccj.view.components.IChessGasket;
 	import com.lookbackon.ccj.view.components.IChessPiece;
 	
+	import flash.geom.Point;
 	import flash.utils.getQualifiedClassName;
 	
 	import mx.logging.ILogger;
@@ -30,20 +31,16 @@ package com.lookbackon.ccj.business.factory
 	public class ChessFactory
 	{
 		//
-		private static const LOG:ILogger  		=  LogUtil.getLogger(ChessFactory);
+		private static const LOG:ILogger  =  LogUtil.getLogger(ChessFactory);
 		
-		public static const FLAG_RED:int  		= 0;
-		public static const FLAG_BLUE:int 		= 1;
-		public static const COLOR_RED:String 	= "red";
-		public static const COLOR_BLUE:String 	= "blue";
 		/**
 		 * 
-		 * @param position chessPiece's position in array2.
+		 * @param position chessPiece's position type is Point(x, y).
 		 * @param flag chessPices's side flag.(red/blue).
 		 * @return ChessPiece component with implement IChessPiece
 		 * 
 		 */		
-		public static function createChessPiece(position:Array,flag:int=0):IChessPiece
+		public static function createChessPiece(position:Point,flag:int=0):IChessPiece
 		{
 			//TODO: implement function
 			var myChessPiece:ChessPiece = new ChessPiece();
@@ -53,78 +50,78 @@ package com.lookbackon.ccj.business.factory
 			switch(position.toString())
 			{
 				//about blue
-				case "0,0":
-				case "8,0":
+				case "(x=0, y=0)":
+				case "(x=8, y=0)":
 					chessPieceType = ChessPiecesConstants.BLUE_ROOK.label;
 					chessPieceValue = ChessPiecesConstants.BLUE_ROOK.value;
 					break;
-				case "1,0":
-				case "7,0":
+				case "(x=1, y=0)":
+				case "(x=7, y=0)":
 					chessPieceType = ChessPiecesConstants.BLUE_KNIGHT.label;
 					chessPieceValue = ChessPiecesConstants.BLUE_KNIGHT.value;
 					break;
-				case "2,0":
-				case "6,0":
+				case "(x=2, y=0)":
+				case "(x=6, y=0)":
 					chessPieceType = ChessPiecesConstants.BLUE_BISHOP.label;
 					chessPieceValue = ChessPiecesConstants.BLUE_BISHOP.value;
 					break;
-				case "3,0":
-				case "5,0":
+				case "(x=3, y=0)":
+				case "(x=5, y=0)":
 					chessPieceType = ChessPiecesConstants.BLUE_OFFICAL.label;
 					chessPieceValue = ChessPiecesConstants.BLUE_OFFICAL.value;
 					break;
-				case "4,0":
+				case "(x=4, y=0)":
 					chessPieceType = ChessPiecesConstants.BLUE_MARSHAL.label;
 					chessPieceValue = ChessPiecesConstants.BLUE_MARSHAL.value;
 					break;
-				case "1,2":
-				case "7,2":
+				case "(x=1, y=2)":
+				case "(x=7, y=2)":
 					chessPieceType = ChessPiecesConstants.BLUE_CANNON.label;
 					chessPieceValue = ChessPiecesConstants.BLUE_CANNON.value;
 					break;
-				case "0,3":
-				case "2,3":
-				case "4,3":
-				case "6,3":
-				case "8,3":
+				case "(x=0, y=3)":
+				case "(x=2, y=3)":
+				case "(x=4, y=3)":
+				case "(x=6, y=3)":
+				case "(x=8, y=3)":
 					chessPieceType = ChessPiecesConstants.BLUE_PAWN.label;
 					chessPieceValue = ChessPiecesConstants.BLUE_PAWN.value;
 					break;
 				//about red
-				case "0,9":
-				case "8,9":
+				case "(x=0, y=9)":
+				case "(x=8, y=9)":
 					chessPieceType = ChessPiecesConstants.RED_ROOK.label;
 					chessPieceValue = ChessPiecesConstants.RED_ROOK.value;
 					break;
-				case "1,9":
-				case "7,9":
+				case "(x=1, y=9)":
+				case "(x=7, y=9)":
 					chessPieceType = ChessPiecesConstants.RED_KNIGHT.label;
 					chessPieceValue = ChessPiecesConstants.RED_KNIGHT.value;
 					break;
-				case "2,9":
-				case "6,9":
+				case "(x=2, y=9)":
+				case "(x=6, y=9)":
 					chessPieceType = ChessPiecesConstants.RED_BISHOP.label;
 					chessPieceValue = ChessPiecesConstants.RED_BISHOP.value;
 					break;
-				case "3,9":
-				case "5,9":
+				case "(x=3, y=9)":
+				case "(x=5, y=9)":
 					chessPieceType = ChessPiecesConstants.RED_OFFICAL.label;
 					chessPieceValue = ChessPiecesConstants.RED_OFFICAL.value;
 					break;
-				case "4,9":
+				case "(x=4, y=9)":
 					chessPieceType = ChessPiecesConstants.RED_MARSHAL.label;
 					chessPieceValue = ChessPiecesConstants.RED_MARSHAL.value;
 					break;
-				case "1,7":
-				case "7,7":
+				case "(x=1, y=7)":
+				case "(x=7, y=7)":
 					chessPieceType = ChessPiecesConstants.RED_CANNON.label;
 					chessPieceValue = ChessPiecesConstants.RED_CANNON.value;
 					break;
-				case "0,6":
-				case "2,6":
-				case "4,6":
-				case "6,6":
-				case "8,6":
+				case "(x=0, y=6)":
+				case "(x=2, y=6)":
+				case "(x=4, y=6)":
+				case "(x=6, y=6)":
+				case "(x=8, y=6)":
 					chessPieceType = ChessPiecesConstants.RED_PAWN.label;
 					chessPieceValue = ChessPiecesConstants.RED_PAWN.value;
 					break;
@@ -134,25 +131,23 @@ package com.lookbackon.ccj.business.factory
 			//view
 			myChessPiece.label =myChessPiece.name = chessPieceType;
 			myChessPiece.x = 
-				position[0]*CcjConstants.BOARD_LATTICE - myChessPiece.width/2 +50;
+				position.x*CcjConstants.BOARD_LATTICE - myChessPiece.width/2 +50;
 			myChessPiece.y = 
-				position[1]*CcjConstants.BOARD_LATTICE + myChessPiece.height/2 -25;
-			//set color to identify.
-			var textColor:String = COLOR_BLUE;//default is blue.
+				position.y*CcjConstants.BOARD_LATTICE + myChessPiece.height/2 -25;
+			//set flag to identify.
+			myChessPiece.flag = CcjConstants.FLAG_BLUE;
 			if(chessPieceValue)
 			{
 				if(chessPieceValue<16)
 				{
-					textColor = COLOR_RED;//red
-					ChessPiecesModel.getInstance().redPieces.setBitt(position[1],position[0],true);
+					myChessPiece.flag = CcjConstants.FLAG_RED;//red
+					ChessPiecesModel.getInstance().redPieces.setBitt(position.y,position.x,true);
 				}else//blue
 				{
 					//				myChessPiece.enabled = false;
-					ChessPiecesModel.getInstance().bluePieces.setBitt(position[1],position[0],true);
+					ChessPiecesModel.getInstance().bluePieces.setBitt(position.y,position.x,true);
 				}
 			}
-			myChessPiece.setStyle("color",textColor);
-			myChessPiece.setStyle("fillColor",textColor);
 			//data
 			myChessPiece.position = position;
 			//avoid duplicate usless components.
@@ -168,15 +163,15 @@ package com.lookbackon.ccj.business.factory
 		 * @return ChessGasket component which implement IChessGasket
 		 * 
 		 */		
-		public static function createChessGasket(position:Array):IChessGasket
+		public static function createChessGasket(position:Point):IChessGasket
 		{
 			//TODO: implement function
 			var myChessGasket:ChessGasket = new ChessGasket();
 			myChessGasket.position = position;
 			myChessGasket.x = 
-				position[0]*CcjConstants.BOARD_LATTICE - myChessGasket.width/2 +50;
+				position.x*CcjConstants.BOARD_LATTICE - myChessGasket.width/2 +50;
 			myChessGasket.y = 
-				position[1]*CcjConstants.BOARD_LATTICE + myChessGasket.height/2 -25;
+				position.y*CcjConstants.BOARD_LATTICE + myChessGasket.height/2 -25;
 			myChessGasket.toolTip = position.toString();
 			return myChessGasket;
 		}
@@ -189,12 +184,12 @@ package com.lookbackon.ccj.business.factory
 		 */		
 		public static function generateChessPieceVO(conductVO:ConductVO,isInceptive:Boolean=false):ChessVO
 		{
-			var oColIndex:int = conductVO.target.position[0];
-			var oRowIndex:int = conductVO.target.position[1];
+			var oColIndex:int = conductVO.target.position.x;
+			var oRowIndex:int = conductVO.target.position.y;
 			if(isInceptive)
 			{
-				var nColIndex:int = conductVO.newPosition[0];
-				var nRowIndex:int = conductVO.newPosition[1];
+				var nColIndex:int = conductVO.newPosition.x;
+				var nRowIndex:int = conductVO.newPosition.y;
 			}
 			var chessVO:ChessVO;
 //			LOG.info(conductVO.dump());

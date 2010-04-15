@@ -1,8 +1,9 @@
 package com.lookbackon.ccj.model.vos.cvo
 {
+	import com.lookbackon.ccj.CcjConstants;
 	import com.lookbackon.ccj.ChessPiecesConstants;
-	import com.lookbackon.ccj.business.factory.ChessFactory;
 	import com.lookbackon.ccj.model.ChessPiecesModel;
+	import com.lookbackon.ccj.model.ZobristKeysModel;
 	import com.lookbackon.ds.BitBoard;
 
 	/**
@@ -46,20 +47,20 @@ package com.lookbackon.ccj.model.vos.cvo
 			//about legal moves.
 //			LOG.info("redPieces:{0}",ChessPositionModelLocator.getInstance().redPieces.dump());
 //			LOG.info("bluePieces:{0}",ChessPositionModelLocator.getInstance().bluePieces.dump());
-			if(flag==ChessFactory.FLAG_RED)
+			if(flag==CcjConstants.FLAG_RED)
 			{
 				this.moves = this.occupies.xor(this.occupies.and(ChessPiecesModel.getInstance().redPieces));
 			}
-			if(flag==ChessFactory.FLAG_BLUE)
+			if(flag==CcjConstants.FLAG_BLUE)
 			{
 				this.moves = this.occupies.xor(this.occupies.and(ChessPiecesModel.getInstance().bluePieces));
 			}
 			//about attacked captures.
-			if(flag==ChessFactory.FLAG_RED)
+			if(flag==CcjConstants.FLAG_RED)
 			{
 				this.captures = this.moves.and(ChessPiecesModel.getInstance().bluePieces);
 			}
-			if(flag==ChessFactory.FLAG_BLUE)
+			if(flag==CcjConstants.FLAG_BLUE)
 			{
 				this.captures = this.moves.and(ChessPiecesModel.getInstance().redPieces);
 			}

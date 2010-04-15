@@ -40,9 +40,9 @@ package com.lookbackon.ccj.model
 		private static const LOG:ILogger = LogUtil.getLogger(HistoryTableModel);
 		//generation.
 		//red
-		private var _redRook:ZobristHashTable	= new ZobristHashTable(MAX_SIZE,ZobristConstants.RED_ROOK.key);
-		private var _redKnight:ZobristHashTable	= new ZobristHashTable(MAX_SIZE,ZobristConstants.RED_KNIGHT.key);
-		private var _redBishop:ZobristHashTable	= new ZobristHashTable(MAX_SIZE,ZobristConstants.RED_BISHOP.key);
+		private var _redRook:ZobristHashTable		= new ZobristHashTable(MAX_SIZE,ZobristConstants.RED_ROOK.key);
+		private var _redKnight:ZobristHashTable		= new ZobristHashTable(MAX_SIZE,ZobristConstants.RED_KNIGHT.key);
+		private var _redBishop:ZobristHashTable		= new ZobristHashTable(MAX_SIZE,ZobristConstants.RED_BISHOP.key);
 		private var _redOffical:ZobristHashTable	= new ZobristHashTable(MAX_SIZE,ZobristConstants.RED_OFFICAL.key);
 		private var _redMarshal:ZobristHashTable	= new ZobristHashTable(MAX_SIZE,ZobristConstants.RED_MARSHAL.key);
 		private var _redCannon:ZobristHashTable		= new ZobristHashTable(MAX_SIZE,ZobristConstants.RED_CANNON.key);

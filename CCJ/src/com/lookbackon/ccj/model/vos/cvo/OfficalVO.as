@@ -1,7 +1,7 @@
 package com.lookbackon.ccj.model.vos.cvo
 {
+	import com.lookbackon.ccj.CcjConstants;
 	import com.lookbackon.ccj.ChessPiecesConstants;
-	import com.lookbackon.ccj.business.factory.ChessFactory;
 	import com.lookbackon.ccj.model.ChessPiecesModel;
 
 	/**
@@ -33,20 +33,20 @@ package com.lookbackon.ccj.model.vos.cvo
 			this.occupies.setBitt(rowIndex-1,colIndex+1,true);
 			this.occupies.setBitt(rowIndex-1,colIndex-1,true);
 			//about legal moves.
-			if(flag==ChessFactory.FLAG_RED)
+			if(flag==CcjConstants.FLAG_RED)
 			{
 				this.moves = this.occupies.xor(this.occupies.and(ChessPiecesModel.getInstance().redPieces));
 			}
-			if(flag==ChessFactory.FLAG_BLUE)
+			if(flag==CcjConstants.FLAG_BLUE)
 			{
 				this.moves = this.occupies.xor(this.occupies.and(ChessPiecesModel.getInstance().bluePieces));
 			}
 			//about attacked captures.
-			if(flag==ChessFactory.FLAG_RED)
+			if(flag==CcjConstants.FLAG_RED)
 			{
 				this.captures = this.moves.and(ChessPiecesModel.getInstance().bluePieces);
 			}
-			if(flag==ChessFactory.FLAG_BLUE)
+			if(flag==CcjConstants.FLAG_BLUE)
 			{
 				this.captures = this.moves.and(ChessPiecesModel.getInstance().redPieces);
 			}

@@ -38,12 +38,12 @@
 			//----------------------------------
 			//  position
 			//----------------------------------
-			private var _position:Array;
-			public function get position():Array
+			private var _position:Point;
+			public function get position():Point
 			{
 				return _position;
 			}
-			public function set position(value:Array):void
+			public function set position(value:Point):void
 			{
 				_position = value;
 			}
