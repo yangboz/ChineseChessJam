@@ -59,7 +59,45 @@ package com.lookbackon.ccj.model.vos.cvo
 			{
 				this.captures = this.moves.and(ChessPiecesModel.getInstance().redPieces);
 			}
+			//blocker
+			var blocker:BitBoard = this.occupies.xor(this.moves);
+			trace("blocker:",blocker.dump());
+			trace("blocker.reverse():",blocker.reverse().dump());
+			trace("blocker.isEmtpty:",blocker.isEmtpty);
+			//rayAttack
+			var rayAttack:BitBoard = new BitBoard(this.column,this.row);
+			//north
+			var nAttack:BitBoard = new BitBoard(this.column,this.row);
+			for(var n:int=rowIndex-1;n>=0;n--)
+			{
+				nAttack.setBitt(n,colIndex,true);
+			}
+			trace("nAttack:",nAttack.dump());
+			//east
+			var eAttack:BitBoard = new BitBoard(this.column,this.row);
+			for(var e:int=colIndex+1;e<=this.column;e++)
+			{
+				eAttack.setBitt(rowIndex,e,true);
+			}
+			trace("eAttack:",eAttack.dump());
+			//south
+			var sAttack:BitBoard = new BitBoard(this.column,this.row);
+			for(var s:int=rowIndex+1;s<this.row;s++)
+			{
+				sAttack.setBitt(s,colIndex,true);
+			}
+			trace("sAttack:",sAttack.dump());
+			//west
+			var wAttack:BitBoard = new BitBoard(this.column,this.row);
+			for(var w:int=colIndex-1;w>=0;w--)
+			{
+				wAttack.setBitt(rowIndex,w,true);
+			}
+			trace("wAttack:",wAttack.dump());
 			//
+			rayAttack = nAttack.or(eAttack).or(sAttack).or(wAttack);
+			trace("rayAttack:",rayAttack.dump());
+			trace("rayAttack|blocker:",rayAttack.xor(blocker).dump());
 		}
 	}
 }

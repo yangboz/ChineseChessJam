@@ -167,6 +167,24 @@ package com.lookbackon.ds
 			return bb;
 		}
 		//----------------------------------
+		//  reverse(IBitBoard)
+		//----------------------------------
+		/**
+		 * @return reversed rows with cols such as mirror rotatation 180 degree.
+		 */		
+		public function reverse():BitBoard
+		{
+			var bb:BitBoard = new BitBoard(this.column,this.row);
+			for(var w:int=0;w<_column;w++)
+			{
+				for(var h:int=0;h<_row;h++)
+				{
+					bb.setBitt(h,w,Boolean(this.getBitt(_row-h-1,w)));
+				}
+			}
+			return bb;
+		}
+		//----------------------------------
 		//  getBitt
 		//----------------------------------
 		/**

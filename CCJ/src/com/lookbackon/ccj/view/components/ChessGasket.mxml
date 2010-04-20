@@ -17,6 +17,7 @@
 			
 			import mx.core.IUIComponent;
 			import mx.core.IVisualElement;
+			import mx.events.ChildExistenceChangedEvent;
 			import mx.events.DragEvent;
 			import mx.events.FlexEvent;
 			import mx.logging.ILogger;
@@ -58,6 +59,8 @@
 				// TODO Auto-generated method stub
 				this.addEventListener(DragEvent.DRAG_ENTER,dragEnterHandler);
 				this.addEventListener(DragEvent.DRAG_DROP,dragDropHandler);
+				//
+				this.addEventListener(ChildExistenceChangedEvent.CHILD_ADD,childAddHandler);
 			}
 			//dragEnterHandler
 			private function dragEnterHandler(event:DragEvent):void
@@ -77,7 +80,7 @@
 			private function dragDropHandler(event:DragEvent):void
 			{
 				//hold gasket skin,then remove previous chess piece.
-				if(this.numElements>=2)
+				while(this.numElements)
 				{
 					this.removeElementAt(1);
 				}
@@ -100,6 +103,11 @@
 				LOG.info("after move,allPieces:{0}",ChessPiecesModel.getInstance().allPieces.dump());
 				// remove event listener
 //				this.removeEventListener(DragEvent.DRAG_DROP,dragDropHandler);
+			}
+			//childAddHandler(notify ChessPieces)
+			private function childAddHandler(event:ChildExistenceChangedEvent):void
+			{
+				
 			}
 
 		]]>

@@ -14,5 +14,7 @@ package com.lookbackon.ds
 		//rotate
 		function rotate90():BitBoard;
 		function rotate45():BitBoard;
+		//reverse
+		function reverse():BitBoard;
 	}
 }

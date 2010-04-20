@@ -3,7 +3,8 @@
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
 			   xmlns:mx="library://ns.adobe.com/flex/halo" 
 			   xmlns:components="com.lookbackon.ccj.view.components.*"
-			   creationComplete="application1_creationCompleteHandler(event)" >
+			   creationComplete="application1_creationCompleteHandler(event)" 
+			   applicationComplete="application1_applicationCompleteHandler(event)" >
 	<s:layout>
 		<s:BasicLayout/>
 	</s:layout>
@@ -12,13 +13,16 @@
 			import com.lookbackon.ccj.CcjConstants;
 			import com.lookbackon.ccj.ChessPiecesConstants;
 			import com.lookbackon.ccj.business.factory.ChessFactory;
+			import com.lookbackon.ccj.managers.ChessPieceManager;
 			import com.lookbackon.ccj.managers.GameManager;
 			import com.lookbackon.ccj.model.ChessPiecesModel;
 			import com.lookbackon.ccj.model.vos.ConductVO;
 			import com.lookbackon.ccj.utils.LogUtil;
+			import com.lookbackon.ccj.view.components.ChessGasket;
 			import com.lookbackon.ccj.view.components.ChessPiece;
 			import com.lookbackon.ccj.view.components.IChessPiece;
 			
+			import mx.core.IVisualElement;
 			import mx.events.FlexEvent;
 			import mx.logging.ILogger;
 			import mx.logging.LogEventLevel;
@@ -30,8 +34,6 @@
 			//--------------------------------------------------------------------------
 			[Bindable]
 			private var chessPositionModel:ChessPiecesModel = ChessPiecesModel.getInstance();
-			//
-			private var chessPieces:Array = [];
 			//
 			[Bindable]
 			private var logFilters:Array = ["com.lookbackon.ccj.business.factory.ChessFactory"];
@@ -53,7 +55,10 @@
 				{
 					for(var v:int=0;v<CcjConstants.BOARD_V_LINES;v++)
 					{
-						this.addElement( ChessFactory.createChessGasket(new Point(h,v)) );
+						var cGasket:IVisualElement = 
+							this.addElement( ChessFactory.createChessGasket(new Point(h,v)) );
+						//
+						ChessPieceManager.gaskets.addItem(cGasket);
 					}
 				}
 				//create chess piece
@@ -65,14 +70,15 @@
 						if(iChessPiece!=null)
 						{
 							this.addElement( iChessPiece );
-							this.chessPieces.push(iChessPiece);
+							//
+							ChessPieceManager.pieces.addItem(iChessPiece);
 						}
 					}
 				}
 				//create chess pieces' chessVO
-				for(var cp:int=0;cp<this.chessPieces.length;cp++)
+				for(var cp:int=0;cp<ChessPieceManager.pieces.length;cp++)
 				{
-					var chessPiece:ChessPiece = this.chessPieces[cp] as ChessPiece;
+					var chessPiece:ChessPiece = ChessPieceManager.pieces.getItemAt(cp) as ChessPiece;
 					//generateChessPieceVO
 					var conductVO:ConductVO = new ConductVO();
 					conductVO.target = chessPiece;
@@ -87,8 +93,14 @@
 				LOG.debug("allPieces rotate90:{0}",chessPositionModel.allPieces.rotate90().dump());
 				LOG.debug("allPieces rotate90.bitCount:{0}",chessPositionModel.allPieces.bitCount);
 				LOG.debug("allPieces rotate90.cellCount:{0}",chessPositionModel.allPieces.cellCount);
+			}
+
+
+			protected function application1_applicationCompleteHandler(event:FlexEvent):void
+			{
+				// TODO Auto-generated method stub
 				//GameManager start.
-//				GameManager.startGame();
+				GameManager.startGame();
 			}
 
 		]]>
