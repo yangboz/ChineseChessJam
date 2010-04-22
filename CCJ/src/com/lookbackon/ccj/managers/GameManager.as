@@ -1,11 +1,17 @@
 package com.lookbackon.ccj.managers
 {
 	import com.lookbackon.AI.searching.ISearchingBase;
+	import com.lookbackon.AI.searching.MinMax;
+	import com.lookbackon.AI.searching.SearchingBase;
+	import com.lookbackon.ccj.model.ChessPiecesModel;
+	import com.lookbackon.ccj.model.HistoryTableModel;
 	import com.lookbackon.ccj.model.vos.ConductVO;
 	import com.lookbackon.ccj.utils.LogUtil;
 	import com.lookbackon.ccj.utils.MathUtil;
 	import com.lookbackon.ccj.view.components.ChessPiece;
 	import com.lookbackon.ccj.view.components.ThinkingProgressBar;
+	
+	import de.polygonal.ds.Array2;
 	
 	import flash.display.DisplayObject;
 	import flash.geom.Point;
@@ -33,6 +39,7 @@ package com.lookbackon.ccj.managers
 		//--------------------------------------------------------------------------
 		private static var searching:ISearchingBase;
 		private static var iThinkingProgressBar:IFlexDisplayObject;
+		private static var gameAI:ISearchingBase;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -85,6 +92,9 @@ package com.lookbackon.ccj.managers
 			conductVO.target = ChessPieceManager.pieces.getItemAt(MathUtil.transactRandomNumberInRange(0,ChessPieceManager.pieces.length-1)) as ChessPiece;
 			conductVO.newPosition = new Point(3,1);
 			ChessPieceManager.makeMove(conductVO);
+			//TODO:
+			gameAI = new SearchingBase(new Array2(10,9));
+			gameAI.generateMoves(ChessPiecesModel.getInstance().redPieces,HistoryTableModel.getInstance().redRook);
 		}
 		//----------------------------------
 		//  isHumanTurnNow

@@ -80,7 +80,7 @@
 			private function dragDropHandler(event:DragEvent):void
 			{
 				//hold gasket skin,then remove previous chess piece.
-				while(this.numElements)
+				if(this.numElements>1)
 				{
 					this.removeElementAt(1);
 				}

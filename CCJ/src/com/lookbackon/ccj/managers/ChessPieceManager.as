@@ -37,6 +37,8 @@ package com.lookbackon.ccj.managers
 		//
 		public static var pieces:ArrayCollection = new ArrayCollection();
 		public static var gaskets:ArrayCollection = new ArrayCollection();
+		public static var redPieces:ArrayCollection = new ArrayCollection();
+		public static var bluePieces:ArrayCollection = new ArrayCollection();
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -96,11 +98,15 @@ package com.lookbackon.ccj.managers
 			var cGasket:ChessGasket = 
 				ChessPieceManager.gaskets.getItemAt(conductVO.newPosition.y*CcjConstants.BOARD_V_LINES+conductVO.newPosition.x) as ChessGasket;
 			//hold gasket skin,then remove previous chess piece.
-			while(this.numElements)
+//			cGasket.dispatchEvent(new DragEvent(DragEvent.DRAG_ENTER,false,true,conductVO.target));
+//			cGasket.dispatchEvent(new DragEvent(DragEvent.DRAG_DROP,false,true,conductVO.target));	
+			if(cGasket.numElements>1)
 			{
-				this.removeElementAt(1);
+				cGasket.removeElementAt(1);
 			}
 			cGasket.addElement(conductVO.target as IVisualElement);
+			(cGasket.getElementAt(1) as ChessPiece).x = 0;
+			(cGasket.getElementAt(1) as ChessPiece).y = 0;
 			//
 			GameManager.isHumanTurnNow();
 		}

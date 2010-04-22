@@ -77,16 +77,82 @@ package com.lookbackon.ccj.model
 		//
 		//--------------------------------------------------------------------------
 		//----------------------------------
-		//  allPieces
+		//  redRook
 		//----------------------------------
 		public function get redRook():ZobristHashTable
 		{
 			return _redRook;
 		}
-		
 		public function set redRook(value:ZobristHashTable):void
 		{
 			_redRook = value;
+			trace(value.dump());
+		}
+		//----------------------------------
+		//  redKnight
+		//----------------------------------
+		public function get redKnight():ZobristHashTable
+		{
+			return _redKnight;
+		}
+		public function set redKnight(value:ZobristHashTable):void
+		{
+			_redKnight = value;
+		}
+		//----------------------------------
+		//  redBishop
+		//----------------------------------
+		public function get redBishop():ZobristHashTable
+		{
+			return _redBishop;
+		}
+		public function set redBishop(value:ZobristHashTable):void
+		{
+			_redBishop = value;
+		}
+		//----------------------------------
+		//  redOffical
+		//----------------------------------
+		public function get redOffical():ZobristHashTable
+		{
+			return _redOffical;
+		}
+		public function set redOffical(value:ZobristHashTable):void
+		{
+			_redOffical = value;
+		}
+		//----------------------------------
+		//  redMarshal
+		//----------------------------------
+		public function get redMarshal():ZobristHashTable
+		{
+			return _redMarshal;
+		}
+		public function set redMarshal(value:ZobristHashTable):void
+		{
+			_redMarshal = value;
+		}
+		//----------------------------------
+		//  redCannon
+		//----------------------------------
+		public function get redCannon():ZobristHashTable
+		{
+			return _redCannon;
+		}
+		public function set redCannon(value:ZobristHashTable):void
+		{
+			_redCannon = value;
+		}
+		//----------------------------------
+		//  redPawn
+		//----------------------------------
+		public function get redPawn():ZobristHashTable
+		{
+			return _redPawn;
+		}
+		public function set redPawn(value:ZobristHashTable):void
+		{
+			_redPawn = value;
 		}
 		//--------------------------------------------------------------------------
 		//

@@ -1,14 +1,12 @@
 package com.lookbackon.AI.searching
 {
-	import com.godpaper.twoHitOne.busniess.managers.PiecesManager;
-	import com.godpaper.twoHitOne.model.BoardModel;
-	import com.godpaper.twoHitOne.model.PiecesModel;
-	import com.godpaper.twoHitOne.util.PositionTransactUtil;
-	import com.godpaper.twoHitOne.views.components.GasketButton;
-	import com.godpaper.twoHitOne.views.components.PieceButton;
-	import com.godpaper.twoHitOne.vo.ConductVO;
+	import com.lookbackon.ccj.business.factory.ChessFactory;
+	import com.lookbackon.ccj.model.vos.ConductVO;
+	import com.lookbackon.ccj.view.components.ChessPiece;
 	
 	import de.polygonal.ds.Array2;
+	
+	import flash.geom.Point;
 	
 	import mx.collections.ArrayCollection;
 	import mx.core.Application;
@@ -45,95 +43,32 @@ package com.lookbackon.AI.searching
 		/**
 		 * This function generates all possible moves and stores them in the arraycollection.
 		 * It returns the arraycollection of the legal moves.
-		 * @param reds
+		 * @param pieces
 		 * @param gamePosition
 		 * @return all possible moves
 		 * 
 		 */		
 		public function generateMoves(reds:ArrayCollection, gamePosition:Array2):ArrayCollection
 		{
-			trace("#####################Game AI generateMoves begin##########################");
-			var tempAC:ArrayCollection = new ArrayCollection();
-			var tempGasketButton:GasketButton;
-			trace("@generateMoves:",gamePosition.dump());
+			var resultAC:ArrayCollection = new ArrayCollection();
 			for(var i:int=0;i<reds.length;i++)
 			{
-				var tempMove:ConductVO = new ConductVO();
-				tempMove.target = reds.getItemAt(i) as PieceButton;
-				trace(tempMove.target.pieceVO.name);	
-				trace(tempMove.target.pieceVO.position[0],tempMove.target.pieceVO.position[1]);
-				trace(gamePosition.gett( tempMove.target.pieceVO.position[0],tempMove.target.pieceVO.position[1]));
-			    if(gamePosition.gett( tempMove.target.pieceVO.position[0],
-									  tempMove.target.pieceVO.position[1])!=null)
+				var conductVO:ConductVO = new ConductVO();
+				var cp:ChessPiece = reds.getItemAt(i) as ChessPiece;
+				conductVO.target = cp;
+				for(var c:int=0;c<cp.chessVO.moves.column;c++)
 				{
-				    //whether to left
-					if( tempMove.target.pieceVO.position[0]%4!=0 && 
-						gamePosition.gett( tempMove.target.pieceVO.position[0]-1,tempMove.target.pieceVO.position[1])==null )
+					for(var r:int=0;r<cp.chessVO.moves.row;r++)
 					{
-						trace(tempMove.target.pieceVO.name,"to left...");
-						var leftPosition:Array = [tempMove.target.pieceVO.position[0]-1,tempMove.target.pieceVO.position[1]];
-						trace("to leftPosition: ",leftPosition.toString());
-						tempGasketButton = (PiecesModel.getInstance().gasketCollection.getItemAt( 
-												PositionTransactUtil.transactArray2Index(leftPosition)
-										    ) as GasketButton);
-						trace("tempGasketButton @ generateMoves: ",tempGasketButton);	
-						tempMove.newDest = tempGasketButton.centerPointXY;
-						tempMove.newPosition = tempGasketButton.position;
-						trace("tempGasketButton(2left) @ generateMoves's position: ",tempGasketButton.position);
-						tempAC.addItem(tempMove);				 	
+						if(cp.chessVO.moves.getBitt(r,c))
+						{
+							conductVO.newPosition = new Point(c,y);
+							resultAC.addItem(conductVO);
+						}
 					}
-					//whether to top
-					if( tempMove.target.pieceVO.position[1]!=0 &&
-					    gamePosition.gett( tempMove.target.pieceVO.position[0],tempMove.target.pieceVO.position[1]-1)==null )
-					{
-						trace(tempMove.target.pieceVO.name,"to top...");
-						var topPosition:Array = [tempMove.target.pieceVO.position[0],tempMove.target.pieceVO.position[1]-1];
-						trace("to topPosition: ",topPosition.toString());
-						tempGasketButton = (PiecesModel.getInstance().gasketCollection.getItemAt( 
-												PositionTransactUtil.transactArray2Index(topPosition)
-										    ) as GasketButton);
-						trace("tempGasketButton @ generateMoves: ",tempGasketButton);	
-						tempMove.newDest = tempGasketButton.centerPointXY;
-						tempMove.newPosition = tempGasketButton.position;
-						trace("tempGasketButton(2top) @ generateMoves's position: ",tempGasketButton.position);
-						tempAC.addItem(tempMove);				 	
-					}
-					//whether to right
-					if( tempMove.target.pieceVO.position[0]!=3 &&
-					    gamePosition.gett( tempMove.target.pieceVO.position[0]+1,tempMove.target.pieceVO.position[1])==null )
-					{
-						trace(tempMove.target.pieceVO.name,"to right...");
-						var rightPosition:Array = [tempMove.target.pieceVO.position[0]+1,tempMove.target.pieceVO.position[1]];
-						trace("to rightPosition: ",rightPosition.toString());
-						tempGasketButton = (PiecesModel.getInstance().gasketCollection.getItemAt( 
-												PositionTransactUtil.transactArray2Index(rightPosition)
-										    ) as GasketButton);
-						trace("tempGasketButton @ generateMoves: ",tempGasketButton);	
-						tempMove.newDest = tempGasketButton.centerPointXY;
-						tempMove.newPosition = tempGasketButton.position;
-						trace("tempGasketButton(2right) @ generateMoves's position: ",tempGasketButton.position);
-						tempAC.addItem(tempMove);					 	
-					}
-					//whether to bottom 
-					if( tempMove.target.pieceVO.position[1]!=3 && 
-						gamePosition.gett( tempMove.target.pieceVO.position[0],tempMove.target.pieceVO.position[1]+1)==null)
-					{
-						trace(tempMove.target.pieceVO.name,"to bottom...");
-						var bottomPosition:Array = [tempMove.target.pieceVO.position[0],tempMove.target.pieceVO.position[1]+1];
-						trace("to bottomPosition: ",bottomPosition.toString());
-						tempGasketButton = (PiecesModel.getInstance().gasketCollection.getItemAt( 
-												PositionTransactUtil.transactArray2Index(bottomPosition)
-										    ) as GasketButton);
-						trace("tempGasketButton @ generateMoves: ",tempGasketButton);	
-						tempMove.newDest = tempGasketButton.centerPointXY;
-						tempMove.newPosition = tempGasketButton.position;
-						trace("tempGasketButton(2bottom) @ generateMoves's position: ",tempGasketButton.position);
-						tempAC.addItem(tempMove);					 	
-					}
-				}	
+				}
 			}
-			trace("#####################Game AI generateMoves end##########################");
-			return tempAC;
+			return resultAC;
 		}
 		/**
 		 * Obviously,the struct move must contain all information necessary to support this operations.
