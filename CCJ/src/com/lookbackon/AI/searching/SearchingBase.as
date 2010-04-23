@@ -5,11 +5,9 @@ package com.lookbackon.AI.searching
 	import com.lookbackon.ccj.view.components.ChessPiece;
 	
 	import de.polygonal.ds.Array2;
-	
 	import flash.geom.Point;
 	
 	import mx.collections.ArrayCollection;
-	import mx.core.Application;
 	
 	 /**
 	 * @author Knight-errant
@@ -35,7 +33,6 @@ package com.lookbackon.AI.searching
 		public function SearchingBase(gamePosition:Array2)
 		{
 			//TODO: implement function
-			mx.core.Application.application.scriptTimeLimit = 30;
 			this.gamePosition = gamePosition;
 		}
 		
@@ -43,8 +40,7 @@ package com.lookbackon.AI.searching
 		/**
 		 * This function generates all possible moves and stores them in the arraycollection.
 		 * It returns the arraycollection of the legal moves.
-		 * @param pieces
-		 * @param gamePosition
+		 * @param reds
 		 * @return all possible moves
 		 * 
 		 */		
@@ -62,8 +58,9 @@ package com.lookbackon.AI.searching
 					{
 						if(cp.chessVO.moves.getBitt(r,c))
 						{
-							conductVO.newPosition = new Point(c,y);
+							conductVO.newPosition = new Point(c,r);
 							resultAC.addItem(conductVO);
+							trace("anew conductVO:",conductVO.dump());
 						}
 					}
 				}
@@ -81,13 +78,11 @@ package com.lookbackon.AI.searching
 		 */		
 		public function applyMovement(conductVO:ConductVO):Array2
 		{
-			PiecesModel.getInstance().selectedPiece = conductVO.target;
-			trace("PiecesModel.getInstance().selectedPiece@GameAIBase.applyMove:",PiecesModel.getInstance().selectedPiece);
-			PiecesManager.tryMovement( conductVO.target,conductVO.newDest,conductVO.newPosition );
-			return BoardModel.getInstance().gamePosition;
+			//TODO:
+			return new Array2(9,10);
 		}
 		
-		private var previewPiece:PieceButton;//for backup selectedPieceButton;
+		private var previewPiece:ChessPiece;//for backup selectedPieceButton;
 		protected var cloneOfGamePosition:Array2;//for backup gamePosition;
 		/**
 		 * Make next move 
@@ -95,22 +90,7 @@ package com.lookbackon.AI.searching
 		 */		
 		protected function makeNextMove(conductVO:ConductVO):void
 		{
-			cloneOfGamePosition = BoardModel.getInstance().gamePosition;
-			for(var w:int=0;w<cloneOfGamePosition.width;w++)
-			{
-				for(var h:int=0;h<cloneOfGamePosition.height;h++)
-				{
-					if( cloneOfGamePosition.gett(w,h)!=null )
-					{
-						if( (cloneOfGamePosition.gett(w,h) as PieceButton).name==conductVO.target.name )
-						{
-							previewPiece = cloneOfGamePosition.gett(w,h);//store preview of gamePosition's changed data;
-							cloneOfGamePosition.sett(w,h,null);
-						}
-					}
-				}
-			}
-			cloneOfGamePosition.sett(conductVO.newPosition[0],conductVO.newPosition[1],conductVO.target);
+			//TODO:
 		}
 		/**
 		 * Unmake preview move 
@@ -118,8 +98,8 @@ package com.lookbackon.AI.searching
 		 */		
 		protected function unmakePreMove(conductVO:ConductVO):void
 		{
-			cloneOfGamePosition.sett(conductVO.newPosition[0],conductVO.newPosition[1],null);
-			cloneOfGamePosition.sett(previewPiece.pieceVO.position[0],previewPiece.pieceVO.position[1],previewPiece);
+			cloneOfGamePosition.sett(conductVO.newPosition.x,conductVO.newPosition.y,null);
+			cloneOfGamePosition.sett(previewPiece.position.x,previewPiece.position.y,previewPiece);
 		}
 		/**
 		 * The evaluation function will return positive values if the position is good for red and negative values

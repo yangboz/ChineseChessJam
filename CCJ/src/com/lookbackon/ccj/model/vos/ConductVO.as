@@ -24,7 +24,7 @@ package com.lookbackon.ccj.model.vos
 			var s:String = "ConductVO";
 			s += "\n{";
 			s += "\n" + "\t";
-			s += "target:"+target+","+"newPosition:"+newPosition.toString();
+			s += "target:"+target+","+"oldPosition:"+target.position.toString()+"newPosition:"+newPosition.toString();
 			s += "\n}";
 			return s;
 		}

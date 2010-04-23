@@ -32,17 +32,11 @@ package com.lookbackon.ccj.model.vos.cvo
 			//serveral admental(炮隔子吃子问题)
 			for(var r:int=0;r<this.row;r++)
 			{
-				if(r!=rowIndex)
-				{
-					this.occupies.setBitt(r,colIndex,true);
-				}
+				this.occupies.setBitt(r,colIndex,true);
 			}
 			for(var c:int=0;c<this.row;c++)
 			{
-				if(c!=colIndex)
-				{
-					this.occupies.setBitt(rowIndex,c,true);
-				}
+				this.occupies.setBitt(rowIndex,c,true);
 			}
 			//about legal moves.
 			if(flag==CcjConstants.FLAG_RED)

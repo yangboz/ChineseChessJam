@@ -60,10 +60,23 @@ package com.lookbackon.ccj.model.vos.cvo
 				this.captures = this.moves.and(ChessPiecesModel.getInstance().redPieces);
 			}
 			//blocker
-			var blocker:BitBoard = this.occupies.xor(this.moves);
+			var blocker:BitBoard;
+			if(flag==CcjConstants.FLAG_RED)
+			{
+				blocker = this.occupies.xor(this.moves);
+			}else
+			{
+				blocker = this.occupies.xor(this.moves);
+			}
 			trace("blocker:",blocker.dump());
-			trace("blocker.reverse():",blocker.reverse().dump());
+//			trace("blocker.reverse():",blocker.reverse().dump());
+			trace("moves:",this.moves.dump());
 			trace("blocker.isEmtpty:",blocker.isEmtpty);
+			if(!blocker.isEmtpty)
+			{
+				trace("detected blocker!!!!");
+			}
+			/*
 			//rayAttack
 			var rayAttack:BitBoard = new BitBoard(this.column,this.row);
 			//north
@@ -98,6 +111,38 @@ package com.lookbackon.ccj.model.vos.cvo
 			rayAttack = nAttack.or(eAttack).or(sAttack).or(wAttack);
 			trace("rayAttack:",rayAttack.dump());
 			trace("rayAttack|blocker:",rayAttack.xor(blocker).dump());
+			*/
 		}
+		
+		private function findBlockerRowIndex(value:BitBoard):int
+		{
+			//TODO:
+		}
+		
+		private function findBlockerColIndex():int
+		{
+			//TODO:
+		}
+		
+		private function isBlockerLeft():Boolean
+		{
+			//TODO:
+		}
+		
+		private function isBlockerRight():Boolean
+		{
+			//TODO:
+		}
+		
+		private function isBlockerUp():Boolean
+		{
+			//TODO:
+		}
+		
+		private function isBlockerDown():Boolean
+		{
+			//TODO:
+		}
+		
 	}
 }

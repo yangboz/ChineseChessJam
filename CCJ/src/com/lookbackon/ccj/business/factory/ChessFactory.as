@@ -136,20 +136,31 @@ package com.lookbackon.ccj.business.factory
 				position.y*CcjConstants.BOARD_LATTICE + myChessPiece.height/2 -25;
 			//set flag to identify.
 			myChessPiece.flag = CcjConstants.FLAG_BLUE;
+			//data
+			myChessPiece.position = position;
+			//
 			if(chessPieceValue)
 			{
 				if(chessPieceValue<16)
 				{
 					myChessPiece.flag = CcjConstants.FLAG_RED;//red
 					ChessPiecesModel.getInstance().redPieces.setBitt(position.y,position.x,true);
+					//push to reds collection.
+					if(myChessPiece.name!="")
+					{
+						ChessPiecesModel.getInstance().reds.addItem(myChessPiece);
+					}
 				}else//blue
 				{
-					//				myChessPiece.enabled = false;
+					//myChessPiece.enabled = false;
 					ChessPiecesModel.getInstance().bluePieces.setBitt(position.y,position.x,true);
+					//push to blues collection.
+					if(myChessPiece.name!="")
+					{
+						ChessPiecesModel.getInstance().blues.addItem(myChessPiece);
+					}
 				}
 			}
-			//data
-			myChessPiece.position = position;
 			//avoid duplicate usless components.
 			if(myChessPiece.name!="")
 			{

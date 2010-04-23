@@ -18,11 +18,11 @@ package com.lookbackon.ds
 	 * Cons:
      * Idiomatic.  Not all programmers understand what's going on.  
 	 * Possible increased documentation requirements.
-	 * 
+	 * @see http://blog.lookbackon.com/?p=371
 	 * @author Knight.zhou
 	 * 
 	 */	
-	public class BitBoard extends BitVector
+	public class BitBoard extends BitVector implements IBitBoard
 	{
 		//--------------------------------------------------------------------------
 		//

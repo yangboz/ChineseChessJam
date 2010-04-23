@@ -16,6 +16,7 @@ package com.lookbackon.ccj.managers
 	import flash.display.DisplayObject;
 	import flash.geom.Point;
 	
+	import mx.collections.ArrayCollection;
 	import mx.controls.Alert;
 	import mx.core.Application;
 	import mx.core.FlexGlobals;
@@ -94,7 +95,11 @@ package com.lookbackon.ccj.managers
 			ChessPieceManager.makeMove(conductVO);
 			//TODO:
 			gameAI = new SearchingBase(new Array2(10,9));
-			gameAI.generateMoves(ChessPiecesModel.getInstance().redPieces,HistoryTableModel.getInstance().redRook);
+			var moves:ArrayCollection = gameAI.generateMoves(ChessPiecesModel.getInstance().reds,null);
+			for(var i:int=0;i<moves.length;i++)
+			{
+//				LOG.info("moves:{0}:{1}",i.toString(),moves.getItemAt(i).dump());
+			}
 		}
 		//----------------------------------
 		//  isHumanTurnNow

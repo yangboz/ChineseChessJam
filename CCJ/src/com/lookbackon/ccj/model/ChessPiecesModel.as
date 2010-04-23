@@ -13,6 +13,7 @@ package com.lookbackon.ccj.model
 	
 	import de.polygonal.ds.Array2;
 	
+	import mx.collections.ArrayCollection;
 	import mx.logging.ILogger;
 	
 	/**
@@ -35,6 +36,9 @@ package com.lookbackon.ccj.model
 		//----------------------------------
 		private static const LOG:ILogger = LogUtil.getLogger(ChessPiecesModel);
 		//generation.
+		//obtain reds/blues chess pieces entity.
+		private var _reds:ArrayCollection   = new ArrayCollection();
+		private var _blues:ArrayCollection  = new ArrayCollection();
 		//
 		private var _bluePieces:BitBoard	= new BitBoard(9,10);
 		private var _redPieces:BitBoard		= new BitBoard(9,10);
@@ -76,6 +80,28 @@ package com.lookbackon.ccj.model
 		//  Properties
 		//
 		//--------------------------------------------------------------------------
+		//----------------------------------
+		//  blues
+		//----------------------------------
+		public function get blues():ArrayCollection
+		{
+			return _blues;
+		}
+		public function set blues(value:ArrayCollection):void
+		{
+			_blues = value;
+		}
+		//----------------------------------
+		//  reds
+		//----------------------------------
+		public function get reds():ArrayCollection
+		{
+			return _reds;
+		}
+		public function set reds(value:ArrayCollection):void
+		{
+			_reds = value;
+		}
 		//----------------------------------
 		//  allPieces
 		//----------------------------------
