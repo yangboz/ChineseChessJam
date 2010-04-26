@@ -137,6 +137,36 @@ package com.lookbackon.ccj.model.vos.cvo
 			//TODO: override function.
 			throw new CcjErrors(CcjErrors.INITIALIZE_VIRTUAL_FUNCTION);
 		}
-
+		//----------------------------------
+		//  X-ray attacks
+		//----------------------------------
+		//west
+		protected function getWest(rowIndex:int, colIndex:int):BitBoard
+		{
+			var bb:BitBoard = new BitBoard(this.column,this.row);
+			bb.setBitt(rowIndex,colIndex-1,Boolean(this.getBitt(rowIndex,colIndex-1)));
+			return bb;
+		}
+		//north
+		protected function getNorth(rowIndex:int, colIndex:int):BitBoard
+		{
+			var bb:BitBoard = new BitBoard(this.column,this.row);
+			bb.setBitt(rowIndex-1,colIndex,Boolean(this.getBitt(rowIndex-1,colIndex)));
+			return bb;
+		}
+		//east
+		protected function getEast(rowIndex:int, colIndex:int):BitBoard
+		{
+			var bb:BitBoard = new BitBoard(this.column,this.row);
+			bb.setBitt(rowIndex,colIndex+1,Boolean(this.getBitt(rowIndex,colIndex+1)));
+			return bb;
+		}
+		//south
+		protected function getSouth(rowIndex:int, colIndex:int):BitBoard
+		{
+			var bb:BitBoard = new BitBoard(this.column,this.row);
+			bb.setBitt(rowIndex+1,colIndex,Boolean(this.getBitt(rowIndex+1,colIndex)));
+			return bb;
+		}
 	}
 }

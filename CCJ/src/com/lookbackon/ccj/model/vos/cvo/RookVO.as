@@ -5,6 +5,9 @@ package com.lookbackon.ccj.model.vos.cvo
 	import com.lookbackon.ccj.model.ChessPiecesModel;
 	import com.lookbackon.ccj.model.ZobristKeysModel;
 	import com.lookbackon.ds.BitBoard;
+	import com.vizsage.as3mathlib.types.Arr;
+	
+	import flash.geom.Point;
 
 	/**
 	 * 
@@ -13,6 +16,7 @@ package com.lookbackon.ccj.model.vos.cvo
 	 */	
 	public class RookVO extends ChessVO
 	{
+		private var blocker:BitBoard;
 		/**
 		 * @inheritDoc
 		 */
@@ -50,6 +54,31 @@ package com.lookbackon.ccj.model.vos.cvo
 			{
 				this.moves = this.occupies.xor(this.occupies.and(ChessPiecesModel.getInstance().bluePieces));
 			}
+			//blocker
+			if(flag==CcjConstants.FLAG_RED)
+			{
+				blocker = this.occupies.xor(this.moves);
+			}else
+			{
+				blocker = this.occupies.xor(this.moves);
+			}
+//			trace("blocker.reverse():",blocker.reverse().dump());
+			trace("blocker.isEmpty:",blocker.isEmpty);
+			if(!blocker.isEmpty)
+			{
+				trace("blocker:",blocker.dump());
+				//
+				var east:BitBoard = this.getEast(rowIndex,colIndex);
+				var north:BitBoard = this.getNorth(rowIndex,colIndex);
+				var west:BitBoard = this.getWest(rowIndex,colIndex);
+				var south:BitBoard = this.getSouth(rowIndex,colIndex);
+				trace("east:",east.dump());
+				trace("north:",north.dump());
+				trace("west:",west.dump());
+				trace("south:",south.dump());
+				this.moves = east.or(north.or(west.or(south)));
+				trace("moves:",this.moves.dump());
+			}
 			//about attacked captures.
 			if(flag==CcjConstants.FLAG_RED)
 			{
@@ -59,89 +88,54 @@ package com.lookbackon.ccj.model.vos.cvo
 			{
 				this.captures = this.moves.and(ChessPiecesModel.getInstance().redPieces);
 			}
-			//blocker
-			var blocker:BitBoard;
-			if(flag==CcjConstants.FLAG_RED)
-			{
-				blocker = this.occupies.xor(this.moves);
-			}else
-			{
-				blocker = this.occupies.xor(this.moves);
-			}
-			trace("blocker:",blocker.dump());
-//			trace("blocker.reverse():",blocker.reverse().dump());
-			trace("moves:",this.moves.dump());
-			trace("blocker.isEmtpty:",blocker.isEmtpty);
-			if(!blocker.isEmtpty)
-			{
-				trace("detected blocker!!!!");
-			}
-			/*
-			//rayAttack
-			var rayAttack:BitBoard = new BitBoard(this.column,this.row);
-			//north
-			var nAttack:BitBoard = new BitBoard(this.column,this.row);
-			for(var n:int=rowIndex-1;n>=0;n--)
-			{
-				nAttack.setBitt(n,colIndex,true);
-			}
-			trace("nAttack:",nAttack.dump());
-			//east
-			var eAttack:BitBoard = new BitBoard(this.column,this.row);
-			for(var e:int=colIndex+1;e<=this.column;e++)
-			{
-				eAttack.setBitt(rowIndex,e,true);
-			}
-			trace("eAttack:",eAttack.dump());
-			//south
-			var sAttack:BitBoard = new BitBoard(this.column,this.row);
-			for(var s:int=rowIndex+1;s<this.row;s++)
-			{
-				sAttack.setBitt(s,colIndex,true);
-			}
-			trace("sAttack:",sAttack.dump());
-			//west
-			var wAttack:BitBoard = new BitBoard(this.column,this.row);
+			trace("captures:",this.captures.dump());
+		}	
+		//----------------------------------
+		//  X-ray attacks
+		//----------------------------------
+		//west
+		override protected function getWest(rowIndex:int, colIndex:int):BitBoard
+		{
+			var bb:BitBoard = new BitBoard(this.column,this.row);
 			for(var w:int=colIndex-1;w>=0;w--)
 			{
-				wAttack.setBitt(rowIndex,w,true);
+				if(ChessPiecesModel.getInstance().allPieces.getBitt(rowIndex,w)) break;
+				bb.setBitt(rowIndex,w,true);
 			}
-			trace("wAttack:",wAttack.dump());
-			//
-			rayAttack = nAttack.or(eAttack).or(sAttack).or(wAttack);
-			trace("rayAttack:",rayAttack.dump());
-			trace("rayAttack|blocker:",rayAttack.xor(blocker).dump());
-			*/
+			return bb;
 		}
-		
-		private function findBlockerRowIndex(value:BitBoard):int
+		//north
+		override protected function getNorth(rowIndex:int, colIndex:int):BitBoard
 		{
-			//TODO:
+			var bb:BitBoard = new BitBoard(this.column,this.row);
+			for(var n:int=rowIndex-1;n>=0;n--)
+			{
+				if(ChessPiecesModel.getInstance().allPieces.getBitt(n,colIndex)) break;
+				bb.setBitt(n,colIndex,true);
+			}
+			return bb;
 		}
-		
-		private function findBlockerColIndex():int
+		//east
+		override protected function getEast(rowIndex:int, colIndex:int):BitBoard
 		{
-			//TODO:
+			var bb:BitBoard = new BitBoard(this.column,this.row);
+			for(var e:int=colIndex+1;e<this.column;e++)
+			{
+				if(ChessPiecesModel.getInstance().allPieces.getBitt(rowIndex,e)) break;
+				bb.setBitt(rowIndex,e,true);
+			}
+			return bb;
 		}
-		
-		private function isBlockerLeft():Boolean
+		//south
+		override protected function getSouth(rowIndex:int, colIndex:int):BitBoard
 		{
-			//TODO:
-		}
-		
-		private function isBlockerRight():Boolean
-		{
-			//TODO:
-		}
-		
-		private function isBlockerUp():Boolean
-		{
-			//TODO:
-		}
-		
-		private function isBlockerDown():Boolean
-		{
-			//TODO:
+			var bb:BitBoard = new BitBoard(this.column,this.row);
+			for(var s:int=rowIndex+1;s<this.row;s++)
+			{
+				if(ChessPiecesModel.getInstance().allPieces.getBitt(s,colIndex)) break;
+				bb.setBitt(s,colIndex,true);
+			}
+			return bb;
 		}
 		
 	}

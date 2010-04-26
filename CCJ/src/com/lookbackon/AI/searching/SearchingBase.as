@@ -60,7 +60,7 @@ package com.lookbackon.AI.searching
 						{
 							conductVO.newPosition = new Point(c,r);
 							resultAC.addItem(conductVO);
-							trace("anew conductVO:",conductVO.dump());
+//							trace("anew conductVO:",conductVO.dump());
 						}
 					}
 				}

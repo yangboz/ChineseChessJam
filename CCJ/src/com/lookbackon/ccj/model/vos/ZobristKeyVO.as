@@ -30,7 +30,9 @@ package com.lookbackon.ccj.model.vos
 			var s:String = "ZobristKeyVO";
 			s += "\n{";
 			s += "\n" + "\t";
-			s += "color:"+color+","+"type:"+type+","+"position:"+position;
+			s += "color:"+color.dump()+"\t";
+			s += "type:"+type.dump()+"\t"
+			s += "position:"+position.dump()+"\t";
 			s += "\n}";
 			return s;
 		}

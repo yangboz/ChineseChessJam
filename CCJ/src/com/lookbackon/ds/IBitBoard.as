@@ -7,6 +7,7 @@ package com.lookbackon.ds
 	 */	
 	public interface IBitBoard
 	{
+		//basic
 		function and(value:BitBoard):BitBoard;
 		function or(value:BitBoard):BitBoard;
 		function xor(value:BitBoard):BitBoard;
@@ -16,5 +17,8 @@ package com.lookbackon.ds
 		function rotate45():BitBoard;
 		//reverse
 		function reverse():BitBoard;
+		//misc..
+		function getRows(rowIndex:int):Array;
+		function getCols(colIndex:int):Array;
 	}
 }

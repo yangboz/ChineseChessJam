@@ -246,9 +246,9 @@ package com.lookbackon.ds
 			return bb;
 		}
 		//----------------------------------
-		//  isEmtpy
+		//  isEmpty
 		//----------------------------------
-		public function get isEmtpty():Boolean
+		public function get isEmpty():Boolean
 		{
 			for(var h:int=0;h<_row;h++)
 			{
@@ -261,6 +261,30 @@ package com.lookbackon.ds
 				}
 			}
 			return true;
+		}
+		//----------------------------------
+		//  getRows
+		//----------------------------------
+		public function getRows(rowIndex:int):Array
+		{
+			var result:Array = [];
+			for(var r:int=0;r<this.row;r++)
+			{
+				result.push(this.getBitt(r,rowIndex));
+			}
+			return result;
+		}
+		//----------------------------------
+		//  getCols
+		//----------------------------------
+		public function getCols(colIndex:int):Array
+		{
+			var result:Array = [];
+			for(var c:int=0;c<this.column;c++)
+			{
+				result.push(this.getBitt(colIndex,c));
+			}
+			return result;
 		}
 		//----------------------------------
 		//  dump
