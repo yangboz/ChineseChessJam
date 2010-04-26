@@ -4,11 +4,13 @@ package com.lookbackon.ccj.model.vos.cvo
 	import com.lookbackon.ccj.ChessPiecesConstants;
 	import com.lookbackon.ccj.model.ChessPiecesModel;
 	import com.lookbackon.ccj.model.ZobristKeysModel;
+	import com.lookbackon.ccj.utils.LogUtil;
 	import com.lookbackon.ds.BitBoard;
-	import com.vizsage.as3mathlib.types.Arr;
 	
 	import flash.geom.Point;
-
+	
+	import mx.logging.ILogger;
+	
 	/**
 	 * 
 	 * @author Knight.zhou
@@ -16,7 +18,20 @@ package com.lookbackon.ccj.model.vos.cvo
 	 */	
 	public class RookVO extends ChessVO
 	{
-		private var blocker:BitBoard;
+		//--------------------------------------------------------------------------
+		//
+		//  Variables
+		//
+		//--------------------------------------------------------------------------
+		//----------------------------------
+		//  CONSTANTS
+		//----------------------------------
+		protected static const LOG:ILogger = LogUtil.getLogger(RookVO);
+		//--------------------------------------------------------------------------
+		//
+		//  Constructor
+		//
+		//--------------------------------------------------------------------------
 		/**
 		 * @inheritDoc
 		 */
@@ -43,6 +58,7 @@ package com.lookbackon.ccj.model.vos.cvo
 			{
 				this.occupies.setBitt(rowIndex,c,true);
 			}
+//			LOG.info("occupies:{0}",this.occupies.dump());
 			//about legal moves.
 //			LOG.info("redPieces:{0}",ChessPositionModelLocator.getInstance().redPieces.dump());
 //			LOG.info("bluePieces:{0}",ChessPositionModelLocator.getInstance().bluePieces.dump());
@@ -54,6 +70,7 @@ package com.lookbackon.ccj.model.vos.cvo
 			{
 				this.moves = this.occupies.xor(this.occupies.and(ChessPiecesModel.getInstance().bluePieces));
 			}
+//			LOG.info("moves:{0}",this.moves.dump());
 			//blocker
 			if(flag==CcjConstants.FLAG_RED)
 			{
@@ -63,23 +80,25 @@ package com.lookbackon.ccj.model.vos.cvo
 				blocker = this.occupies.xor(this.moves);
 			}
 //			trace("blocker.reverse():",blocker.reverse().dump());
-			trace("blocker.isEmpty:",blocker.isEmpty);
+		    
+			LOG.debug("blocker.isEmpty:{0}",blocker.isEmpty.toString());
 			if(!blocker.isEmpty)
 			{
-				trace("blocker:",blocker.dump());
+				LOG.debug("blocker:{0}",blocker.dump());
 				//
 				var east:BitBoard = this.getEast(rowIndex,colIndex);
 				var north:BitBoard = this.getNorth(rowIndex,colIndex);
 				var west:BitBoard = this.getWest(rowIndex,colIndex);
 				var south:BitBoard = this.getSouth(rowIndex,colIndex);
-				trace("east:",east.dump());
-				trace("north:",north.dump());
-				trace("west:",west.dump());
-				trace("south:",south.dump());
+				LOG.debug("east:{0}",east.dump());
+				LOG.debug("north:{0}",north.dump());
+				LOG.debug("west:{0}",west.dump());
+				LOG.debug("south:{0}",south.dump());
 				this.moves = east.or(north.or(west.or(south)));
-				trace("moves:",this.moves.dump());
+				LOG.debug("moves:{0}",this.moves.dump());
 			}
 			//about attacked captures.
+			//TODO:(find Cannon moutain.)
 			if(flag==CcjConstants.FLAG_RED)
 			{
 				this.captures = this.moves.and(ChessPiecesModel.getInstance().bluePieces);
@@ -88,55 +107,7 @@ package com.lookbackon.ccj.model.vos.cvo
 			{
 				this.captures = this.moves.and(ChessPiecesModel.getInstance().redPieces);
 			}
-			trace("captures:",this.captures.dump());
+			LOG.debug("captures:{0}",this.captures.dump());
 		}	
-		//----------------------------------
-		//  X-ray attacks
-		//----------------------------------
-		//west
-		override protected function getWest(rowIndex:int, colIndex:int):BitBoard
-		{
-			var bb:BitBoard = new BitBoard(this.column,this.row);
-			for(var w:int=colIndex-1;w>=0;w--)
-			{
-				if(ChessPiecesModel.getInstance().allPieces.getBitt(rowIndex,w)) break;
-				bb.setBitt(rowIndex,w,true);
-			}
-			return bb;
-		}
-		//north
-		override protected function getNorth(rowIndex:int, colIndex:int):BitBoard
-		{
-			var bb:BitBoard = new BitBoard(this.column,this.row);
-			for(var n:int=rowIndex-1;n>=0;n--)
-			{
-				if(ChessPiecesModel.getInstance().allPieces.getBitt(n,colIndex)) break;
-				bb.setBitt(n,colIndex,true);
-			}
-			return bb;
-		}
-		//east
-		override protected function getEast(rowIndex:int, colIndex:int):BitBoard
-		{
-			var bb:BitBoard = new BitBoard(this.column,this.row);
-			for(var e:int=colIndex+1;e<this.column;e++)
-			{
-				if(ChessPiecesModel.getInstance().allPieces.getBitt(rowIndex,e)) break;
-				bb.setBitt(rowIndex,e,true);
-			}
-			return bb;
-		}
-		//south
-		override protected function getSouth(rowIndex:int, colIndex:int):BitBoard
-		{
-			var bb:BitBoard = new BitBoard(this.column,this.row);
-			for(var s:int=rowIndex+1;s<this.row;s++)
-			{
-				if(ChessPiecesModel.getInstance().allPieces.getBitt(s,colIndex)) break;
-				bb.setBitt(s,colIndex,true);
-			}
-			return bb;
-		}
-		
 	}
 }

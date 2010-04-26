@@ -38,7 +38,7 @@ package com.lookbackon.ccj.model
 	 * DOE is a relatively new technique and has been applied successfully to checkers (by Ed Gilbert and Fierz) and Awari (by Thomas Lincke).</p>
 	 * 
 	 * @see http://www.fierz.ch/strategy4.htm
-	 * 
+	 * @see 2004CCC.pdf
 	 * @author Knight.zhou
 	 * 
 	 */	

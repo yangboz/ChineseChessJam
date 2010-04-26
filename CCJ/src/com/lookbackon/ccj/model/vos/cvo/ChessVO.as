@@ -1,6 +1,7 @@
 package com.lookbackon.ccj.model.vos.cvo
 {
 	import com.lookbackon.ccj.errors.CcjErrors;
+	import com.lookbackon.ccj.model.ChessPiecesModel;
 	import com.lookbackon.ccj.utils.LogUtil;
 	import com.lookbackon.ds.BitBoard;
 	
@@ -34,6 +35,8 @@ package com.lookbackon.ccj.model.vos.cvo
 		private var _occupies:BitBoard;
 		private var _moves:BitBoard;
 		private var _captures:BitBoard;
+		//for Rook/Cannon condition filter.
+		protected var blocker:BitBoard;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -144,28 +147,44 @@ package com.lookbackon.ccj.model.vos.cvo
 		protected function getWest(rowIndex:int, colIndex:int):BitBoard
 		{
 			var bb:BitBoard = new BitBoard(this.column,this.row);
-			bb.setBitt(rowIndex,colIndex-1,Boolean(this.getBitt(rowIndex,colIndex-1)));
+			for(var w:int=colIndex-1;w>=0;w--)
+			{
+				if(ChessPiecesModel.getInstance().allPieces.getBitt(rowIndex,w)) break;
+				bb.setBitt(rowIndex,w,true);
+			}
 			return bb;
 		}
 		//north
 		protected function getNorth(rowIndex:int, colIndex:int):BitBoard
 		{
 			var bb:BitBoard = new BitBoard(this.column,this.row);
-			bb.setBitt(rowIndex-1,colIndex,Boolean(this.getBitt(rowIndex-1,colIndex)));
+			for(var n:int=rowIndex-1;n>=0;n--)
+			{
+				if(ChessPiecesModel.getInstance().allPieces.getBitt(n,colIndex)) break;
+				bb.setBitt(n,colIndex,true);
+			}
 			return bb;
 		}
 		//east
 		protected function getEast(rowIndex:int, colIndex:int):BitBoard
 		{
 			var bb:BitBoard = new BitBoard(this.column,this.row);
-			bb.setBitt(rowIndex,colIndex+1,Boolean(this.getBitt(rowIndex,colIndex+1)));
+			for(var e:int=colIndex+1;e<this.column;e++)
+			{
+				if(ChessPiecesModel.getInstance().allPieces.getBitt(rowIndex,e)) break;
+				bb.setBitt(rowIndex,e,true);
+			}
 			return bb;
 		}
 		//south
 		protected function getSouth(rowIndex:int, colIndex:int):BitBoard
 		{
 			var bb:BitBoard = new BitBoard(this.column,this.row);
-			bb.setBitt(rowIndex+1,colIndex,Boolean(this.getBitt(rowIndex+1,colIndex)));
+			for(var s:int=rowIndex+1;s<this.row;s++)
+			{
+				if(ChessPiecesModel.getInstance().allPieces.getBitt(s,colIndex)) break;
+				bb.setBitt(s,colIndex,true);
+			}
 			return bb;
 		}
 	}

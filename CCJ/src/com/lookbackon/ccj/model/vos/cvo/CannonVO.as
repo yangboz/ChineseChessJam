@@ -3,7 +3,11 @@ package com.lookbackon.ccj.model.vos.cvo
 	import com.lookbackon.ccj.CcjConstants;
 	import com.lookbackon.ccj.ChessPiecesConstants;
 	import com.lookbackon.ccj.model.ChessPiecesModel;
+	import com.lookbackon.ccj.utils.LogUtil;
 	import com.lookbackon.ccj.utils.MathUtil;
+	import com.lookbackon.ds.BitBoard;
+	
+	import mx.logging.ILogger;
 
 	/**
 	 * 
@@ -12,6 +16,20 @@ package com.lookbackon.ccj.model.vos.cvo
 	 */	
 	public class CannonVO extends ChessVO
 	{
+		//--------------------------------------------------------------------------
+		//
+		//  Variables
+		//
+		//--------------------------------------------------------------------------
+		//----------------------------------
+		//  CONSTANTS
+		//----------------------------------
+		protected static const LOG:ILogger = LogUtil.getLogger(CannonVO);
+		//--------------------------------------------------------------------------
+		//
+		//  Constructor
+		//
+		//--------------------------------------------------------------------------
 		/**
 		 * @inheritDoc
 		 */
@@ -34,10 +52,11 @@ package com.lookbackon.ccj.model.vos.cvo
 			{
 				this.occupies.setBitt(r,colIndex,true);
 			}
-			for(var c:int=0;c<this.row;c++)
+			for(var c:int=0;c<this.column;c++)
 			{
 				this.occupies.setBitt(rowIndex,c,true);
 			}
+			LOG.info("occupies:{0}",this.occupies.dump());
 			//about legal moves.
 			if(flag==CcjConstants.FLAG_RED)
 			{
@@ -47,16 +66,41 @@ package com.lookbackon.ccj.model.vos.cvo
 			{
 				this.moves = this.occupies.xor(this.occupies.and(ChessPiecesModel.getInstance().bluePieces));
 			}
+//			LOG.info("moves:{0}",this.moves.dump());//not complete generated here.
+			//blocker
+			if(flag==CcjConstants.FLAG_RED)
+			{
+				blocker = this.occupies.xor(this.moves);
+			}else
+			{
+				blocker = this.occupies.xor(this.moves);
+			}
+			LOG.debug("blocker.isEmpty:{0}",blocker.isEmpty.toString());
+			if(!blocker.isEmpty)
+			{
+				LOG.debug("blocker:{0}",blocker.dump());
+				//
+				var east:BitBoard = this.getEast(rowIndex,colIndex);
+				var north:BitBoard = this.getNorth(rowIndex,colIndex);
+				var west:BitBoard = this.getWest(rowIndex,colIndex);
+				var south:BitBoard = this.getSouth(rowIndex,colIndex);
+				LOG.debug("east:{0}",east.dump());
+				LOG.debug("north:{0}",north.dump());
+				LOG.debug("west:{0}",west.dump());
+				LOG.debug("south:{0}",south.dump());
+				this.moves = east.or(north.or(west.or(south)));
+				LOG.debug("moves:{0}",this.moves.dump());
+			}
 			//about attacked captures.
 			if(flag==CcjConstants.FLAG_RED)
 			{
-				//serveral admental(炮隔子吃子问题)
 				this.captures = this.moves.and(ChessPiecesModel.getInstance().bluePieces);
 			}
 			if(flag==CcjConstants.FLAG_BLUE)
 			{
 				this.captures = this.moves.and(ChessPiecesModel.getInstance().redPieces);
 			}
+			LOG.debug("captures:{0}",this.captures.dump());
 		}
 	}
 }
