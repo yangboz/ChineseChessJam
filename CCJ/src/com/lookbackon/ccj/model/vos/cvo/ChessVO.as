@@ -22,6 +22,23 @@ package com.lookbackon.ccj.model.vos.cvo
 	 * 
 	 * RKBOMOBKR
 	 * ---------
+	 * </p>
+	 * <strong>about X-ray attacks</strong></p>
+	 * Here is another type of double attack in which the targets are threatened in one direction. </p>
+	 * The attacking piece threatens two units, one behind the other, </p>
+	 * on the same rank, file or diagonal. This double threat has lacked a good descriptive name. </p>
+	 * We suggest ‘X-Ray’ attack.</p>
+	 * 
+	 * The classical approach works ray-wise and uses pre-calculated ray-attacks </p>
+	 * for each of the eight ray-directions and each of the 64 squares. </p>
+	 * It has to distinguish between positive and negative directions, </p>
+	 * because it has to bitscan the ray-attack intersection with the occupancy in different orders. </p>
+	 * That usually don't cares for getting line- or piece attacks, </p>
+	 * since one likely unrolls all directions needed for a particular line or piece - otherwise one may rely on a generalized bitscan.</p>
+	 * 
+	 * @see http://chessprogramming.wikispaces.com/X-ray+Attacks
+	 * @see http://chessprogramming.wikispaces.com/Classical+Approach
+	 * 
 	 * @author Knight.zhou
 	 * 
 	 */	
@@ -140,10 +157,18 @@ package com.lookbackon.ccj.model.vos.cvo
 			//TODO: override function.
 			throw new CcjErrors(CcjErrors.INITIALIZE_VIRTUAL_FUNCTION);
 		}
+			
 		//----------------------------------
 		//  X-ray attacks
 		//----------------------------------
 		//west
+		/**
+		 * 
+		 * @param rowIndex current piece's row index.
+		 * @param colIndex current piece's column index.
+		 * @return legal moves prototype is bit board under west direction.
+		 * 
+		 */	
 		protected function getWest(rowIndex:int, colIndex:int):BitBoard
 		{
 			var bb:BitBoard = new BitBoard(this.column,this.row);
@@ -154,6 +179,13 @@ package com.lookbackon.ccj.model.vos.cvo
 			}
 			return bb;
 		}
+		/**
+		 * 
+		 * @param rowIndex current piece's row index.
+		 * @param colIndex current piece's column index.
+		 * @return legal moves prototype is bit board under north direction.
+		 * 
+		 */	
 		//north
 		protected function getNorth(rowIndex:int, colIndex:int):BitBoard
 		{
@@ -165,6 +197,13 @@ package com.lookbackon.ccj.model.vos.cvo
 			}
 			return bb;
 		}
+		/**
+		 * 
+		 * @param rowIndex current piece's row index.
+		 * @param colIndex current piece's column index.
+		 * @return legal moves prototype is bit board under east direction.
+		 * 
+		 */	
 		//east
 		protected function getEast(rowIndex:int, colIndex:int):BitBoard
 		{
@@ -176,6 +215,13 @@ package com.lookbackon.ccj.model.vos.cvo
 			}
 			return bb;
 		}
+		/**
+		 * 
+		 * @param rowIndex current piece's row index.
+		 * @param colIndex current piece's column index.
+		 * @return legal moves prototype is bit board under south direction.
+		 * 
+		 */	
 		//south
 		protected function getSouth(rowIndex:int, colIndex:int):BitBoard
 		{
