@@ -111,7 +111,7 @@ package com.lookbackon.ccj.model.vos.cvo
 		//  X-ray attacks(override)
 		//----------------------------------
 		//west
-		override protected function getWest(rowIndex:int, colIndex:int):BitBoard
+		override public function getWest(rowIndex:int, colIndex:int):BitBoard
 		{
 			var mountIndex:int = -1;//find cannon mount().
 			var bb:BitBoard = new BitBoard(this.column,this.row);
@@ -137,7 +137,7 @@ package com.lookbackon.ccj.model.vos.cvo
 			return bb;
 		}
 		//north
-		override protected function getNorth(rowIndex:int, colIndex:int):BitBoard
+		override public function getNorth(rowIndex:int, colIndex:int):BitBoard
 		{
 			var mountIndex:int = -1;//find cannon mount().
 			var bb:BitBoard = new BitBoard(this.column,this.row);
@@ -163,7 +163,7 @@ package com.lookbackon.ccj.model.vos.cvo
 			return bb;
 		}
 		//east
-		override protected function getEast(rowIndex:int, colIndex:int):BitBoard
+		override public function getEast(rowIndex:int, colIndex:int):BitBoard
 		{
 			var mountIndex:int = -1;//find cannon mount().
 			var bb:BitBoard = new BitBoard(this.column,this.row);
@@ -189,7 +189,7 @@ package com.lookbackon.ccj.model.vos.cvo
 			return bb;
 		}
 		//south
-		override protected function getSouth(rowIndex:int, colIndex:int):BitBoard
+		override public function getSouth(rowIndex:int, colIndex:int):BitBoard
 		{
 			var mountIndex:int = -1;//find cannon mount().
 			var bb:BitBoard = new BitBoard(this.column,this.row);

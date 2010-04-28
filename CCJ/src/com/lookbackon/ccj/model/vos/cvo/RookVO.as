@@ -109,5 +109,53 @@ package com.lookbackon.ccj.model.vos.cvo
 			}
 			LOG.debug("captures:{0}",this.captures.dump());
 		}	
+		
+		//----------------------------------
+		//  X-ray attacks
+		//----------------------------------
+		//west
+		override public function getWest(rowIndex:int, colIndex:int):BitBoard
+		{
+			var bb:BitBoard = new BitBoard(this.column,this.row);
+			for(var w:int=colIndex-1;w>=0;w--)
+			{
+				if(ChessPiecesModel.getInstance().allPieces.getBitt(rowIndex,w)) break;
+				bb.setBitt(rowIndex,w,true);
+			}
+			return bb;
+		}
+		//north
+		override public function getNorth(rowIndex:int, colIndex:int):BitBoard
+		{
+			var bb:BitBoard = new BitBoard(this.column,this.row);
+			for(var n:int=rowIndex-1;n>=0;n--)
+			{
+				if(ChessPiecesModel.getInstance().allPieces.getBitt(n,colIndex)) break;
+				bb.setBitt(n,colIndex,true);
+			}
+			return bb;
+		}
+		//east
+		override public function getEast(rowIndex:int, colIndex:int):BitBoard
+		{
+			var bb:BitBoard = new BitBoard(this.column,this.row);
+			for(var e:int=colIndex+1;e<this.column;e++)
+			{
+				if(ChessPiecesModel.getInstance().allPieces.getBitt(rowIndex,e)) break;
+				bb.setBitt(rowIndex,e,true);
+			}
+			return bb;
+		}
+		//south
+		override public function getSouth(rowIndex:int, colIndex:int):BitBoard
+		{
+			var bb:BitBoard = new BitBoard(this.column,this.row);
+			for(var s:int=rowIndex+1;s<this.row;s++)
+			{
+				if(ChessPiecesModel.getInstance().allPieces.getBitt(s,colIndex)) break;
+				bb.setBitt(s,colIndex,true);
+			}
+			return bb;
+		}
 	}
 }

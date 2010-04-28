@@ -16,9 +16,11 @@
     <sourceAttachmentPath/>
   </compiler>
   <applications>
-    <application path="Flex4Test.mxml"/>
     <application path="MathTest.mxml"/>
     <application path="Main.mxml"/>
+    <application path="Flex4Test.mxml"/>
+    <application path="FlexUnitCompilerApplication.mxml"/>
+    <application path="FlexUnitApplication.mxml"/>
   </applications>
   <modules/>
   <buildCSSFiles/>

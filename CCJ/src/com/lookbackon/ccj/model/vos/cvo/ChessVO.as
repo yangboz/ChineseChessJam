@@ -8,21 +8,21 @@ package com.lookbackon.ccj.model.vos.cvo
 	import mx.logging.ILogger;
 
 	/**
-	 * This is our bitboard:
-	 * ---------
-	 * rkbomobkr
-	 * 
-	 *  c     c
-	 * p p p p p
-	 * 
-	 * 
-	 * 
-	 * P P P P P
-	 *  C     C
-	 * 
-	 * RKBOMOBKR
-	 * ---------
-	 * </p>
+	 * This is our bitboard:</p>
+	 * ---------</br>
+	 * rkbomobkr</br>
+	 * </br>
+	 *  c     c</br>
+	 * p p p p p</br>
+	 * </br>
+	 * </br>
+	 * </br>
+	 * P P P P P</br>
+	 *  C     C</br>
+	 * </br>
+	 * RKBOMOBKR</br>
+	 * ---------</br>
+	 * </br>
 	 * <strong>about X-ray attacks</strong></p>
 	 * Here is another type of double attack in which the targets are threatened in one direction. </p>
 	 * The attacking piece threatens two units, one behind the other, </p>
@@ -169,14 +169,9 @@ package com.lookbackon.ccj.model.vos.cvo
 		 * @return legal moves prototype is bit board under west direction.
 		 * 
 		 */	
-		protected function getWest(rowIndex:int, colIndex:int):BitBoard
+		virtual public function getWest(rowIndex:int, colIndex:int):BitBoard
 		{
 			var bb:BitBoard = new BitBoard(this.column,this.row);
-			for(var w:int=colIndex-1;w>=0;w--)
-			{
-				if(ChessPiecesModel.getInstance().allPieces.getBitt(rowIndex,w)) break;
-				bb.setBitt(rowIndex,w,true);
-			}
 			return bb;
 		}
 		/**
@@ -187,14 +182,9 @@ package com.lookbackon.ccj.model.vos.cvo
 		 * 
 		 */	
 		//north
-		protected function getNorth(rowIndex:int, colIndex:int):BitBoard
+		virtual public function getNorth(rowIndex:int, colIndex:int):BitBoard
 		{
 			var bb:BitBoard = new BitBoard(this.column,this.row);
-			for(var n:int=rowIndex-1;n>=0;n--)
-			{
-				if(ChessPiecesModel.getInstance().allPieces.getBitt(n,colIndex)) break;
-				bb.setBitt(n,colIndex,true);
-			}
 			return bb;
 		}
 		/**
@@ -205,14 +195,9 @@ package com.lookbackon.ccj.model.vos.cvo
 		 * 
 		 */	
 		//east
-		protected function getEast(rowIndex:int, colIndex:int):BitBoard
+		virtual public function getEast(rowIndex:int, colIndex:int):BitBoard
 		{
 			var bb:BitBoard = new BitBoard(this.column,this.row);
-			for(var e:int=colIndex+1;e<this.column;e++)
-			{
-				if(ChessPiecesModel.getInstance().allPieces.getBitt(rowIndex,e)) break;
-				bb.setBitt(rowIndex,e,true);
-			}
 			return bb;
 		}
 		/**
@@ -223,14 +208,9 @@ package com.lookbackon.ccj.model.vos.cvo
 		 * 
 		 */	
 		//south
-		protected function getSouth(rowIndex:int, colIndex:int):BitBoard
+		virtual public function getSouth(rowIndex:int, colIndex:int):BitBoard
 		{
 			var bb:BitBoard = new BitBoard(this.column,this.row);
-			for(var s:int=rowIndex+1;s<this.row;s++)
-			{
-				if(ChessPiecesModel.getInstance().allPieces.getBitt(s,colIndex)) break;
-				bb.setBitt(s,colIndex,true);
-			}
 			return bb;
 		}
 	}
