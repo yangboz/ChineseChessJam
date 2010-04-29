@@ -44,7 +44,6 @@ package flexUnitTests.chessVO.tests
 		override public function getNorth():void
 		{
 			var north:BitBoard = new BitBoard(9,10);
-			north.setBitt(0,0,true);
 			var rVO:RookVO = new RookVO(9,10,rowIndexTest,colIndexTest);
 			//			Assert.assertEquals(rVO.getWest(0,0),west);//notice here forever fail.cuz strick Equals reference,not bitboard's content. 
 			Assert.assertTrue(north.xor(rVO.getNorth(rowIndexTest,colIndexTest)).isEmpty);
