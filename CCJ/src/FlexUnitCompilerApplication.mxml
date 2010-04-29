@@ -8,6 +8,8 @@ Please click on the "Refresh" icon in "FlexUnit Results" view to regenerate this
 			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600">
 	<fx:Script>
 		<![CDATA[
+			import flexUnitTests.PawnVOSuite;
+			import flexUnitTests.chessVO.tests.PawnVOTest;
 			import flexUnitTests.MarshalVOSuite;
 			import flexUnitTests.chessVO.tests.MarshalVOTest;
 			import flexUnitTests.KnightVOSuite;
@@ -19,6 +21,12 @@ Please click on the "Refresh" icon in "FlexUnit Results" view to regenerate this
 			import flexUnitTests.chessVO.tests.CannonVOTest;
 			import flexUnitTests.RookVOSuite;
 			import flexUnitTests.chessVO.tests.RookVOTest;
+			
+			private var flexUnitTests_PawnVOSuite_obj:flexUnitTests.PawnVOSuite;
+			
+			
+			private var flexUnitTests_chessVO_tests_PawnVOTest_obj:flexUnitTests.chessVO.tests.PawnVOTest;
+			
 			
 			private var flexUnitTests_MarshalVOSuite_obj:flexUnitTests.MarshalVOSuite;
 			

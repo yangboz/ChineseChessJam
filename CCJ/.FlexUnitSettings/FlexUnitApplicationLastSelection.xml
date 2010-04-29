@@ -6,6 +6,7 @@
 <testsuite name="flexUnitTests:KnightVOSuite" type="testsuiteclass"/>
 <testsuite name="flexUnitTests:MarshalVOSuite" type="testsuiteclass"/>
 <testsuite name="flexUnitTests:OfficalVOSuite" type="testsuiteclass"/>
+<testsuite name="flexUnitTests:PawnVOSuite" type="testsuiteclass"/>
 <testsuite name="flexUnitTests:RookVOSuite" type="testsuiteclass"/>
 </testsuite>
 </testrun>

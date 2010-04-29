@@ -8,6 +8,7 @@
 	<fx:Script>
 		<![CDATA[
 			import flexUnitTests.RookVOSuite;
+			import flexUnitTests.PawnVOSuite;
 			import flexUnitTests.OfficalVOSuite;
 			import flexUnitTests.MarshalVOSuite;
 			import flexUnitTests.KnightVOSuite;
@@ -22,6 +23,7 @@
 				testsToRun.push(flexUnitTests.KnightVOSuite);
 				testsToRun.push(flexUnitTests.MarshalVOSuite);
 				testsToRun.push(flexUnitTests.OfficalVOSuite);
+				testsToRun.push(flexUnitTests.PawnVOSuite);
 				testsToRun.push(flexUnitTests.RookVOSuite);
 				return testsToRun;
 			}
