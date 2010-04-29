@@ -1,14 +1,13 @@
 package flexUnitTests.chessVO.tests
 {
-	import com.lookbackon.ccj.model.ChessPiecesModel;
-	import com.lookbackon.ccj.model.vos.cvo.OfficalVO;
+	import com.lookbackon.ccj.model.vos.cvo.BishopVO;
 	import com.lookbackon.ds.BitBoard;
 	
 	import org.flexunit.Assert;
 
-	public class OfficalVOTest extends ChessVOTestBase
-	{
-		public function OfficalVOTest()
+	public class BishopVOTest extends ChessVOTestBase
+	{		
+		public function BishopVOTest()
 		{
 			//TODO: implement function
 			super();
@@ -33,36 +32,39 @@ package flexUnitTests.chessVO.tests
 		public static function tearDownAfterClass():void
 		{
 		}
+		
 		override protected function initialization():void
 		{
 			super.initialization();
-			this.colIndexTest = 3;
+			this.colIndexTest = 6;
 			this.rowIndexTest = 0;
 		}
 		//
-		[Test(descrption="OfficalVO occuipes test")]
+		[Test(descrption="BishopVO occuipes test")]
 		override public function occuipes():void
 		{
 			var occuipesExpect:BitBoard = new BitBoard(9,10);
-			occuipesExpect.setBitt(1,4,true);
-			var oVO:OfficalVO = new OfficalVO(9,10,rowIndexTest,colIndexTest);
+			occuipesExpect.setBitt(2,4,true);
+			occuipesExpect.setBitt(2,8,true);
+			var oVO:BishopVO = new BishopVO(9,10,rowIndexTest,colIndexTest);
 			Assert.assertTrue(occuipesExpect.xor(oVO.occupies).isEmpty);
 		}
 		
-		[Test(descrption="OfficalVO moves test")]
+		[Test(descrption="BishopVO moves test")]
 		override public function moves():void
 		{
 			var movesExpect:BitBoard = new BitBoard(9,10);
-			movesExpect.setBitt(1,4,true);
-			var oVO:OfficalVO = new OfficalVO(9,10,rowIndexTest,colIndexTest);
+			movesExpect.setBitt(2,4,true);
+			movesExpect.setBitt(2,8,true);
+			var oVO:BishopVO = new BishopVO(9,10,rowIndexTest,colIndexTest);
 			Assert.assertTrue(movesExpect.xor(oVO.moves).isEmpty);
 		}
 		
-		[Test(descrption="OfficalVO captures test")]
+		[Test(descrption="BishopVO captures test")]
 		override public function captures():void
 		{
 			var capturesExpect:BitBoard = new BitBoard(9,10);
-			var oVO:OfficalVO = new OfficalVO(9,10,rowIndexTest,colIndexTest);
+			var oVO:BishopVO = new BishopVO(9,10,rowIndexTest,colIndexTest);
 			Assert.assertTrue(capturesExpect.xor(oVO.captures).isEmpty);
 		}
 		

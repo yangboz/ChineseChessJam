@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testrun name="" >
 <testsuite  name="Default Test Suite" project="CCJ">
-<testsuite name="flexUnitTests.chessVO.tests:OfficalVOTest" type="testcaseclass"/>
+<testsuite name="flexUnitTests:BishopVOSuite" type="testsuiteclass"/>
+<testsuite name="flexUnitTests:CannonVOSuite" type="testsuiteclass"/>
+<testsuite name="flexUnitTests:OfficalVOSuite" type="testsuiteclass"/>
+<testsuite name="flexUnitTests:RookVOSuite" type="testsuiteclass"/>
 </testsuite>
 </testrun>

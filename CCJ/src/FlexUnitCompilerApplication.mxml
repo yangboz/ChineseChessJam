@@ -8,11 +8,19 @@ Please click on the "Refresh" icon in "FlexUnit Results" view to regenerate this
 			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600">
 	<fx:Script>
 		<![CDATA[
+			import flexUnitTests.BishopVOSuite;
+			import flexUnitTests.chessVO.tests.BishopVOTest;
 			import flexUnitTests.OfficalVOSuite;
 			import flexUnitTests.CannonVOSuite;
 			import flexUnitTests.chessVO.tests.CannonVOTest;
 			import flexUnitTests.RookVOSuite;
 			import flexUnitTests.chessVO.tests.RookVOTest;
+			
+			private var flexUnitTests_BishopVOSuite_obj:flexUnitTests.BishopVOSuite;
+			
+			
+			private var flexUnitTests_chessVO_tests_BishopVOTest_obj:flexUnitTests.chessVO.tests.BishopVOTest;
+			
 			
 			private var flexUnitTests_OfficalVOSuite_obj:flexUnitTests.OfficalVOSuite;
 			

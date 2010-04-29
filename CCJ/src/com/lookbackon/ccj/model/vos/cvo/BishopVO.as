@@ -5,7 +5,10 @@ package com.lookbackon.ccj.model.vos.cvo
 	import com.lookbackon.ccj.model.ChessPiecesModel;
 	import com.lookbackon.ccj.model.ZobristKeysModel;
 	import com.lookbackon.ccj.model.vos.ZobristKeyVO;
+	import com.lookbackon.ccj.utils.LogUtil;
 	import com.lookbackon.ccj.utils.MathUtil;
+	
+	import mx.logging.ILogger;
 	
 	import org.osmf.layout.AbsoluteLayoutFacet;
 
@@ -16,6 +19,7 @@ package com.lookbackon.ccj.model.vos.cvo
 	 */	
 	public class BishopVO extends ChessVO
 	{
+		private static const LOG:ILogger = LogUtil.getLogger(BishopVO);
 		/**
 		 * @inheritDoc
 		 */
@@ -110,6 +114,10 @@ package com.lookbackon.ccj.model.vos.cvo
 			{
 				this.captures = this.moves.and(ChessPiecesModel.getInstance().redPieces);
 			}
+			//
+			LOG.info("occupies:{0}",this.occupies.dump());
+			LOG.info("moves:{0}",this.moves.dump());
+			LOG.info("captures:{0}",this.captures.dump());
 		}
 	}
 }
