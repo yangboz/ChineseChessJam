@@ -44,13 +44,26 @@ package com.lookbackon.ccj.model.vos.cvo
 			//* -
 			//- *
 			//TODO: implement function
-			//Notice:serveral admental(防守将问题)
 			//about occupies.
-			this.occupies.setBitt(rowIndex+1,colIndex+1,true);
-			this.occupies.setBitt(rowIndex+1,colIndex-1,true);
-			this.occupies.setBitt(rowIndex-1,colIndex+1,true);
-			this.occupies.setBitt(rowIndex-1,colIndex-1,true);
+			if(rowIndex%7!=2 && colIndex!=5 )
+			{
+				this.occupies.setBitt(rowIndex+1,colIndex+1,true);
+			}
+			if(rowIndex%7!=2 && colIndex!=3 )
+			{
+				this.occupies.setBitt(rowIndex+1,colIndex-1,true);
+			}
+			if(rowIndex%7!=0 && colIndex!=5 )
+			{
+				this.occupies.setBitt(rowIndex-1,colIndex+1,true);
+			}	
+			if(rowIndex%7!=0 && colIndex!=3 )
+			{
+				this.occupies.setBitt(rowIndex-1,colIndex-1,true);
+			}	
 			//about legal moves.
+			//Notice:serveral admental(防守将问题)
+			//TODO:
 			if(flag==CcjConstants.FLAG_RED)
 			{
 				this.moves = this.occupies.xor(this.occupies.and(ChessPiecesModel.getInstance().redPieces));

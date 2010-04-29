@@ -58,5 +58,20 @@ package flexUnitTests.chessVO.tests
 		virtual public function getSouth():void
 		{
 		}
+		//
+		[Test(descrption="ChessVO occuipes test")]
+		virtual public function occuipes():void
+		{
+		}
+		
+		[Test(descrption="ChessVO moves test")]
+		virtual public function moves():void
+		{
+		}
+		
+		[Test(descrption="ChessVO captures test")]
+		virtual public function captures():void
+		{
+		}
 	}
 }
