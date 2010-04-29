@@ -3,6 +3,9 @@ package com.lookbackon.ccj.model.vos.cvo
 	import com.lookbackon.ccj.CcjConstants;
 	import com.lookbackon.ccj.ChessPiecesConstants;
 	import com.lookbackon.ccj.model.ChessPiecesModel;
+	import com.lookbackon.ccj.utils.LogUtil;
+	
+	import mx.logging.ILogger;
 
 	/**
 	 * 
@@ -11,6 +14,20 @@ package com.lookbackon.ccj.model.vos.cvo
 	 */	
 	public class OfficalVO extends ChessVO
 	{
+		//--------------------------------------------------------------------------
+		//
+		//  Variables
+		//
+		//--------------------------------------------------------------------------
+		//----------------------------------
+		//  CONSTANTS
+		//----------------------------------
+		private static const LOG:ILogger = LogUtil.getLogger(OfficalVO);
+		//--------------------------------------------------------------------------
+		//
+		//  Constructor
+		//
+		//--------------------------------------------------------------------------
 		/**
 		 * @inheritDoc
 		 */
@@ -51,6 +68,9 @@ package com.lookbackon.ccj.model.vos.cvo
 			{
 				this.captures = this.moves.and(ChessPiecesModel.getInstance().redPieces);
 			}
+			LOG.info("occupies:{0}",this.occupies.dump());
+			LOG.info("moves:{0}",this.moves.dump());
+			LOG.info("captures:{0}",this.captures.dump());
 		}
 	}
 }

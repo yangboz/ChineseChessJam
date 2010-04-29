@@ -1,17 +1,19 @@
 package flexUnitTests.chessVO.tests
 {
 	import com.lookbackon.ccj.model.ChessPiecesModel;
+	import com.lookbackon.ccj.model.vos.cvo.CannonVO;
 	import com.lookbackon.ccj.model.vos.cvo.RookVO;
 	import com.lookbackon.ds.BitBoard;
 	
 	import org.flexunit.Assert;
-
-	public class RookVOTest extends ChessVOTestBase
+	
+	public class CannonVOTest extends ChessVOTestBase
 	{		
-		public function RookVOTest()
+		public function CannonVOTest()
 		{
 			super();
 		}
+		
 		[Before]
 		public function setUp():void
 		{
@@ -32,46 +34,59 @@ package flexUnitTests.chessVO.tests
 		{
 		}
 		
-		[Test(descrption="RooVO x-ray west attack test")]
+		override protected function initialization():void
+		{
+			super.initialization();
+			//
+			this.rowIndexTest = 2;
+			this.colIndexTest = 1;
+		}
+		
+		[Test(descrption="CannonVO x-ray west attack test")]
 		override public function getWest():void
 		{
 			var west:BitBoard = new BitBoard(9,10);
-			var rVO:RookVO = new RookVO(9,10,rowIndexTest,colIndexTest);
-//			Assert.assertEquals(rVO.getWest(0,0),west);//notice here forever fail.cuz strick Equals reference,not bitboard's content. 
-			Assert.assertTrue(west.xor(rVO.getWest(rowIndexTest,colIndexTest)).isEmpty);
+			west.setBitt(rowIndexTest,0,true);
+			var rVO:CannonVO = new CannonVO(9,10,rowIndexTest,colIndexTest);
+			//			Assert.assertEquals(rVO.getWest(0,0),west);//notice here forever fail.cuz strick Equals reference,not bitboard's content. 
+			var getWest:BitBoard = rVO.getWest(rowIndexTest,colIndexTest);
+			Assert.assertTrue(west.xor(getWest).isEmpty);
 		}
-		[Test(descrption="RooVO x-ray north attack test")]
+		[Test(descrption="CannonVO x-ray north attack test")]
 		override public function getNorth():void
 		{
 			var north:BitBoard = new BitBoard(9,10);
-			north.setBitt(0,0,true);
-			var rVO:RookVO = new RookVO(9,10,rowIndexTest,colIndexTest);
+			north.setBitt(1,colIndexTest,true);
+			var rVO:CannonVO = new CannonVO(9,10,rowIndexTest,colIndexTest);
 			//			Assert.assertEquals(rVO.getWest(0,0),west);//notice here forever fail.cuz strick Equals reference,not bitboard's content. 
-			Assert.assertTrue(north.xor(rVO.getNorth(rowIndexTest,colIndexTest)).isEmpty);
+			var getNorth:BitBoard = rVO.getNorth(rowIndexTest,colIndexTest);
+			Assert.assertTrue(north.xor(getNorth).isEmpty);
 		}
-		[Test(descrption="RooVO x-ray east attack test")]
+		[Test(descrption="CannonVO x-ray east attack test")]
 		override public function getEast():void
 		{
 			var east:BitBoard = new BitBoard(9,10);
-			east.setBitt(rowIndexTest,1,true);
 			east.setBitt(rowIndexTest,2,true);
 			east.setBitt(rowIndexTest,3,true);
 			east.setBitt(rowIndexTest,4,true);
 			east.setBitt(rowIndexTest,5,true);
 			east.setBitt(rowIndexTest,6,true);
-			east.setBitt(rowIndexTest,7,true);
-			east.setBitt(rowIndexTest,8,true);
-			var rVO:RookVO = new RookVO(9,10,rowIndexTest,colIndexTest);
+			var rVO:CannonVO = new CannonVO(9,10,rowIndexTest,colIndexTest);
 			//			Assert.assertEquals(rVO.getWest(0,0),west);//notice here forever fail.cuz strick Equals reference,not bitboard's content. 
-			Assert.assertTrue(east.xor(rVO.getEast(rowIndexTest,colIndexTest)).isEmpty);
+			var getEast:BitBoard = rVO.getEast(rowIndexTest,colIndexTest);
+			Assert.assertTrue(east.xor(getEast).isEmpty);
 		}
-		[Test(descrption="RooVO x-ray south attack test")]
+		[Test(descrption="CannonVO x-ray south attack test")]
 		override public function getSouth():void
 		{
 			var south:BitBoard = new BitBoard(9,10);
-//			south.setBitt(1,0,true);
-			south.setBitt(2,0,true);
-			var rVO:RookVO = new RookVO(9,10,rowIndexTest,colIndexTest);
+			//			south.setBitt(1,0,true);
+			south.setBitt(3,colIndexTest,true);
+			south.setBitt(4,colIndexTest,true);
+			south.setBitt(5,colIndexTest,true);
+			south.setBitt(6,colIndexTest,true);
+			south.setBitt(9,colIndexTest,true);
+			var rVO:CannonVO = new CannonVO(9,10,rowIndexTest,colIndexTest);
 			//			Assert.assertEquals(rVO.getWest(0,0),west);//notice here forever fail.cuz strick Equals reference,not bitboard's content. 
 			var getSouth:BitBoard = rVO.getSouth(rowIndexTest,colIndexTest);
 			Assert.assertTrue(south.xor(getSouth).isEmpty);

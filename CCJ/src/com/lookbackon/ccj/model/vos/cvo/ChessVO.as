@@ -57,7 +57,7 @@ package com.lookbackon.ccj.model.vos.cvo
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		protected static const LOG:ILogger = LogUtil.getLogger(ChessVO);
+		private static const LOG:ILogger = LogUtil.getLogger(ChessVO);
 		//--------------------------------------------------------------------------
 		//
 		//  Constructor

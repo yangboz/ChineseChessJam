@@ -8,10 +8,12 @@
 	<fx:Script>
 		<![CDATA[
 			import flexUnitTests.chessVO.tests.RookVOTest;
+			import flexUnitTests.chessVO.tests.CannonVOTest;
 			
 			public function currentRunTestSuite():Array
 			{
 				var testsToRun:Array = new Array();
+				testsToRun.push(flexUnitTests.chessVO.tests.CannonVOTest);
 				testsToRun.push(flexUnitTests.chessVO.tests.RookVOTest);
 				return testsToRun;
 			}
