@@ -1,6 +1,7 @@
 package flexUnitTests.chessVO.tests
 {
 	import com.lookbackon.ccj.model.ChessPiecesModel;
+	import com.lookbackon.ccj.model.vos.cvo.IChessVO;
 	import com.lookbackon.ds.BitBoard;
 	
 	import org.flexunit.Assert;
@@ -10,6 +11,7 @@ package flexUnitTests.chessVO.tests
 		//should bitscan all bitboard cell.
 		protected var rowIndexTest:int = 1;
 		protected var colIndexTest:int = 0;
+		protected var iChessVO:IChessVO;
 		
 		public function ChessVOTestBase()
 		{
