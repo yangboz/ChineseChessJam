@@ -3,6 +3,7 @@ package com.lookbackon.ccj.managers
 	import com.lookbackon.AI.searching.ISearchingBase;
 	import com.lookbackon.AI.searching.MinMax;
 	import com.lookbackon.AI.searching.SearchingBase;
+	import com.lookbackon.ccj.CcjConstants;
 	import com.lookbackon.ccj.model.ChessPiecesModel;
 	import com.lookbackon.ccj.model.HistoryTableModel;
 	import com.lookbackon.ccj.model.vos.ConductVO;
@@ -89,17 +90,16 @@ package com.lookbackon.ccj.managers
 				PopUpManager.createPopUp(FlexGlobals.topLevelApplication as DisplayObject,ThinkingProgressBar,true);
 			PopUpManager.centerPopUp(iThinkingProgressBar);
 			//about data
-			var conductVO:ConductVO = new ConductVO();
-			conductVO.target = ChessPieceManager.pieces.getItemAt(MathUtil.transactRandomNumberInRange(0,ChessPieceManager.pieces.length-1)) as ChessPiece;
-			conductVO.newPosition = new Point(3,1);
-			ChessPieceManager.makeMove(conductVO);
 			//TODO:
-			gameAI = new SearchingBase(new Array2(10,9));
-			var moves:ArrayCollection = gameAI.generateMoves(ChessPiecesModel.getInstance().reds,null);
+			gameAI = new SearchingBase(new Array2(CcjConstants.BOARD_V_LINES,CcjConstants.BOARD_H_LINES));
+			var moves:ArrayCollection = gameAI.generateMoves(ChessPiecesModel.getInstance().blues,null);
 			for(var i:int=0;i<moves.length;i++)
 			{
-//				LOG.info("moves:{0}:{1}",i.toString(),moves.getItemAt(i).dump());
+				LOG.debug("moves:#{0},detail:{1}",i.toString(),moves.getItemAt(i).dump());
 			}
+			var randomCVO:ConductVO = moves.getItemAt(MathUtil.transactRandomNumberInRange(0,moves.length-1)) as ConductVO;
+			LOG.debug("random cvo:{0}",randomCVO.dump());
+			ChessPieceManager.makeMove( randomCVO );
 		}
 		//----------------------------------
 		//  isHumanTurnNow

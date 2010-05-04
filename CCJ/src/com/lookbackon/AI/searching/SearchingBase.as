@@ -5,6 +5,7 @@ package com.lookbackon.AI.searching
 	import com.lookbackon.ccj.view.components.ChessPiece;
 	
 	import de.polygonal.ds.Array2;
+	
 	import flash.geom.Point;
 	
 	import mx.collections.ArrayCollection;
@@ -17,11 +18,24 @@ package com.lookbackon.AI.searching
 	 */	
 	public class SearchingBase implements ISearchingBase
 	{
+		//--------------------------------------------------------------------------
+		//
+		//  Variables
+		//
+		//--------------------------------------------------------------------------
 		protected var bestMove:ConductVO;
 		protected var moves:ArrayCollection;//conductVO's collection;
 		protected var tempMove:ConductVO;
 		protected var positionEvaluation:int;
 		protected var gamePosition:Array2;
+		//----------------------------------
+		//  CONSTANTS
+		//----------------------------------
+		//--------------------------------------------------------------------------
+		//
+		//  Constructor
+		//
+		//--------------------------------------------------------------------------
 		/**
 		 * To sum up this in one sentence: 
 		 * Computers play strategy games by generating 
@@ -35,38 +49,48 @@ package com.lookbackon.AI.searching
 			//TODO: implement function
 			this.gamePosition = gamePosition;
 		}
-		
+		//--------------------------------------------------------------------------
+		//
+		//  Methods
+		//
+		//--------------------------------------------------------------------------
+		//----------------------------------
+		//  generateMoves(native)
+		//----------------------------------
 		//return all possbility movements;
 		/**
 		 * This function generates all possible moves and stores them in the arraycollection.
 		 * It returns the arraycollection of the legal moves.
-		 * @param reds
+		 * @param blues computer's chess pieces type.
 		 * @return all possible moves
 		 * 
 		 */		
-		public function generateMoves(reds:ArrayCollection, gamePosition:Array2):ArrayCollection
+		public function generateMoves(blues:ArrayCollection, gamePosition:Array2):ArrayCollection
 		{
 			var resultAC:ArrayCollection = new ArrayCollection();
-			for(var i:int=0;i<reds.length;i++)
+			for(var i:int=0;i<blues.length;i++)
 			{
-				var conductVO:ConductVO = new ConductVO();
-				var cp:ChessPiece = reds.getItemAt(i) as ChessPiece;
-				conductVO.target = cp;
+				var cp:ChessPiece = blues.getItemAt(i) as ChessPiece;
 				for(var c:int=0;c<cp.chessVO.moves.column;c++)
 				{
 					for(var r:int=0;r<cp.chessVO.moves.row;r++)
 					{
 						if(cp.chessVO.moves.getBitt(r,c))
 						{
+							var conductVO:ConductVO = new ConductVO();
+							conductVO.target = cp;
 							conductVO.newPosition = new Point(c,r);
 							resultAC.addItem(conductVO);
-//							trace("anew conductVO:",conductVO.dump());
+//							trace("anew ",conductVO.dump());
 						}
 					}
 				}
 			}
 			return resultAC;
 		}
+		//----------------------------------
+		//  applyMovement(native)
+		//----------------------------------
 		/**
 		 * Obviously,the struct move must contain all information necessary to support this operations.
 		 * As always,the structures are passed by reference,
@@ -81,7 +105,9 @@ package com.lookbackon.AI.searching
 			//TODO:
 			return new Array2(9,10);
 		}
-		
+		//----------------------------------
+		//  makeNextMove(native)
+		//----------------------------------
 		private var previewPiece:ChessPiece;//for backup selectedPieceButton;
 		protected var cloneOfGamePosition:Array2;//for backup gamePosition;
 		/**
@@ -92,6 +118,9 @@ package com.lookbackon.AI.searching
 		{
 			//TODO:
 		}
+		//----------------------------------
+		//  unmakePreMove(native)
+		//----------------------------------
 		/**
 		 * Unmake preview move 
 		 * @param conductVO
@@ -101,6 +130,9 @@ package com.lookbackon.AI.searching
 			cloneOfGamePosition.sett(conductVO.newPosition.x,conductVO.newPosition.y,null);
 			cloneOfGamePosition.sett(previewPiece.position.x,previewPiece.position.y,previewPiece);
 		}
+		//----------------------------------
+		//  doEvaluation(virtual)
+		//----------------------------------
 		/**
 		 * The evaluation function will return positive values if the position is good for red and negative values
 		 * if the position is bad for red in the MinMax formulation.

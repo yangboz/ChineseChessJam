@@ -4,7 +4,8 @@
 			   xmlns:mx="library://ns.adobe.com/flex/halo" 
 			   xmlns:components="com.lookbackon.ccj.view.components.*"
 			   creationComplete="application1_creationCompleteHandler(event)" 
-			   applicationComplete="application1_applicationCompleteHandler(event)" >
+			   applicationComplete="application1_applicationCompleteHandler(event)" 
+			   >
 	<s:layout>
 		<s:BasicLayout/>
 	</s:layout>
@@ -36,7 +37,7 @@
 			private var chessPositionModel:ChessPiecesModel = ChessPiecesModel.getInstance();
 			//
 			[Bindable]
-			private var logFilters:Array = ["com.lookbackon.ccj.model.vos.cvo.PawnVO"];
+			private var logFilters:Array = ["com.lookbackon.ccj.managers.GameManager"];
 			//----------------------------------
 			//  CONSTANTS
 			//----------------------------------
@@ -118,6 +119,6 @@
 	</fx:Declarations>
 	
 	<!-- Views here -->
-	<components:ChessBoard left="50" right="50" top="25" bottom="25"/>
+	<components:ChessBoard id="chessBoard" left="50" right="50" top="25" bottom="25"/>
 	
 </s:Application>

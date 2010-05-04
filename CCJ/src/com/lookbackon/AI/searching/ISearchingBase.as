@@ -12,7 +12,7 @@ package com.lookbackon.AI.searching
 	 */	
 	public interface ISearchingBase
 	{
-		function generateMoves(reds:ArrayCollection,gamePosition:Array2):ArrayCollection;
+		function generateMoves(blues:ArrayCollection,gamePosition:Array2):ArrayCollection;
 		function applyMovement(conductVO:ConductVO):Array2;
 		function doEvaluation(conductVO:ConductVO):int;
 	}

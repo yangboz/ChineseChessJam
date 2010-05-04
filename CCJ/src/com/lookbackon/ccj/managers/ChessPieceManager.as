@@ -15,6 +15,7 @@ package com.lookbackon.ccj.managers
 	import flash.events.MouseEvent;
 	
 	import mx.collections.ArrayCollection;
+	import mx.controls.Alert;
 	import mx.core.IUIComponent;
 	import mx.core.IVisualElement;
 	import mx.events.DragEvent;
@@ -95,8 +96,10 @@ package com.lookbackon.ccj.managers
 			}*/
 			//manually move chess pieces handler.
 			//
+			var cGasketIndex:int = conductVO.newPosition.y*CcjConstants.BOARD_V_LINES+conductVO.newPosition.x-1;
+			Alert.show(cGasketIndex.toString(),"cGasketIndex");
 			var cGasket:ChessGasket = 
-				ChessPieceManager.gaskets.getItemAt(conductVO.newPosition.y*CcjConstants.BOARD_V_LINES+conductVO.newPosition.x) as ChessGasket;
+				ChessPieceManager.gaskets.getItemAt(cGasketIndex) as ChessGasket;
 			//hold gasket skin,then remove previous chess piece.
 //			cGasket.dispatchEvent(new DragEvent(DragEvent.DRAG_ENTER,false,true,conductVO.target));
 //			cGasket.dispatchEvent(new DragEvent(DragEvent.DRAG_DROP,false,true,conductVO.target));	
@@ -105,8 +108,8 @@ package com.lookbackon.ccj.managers
 				cGasket.removeElementAt(1);
 			}
 			cGasket.addElement(conductVO.target as IVisualElement);
-			(cGasket.getElementAt(1) as ChessPiece).x = 0;
-			(cGasket.getElementAt(1) as ChessPiece).y = 0;
+//			(cGasket.getElementAt(1) as ChessPiece).x = 0;
+//			(cGasket.getElementAt(1) as ChessPiece).y = 0;
 			//
 			GameManager.isHumanTurnNow();
 		}
