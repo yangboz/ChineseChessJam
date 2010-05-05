@@ -15,7 +15,6 @@ package com.lookbackon.ccj.managers
 	import flash.events.MouseEvent;
 	
 	import mx.collections.ArrayCollection;
-	import mx.controls.Alert;
 	import mx.core.IUIComponent;
 	import mx.core.IVisualElement;
 	import mx.events.DragEvent;
@@ -96,8 +95,8 @@ package com.lookbackon.ccj.managers
 			}*/
 			//manually move chess pieces handler.
 			//
-			var cGasketIndex:int = conductVO.newPosition.y*CcjConstants.BOARD_V_LINES+conductVO.newPosition.x-1;
-			Alert.show(cGasketIndex.toString(),"cGasketIndex");
+			var cGasketIndex:int = conductVO.newPosition.y*CcjConstants.BOARD_H_LINES+conductVO.newPosition.x;
+//			trace(cGasketIndex.toString(),"cGasketIndex");
 			var cGasket:ChessGasket = 
 				ChessPieceManager.gaskets.getItemAt(cGasketIndex) as ChessGasket;
 			//hold gasket skin,then remove previous chess piece.
@@ -108,8 +107,9 @@ package com.lookbackon.ccj.managers
 				cGasket.removeElementAt(1);
 			}
 			cGasket.addElement(conductVO.target as IVisualElement);
-//			(cGasket.getElementAt(1) as ChessPiece).x = 0;
-//			(cGasket.getElementAt(1) as ChessPiece).y = 0;
+			//adjust the chess piece's position.
+			conductVO.target.x = 0;
+			conductVO.target.y = 0;
 			//
 			GameManager.isHumanTurnNow();
 		}

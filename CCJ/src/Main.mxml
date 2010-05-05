@@ -52,9 +52,9 @@
 			{
 				// TODO Auto-generated method stub
 				//create chess gaskets.
-				for(var h:int=0;h<CcjConstants.BOARD_H_LINES;h++)
+				for(var v:int=0;v<CcjConstants.BOARD_V_LINES;v++)
 				{
-					for(var v:int=0;v<CcjConstants.BOARD_V_LINES;v++)
+					for(var h:int=0;h<CcjConstants.BOARD_H_LINES;h++)
 					{
 						var cGasket:IVisualElement = 
 							this.addElement( ChessFactory.createChessGasket(new Point(h,v)) );
