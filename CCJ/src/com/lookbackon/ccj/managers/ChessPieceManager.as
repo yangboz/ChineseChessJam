@@ -80,10 +80,11 @@ package com.lookbackon.ccj.managers
 		public static function makeMove(conductVO:ConductVO):void
 		{
 			//TODO:implement functions.
-			//update ZobristKeys
+			//TODO:update ZobristKeys
 			/*var zKeyVO:ZobristKeyVO = new ZobristKeyVO();
 			var pX:int = conductVO.newPosition.x;
 			var pY:int = conductVO.newPosition.y;
+			LOG.debug("before move:{0}",ZobristKeysModel.getInstance().redRook.dump());
 			if(conductVO.target.flag==CcjConstants.FLAG_RED)
 			{
 				ZobristKeysModel.getInstance().redRook.position.sett(pX,pY,
@@ -92,8 +93,9 @@ package com.lookbackon.ccj.managers
 			{
 				ZobristKeysModel.getInstance().redRook.position.sett(pX,pY,
 					pmPRNG.nextInt()^ZobristKeysModel.getInstance().redRook.position.gett(pX,pY) );
-			}*/
-			//manually move chess pieces handler.
+			}
+			LOG.debug("after move:{0}",ZobristKeysModel.getInstance().redRook.dump());*/
+			//manually move chess pieces handler.;
 			//
 			var cGasketIndex:int = conductVO.newPosition.y*CcjConstants.BOARD_H_LINES+conductVO.newPosition.x;
 //			trace(cGasketIndex.toString(),"cGasketIndex");
@@ -110,7 +112,7 @@ package com.lookbackon.ccj.managers
 			//adjust the chess piece's position.
 			conductVO.target.x = 0;
 			conductVO.target.y = 0;
-			//
+			//switch turn flag.
 			GameManager.isHumanTurnNow();
 		}
 	}

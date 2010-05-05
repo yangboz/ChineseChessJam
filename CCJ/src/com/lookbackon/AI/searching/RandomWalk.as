@@ -71,7 +71,6 @@ package com.lookbackon.AI.searching
 						pValue = doEvaluation(moves.getItemAt(i) as ConductVO);
 					}
 				}
-//				bestMove = moves.getItemAt(randomStep) as ConductVO;
 				LOG.debug("randomed bestMove:{0}",bestMove.dump());
 				LOG.debug("max position value:{0}",pValue);
 				applyMovement(bestMove);

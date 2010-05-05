@@ -15,11 +15,11 @@ package com.lookbackon.ccj.model.vos
 	public class ZobristKeyVO extends EventDispatcher
 	{
 		//chess colour bit board.
-		[Bindable]public var color:Array2 = new Array2(CcjConstants.BOARD_H_LINES,CcjConstants.BOARD_V_LINES);
+		public var color:Array2 = new Array2(CcjConstants.BOARD_H_LINES,CcjConstants.BOARD_V_LINES);
 		//chess type bit board.
-		[Bindable]public var type:Array2 = new Array2(CcjConstants.BOARD_H_LINES,CcjConstants.BOARD_V_LINES);
+		public var type:Array2 = new Array2(CcjConstants.BOARD_H_LINES,CcjConstants.BOARD_V_LINES);
 		//chess position bit board.
-		[Bindable]public var position:Array2 = new Array2(CcjConstants.BOARD_H_LINES,CcjConstants.BOARD_V_LINES);
+		public var position:Array2 = new Array2(CcjConstants.BOARD_H_LINES,CcjConstants.BOARD_V_LINES);
 		/**
 		 * Prints out all elements (for debug/demo purposes).
 		 * 

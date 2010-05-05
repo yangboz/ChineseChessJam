@@ -30,7 +30,7 @@ package com.lookbackon.ccj.managers
 	/**
 	 * A player manager class to maintain turn-based game.
 	 * 
-	 * @author knight.zhou
+	 * @author Knight.zhou
 	 * 
 	 */	
 	public class GameManager
@@ -40,7 +40,7 @@ package com.lookbackon.ccj.managers
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		private static var searching:ISearchingBase;
+		public static var turnFlag:Boolean = Boolean(CcjConstants.FLAG_BLUE);
 		private static var iThinkingProgressBar:IFlexDisplayObject;
 		private static var gameAI:ISearchingBase;
 		//----------------------------------
@@ -93,7 +93,8 @@ package com.lookbackon.ccj.managers
 			//about data
 			//TODO:switch any searching class to test.
 			gameAI = new RandomWalk(new Array2(CcjConstants.BOARD_V_LINES,CcjConstants.BOARD_H_LINES));
-			//
+			//hold turn flag
+			turnFlag = Boolean(CcjConstants.FLAG_BLUE);
 		}
 		//----------------------------------
 		//  isHumanTurnNow
@@ -111,6 +112,8 @@ package com.lookbackon.ccj.managers
 			}
 			//about data
 			
+			//hold turn flag
+			turnFlag = Boolean(CcjConstants.FLAG_RED);
 		}
 		
 	}
