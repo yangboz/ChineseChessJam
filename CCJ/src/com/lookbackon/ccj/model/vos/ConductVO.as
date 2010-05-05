@@ -7,7 +7,7 @@ package com.lookbackon.ccj.model.vos
 
 	/**
 	 * 
-	 * @author knight.zhou
+	 * @author Knight.zhou
 	 * 
 	 */
 	public class ConductVO extends EventDispatcher

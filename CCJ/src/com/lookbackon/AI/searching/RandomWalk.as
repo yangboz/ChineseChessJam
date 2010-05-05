@@ -1,29 +1,29 @@
 package com.lookbackon.AI.searching
 {
-	import com.godpaper.twoHitOne.busniess.managers.PiecesManager;
-	import com.godpaper.twoHitOne.busniess.managers.PlayerManager;
-	import com.godpaper.twoHitOne.model.BoardModel;
-	import com.godpaper.twoHitOne.model.PiecesModel;
-	import com.godpaper.twoHitOne.util.NumberUtil;
-	import com.godpaper.twoHitOne.util.PositionTransactUtil;
-	import com.godpaper.twoHitOne.views.components.GasketButton;
-	import com.godpaper.twoHitOne.views.components.PieceButton;
-	import com.godpaper.twoHitOne.vo.ConductVO;
+	import com.lookbackon.ccj.managers.GameManager;
+	import com.lookbackon.ccj.model.ChessPiecesModel;
+	import com.lookbackon.ccj.model.vos.ConductVO;
+	import com.lookbackon.ccj.utils.LogUtil;
+	import com.lookbackon.ccj.utils.MathUtil;
 	
 	import de.polygonal.ds.Array2;
 	
 	import mx.collections.ArrayCollection;
+	import mx.logging.ILogger;
+	import mx.utils.ObjectUtil;
 
 	/**
 	 *
 	 * This essay is a detailed explanation of one of the most important
 	 * data structures ever created for Game Artificial Intelligence. 
 	 * The minimax tree is at the heart of almost every board game program in existence.
+	 * 
+	 * @author Knight-errant
 	 */	
 	public class RandomWalk extends SearchingBase
 	{
+		private static const LOG:ILogger = LogUtil.getLogger(RandomWalk);
 		/**
-		 * @author Knight-errant
 		 * About RandomWalkAI(瞎走)
     	 * if(game over in current board position)
          * return winner
@@ -48,15 +48,20 @@ package com.lookbackon.AI.searching
 		        return α
 			*/
 			bestMove = new ConductVO();
-			moves =  generateMoves(PiecesModel.getInstance().redPiecesCollection,gamePosition);
+			moves =  generateMoves( ChessPiecesModel.getInstance().blues,gamePosition);
 			if(moves.length<=0)
 			{
-				PlayerManager.humanWin();//pluge to death.
+				GameManager.humanWin();//pluge to death.
 			}else
 			{
-				trace("all possbility moves:",moves.toArray().toString());
-				var randomStep:int = NumberUtil.randomNumberWithScope(0,moves.length-1);
-				trace("randomStep:",randomStep);
+				//for test.
+				for(var t:int=0;t<moves.length;t++)
+				{
+					LOG.debug("moves:#{0},detail:{1}",t.toString(),moves.getItemAt(t).dump());
+				}
+				var randomStep:int = MathUtil.transactRandomNumberInRange(0,moves.length-1);
+				LOG.debug("randomStep:{0}",randomStep.toString());
+				//evaluation.
 				var pValue:int=-1;
 				for(var i:int=0;i<moves.length;i++)
 				{
@@ -67,23 +72,12 @@ package com.lookbackon.AI.searching
 					}
 				}
 //				bestMove = moves.getItemAt(randomStep) as ConductVO;
-				trace("randomed bestMove:",bestMove);
-				trace("max position value:",pValue);
+				LOG.debug("randomed bestMove:{0}",bestMove.dump());
+				LOG.debug("max position value:{0}",pValue);
 				applyMovement(bestMove);
 			}
 		}	
-		/*
-		How long does this(MinMax) algorithm take? 
-		For a simple game like tic tac toe, not too long - it is certainly possible to search all possible positions.
-		For a game like Chess or Go however, the running time is prohibitively expensive.
-		In fact, to completely search either of these games, we would first need to develop interstellar travel, 
-		as by the time we finish analyzing a move the sun will have gone nova and the earth will no longer exist. 
-		Therefore, all real computer games will search, not to the end of the game, but only a few moves ahead. 
-		Of course, now the program must determine whether a certain board position is 'good' or 'bad' for a certainly player. 
-		This is often done using an evaluation function. This function is the key to a strong computer game; 
-		after all, it does little good to be able to look ahead 20 moves,
-		if, after we do, we decide that the position is good for us, when in fact, it is terrible! 
-		*/
+		//return random position value.
 		override public function doEvaluation(conductVO:ConductVO):int
 		{
 			//Todo:doEvaluation about assumpted conductVO;

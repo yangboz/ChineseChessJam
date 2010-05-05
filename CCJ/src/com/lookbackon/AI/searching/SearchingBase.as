@@ -1,6 +1,7 @@
 package com.lookbackon.AI.searching
 {
 	import com.lookbackon.ccj.business.factory.ChessFactory;
+	import com.lookbackon.ccj.managers.ChessPieceManager;
 	import com.lookbackon.ccj.model.vos.ConductVO;
 	import com.lookbackon.ccj.view.components.ChessPiece;
 	
@@ -11,10 +12,11 @@ package com.lookbackon.AI.searching
 	import mx.collections.ArrayCollection;
 	
 	 /**
-	 * @author Knight-errant
 	 * This essay is a detailed explanation of one of the most important
-	 * data structures ever created for Game Artificial Intelligence. 
-	 * The minimax tree is at the heart of almost every board game program in existence.
+	 * data structures ever created for Game Artificial Intelligence. </p>
+	 * The minimax tree is at the heart of almost every board game program in existence.</p>
+	 * 
+	 * @author Knight-errant
 	 */	
 	public class SearchingBase implements ISearchingBase
 	{
@@ -37,11 +39,11 @@ package com.lookbackon.AI.searching
 		//
 		//--------------------------------------------------------------------------
 		/**
-		 * To sum up this in one sentence: 
+		 * To sum up this in one sentence: </p>
 		 * Computers play strategy games by generating 
 		 * all possible continuations up to a (more or less) fixed depth 
-		 * and evaluating the resulting positions, 
-		 * which allows them to choose the best of these continuations. 
+		 * and evaluating the resulting positions, </p>
+		 * which allows them to choose the best of these continuations. </p>
 		 * 
 		 */		
 		public function SearchingBase(gamePosition:Array2)
@@ -59,13 +61,13 @@ package com.lookbackon.AI.searching
 		//----------------------------------
 		//return all possbility movements;
 		/**
-		 * This function generates all possible moves and stores them in the arraycollection.
-		 * It returns the arraycollection of the legal moves.
+		 * This function generates all possible moves and stores them in the arraycollection.</p>
+		 * It returns the arraycollection of the legal moves.</p>
 		 * @param blues computer's chess pieces type.
 		 * @return all possible moves
 		 * 
 		 */		
-		public function generateMoves(blues:ArrayCollection, gamePosition:Array2):ArrayCollection
+		final public function generateMoves(blues:ArrayCollection, gamePosition:Array2):ArrayCollection
 		{
 			var resultAC:ArrayCollection = new ArrayCollection();
 			for(var i:int=0;i<blues.length;i++)
@@ -92,16 +94,17 @@ package com.lookbackon.AI.searching
 		//  applyMovement(native)
 		//----------------------------------
 		/**
-		 * Obviously,the struct move must contain all information necessary to support this operations.
-		 * As always,the structures are passed by reference,
-		 * in this case it is not only a speed question:
-		 * the position will be modified by this functions 
+		 * Obviously,the struct move must contain all information necessary to support this operations.</p>
+		 * As always,the structures are passed by reference,</p>
+		 * in this case it is not only a speed question:</p>
+		 * the position will be modified by this functions.</p>
 		 * @param conductVO
 		 * @return modified gameposition
 		 * 
 		 */		
-		public function applyMovement(conductVO:ConductVO):Array2
+		final public function applyMovement(conductVO:ConductVO):Array2
 		{
+			ChessPieceManager.makeMove( conductVO );
 			//TODO:
 			return new Array2(9,10);
 		}
@@ -134,21 +137,22 @@ package com.lookbackon.AI.searching
 		//  doEvaluation(virtual)
 		//----------------------------------
 		/**
-		 * The evaluation function will return positive values if the position is good for red and negative values
-		 * if the position is bad for red in the MinMax formulation.
+		 * The evaluation function will return positive values if the position is good for red and negative values.</p>
+		 * if the position is bad for red in the MinMax formulation.</p>
 		 * Many things could be said about evaluation functions,
-		 * for me,the two main objectives in designing a evaluation function are speed and accuracy.
-		 * The faster your evaluation function is,the better is.
-		 * and the more accurate its evaluation is,the beeter.
+		 * for me,the two main objectives in designing a evaluation function are speed and accuracy.</p>
+		 * The faster your evaluation function is,the better is.</p>
+		 * and the more accurate its evaluation is,the beeter.</p>
 		 * Obviously,these two things are somewhat at odds:
-		 * an accurate evaluation function probably is slower than a 'quick-and-dirty' one.
-		 * The evaluation function I'm taking about here is a heuristic one -not a exact one.
+		 * an accurate evaluation function probably is slower than a 'quick-and-dirty' one.</p>
+		 * The evaluation function I'm taking about here is a heuristic one -not a exact one.</p>
 		 * @see http://www.fierz.ch/strategy1.htm
 		 * @param conductVO
 		 * @return evaluation result 
 		 * 
 		 */		
-		virtual public function doEvaluation(conductVO:ConductVO):int
+		//virtual functions.
+		public function doEvaluation(conductVO:ConductVO):int
 		{
 			return 0;
 		}

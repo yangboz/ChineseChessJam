@@ -5,24 +5,24 @@ package com.lookbackon.ccj
 	import de.polygonal.math.PM_PRNG;
 
 	/**
-	 * Summary description for ZC(ZobristConstants).
-	 * In breakthrough, 
+	 * <b>Summary description for ZC(ZobristConstants).</b></p>
+	 * In breakthrough, </p>
 	 * the transposition table proven to be very effective for detecting duplicate positions 
-	 * and as well for Iterative Deepening (re-search is almost done instantaneously).
-	 * Zobrist hashing was used in the algorithm in order to create the transposition table. 
+	 * and as well for Iterative Deepening (re-search is almost done instantaneously).</p>
+	 * Zobrist hashing was used in the algorithm in order to create the transposition table. </p>
 	 * According to original research, the better are the random generated numbers, 
-	 * the better would be the actual distribution and the collisions could be avoided.  
-	 * Since the engine was build in C# which offers a way to generate pseudo-random numbers.  
-	 * Pseudo-random numbers are chosen with equal probability from a finite set of numbers. 
+	 * the better would be the actual distribution and the collisions could be avoided.  </p>
+	 * Since the engine was build in C# which offers a way to generate pseudo-random numbers.  </p>
+	 * Pseudo-random numbers are chosen with equal probability from a finite set of numbers. </p>
 	 * The chosen numbers are not completely random because a definite mathematical algorithm 
-	 * is used to select them, but they are sufficiently random for practical purposes.
+	 * is used to select them, but they are sufficiently random for practical purposes.</p>
 	 * However, to ensure better quality of random numbers distribution, 
 	 * the Zobrist hashing was enhanced with the Mersenne Twister pseudo-random number generator, 
 	 * developed in 1997 by Makoto Matsumoto and Takuji Nishimura that 
-	 * is based on a matrix linear recurrence over a finite binary field. 
+	 * is based on a matrix linear recurrence over a finite binary field. </p>
 	 * It provides for fast generation of very high-quality pseudorandom numbers, 
-	 * having been designed specifically to rectify many of the flaws found in older algorithms. 
-	 * It is designed with consideration on the flaws of various existing generators.  
+	 * having been designed specifically to rectify many of the flaws found in older algorithms. </p>
+	 * It is designed with consideration on the flaws of various existing generators.  </p>
 	 * 
 	 * @author knight.zhou
 	 * 

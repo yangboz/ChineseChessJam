@@ -17,18 +17,18 @@ package com.lookbackon.ccj.model
 	
 	/**
 	 * <b>A singleton model hold chess board opening book information.</b></p>
-	 * Whether you like it or not,opening book are very important in many games.
-	 * Some games already have a large body of thory produced by humams(e.g. chess,checker),
-	 * for other games,particularly for relatively new or less popular games, there is nothing to go on. 
-	 * For those games where humans are competitive (like in chess), 
-	 * there is a simple approach to generating an opening book: produce it manually, 
-	 * selecting moves played by strong players. 
-	 * This type of approach is obivously not very interesting for our purposes, 
-	 * and for games where there is no theory or where computers are already superior to humans (like checkers), 
+	 * Whether you like it or not,opening book are very important in many games.</p>
+	 * Some games already have a large body of thory produced by humams(e.g. chess,checker),</p>
+	 * for other games,particularly for relatively new or less popular games, there is nothing to go on. </p>
+	 * For those games where humans are competitive (like in chess), </p>
+	 * there is a simple approach to generating an opening book: </p>
+	 * produce it manually, selecting moves played by strong players. </p>
+	 * This type of approach is obivously not very interesting for our purposes, </p>
+	 * and for games where there is no theory or where computers are already superior to humans (like checkers), </p>
 	 * it is impossible or pointless. I will only look at approaches to generating books without manual intervention.</p>
 	 * 
 	 * <b>Automated generation from a database</b></p>
-	 * A simple way to generate an opening book is to take a database of games,
+	 * A simple way to generate an opening book is to take a database of games,</p>
 	 * and select promising moves based on the results of games in that database.</p>
 	 * 
 	 * <b>Automated computation by drop-out expansion</b></p>

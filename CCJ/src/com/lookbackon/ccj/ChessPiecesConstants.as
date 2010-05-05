@@ -2,6 +2,9 @@ package com.lookbackon.ccj
 {
 	import com.lookbackon.ccj.utils.Enum;
 	/**
+	 * <b>ChessPieces value/label global setting</b></p>
+	 * 1.label for labeling chess pieces button;</p>
+	 * 2.value for chess pieces' evaluation;</p>
 	 * 
 	 * @author Knight.zhou
 	 * 

@@ -2,6 +2,7 @@ package com.lookbackon.ccj.managers
 {
 	import com.lookbackon.AI.searching.ISearchingBase;
 	import com.lookbackon.AI.searching.MinMax;
+	import com.lookbackon.AI.searching.RandomWalk;
 	import com.lookbackon.AI.searching.SearchingBase;
 	import com.lookbackon.ccj.CcjConstants;
 	import com.lookbackon.ccj.model.ChessPiecesModel;
@@ -90,16 +91,9 @@ package com.lookbackon.ccj.managers
 				PopUpManager.createPopUp(FlexGlobals.topLevelApplication as DisplayObject,ThinkingProgressBar,true);
 			PopUpManager.centerPopUp(iThinkingProgressBar);
 			//about data
-			//TODO:
-			gameAI = new SearchingBase(new Array2(CcjConstants.BOARD_V_LINES,CcjConstants.BOARD_H_LINES));
-			var moves:ArrayCollection = gameAI.generateMoves(ChessPiecesModel.getInstance().blues,null);
-			for(var i:int=0;i<moves.length;i++)
-			{
-				LOG.debug("moves:#{0},detail:{1}",i.toString(),moves.getItemAt(i).dump());
-			}
-			var randomCVO:ConductVO = moves.getItemAt(MathUtil.transactRandomNumberInRange(0,moves.length-1)) as ConductVO;
-			LOG.debug("random cvo:{0}",randomCVO.dump());
-			ChessPieceManager.makeMove( randomCVO );
+			//TODO:switch any searching class to test.
+			gameAI = new RandomWalk(new Array2(CcjConstants.BOARD_V_LINES,CcjConstants.BOARD_H_LINES));
+			//
 		}
 		//----------------------------------
 		//  isHumanTurnNow

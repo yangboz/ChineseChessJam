@@ -15,12 +15,13 @@ package com.lookbackon.AI.searching
 	import mx.collections.ArrayCollection;
 	
 	/**
-	 * @author Knight-errant
-	 * Class ShortSightedAI(鼠目寸光)
-	 * cannot see beyond one's nose; 
+	 * About ShortSightedAI(鼠目寸光)
+	 * cannot see beyond one's nose; </p>
 	 * This essay is a detailed explanation of one of the most important
-	 * data structures ever created for Game Artificial Intelligence. 
-	 * The minimax tree is at the heart of almost every board game program in existence.
+	 * data structures ever created for Game Artificial Intelligence. </p>
+	 * The minimax tree is at the heart of almost every board game program in existence.</p>
+	 * 
+	 * @author Knight-errant
 	 */	
 	public class ShortSighted extends SearchingBase
 	{
@@ -62,6 +63,7 @@ package com.lookbackon.AI.searching
 				applyMovement(bestMove);
 			}
 		}	
+		//
 		override public function doEvaluation(conductVO:ConductVO):int
 		{
 			//TODO: implement function

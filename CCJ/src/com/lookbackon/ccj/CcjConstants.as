@@ -1,8 +1,12 @@
 package com.lookbackon.ccj
 {
 	/**
+	 * <b>ChineseChessJam constants as follows:</b></p>
+	 * 1.global chess board width and heigt setting;</p>
+	 * 2.global chess pieces' flag setting(top is blue(computer),bottom is red(human));</p>
+	 * 3.global chess pieces' color setting(blue/red);</p>
 	 * 
-	 * @author knight.zhou
+	 * @author Knight.zhou
 	 * 
 	 */	
 	public class CcjConstants
