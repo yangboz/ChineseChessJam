@@ -40,21 +40,32 @@ package com.lookbackon.ccj.managers
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		public static var turnFlag:Boolean = Boolean(CcjConstants.FLAG_BLUE);
+		private static var _turnFlag:int;
 		private static var iThinkingProgressBar:IFlexDisplayObject;
 		private static var gameAI:ISearchingBase;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
 		private static const LOG:ILogger = LogUtil.getLogger(GameManager);
-		//generation.
+		//--------------------------------------------------------------------------
+		//
+		//  Properties
+		//
+		//--------------------------------------------------------------------------
+		//----------------------------------
+		//  turnFlag(read-only)
+		//----------------------------------
+		public static function get turnFlag():int
+		{
+			return _turnFlag;
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Methods
 		//
 		//--------------------------------------------------------------------------
 		//----------------------------------
-		//  CONSTANTS
+		//  startGame
 		//----------------------------------
 		public static function startGame():void
 		{
@@ -84,6 +95,8 @@ package com.lookbackon.ccj.managers
 		public static function isComputerTurnNow():void
 		{
 			//TODO:
+			//hold turn flag
+			_turnFlag = CcjConstants.FLAG_BLUE;
 			//about view
 			CursorManager.setBusyCursor();
 			//
@@ -93,8 +106,6 @@ package com.lookbackon.ccj.managers
 			//about data
 			//TODO:switch any searching class to test.
 			gameAI = new RandomWalk(new Array2(CcjConstants.BOARD_V_LINES,CcjConstants.BOARD_H_LINES));
-			//hold turn flag
-			turnFlag = Boolean(CcjConstants.FLAG_BLUE);
 		}
 		//----------------------------------
 		//  isHumanTurnNow
@@ -102,6 +113,8 @@ package com.lookbackon.ccj.managers
 		public static function isHumanTurnNow():void
 		{
 			//TODO:
+			//hold turn flag
+			_turnFlag = CcjConstants.FLAG_RED;
 			//about view
 			CursorManager.removeBusyCursor();
 			//
@@ -112,8 +125,6 @@ package com.lookbackon.ccj.managers
 			}
 			//about data
 			
-			//hold turn flag
-			turnFlag = Boolean(CcjConstants.FLAG_RED);
 		}
 		
 	}

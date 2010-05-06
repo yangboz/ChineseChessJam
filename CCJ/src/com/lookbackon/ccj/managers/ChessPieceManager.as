@@ -35,14 +35,55 @@ package com.lookbackon.ccj.managers
 		//--------------------------------------------------------------------------
 		private static var pmPRNG:PM_PRNG = new PM_PRNG();
 		//
-		public static var pieces:ArrayCollection = new ArrayCollection();
-		public static var gaskets:ArrayCollection = new ArrayCollection();
-		public static var redPieces:ArrayCollection = new ArrayCollection();
-		public static var bluePieces:ArrayCollection = new ArrayCollection();
+		private static var _pieces:ArrayCollection = new ArrayCollection();
+		private static var _gaskets:ArrayCollection = new ArrayCollection();
+		private static var _redPieces:ArrayCollection = new ArrayCollection();
+		private static var _bluePieces:ArrayCollection = new ArrayCollection();
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
 		private static const LOG:ILogger = LogUtil.getLogger(ChessPieceManager);
+		//--------------------------------------------------------------------------
+		//
+		//  Properties
+		//
+		//--------------------------------------------------------------------------
+		//----------------------------------
+		//  gaskets
+		//----------------------------------
+		public static function get gaskets():ArrayCollection
+		{
+			return _gaskets;
+		}
+		public static function set gaskets(value:ArrayCollection):void
+		{
+			_gaskets = value;
+		}
+		//----------------------------------
+		//  pieces
+		//----------------------------------
+		public static function get pieces():ArrayCollection
+		{
+			return _pieces;
+		}
+		public static function set pieces(value:ArrayCollection):void
+		{
+			_pieces = value;
+		}
+		//----------------------------------
+		//  redPieces
+		//----------------------------------
+		public static function get redPieces():ArrayCollection
+		{
+			return _redPieces;
+		}
+		//----------------------------------
+		//  bluePieces
+		//----------------------------------
+		public static function get bluePieces():ArrayCollection
+		{
+			return _bluePieces;
+		}
 		//generation.
 		//--------------------------------------------------------------------------
 		//
@@ -80,23 +121,7 @@ package com.lookbackon.ccj.managers
 		public static function makeMove(conductVO:ConductVO):void
 		{
 			//TODO:implement functions.
-			//TODO:update ZobristKeys
-			/*var zKeyVO:ZobristKeyVO = new ZobristKeyVO();
-			var pX:int = conductVO.newPosition.x;
-			var pY:int = conductVO.newPosition.y;
-			LOG.debug("before move:{0}",ZobristKeysModel.getInstance().redRook.dump());
-			if(conductVO.target.flag==CcjConstants.FLAG_RED)
-			{
-				ZobristKeysModel.getInstance().redRook.position.sett(pX,pY,
-					pmPRNG.nextInt()^ZobristKeysModel.getInstance().redRook.position.gett(pX,pY) );
-			}else
-			{
-				ZobristKeysModel.getInstance().redRook.position.sett(pX,pY,
-					pmPRNG.nextInt()^ZobristKeysModel.getInstance().redRook.position.gett(pX,pY) );
-			}
-			LOG.debug("after move:{0}",ZobristKeysModel.getInstance().redRook.dump());*/
 			//manually move chess pieces handler.;
-			//
 			var cGasketIndex:int = conductVO.newPosition.y*CcjConstants.BOARD_H_LINES+conductVO.newPosition.x;
 //			trace(cGasketIndex.toString(),"cGasketIndex");
 			var cGasket:ChessGasket = 
@@ -112,8 +137,54 @@ package com.lookbackon.ccj.managers
 			//adjust the chess piece's position.
 			conductVO.target.x = 0;
 			conductVO.target.y = 0;
+			//update allPieces.
+			updateAllPiecesPosition(conductVO);
+			//update ZobristKeys
+//			updateZobristKeysModel(conductVO);
 			//switch turn flag.
 			GameManager.isHumanTurnNow();
+		}
+		/**
+		 * 
+		 * @param conductVO the conduct value object of moving chess piece.
+		 * 
+		 */
+		private static function updateZobristKeysModel(conductVO:ConductVO):void
+		{
+			//TODO:update ZobristKeys
+			var zKeyVO:ZobristKeyVO = new ZobristKeyVO();
+			var pX:int = conductVO.newPosition.x;
+			var pY:int = conductVO.newPosition.y;
+			LOG.debug("before move:{0}",ZobristKeysModel.getInstance().redRook.dump());
+			if(conductVO.target.flag==CcjConstants.FLAG_RED)
+			{
+				ZobristKeysModel.getInstance().redRook.position.sett(pX,pY,
+					pmPRNG.nextInt()^ZobristKeysModel.getInstance().redRook.position.gett(pX,pY) );
+			}else
+			{
+				ZobristKeysModel.getInstance().redRook.position.sett(pX,pY,
+					pmPRNG.nextInt()^ZobristKeysModel.getInstance().redRook.position.gett(pX,pY) );
+			}
+			LOG.debug("after move:{0}",ZobristKeysModel.getInstance().redRook.dump());
+		}
+		/**
+		 * 
+		 * @param conductVO the conduct value object of moving chess piece.
+		 * 
+		 */
+		private static function updateAllPiecesPosition(conductVO:ConductVO):void
+		{
+			LOG.debug("before move,allPieces:{0}",ChessPiecesModel.getInstance().allPieces.dump());
+			if(GameManager.turnFlag==CcjConstants.FLAG_BLUE)
+			{
+				ChessPiecesModel.getInstance().bluePieces.setBitt(conductVO.target.position.y,conductVO.target.position.x,false);
+				ChessPiecesModel.getInstance().bluePieces.setBitt(conductVO.newPosition.y,conductVO.newPosition.x,true);
+			}else
+			{
+				ChessPiecesModel.getInstance().redPieces.setBitt(conductVO.target.position.y,conductVO.target.position.x,false);
+				ChessPiecesModel.getInstance().redPieces.setBitt(conductVO.newPosition.y,conductVO.newPosition.x,true);
+			}
+			LOG.debug("after move,allPieces:{0}",ChessPiecesModel.getInstance().allPieces.dump());
 		}
 	}
 }

@@ -78,30 +78,10 @@
 			//dragDropHandler
 			private function dragDropHandler(event:DragEvent):void
 			{
-				//hold gasket skin,then remove previous chess piece.
-				if(this.numElements>1)
-				{
-					this.removeElementAt(1);
-				}
-				//add chess piece position.
-				this.addElement(event.dragInitiator as IVisualElement);
-				//update chess piece position.
-				event.dragInitiator.x = 0;
-				event.dragInitiator.y = 0;
-				//update data.
 				var conductVO:ConductVO = new ConductVO();
 				conductVO.newPosition = this.position;
 				conductVO.target = ChessPiece(event.dragInitiator);
-				//set new chessVO.
-				LOG.info("before move,old chess position:{0}",conductVO.target.position.toString());
-				ChessPiece(event.dragInitiator).chessVO = ChessFactory.generateChessPieceVO(conductVO,true);
-				//set new position.
-				ChessPiece(event.dragInitiator).position = this.position;
-				LOG.info("after move,new chess position:{0}",ChessPiece(event.dragInitiator).position.toString());
-				//
-				LOG.info("after move,allPieces:{0}",ChessPiecesModel.getInstance().allPieces.dump());
-				// remove event listener
-//				this.removeEventListener(DragEvent.DRAG_DROP,dragDropHandler);
+				ChessPieceManager.makeMove(conductVO);
 				//switch turn flag.
 				GameManager.isComputerTurnNow();
 			}
