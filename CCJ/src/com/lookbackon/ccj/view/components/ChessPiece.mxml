@@ -89,6 +89,7 @@
 				if(value!=CcjConstants.FLAG_BLUE)
 				{
 					this.textColor = CcjConstants.COLOR_RED;
+					this.addEventListener(MouseEvent.MOUSE_DOWN,mouseDownHandler);
 				}
 			}
 			//--------------------------------------------------------------------------
@@ -105,7 +106,7 @@
 				this.attackState = new AttackState(this.agent,null,"Attack");
 				this.defenseState = new DefenseState(this.agent,null,"Defense");
 				// add event listener
-				this.addEventListener(MouseEvent.MOUSE_DOWN,mouseDownHandler);
+				
 				//set text style.
 				this.setStyle("color",textColor);
 				this.setStyle("fillColor",textColor);
