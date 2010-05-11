@@ -1,9 +1,5 @@
 package com.lookbackon.AI.searching
 {
-	import com.godpaper.twoHitOne.model.BoardModel;
-	import com.godpaper.twoHitOne.model.PiecesModel;
-	import com.godpaper.twoHitOne.vo.ConductVO;
-	
 	import de.polygonal.ds.Array2;
 	/**
 	 * @author Knight-errant
@@ -11,19 +7,20 @@ package com.lookbackon.AI.searching
 	public class NegaMax extends SearchingBase
 	{
 		 /**
-		 * The normal MiniMax code is a bit clumsy, 
+		 * The normal MiniMax code is a bit clumsy, </br>
 		 * since one side is trying to maximize the value and the other 
-		 * is trying to minimize - therefore, 
+		 * is trying to minimize - therefore, </br>
 		 * with MiniMax we always have to check if we are the side 
-		 * trying to maximize or the side trying to minimize. 
-		 * A neat way to get rid of this and to have a simpler function is NegaMax.
-		 * With the NegaMax algorithm both sides try to maximize all the time.
-		 * NegaMax is identical to MiniMax, it's just a nicer formulation.
+		 * trying to maximize or the side trying to minimize. </br>
+		 * A neat way to get rid of this and to have a simpler function is NegaMax.</br>
+		 * With the NegaMax algorithm both sides try to maximize all the time.</br>
+		 * NegaMax is identical to MiniMax, it's just a nicer formulation.</br>
 		 * 
-		 * @param postion the piece's postion in board.
-		 * @param depth the piece's depth in this game tree.
+		 * @param postion the piece's postion in board.</br>
+		 * @param depth the piece's depth in this game tree.</br>
 		 * 
 		 * @see http://www.fierz.ch/strategy.htm
+		 * @author Knight.zhou
 		 */	
 		 //You can see that the NegaMax algorithm is shorter and simpler than the MiniMax algorithm.
 		 //At first sight, NegaMax is a bit harder to understand than MiniMax, 

@@ -137,15 +137,15 @@ package com.lookbackon.AI.searching
 		//  doEvaluation(virtual)
 		//----------------------------------
 		/**
-		 * The evaluation function will return positive values if the position is good for red and negative values.</p>
-		 * if the position is bad for red in the MinMax formulation.</p>
-		 * Many things could be said about evaluation functions,
-		 * for me,the two main objectives in designing a evaluation function are speed and accuracy.</p>
-		 * The faster your evaluation function is,the better is.</p>
-		 * and the more accurate its evaluation is,the beeter.</p>
-		 * Obviously,these two things are somewhat at odds:
-		 * an accurate evaluation function probably is slower than a 'quick-and-dirty' one.</p>
-		 * The evaluation function I'm taking about here is a heuristic one -not a exact one.</p>
+		 * The evaluation function will return positive values if the position is good for red and negative values.</br>
+		 * if the position is bad for red in the MinMax formulation.</br>
+		 * Many things could be said about evaluation functions,</br>
+		 * for me,the two main objectives in designing a evaluation function are speed and accuracy.</br>
+		 * The faster your evaluation function is,the better is.</br>
+		 * and the more accurate its evaluation is,the beeter.</br>
+		 * Obviously,these two things are somewhat at odds:</br>
+		 * an accurate evaluation function probably is slower than a 'quick-and-dirty' one.</br>
+		 * The evaluation function I'm taking about here is a heuristic one -not a exact one.</br>
 		 * @see http://www.fierz.ch/strategy1.htm
 		 * @param conductVO
 		 * @return evaluation result 
