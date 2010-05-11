@@ -79,7 +79,6 @@ package com.lookbackon.ccj.model.vos
 		//as the optimal positions of the Cannon.
 		//When the enemy moves the King or Horse, the status of these positions have to be re-adjusted.
 		public var adjustment:int=0;
-		
 		//--------------------------------------------------------------------------
 		//
 		//  Construct
@@ -113,7 +112,11 @@ package com.lookbackon.ccj.model.vos
 			var s:String = "OmenVO";
 			s += "\n{";
 			s += "\n" + "\t";
-			s += "target:"+target+","+"oldPosition:"+target.position.toString()+","+"newPosition:"+newPosition.toString()+","+"brevity:"+brevity.toString();
+			s += "strength:"+strength.toString()
+				+","+"important:"+important.dump()
+				+","+"flexibility:"+flexibility.toString()
+				+","+"threat:"+threat.toString()
+				+","+"adjustment:"+adjustment.toString();
 			s += "\n}";
 			return s;
 		}

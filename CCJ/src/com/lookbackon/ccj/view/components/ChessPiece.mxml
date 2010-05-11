@@ -122,7 +122,7 @@
 				conductVO.newPosition = this.position;
 				conductVO.target = this;
 				//renew chessVO.
-				this.chessVO = ChessFactory.generateChessPieceVO(conductVO,true);
+				this.chessVO = ChessFactory.generateChessVO(conductVO,true);
 				LOG.info("preBefore move,renew chessVO.occupies:{0}",this.chessVO.occupies.dump());
 				LOG.info("preBefore move,renew chessVO.moves:{0}",this.chessVO.moves.dump());
 				LOG.info("preBefore move,renew chessVO.captures:{0}",this.chessVO.captures.dump());

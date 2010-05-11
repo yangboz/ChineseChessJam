@@ -4,6 +4,7 @@ package com.lookbackon.ccj.business.factory
 	import com.lookbackon.ccj.ChessPiecesConstants;
 	import com.lookbackon.ccj.model.ChessPiecesModel;
 	import com.lookbackon.ccj.model.vos.ConductVO;
+	import com.lookbackon.ccj.model.vos.OmenVO;
 	import com.lookbackon.ccj.model.vos.cvo.BishopVO;
 	import com.lookbackon.ccj.model.vos.cvo.CannonVO;
 	import com.lookbackon.ccj.model.vos.cvo.ChessVO;
@@ -18,12 +19,15 @@ package com.lookbackon.ccj.business.factory
 	import com.lookbackon.ccj.view.components.IChessGasket;
 	import com.lookbackon.ccj.view.components.IChessPiece;
 	
+	import de.polygonal.ds.Array2;
+	
 	import flash.geom.Point;
 	import flash.utils.getQualifiedClassName;
 	
 	import mx.logging.ILogger;
 
 	/**
+	 * Simply factory produce ChessPiece/ChessGasket/ChessVO/OmenVO.
 	 * 
 	 * @author Knight.zhou
 	 * 
@@ -193,7 +197,7 @@ package com.lookbackon.ccj.business.factory
 		 * @return precise chess value object(prototype is chessVOBase).
 		 * 
 		 */		
-		public static function generateChessPieceVO(conductVO:ConductVO,isInceptive:Boolean=false):ChessVO
+		public static function generateChessVO(conductVO:ConductVO,isInceptive:Boolean=false):ChessVO
 		{
 			var oColIndex:int = conductVO.target.position.x;
 			var oRowIndex:int = conductVO.target.position.y;
@@ -379,6 +383,67 @@ package com.lookbackon.ccj.business.factory
 						ChessPiecesModel.getInstance().redPieces.setBitt(oRowIndex,oColIndex,true);
 						chessVO = new PawnVO(9,10,oRowIndex,oColIndex);
 					}
+					break;
+				default:
+					break;
+			}
+			return chessVO;
+		}
+		/**
+		 * 
+		 * @param conductVO has property target(type is chessPiece) and newPosition([0,1]).
+		 * @return precise chess value object(prototype is OmenVO).
+		 * 
+		 */		
+		public static function generateOmenVO(conductVO:ConductVO):OmenVO
+		{
+			var omenVO:OmenVO;
+			//TODO:importance initialization.
+			var important:Array2 = new Array2(CcjConstants.BOARD_H_LINES,CcjConstants.BOARD_V_LINES);
+			//			LOG.info(omenVO.dump());
+			switch(conductVO.target.name)
+			{
+				case ChessPiecesConstants.BLUE_BISHOP.label:
+					omenVO = new OmenVO(-1,important,-1,-1,-1);
+					break;
+				case ChessPiecesConstants.RED_BISHOP.label:
+					omenVO = new OmenVO(-1,important,-1,-1,-1);
+					break;
+				case ChessPiecesConstants.BLUE_CANNON.label:
+					omenVO = new OmenVO(-1,important,-1,-1,-1);
+					break;
+				case ChessPiecesConstants.RED_CANNON.label:
+					omenVO = new OmenVO(-1,important,-1,-1,-1);
+					break;
+				case ChessPiecesConstants.BLUE_ROOK.label:
+					omenVO = new OmenVO(-1,important,-1,-1,-1);
+					break;
+				case ChessPiecesConstants.RED_ROOK.label:
+					omenVO = new OmenVO(-1,important,-1,-1,-1);
+					break;
+				case ChessPiecesConstants.BLUE_KNIGHT.label:
+					omenVO = new OmenVO(-1,important,-1,-1,-1);
+					break;
+				case ChessPiecesConstants.RED_KNIGHT.label:
+					omenVO = new OmenVO(-1,important,-1,-1,-1);
+					break;
+				case ChessPiecesConstants.BLUE_MARSHAL.label:
+					omenVO = new OmenVO(-1,important,-1,-1,-1);
+					break;
+				case ChessPiecesConstants.RED_MARSHAL.label:
+					omenVO = new OmenVO(-1,important,-1,-1,-1);
+					break;
+				case ChessPiecesConstants.BLUE_OFFICAL.label:
+					omenVO = new OmenVO(-1,important,-1,-1,-1);
+					break;
+				case ChessPiecesConstants.RED_OFFICAL.label:
+					omenVO = new OmenVO(-1,important,-1,-1,-1);
+					break;
+				case ChessPiecesConstants.BLUE_PAWN.label:
+					omenVO = new OmenVO(-1,important,-1,-1,-1);
+					break;
+				case ChessPiecesConstants.RED_PAWN.label:
+					omenVO = new OmenVO(-1,important,-1,-1,-1);
 					break;
 				default:
 					break;

@@ -78,7 +78,10 @@ package com.lookbackon.ccj.model.vos
 			var s:String = "ConductVO";
 			s += "\n{";
 			s += "\n" + "\t";
-			s += "target:"+target+","+"oldPosition:"+target.position.toString()+","+"newPosition:"+newPosition.toString()+","+"brevity:"+brevity.toString();
+			s += "target:"+target
+				+","+"oldPosition:"+target.position.toString()
+				+","+"newPosition:"+newPosition.toString()
+				+","+"brevity:"+brevity.toString();
 			s += "\n}";
 			return s;
 		}

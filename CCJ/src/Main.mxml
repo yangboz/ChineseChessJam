@@ -84,7 +84,7 @@
 					var conductVO:ConductVO = new ConductVO();
 					conductVO.target = chessPiece;
 					conductVO.newPosition = chessPiece.position;
-					chessPiece.chessVO = ChessFactory.generateChessPieceVO(conductVO);
+					chessPiece.chessVO = ChessFactory.generateChessVO(conductVO);
 				}
 				//init data struct.@seechessPositionModelLocator dump info.
 				LOG.debug("redPieces:{0}",chessPositionModel.redPieces.dump());
