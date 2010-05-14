@@ -448,7 +448,7 @@ package com.lookbackon.ccj.business.factory
 				default:
 					break;
 			}
-			return chessVO;
+			return omenVO;
 		}
 	}
 }
