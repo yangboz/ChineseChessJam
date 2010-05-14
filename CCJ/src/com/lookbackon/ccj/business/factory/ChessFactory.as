@@ -404,46 +404,46 @@ package com.lookbackon.ccj.business.factory
 			switch(conductVO.target.name)
 			{
 				case ChessPiecesConstants.BLUE_BISHOP.label:
-					omenVO = new OmenVO(-1,important,-1,-1,-1);
+					omenVO = new OmenVO(ChessPiecesConstants.BLUE_BISHOP.strength,important,-1,-1,-1);
 					break;
 				case ChessPiecesConstants.RED_BISHOP.label:
-					omenVO = new OmenVO(-1,important,-1,-1,-1);
+					omenVO = new OmenVO(ChessPiecesConstants.RED_BISHOP.strength,important,-1,-1,-1);
 					break;
 				case ChessPiecesConstants.BLUE_CANNON.label:
-					omenVO = new OmenVO(-1,important,-1,-1,-1);
+					omenVO = new OmenVO(ChessPiecesConstants.BLUE_CANNON.strength,important,-1,-1,-1);
 					break;
 				case ChessPiecesConstants.RED_CANNON.label:
-					omenVO = new OmenVO(-1,important,-1,-1,-1);
+					omenVO = new OmenVO(ChessPiecesConstants.RED_CANNON.strength,important,-1,-1,-1);
 					break;
 				case ChessPiecesConstants.BLUE_ROOK.label:
-					omenVO = new OmenVO(-1,important,-1,-1,-1);
+					omenVO = new OmenVO(ChessPiecesConstants.BLUE_ROOK.strength,important,-1,-1,-1);
 					break;
 				case ChessPiecesConstants.RED_ROOK.label:
-					omenVO = new OmenVO(-1,important,-1,-1,-1);
+					omenVO = new OmenVO(ChessPiecesConstants.RED_ROOK.strength,important,-1,-1,-1);
 					break;
 				case ChessPiecesConstants.BLUE_KNIGHT.label:
-					omenVO = new OmenVO(-1,important,-1,-1,-1);
+					omenVO = new OmenVO(ChessPiecesConstants.BLUE_KNIGHT.strength,important,-1,-1,-1);
 					break;
 				case ChessPiecesConstants.RED_KNIGHT.label:
-					omenVO = new OmenVO(-1,important,-1,-1,-1);
+					omenVO = new OmenVO(ChessPiecesConstants.RED_KNIGHT.strength,important,-1,-1,-1);
 					break;
 				case ChessPiecesConstants.BLUE_MARSHAL.label:
-					omenVO = new OmenVO(-1,important,-1,-1,-1);
+					omenVO = new OmenVO(ChessPiecesConstants.BLUE_MARSHAL.strength,important,-1,-1,-1);
 					break;
 				case ChessPiecesConstants.RED_MARSHAL.label:
-					omenVO = new OmenVO(-1,important,-1,-1,-1);
+					omenVO = new OmenVO(ChessPiecesConstants.RED_MARSHAL.strength,important,-1,-1,-1);
 					break;
 				case ChessPiecesConstants.BLUE_OFFICAL.label:
-					omenVO = new OmenVO(-1,important,-1,-1,-1);
+					omenVO = new OmenVO(ChessPiecesConstants.BLUE_OFFICAL.strength,important,-1,-1,-1);
 					break;
 				case ChessPiecesConstants.RED_OFFICAL.label:
-					omenVO = new OmenVO(-1,important,-1,-1,-1);
+					omenVO = new OmenVO(ChessPiecesConstants.RED_OFFICAL.strength,important,-1,-1,-1);
 					break;
 				case ChessPiecesConstants.BLUE_PAWN.label:
-					omenVO = new OmenVO(-1,important,-1,-1,-1);
+					omenVO = new OmenVO(ChessPiecesConstants.BLUE_PAWN.strength,important,-1,-1,-1);
 					break;
 				case ChessPiecesConstants.RED_PAWN.label:
-					omenVO = new OmenVO(-1,important,-1,-1,-1);
+					omenVO = new OmenVO(ChessPiecesConstants.RED_PAWN.strength,important,-1,-1,-1);
 					break;
 				default:
 					break;
