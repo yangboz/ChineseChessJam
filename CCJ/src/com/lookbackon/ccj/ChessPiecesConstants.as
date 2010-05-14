@@ -1,6 +1,9 @@
 package com.lookbackon.ccj
 {
 	import com.lookbackon.ccj.utils.Enum;
+	
+	import de.polygonal.ds.Array2;
+
 	/**
 	 * <b>ChessPieces value/label global setting</b></p>
 	 * 1.label for labeling chess pieces button;</p>
@@ -48,11 +51,57 @@ package com.lookbackon.ccj
 							 //C. 16~22依次表示蓝方的将、士、象、马、车、炮和卒。
 		public var strength:int;//Piece: King Assistant Elephant Rook Horse Cannon Pawn
 								 //Value: 6000 120 		120 	 600  270    285    30
-		public function ChessPiecesConstants(label:String,value:int,strength:int=-1)
+		public var important:Array2;
+		//
+		public function ChessPiecesConstants(label:String,value:int,strength:int=-1,important:Array2=null)
 		{
 			this.label = label;
 			this.value = value;
 			this.strength = strength;
+			if(important!=null)
+			{
+				this.important = important;
+			}else
+			{
+				this.important = new Array2(CcjConstants.BOARD_H_LINES,CcjConstants.BOARD_V_LINES);
+				//TODO:manually set chess pieces' important.
+				switch(label)
+				{
+					case ChessPiecesConstants.BLUE_ROOK.label:
+						//
+						this.important.sett(0,0,14);
+						this.important.sett(0,1,14);
+						this.important.sett(0,2,12);
+						this.important.sett(0,3,18);
+						this.important.sett(0,4,16);
+						this.important.sett(0,5,18);
+						this.important.sett(0,6,12);
+						this.important.sett(0,7,14);
+						this.important.sett(0,8,14);
+						//
+						this.important.sett(1,0,16);
+						this.important.sett(1,1,20);
+						this.important.sett(1,2,18);
+						this.important.sett(1,3,24);
+						this.important.sett(1,4,26);
+						this.important.sett(1,5,24);
+						this.important.sett(1,6,18);
+						this.important.sett(1,7,20);
+						this.important.sett(1,8,16);
+						//
+						this.important.sett(2,0,12);
+						this.important.sett(2,1,12);
+						this.important.sett(2,2,12);
+						this.important.sett(2,3,18);
+						this.important.sett(2,4,18);
+						this.important.sett(2,5,18);
+						this.important.sett(2,6,12);
+						this.important.sett(2,7,12);
+						this.important.sett(2,8,12);
+						break;
+					
+				}
+			}
 		}
 	}
 }
