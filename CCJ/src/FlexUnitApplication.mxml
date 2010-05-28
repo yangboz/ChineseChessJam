@@ -7,24 +7,12 @@
 			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600" xmlns:flexui="flexunit.flexui.*" creationComplete="onCreationComplete()">
 	<fx:Script>
 		<![CDATA[
-			import flexUnitTests.RookVOSuite;
-			import flexUnitTests.PawnVOSuite;
-			import flexUnitTests.OfficalVOSuite;
-			import flexUnitTests.MarshalVOSuite;
-			import flexUnitTests.KnightVOSuite;
-			import flexUnitTests.CannonVOSuite;
-			import flexUnitTests.BishopVOSuite;
+			import flexUnitTests.ds.tests.ZobristHashTableTest;
 			
 			public function currentRunTestSuite():Array
 			{
 				var testsToRun:Array = new Array();
-				testsToRun.push(flexUnitTests.BishopVOSuite);
-				testsToRun.push(flexUnitTests.CannonVOSuite);
-				testsToRun.push(flexUnitTests.KnightVOSuite);
-				testsToRun.push(flexUnitTests.MarshalVOSuite);
-				testsToRun.push(flexUnitTests.OfficalVOSuite);
-				testsToRun.push(flexUnitTests.PawnVOSuite);
-				testsToRun.push(flexUnitTests.RookVOSuite);
+				testsToRun.push(flexUnitTests.ds.tests.ZobristHashTableTest);
 				return testsToRun;
 			}
 			
