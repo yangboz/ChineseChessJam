@@ -83,6 +83,7 @@ package com.lookbackon.AI.searching
 			
 //			return _positionEvaluation;
 			return Math.random()*100;
+//			return super.doEvaluation(conductVO);
 		};
 		
 	}	

@@ -14,6 +14,7 @@
 			import com.lookbackon.ccj.business.fsm.states.DefenseState;
 			import com.lookbackon.ccj.managers.ChessPieceManager;
 			import com.lookbackon.ccj.model.vos.ConductVO;
+			import com.lookbackon.ccj.model.vos.OmenVO;
 			import com.lookbackon.ccj.model.vos.cvo.IChessVO;
 			import com.lookbackon.ccj.utils.LogUtil;
 			
@@ -91,6 +92,18 @@
 					this.textColor = CcjConstants.COLOR_RED;
 					this.addEventListener(MouseEvent.MOUSE_DOWN,mouseDownHandler);
 				}
+			}
+			//----------------------------------
+			//  omenVO
+			//----------------------------------
+			private var _omenVO:OmenVO;
+			public function get omenVO():OmenVO
+			{
+				return _omenVO;
+			}
+			public function set omenVO(value:OmenVO):void
+			{
+				_omenVO = value;
 			}
 			//--------------------------------------------------------------------------
 			//

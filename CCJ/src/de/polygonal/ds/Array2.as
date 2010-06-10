@@ -19,6 +19,10 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+/**
+ * @history 2010-01-21 rename set/get function name to sett/gett.
+ * @history 2010-06-10 added setXs/setYs help functions. 
+ */
 package de.polygonal.ds
 {
 	/**
@@ -137,7 +141,32 @@ package de.polygonal.ds
 		{
 			_a[int(y * _w + x)] = obj;
 		}
-		
+		/**
+		 * Writes values horiztontally. 
+		 * @param y The y index (row).
+		 * @param objs The items to be writtten into the cell.
+		 * 
+		 */		
+		public function setXs(y:int,objs:Array):void
+		{
+			for(var i:int=0;i<objs.length;i++)
+			{
+				this.sett(i,y,objs[i]);
+			}
+		}
+		/**
+		 * Writes values vertically. 
+		 * @param The x index (column).
+		 * @param objs The items to be writtten into the cell.
+		 * 
+		 */		
+		public function setYs(x:int,objs:Array):void
+		{
+			for(var i:int=0;i<objs.length;i++)
+			{
+				this.sett(x,i,objs[i]);
+			}
+		}
 		/**
 		 * Resizes the array to match the given width and height. If the new
 		 * size is smaller than the existing size, values are lost because of

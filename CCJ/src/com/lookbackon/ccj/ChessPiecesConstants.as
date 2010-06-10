@@ -30,7 +30,7 @@ package com.lookbackon.ccj
 		public static const BLUE_KNIGHT:ChessPiecesConstants	= new ChessPiecesConstants("k",19,270);//knight-
 		public static const BLUE_BISHOP:ChessPiecesConstants	= new ChessPiecesConstants("b",18,120);//bishop-
 		public static const BLUE_OFFICAL:ChessPiecesConstants 	= new ChessPiecesConstants("o",16,120);//offcial-
-		public static const BLUE_MARSHAL:ChessPiecesConstants	= new ChessPiecesConstants("m",17,600);//marshal-
+		public static const BLUE_MARSHAL:ChessPiecesConstants	= new ChessPiecesConstants("m",17,6000);//marshal-
 		public static const BLUE_CANNON:ChessPiecesConstants	= new ChessPiecesConstants("c",21,285);//cannon-
 		//red(at bottom)
 		public static const RED_PAWN:ChessPiecesConstants 		= new ChessPiecesConstants("P",14,30);//pawn+
@@ -38,7 +38,7 @@ package com.lookbackon.ccj
 		public static const RED_KNIGHT:ChessPiecesConstants		= new ChessPiecesConstants("K",11,270);//knight+
 		public static const RED_BISHOP:ChessPiecesConstants		= new ChessPiecesConstants("B",10,120);//bishop+
 		public static const RED_OFFICAL:ChessPiecesConstants 	= new ChessPiecesConstants("O",8,120);//offcial+
-		public static const RED_MARSHAL:ChessPiecesConstants	= new ChessPiecesConstants("M",9,600);//marshal+
+		public static const RED_MARSHAL:ChessPiecesConstants	= new ChessPiecesConstants("M",9,6000);//marshal+
 		public static const RED_CANNON:ChessPiecesConstants		= new ChessPiecesConstants("C",13,285);//cannon+
 		//--------------------------------------------------------------------------
 		//
@@ -64,40 +64,53 @@ package com.lookbackon.ccj
 			}else
 			{
 				this.important = new Array2(CcjConstants.BOARD_H_LINES,CcjConstants.BOARD_V_LINES);
-				//TODO:manually set chess pieces' important.
-				switch(label)
+				//TODO:manually set chess pieces' important,reference@2004ccc.pdf.
+				switch(label.toLowerCase())
 				{
-					case ChessPiecesConstants.BLUE_ROOK.label:
-						//
-						this.important.sett(0,0,14);
-						this.important.sett(0,1,14);
-						this.important.sett(0,2,12);
-						this.important.sett(0,3,18);
-						this.important.sett(0,4,16);
-						this.important.sett(0,5,18);
-						this.important.sett(0,6,12);
-						this.important.sett(0,7,14);
-						this.important.sett(0,8,14);
-						//
-						this.important.sett(1,0,16);
-						this.important.sett(1,1,20);
-						this.important.sett(1,2,18);
-						this.important.sett(1,3,24);
-						this.important.sett(1,4,26);
-						this.important.sett(1,5,24);
-						this.important.sett(1,6,18);
-						this.important.sett(1,7,20);
-						this.important.sett(1,8,16);
-						//
-						this.important.sett(2,0,12);
-						this.important.sett(2,1,12);
-						this.important.sett(2,2,12);
-						this.important.sett(2,3,18);
-						this.important.sett(2,4,18);
-						this.important.sett(2,5,18);
-						this.important.sett(2,6,12);
-						this.important.sett(2,7,12);
-						this.important.sett(2,8,12);
+					case "r":
+						this.important.setXs(0,[14,14,12,18,16,18,12,14,14]);
+						this.important.setXs(1,[16,20,18,24,26,24,18,20,16]);
+						this.important.setXs(2,[12,12,12,18,18,18,12,12,12]);
+						this.important.setXs(3,[12,18,16,22,22,22,16,18,12]);
+						this.important.setXs(4,[12,14,12,18,18,18,12,14,12]);
+						this.important.setXs(5,[12,16,14,20,20,20,14,16,12]);
+						this.important.setXs(6,[6,10,8,14,14,14,8,10,6]);
+						this.important.setXs(7,[4,8,6,14,12,14,6,8,4]);
+						this.important.setXs(8,[8,4,8,16,8,16,8,4,8]);
+						this.important.setXs(9,[-2,10,6,14,12,14,6,10,-2]);
+					case "k":
+						this.important.setXs(0,[4,8,16,12,4,12,16,8,4]);
+						this.important.setXs(1,[4,10,28,16,8,16,28,10,4]);
+						this.important.setXs(2,[12,14,16,20,18,20,16,14,12]);
+						this.important.setXs(3,[8,24,18,24,20,24,18,24,8]);
+						this.important.setXs(4,[6,16,14,18,16,18,14,16,6]);
+						this.important.setXs(5,[4,12,16,14,12,14,16,12,4]);
+						this.important.setXs(6,[2,6,8,6,10,6,8,6,2]);
+						this.important.setXs(7,[4,2,8,8,4,8,8,2,4]);
+						this.important.setXs(8,[0,2,4,4,-2,4,4,2,0]);
+						this.important.setXs(9,[0,-4,0,0,0,0,0,-4,0]);
+					case "c":
+						this.important.setXs(0,[6,4,0,-10,-12,-10,0,4,6]);
+						this.important.setXs(1,[2,2,0,-4,-14,-4,0,2,2]);
+						this.important.setXs(2,[2,2,0,-10,-8,-10,0,2,2]);
+						this.important.setXs(3,[0,0,-2,4,10,4,-2,0,0]);
+						this.important.setXs(4,[0,0,0,2,8,2,0,0,0]);
+						this.important.setXs(5,[-2,0,4,2,6,2,4,0,-2]);
+						this.important.setXs(6,[0,0,0,2,4,2,0,0,0]);
+						this.important.setXs(7,[4,0,8,6,10,6,8,0,4]);
+						this.important.setXs(8,[0,2,4,6,6,6,4,2,0]);
+						this.important.setXs(9,[0,0,2,6,6,6,2,0,0]);
+					case "p":
+						this.important.setXs(0,[0,3,6,9,12,9,6,3,0]);
+						this.important.setXs(1,[18,36,56,80,120,80,56,36,18]);
+						this.important.setXs(2,[14,26,42,60,80,60,42,26,14]);
+						this.important.setXs(3,[10,20,30,34,40,34,30,20,10]);
+						this.important.setXs(4,[6,12,18,18,20,18,18,12,6]);
+						this.important.setXs(5,[2,0,8,0,8,0,8,0,2]);
+						this.important.setXs(6,[0,0,-2,0,4,0,-2,0,0]);
+						this.important.setXs(7,[0,0,0,0,0,0,0,0,0]);
+						this.important.setXs(8,[0,0,0,0,0,0,0,0,0]);
+						this.important.setXs(9,[0,0,0,0,0,0,0,0,0]);	
 						break;
 					
 				}

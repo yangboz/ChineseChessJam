@@ -18,6 +18,7 @@
 			import com.lookbackon.ccj.managers.GameManager;
 			import com.lookbackon.ccj.model.ChessPiecesModel;
 			import com.lookbackon.ccj.model.vos.ConductVO;
+			import com.lookbackon.ccj.model.vos.OmenVO;
 			import com.lookbackon.ccj.utils.LogUtil;
 			import com.lookbackon.ccj.view.components.ChessGasket;
 			import com.lookbackon.ccj.view.components.ChessPiece;
@@ -37,7 +38,7 @@
 			private var chessPositionModel:ChessPiecesModel = ChessPiecesModel.getInstance();
 			//
 			[Bindable]
-			private var logFilters:Array = ["com.lookbackon.ccj.managers.*"];
+			private var logFilters:Array = ["Main"];
 			//----------------------------------
 			//  CONSTANTS
 			//----------------------------------
@@ -76,7 +77,8 @@
 						}
 					}
 				}
-				//create chess pieces' chessVO
+				//create chess pieces' chessVO;
+				//create chess pieces' omenVO;
 				for(var cp:int=0;cp<ChessPieceManager.pieces.length;cp++)
 				{
 					var chessPiece:ChessPiece = ChessPieceManager.pieces.getItemAt(cp) as ChessPiece;
@@ -85,6 +87,10 @@
 					conductVO.target = chessPiece;
 					conductVO.newPosition = chessPiece.position;
 					chessPiece.chessVO = ChessFactory.generateChessVO(conductVO);
+					//generateOmenVO
+					var omenVO:OmenVO = ChessFactory.generateOmenVO(conductVO);
+					LOG.debug(omenVO.dump());
+					chessPiece.omenVO = omenVO;
 				}
 				//init data struct.@seechessPositionModelLocator dump info.
 				LOG.debug("redPieces:{0}",chessPositionModel.redPieces.dump());

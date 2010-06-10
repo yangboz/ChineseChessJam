@@ -1,5 +1,7 @@
 package com.lookbackon.AI.evaluation.statical.exchange
 {
+	import com.lookbackon.AI.evaluation.IEvaluation;
+
 	/*
 	Static exchange evaluation is a very powerful tool for evaluating a capture without actually playing out the moves.
 	
@@ -113,7 +115,7 @@ package com.lookbackon.AI.evaluation.statical.exchange
 	 * @author Knight.zhou
 	 * 
 	 */	
-	public class StaticExchangeEvaluation
+	public class StaticExchangeEvaluation implements IEvaluation
 	{
 		public function StaticExchangeEvaluation()
 		{

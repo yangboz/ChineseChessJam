@@ -1,6 +1,8 @@
 package com.lookbackon.ccj.model
 {
+	import com.lookbackon.ccj.CcjConstants;
 	import com.lookbackon.ccj.errors.CcjErrors;
+	import com.lookbackon.ccj.model.vos.ConductVO;
 	import com.lookbackon.ccj.model.vos.cvo.BishopVO;
 	import com.lookbackon.ccj.model.vos.cvo.CannonVO;
 	import com.lookbackon.ccj.model.vos.cvo.KnightVO;
@@ -359,6 +361,7 @@ package com.lookbackon.ccj.model
 			_bluePawn = value;
 			LOG.info("bluePawn:{0}",value.dump());
 		}
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Methods
@@ -376,6 +379,29 @@ package com.lookbackon.ccj.model
 				instance=new ChessPiecesModel(new Private());
 			}
 			return instance;
+		}
+		/**
+		 * 
+		 * @param type the piece's type.
+		 * @param flag the piece's flag.
+		 * @return the number of specified type piece.
+		 * 
+		 */		
+		public function numberOf(type:String,flag:int):int
+		{
+			var fResult:ArrayCollection = new ArrayCollection();
+			if(flag==CcjConstants.FLAG_RED)
+			{
+				fResult = reds;
+			}else
+			{
+				fResult = blues;
+			}
+			fResult.filterFunction = function(item:Object):Boolean
+			{
+				return (item as ConductVO).target.label == type;
+			};
+			return fResult.length;
 		}
 	}
 }

@@ -1,6 +1,7 @@
 package com.lookbackon.ccj.view.components
 {
 	import com.lookbackon.ccj.business.fsm.ChessAgent;
+	import com.lookbackon.ccj.model.vos.OmenVO;
 	import com.lookbackon.ccj.model.vos.cvo.IChessVO;
 	
 	import mx.core.IVisualElement;
@@ -17,5 +18,8 @@ package com.lookbackon.ccj.view.components
 		
 		function set chessVO(value:IChessVO):void;
 		function get chessVO():IChessVO;
+		
+		function set omenVO(value:OmenVO):void;
+		function get omenVO():OmenVO;
 	}
 }

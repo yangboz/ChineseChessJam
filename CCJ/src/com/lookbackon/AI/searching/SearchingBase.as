@@ -1,5 +1,7 @@
 package com.lookbackon.AI.searching
 {
+	import com.lookbackon.AI.evaluation.IEvaluation;
+	import com.lookbackon.AI.evaluation.linear.LinearEvaluationProxy;
 	import com.lookbackon.ccj.business.factory.ChessFactory;
 	import com.lookbackon.ccj.managers.ChessPieceManager;
 	import com.lookbackon.ccj.model.vos.ConductVO;
@@ -18,7 +20,7 @@ package com.lookbackon.AI.searching
 	 * 
 	 * @author Knight-errant
 	 */	
-	public class SearchingBase implements ISearchingBase
+	public class SearchingBase implements ISearching,IEvaluation
 	{
 		//--------------------------------------------------------------------------
 		//
@@ -30,6 +32,7 @@ package com.lookbackon.AI.searching
 		protected var tempMove:ConductVO;
 		protected var positionEvaluation:int;
 		protected var gamePosition:Array2;
+		protected var evaluation:IEvaluation = new LinearEvaluationProxy();//Notice:this is all kinds of evaluation method entry,should be test.
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -154,7 +157,8 @@ package com.lookbackon.AI.searching
 		//virtual functions.
 		public function doEvaluation(conductVO:ConductVO):int
 		{
-			return 0;
+			//delegate to evaluation proxy to do evaluation(); 
+			return evaluation.doEvaluation(conductVO);
 		}
 	}
 }

@@ -1,6 +1,6 @@
 package com.lookbackon.ccj.managers
 {
-	import com.lookbackon.AI.searching.ISearchingBase;
+	import com.lookbackon.AI.searching.ISearching;
 	import com.lookbackon.AI.searching.MinMax;
 	import com.lookbackon.AI.searching.RandomWalk;
 	import com.lookbackon.AI.searching.SearchingBase;
@@ -42,7 +42,7 @@ package com.lookbackon.ccj.managers
 		//--------------------------------------------------------------------------
 		private static var _turnFlag:int;
 		private static var iThinkingProgressBar:IFlexDisplayObject;
-		private static var gameAI:ISearchingBase;
+		private static var gameAI:ISearching;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
