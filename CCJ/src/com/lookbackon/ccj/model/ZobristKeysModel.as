@@ -8,6 +8,7 @@ package com.lookbackon.ccj.model
 	
 	import de.polygonal.ds.Array3;
 	import de.polygonal.ds.HashTable;
+	import de.polygonal.math.PM_PRNG;
 	
 	import mx.logging.ILogger;
 	
@@ -62,6 +63,19 @@ package com.lookbackon.ccj.model
 			} else {
 				throw new CcjErrors(CcjErrors.INITIALIZE_SINGLETON_CLASS);
 			}
+			//static constructor block
+			//ref:http://mediocrechess.blogspot.com/2007/01/guide-zobrist-keys.html
+			var pm_pgn:PM_PRNG = new PM_PRNG();
+			redRook.position.setXs(0,[pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt()]);
+			redRook.position.setXs(1,[pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt()]);
+			redRook.position.setXs(2,[pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt()]);
+			redRook.position.setXs(3,[pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt()]);
+			redRook.position.setXs(4,[pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt()]);
+			redRook.position.setXs(5,[pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt()]);
+			redRook.position.setXs(6,[pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt()]);
+			redRook.position.setXs(7,[pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt()]);
+			redRook.position.setXs(8,[pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt()]);
+			redRook.position.setXs(9,[pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt()]);
 		}
 		//--------------------------------------------------------------------------
 		//

@@ -39,6 +39,7 @@ package com.lookbackon.ccj.managers
 		private static var _gaskets:ArrayCollection = new ArrayCollection();
 		private static var _redPieces:ArrayCollection = new ArrayCollection();
 		private static var _bluePieces:ArrayCollection = new ArrayCollection();
+		private static var _conductsHistory:Array = [];
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -83,6 +84,17 @@ package com.lookbackon.ccj.managers
 		public static function get bluePieces():ArrayCollection
 		{
 			return _bluePieces;
+		}
+		//----------------------------------
+		//  conductsHistory
+		//----------------------------------
+		public static function get conductsHistory():Array
+		{
+			return _conductsHistory;
+		}
+		public static function set conductsHistory(value:Array):void
+		{
+			_conductsHistory = value;
 		}
 		//generation.
 		//--------------------------------------------------------------------------
@@ -137,12 +149,33 @@ package com.lookbackon.ccj.managers
 			//adjust the chess piece's position.
 			conductVO.target.x = 0;
 			conductVO.target.y = 0;
+			//update conductsHistory
+			conductsHistory.push(conductVO);
 			//update allPieces.
 			updateAllPiecesPosition(conductVO);
 			//update ZobristKeys
-//			updateZobristKeysModel(conductVO);
+			updateZobristKeysModel(conductVO);
 			//switch turn flag.
 			GameManager.isHumanTurnNow();
+		}
+		public static function unmakeMove():void
+		{
+			var conductVO:ConductVO = conductsHistory.pop();
+			var pX:int = conductVO.newPosition.x;
+			var pY:int = conductVO.newPosition.y;
+			//TODO:implement functions.
+			//ref:http://mediocrechess.blogspot.com/2007/01/guide-zobrist-keys.html.
+			LOG.debug("before unmakemove:{0}",ZobristKeysModel.getInstance().redRook.dump());
+			if(conductVO.target.flag==CcjConstants.FLAG_RED)
+			{
+				ZobristKeysModel.getInstance().redRook.position.sett(pX,pY,
+					pmPRNG.nextInt()^ZobristKeysModel.getInstance().redRook.position.gett(pX,pY) );
+			}else
+			{
+				ZobristKeysModel.getInstance().redRook.position.sett(pX,pY,
+					pmPRNG.nextInt()^ZobristKeysModel.getInstance().redRook.position.gett(pX,pY) );
+			}
+			LOG.debug("after unmakemove:{0}",ZobristKeysModel.getInstance().redRook.dump());
 		}
 		/**
 		 * 
@@ -166,6 +199,8 @@ package com.lookbackon.ccj.managers
 					pmPRNG.nextInt()^ZobristKeysModel.getInstance().redRook.position.gett(pX,pY) );
 			}
 			LOG.debug("after move:{0}",ZobristKeysModel.getInstance().redRook.dump());
+			//for testing unmakeMove();
+			unmakeMove();
 		}
 		/**
 		 * 

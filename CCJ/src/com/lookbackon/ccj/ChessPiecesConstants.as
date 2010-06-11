@@ -125,16 +125,16 @@ package com.lookbackon.ccj
 					this.important.setXs(8,[0,2,4,6,6,6,4,2,0]);
 					this.important.setXs(9,[0,0,2,6,6,6,2,0,0]);
 					//convertedImportant
-					this.important.setXs(0,[4,3,2,1,1,1,2,3,4]);
-					this.important.setXs(1,[3,3,2,2,1,2,2,3,3]);
-					this.important.setXs(2,[3,3,2,1,1,1,2,3,3]);
-					this.important.setXs(3,[2,2,2,3,4,3,2,2,2]);
-					this.important.setXs(4,[2,2,2,3,4,3,2,2,2]);
-					this.important.setXs(5,[2,2,3,3,4,3,3,2,2]);
-					this.important.setXs(6,[2,2,2,3,3,3,2,2,2]);
-					this.important.setXs(7,[3,2,4,4,4,4,4,2,3]);
-					this.important.setXs(8,[2,3,3,4,4,4,3,3,2]);
-					this.important.setXs(9,[2,2,3,4,4,4,3,2,2]);
+					this.convertedImportant.setXs(0,[4,3,2,1,1,1,2,3,4]);
+					this.convertedImportant.setXs(1,[3,3,2,2,1,2,2,3,3]);
+					this.convertedImportant.setXs(2,[3,3,2,1,1,1,2,3,3]);
+					this.convertedImportant.setXs(3,[2,2,2,3,4,3,2,2,2]);
+					this.convertedImportant.setXs(4,[2,2,2,3,4,3,2,2,2]);
+					this.convertedImportant.setXs(5,[2,2,3,3,4,3,3,2,2]);
+					this.convertedImportant.setXs(6,[2,2,2,3,3,3,2,2,2]);
+					this.convertedImportant.setXs(7,[3,2,4,4,4,4,4,2,3]);
+					this.convertedImportant.setXs(8,[2,3,3,4,4,4,3,3,2]);
+					this.convertedImportant.setXs(9,[2,2,3,4,4,4,3,2,2]);
 				case "p":
 					//important
 					this.important.setXs(0,[0,3,6,9,12,9,6,3,0]);
@@ -148,58 +148,58 @@ package com.lookbackon.ccj
 					this.important.setXs(8,[0,0,0,0,0,0,0,0,0]);
 					this.important.setXs(9,[0,0,0,0,0,0,0,0,0]);
 					//convertedImportant
-					this.important.setXs(0,[0,0,2,2,2,2,2,0,0]);
-					this.important.setXs(1,[3,4,4,4,4,4,4,4,3]);
-					this.important.setXs(2,[3,4,4,4,4,4,4,4,3]);
-					this.important.setXs(3,[2,4,4,4,4,4,4,4,2]);
-					this.important.setXs(4,[2,2,3,3,4,3,3,2,2]);
-					this.important.setXs(5,[0,0,2,0,2,0,2,0,0]);
-					this.important.setXs(6,[0,0,–1,0,0,0,-1,0,0]);
-					this.important.setXs(7,[0,0,0,0,0,0,0,0,0]);
-					this.important.setXs(8,[0,0,0,0,0,0,0,0,0]);
-					this.important.setXs(9,[0,0,0,0,0,0,0,0,0]);
+					this.convertedImportant.setXs(0,[0,0,2,2,2,2,2,0,0]);
+					this.convertedImportant.setXs(1,[3,4,4,4,4,4,4,4,3]);
+					this.convertedImportant.setXs(2,[3,4,4,4,4,4,4,4,3]);
+					this.convertedImportant.setXs(3,[2,4,4,4,4,4,4,4,2]);
+					this.convertedImportant.setXs(4,[2,2,3,3,4,3,3,2,2]);
+					this.convertedImportant.setXs(5,[0,0,2,0,2,0,2,0,0]);
+					this.convertedImportant.setXs(6,[0,0,-1,0,0,0,-1,0,0]);
+					this.convertedImportant.setXs(7,[0,0,0,0,0,0,0,0,0]);
+					this.convertedImportant.setXs(8,[0,0,0,0,0,0,0,0,0]);
+					this.convertedImportant.setXs(9,[0,0,0,0,0,0,0,0,0]);
 					break;
 				case "b":
 					//important
 					//convertedImportant
-					this.important.setXs(0,[0,0,0,0,0,0,0,0,0]);
-					this.important.setXs(1,[0,0,0,0,0,0,0,0,0]);
-					this.important.setXs(2,[0,0,0,0,0,0,0,0,0]);
-					this.important.setXs(3,[0,0,0,0,0,0,0,0,0]);
-					this.important.setXs(4,[0,0,0,0,0,0,0,0,0]);
-					this.important.setXs(5,[0,0,-1,0,0,0,-1,0,0]);
-					this.important.setXs(6,[0,0,0,0,0,0,0,0,0]);
-					this.important.setXs(7,[-2,0,0,0,3,0,0,0,-2]);
-					this.important.setXs(8,[0,0,0,0,0,0,0,0,0]);
-					this.important.setXs(9,[0,0,1,0,0,0,1,0,0]);
+					this.convertedImportant.setXs(0,[0,0,0,0,0,0,0,0,0]);
+					this.convertedImportant.setXs(1,[0,0,0,0,0,0,0,0,0]);
+					this.convertedImportant.setXs(2,[0,0,0,0,0,0,0,0,0]);
+					this.convertedImportant.setXs(3,[0,0,0,0,0,0,0,0,0]);
+					this.convertedImportant.setXs(4,[0,0,0,0,0,0,0,0,0]);
+					this.convertedImportant.setXs(5,[0,0,-1,0,0,0,-1,0,0]);
+					this.convertedImportant.setXs(6,[0,0,0,0,0,0,0,0,0]);
+					this.convertedImportant.setXs(7,[-2,0,0,0,3,0,0,0,-2]);
+					this.convertedImportant.setXs(8,[0,0,0,0,0,0,0,0,0]);
+					this.convertedImportant.setXs(9,[0,0,1,0,0,0,1,0,0]);
 					break;
 				case "o":
 					//important
 					//convertedImportant
-					this.important.setXs(0,[0,0,0,0,0,0,0,0,0]);
-					this.important.setXs(1,[0,0,0,0,0,0,0,0,0]);
-					this.important.setXs(2,[0,0,0,0,0,0,0,0,0]);
-					this.important.setXs(3,[0,0,0,0,0,0,0,0,0]);
-					this.important.setXs(4,[0,0,0,0,0,0,0,0,0]);
-					this.important.setXs(5,[0,0,0,0,0,0,0,0,0]);
-					this.important.setXs(6,[0,0,0,0,0,0,0,0,0]);
-					this.important.setXs(7,[0,0,0,-1,0,-1,0,0,0]);
-					this.important.setXs(8,[0,0,0,0,3,0,0,0,0]);
-					this.important.setXs(9,[0,0,0,1,0,1,0,0,0]);
+					this.convertedImportant.setXs(0,[0,0,0,0,0,0,0,0,0]);
+					this.convertedImportant.setXs(1,[0,0,0,0,0,0,0,0,0]);
+					this.convertedImportant.setXs(2,[0,0,0,0,0,0,0,0,0]);
+					this.convertedImportant.setXs(3,[0,0,0,0,0,0,0,0,0]);
+					this.convertedImportant.setXs(4,[0,0,0,0,0,0,0,0,0]);
+					this.convertedImportant.setXs(5,[0,0,0,0,0,0,0,0,0]);
+					this.convertedImportant.setXs(6,[0,0,0,0,0,0,0,0,0]);
+					this.convertedImportant.setXs(7,[0,0,0,-1,0,-1,0,0,0]);
+					this.convertedImportant.setXs(8,[0,0,0,0,3,0,0,0,0]);
+					this.convertedImportant.setXs(9,[0,0,0,1,0,1,0,0,0]);
 					break;
 				case "m":
 					//important
 					//convertedImportant
-					this.important.setXs(0,[-2,-2,-2,2,2,2,-2,-2,-2]);
-					this.important.setXs(1,[-2,-2,-2,2,2,2,-2,-2,-2]);
-					this.important.setXs(2,[-2,-2,-2,2,2,2,-2,-2,-2]);
-					this.important.setXs(3,[-2,-2,-2,-2,-2,-2,-2,-2,-2]);
-					this.important.setXs(4,[-2,-2,-2,-2,-2,-2,-2,-2,-2]);
-					this.important.setXs(5,[-2,-2,-2,-2,-2,-2,-2,-2,-2]);
-					this.important.setXs(6,[-2,-2,-2,-2,-2,-2,-2,-2,-2]);
-					this.important.setXs(7,[-2,-2,-2,-2,-2,-2,-2,-2,-2]);
-					this.important.setXs(8,[-2,-2,-2,-2,-2,-2,-2,-2,-2]);
-					this.important.setXs(9,[-2,-2,-2,-2,-2,-2,-2,-2,-2]);
+					this.convertedImportant.setXs(0,[-2,-2,-2,2,2,2,-2,-2,-2]);
+					this.convertedImportant.setXs(1,[-2,-2,-2,2,2,2,-2,-2,-2]);
+					this.convertedImportant.setXs(2,[-2,-2,-2,2,2,2,-2,-2,-2]);
+					this.convertedImportant.setXs(3,[-2,-2,-2,-2,-2,-2,-2,-2,-2]);
+					this.convertedImportant.setXs(4,[-2,-2,-2,-2,-2,-2,-2,-2,-2]);
+					this.convertedImportant.setXs(5,[-2,-2,-2,-2,-2,-2,-2,-2,-2]);
+					this.convertedImportant.setXs(6,[-2,-2,-2,-2,-2,-2,-2,-2,-2]);
+					this.convertedImportant.setXs(7,[-2,-2,-2,-2,-2,-2,-2,-2,-2]);
+					this.convertedImportant.setXs(8,[-2,-2,-2,-2,-2,-2,-2,-2,-2]);
+					this.convertedImportant.setXs(9,[-2,-2,-2,-2,-2,-2,-2,-2,-2]);
 					break;
 			}
 		}

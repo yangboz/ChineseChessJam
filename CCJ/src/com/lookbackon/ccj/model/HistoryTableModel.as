@@ -33,7 +33,7 @@ package com.lookbackon.ccj.model
 		//--------------------------------------------------------------------------
 		//Singleton instance of HistoryTableModel;
 		private static var instance:HistoryTableModel;
-		private static const MAX_SIZE:int = MAX_SIZE;
+		private static const MAX_SIZE:int = 500;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
