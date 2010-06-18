@@ -134,10 +134,10 @@ package com.lookbackon.ccj.business.factory
 			}
 			//view
 			myChessPiece.label =myChessPiece.name = chessPieceType;
-			myChessPiece.x = 
+			/*myChessPiece.x = 
 				position.x*CcjConstants.BOARD_LATTICE - myChessPiece.width/2 +50;
 			myChessPiece.y = 
-				position.y*CcjConstants.BOARD_LATTICE + myChessPiece.height/2 -25;
+				position.y*CcjConstants.BOARD_LATTICE + myChessPiece.height/2 -25;*/
 			//set flag to identify.
 			myChessPiece.flag = CcjConstants.FLAG_BLUE;
 			//data

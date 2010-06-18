@@ -27,22 +27,25 @@ package com.lookbackon.ccj.model
 		//--------------------------------------------------------------------------
 		//Singleton instance of ZobristKeysModel;
 		private static var instance:ZobristKeysModel;
-		//red
-		private var _redRook:ZobristKeyVO 		= new ZobristKeyVO();
+		//reds
+		/*private var _redRook:ZobristKeyVO 		= new ZobristKeyVO();
 		private var _redKnight:ZobristKeyVO 	= new ZobristKeyVO();
 		private var _redBishop:ZobristKeyVO 	= new ZobristKeyVO();
 		private var _redOffical:ZobristKeyVO 	= new ZobristKeyVO();
 		private var _redMarshal:ZobristKeyVO 	= new ZobristKeyVO();
 		private var _redCannon:ZobristKeyVO 	= new ZobristKeyVO();
 		private var _redPawn:ZobristKeyVO 		= new ZobristKeyVO();
-		//blue
-		private var _blueRook:ZobristKeyVO 		= new ZobristKeyVO();
+		private var _reds:ZobristKeyVO 			= new ZobristKeyVO();*/
+		//blues
+		/*private var _blueRook:ZobristKeyVO 		= new ZobristKeyVO();
 		private var _blueKnight:ZobristKeyVO 	= new ZobristKeyVO();
 		private var _blueBishop:ZobristKeyVO 	= new ZobristKeyVO();
 		private var _blueOffical:ZobristKeyVO 	= new ZobristKeyVO();
 		private var _blueMarshal:ZobristKeyVO 	= new ZobristKeyVO();
 		private var _blueCannon:ZobristKeyVO 	= new ZobristKeyVO();
 		private var _bluePawn:ZobristKeyVO 		= new ZobristKeyVO();
+		private var _blues:ZobristKeyVO			= new ZobristKeyVO();*/
+		private var _board:ZobristKeyVO			= new ZobristKeyVO();
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -66,22 +69,24 @@ package com.lookbackon.ccj.model
 			//static constructor block
 			//ref:http://mediocrechess.blogspot.com/2007/01/guide-zobrist-keys.html
 			var pm_pgn:PM_PRNG = new PM_PRNG();
-			redRook.position.setXs(0,[pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt()]);
-			redRook.position.setXs(1,[pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt()]);
-			redRook.position.setXs(2,[pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt()]);
-			redRook.position.setXs(3,[pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt()]);
-			redRook.position.setXs(4,[pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt()]);
-			redRook.position.setXs(5,[pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt()]);
-			redRook.position.setXs(6,[pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt()]);
-			redRook.position.setXs(7,[pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt()]);
-			redRook.position.setXs(8,[pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt()]);
-			redRook.position.setXs(9,[pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt()]);
+			//board(reds and blues).
+			_board.position.setXs(0,[pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt()]);
+			_board.position.setXs(1,[pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt()]);
+			_board.position.setXs(2,[pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt()]);
+			_board.position.setXs(3,[pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt()]);
+			_board.position.setXs(4,[pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt()]);
+			_board.position.setXs(5,[pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt()]);
+			_board.position.setXs(6,[pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt()]);
+			_board.position.setXs(7,[pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt()]);
+			_board.position.setXs(8,[pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt()]);
+			_board.position.setXs(9,[pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt(),pm_pgn.nextInt()]);
 		}
 		//--------------------------------------------------------------------------
 		//
 		//  Properties
 		//
 		//--------------------------------------------------------------------------
+		/*
 		//----------------------------------
 		//  bluePawn
 		//----------------------------------
@@ -237,6 +242,32 @@ package com.lookbackon.ccj.model
 			_redRook = value;
 			HistoryTableModel.getInstance().redRook.insert(ZobristConstants.RED_ROOK.key,value);
 		}
+		//----------------------------------
+		//  reds
+		//----------------------------------
+		public function get reds():ZobristKeyVO
+		{
+			return _reds;
+		}
+		public function set reds(value:ZobristKeyVO):void
+		{
+			_reds = value;
+			//TODO:
+//			HistoryTableModel.getInstance().reds.insert(ZobristConstants.RED_ROOK.key,value);
+		}
+		//----------------------------------
+		//  blues
+		//----------------------------------
+		public function get blues():ZobristKeyVO
+		{
+			return _blues;
+		}
+		public function set blues(value:ZobristKeyVO):void
+		{
+			_blues = value;
+			//TODO:
+//			HistoryTableModel.getInstance().blues.insert(ZobristConstants.RED_ROOK.key,value);
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Methods
@@ -255,6 +286,13 @@ package com.lookbackon.ccj.model
 				instance=new ZobristKeysModel(new Private());
 			}
 			return instance;
+		}
+		
+		public function getZobristKey(type:String="board"):ZobristKeyVO
+		{
+			//TODO:every key type such as (Knight/Marshall..) should with his zobristKeyVO.
+			//but now we just renturn all board zobristkey vo.
+			return _board;
 		}
 	}
 }

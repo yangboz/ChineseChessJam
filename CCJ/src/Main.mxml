@@ -60,7 +60,7 @@
 						var cGasket:IVisualElement = 
 							this.addElement( ChessFactory.createChessGasket(new Point(h,v)) );
 						//
-						ChessPieceManager.gaskets.addItem(cGasket);
+						ChessPieceManager.gaskets.push(cGasket);
 					}
 				}
 				//create chess piece
@@ -71,7 +71,12 @@
 						var iChessPiece:IChessPiece = ChessFactory.createChessPiece(new Point(hh,vv));
 						if(iChessPiece!=null)
 						{
-							this.addElement( iChessPiece );
+//							trace("index:",vv*CcjConstants.BOARD_V_LINES+hh);
+							var ecGasket:ChessGasket = ChessPieceManager.gaskets[vv*(CcjConstants.BOARD_V_LINES-1)+hh] as ChessGasket;
+							ecGasket.addElement( iChessPiece );
+							//
+							iChessPiece.x = 0;
+							iChessPiece.y = 0;
 							//
 							ChessPieceManager.pieces.addItem(iChessPiece);
 						}
@@ -119,7 +124,7 @@
 					   includeDate="false"
 					   includeLevel="true"
 					   includeTime="true"
-					   level="{LogEventLevel.DEBUG}"
+					   level="{LogEventLevel.INFO}"
 					   filters="{logFilters}"
 					   />
 	</fx:Declarations>

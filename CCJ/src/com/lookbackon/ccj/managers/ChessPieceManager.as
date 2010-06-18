@@ -12,9 +12,12 @@ package com.lookbackon.ccj.managers
 	
 	import de.polygonal.math.PM_PRNG;
 	
+	import flash.events.EventDispatcher;
 	import flash.events.MouseEvent;
 	
 	import mx.collections.ArrayCollection;
+	import mx.controls.Alert;
+	import mx.core.FlexGlobals;
 	import mx.core.IUIComponent;
 	import mx.core.IVisualElement;
 	import mx.events.DragEvent;
@@ -22,7 +25,8 @@ package com.lookbackon.ccj.managers
 	import mx.managers.DragManager;
 
 	/**
-	 * The chess piece manager manage chess piece move's validation.
+	 * The chess piece manager manage chess piece move's validation/makeMove/unMakeMove.
+	 * 
 	 * @author Knight.zhou
 	 * 
 	 */	
@@ -36,10 +40,15 @@ package com.lookbackon.ccj.managers
 		private static var pmPRNG:PM_PRNG = new PM_PRNG();
 		//
 		private static var _pieces:ArrayCollection = new ArrayCollection();
-		private static var _gaskets:ArrayCollection = new ArrayCollection();
+		private static var _gaskets:Vector.<ChessGasket> = new Vector.<ChessGasket>();
 		private static var _redPieces:ArrayCollection = new ArrayCollection();
 		private static var _bluePieces:ArrayCollection = new ArrayCollection();
-		private static var _conductsHistory:Array = [];
+		private static var _conductsHistorys:Array = [];
+		//But the real trick is if we do the XOR operation again we get the initial number back.
+		//a ^ b = c
+		//c ^ b = a
+		private static var _crossOverValue:int;//and we using _crossOverValue for store the value "b";
+		private static var _zKey:ZobristKeyVO;//current chess piece's zobrist key value object.
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -52,11 +61,12 @@ package com.lookbackon.ccj.managers
 		//----------------------------------
 		//  gaskets
 		//----------------------------------
-		public static function get gaskets():ArrayCollection
+		public static function get gaskets():Vector.<ChessGasket>
 		{
 			return _gaskets;
 		}
-		public static function set gaskets(value:ArrayCollection):void
+		
+		public static function set gaskets(value:Vector.<ChessGasket>):void
 		{
 			_gaskets = value;
 		}
@@ -86,15 +96,15 @@ package com.lookbackon.ccj.managers
 			return _bluePieces;
 		}
 		//----------------------------------
-		//  conductsHistory
+		//  conductsHistorys
 		//----------------------------------
-		public static function get conductsHistory():Array
+		public static function get conductsHistorys():Array
 		{
-			return _conductsHistory;
+			return _conductsHistorys;
 		}
-		public static function set conductsHistory(value:Array):void
+		public static function set conductsHistorys(value:Array):void
 		{
-			_conductsHistory = value;
+			_conductsHistorys = value;
 		}
 		//generation.
 		//--------------------------------------------------------------------------
@@ -137,20 +147,25 @@ package com.lookbackon.ccj.managers
 			var cGasketIndex:int = conductVO.newPosition.y*CcjConstants.BOARD_H_LINES+conductVO.newPosition.x;
 //			trace(cGasketIndex.toString(),"cGasketIndex");
 			var cGasket:ChessGasket = 
-				ChessPieceManager.gaskets.getItemAt(cGasketIndex) as ChessGasket;
+				ChessPieceManager.gaskets[cGasketIndex] as ChessGasket;
 			//hold gasket skin,then remove previous chess piece.
 //			cGasket.dispatchEvent(new DragEvent(DragEvent.DRAG_ENTER,false,true,conductVO.target));
 //			cGasket.dispatchEvent(new DragEvent(DragEvent.DRAG_DROP,false,true,conductVO.target));	
 			if(cGasket.numElements>1)
 			{
+				//TODO:chess piece eat off.
+				mx.controls.Alert.show(cGasket.position.toString(),"Eat Off !!!");
+				//
 				cGasket.removeElementAt(1);
 			}
 			cGasket.addElement(conductVO.target as IVisualElement);
 			//adjust the chess piece's position.
 			conductVO.target.x = 0;
 			conductVO.target.y = 0;
-			//update conductsHistory
-			conductsHistory.push(conductVO);
+			//update conductsHistorys
+			_crossOverValue = pmPRNG.nextInt();
+			LOG.debug("_crossOverValue:{0}",_crossOverValue.toString());
+			conductsHistorys.push({con:conductVO,cov:_crossOverValue});
 			//update allPieces.
 			updateAllPiecesPosition(conductVO);
 			//update ZobristKeys
@@ -160,22 +175,24 @@ package com.lookbackon.ccj.managers
 		}
 		public static function unmakeMove():void
 		{
-			var conductVO:ConductVO = conductsHistory.pop();
+			var conductHistory:* = conductsHistorys.pop();
+			var conductVO:ConductVO = conductHistory["con"] as ConductVO;
+			var _crossOverValue:int = conductHistory["cov"];
+			var oX:int = conductVO.target.position.x;
+			var oY:int = conductVO.target.position.y;
 			var pX:int = conductVO.newPosition.x;
 			var pY:int = conductVO.newPosition.y;
 			//TODO:implement functions.
 			//ref:http://mediocrechess.blogspot.com/2007/01/guide-zobrist-keys.html.
-			LOG.debug("before unmakemove:{0}",ZobristKeysModel.getInstance().redRook.dump());
-			if(conductVO.target.flag==CcjConstants.FLAG_RED)
-			{
-				ZobristKeysModel.getInstance().redRook.position.sett(pX,pY,
-					pmPRNG.nextInt()^ZobristKeysModel.getInstance().redRook.position.gett(pX,pY) );
-			}else
-			{
-				ZobristKeysModel.getInstance().redRook.position.sett(pX,pY,
-					pmPRNG.nextInt()^ZobristKeysModel.getInstance().redRook.position.gett(pX,pY) );
-			}
-			LOG.debug("after unmakemove:{0}",ZobristKeysModel.getInstance().redRook.dump());
+			_zKey = ZobristKeysModel.getInstance().getZobristKey();
+			LOG.debug("before unmakemove:{0}",_zKey.dump());
+			//update zobristkey.
+			_zKey.position.sett(oX,oY,_crossOverValue^_zKey.position.gett(oX,oY) );
+			_zKey.position.sett(pX,pY,_crossOverValue^_zKey.position.gett(pX,pY) );
+			//
+			LOG.debug("after unmakemove:{0}",_zKey.dump());
+			//TODO:unmake updateAllPiecesPosition(based on game turn phase.)
+			//
 		}
 		/**
 		 * 
@@ -185,22 +202,20 @@ package com.lookbackon.ccj.managers
 		private static function updateZobristKeysModel(conductVO:ConductVO):void
 		{
 			//TODO:update ZobristKeys
-			var zKeyVO:ZobristKeyVO = new ZobristKeyVO();
 			var pX:int = conductVO.newPosition.x;
 			var pY:int = conductVO.newPosition.y;
-			LOG.debug("before move:{0}",ZobristKeysModel.getInstance().redRook.dump());
-			if(conductVO.target.flag==CcjConstants.FLAG_RED)
-			{
-				ZobristKeysModel.getInstance().redRook.position.sett(pX,pY,
-					pmPRNG.nextInt()^ZobristKeysModel.getInstance().redRook.position.gett(pX,pY) );
-			}else
-			{
-				ZobristKeysModel.getInstance().redRook.position.sett(pX,pY,
-					pmPRNG.nextInt()^ZobristKeysModel.getInstance().redRook.position.gett(pX,pY) );
-			}
-			LOG.debug("after move:{0}",ZobristKeysModel.getInstance().redRook.dump());
+			var oX:int = conductVO.target.position.x;
+			var oY:int = conductVO.target.position.y;
+			//ref:http://mediocrechess.blogspot.com/2007/01/guide-zobrist-keys.html
+			_zKey = ZobristKeysModel.getInstance().getZobristKey();
+			LOG.debug("before makemove:{0}",_zKey.dump());
+			//update zobristkey.
+			_zKey.position.sett(oX,oY,_crossOverValue^_zKey.position.gett(oX,oY) );
+			_zKey.position.sett(pX,pY,_crossOverValue^_zKey.position.gett(pX,pY) );
+			//
+			LOG.debug("after makemove:{0}",_zKey.dump());
 			//for testing unmakeMove();
-			unmakeMove();
+//			unmakeMove();
 		}
 		/**
 		 * 
@@ -219,7 +234,8 @@ package com.lookbackon.ccj.managers
 				ChessPiecesModel.getInstance().redPieces.setBitt(conductVO.target.position.y,conductVO.target.position.x,false);
 				ChessPiecesModel.getInstance().redPieces.setBitt(conductVO.newPosition.y,conductVO.newPosition.x,true);
 			}
-			LOG.debug("after move,allPieces:{0}",ChessPiecesModel.getInstance().allPieces.dump());
+			LOG.info("after move,allPieces:{0}",ChessPiecesModel.getInstance().allPieces.dump());
 		}
 	}
+	
 }
