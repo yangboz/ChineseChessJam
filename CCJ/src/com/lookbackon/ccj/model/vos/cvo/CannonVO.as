@@ -59,7 +59,7 @@ package com.lookbackon.ccj.model.vos.cvo
 			{
 				this.occupies.setBitt(rowIndex,c,true);
 			}
-			LOG.info("occupies:{0}",this.occupies.dump());
+			LOG.debug("occupies:{0}",this.occupies.dump());
 			//about legal moves.
 			if(flag==CcjConstants.FLAG_RED)
 			{
@@ -126,12 +126,15 @@ package com.lookbackon.ccj.model.vos.cvo
 					bb.setBitt(rowIndex,w,true);
 				}
 			}
-			for(var m:int=mountIndex-1;m>=0;m--)
+			if(mountIndex!=-1)
 			{
-				if(ChessPiecesModel.getInstance().allPieces.getBitt(rowIndex,m))
+				for(var m:int=mountIndex-1;m>=0;m--)
 				{
-					bb.setBitt(rowIndex,w,true);
-					break;
+					if(ChessPiecesModel.getInstance().allPieces.getBitt(rowIndex,m))
+					{
+						bb.setBitt(rowIndex,w,true);
+						break;
+					}
 				}
 			}
 			return bb;
@@ -152,12 +155,15 @@ package com.lookbackon.ccj.model.vos.cvo
 					bb.setBitt(n,colIndex,true);
 				}
 			}
-			for(var m:int=mountIndex-1;m>=0;m--)
+			if(mountIndex!=-1)
 			{
-				if(ChessPiecesModel.getInstance().allPieces.getBitt(m,colIndex))
+				for(var m:int=mountIndex-1;m>=0;m--)
 				{
-					bb.setBitt(m,colIndex,true);
-					break;
+					if(ChessPiecesModel.getInstance().allPieces.getBitt(m,colIndex))
+					{
+						bb.setBitt(m,colIndex,true);
+						break;
+					}
 				}
 			}
 			return bb;
@@ -178,12 +184,15 @@ package com.lookbackon.ccj.model.vos.cvo
 					bb.setBitt(rowIndex,e,true);
 				}
 			}
-			for(var m:int=mountIndex+1;m<this.column;m++)
+			if(mountIndex!=-1)
 			{
-				if(ChessPiecesModel.getInstance().allPieces.getBitt(rowIndex,m))
+				for(var m:int=mountIndex+1;m<this.column;m++)
 				{
-					bb.setBitt(rowIndex,m,true);
-					break;
+					if(ChessPiecesModel.getInstance().allPieces.getBitt(rowIndex,m))
+					{
+						bb.setBitt(rowIndex,m,true);
+						break;
+					}
 				}
 			}
 			return bb;
@@ -204,12 +213,15 @@ package com.lookbackon.ccj.model.vos.cvo
 					bb.setBitt(s,colIndex,true);
 				}
 			}
-			for(var m:int=mountIndex+1;m<this.row;m++)
+			if(mountIndex!=-1)
 			{
-				if(ChessPiecesModel.getInstance().allPieces.getBitt(m,colIndex))
+				for(var m:int=mountIndex+1;m<this.row;m++)
 				{
-					bb.setBitt(m,colIndex,true);
-					break;
+					if(ChessPiecesModel.getInstance().allPieces.getBitt(m,colIndex))
+					{
+						bb.setBitt(m,colIndex,true);
+						break;
+					}
 				}
 			}
 			return bb;
