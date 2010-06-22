@@ -14,7 +14,7 @@ package com.lookbackon.AI.evaluation.statical.nelderMeadSimplex
 		}
 	}
 }
-using System;
+/*using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Reflection;
@@ -103,4 +103,4 @@ namespace NumUtilsTests
 			}
 		}
 	}
-	}
+	}*/

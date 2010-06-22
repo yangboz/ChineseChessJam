@@ -23,7 +23,7 @@ package com.lookbackon.ccj.errors
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function CcjErrors(message:*="", id:*=0)
+		public function CcjErrors(message:String="", id:int=0)
 		{
 			//TODO: implement function
 			super(message, id);

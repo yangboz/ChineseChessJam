@@ -19,6 +19,6 @@ package com.lookbackon.AI.searching
 		 * This search is made unnecessary with the ETC lookup. 
 		 * @see http://www.fierz.ch/strategy.htm
 		 */		
-		public function ETC():void{}
+		public function ETC(){}
 	}
 }

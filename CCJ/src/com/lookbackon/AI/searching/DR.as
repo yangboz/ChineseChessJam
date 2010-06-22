@@ -21,6 +21,6 @@ package com.lookbackon.AI.searching
 		 * these have some knowledge advantage! 
 		 * @see http://www.fierz.ch/strategy.htm
 		 */		
-		public function DR():void{}
+		public function DR(){}
 	}
 }

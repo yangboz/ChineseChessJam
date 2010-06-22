@@ -66,7 +66,7 @@ package com.lookbackon.AI.searching
 //			AlphaBeta(5,-2,2);
 		}
 		
-		protected function AlphaBeta(depth:int,alpha:int,beta:int):int
+		protected function doAlphaBeta(depth:int,alpha:int,beta:int):int
 		{
 				/*
 			   int AlphaBeta(int depth, int alpha, int beta) {

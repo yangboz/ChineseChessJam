@@ -9,7 +9,7 @@ package com.lookbackon.ccj.business.fsm.states
 	 */	
 	public class DefenseState extends StateBase
 	{
-		public function DefenseState(agent:ChessAgent,resource:*,description:String=null)
+		public function DefenseState(agent:ChessAgent,resource:Object,description:String=null)
 		{
 			super(agent,resource,description);
 		}

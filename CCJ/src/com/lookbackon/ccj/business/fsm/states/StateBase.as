@@ -11,13 +11,13 @@ package com.lookbackon.ccj.business.fsm.states
 	public class StateBase implements IState
 	{
 		protected var agent:ChessAgent;
-		protected var resource:*;//the current state's resource(effect,movie,etc...)
+		protected var resource:Object;//the current state's resource(effect,movie,etc...)
 		//--------------------------------------------------------------------------
 		//
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function StateBase(agent:ChessAgent,resource:*,description:String=null)
+		public function StateBase(agent:ChessAgent,resource:Object,description:String=null)
 		{
 			this.agent = agent;
 			this.resource = resource;

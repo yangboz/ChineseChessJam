@@ -21,6 +21,6 @@ package com.lookbackon.AI.searching
 		 * @see http://www.fierz.ch/strategy.htm
 		 *  
 		 * */		
-		public function SE():void{}
+		public function SE(){}
 	}
 }

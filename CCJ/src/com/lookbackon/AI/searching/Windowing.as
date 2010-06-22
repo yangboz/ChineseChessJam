@@ -15,6 +15,6 @@ package com.lookbackon.AI.searching
 		 * we will have to do a re-search with a larger window. '
 		 * @see http://www.fierz.ch/strategy.htm
 		 */		
-		public function Windowing():void{}
+		public function Windowing(){}
 	}
 }

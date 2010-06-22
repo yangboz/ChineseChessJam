@@ -21,7 +21,7 @@ package com.lookbackon.AI.evaluation.linear
 	 * @playerVersion 9.0
 	 * Created Jun 10, 2010 2:09:53 PM
 	 */
-	dynamic public class LinearEvaluationProxy extends Proxy implements IEvaluation
+	public class LinearEvaluationProxy extends Proxy implements IEvaluation
 	{
 		use namespace flash_proxy;
 		//--------------------------------------------------------------------------

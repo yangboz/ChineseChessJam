@@ -181,7 +181,7 @@ package com.lookbackon.ds
 import flash.display.Stage;
 import flash.events.KeyboardEvent;
 
-public class Key
+internal class Key
 {
 	private static var instance:Key;
 	

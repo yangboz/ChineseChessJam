@@ -41,34 +41,31 @@ package com.lookbackon.AI.evaluation.statical.nelderMeadSimplex
 			return _errorValue;
 		}
 		
-		public function EvaluationCount:int
+		public function EvaluationCount():int
 		{
 			return _evaluationCount;
 		}
 	}
 }
-internal class
+import com.lookbackon.ccj.utils.Enum;
+
+internal class TerminationReason extends Enum
 {
-	import com.lookbackon.ccj.utils.Enum;
+	{initEnum(TerminationReason);}//static construct.
 	
-	public class TerminationReason extends Enum
+	//--------------------------------------------------------------------------
+	//
+	//  Constructor
+	//
+	//--------------------------------------------------------------------------
+	//
+	public var MaxFunctionEvaluations:*;
+	public var Converged:*;
+	public var Unspecified:*;
+	
+	public function TerminationReason()
 	{
-		{initEnum(TerminationReason);}//static construct.
-		
-		//--------------------------------------------------------------------------
-		//
-		//  Constructor
-		//
-		//--------------------------------------------------------------------------
-		//
-		public var MaxFunctionEvaluations:*;
-		public var Converged:*;
-		public var Unspecified:*;
-		
-		public function TerminationReason()
-		{
-			//TODO: implement function
-			super();
-		}
+		//TODO: implement function
+		super();
 	}
 }

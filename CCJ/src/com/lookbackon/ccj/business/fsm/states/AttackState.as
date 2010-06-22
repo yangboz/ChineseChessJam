@@ -8,7 +8,7 @@ package com.lookbackon.ccj.business.fsm.states
 	 */	
 	public class AttackState extends StateBase
 	{
-		public function AttackState(agent:ChessAgent,resource:*,description:String=null)
+		public function AttackState(agent:ChessAgent,resource:Object,description:String=null)
 		{
 			super(agent,resource,description);
 		}
