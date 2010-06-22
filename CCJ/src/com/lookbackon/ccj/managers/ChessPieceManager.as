@@ -1,6 +1,7 @@
 package com.lookbackon.ccj.managers
 {
 	import com.lookbackon.ccj.CcjConstants;
+	import com.lookbackon.ccj.ChessPiecesConstants;
 	import com.lookbackon.ccj.model.ChessPiecesModel;
 	import com.lookbackon.ccj.model.ZobristKeysModel;
 	import com.lookbackon.ccj.model.vos.ConductVO;
@@ -154,7 +155,15 @@ package com.lookbackon.ccj.managers
 			if(cGasket.numElements>1)
 			{
 				//TODO:chess piece eat off.
-				mx.controls.Alert.show(cGasket.position.toString(),"Eat Off !!!");
+				LOG.info("Eat Off@{0}",cGasket.position.toString());
+				if(ChessPiece(cGasket.getElementAt(1)).label==ChessPiecesConstants.BLUE_MARSHAL.label)
+				{
+					GameManager.humanWin();	
+				}
+				if(ChessPiece(cGasket.getElementAt(1)).label==ChessPiecesConstants.RED_MARSHAL.label)
+				{
+					GameManager.computerWin();
+				}
 				//
 				cGasket.removeElementAt(1);
 			}
@@ -171,7 +180,13 @@ package com.lookbackon.ccj.managers
 			//update ZobristKeys
 			updateZobristKeysModel(conductVO);
 			//switch turn flag.
-			GameManager.isHumanTurnNow();
+			if(GameManager.turnFlag==CcjConstants.FLAG_BLUE)
+			{
+				GameManager.isHumanTurnNow();
+			}else
+			{
+				GameManager.isComputerTurnNow();
+			}
 		}
 		public static function unmakeMove():void
 		{

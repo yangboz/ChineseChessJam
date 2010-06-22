@@ -40,7 +40,7 @@ package com.lookbackon.ccj.managers
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		private static var _turnFlag:int;
+		private static var _turnFlag:int=CcjConstants.FLAG_BLUE;
 		private static var iThinkingProgressBar:IFlexDisplayObject;
 		private static var gameAI:ISearching;
 		//----------------------------------

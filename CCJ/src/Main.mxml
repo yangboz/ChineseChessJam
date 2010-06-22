@@ -39,7 +39,7 @@
 			private var chessPositionModel:ChessPiecesModel = ChessPiecesModel.getInstance();
 			//
 			[Bindable]
-			private var logFilters:Array = ["com.lookbackon.ccj.model.vos.cvo.CannonVO"];
+			private var logFilters:Array = ["*"];
 			//----------------------------------
 			//  CONSTANTS
 			//----------------------------------

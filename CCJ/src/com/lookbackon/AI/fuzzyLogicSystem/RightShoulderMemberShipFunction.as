@@ -1,8 +1,6 @@
 package com.lookbackon.AI.fuzzyLogicSystem
 {
 	import mx.logging.ILogger;
-	import com.saybot.vworld.utils.LogUtil;
-	
     /**
      * Right shoulder member ship functions
      * 

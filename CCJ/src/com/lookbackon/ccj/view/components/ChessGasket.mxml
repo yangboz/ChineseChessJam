@@ -10,7 +10,6 @@
 		<![CDATA[
 			import com.lookbackon.ccj.business.factory.ChessFactory;
 			import com.lookbackon.ccj.managers.ChessPieceManager;
-			import com.lookbackon.ccj.managers.GameManager;
 			import com.lookbackon.ccj.model.ChessPiecesModel;
 			import com.lookbackon.ccj.model.vos.ConductVO;
 			import com.lookbackon.ccj.model.vos.cvo.ChessVO;
@@ -78,12 +77,17 @@
 			//dragDropHandler
 			private function dragDropHandler(event:DragEvent):void
 			{
+				//renew data.
 				var conductVO:ConductVO = new ConductVO();
-				conductVO.newPosition = this.position;
 				conductVO.target = ChessPiece(event.dragInitiator);
+				conductVO.newPosition = this.position;
+				LOG.info("preBefore move,renew conductVO:{0}",conductVO.dump());
+				//renew chessVO.
+				conductVO.target.chessVO = ChessFactory.generateChessVO(conductVO,true);
+				LOG.info("preBefore move,renew chessVO.occupies:{0}",conductVO.target.chessVO.occupies.dump());
+				LOG.info("preBefore move,renew chessVO.moves:{0}",conductVO.target.chessVO.moves.dump());
+				LOG.info("preBefore move,renew chessVO.captures:{0}",conductVO.target.chessVO.captures.dump());
 				ChessPieceManager.makeMove(conductVO);
-				//switch turn flag.
-				GameManager.isComputerTurnNow();
 			}
 		]]>
 	</fx:Script>

@@ -130,15 +130,6 @@
 				DragManager.doDrag(event.currentTarget as IUIComponent,null,event);
 				// remove event listener
 //				this.removeEventListener(MouseEvent.MOUSE_DOWN,mouseDownHandler);
-				//renew data.
-				var conductVO:ConductVO = new ConductVO();
-				conductVO.newPosition = this.position;
-				conductVO.target = this;
-				//renew chessVO.
-				this.chessVO = ChessFactory.generateChessVO(conductVO,true);
-				LOG.info("preBefore move,renew chessVO.occupies:{0}",this.chessVO.occupies.dump());
-				LOG.info("preBefore move,renew chessVO.moves:{0}",this.chessVO.moves.dump());
-				LOG.info("preBefore move,renew chessVO.captures:{0}",this.chessVO.captures.dump());
 			}
 		]]>
 	</fx:Script>

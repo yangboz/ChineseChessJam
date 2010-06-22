@@ -1,6 +1,5 @@
 package com.lookbackon.AI.fuzzyLogicSystem
 {
-	import com.saybot.vworld.errors.SaybotError;
 	/**
 	 * These are sets whose elements are all the possible linguistic 
 	 * value of a specific linguistic variable,each assoicated 
@@ -31,7 +30,7 @@ package com.lookbackon.AI.fuzzyLogicSystem
 				return variableValue.memberShipOf(crispValue);
 			}else
 			{
-				throw new SaybotError(SaybotError.INVALID_FUZZY_LOGIC_VALUE);
+				throw new Error("INVALID_FUZZY_LOGIC_VALUE");
 			}
 			return -1;
 		}

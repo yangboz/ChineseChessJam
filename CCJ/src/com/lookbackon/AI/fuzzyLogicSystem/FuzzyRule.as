@@ -1,7 +1,5 @@
 package com.lookbackon.AI.fuzzyLogicSystem
 {
-	import com.saybot.vworld.utils.LogUtil;
-	
 	import mx.logging.ILogger;
 
 	/**

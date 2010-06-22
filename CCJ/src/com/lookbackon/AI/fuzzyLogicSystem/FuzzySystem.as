@@ -1,8 +1,5 @@
 package com.lookbackon.AI.fuzzyLogicSystem
 {
-	import com.saybot.vworld.SaybotConstants;
-	
-
 	/**
 	 * This class lets you define a set of rules.
 	 * all defining the same crisp variable and calculate
@@ -26,11 +23,11 @@ package com.lookbackon.AI.fuzzyLogicSystem
 		{
 			rules  = [];
 			boundarys = [
-				SaybotConstants.FL_M_ACTION_AREA_A_VALUE,//11111
-				SaybotConstants.FL_M_ACTION_AREA_B_VALUE,//22222
-				SaybotConstants.FL_M_ACTION_AREA_C_VALUE,//33333
-				SaybotConstants.FL_M_ACTION_AREA_F_VALUE,//44444
-				SaybotConstants.FL_M_ACTION_AREA_I_VALUE //55555
+				11111,//11111
+				22222,//22222
+				33333,//33333
+				44444,//44444
+				55555 //55555
 				];
 		}
 		//----------------------------------
