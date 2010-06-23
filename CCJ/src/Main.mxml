@@ -36,10 +36,10 @@
 			//
 			//--------------------------------------------------------------------------
 			[Bindable]
-			private var chessPositionModel:ChessPiecesModel = ChessPiecesModel.getInstance();
+			private var chessPiecesModel:ChessPiecesModel = ChessPiecesModel.getInstance();
 			//
 			[Bindable]
-			private var logFilters:Array = ["com.lookbackon.ccj.view.components.ChessGasket"];
+			private var logFilters:Array = ["com.lookbackon.ccj.managers.ChessPieceManager"];
 			//----------------------------------
 			//  CONSTANTS
 			//----------------------------------
@@ -79,15 +79,14 @@
 							iChessPiece.x = 0;
 							iChessPiece.y = 0;
 							//
-							ChessPieceManager.pieces.addItem(iChessPiece);
 						}
 					}
 				}
 				//create chess pieces' chessVO;
 				//create chess pieces' omenVO;
-				for(var cp:int=0;cp<ChessPieceManager.pieces.length;cp++)
+				for(var cp:int=0;cp<chessPiecesModel.pieces.length;cp++)
 				{
-					var chessPiece:ChessPiece = ChessPieceManager.pieces.getItemAt(cp) as ChessPiece;
+					var chessPiece:ChessPiece = chessPiecesModel.pieces.getItemAt(cp) as ChessPiece;
 					//generateChessPieceVO
 					var conductVO:ConductVO = new ConductVO();
 					conductVO.target = chessPiece;
@@ -116,13 +115,13 @@
 					LOG.warn("CONFIG::debugging {0}",error.toString());
 				}
 				//
-				LOG.debug("redPieces:{0}",chessPositionModel.redPieces.dump());
-				LOG.debug("bluePieces:{0}",chessPositionModel.bluePieces.dump());
-				LOG.debug("allPieces:{0}",chessPositionModel.allPieces.dump());
+				LOG.debug("redPieces:{0}",chessPiecesModel.redPieces.dump());
+				LOG.debug("bluePieces:{0}",chessPiecesModel.bluePieces.dump());
+				LOG.debug("allPieces:{0}",chessPiecesModel.allPieces.dump());
 				//
-				LOG.debug("allPieces rotate90:{0}",chessPositionModel.allPieces.rotate90().dump());
-				LOG.debug("allPieces rotate90.bitCount:{0}",chessPositionModel.allPieces.bitCount);
-				LOG.debug("allPieces rotate90.cellCount:{0}",chessPositionModel.allPieces.cellCount);
+				LOG.debug("allPieces rotate90:{0}",chessPiecesModel.allPieces.rotate90().dump());
+				LOG.debug("allPieces rotate90.bitCount:{0}",chessPiecesModel.allPieces.bitCount);
+				LOG.debug("allPieces rotate90.cellCount:{0}",chessPiecesModel.allPieces.cellCount);
 			}
 
 			protected function application1_applicationCompleteHandler(event:FlexEvent):void

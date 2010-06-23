@@ -11,6 +11,7 @@ package com.lookbackon.ccj.model
 	import com.lookbackon.ccj.model.vos.cvo.PawnVO;
 	import com.lookbackon.ccj.model.vos.cvo.RookVO;
 	import com.lookbackon.ccj.utils.LogUtil;
+	import com.lookbackon.ccj.view.components.ChessPiece;
 	import com.lookbackon.ds.BitBoard;
 	
 	import de.polygonal.ds.Array2;
@@ -41,6 +42,7 @@ package com.lookbackon.ccj.model
 		//obtain reds/blues chess pieces entity.
 		private var _reds:ArrayCollection   = new ArrayCollection();
 		private var _blues:ArrayCollection  = new ArrayCollection();
+		private var _pieces:ArrayCollection = new ArrayCollection();
 		//
 		private var _bluePieces:BitBoard	= new BitBoard(9,10);
 		private var _redPieces:BitBoard		= new BitBoard(9,10);
@@ -103,6 +105,13 @@ package com.lookbackon.ccj.model
 		public function set reds(value:ArrayCollection):void
 		{
 			_reds = value;
+		}
+		//----------------------------------
+		//  pieces
+		//----------------------------------
+		public function get pieces():ArrayCollection
+		{
+			return new ArrayCollection(_blues.source.concat(_reds.source));
 		}
 		//----------------------------------
 		//  allPieces

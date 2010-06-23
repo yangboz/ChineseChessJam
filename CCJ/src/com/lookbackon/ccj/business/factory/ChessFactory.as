@@ -25,7 +25,7 @@ package com.lookbackon.ccj.business.factory
 	import flash.utils.getQualifiedClassName;
 	
 	import mx.logging.ILogger;
-
+	
 	/**
 	 * Simply factory produce ChessPiece/ChessGasket/ChessVO/OmenVO.
 	 * 
@@ -135,9 +135,9 @@ package com.lookbackon.ccj.business.factory
 			//view
 			myChessPiece.label =myChessPiece.name = chessPieceType;
 			/*myChessPiece.x = 
-				position.x*CcjConstants.BOARD_LATTICE - myChessPiece.width/2 +50;
+			position.x*CcjConstants.BOARD_LATTICE - myChessPiece.width/2 +50;
 			myChessPiece.y = 
-				position.y*CcjConstants.BOARD_LATTICE + myChessPiece.height/2 -25;*/
+			position.y*CcjConstants.BOARD_LATTICE + myChessPiece.height/2 -25;*/
 			//set flag to identify.
 			myChessPiece.flag = CcjConstants.FLAG_BLUE;
 			//data
@@ -193,196 +193,58 @@ package com.lookbackon.ccj.business.factory
 		/**
 		 * 
 		 * @param conductVO has property target(type is chessPiece) and newPosition([0,1]).
-		 * @param isInceptive a flag indicator bitBoard's value whether first inceptive.
 		 * @return precise chess value object(prototype is chessVOBase).
 		 * 
 		 */		
-		public static function generateChessVO(conductVO:ConductVO,isInceptive:Boolean=false):ChessVO
+		public static function generateChessVO(conductVO:ConductVO):ChessVO
 		{
 			var oColIndex:int = conductVO.target.position.x;
 			var oRowIndex:int = conductVO.target.position.y;
-			if(isInceptive)
-			{
-				var nColIndex:int = conductVO.newPosition.x;
-				var nRowIndex:int = conductVO.newPosition.y;
-			}
 			var chessVO:ChessVO;
-//			LOG.info(conductVO.dump());
+			//			LOG.info(conductVO.dump());
 			switch(conductVO.target.name)
 			{
 				case ChessPiecesConstants.BLUE_BISHOP.label:
-					if(isInceptive)
-					{
-						ChessPiecesModel.getInstance().bluePieces.setBitt(oRowIndex,oColIndex,false);
-						ChessPiecesModel.getInstance().bluePieces.setBitt(nRowIndex,nColIndex,true);
-						chessVO = new BishopVO(9,10,nRowIndex,nColIndex,1);
-					}else
-					{
-						ChessPiecesModel.getInstance().bluePieces.setBitt(oRowIndex,oColIndex,true);
-						chessVO = new BishopVO(9,10,oRowIndex,oColIndex,1);
-					}
+					chessVO = new BishopVO(9,10,oRowIndex,oColIndex,1);
 					break;
 				case ChessPiecesConstants.RED_BISHOP.label:
-					if(isInceptive)
-					{
-						ChessPiecesModel.getInstance().redPieces.setBitt(oRowIndex,oColIndex,false);
-						ChessPiecesModel.getInstance().redPieces.setBitt(nRowIndex,nColIndex,true);
-						chessVO = new BishopVO(9,10,nRowIndex,nColIndex);
-					}else
-					{
-						ChessPiecesModel.getInstance().redPieces.setBitt(oRowIndex,oColIndex,true);	
-						chessVO = new BishopVO(9,10,oRowIndex,oColIndex);
-					}
+					chessVO = new BishopVO(9,10,oRowIndex,oColIndex);
 					break;
 				case ChessPiecesConstants.BLUE_CANNON.label:
-					if(isInceptive)
-					{
-						ChessPiecesModel.getInstance().bluePieces.setBitt(oRowIndex,oColIndex,false);
-						ChessPiecesModel.getInstance().bluePieces.setBitt(nRowIndex,nColIndex,true);
-						chessVO = new CannonVO(9,10,nRowIndex,nColIndex,1);
-					}else
-					{
-						ChessPiecesModel.getInstance().bluePieces.setBitt(oRowIndex,oColIndex,true);
-						chessVO = new CannonVO(9,10,oRowIndex,oColIndex,1);
-					}
+					chessVO = new CannonVO(9,10,oRowIndex,oColIndex,1);
 					break;
 				case ChessPiecesConstants.RED_CANNON.label:
-					if(isInceptive)
-					{
-						ChessPiecesModel.getInstance().redPieces.setBitt(oRowIndex,oColIndex,false);
-						ChessPiecesModel.getInstance().redPieces.setBitt(nRowIndex,nColIndex,true);
-						chessVO = new CannonVO(9,10,nRowIndex,nColIndex);
-					}else
-					{
-						ChessPiecesModel.getInstance().redPieces.setBitt(oRowIndex,oColIndex,true);
-						chessVO = new CannonVO(9,10,oRowIndex,oColIndex);
-					}
-					if(chessVO!=null)
-					{
-						LOG.info("{0}.occupies:{1}",flash.utils.getQualifiedClassName(chessVO),chessVO.occupies.dump());
-						LOG.info("{0}.moves:{1}",flash.utils.getQualifiedClassName(chessVO),chessVO.moves.dump());
-						LOG.info("{0}.captures:{1}",flash.utils.getQualifiedClassName(chessVO),chessVO.captures.dump());
-					}
+					chessVO = new CannonVO(9,10,oRowIndex,oColIndex);
 					break;
 				case ChessPiecesConstants.BLUE_ROOK.label:
-					if(isInceptive)
-					{
-						ChessPiecesModel.getInstance().bluePieces.setBitt(oRowIndex,oColIndex,false);
-						ChessPiecesModel.getInstance().bluePieces.setBitt(nRowIndex,nColIndex,true);
-						chessVO = new RookVO(9,10,nRowIndex,nColIndex,1);
-					}else
-					{
-						ChessPiecesModel.getInstance().bluePieces.setBitt(oRowIndex,oColIndex,true);
-						chessVO = new RookVO(9,10,oRowIndex,oColIndex,1);
-					}
+					chessVO = new RookVO(9,10,oRowIndex,oColIndex,1);
 					break;
 				case ChessPiecesConstants.RED_ROOK.label:
-					if(isInceptive)
-					{
-						ChessPiecesModel.getInstance().redPieces.setBitt(oRowIndex,oColIndex,false);
-						ChessPiecesModel.getInstance().redPieces.setBitt(nRowIndex,nColIndex,true);
-						chessVO = new RookVO(9,10,nRowIndex,nColIndex);
-					}else
-					{
-						ChessPiecesModel.getInstance().redPieces.setBitt(oRowIndex,oColIndex,true);
-						chessVO = new RookVO(9,10,oRowIndex,oColIndex);
-					}
+					chessVO = new RookVO(9,10,oRowIndex,oColIndex);
 					break;
 				case ChessPiecesConstants.BLUE_KNIGHT.label:
-					if(isInceptive)
-					{
-						ChessPiecesModel.getInstance().bluePieces.setBitt(oRowIndex,oColIndex,false);
-						ChessPiecesModel.getInstance().bluePieces.setBitt(nRowIndex,nColIndex,true);
-						chessVO = new KnightVO(9,10,nRowIndex,nColIndex,1);
-					}else
-					{
-						ChessPiecesModel.getInstance().bluePieces.setBitt(oRowIndex,oColIndex,true);
-						chessVO = new KnightVO(9,10,oRowIndex,oColIndex,1);
-					}
+					chessVO = new KnightVO(9,10,oRowIndex,oColIndex,1);
 					break;
 				case ChessPiecesConstants.RED_KNIGHT.label:
-					if(isInceptive)
-					{
-						ChessPiecesModel.getInstance().redPieces.setBitt(oRowIndex,oColIndex,false);
-						ChessPiecesModel.getInstance().redPieces.setBitt(nRowIndex,nColIndex,true);
-						chessVO = new KnightVO(9,10,nRowIndex,nColIndex);
-					}else
-					{
-						ChessPiecesModel.getInstance().redPieces.setBitt(oRowIndex,oColIndex,true);
-						chessVO = new KnightVO(9,10,oRowIndex,oColIndex);
-					}
+					chessVO = new KnightVO(9,10,oRowIndex,oColIndex);
 					break;
 				case ChessPiecesConstants.BLUE_MARSHAL.label:
-					if(isInceptive)
-					{
-						ChessPiecesModel.getInstance().bluePieces.setBitt(oRowIndex,oColIndex,false);
-						ChessPiecesModel.getInstance().bluePieces.setBitt(nRowIndex,nColIndex,true);
-						chessVO = new MarshalVO(9,10,nRowIndex,nColIndex,1);
-					}else
-					{
-						ChessPiecesModel.getInstance().bluePieces.setBitt(oRowIndex,oColIndex,true);	
-						chessVO = new MarshalVO(9,10,oRowIndex,oColIndex,1);
-					}
+					chessVO = new MarshalVO(9,10,oRowIndex,oColIndex,1);
 					break;
 				case ChessPiecesConstants.RED_MARSHAL.label:
-					if(isInceptive)
-					{
-						ChessPiecesModel.getInstance().redPieces.setBitt(oRowIndex,oColIndex,false);
-						ChessPiecesModel.getInstance().redPieces.setBitt(nRowIndex,nColIndex,true);
-						chessVO = new MarshalVO(9,10,nRowIndex,nColIndex);
-					}else
-					{
-						ChessPiecesModel.getInstance().redPieces.setBitt(oRowIndex,oColIndex,true);
-						chessVO = new MarshalVO(9,10,oRowIndex,oColIndex);
-					}
+					chessVO = new MarshalVO(9,10,oRowIndex,oColIndex);
 					break;
 				case ChessPiecesConstants.BLUE_OFFICAL.label:
-					if(isInceptive)
-					{
-						ChessPiecesModel.getInstance().bluePieces.setBitt(oRowIndex,oColIndex,false);
-						ChessPiecesModel.getInstance().bluePieces.setBitt(nRowIndex,nColIndex,true);
-						chessVO = new OfficalVO(9,10,nRowIndex,nColIndex,1);
-					}else
-					{
-						ChessPiecesModel.getInstance().bluePieces.setBitt(oRowIndex,oColIndex,true);
-						chessVO = new OfficalVO(9,10,oRowIndex,oColIndex,1);
-					}
+					chessVO = new OfficalVO(9,10,oRowIndex,oColIndex,1);
 					break;
 				case ChessPiecesConstants.RED_OFFICAL.label:
-					if(isInceptive)
-					{
-						ChessPiecesModel.getInstance().redPieces.setBitt(oRowIndex,oColIndex,false);
-						ChessPiecesModel.getInstance().redPieces.setBitt(nRowIndex,nColIndex,true);
-						chessVO = new OfficalVO(9,10,nRowIndex,nColIndex);
-					}else
-					{
-						ChessPiecesModel.getInstance().redPieces.setBitt(oRowIndex,oColIndex,true);
-						chessVO = new OfficalVO(9,10,oRowIndex,oColIndex);
-					}
+					chessVO = new OfficalVO(9,10,oRowIndex,oColIndex);
 					break;
 				case ChessPiecesConstants.BLUE_PAWN.label:
-					if(isInceptive)
-					{
-						ChessPiecesModel.getInstance().bluePieces.setBitt(oRowIndex,oColIndex,false);
-						ChessPiecesModel.getInstance().bluePieces.setBitt(nRowIndex,nColIndex,true);
-						chessVO = new PawnVO(9,10,nRowIndex,nColIndex,1);
-					}else
-					{
-						ChessPiecesModel.getInstance().bluePieces.setBitt(oRowIndex,oColIndex,true);
-						chessVO = new PawnVO(9,10,oRowIndex,oColIndex,1);
-					}
+					chessVO = new PawnVO(9,10,oRowIndex,oColIndex,1);
 					break;
 				case ChessPiecesConstants.RED_PAWN.label:
-					if(isInceptive)
-					{
-						ChessPiecesModel.getInstance().redPieces.setBitt(oRowIndex,oColIndex,false);
-						ChessPiecesModel.getInstance().redPieces.setBitt(nRowIndex,nColIndex,true);
-						chessVO = new PawnVO(9,10,nRowIndex,nColIndex);
-					}else
-					{
-						ChessPiecesModel.getInstance().redPieces.setBitt(oRowIndex,oColIndex,true);
-						chessVO = new PawnVO(9,10,oRowIndex,oColIndex);
-					}
+					chessVO = new PawnVO(9,10,oRowIndex,oColIndex);
 					break;
 				default:
 					break;

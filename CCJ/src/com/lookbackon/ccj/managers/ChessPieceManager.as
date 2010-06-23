@@ -2,6 +2,7 @@ package com.lookbackon.ccj.managers
 {
 	import com.lookbackon.ccj.CcjConstants;
 	import com.lookbackon.ccj.ChessPiecesConstants;
+	import com.lookbackon.ccj.business.factory.ChessFactory;
 	import com.lookbackon.ccj.model.ChessPiecesModel;
 	import com.lookbackon.ccj.model.ZobristKeysModel;
 	import com.lookbackon.ccj.model.vos.ConductVO;
@@ -40,16 +41,15 @@ package com.lookbackon.ccj.managers
 		//--------------------------------------------------------------------------
 		private static var pmPRNG:PM_PRNG = new PM_PRNG();
 		//
-		private static var _pieces:ArrayCollection = new ArrayCollection();
 		private static var _gaskets:Vector.<ChessGasket> = new Vector.<ChessGasket>();
-		private static var _redPieces:ArrayCollection = new ArrayCollection();
-		private static var _bluePieces:ArrayCollection = new ArrayCollection();
 		private static var _conductsHistorys:Array = [];
 		//But the real trick is if we do the XOR operation again we get the initial number back.
 		//a ^ b = c
 		//c ^ b = a
 		private static var _crossOverValue:int;//and we using _crossOverValue for store the value "b";
 		private static var _zKey:ZobristKeyVO;//current chess piece's zobrist key value object.
+		//
+		private static var chessPiecesModel:ChessPiecesModel = ChessPiecesModel.getInstance();
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -70,31 +70,6 @@ package com.lookbackon.ccj.managers
 		public static function set gaskets(value:Vector.<ChessGasket>):void
 		{
 			_gaskets = value;
-		}
-		//----------------------------------
-		//  pieces
-		//----------------------------------
-		public static function get pieces():ArrayCollection
-		{
-			return _pieces;
-		}
-		public static function set pieces(value:ArrayCollection):void
-		{
-			_pieces = value;
-		}
-		//----------------------------------
-		//  redPieces
-		//----------------------------------
-		public static function get redPieces():ArrayCollection
-		{
-			return _redPieces;
-		}
-		//----------------------------------
-		//  bluePieces
-		//----------------------------------
-		public static function get bluePieces():ArrayCollection
-		{
-			return _bluePieces;
 		}
 		//----------------------------------
 		//  conductsHistorys
@@ -164,7 +139,9 @@ package com.lookbackon.ccj.managers
 				{
 					GameManager.computerWin();
 				}
-				//
+				//remove pieces data.
+				chessPiecesModel.pieces.removeItemAt(chessPiecesModel.pieces.getItemIndex(cGasket.getChildAt(1)));
+				//remove element from gasket.
 				cGasket.removeElementAt(1);
 			}
 			cGasket.addElement(conductVO.target as IVisualElement);
@@ -177,6 +154,8 @@ package com.lookbackon.ccj.managers
 			conductsHistorys.push({con:conductVO,cov:_crossOverValue});
 			//update allPieces.
 			updateAllPiecesPosition(conductVO);
+			//update allPieces' chessVO.
+			updateAllPiecesChessVO();
 			//update ZobristKeys
 			updateZobristKeysModel(conductVO);
 			//switch turn flag.
@@ -251,6 +230,24 @@ package com.lookbackon.ccj.managers
 			}
 			LOG.info("after move,allPieces:{0}",ChessPiecesModel.getInstance().allPieces.dump());
 		}
+		
+		//	
+		private static function updateAllPiecesChessVO():void
+		{
+			for(var i:int=0;i<chessPiecesModel.pieces.length;i++)
+			{
+				var chessPiece:ChessPiece = chessPiecesModel.pieces.getItemAt(i) as ChessPiece;
+				//renew data.
+				var currentConductVO:ConductVO = new ConductVO();
+				currentConductVO.target = chessPiece;
+//				LOG.info("before move,currentConductVO:{0}",currentConductVO.dump());
+//				LOG.info("before move,chessPiece's chessVO's legal moves:{0}",chessPiece.chessVO.moves.dump());
+				//renew chessVO.
+				chessPiece.chessVO = ChessFactory.generateChessVO(currentConductVO);
+//				LOG.info("after move,chessPiece's chessVO's legal moves:{0}",chessPiece.chessVO.moves.dump());
+			}
+		}
+		
 	}
 	
 }

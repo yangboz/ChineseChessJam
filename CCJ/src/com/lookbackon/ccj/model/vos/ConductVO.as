@@ -22,7 +22,7 @@ package com.lookbackon.ccj.model.vos
 		//
 		//--------------------------------------------------------------------------
 		private var _target:ChessPiece;  
-		private var _newPosition:Point;
+		private var _newPosition:Point=new Point(-1,-1);
 		private var _brevity:String="";
 		//--------------------------------------------------------------------------
 		//

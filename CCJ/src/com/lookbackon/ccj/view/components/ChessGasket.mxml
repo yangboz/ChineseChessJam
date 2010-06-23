@@ -62,7 +62,7 @@
 				this.addEventListener(DragEvent.DRAG_ENTER,dragEnterHandler);
 				this.addEventListener(DragEvent.DRAG_DROP,dragDropHandler);
 				//
-				this.addEventListener(ElementExistenceEvent.ELEMENT_ADD,elementAddHandler);
+//				this.addEventListener(ElementExistenceEvent.ELEMENT_ADD,elementAddHandler);
 			}
 			//dragEnterHandler
 			private function dragEnterHandler(event:DragEvent):void
@@ -97,7 +97,7 @@
 				currentConductVO.newPosition = this.position;
 				LOG.info("preBefore move,renew conductVO:{0}",currentConductVO.dump());
 				//renew chessVO.
-				currentConductVO.target.chessVO = ChessFactory.generateChessVO(currentConductVO,true);
+				currentConductVO.target.chessVO = ChessFactory.generateChessVO(currentConductVO);
 				LOG.info("preBefore move,renew chessVO.occupies:{0}",currentConductVO.target.chessVO.occupies.dump());
 				LOG.info("preBefore move,renew chessVO.moves:{0}",currentConductVO.target.chessVO.moves.dump());
 				LOG.info("preBefore move,renew chessVO.captures:{0}",currentConductVO.target.chessVO.captures.dump());
