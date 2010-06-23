@@ -21,6 +21,8 @@
 			import mx.events.FlexEvent;
 			import mx.logging.ILogger;
 			import mx.managers.DragManager;
+			
+			import spark.events.ElementExistenceEvent;
 			//--------------------------------------------------------------------------
 			//
 			//  Variables
@@ -30,6 +32,7 @@
 			//  CONSTANTS
 			//----------------------------------
 			private static const LOG:ILogger = LogUtil.getLogger(ChessGasket);
+			private var currentConductVO:ConductVO;
 			//--------------------------------------------------------------------------
 			//
 			//  Properties(implement)
@@ -59,6 +62,7 @@
 				this.addEventListener(DragEvent.DRAG_ENTER,dragEnterHandler);
 				this.addEventListener(DragEvent.DRAG_DROP,dragDropHandler);
 				//
+				this.addEventListener(ElementExistenceEvent.ELEMENT_ADD,elementAddHandler);
 			}
 			//dragEnterHandler
 			private function dragEnterHandler(event:DragEvent):void
@@ -77,17 +81,26 @@
 			//dragDropHandler
 			private function dragDropHandler(event:DragEvent):void
 			{
+				//make move.
+				var myConductVO:ConductVO = new ConductVO();
+				myConductVO.target = event.dragInitiator as ChessPiece;
+				myConductVO.newPosition = this.position;
+				ChessPieceManager.makeMove(myConductVO);
+			}
+			
+			private function elementAddHandler(event:ElementExistenceEvent):void
+			{
+//				LOG.debug("ElementExistenceEvent");
 				//renew data.
-				var conductVO:ConductVO = new ConductVO();
-				conductVO.target = ChessPiece(event.dragInitiator);
-				conductVO.newPosition = this.position;
-				LOG.info("preBefore move,renew conductVO:{0}",conductVO.dump());
+				currentConductVO = new ConductVO();
+				currentConductVO.target = ChessPiece(event.element);
+				currentConductVO.newPosition = this.position;
+				LOG.info("preBefore move,renew conductVO:{0}",currentConductVO.dump());
 				//renew chessVO.
-				conductVO.target.chessVO = ChessFactory.generateChessVO(conductVO,true);
-				LOG.info("preBefore move,renew chessVO.occupies:{0}",conductVO.target.chessVO.occupies.dump());
-				LOG.info("preBefore move,renew chessVO.moves:{0}",conductVO.target.chessVO.moves.dump());
-				LOG.info("preBefore move,renew chessVO.captures:{0}",conductVO.target.chessVO.captures.dump());
-				ChessPieceManager.makeMove(conductVO);
+				currentConductVO.target.chessVO = ChessFactory.generateChessVO(currentConductVO,true);
+				LOG.info("preBefore move,renew chessVO.occupies:{0}",currentConductVO.target.chessVO.occupies.dump());
+				LOG.info("preBefore move,renew chessVO.moves:{0}",currentConductVO.target.chessVO.moves.dump());
+				LOG.info("preBefore move,renew chessVO.captures:{0}",currentConductVO.target.chessVO.captures.dump());
 			}
 		]]>
 	</fx:Script>
