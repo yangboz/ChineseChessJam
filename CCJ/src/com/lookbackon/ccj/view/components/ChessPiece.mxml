@@ -130,6 +130,9 @@
 				DragManager.doDrag(event.currentTarget as IUIComponent,null,event);
 				// remove event listener
 //				this.removeEventListener(MouseEvent.MOUSE_DOWN,mouseDownHandler);
+//				LOG.debug("occupies:{0}",this.chessVO.occupies.dump());
+				LOG.debug("captures:{0}",this.chessVO.captures.dump());
+				LOG.debug("moves:{0}",this.chessVO.moves.dump());
 			}
 		]]>
 	</fx:Script>

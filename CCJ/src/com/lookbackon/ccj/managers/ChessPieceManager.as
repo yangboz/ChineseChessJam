@@ -140,7 +140,7 @@ package com.lookbackon.ccj.managers
 					GameManager.computerWin();
 				}
 				//remove pieces data.
-				chessPiecesModel.pieces.removeItemAt(chessPiecesModel.pieces.getItemIndex(cGasket.getChildAt(1)));
+				chessPiecesModel.pieces.removeItemAt(chessPiecesModel.pieces.getItemIndex(cGasket.getElementAt(1)));
 				//remove element from gasket.
 				cGasket.removeElementAt(1);
 			}
