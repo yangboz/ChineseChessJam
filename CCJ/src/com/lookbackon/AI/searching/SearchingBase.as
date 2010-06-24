@@ -84,7 +84,8 @@ package com.lookbackon.AI.searching
 						{
 							var conductVO:ConductVO = new ConductVO();
 							conductVO.target = cp;
-							conductVO.newPosition = new Point(c,r);
+							conductVO.previousPosition = conductVO.target.position;
+							conductVO.nextPosition = new Point(c,r);
 							resultAC.addItem(conductVO);
 //							trace("anew ",conductVO.dump());
 						}
@@ -133,7 +134,7 @@ package com.lookbackon.AI.searching
 		 */		
 		protected function unmakePreMove(conductVO:ConductVO):void
 		{
-			cloneOfGamePosition.sett(conductVO.newPosition.x,conductVO.newPosition.y,null);
+			cloneOfGamePosition.sett(conductVO.previousPosition.x,conductVO.previousPosition.y,null);
 			cloneOfGamePosition.sett(previewPiece.position.x,previewPiece.position.y,previewPiece);
 		}
 		//----------------------------------

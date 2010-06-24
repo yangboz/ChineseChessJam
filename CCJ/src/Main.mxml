@@ -39,7 +39,11 @@
 			private var chessPiecesModel:ChessPiecesModel = ChessPiecesModel.getInstance();
 			//
 			[Bindable]
-			private var logFilters:Array = ["com.lookbackon.ccj.view.components.ChessPiece"];
+			private var logFilters:Array = 
+											[ 
+												"com.lookbackon.ccj.view.components.ChessPiece",
+												"com.lookbackon.ccj.managers.ChessPieceManager"
+											];
 			//----------------------------------
 			//  CONSTANTS
 			//----------------------------------
@@ -90,7 +94,7 @@
 					//generateChessPieceVO
 					var conductVO:ConductVO = new ConductVO();
 					conductVO.target = chessPiece;
-					conductVO.newPosition = chessPiece.position;
+					conductVO.previousPosition = chessPiece.position;
 					chessPiece.chessVO = ChessFactory.generateChessVO(conductVO);
 					//generateOmenVO
 					var omenVO:OmenVO = ChessFactory.generateOmenVO(conductVO);

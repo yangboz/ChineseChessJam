@@ -69,7 +69,7 @@
 			{
 				var myConductVO:ConductVO = new ConductVO();
 				myConductVO.target = event.dragInitiator as ChessPiece;
-				myConductVO.newPosition = this.position;
+				myConductVO.previousPosition = this.position;
 				if(ChessPieceManager.doMoveValidation(myConductVO))
 				{
 					DragManager.acceptDragDrop(event.currentTarget as IUIComponent);
@@ -81,11 +81,14 @@
 			//dragDropHandler
 			private function dragDropHandler(event:DragEvent):void
 			{
-				//make move.
 				var myConductVO:ConductVO = new ConductVO();
 				myConductVO.target = event.dragInitiator as ChessPiece;
-				myConductVO.newPosition = this.position;
+				myConductVO.previousPosition = (event.dragInitiator as ChessPiece).position;
+				myConductVO.nextPosition = this.position;
+				//make move.
 				ChessPieceManager.makeMove(myConductVO);
+				//
+				event.stopImmediatePropagation();
 			}
 			
 			private function elementAddHandler(event:ElementExistenceEvent):void

@@ -17,6 +17,7 @@
 			import com.lookbackon.ccj.model.vos.OmenVO;
 			import com.lookbackon.ccj.model.vos.cvo.IChessVO;
 			import com.lookbackon.ccj.utils.LogUtil;
+			import com.lookbackon.ccj.model.ChessPiecesModel;
 			
 			import mx.core.IUIComponent;
 			import mx.events.FlexEvent;
@@ -133,6 +134,7 @@
 //				LOG.debug("occupies:{0}",this.chessVO.occupies.dump());
 				LOG.debug("captures:{0}",this.chessVO.captures.dump());
 				LOG.debug("moves:{0}",this.chessVO.moves.dump());
+				LOG.debug("current bitboard:{0}",ChessPiecesModel.getInstance().allPieces.dump());
 			}
 		]]>
 	</fx:Script>

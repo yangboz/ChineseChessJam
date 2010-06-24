@@ -48,7 +48,7 @@ package com.lookbackon.ccj.business.factory
 		{
 			//TODO: implement function
 			var myChessPiece:ChessPiece = new ChessPiece();
-			var chessPieceType:String 	= "";
+			var chessPieceLabel:String 	= "";
 			var chessPieceValue:int;
 			//
 			switch(position.toString())
@@ -56,31 +56,31 @@ package com.lookbackon.ccj.business.factory
 				//about blue
 				case "(x=0, y=0)":
 				case "(x=8, y=0)":
-					chessPieceType = ChessPiecesConstants.BLUE_ROOK.label;
+					chessPieceLabel = ChessPiecesConstants.BLUE_ROOK.label;
 					chessPieceValue = ChessPiecesConstants.BLUE_ROOK.value;
 					break;
 				case "(x=1, y=0)":
 				case "(x=7, y=0)":
-					chessPieceType = ChessPiecesConstants.BLUE_KNIGHT.label;
+					chessPieceLabel = ChessPiecesConstants.BLUE_KNIGHT.label;
 					chessPieceValue = ChessPiecesConstants.BLUE_KNIGHT.value;
 					break;
 				case "(x=2, y=0)":
 				case "(x=6, y=0)":
-					chessPieceType = ChessPiecesConstants.BLUE_BISHOP.label;
+					chessPieceLabel = ChessPiecesConstants.BLUE_BISHOP.label;
 					chessPieceValue = ChessPiecesConstants.BLUE_BISHOP.value;
 					break;
 				case "(x=3, y=0)":
 				case "(x=5, y=0)":
-					chessPieceType = ChessPiecesConstants.BLUE_OFFICAL.label;
+					chessPieceLabel = ChessPiecesConstants.BLUE_OFFICAL.label;
 					chessPieceValue = ChessPiecesConstants.BLUE_OFFICAL.value;
 					break;
 				case "(x=4, y=0)":
-					chessPieceType = ChessPiecesConstants.BLUE_MARSHAL.label;
+					chessPieceLabel = ChessPiecesConstants.BLUE_MARSHAL.label;
 					chessPieceValue = ChessPiecesConstants.BLUE_MARSHAL.value;
 					break;
 				case "(x=1, y=2)":
 				case "(x=7, y=2)":
-					chessPieceType = ChessPiecesConstants.BLUE_CANNON.label;
+					chessPieceLabel = ChessPiecesConstants.BLUE_CANNON.label;
 					chessPieceValue = ChessPiecesConstants.BLUE_CANNON.value;
 					break;
 				case "(x=0, y=3)":
@@ -88,37 +88,37 @@ package com.lookbackon.ccj.business.factory
 				case "(x=4, y=3)":
 				case "(x=6, y=3)":
 				case "(x=8, y=3)":
-					chessPieceType = ChessPiecesConstants.BLUE_PAWN.label;
+					chessPieceLabel = ChessPiecesConstants.BLUE_PAWN.label;
 					chessPieceValue = ChessPiecesConstants.BLUE_PAWN.value;
 					break;
 				//about red
 				case "(x=0, y=9)":
 				case "(x=8, y=9)":
-					chessPieceType = ChessPiecesConstants.RED_ROOK.label;
+					chessPieceLabel = ChessPiecesConstants.RED_ROOK.label;
 					chessPieceValue = ChessPiecesConstants.RED_ROOK.value;
 					break;
 				case "(x=1, y=9)":
 				case "(x=7, y=9)":
-					chessPieceType = ChessPiecesConstants.RED_KNIGHT.label;
+					chessPieceLabel = ChessPiecesConstants.RED_KNIGHT.label;
 					chessPieceValue = ChessPiecesConstants.RED_KNIGHT.value;
 					break;
 				case "(x=2, y=9)":
 				case "(x=6, y=9)":
-					chessPieceType = ChessPiecesConstants.RED_BISHOP.label;
+					chessPieceLabel = ChessPiecesConstants.RED_BISHOP.label;
 					chessPieceValue = ChessPiecesConstants.RED_BISHOP.value;
 					break;
 				case "(x=3, y=9)":
 				case "(x=5, y=9)":
-					chessPieceType = ChessPiecesConstants.RED_OFFICAL.label;
+					chessPieceLabel = ChessPiecesConstants.RED_OFFICAL.label;
 					chessPieceValue = ChessPiecesConstants.RED_OFFICAL.value;
 					break;
 				case "(x=4, y=9)":
-					chessPieceType = ChessPiecesConstants.RED_MARSHAL.label;
+					chessPieceLabel = ChessPiecesConstants.RED_MARSHAL.label;
 					chessPieceValue = ChessPiecesConstants.RED_MARSHAL.value;
 					break;
 				case "(x=1, y=7)":
 				case "(x=7, y=7)":
-					chessPieceType = ChessPiecesConstants.RED_CANNON.label;
+					chessPieceLabel = ChessPiecesConstants.RED_CANNON.label;
 					chessPieceValue = ChessPiecesConstants.RED_CANNON.value;
 					break;
 				case "(x=0, y=6)":
@@ -126,14 +126,14 @@ package com.lookbackon.ccj.business.factory
 				case "(x=4, y=6)":
 				case "(x=6, y=6)":
 				case "(x=8, y=6)":
-					chessPieceType = ChessPiecesConstants.RED_PAWN.label;
+					chessPieceLabel = ChessPiecesConstants.RED_PAWN.label;
 					chessPieceValue = ChessPiecesConstants.RED_PAWN.value;
 					break;
 				default:
 					break;
 			}
 			//view
-			myChessPiece.label =myChessPiece.name = chessPieceType;
+			myChessPiece.label =myChessPiece.name = chessPieceLabel;
 			/*myChessPiece.x = 
 			position.x*CcjConstants.BOARD_LATTICE - myChessPiece.width/2 +50;
 			myChessPiece.y = 
@@ -198,8 +198,8 @@ package com.lookbackon.ccj.business.factory
 		 */		
 		public static function generateChessVO(conductVO:ConductVO):ChessVO
 		{
-			var oColIndex:int = conductVO.target.position.x;
-			var oRowIndex:int = conductVO.target.position.y;
+			var oColIndex:int = conductVO.currentPosition.x;
+			var oRowIndex:int = conductVO.currentPosition.y;
 			var chessVO:ChessVO;
 			//			LOG.info(conductVO.dump());
 			switch(conductVO.target.name)
