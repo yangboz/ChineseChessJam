@@ -67,7 +67,7 @@
 						var cGasket:IVisualElement = 
 							this.addElement( ChessFactory.createChessGasket(new Point(h,v)) );
 						//
-						ChessPieceManager.gaskets.push(cGasket);
+						ChessPieceManager.gaskets.sett(h,v,cGasket);
 					}
 				}
 				//create chess piece
@@ -79,7 +79,7 @@
 						if(iChessPiece!=null)
 						{
 //							trace("index:",vv*CcjConstants.BOARD_V_LINES+hh);
-							var ecGasket:ChessGasket = ChessPieceManager.gaskets[vv*(CcjConstants.BOARD_V_LINES-1)+hh] as ChessGasket;
+							var ecGasket:ChessGasket = ChessPieceManager.gaskets.gett(hh,vv) as ChessGasket;
 							ecGasket.addElement( iChessPiece );
 							//
 							iChessPiece.x = 0;

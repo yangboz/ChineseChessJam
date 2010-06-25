@@ -12,7 +12,9 @@ package com.lookbackon.ccj.managers
 	import com.lookbackon.ccj.utils.LogUtil;
 	import com.lookbackon.ccj.view.components.ChessGasket;
 	import com.lookbackon.ccj.view.components.ChessPiece;
+	import com.lookbackon.ds.BitBoard;
 	
+	import de.polygonal.ds.Array2;
 	import de.polygonal.math.PM_PRNG;
 	
 	import flash.events.EventDispatcher;
@@ -26,6 +28,8 @@ package com.lookbackon.ccj.managers
 	import mx.events.DragEvent;
 	import mx.logging.ILogger;
 	import mx.managers.DragManager;
+	
+	import spark.filters.GlowFilter;
 
 	/**
 	 * The chess piece manager manage chess piece move's validation/makeMove/unMakeMove.
@@ -42,7 +46,8 @@ package com.lookbackon.ccj.managers
 		//--------------------------------------------------------------------------
 		private static var pmPRNG:PM_PRNG = new PM_PRNG();
 		//
-		private static var _gaskets:Vector.<ChessGasket> = new Vector.<ChessGasket>();
+		private static var _gaskets:Array2 = new Array2(CcjConstants.BOARD_H_LINES,CcjConstants.BOARD_V_LINES);
+		//
 		private static var _conductsHistorys:Array = [];
 		//But the real trick is if we do the XOR operation again we get the initial number back.
 		//a ^ b = c
@@ -63,12 +68,11 @@ package com.lookbackon.ccj.managers
 		//----------------------------------
 		//  gaskets
 		//----------------------------------
-		public static function get gaskets():Vector.<ChessGasket>
+		public static function get gaskets():Array2
 		{
 			return _gaskets;
 		}
-		
-		public static function set gaskets(value:Vector.<ChessGasket>):void
+		public static function set gaskets(value:Array2):void
 		{
 			_gaskets = value;
 		}
@@ -122,17 +126,17 @@ package com.lookbackon.ccj.managers
 			LOG.info("makeMove:{0}",conductVO.brevity);
 			//TODO:implement functions.
 			//manually move chess pieces handler.;
-			var cGasketIndex:int = conductVO.nextPosition.y*CcjConstants.BOARD_H_LINES+conductVO.nextPosition.x;
+//			var cGasketIndex:int = conductVO.nextPosition.y*CcjConstants.BOARD_H_LINES+conductVO.nextPosition.x;
 //			trace(cGasketIndex.toString(),"cGasketIndex");
 			var cGasket:ChessGasket = 
-				ChessPieceManager.gaskets[cGasketIndex] as ChessGasket;
+				ChessPieceManager.gaskets.gett(conductVO.nextPosition.x,conductVO.nextPosition.y) as ChessGasket;
 			//hold gasket skin,then remove previous chess piece.
 //			cGasket.dispatchEvent(new DragEvent(DragEvent.DRAG_ENTER,false,true,conductVO.target));
 //			cGasket.dispatchEvent(new DragEvent(DragEvent.DRAG_DROP,false,true,conductVO.target));	
 			if(cGasket.numElements>1)
 			{
 				//TODO:chess piece eat off.
-				var removedIndex:int = calculateIndex(cGasket.getElementAt(1) as ChessPiece);
+				var removedIndex:int = calculatePieceIndex(cGasket.getElementAt(1) as ChessPiece);
 				LOG.info("Eat Off@{0} index:{1}",cGasket.position.toString(),removedIndex.toString());
 				if(ChessPiece(cGasket.getElementAt(1)).label==ChessPiecesConstants.BLUE_MARSHAL.label)
 				{
@@ -212,8 +216,8 @@ package com.lookbackon.ccj.managers
 			//TODO:update ZobristKeys
 			var pX:int = conductVO.previousPosition.x;
 			var pY:int = conductVO.previousPosition.y;
-			var oX:int = conductVO.target.position.x;
-			var oY:int = conductVO.target.position.y;
+			var oX:int = conductVO.nextPosition.x;
+			var oY:int = conductVO.nextPosition.y;
 			//ref:http://mediocrechess.blogspot.com/2007/01/guide-zobrist-keys.html
 			_zKey = ZobristKeysModel.getInstance().getZobristKey();
 			LOG.debug("before makemove:{0}",_zKey.dump());
@@ -264,7 +268,7 @@ package com.lookbackon.ccj.managers
 		}
 		//notice:why not using ArrayCollection.getItemIndex(object)?
 		//cuz our chess piece's position property always change here.
-		private static function calculateIndex(chessPiece:ChessPiece):int
+		private static function calculatePieceIndex(chessPiece:ChessPiece):int
 		{
 			for(var i:int=0;i<chessPiecesModel.reds.length;i++)
 			{
@@ -282,6 +286,28 @@ package com.lookbackon.ccj.managers
 			}
 			throw new CcjErrors(CcjErrors.INVALID_CHESS_PIECE_INDEX);
 			return -1;
+		}
+		/**
+		 * 
+		 * @param legalMoves current chess piece's legal moves.
+		 * 
+		 */		
+		public static function indicatedGaskets(legalMoves:BitBoard):void
+		{
+			//@see Main.application1_creationCompleteHandler.createGasket.
+			for(var v:int=0;v<CcjConstants.BOARD_V_LINES;v++)
+			{
+				for(var h:int=0;h<CcjConstants.BOARD_H_LINES;h++)
+				{
+					if(legalMoves.getBitt(v,h))
+					{
+						(ChessPieceManager.gaskets.gett(h,v) as ChessGasket).filters = [new GlowFilter()];
+					}else
+					{
+						(ChessPieceManager.gaskets.gett(h,v) as ChessGasket).filters = [];
+					}
+				}
+			}	
 		}
 	}
 	

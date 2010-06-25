@@ -18,6 +18,7 @@
 			import com.lookbackon.ccj.model.vos.OmenVO;
 			import com.lookbackon.ccj.model.vos.cvo.IChessVO;
 			import com.lookbackon.ccj.utils.LogUtil;
+			import com.lookbackon.ccj.managers.ChessPieceManager;
 			
 			import mx.core.IUIComponent;
 			import mx.events.FlexEvent;
@@ -148,6 +149,8 @@
 				LOG.debug("captures:{0}",this.chessVO.captures.dump());
 				LOG.debug("moves:{0}",this.chessVO.moves.dump());
 				LOG.debug("current bitboard:{0}",ChessPiecesModel.getInstance().allPieces.dump());
+				//indicate gasket can fill with chess piece.
+				ChessPieceManager.indicatedGaskets(this.chessVO.moves);
 			}
 		]]>
 	</fx:Script>
