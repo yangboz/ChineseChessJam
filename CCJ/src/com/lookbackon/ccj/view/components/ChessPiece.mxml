@@ -13,11 +13,11 @@
 			import com.lookbackon.ccj.business.fsm.states.AttackState;
 			import com.lookbackon.ccj.business.fsm.states.DefenseState;
 			import com.lookbackon.ccj.managers.ChessPieceManager;
+			import com.lookbackon.ccj.model.ChessPiecesModel;
 			import com.lookbackon.ccj.model.vos.ConductVO;
 			import com.lookbackon.ccj.model.vos.OmenVO;
 			import com.lookbackon.ccj.model.vos.cvo.IChessVO;
 			import com.lookbackon.ccj.utils.LogUtil;
-			import com.lookbackon.ccj.model.ChessPiecesModel;
 			
 			import mx.core.IUIComponent;
 			import mx.events.FlexEvent;
@@ -106,6 +106,19 @@
 			{
 				_omenVO = value;
 			}
+			//----------------------------------
+			//  type
+			//----------------------------------
+			private var _type:String;
+			public function get type():String
+			{
+				return _type;
+			}
+			public function set type(value:String):void
+			{
+				_type = value;
+			}
+
 			//--------------------------------------------------------------------------
 			//
 			//  Methods

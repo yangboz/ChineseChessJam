@@ -9,7 +9,7 @@ package com.lookbackon.ccj.view.components
 	/**
 	 * The interface of ChessPiece.
 	 * @author Knight.zhou
-	 * 
+	 * @history 2010-06-25 add type property for category chess piece class type.
 	 */	
 	public interface IChessPiece extends IVisualElement,IPosition
 	{
@@ -21,5 +21,8 @@ package com.lookbackon.ccj.view.components
 		
 		function set omenVO(value:OmenVO):void;
 		function get omenVO():OmenVO;
+		
+		function set type(value:String):void;
+		function get type():String;
 	}
 }

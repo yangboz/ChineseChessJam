@@ -1,5 +1,7 @@
 package com.lookbackon.AI.searching
 {
+	import com.lookbackon.ccj.CcjConstants;
+	import com.lookbackon.ccj.ChessPiecesConstants;
 	import com.lookbackon.ccj.managers.GameManager;
 	import com.lookbackon.ccj.model.ChessPiecesModel;
 	import com.lookbackon.ccj.model.vos.ConductVO;
@@ -80,7 +82,10 @@ package com.lookbackon.AI.searching
 		override public function doEvaluation(conductVO:ConductVO):int
 		{
 			//Todo:doEvaluation about assumpted conductVO;
-			
+			//precies evaluation value.
+			return ChessPiecesConstants[conductVO.target.type].important.gett(conductVO.nextPosition.x,conductVO.nextPosition.y);
+			//fuzzy evaluation value.
+			return ChessPiecesConstants[conductVO.target.type].convertedImportant.gett(conductVO.nextPosition.x,conductVO.nextPosition.y);
 //			return _positionEvaluation;
 			return Math.random()*100;
 //			return super.doEvaluation(conductVO);
