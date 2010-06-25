@@ -42,7 +42,8 @@
 			private var logFilters:Array = 
 											[ 
 												"com.lookbackon.ccj.view.components.ChessPiece",
-												"com.lookbackon.ccj.managers.ChessPieceManager"
+												"com.lookbackon.ccj.managers.ChessPieceManager",
+												"com.lookbackon.ccj.model.vos.cvo.CannonVO"		
 											];
 			//----------------------------------
 			//  CONSTANTS

@@ -130,10 +130,20 @@ package com.lookbackon.ccj.model.vos.cvo
 			{
 				for(var m:int=mountIndex-1;m>=0;m--)
 				{
-					if(ChessPiecesModel.getInstance().allPieces.getBitt(rowIndex,m))
+					if(this.flag==CcjConstants.FLAG_BLUE)
 					{
-						bb.setBitt(rowIndex,w,true);
-						break;
+						if(ChessPiecesModel.getInstance().redPieces.getBitt(rowIndex,m))
+						{
+							bb.setBitt(rowIndex,m,true);
+							break;
+						}
+					}else
+					{
+						if(ChessPiecesModel.getInstance().bluePieces.getBitt(rowIndex,m))
+						{
+							bb.setBitt(rowIndex,m,true);
+							break;
+						}
 					}
 				}
 			}
@@ -159,10 +169,20 @@ package com.lookbackon.ccj.model.vos.cvo
 			{
 				for(var m:int=mountIndex-1;m>=0;m--)
 				{
-					if(ChessPiecesModel.getInstance().allPieces.getBitt(m,colIndex))
+					if(this.flag==CcjConstants.FLAG_BLUE)
 					{
-						bb.setBitt(m,colIndex,true);
-						break;
+						if(ChessPiecesModel.getInstance().redPieces.getBitt(m,colIndex))
+						{
+							bb.setBitt(m,colIndex,true);
+							break;
+						}
+					}else
+					{
+						if(ChessPiecesModel.getInstance().bluePieces.getBitt(m,colIndex))
+						{
+							bb.setBitt(m,colIndex,true);
+							break;
+						}
 					}
 				}
 			}
@@ -188,10 +208,20 @@ package com.lookbackon.ccj.model.vos.cvo
 			{
 				for(var m:int=mountIndex+1;m<this.column;m++)
 				{
-					if(ChessPiecesModel.getInstance().allPieces.getBitt(rowIndex,m))
+					if(this.flag==CcjConstants.FLAG_BLUE)
 					{
-						bb.setBitt(rowIndex,m,true);
-						break;
+						if(ChessPiecesModel.getInstance().redPieces.getBitt(rowIndex,m))
+						{
+							bb.setBitt(rowIndex,m,true);
+							break;
+						}
+					}else
+					{
+						if(ChessPiecesModel.getInstance().bluePieces.getBitt(rowIndex,m))
+						{
+							bb.setBitt(rowIndex,m,true);
+							break;
+						}
 					}
 				}
 			}
@@ -217,10 +247,20 @@ package com.lookbackon.ccj.model.vos.cvo
 			{
 				for(var m:int=mountIndex+1;m<this.row;m++)
 				{
-					if(ChessPiecesModel.getInstance().allPieces.getBitt(m,colIndex))
+					if(this.flag==CcjConstants.FLAG_BLUE)
 					{
-						bb.setBitt(m,colIndex,true);
-						break;
+						if(ChessPiecesModel.getInstance().redPieces.getBitt(m,colIndex))
+						{
+							bb.setBitt(m,colIndex,true);
+							break;
+						}
+					}else
+					{
+						if(ChessPiecesModel.getInstance().bluePieces.getBitt(rowIndex,m))
+						{
+							bb.setBitt(m,colIndex,true);
+							break;
+						}
 					}
 				}
 			}

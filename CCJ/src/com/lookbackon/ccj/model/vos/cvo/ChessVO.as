@@ -54,6 +54,8 @@ package com.lookbackon.ccj.model.vos.cvo
 		private var _captures:BitBoard;
 		//for Rook/Cannon condition filter.
 		protected var blocker:BitBoard;
+		//chess flag value(red or blue).
+		protected var flag:int;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -75,6 +77,8 @@ package com.lookbackon.ccj.model.vos.cvo
 		{
 			//TODO: implement function
 			super(width, height);
+			//
+			this.flag = flag;
 			//init.
 			this.occupies = new BitBoard(width,height);
 			this.moves = new BitBoard(width,height);

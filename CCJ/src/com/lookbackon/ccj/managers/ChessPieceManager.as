@@ -3,6 +3,7 @@ package com.lookbackon.ccj.managers
 	import com.lookbackon.ccj.CcjConstants;
 	import com.lookbackon.ccj.ChessPiecesConstants;
 	import com.lookbackon.ccj.business.factory.ChessFactory;
+	import com.lookbackon.ccj.errors.CcjErrors;
 	import com.lookbackon.ccj.model.ChessPiecesModel;
 	import com.lookbackon.ccj.model.ZobristKeysModel;
 	import com.lookbackon.ccj.model.vos.ConductVO;
@@ -265,13 +266,21 @@ package com.lookbackon.ccj.managers
 		//cuz our chess piece's position property always change here.
 		private static function calculateIndex(chessPiece:ChessPiece):int
 		{
-			for(var i:int=0;i<chessPiecesModel.pieces.length;i++)
+			for(var i:int=0;i<chessPiecesModel.reds.length;i++)
 			{
-				if(chessPiece.uid == ChessPiece(chessPiecesModel.pieces.getItemAt(i)).uid)
+				if(chessPiece.uid == ChessPiece(chessPiecesModel.reds.getItemAt(i)).uid)
 				{
 					return i;
 				}
 			}
+			for(var j:int=0;j<chessPiecesModel.blues.length;j++)
+			{
+				if(chessPiece.uid == ChessPiece(chessPiecesModel.blues.getItemAt(j)).uid)
+				{
+					return j;
+				}
+			}
+			throw new CcjErrors(CcjErrors.INVALID_CHESS_PIECE_INDEX);
 			return -1;
 		}
 	}

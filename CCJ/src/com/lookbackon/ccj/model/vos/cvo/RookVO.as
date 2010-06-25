@@ -119,7 +119,13 @@ package com.lookbackon.ccj.model.vos.cvo
 			var bb:BitBoard = new BitBoard(this.column,this.row);
 			for(var w:int=colIndex-1;w>=0;w--)
 			{
-				if(ChessPiecesModel.getInstance().allPieces.getBitt(rowIndex,w)) break;
+				if(this.flag==CcjConstants.FLAG_BLUE)
+				{
+					if(ChessPiecesModel.getInstance().bluePieces.getBitt(rowIndex,w)) break;
+				}else
+				{
+					if(ChessPiecesModel.getInstance().redPieces.getBitt(rowIndex,w)) break;
+				}
 				bb.setBitt(rowIndex,w,true);
 			}
 			return bb;
@@ -130,7 +136,13 @@ package com.lookbackon.ccj.model.vos.cvo
 			var bb:BitBoard = new BitBoard(this.column,this.row);
 			for(var n:int=rowIndex-1;n>=0;n--)
 			{
-				if(ChessPiecesModel.getInstance().allPieces.getBitt(n,colIndex)) break;
+				if(this.flag==CcjConstants.FLAG_BLUE)
+				{
+					if(ChessPiecesModel.getInstance().bluePieces.getBitt(n,colIndex)) break;
+				}else
+				{
+					if(ChessPiecesModel.getInstance().redPieces.getBitt(n,colIndex)) break;
+				}
 				bb.setBitt(n,colIndex,true);
 			}
 			return bb;
@@ -141,7 +153,13 @@ package com.lookbackon.ccj.model.vos.cvo
 			var bb:BitBoard = new BitBoard(this.column,this.row);
 			for(var e:int=colIndex+1;e<this.column;e++)
 			{
-				if(ChessPiecesModel.getInstance().allPieces.getBitt(rowIndex,e)) break;
+				if(this.flag==CcjConstants.FLAG_BLUE)
+				{
+					if(ChessPiecesModel.getInstance().bluePieces.getBitt(rowIndex,e)) break;
+				}else
+				{
+					if(ChessPiecesModel.getInstance().redPieces.getBitt(rowIndex,e)) break;
+				}
 				bb.setBitt(rowIndex,e,true);
 			}
 			return bb;
@@ -152,7 +170,13 @@ package com.lookbackon.ccj.model.vos.cvo
 			var bb:BitBoard = new BitBoard(this.column,this.row);
 			for(var s:int=rowIndex+1;s<this.row;s++)
 			{
-				if(ChessPiecesModel.getInstance().allPieces.getBitt(s,colIndex)) break;
+				if(this.flag==CcjConstants.FLAG_BLUE)
+				{
+					if(ChessPiecesModel.getInstance().bluePieces.getBitt(s,colIndex)) break;
+				}else
+				{
+					if(ChessPiecesModel.getInstance().redPieces.getBitt(s,colIndex)) break;
+				}
 				bb.setBitt(s,colIndex,true);
 			}
 			return bb;
