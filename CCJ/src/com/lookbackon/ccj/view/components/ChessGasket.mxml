@@ -111,10 +111,10 @@
 	</fx:Declarations>
 	<s:Rect width="100%" height="100%">
 		<s:stroke>
-			<s:SolidColorStroke color="black"/>
+			<s:SolidColorStroke color="white"/>
 		</s:stroke>
 		<s:fill>
-			<s:SolidColor color="black"/>
+			<s:SolidColor color="white"/>
 		</s:fill>
 	</s:Rect>
 </s:Group>

@@ -11,7 +11,7 @@ package com.lookbackon.ccj.managers
 	import com.lookbackon.ccj.utils.LogUtil;
 	import com.lookbackon.ccj.utils.MathUtil;
 	import com.lookbackon.ccj.view.components.ChessPiece;
-	import com.lookbackon.ccj.view.components.ThinkingProgressBar;
+	import com.lookbackon.ccj.view.components.IndicatoryProgressBar;
 	
 	import de.polygonal.ds.Array2;
 	
@@ -25,7 +25,6 @@ package com.lookbackon.ccj.managers
 	import mx.core.IFlexDisplayObject;
 	import mx.logging.ILogger;
 	import mx.managers.CursorManager;
-	import mx.managers.PopUpManager;
 
 	/**
 	 * A player manager class to maintain turn-based game.
@@ -41,12 +40,16 @@ package com.lookbackon.ccj.managers
 		//
 		//--------------------------------------------------------------------------
 		private static var _turnFlag:int=CcjConstants.FLAG_BLUE;
-		private static var iThinkingProgressBar:IFlexDisplayObject;
+//		private static var iThinkingProgressBar:IFlexDisplayObject;
 		private static var gameAI:ISearching;
+		[Bindable]public static var indicatorReadOut:Boolean = false;
+		[Bindable]public static var indication:String = INDICATION_THINKING;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
 		private static const LOG:ILogger = LogUtil.getLogger(GameManager);
+		public static const INDICATION_THINKING:String 	= "Thinking..";
+		public static const INDICATION_CHECK:String 	= "Eschequier";
 		//--------------------------------------------------------------------------
 		//
 		//  Properties
@@ -100,9 +103,7 @@ package com.lookbackon.ccj.managers
 			//about view
 			CursorManager.setBusyCursor();
 			//
-			iThinkingProgressBar = 
-				PopUpManager.createPopUp(FlexGlobals.topLevelApplication as DisplayObject,ThinkingProgressBar,true);
-			PopUpManager.centerPopUp(iThinkingProgressBar);
+			GameManager.indicatorReadOut = true;
 			//about data
 			//TODO:switch any searching class to test.
 			gameAI = new RandomWalk(new Array2(CcjConstants.BOARD_V_LINES,CcjConstants.BOARD_H_LINES));
@@ -118,11 +119,7 @@ package com.lookbackon.ccj.managers
 			//about view
 			CursorManager.removeBusyCursor();
 			//
-			if(iThinkingProgressBar!=null)
-			{
-				PopUpManager.removePopUp(iThinkingProgressBar);
-				iThinkingProgressBar = null;
-			}
+			GameManager.indicatorReadOut = false;
 			//about data
 			
 		}

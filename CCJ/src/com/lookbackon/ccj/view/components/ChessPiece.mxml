@@ -4,7 +4,8 @@
 		  xmlns:mx="library://ns.adobe.com/flex/halo"
 		  width="50" height="50" cornerRadius="25"
 		  implements="com.lookbackon.ccj.view.components.IChessPiece" 
-		  creationComplete="button1_creationCompleteHandler(event)" >
+		  creationComplete="button1_creationCompleteHandler(event)" 
+		  >
 	<fx:Script>
 		<![CDATA[
 			import com.lookbackon.ccj.CcjConstants;
@@ -18,9 +19,9 @@
 			import com.lookbackon.ccj.model.vos.OmenVO;
 			import com.lookbackon.ccj.model.vos.cvo.IChessVO;
 			import com.lookbackon.ccj.utils.LogUtil;
-			import com.lookbackon.ccj.managers.ChessPieceManager;
 			
 			import mx.core.IUIComponent;
+			import mx.effects.Fade;
 			import mx.events.FlexEvent;
 			import mx.logging.ILogger;
 			import mx.managers.DragManager;

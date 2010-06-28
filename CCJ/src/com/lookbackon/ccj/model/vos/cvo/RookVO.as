@@ -122,9 +122,21 @@ package com.lookbackon.ccj.model.vos.cvo
 				if(this.flag==CcjConstants.FLAG_BLUE)
 				{
 					if(ChessPiecesModel.getInstance().bluePieces.getBitt(rowIndex,w)) break;
+					//notice rook's blocker issue.
+					if(ChessPiecesModel.getInstance().redPieces.getBitt(rowIndex,w))
+					{
+						bb.setBitt(rowIndex,w,true);
+						break;
+					}
 				}else
 				{
 					if(ChessPiecesModel.getInstance().redPieces.getBitt(rowIndex,w)) break;
+					//notice rook's blocker issue.
+					if(ChessPiecesModel.getInstance().bluePieces.getBitt(rowIndex,w))
+					{
+						bb.setBitt(rowIndex,w,true);
+						break;
+					}
 				}
 				bb.setBitt(rowIndex,w,true);
 			}
@@ -139,9 +151,21 @@ package com.lookbackon.ccj.model.vos.cvo
 				if(this.flag==CcjConstants.FLAG_BLUE)
 				{
 					if(ChessPiecesModel.getInstance().bluePieces.getBitt(n,colIndex)) break;
+					//notice rook's blocker issue.
+					if(ChessPiecesModel.getInstance().redPieces.getBitt(n,colIndex))
+					{
+						bb.setBitt(n,colIndex,true);
+						break;
+					}
 				}else
 				{
 					if(ChessPiecesModel.getInstance().redPieces.getBitt(n,colIndex)) break;
+					//notice rook's blocker issue.
+					if(ChessPiecesModel.getInstance().bluePieces.getBitt(n,colIndex))
+					{
+						bb.setBitt(n,colIndex,true);
+						break;
+					}
 				}
 				bb.setBitt(n,colIndex,true);
 			}
@@ -156,9 +180,21 @@ package com.lookbackon.ccj.model.vos.cvo
 				if(this.flag==CcjConstants.FLAG_BLUE)
 				{
 					if(ChessPiecesModel.getInstance().bluePieces.getBitt(rowIndex,e)) break;
+					//notice rook's blocker issue.
+					if(ChessPiecesModel.getInstance().redPieces.getBitt(rowIndex,e))
+					{
+						bb.setBitt(rowIndex,e,true);
+						break;
+					}
 				}else
 				{
 					if(ChessPiecesModel.getInstance().redPieces.getBitt(rowIndex,e)) break;
+					//notice rook's blocker issue.
+					if(ChessPiecesModel.getInstance().bluePieces.getBitt(rowIndex,e))
+					{
+						bb.setBitt(rowIndex,e,true);
+						break;
+					}
 				}
 				bb.setBitt(rowIndex,e,true);
 			}
@@ -173,9 +209,21 @@ package com.lookbackon.ccj.model.vos.cvo
 				if(this.flag==CcjConstants.FLAG_BLUE)
 				{
 					if(ChessPiecesModel.getInstance().bluePieces.getBitt(s,colIndex)) break;
+					//notice rook's blocker issue.
+					if(ChessPiecesModel.getInstance().redPieces.getBitt(s,colIndex))
+					{
+						bb.setBitt(s,colIndex,true);
+						break;
+					}
 				}else
 				{
 					if(ChessPiecesModel.getInstance().redPieces.getBitt(s,colIndex)) break;
+					//notice rook's blocker issue.
+					if(ChessPiecesModel.getInstance().bluePieces.getBitt(s,colIndex))
+					{
+						bb.setBitt(s,colIndex,true);
+						break;
+					}
 				}
 				bb.setBitt(s,colIndex,true);
 			}

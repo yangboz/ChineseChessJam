@@ -5,6 +5,7 @@
 			   xmlns:components="com.lookbackon.ccj.view.components.*"
 			   creationComplete="application1_creationCompleteHandler(event)" 
 			   applicationComplete="application1_applicationCompleteHandler(event)" 
+			   xmlns:popup="com.adobe.cairngorm.popup.*" 
 			   >
 	<s:layout>
 		<s:BasicLayout/>
@@ -151,6 +152,9 @@
 					   level="{LogEventLevel.INFO}"
 					   filters="{logFilters}"
 					   />
+		<popup:PopUpWrapper open="{GameManager.indicatorReadOut}" center="true" modal="true" >
+			<components:IndicatoryProgressBar label="{GameManager.indication}"/>
+		</popup:PopUpWrapper>
 	</fx:Declarations>
 	
 	<!-- Views here -->

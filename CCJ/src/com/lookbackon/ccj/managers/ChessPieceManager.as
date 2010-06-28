@@ -162,6 +162,7 @@ package com.lookbackon.ccj.managers
 				//remove element from gasket.
 				cGasket.removeElementAt(1);
 			}
+			//
 			cGasket.addElement(conductVO.target as IVisualElement);
 			//adjust the chess piece's position.
 			conductVO.target.x = 0;
@@ -179,9 +180,15 @@ package com.lookbackon.ccj.managers
 			//switch turn flag.
 			if(GameManager.turnFlag==CcjConstants.FLAG_BLUE)
 			{
+				//indicate check.
+				indicateCheck(chessPiecesModel.reds);
+				//
 				GameManager.isHumanTurnNow();
 			}else
 			{
+				//indicate check.
+				indicateCheck(chessPiecesModel.blues);
+				//
 				GameManager.isComputerTurnNow();
 			}
 		}
@@ -308,6 +315,14 @@ package com.lookbackon.ccj.managers
 					}
 				}
 			}	
+		}
+		/**
+		 * indicate check pattern,if neccessary.
+		 */		
+		private static function indicateCheck(opposite:ArrayCollection):Boolean
+		{
+			//TODO:
+			return false;
 		}
 	}
 	
