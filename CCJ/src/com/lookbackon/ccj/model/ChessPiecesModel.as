@@ -205,170 +205,170 @@ package com.lookbackon.ccj.model
 		//----------------------------------
 		//  redRook
 		//----------------------------------
-		public function get redRook():BitBoard
+		public function get RED_ROOK():BitBoard
 		{
 			return _redRook;
 		}
-		public function set redRook(value:BitBoard):void
+		public function set RED_ROOK(value:BitBoard):void
 		{
 			_redRook = value;
-			LOG.info("redRook:{0}",value.dump());
+			LOG.info("RED_ROOK:{0}",value.dump());
 		}
 		//----------------------------------
 		//  redKnight
 		//----------------------------------
-		public function get redKnight():BitBoard
+		public function get RED_KNIGHT():BitBoard
 		{
 			return _redKnight;
 		}
-		public function set redKnight(value:BitBoard):void
+		public function set RED_KNIGHT(value:BitBoard):void
 		{
 			_redKnight = value;
-			LOG.info("redKnight:{0}",value.dump());
+			LOG.info("RED_KNIGHT:{0}",value.dump());
 		}
 		//----------------------------------
 		//  redBishop
 		//----------------------------------
-		public function get redBishop():BitBoard
+		public function get RED_BISHOP():BitBoard
 		{
 			return _redBishop;
 		}
-		public function set redBishop(value:BitBoard):void
+		public function set RED_BISHOP(value:BitBoard):void
 		{
 			_redBishop = value;
-			LOG.info("redBishop:{0}",value.dump());
+			LOG.info("RED_BISHOP:{0}",value.dump());
 		}
 		//----------------------------------
 		//  redOffical
 		//----------------------------------
-		public function get redOffical():BitBoard
+		public function get RED_OFFICAL():BitBoard
 		{
 			return _redOffical;
 		}
-		public function set redOffical(value:BitBoard):void
+		public function set RED_OFFICAL(value:BitBoard):void
 		{
 			_redOffical = value;
-			LOG.info("redOffical:{0}",value.dump());
+			LOG.info("RED_OFFICAL:{0}",value.dump());
 		}
 		//----------------------------------
 		//  redMarshal
 		//----------------------------------
-		public function get redMarshal():BitBoard
+		public function get RED_MARSHAL():BitBoard
 		{
 			return _redMarshal;
 		}
-		public function set redMarshal(value:BitBoard):void
+		public function set RED_MARSHAL(value:BitBoard):void
 		{
 			_redMarshal = value;
-			LOG.info("redMarshal:{0}",value.dump());
+			LOG.info("RED_MARSHAL:{0}",value.dump());
 		}
 		//----------------------------------
 		//  redCannon
 		//----------------------------------
-		public function get redCannon():BitBoard
+		public function get RED_CANNON():BitBoard
 		{
 			return _redCannon;
 		}
-		public function set redCannon(value:BitBoard):void
+		public function set RED_CANNON(value:BitBoard):void
 		{
 			_redCannon = value;
-			LOG.info("redCannon:{0}",value.dump());
+			LOG.info("RED_CANNON:{0}",value.dump());
 		}
 		//----------------------------------
 		//  redPawn
 		//----------------------------------
-		public function get redPawn():BitBoard
+		public function get RED_PAWN():BitBoard
 		{
 			return _redPawn;
 		}
-		public function set redPawn(value:BitBoard):void
+		public function set RED_PAWN(value:BitBoard):void
 		{
 			_redPawn = value;
-			LOG.info("redPawn:{0}",value.dump());
+			LOG.info("RED_PAWN:{0}",value.dump());
 		}
 		//----------------------------------
 		//  blueRook
 		//----------------------------------
-		public function get blueRook():BitBoard
+		public function get BLUE_ROOK():BitBoard
 		{
 			return _blueRook;
 		}
-		public function set blueRook(value:BitBoard):void
+		public function set BLUE_ROOK(value:BitBoard):void
 		{
 			_blueRook = value;
-			LOG.info("blueRook:{0}",value.dump());
+			LOG.info("BLUE_ROOK:{0}",value.dump());
 		}
 		//----------------------------------
 		//  blueKnight
 		//----------------------------------
-		public function get blueKnight():BitBoard
+		public function get BLUE_KNIGHT():BitBoard
 		{
 			return _blueKnight;
 		}
-		public function set blueKnight(value:BitBoard):void
+		public function set BLUE_KNIGHT(value:BitBoard):void
 		{
 			_blueKnight = value;
-			LOG.info("blueKnight:{0}",value.dump());
+			LOG.info("BLUE_KNIGHT:{0}",value.dump());
 		}
 		//----------------------------------
 		//  blueBishop
 		//----------------------------------
-		public function get blueBishop():BitBoard
+		public function get BLUE_BISHOP():BitBoard
 		{
 			return _blueBishop;
 		}
-		public function set blueBishop(value:BitBoard):void
+		public function set BLUE_BISHOP(value:BitBoard):void
 		{
 			_blueBishop = value;
-			LOG.info("blueBishop:{0}",value.dump());
+			LOG.info("BLUE_BISHOP:{0}",value.dump());
 		}
 		//----------------------------------
 		//  blueOffical
 		//----------------------------------
-		public function get blueOffical():BitBoard
+		public function get BLUE_OFFICAL():BitBoard
 		{
 			return _blueOffical;
 		}
-		public function set blueOffical(value:BitBoard):void
+		public function set BLUE_OFFICAL(value:BitBoard):void
 		{
 			_blueOffical = value;
-			LOG.info("blueOffical:{0}",value.dump());
+			LOG.info("BLUE_OFFICAL:{0}",value.dump());
 		}
 		//----------------------------------
 		//  blueMarshal
 		//----------------------------------
-		public function get blueMarshal():BitBoard
+		public function get BLUE_MARSHAL():BitBoard
 		{
 			return _blueMarshal;
 		}
-		public function set blueMarshal(value:BitBoard):void
+		public function set BLUE_MARSHAL(value:BitBoard):void
 		{
 			_blueMarshal = value;
-			LOG.info("blueMarshal:{0}",value.dump());
+			LOG.info("BLUE_MARSHAL:{0}",value.dump());
 		}
 		//----------------------------------
 		//  blueCannon
 		//----------------------------------
-		public function get blueCannon():BitBoard
+		public function get BLUE_CANNON():BitBoard
 		{
 			return _blueCannon;
 		}
-		public function set blueCannon(value:BitBoard):void
+		public function set BLUE_CANNON(value:BitBoard):void
 		{
 			_blueCannon = value;
-			LOG.info("blueCannon:{0}",value.dump());
+			LOG.info("BLUE_CANNON:{0}",value.dump());
 		}
 		//----------------------------------
 		//  bluePawn
 		//----------------------------------
-		public function get bluePawn():BitBoard
+		public function get BLUE_PAWN():BitBoard
 		{
 			return _bluePawn;
 		}
-		public function set bluePawn(value:BitBoard):void
+		public function set BLUE_PAWN(value:BitBoard):void
 		{
 			_bluePawn = value;
-			LOG.info("bluePawn:{0}",value.dump());
+			LOG.info("BLUE_PAWN:{0}",value.dump());
 		}
 		
 		//--------------------------------------------------------------------------

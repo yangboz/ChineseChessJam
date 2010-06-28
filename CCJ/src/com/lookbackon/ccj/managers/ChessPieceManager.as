@@ -181,13 +181,13 @@ package com.lookbackon.ccj.managers
 			if(GameManager.turnFlag==CcjConstants.FLAG_BLUE)
 			{
 				//indicate check.
-				indicateCheck(chessPiecesModel.reds);
+				indicateCheck(chessPiecesModel.blues,chessPiecesModel.RED_MARSHAL);
 				//
 				GameManager.isHumanTurnNow();
 			}else
 			{
 				//indicate check.
-				indicateCheck(chessPiecesModel.blues);
+				indicateCheck(chessPiecesModel.reds,chessPiecesModel.BLUE_MARSHAL);
 				//
 				GameManager.isComputerTurnNow();
 			}
@@ -317,11 +317,27 @@ package com.lookbackon.ccj.managers
 			}	
 		}
 		/**
-		 * indicate check pattern,if neccessary.
+		 * 
+		 * @param pieces execute check mate's chess pieces.
+		 * @param marshal blues'/reds' marshal bitboard.
+		 * @return the result of check pattern,if neccessary.
+		 * 
 		 */		
-		private static function indicateCheck(opposite:ArrayCollection):Boolean
+		private static function indicateCheck(pieces:ArrayCollection,marshal:BitBoard):Boolean
 		{
 			//TODO:
+			var totalCaptures:BitBoard = new BitBoard(CcjConstants.BOARD_H_LINES,CcjConstants.BOARD_V_LINES);
+			for(var i:int=0;i<pieces.length;i++)
+			{
+				totalCaptures = (pieces.getItemAt(i) as ChessPiece).chessVO.captures.or(totalCaptures);
+			}
+			LOG.debug("totalCaptures:{0}",totalCaptures.dump());
+			if(!totalCaptures.and(marshal).isEmpty)
+			{
+				GameManager.indicatorReadOut = true;
+				GameManager.indication = GameManager.INDICATION_CHECK;
+				return true;
+			}
 			return false;
 		}
 	}

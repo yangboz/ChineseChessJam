@@ -256,7 +256,7 @@ package com.lookbackon.ccj.model.vos.cvo
 						}
 					}else
 					{
-						if(ChessPiecesModel.getInstance().bluePieces.getBitt(rowIndex,m))
+						if(ChessPiecesModel.getInstance().bluePieces.getBitt(m,colIndex))
 						{
 							bb.setBitt(m,colIndex,true);
 							break;

@@ -22,8 +22,25 @@ package com.lookbackon.ccj
 		//about chess pieces' flag
 		public static const FLAG_RED:int  			= 0;
 		public static const FLAG_BLUE:int 			= 1;
-		//
+			//
 		public static const COLOR_RED:String 		= "red";//above;
 		public static const COLOR_BLUE:String 		= "blue";//below;
+		//chess pieces type consts
+		public static const BLUE_ROOK:String 		= "BLUE_ROOK";
+		public static const BLUE_KNIGHT:String 		= "BLUE_KNIGHT";
+		public static const BLUE_BISHOP:String 		= "BLUE_BISHOP";
+		public static const BLUE_OFFICAL:String 	= "BLUE_OFFICAL";
+		public static const BLUE_MARSHAL:String 	= "BLUE_MARSHAL";
+		public static const BLUE_CANNON:String 	 	= "BLUE_CANNON";
+		public static const BLUE_PAWN:String 		= "BLUE_PAWN";
+			//
+		public static const RED_ROOK:String 		= "RED_ROOK";
+		public static const RED_KNIGHT:String 		= "RED_KNIGHT";
+		public static const RED_BISHOP:String 		= "RED_BISHOP";
+		public static const RED_OFFICAL:String 		= "RED_OFFICAL";
+		public static const RED_MARSHAL:String 		= "RED_MARSHAL";
+		public static const RED_CANNON:String 	 	= "RED_CANNON";
+		public static const RED_PAWN:String 		= "RED_PAWN";
+		
 	}
 }

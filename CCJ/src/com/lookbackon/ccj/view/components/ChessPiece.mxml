@@ -19,6 +19,7 @@
 			import com.lookbackon.ccj.model.vos.OmenVO;
 			import com.lookbackon.ccj.model.vos.cvo.IChessVO;
 			import com.lookbackon.ccj.utils.LogUtil;
+			import com.lookbackon.ds.BitBoard;
 			
 			import mx.core.IUIComponent;
 			import mx.effects.Fade;
@@ -65,6 +66,9 @@
 			public function set position(value:Point):void
 			{
 				_position = value;
+				//update relative bitboard by chess piece's type.
+				(ChessPiecesModel.getInstance()[this.type] as BitBoard).clear();
+				(ChessPiecesModel.getInstance()[this.type] as BitBoard).setBitt(value.y,value.x,true);
 			}
 			//----------------------------------
 			//  chessVO
