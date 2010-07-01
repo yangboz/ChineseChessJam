@@ -71,13 +71,8 @@ package com.lookbackon.ccj.model.vos.cvo
 			}
 //			LOG.info("moves:{0}",this.moves.dump());//not complete generated here.
 			//blocker
-			if(flag==CcjConstants.FLAG_RED)
-			{
-				blocker = this.occupies.xor(this.moves);
-			}else
-			{
-				blocker = this.occupies.xor(this.moves);
-			}
+			blocker = this.occupies.xor(this.moves);
+			//
 			LOG.debug("blocker.isEmpty:{0}",blocker.isEmpty.toString());
 			if(!blocker.isEmpty)
 			{
@@ -132,6 +127,7 @@ package com.lookbackon.ccj.model.vos.cvo
 				{
 					if(this.flag==CcjConstants.FLAG_BLUE)
 					{
+						if(ChessPiecesModel.getInstance().bluePieces.getBitt(rowIndex,m)) break;
 						if(ChessPiecesModel.getInstance().redPieces.getBitt(rowIndex,m))
 						{
 							bb.setBitt(rowIndex,m,true);
@@ -139,6 +135,7 @@ package com.lookbackon.ccj.model.vos.cvo
 						}
 					}else
 					{
+						if(ChessPiecesModel.getInstance().redPieces.getBitt(rowIndex,m)) break;
 						if(ChessPiecesModel.getInstance().bluePieces.getBitt(rowIndex,m))
 						{
 							bb.setBitt(rowIndex,m,true);
@@ -171,6 +168,7 @@ package com.lookbackon.ccj.model.vos.cvo
 				{
 					if(this.flag==CcjConstants.FLAG_BLUE)
 					{
+						if(ChessPiecesModel.getInstance().bluePieces.getBitt(m,colIndex)) break;
 						if(ChessPiecesModel.getInstance().redPieces.getBitt(m,colIndex))
 						{
 							bb.setBitt(m,colIndex,true);
@@ -178,6 +176,7 @@ package com.lookbackon.ccj.model.vos.cvo
 						}
 					}else
 					{
+						if(ChessPiecesModel.getInstance().redPieces.getBitt(m,colIndex)) break;
 						if(ChessPiecesModel.getInstance().bluePieces.getBitt(m,colIndex))
 						{
 							bb.setBitt(m,colIndex,true);
@@ -210,6 +209,7 @@ package com.lookbackon.ccj.model.vos.cvo
 				{
 					if(this.flag==CcjConstants.FLAG_BLUE)
 					{
+						if(ChessPiecesModel.getInstance().bluePieces.getBitt(rowIndex,m)) break;
 						if(ChessPiecesModel.getInstance().redPieces.getBitt(rowIndex,m))
 						{
 							bb.setBitt(rowIndex,m,true);
@@ -217,6 +217,7 @@ package com.lookbackon.ccj.model.vos.cvo
 						}
 					}else
 					{
+						if(ChessPiecesModel.getInstance().redPieces.getBitt(rowIndex,m)) break;
 						if(ChessPiecesModel.getInstance().bluePieces.getBitt(rowIndex,m))
 						{
 							bb.setBitt(rowIndex,m,true);
@@ -249,6 +250,7 @@ package com.lookbackon.ccj.model.vos.cvo
 				{
 					if(this.flag==CcjConstants.FLAG_BLUE)
 					{
+						if(ChessPiecesModel.getInstance().bluePieces.getBitt(m,colIndex)) break;
 						if(ChessPiecesModel.getInstance().redPieces.getBitt(m,colIndex))
 						{
 							bb.setBitt(m,colIndex,true);
@@ -256,6 +258,7 @@ package com.lookbackon.ccj.model.vos.cvo
 						}
 					}else
 					{
+						if(ChessPiecesModel.getInstance().redPieces.getBitt(m,colIndex)) break;
 						if(ChessPiecesModel.getInstance().bluePieces.getBitt(m,colIndex))
 						{
 							bb.setBitt(m,colIndex,true);

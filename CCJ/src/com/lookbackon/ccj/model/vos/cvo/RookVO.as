@@ -72,13 +72,8 @@ package com.lookbackon.ccj.model.vos.cvo
 			}
 //			LOG.info("moves:{0}",this.moves.dump());
 			//blocker
-			if(flag==CcjConstants.FLAG_RED)
-			{
-				blocker = this.occupies.xor(this.moves);
-			}else
-			{
-				blocker = this.occupies.xor(this.moves);
-			}
+			//
+			blocker = this.occupies.xor(this.moves);
 //			trace("blocker.reverse():",blocker.reverse().dump());
 		    
 			LOG.debug("blocker.isEmpty:{0}",blocker.isEmpty.toString());
