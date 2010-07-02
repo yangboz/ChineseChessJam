@@ -334,8 +334,8 @@ package com.lookbackon.ccj.managers
 			LOG.debug("totalCaptures:{0}",totalCaptures.dump());
 			if(!totalCaptures.and(marshal).isEmpty)
 			{
-				GameManager.indicatorReadOut = true;
-				GameManager.indication = GameManager.INDICATION_CHECK;
+//				GameManager.indicatorReadOut = true;
+//				GameManager.indication = GameManager.INDICATION_CHECK;
 				return true;
 			}
 			return false;
