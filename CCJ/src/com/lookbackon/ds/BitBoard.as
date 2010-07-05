@@ -248,6 +248,9 @@ package com.lookbackon.ds
 		//----------------------------------
 		//  isEmpty
 		//----------------------------------
+		/**
+		 * whether or not bitboard is empty;
+		 */		
 		public function get isEmpty():Boolean
 		{
 			for(var h:int=0;h<_row;h++)

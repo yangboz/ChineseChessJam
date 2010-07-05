@@ -156,7 +156,7 @@ package com.lookbackon.ccj.model.vos.cvo
 		 * @param the flag you wanna set(red is 0,blue is 1).
 		 * @see mx.utils.BitFlagUtil#update
 		 */
-		public function initialization( rowIndex:int, colIndex:int,flag:int=0):void
+		virtual public function initialization( rowIndex:int, colIndex:int,flag:int=0):void
 		{
 			//TODO: override function.
 			throw new CcjErrors(CcjErrors.INITIALIZE_VIRTUAL_FUNCTION);

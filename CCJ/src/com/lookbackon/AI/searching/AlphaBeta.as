@@ -62,7 +62,6 @@ package com.lookbackon.AI.searching
 			*/
 			//alpha in this twohitone game,the max number of pieces can be killed.
 			//beta in this twohitone game,the min number of pieces can be killed. 
-			MaxMove(gamePosition,-2,2);
 //			AlphaBeta(5,-2,2);
 		}
 		

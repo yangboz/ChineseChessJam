@@ -4,6 +4,7 @@ package com.lookbackon.AI.searching
 	import com.lookbackon.AI.evaluation.linear.LinearEvaluationProxy;
 	import com.lookbackon.ccj.business.factory.ChessFactory;
 	import com.lookbackon.ccj.managers.ChessPieceManager;
+	import com.lookbackon.ccj.model.ChessPiecesModel;
 	import com.lookbackon.ccj.model.vos.ConductVO;
 	import com.lookbackon.ccj.view.components.ChessPiece;
 	
@@ -28,7 +29,7 @@ package com.lookbackon.AI.searching
 		//
 		//--------------------------------------------------------------------------
 		protected var bestMove:ConductVO;
-		protected var moves:ArrayCollection;//conductVO's collection;
+//conductVO's collection;
 		protected var tempMove:ConductVO;
 		protected var positionEvaluation:int;
 		protected var gamePosition:Array2;
@@ -53,6 +54,62 @@ package com.lookbackon.AI.searching
 		{
 			//TODO: implement function
 			this.gamePosition = gamePosition;
+		}
+		//--------------------------------------------------------------------------
+		//
+		//  Public properties
+		//
+		//-------------------------------------------------------------------------- 
+		//----------------------------------
+		//  moves(native)
+		//----------------------------------
+		/**
+		 * @return all legal moves.
+		 */		
+		[Deprecated(replacement="com.lookbackon.AI.searching.SearchingBase.orderingMoves")]
+		public function get moves():ArrayCollection
+		{
+			return generateMoves( ChessPiecesModel.getInstance().blues,gamePosition);
+		}
+		//----------------------------------
+		//  orderingMoves(native)
+		//----------------------------------
+		/**
+		 * <b>Ordering Moves To Speed Up Search</b></p>
+		 * As we will see next time, search efficiency depends on the order in which moves are searched.</br>  
+		 * The gains and losses related to good or poor move ordering are not trivial: </br> 
+		 * a good ordering, defined as one which will cause a large number of cutoffs, 
+		 * will result in a search tree about the square root of 
+		 * the size of the tree associated with the worst possible ordering!</br> 
+		 * Unfortunately, it turns out that the best possible ordering is simply defined by trying the best move first.  </br> 
+		 * And of course, if you knew which moves are best, you wouldn't be searching in the first place.  </br> 
+		 * Still, there are ways to "guess" which moves are more likely to be good than others.  </br> 
+		 * For example, you might start with captures, 
+		 * pawn promotions (which dramatically change material balance on the board), 
+		 * or checks (which often allow few legal responses); </br>
+		 * follow with moves which caused recent cutoffs at the same depth in the tree (so-called "killer moves"),</br> 
+		 * and then look at the rest.  </br> 
+		 * This is the justification for iterative deepening alphabeta, which we will discuss in detail next month,</br> 
+		 *  as well as the history table we talked about last time. </br> 
+		 * Note that these techniques do not constitute forward pruning: </br> 
+		 * all moves will be examined eventually; those which appear bad are only delayed, not eliminated from consideration.</br> 
+		 * A final note: in chess, some moves may be illegal because they leave the King in check.  </br> 
+		 * However, such an occurrence is quite rare, 
+		 * and it turns out that validating moves during generation would cost a tremendous amount of effort.  </br> 
+		 * It is more efficient to delay the check until the move is actually searched: </br> 
+		 * for example, if capturing the King would be a valid reply to Move X, 
+		 * then Move X is illegal and search should be terminated.  </br> 
+		 * Of course, if search is cutoff before the move has to be examined, validation never has to take place. </br> 
+		 * @see http://www.gamedev.net/reference/articles/article1126.asp
+		 * 
+		 * @return ordering legal moves,prototype is ArrayCollection.
+		 * 
+		 */		
+		public function get orderingMoves():ArrayCollection
+		{
+			//TODO:ordering moves by order.
+			var _moves:ArrayCollection = generateMoves( ChessPiecesModel.getInstance().blues,gamePosition);
+			return _moves;
 		}
 		//--------------------------------------------------------------------------
 		//

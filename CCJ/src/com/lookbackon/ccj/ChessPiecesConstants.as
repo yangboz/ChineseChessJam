@@ -8,7 +8,9 @@ package com.lookbackon.ccj
 	 * <b>ChessPieces value/label global setting</b></p>
 	 * 1.label for labeling chess pieces button;</p>
 	 * 2.value for chess pieces' evaluation;</p>
-	 * 
+	 * 3.strength for chess pieces' strength;</p>
+	 * 4.important for chess pieces' important on board;</p>
+	 * 5.convertImportant for the chess pieces' fuzzy import on board;</p>
 	 * @author Knight.zhou
 	 * 
 	 */	

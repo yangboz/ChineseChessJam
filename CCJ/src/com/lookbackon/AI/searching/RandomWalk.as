@@ -39,38 +39,28 @@ package com.lookbackon.AI.searching
 		public function RandomWalk(gamePosition:Array2) 
 		{
 			super(gamePosition);
-			/*
-			function minimax(node, depth)
-		    if node is a terminal node or depth = 0
-		        return the heuristic value of node
-		    else
-		        let α := -∞
-		        foreach child of node                       { evaluation is identical for both players }
-		            let α := max(α, -minimax(child, depth-1))
-		        return α
-			*/
+			//
 			bestMove = new ConductVO();
-			moves =  generateMoves( ChessPiecesModel.getInstance().blues,gamePosition);
-			if(moves.length<=0)
+			if(orderingMoves.length<=0)
 			{
 				GameManager.humanWin();//pluge to death.
 			}else
 			{
 				//for test.
-				for(var t:int=0;t<moves.length;t++)
+				for(var t:int=0;t<orderingMoves.length;t++)
 				{
-					LOG.debug("moves:#{0},detail:{1}",t.toString(),moves.getItemAt(t).dump());
+					LOG.debug("moves:#{0},detail:{1}",t.toString(),orderingMoves.getItemAt(t).dump());
 				}
-				var randomStep:int = MathUtil.transactRandomNumberInRange(0,moves.length-1);
+				var randomStep:int = MathUtil.transactRandomNumberInRange(0,orderingMoves.length-1);
 				LOG.debug("randomStep:{0}",randomStep.toString());
 				//evaluation.
 				var pValue:int=-1;
-				for(var i:int=0;i<moves.length;i++)
+				for(var i:int=0;i<orderingMoves.length;i++)
 				{
-					if(doEvaluation(moves.getItemAt(i) as ConductVO)>pValue)
+					if(doEvaluation(orderingMoves.getItemAt(i) as ConductVO)>pValue)
 					{
-						bestMove = moves.getItemAt(i) as ConductVO;
-						pValue = doEvaluation(moves.getItemAt(i) as ConductVO);
+						bestMove = orderingMoves.getItemAt(i) as ConductVO;
+						pValue = doEvaluation(orderingMoves.getItemAt(i) as ConductVO);
 					}
 				}
 				LOG.debug("randomed bestMove:{0}",bestMove.dump());
@@ -82,12 +72,13 @@ package com.lookbackon.AI.searching
 		override public function doEvaluation(conductVO:ConductVO):int
 		{
 			//Todo:doEvaluation about assumpted conductVO;
+			var importantValue:int = ChessPiecesConstants[conductVO.target.type].important.gett(conductVO.nextPosition.x,conductVO.nextPosition.y);
+			var fuzzyImportValue:int = ChessPiecesConstants[conductVO.target.type].convertedImportant.gett(conductVO.nextPosition.x,conductVO.nextPosition.y);
+			//TODO:dynamic omenVO value to be calculated. 
 			//precies evaluation value.
-			return ChessPiecesConstants[conductVO.target.type].important.gett(conductVO.nextPosition.x,conductVO.nextPosition.y);
-			//fuzzy evaluation value.
-			return ChessPiecesConstants[conductVO.target.type].convertedImportant.gett(conductVO.nextPosition.x,conductVO.nextPosition.y);
+			return importantValue+fuzzyImportValue;
 //			return _positionEvaluation;
-			return Math.random()*100;
+//			return Math.random()*100;
 //			return super.doEvaluation(conductVO);
 		};
 		

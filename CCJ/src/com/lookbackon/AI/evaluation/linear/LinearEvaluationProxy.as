@@ -57,7 +57,7 @@ package com.lookbackon.AI.evaluation.linear
 		 * 
 		 * @param conductVO The conductVO which obtained position information.
 		 * @return Red should try to maximize T as large as possible,
-		 * while the black should try to minimize T as small as possible. 
+		 * while the Blue should try to minimize T as small as possible. 
 		 */		
 		public function doEvaluation(conductVO:ConductVO):int
 		{
