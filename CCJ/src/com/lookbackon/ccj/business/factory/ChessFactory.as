@@ -162,7 +162,8 @@ package com.lookbackon.ccj.business.factory
 				if(chessPieceValue<16)
 				{
 					myChessPiece.flag = CcjConstants.FLAG_RED;//red
-					ChessPiecesModel.getInstance().redPieces.setBitt(position.y,position.x,true);
+//					ChessPiecesModel.getInstance().redPieces.setBitt(position.y,position.x,true);
+					ChessPiecesModel.getInstance()[myChessPiece.type].setBitt(position.y,position.x,true);
 					//push to reds collection.
 					if(myChessPiece.name!="")
 					{
@@ -171,7 +172,8 @@ package com.lookbackon.ccj.business.factory
 				}else//blue
 				{
 					//myChessPiece.enabled = false;
-					ChessPiecesModel.getInstance().bluePieces.setBitt(position.y,position.x,true);
+//					ChessPiecesModel.getInstance().bluePieces.setBitt(position.y,position.x,true);
+					ChessPiecesModel.getInstance()[myChessPiece.type].setBitt(position.y,position.x,true);
 					//push to blues collection.
 					if(myChessPiece.name!="")
 					{

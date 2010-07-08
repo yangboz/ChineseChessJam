@@ -157,7 +157,8 @@ package com.lookbackon.ccj.model
 		 */		
 		public function get bluePieces():BitBoard
 		{
-			return _bluePieces;
+//			return _bluePieces;
+			return BLUE_ROOK.or(BLUE_KNIGHT).or(BLUE_BISHOP).or(BLUE_OFFICAL).or(BLUE_MARSHAL).or(BLUE_CANNON).or(BLUE_PAWN);
 		}
 		/**
 		 * 
@@ -190,7 +191,8 @@ package com.lookbackon.ccj.model
 		 */		
 		public function get redPieces():BitBoard
 		{
-			return 	_redPieces;
+//			return 	_redPieces;
+			return RED_ROOK.or(RED_KNIGHT).or(RED_BISHOP).or(RED_OFFICAL).or(RED_MARSHAL).or(RED_CANNON).or(RED_PAWN);
 		}
 		/**
 		 * 

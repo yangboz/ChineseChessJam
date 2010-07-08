@@ -17,6 +17,7 @@ package com.lookbackon.ccj.managers
 	import de.polygonal.ds.Array2;
 	import de.polygonal.math.PM_PRNG;
 	
+	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.events.MouseEvent;
 	
@@ -29,6 +30,7 @@ package com.lookbackon.ccj.managers
 	import mx.logging.ILogger;
 	import mx.managers.DragManager;
 	
+	import spark.events.ElementExistenceEvent;
 	import spark.filters.GlowFilter;
 
 	/**
@@ -136,8 +138,9 @@ package com.lookbackon.ccj.managers
 			if(cGasket.numElements>1)
 			{
 				//TODO:chess piece eat off.
-				var removedIndex:int = calculatePieceIndex(cGasket.getElementAt(1) as ChessPiece);
-				LOG.info("Eat Off@{0} index:{1}",cGasket.position.toString(),removedIndex.toString());
+				var removedPiece:ChessPiece = cGasket.getElementAt(1) as ChessPiece;
+				var removedIndex:int = calculatePieceIndex(removedPiece);
+				LOG.info("Eat Off@{0} target:{1}",cGasket.position.toString(),removedPiece.toString());
 				if(ChessPiece(cGasket.getElementAt(1)).label==ChessPiecesConstants.BLUE_MARSHAL.label)
 				{
 					GameManager.humanWin();	
@@ -147,16 +150,15 @@ package com.lookbackon.ccj.managers
 					GameManager.computerWin();
 				}
 				//clean this bit at pieces.
+				BitBoard(ChessPiecesModel.getInstance()[removedPiece.type]).setBitt(removedPiece.position.y,removedPiece.position.x,false);
 				//remove pieces data.
 				if(GameManager.turnFlag==CcjConstants.FLAG_RED)
 				{
 					//clean this bit at bluePieces.
-					ChessPiecesModel.getInstance().bluePieces.setBitt(cGasket.position.y,cGasket.position.x,false);
 					chessPiecesModel.blues.removeItemAt(removedIndex);
 				}else
 				{
 					//clean this bit at redPieces.
-					ChessPiecesModel.getInstance().redPieces.setBitt(cGasket.position.y,cGasket.position.x,false);
 					chessPiecesModel.reds.removeItemAt(removedIndex);
 				}
 				//remove element from gasket.
@@ -171,12 +173,15 @@ package com.lookbackon.ccj.managers
 			_crossOverValue = pmPRNG.nextInt();
 			LOG.debug("_crossOverValue:{0}",_crossOverValue.toString());
 			conductsHistorys.push({con:conductVO,cov:_crossOverValue});
+			//update bitboard.
+			updatePieceBitboard(conductVO);
 			//update allPieces.
-			updateAllPiecesPosition(conductVO);
+			updatePiecePosition(conductVO,cGasket);
 			//update allPieces' chessVO.
 			updateAllPiecesChessVO();
 			//update ZobristKeys
-			updateZobristKeysModel(conductVO);
+//			updateZobristKeysModel(conductVO);
+			//
 			//switch turn flag.
 			if(GameManager.turnFlag==CcjConstants.FLAG_BLUE)
 			{
@@ -237,22 +242,21 @@ package com.lookbackon.ccj.managers
 //			unmakeMove();
 		}
 		/**
-		 * 
 		 * @param conductVO the conduct value object of moving chess piece.
-		 * 
+		 * @param gasket the chess piece's gasket.
 		 */
-		private static function updateAllPiecesPosition(conductVO:ConductVO):void
+		private static function updatePiecePosition(conductVO:ConductVO,gasket:ChessGasket):void
+		{
+			conductVO.target.position = gasket.position;
+		}
+		/**
+		 * @param conductVO the conduct value object of moving chess piece.
+		 */
+		private static function updatePieceBitboard(conductVO:ConductVO):void
 		{
 			LOG.debug("before move,allPieces:{0}",ChessPiecesModel.getInstance().allPieces.dump());
-			if(GameManager.turnFlag==CcjConstants.FLAG_BLUE)
-			{
-				ChessPiecesModel.getInstance().bluePieces.setBitt(conductVO.nextPosition.y, conductVO.nextPosition.x,true);
-				ChessPiecesModel.getInstance().bluePieces.setBitt(conductVO.previousPosition.y,conductVO.previousPosition.x,false);
-			}else
-			{
-				ChessPiecesModel.getInstance().redPieces.setBitt(conductVO.nextPosition.y,conductVO.nextPosition.x,true);
-				ChessPiecesModel.getInstance().redPieces.setBitt(conductVO.previousPosition.y,conductVO.previousPosition.x,false);
-			}
+			BitBoard(ChessPiecesModel.getInstance()[conductVO.target.type]).setBitt(conductVO.nextPosition.y,conductVO.nextPosition.x,true);
+			BitBoard(ChessPiecesModel.getInstance()[conductVO.target.type]).setBitt(conductVO.previousPosition.y,conductVO.previousPosition.x,false);
 			LOG.info("after move,allPieces:{0}",ChessPiecesModel.getInstance().allPieces.dump());
 		}
 		

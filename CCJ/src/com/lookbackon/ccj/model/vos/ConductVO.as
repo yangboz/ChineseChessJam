@@ -60,7 +60,7 @@ package com.lookbackon.ccj.model.vos
 		public function get brevity():String
 		{
 			//generate brevity.
-			return _brevity.concat(target.name,previousPosition.x,previousPosition.y,nextPosition.x,nextPosition.y);;
+			return _brevity.concat(target.name,previousPosition.x,previousPosition.y,nextPosition.x,nextPosition.y);
 		}
 		//----------------------------------
 		//  currentPosition(read-only)

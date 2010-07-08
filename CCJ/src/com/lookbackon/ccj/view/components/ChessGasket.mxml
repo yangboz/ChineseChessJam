@@ -8,18 +8,12 @@
 		 >
 	<fx:Script>
 		<![CDATA[
-			import com.lookbackon.ccj.business.factory.ChessFactory;
 			import com.lookbackon.ccj.managers.ChessPieceManager;
-			import com.lookbackon.ccj.model.ChessPiecesModel;
 			import com.lookbackon.ccj.model.vos.ConductVO;
-			import com.lookbackon.ccj.model.vos.cvo.ChessVO;
 			import com.lookbackon.ccj.utils.LogUtil;
 			import com.lookbackon.ds.BitBoard;
 			
-			import de.polygonal.ds.Array2;
-			
 			import mx.core.IUIComponent;
-			import mx.core.IVisualElement;
 			import mx.events.DragEvent;
 			import mx.events.FlexEvent;
 			import mx.logging.ILogger;
@@ -96,9 +90,9 @@
 			
 			private function elementAddHandler(event:ElementExistenceEvent):void
 			{
-//				LOG.debug("ElementExistenceEvent");
+				LOG.debug("ElementExistenceEvent,element:{0},@index:{1}",event.element,event.index.toString());
 				//renew ChessPiece's position.
-				ChessPiece(event.element).position = this.position;
+//				ChessPiece(event.element).position = this.position;
 				//clear gasket indicate effect.
 				var emptyLegalMoves:BitBoard = new BitBoard(9,10);
 				emptyLegalMoves.clear();
