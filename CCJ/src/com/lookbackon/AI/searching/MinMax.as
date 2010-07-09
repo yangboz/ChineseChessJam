@@ -1,9 +1,15 @@
 package com.lookbackon.AI.searching
 {
-	import com.godpaper.twoHitOne.model.PiecesModel;
-	import com.godpaper.twoHitOne.vo.ConductVO;
+	import com.lookbackon.ccj.CcjConstants;
+	import com.lookbackon.ccj.ChessPiecesConstants;
+	import com.lookbackon.ccj.managers.GameManager;
+	import com.lookbackon.ccj.model.ChessPiecesModel;
+	import com.lookbackon.ccj.model.vos.ConductVO;
+	import com.lookbackon.ccj.utils.LogUtil;
+	import com.lookbackon.ccj.utils.MathUtil;
+	import com.lookbackon.ds.BitBoard;
 	
-	import de.polygonal.ds.Array2;
+	import mx.logging.ILogger;
 
 	/**
 	 *
@@ -13,6 +19,21 @@ package com.lookbackon.AI.searching
 	 */	
 	public class MinMax extends SearchingBase
 	{
+		//param alpha the alpha value which hold the best MAX value found;
+		// At MAX level, before evaluating each child path, 
+		// compare the returned value with of the previous path with the beta value. 
+		// If the value is greater than it abort the search for the current node;
+		private var alpha:int;
+		//param beta the beta value which hold the best MIN value found;
+		// At MIN level, before evaluating each child path, 
+		// compare the returned value with of the previous path with the alpha value. 
+		// If the value is lesser than it abort the search for the current node.
+		private var beta:int; 
+		//
+		private static const LOG:ILogger = LogUtil.getLogger(MinMax);
+		private static const MAX_DEPTH:int = 5;
+		private static var depth:int=0;
+		//	
 		/**
     	 * if(game over in current board position)
          * return winner
@@ -23,7 +44,7 @@ package com.lookbackon.AI.searching
          * return minimal score of calling minimax on all the children
 		 * @see http://www.fierz.ch/strategy.htm
 		*/		
-		public function MinMax(gamePosition:Array2) 
+		public function MinMax(gamePosition:BitBoard) 
 		{
 			super(gamePosition);
 			/*
@@ -36,10 +57,23 @@ package com.lookbackon.AI.searching
 		            let α := max(α, -minimax(child, depth-1))
 		        return α
 			*/
-			MaxMove(gamePosition);
+			if( orderingMoves.length<=0 )
+			{
+				GameManager.humanWin();//pluge to death.
+			}else
+			{
+				this.bestMove = orderingMoves.getItemAt(0) as ConductVO;
+				//	
+				this.applyMovement(MaxMove(gamePosition));
+			}
 		}	
-		
-		private function MaxMove (gamePosition:Array2):ConductVO
+		/**
+		 * 
+		 * @param gamePosition the current game position.
+		 * @return the MaxMove choose conductVO;
+		 * 
+		 */		
+		private function MaxMove (gamePosition:BitBoard):ConductVO
 		{
 			/*if (GameEnded(game)) {
 				return EvalGameState(game);
@@ -55,29 +89,54 @@ package com.lookbackon.AI.searching
 				}
 				return best_move;
 			}*/
-			
-			bestMove = new ConductVO();
-			moves =  generateMoves(PiecesModel.getInstance().redPiecesCollection,gamePosition);
-			if(moves.length<=0)
+			//init ordering moves.
+			orderingMoves = generateMoves(ChessPiecesModel.getInstance().blues);
+			//depth auto increasement.
+			depth++;
+			trace("depth:",depth);
+			//
+			if( orderingMoves.length<=0 )
 			{
-				PlayerManager.humanWin();//pluge to death.
-			}else
+				GameManager.humanWin();//pluge to death.
+			}
+			//
+			if(depthLimitReached)
 			{
-				trace("all possbility conducts @MinMaxAI.MaxMove:",moves.toString());
-				for(var i:int=0;i<moves.length;i++)
+				return bestMove;			
+			}
+			//			
+			LOG.debug("Max orderingMoves.len:{0}",orderingMoves.length);
+			var len:int = orderingMoves.length;
+			var tempMoveValue:int;
+			var bestMoveValue:int;
+			for(var i:int=0;i<len;i++)
+			{
+				var conductVO:ConductVO = orderingMoves.getItemAt(i) as ConductVO;
+				tempMove = MinMove(applyMovement(conductVO));
+				tempMoveValue = doEvaluation(tempMove);
+				bestMoveValue = doEvaluation(bestMove);
+				if(tempMoveValue>bestMoveValue)
 				{
-					var conductVO:ConductVO = moves.getItemAt(i) as ConductVO;
-					tempMove = MinMove(applyMovement(conductVO));
-					if(doEvaluation(tempMove)>doEvaluation(bestMove))
-					{
-						bestMove = tempMove;
-					}
+					bestMove = tempMove;
+					LOG.debug("Max bestMove:{0}",bestMove.dump());
+					//
+					this.alpha = tempMoveValue;
 				}
-			}	
+				//Ignore the remaing moves.
+				if(beta>alpha)
+				{
+					return bestMove;
+				}
+			}
 			return bestMove;						   
 		}
-			
-		private function MinMove(gamePosition:Array2):ConductVO 
+		/**
+		 * 
+		 * @param gamePosition the current game position.
+		 * @return the MinMove choose conductVO;
+		 * 
+		 */			
+		private function MinMove(gamePosition:BitBoard):ConductVO 
 		{
 			/*best_move <- {};
 			moves <- GenerateMoves(game);
@@ -88,24 +147,41 @@ package com.lookbackon.AI.searching
 				}
 			}
 			return best_move;*/
-			bestMove = new ConductVO();
-			moves =  generateMoves(PiecesModel.getInstance().redPiecesCollection,gamePosition);
-			if(moves.length<=0)
+			//init ordering moves.
+			orderingMoves = generateMoves(ChessPiecesModel.getInstance().reds);
+			//
+			if(orderingMoves.length<=0)
 			{
-				PlayerManager.humanWin();//pluge to death.
-			}else
+				GameManager.computerWin();//pluge to death.
+			}
+			//
+			if(depthLimitReached)
 			{
-				trace("all possbility conducts @MinMaxAI.MinMove:",moves.toString());
-				for(var i:int=0;i<moves.length;i++)
+				return bestMove;			
+			}
+			LOG.debug("Min orderingMoves.len:{0}",orderingMoves.length);
+			var len:int = orderingMoves.length;
+			var tempMoveValue:int;
+			var bestMoveValue:int;
+			for(var i:int=0;i<len;i++)
+			{
+				var conductVO:ConductVO = orderingMoves.getItemAt(i) as ConductVO;
+				tempMove = MaxMove(applyMovement(conductVO));
+				tempMoveValue = doEvaluation(tempMove);
+				bestMoveValue = doEvaluation(bestMove);
+				if(tempMoveValue>bestMoveValue)
 				{
-					var conductVO:ConductVO = moves.getItemAt(i) as ConductVO;
-					tempMove = MaxMove(applyMovement(conductVO));
-					if(doEvaluation(tempMove)>doEvaluation(bestMove))
-					{
-						bestMove = tempMove;
-					}
+					bestMove = tempMove;
+					LOG.debug("Min bestMove:{0}",bestMove.dump());
+					//
+					this.beta = tempMoveValue;
 				}
-			}	
+				// Ignore remaining moves
+				if (beta < alpha)
+				{
+					return bestMove;
+				}
+			}
 			return bestMove;
 		}
 		
@@ -121,11 +197,21 @@ package com.lookbackon.AI.searching
 		after all, it does little good to be able to look ahead 20 moves,
 		if, after we do, we decide that the position is good for us, when in fact, it is terrible! 
 		*/
-		/*override public function doEvaluation(conductVO:ConductVO):int
+		override public function doEvaluation(conductVO:ConductVO):int
 		{
-			
-		};*/
-		
+//			return MathUtil.transactRandomNumberInRange(0,100);
+			//Todo:doEvaluation about assumpted conductVO;
+			var importantValue:int = ChessPiecesConstants[conductVO.target.type].important.gett(conductVO.nextPosition.x,conductVO.nextPosition.y);
+			var fuzzyImportValue:int = ChessPiecesConstants[conductVO.target.type].convertedImportant.gett(conductVO.nextPosition.x,conductVO.nextPosition.y);
+			//TODO:dynamic omenVO value to be calculated. 
+			//precies evaluation value.
+			return importantValue+fuzzyImportValue;
+		};
+		//
+		private function get depthLimitReached():Boolean
+		{
+			return depth>=MAX_DEPTH;
+		}
 	}	
 	
 }

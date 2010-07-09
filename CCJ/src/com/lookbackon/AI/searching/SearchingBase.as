@@ -7,6 +7,7 @@ package com.lookbackon.AI.searching
 	import com.lookbackon.ccj.model.ChessPiecesModel;
 	import com.lookbackon.ccj.model.vos.ConductVO;
 	import com.lookbackon.ccj.view.components.ChessPiece;
+	import com.lookbackon.ds.BitBoard;
 	
 	import de.polygonal.ds.Array2;
 	
@@ -32,8 +33,10 @@ package com.lookbackon.AI.searching
 //conductVO's collection;
 		protected var tempMove:ConductVO;
 		protected var positionEvaluation:int;
-		protected var gamePosition:Array2;
+		protected var gamePosition:BitBoard;
 		protected var evaluation:IEvaluation = new LinearEvaluationProxy();//Notice:this is all kinds of evaluation method entry,should be test.
+		
+		private var _orderingMoves:ArrayCollection;	
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -50,10 +53,12 @@ package com.lookbackon.AI.searching
 		 * which allows them to choose the best of these continuations. </p>
 		 * 
 		 */		
-		public function SearchingBase(gamePosition:Array2)
+		public function SearchingBase(gamePosition:BitBoard)
 		{
 			//TODO: implement function
 			this.gamePosition = gamePosition;
+			//init ordering moves.
+			this.orderingMoves = generateMoves( ChessPiecesModel.getInstance().blues);
 		}
 		//--------------------------------------------------------------------------
 		//
@@ -69,7 +74,7 @@ package com.lookbackon.AI.searching
 		[Deprecated(replacement="com.lookbackon.AI.searching.SearchingBase.orderingMoves")]
 		public function get moves():ArrayCollection
 		{
-			return generateMoves( ChessPiecesModel.getInstance().blues,gamePosition);
+			return generateMoves( ChessPiecesModel.getInstance().blues);
 		}
 		//----------------------------------
 		//  orderingMoves(native)
@@ -108,8 +113,11 @@ package com.lookbackon.AI.searching
 		public function get orderingMoves():ArrayCollection
 		{
 			//TODO:ordering moves by order.
-			var _moves:ArrayCollection = generateMoves( ChessPiecesModel.getInstance().blues,gamePosition);
-			return _moves;
+			return _orderingMoves;
+		}
+		public function set orderingMoves(value:ArrayCollection):void
+		{
+			_orderingMoves = value;
 		}
 		//--------------------------------------------------------------------------
 		//
@@ -123,16 +131,16 @@ package com.lookbackon.AI.searching
 		/**
 		 * This function generates all possible moves and stores them in the arraycollection.</p>
 		 * It returns the arraycollection of the legal moves.</p>
-		 * @param blues computer's chess pieces type.
-		 * @return all possible moves
+		 * @param pieces chess pieces collection.
+		 * @return all possible moves.
 		 * 
 		 */		
-		final public function generateMoves(blues:ArrayCollection, gamePosition:Array2):ArrayCollection
+		final public function generateMoves(pieces:ArrayCollection):ArrayCollection
 		{
 			var resultAC:ArrayCollection = new ArrayCollection();
-			for(var i:int=0;i<blues.length;i++)
+			for(var i:int=0;i<pieces.length;i++)
 			{
-				var cp:ChessPiece = blues.getItemAt(i) as ChessPiece;
+				var cp:ChessPiece = pieces.getItemAt(i) as ChessPiece;
 				for(var c:int=0;c<cp.chessVO.moves.column;c++)
 				{
 					for(var r:int=0;r<cp.chessVO.moves.row;r++)
@@ -163,17 +171,17 @@ package com.lookbackon.AI.searching
 		 * @return modified gameposition
 		 * 
 		 */		
-		final public function applyMovement(conductVO:ConductVO):Array2
+		final public function applyMovement(conductVO:ConductVO):BitBoard
 		{
 			ChessPieceManager.makeMove( conductVO );
 			//TODO:
-			return new Array2(9,10);
+			return ChessPiecesModel.getInstance().allPieces;
 		}
 		//----------------------------------
 		//  makeNextMove(native)
 		//----------------------------------
 		private var previewPiece:ChessPiece;//for backup selectedPieceButton;
-		protected var cloneOfGamePosition:Array2;//for backup gamePosition;
+		protected var cloneOfGamePosition:BitBoard;//for backup gamePosition;
 		/**
 		 * Make next move 
 		 * @param conductVO
@@ -191,8 +199,8 @@ package com.lookbackon.AI.searching
 		 */		
 		protected function unmakePreMove(conductVO:ConductVO):void
 		{
-			cloneOfGamePosition.sett(conductVO.previousPosition.x,conductVO.previousPosition.y,null);
-			cloneOfGamePosition.sett(previewPiece.position.x,previewPiece.position.y,previewPiece);
+			cloneOfGamePosition.setBitt(conductVO.previousPosition.x,conductVO.previousPosition.y,false);
+			cloneOfGamePosition.setBitt(previewPiece.position.x,previewPiece.position.y,true);
 		}
 		//----------------------------------
 		//  doEvaluation(virtual)

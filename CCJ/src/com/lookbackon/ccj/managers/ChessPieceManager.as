@@ -125,7 +125,7 @@ package com.lookbackon.ccj.managers
 		 */		
 		public static function makeMove(conductVO:ConductVO):void
 		{
-			LOG.info("makeMove:{0}",conductVO.brevity);
+			LOG.info("Begin makeMove:{0}",conductVO.brevity);
 			//TODO:implement functions.
 			//manually move chess pieces handler.;
 //			var cGasketIndex:int = conductVO.nextPosition.y*CcjConstants.BOARD_H_LINES+conductVO.nextPosition.x;
@@ -164,8 +164,6 @@ package com.lookbackon.ccj.managers
 				//remove element from gasket.
 				cGasket.removeElementAt(1);
 			}
-			//
-			cGasket.addElement(conductVO.target as IVisualElement);
 			//adjust the chess piece's position.
 			conductVO.target.x = 0;
 			conductVO.target.y = 0;
@@ -181,7 +179,8 @@ package com.lookbackon.ccj.managers
 			updateAllPiecesChessVO();
 			//update ZobristKeys
 //			updateZobristKeysModel(conductVO);
-			//
+			//buffer here,after update all data,then refresh view.
+			cGasket.addElement(conductVO.target as IVisualElement);
 			//switch turn flag.
 			if(GameManager.turnFlag==CcjConstants.FLAG_BLUE)
 			{
@@ -196,6 +195,7 @@ package com.lookbackon.ccj.managers
 				//
 				GameManager.isComputerTurnNow();
 			}
+			LOG.info("End makeMove:{0}",conductVO.brevity);
 		}
 		public static function unmakeMove():void
 		{

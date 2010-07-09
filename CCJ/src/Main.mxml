@@ -6,6 +6,7 @@
 			   creationComplete="application1_creationCompleteHandler(event)" 
 			   applicationComplete="application1_applicationCompleteHandler(event)" 
 			   xmlns:popup="com.adobe.cairngorm.popup.*" 
+			   scriptTimeLimit="60" 
 			   >
 	<s:layout>
 		<s:BasicLayout/>
@@ -43,11 +44,13 @@
 											[ 
 //												"com.lookbackon.ccj.view.components.ChessPiece"
 //												,
-												"com.lookbackon.ccj.managers.ChessPieceManager"
+//												"com.lookbackon.ccj.managers.ChessPieceManager"
 //												,
 //												"com.lookbackon.ccj.model.vos.cvo.CannonVO"		
-												,
-												"com.lookbackon.ccj.view.components.ChessPiece"
+//												,
+//												"com.lookbackon.ccj.view.components.ChessPiece"
+//												,
+												"com.lookbackon.AI.searching.MinMax"
 											];
 			//----------------------------------
 			//  CONSTANTS
@@ -151,7 +154,7 @@
 					   includeDate="false"
 					   includeLevel="true"
 					   includeTime="true"
-					   level="{LogEventLevel.INFO}"
+					   level="{LogEventLevel.DEBUG}"
 					   filters="{logFilters}"
 					   />
 		<popup:PopUpWrapper open="{GameManager.indicatorReadOut}" center="true" modal="true" >

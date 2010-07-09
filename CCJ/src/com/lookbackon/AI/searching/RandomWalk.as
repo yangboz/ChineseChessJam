@@ -1,19 +1,14 @@
 package com.lookbackon.AI.searching
 {
-	import com.lookbackon.ccj.CcjConstants;
 	import com.lookbackon.ccj.ChessPiecesConstants;
 	import com.lookbackon.ccj.managers.GameManager;
-	import com.lookbackon.ccj.model.ChessPiecesModel;
 	import com.lookbackon.ccj.model.vos.ConductVO;
 	import com.lookbackon.ccj.utils.LogUtil;
 	import com.lookbackon.ccj.utils.MathUtil;
+	import com.lookbackon.ds.BitBoard;
 	
-	import de.polygonal.ds.Array2;
-	
-	import mx.collections.ArrayCollection;
 	import mx.logging.ILogger;
-	import mx.utils.ObjectUtil;
-
+	
 	/**
 	 *
 	 * This essay is a detailed explanation of one of the most important
@@ -27,16 +22,16 @@ package com.lookbackon.AI.searching
 		private static const LOG:ILogger = LogUtil.getLogger(RandomWalk);
 		/**
 		 * About RandomWalkAI(瞎走)
-    	 * if(game over in current board position)
-         * return winner
-         * children = all legal moves for player from this board
-         * if(max's turn)
-         * return maximal score of calling minimax on all the children
-         * else (min's turn)
-         * return minimal score of calling minimax on all the children
+		 * if(game over in current board position)
+		 * return winner
+		 * children = all legal moves for player from this board
+		 * if(max's turn)
+		 * return maximal score of calling minimax on all the children
+		 * else (min's turn)
+		 * return minimal score of calling minimax on all the children
 		 * 
-		*/		
-		public function RandomWalk(gamePosition:Array2) 
+		 */		
+		public function RandomWalk(gamePosition:BitBoard) 
 		{
 			super(gamePosition);
 			//
@@ -77,9 +72,9 @@ package com.lookbackon.AI.searching
 			//TODO:dynamic omenVO value to be calculated. 
 			//precies evaluation value.
 			return importantValue+fuzzyImportValue;
-//			return _positionEvaluation;
-//			return Math.random()*100;
-//			return super.doEvaluation(conductVO);
+			//			return _positionEvaluation;
+			//			return Math.random()*100;
+			//			return super.doEvaluation(conductVO);
 		};
 		
 	}	

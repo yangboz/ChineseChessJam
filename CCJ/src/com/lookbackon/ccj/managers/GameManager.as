@@ -74,7 +74,8 @@ package com.lookbackon.ccj.managers
 		{
 			//TODO:
 			//logic condition who's turn now at first.
-			isComputerTurnNow();
+//			isComputerTurnNow();
+			isHumanTurnNow();
 		}
 		//----------------------------------
 		//  computerWin
@@ -106,7 +107,8 @@ package com.lookbackon.ccj.managers
 			GameManager.indicatorReadOut = true;
 			//about data
 			//TODO:switch any searching class to test.
-			gameAI = new RandomWalk(new Array2(CcjConstants.BOARD_V_LINES,CcjConstants.BOARD_H_LINES));
+			gameAI = new RandomWalk(ChessPiecesModel.getInstance().allPieces);
+//			gameAI = new MinMax(ChessPiecesModel.getInstance().allPieces);
 		}
 		//----------------------------------
 		//  isHumanTurnNow
