@@ -100,7 +100,7 @@ package com.lookbackon.AI.searching
 			  	{
 			  		makeNextMove(moves.getItemAt(step) as ConductVO);
 			  		var value:int = -AlphaBeta(depth-1,-beta,-alpha);
-			  		unmakePreMove(moves.getItemAt(step) as ConductVO);
+			  		unmakeMove(moves.getItemAt(step) as ConductVO);
 			  		step++;
 			  		if(value>=beta)
 			  		{
@@ -162,7 +162,7 @@ package com.lookbackon.AI.searching
 				for(var i:int=0;i<moves.length;i++)
 				{
 					var conductVO:ConductVO = moves.getItemAt(i) as ConductVO;
-					tempMove = MinMove(applyMovement(conductVO),alpha,beta);
+					tempMove = MinMove(makeMove(conductVO),alpha,beta);
 					if(doEvaluation(tempMove)>doEvaluation(bestMove))
 					{
 						bestMove = tempMove;
@@ -218,7 +218,7 @@ package com.lookbackon.AI.searching
 				for(var i:int=0;i<moves.length;i++)
 				{
 					var conductVO:ConductVO = moves.getItemAt(i) as ConductVO;
-					tempMove = MaxMove(applyMovement(conductVO),alpha,beta);
+					tempMove = MaxMove(makeMove(conductVO),alpha,beta);
 					if(doEvaluation(tempMove)>doEvaluation(bestMove))
 					{
 						bestMove = tempMove;

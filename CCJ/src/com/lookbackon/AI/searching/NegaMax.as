@@ -77,7 +77,7 @@ package com.lookbackon.AI.searching
 			{
 				makeNextMove(moves.getItemAt(i));
 				val = -NegaMax(BoardModel.getInstance().gamePosition,depth-1);
-				unmakePreMove(moves.getItemAt(i));
+				unmakeMove(moves.getItemAt(i));
 				if(val>best)
 				{
 					best = val;

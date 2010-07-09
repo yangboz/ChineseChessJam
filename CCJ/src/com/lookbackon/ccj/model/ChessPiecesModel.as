@@ -3,6 +3,7 @@ package com.lookbackon.ccj.model
 	import com.lookbackon.ccj.CcjConstants;
 	import com.lookbackon.ccj.errors.CcjErrors;
 	import com.lookbackon.ccj.model.vos.ConductVO;
+	import com.lookbackon.ccj.model.vos.PositionVO;
 	import com.lookbackon.ccj.model.vos.cvo.BishopVO;
 	import com.lookbackon.ccj.model.vos.cvo.CannonVO;
 	import com.lookbackon.ccj.model.vos.cvo.KnightVO;
@@ -112,6 +113,22 @@ package com.lookbackon.ccj.model
 		public function get pieces():ArrayCollection
 		{
 			return new ArrayCollection(_blues.source.concat(_reds.source));
+		}
+		//----------------------------------
+		//  gamePosition
+		//----------------------------------
+		public function get gamePosition():PositionVO
+		{
+			var _gamePosition:PositionVO = new PositionVO();
+			var board:Array2 = new Array2(9,10);
+			for(var i:int=0;i<pieces.length;i++)
+			{
+				var cp:ChessPiece = pieces.getItemAt(i) as ChessPiece;
+				board.sett(cp.position.x,cp.position.y,cp);
+			}
+			_gamePosition.board = board;
+			_gamePosition.color = CcjConstants.FLAG_BLUE;
+			return _gamePosition;
 		}
 		//----------------------------------
 		//  allPieces

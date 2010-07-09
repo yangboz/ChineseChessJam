@@ -1,8 +1,6 @@
 package com.lookbackon.AI.searching
 {
 	import com.lookbackon.ccj.model.vos.ConductVO;
-	import com.lookbackon.ds.BitBoard;
-	
 	import mx.collections.ArrayCollection;
 
 	/**
@@ -12,6 +10,7 @@ package com.lookbackon.AI.searching
 	public interface ISearching
 	{
 		function generateMoves(blues:ArrayCollection):ArrayCollection;
-		function applyMovement(conductVO:ConductVO):BitBoard;
+		function makeMove(conductVO:ConductVO):void;
+		function unmakeMove(conductVO:ConductVO):void;
 	}
 }

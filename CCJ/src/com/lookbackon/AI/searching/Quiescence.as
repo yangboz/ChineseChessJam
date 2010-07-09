@@ -82,7 +82,7 @@ package com.lookbackon.AI.searching
 			trace("score@QuiesceSearch:",score);
 			if(score>=beta)
 			{
-				applyMovement(conductVO);
+				makeMove(conductVO);
 				return score;
 			}
 			
@@ -91,7 +91,7 @@ package com.lookbackon.AI.searching
 				trace("all possbility conducts @QuiesceAI.quiesce:",(moves.getItemAt(i) as ConductVO).dump());
 				makeNextMove(moves.getItemAt(i) as ConductVO);//执行着法 m;
 				score = -quiescence(alpha,beta,moves.getItemAt(i) as ConductVO);
-				unmakePreMove(moves.getItemAt(i) as ConductVO);//撤消着法 m;
+				unmakeMove(moves.getItemAt(i) as ConductVO);//撤消着法 m;
 				if(score>=alpha)
 				{
 					alpha = score;
@@ -101,7 +101,7 @@ package com.lookbackon.AI.searching
 					}
 				}
 			}
-			applyMovement(conductVO);
+			makeMove(conductVO);
 			return score;
 		}
 		
@@ -147,7 +147,7 @@ package com.lookbackon.AI.searching
 							conductVO.newPosition[1]
 																	 ),true).length;
 				//backup gamePosition;
-				unmakePreMove(conductVO);	
+				unmakeMove(conductVO);	
 				trace( "hResult+vResult+hResultPlus+vResultPlus:",hResult+vResult+hResultPlus+vResultPlus);
 				trace("#####################doEvaluation end##########################");									 
 				return 	hResult+vResult+hResultPlus+vResultPlus;												 
@@ -155,7 +155,7 @@ package com.lookbackon.AI.searching
 			//knowlege 04:just run away.
 			
 			//backup gamePosition;
-			unmakePreMove(conductVO);
+			unmakeMove(conductVO);
 			
 			trace( "hResult+vResult:",hResult+vResult);
 			trace("#####################doEvaluation end##########################");

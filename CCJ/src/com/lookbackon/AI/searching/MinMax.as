@@ -5,9 +5,12 @@ package com.lookbackon.AI.searching
 	import com.lookbackon.ccj.managers.GameManager;
 	import com.lookbackon.ccj.model.ChessPiecesModel;
 	import com.lookbackon.ccj.model.vos.ConductVO;
+	import com.lookbackon.ccj.model.vos.PositionVO;
 	import com.lookbackon.ccj.utils.LogUtil;
 	import com.lookbackon.ccj.utils.MathUtil;
 	import com.lookbackon.ds.BitBoard;
+	
+	import de.polygonal.ds.Array2;
 	
 	import mx.logging.ILogger;
 
@@ -44,7 +47,7 @@ package com.lookbackon.AI.searching
          * return minimal score of calling minimax on all the children
 		 * @see http://www.fierz.ch/strategy.htm
 		*/		
-		public function MinMax(gamePosition:BitBoard) 
+		public function MinMax(gamePosition:PositionVO) 
 		{
 			super(gamePosition);
 			/*
@@ -64,7 +67,7 @@ package com.lookbackon.AI.searching
 			{
 				this.bestMove = orderingMoves.getItemAt(0) as ConductVO;
 				//	
-				this.applyMovement(MaxMove(gamePosition));
+				this.makeMove(MaxMove(gamePosition));
 			}
 		}	
 		/**
@@ -73,7 +76,7 @@ package com.lookbackon.AI.searching
 		 * @return the MaxMove choose conductVO;
 		 * 
 		 */		
-		private function MaxMove (gamePosition:BitBoard):ConductVO
+		private function MaxMove (gamePosition:PositionVO):ConductVO
 		{
 			/*if (GameEnded(game)) {
 				return EvalGameState(game);
@@ -112,7 +115,7 @@ package com.lookbackon.AI.searching
 			for(var i:int=0;i<len;i++)
 			{
 				var conductVO:ConductVO = orderingMoves.getItemAt(i) as ConductVO;
-				tempMove = MinMove(applyMovement(conductVO));
+				tempMove = MinMove(makeMove(conductVO));
 				tempMoveValue = doEvaluation(tempMove);
 				bestMoveValue = doEvaluation(bestMove);
 				if(tempMoveValue>bestMoveValue)
@@ -136,7 +139,7 @@ package com.lookbackon.AI.searching
 		 * @return the MinMove choose conductVO;
 		 * 
 		 */			
-		private function MinMove(gamePosition:BitBoard):ConductVO 
+		private function MinMove(gamePosition:PositionVO):ConductVO 
 		{
 			/*best_move <- {};
 			moves <- GenerateMoves(game);
@@ -166,7 +169,7 @@ package com.lookbackon.AI.searching
 			for(var i:int=0;i<len;i++)
 			{
 				var conductVO:ConductVO = orderingMoves.getItemAt(i) as ConductVO;
-				tempMove = MaxMove(applyMovement(conductVO));
+				tempMove = MaxMove(makeMove(conductVO));
 				tempMoveValue = doEvaluation(tempMove);
 				bestMoveValue = doEvaluation(bestMove);
 				if(tempMoveValue>bestMoveValue)

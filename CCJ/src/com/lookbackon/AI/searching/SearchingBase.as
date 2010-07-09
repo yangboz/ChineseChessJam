@@ -6,10 +6,9 @@ package com.lookbackon.AI.searching
 	import com.lookbackon.ccj.managers.ChessPieceManager;
 	import com.lookbackon.ccj.model.ChessPiecesModel;
 	import com.lookbackon.ccj.model.vos.ConductVO;
+	import com.lookbackon.ccj.model.vos.PositionVO;
 	import com.lookbackon.ccj.view.components.ChessPiece;
 	import com.lookbackon.ds.BitBoard;
-	
-	import de.polygonal.ds.Array2;
 	
 	import flash.geom.Point;
 	
@@ -30,10 +29,11 @@ package com.lookbackon.AI.searching
 		//
 		//--------------------------------------------------------------------------
 		protected var bestMove:ConductVO;
-//conductVO's collection;
+		//conductVO's collection;
 		protected var tempMove:ConductVO;
 		protected var positionEvaluation:int;
-		protected var gamePosition:BitBoard;
+		//
+		protected var gamePosition:PositionVO;
 		protected var evaluation:IEvaluation = new LinearEvaluationProxy();//Notice:this is all kinds of evaluation method entry,should be test.
 		
 		private var _orderingMoves:ArrayCollection;	
@@ -53,7 +53,7 @@ package com.lookbackon.AI.searching
 		 * which allows them to choose the best of these continuations. </p>
 		 * 
 		 */		
-		public function SearchingBase(gamePosition:BitBoard)
+		public function SearchingBase(gamePosition:PositionVO)
 		{
 			//TODO: implement function
 			this.gamePosition = gamePosition;
@@ -160,7 +160,7 @@ package com.lookbackon.AI.searching
 			return resultAC;
 		}
 		//----------------------------------
-		//  applyMovement(native)
+		//  makeMove(native)
 		//----------------------------------
 		/**
 		 * Obviously,the struct move must contain all information necessary to support this operations.</p>
@@ -171,36 +171,20 @@ package com.lookbackon.AI.searching
 		 * @return modified gameposition
 		 * 
 		 */		
-		final public function applyMovement(conductVO:ConductVO):BitBoard
+		final public function makeMove(conductVO:ConductVO):void
 		{
 			ChessPieceManager.makeMove( conductVO );
-			//TODO:
-			return ChessPiecesModel.getInstance().allPieces;
 		}
 		//----------------------------------
-		//  makeNextMove(native)
-		//----------------------------------
-		private var previewPiece:ChessPiece;//for backup selectedPieceButton;
-		protected var cloneOfGamePosition:BitBoard;//for backup gamePosition;
-		/**
-		 * Make next move 
-		 * @param conductVO
-		 */		
-		protected function makeNextMove(conductVO:ConductVO):void
-		{
-			//TODO:
-		}
-		//----------------------------------
-		//  unmakePreMove(native)
+		//  unmakeMove(native)
 		//----------------------------------
 		/**
-		 * Unmake preview move 
+		 * Unmake preview move,for all kinds of searching tree algorithms.
 		 * @param conductVO
 		 */		
-		protected function unmakePreMove(conductVO:ConductVO):void
+		final public function unmakeMove(conductVO:ConductVO):void
 		{
-			cloneOfGamePosition.setBitt(conductVO.previousPosition.x,conductVO.previousPosition.y,false);
-			cloneOfGamePosition.setBitt(previewPiece.position.x,previewPiece.position.y,true);
+			ChessPieceManager.unmakeMove();
 		}
 		//----------------------------------
 		//  doEvaluation(virtual)

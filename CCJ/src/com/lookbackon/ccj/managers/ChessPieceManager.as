@@ -7,6 +7,7 @@ package com.lookbackon.ccj.managers
 	import com.lookbackon.ccj.model.ChessPiecesModel;
 	import com.lookbackon.ccj.model.ZobristKeysModel;
 	import com.lookbackon.ccj.model.vos.ConductVO;
+	import com.lookbackon.ccj.model.vos.PositionVO;
 	import com.lookbackon.ccj.model.vos.ZobristKeyVO;
 	import com.lookbackon.ccj.model.vos.cvo.ChessVO;
 	import com.lookbackon.ccj.utils.LogUtil;
@@ -132,45 +133,8 @@ package com.lookbackon.ccj.managers
 //			trace(cGasketIndex.toString(),"cGasketIndex");
 			var cGasket:ChessGasket = 
 				ChessPieceManager.gaskets.gett(conductVO.nextPosition.x,conductVO.nextPosition.y) as ChessGasket;
-			//hold gasket skin,then remove previous chess piece.
-//			cGasket.dispatchEvent(new DragEvent(DragEvent.DRAG_ENTER,false,true,conductVO.target));
-//			cGasket.dispatchEvent(new DragEvent(DragEvent.DRAG_DROP,false,true,conductVO.target));	
-			if(cGasket.numElements>1)
-			{
-				//TODO:chess piece eat off.
-				var removedPiece:ChessPiece = cGasket.getElementAt(1) as ChessPiece;
-				var removedIndex:int = calculatePieceIndex(removedPiece);
-				LOG.info("Eat Off@{0} target:{1}",cGasket.position.toString(),removedPiece.toString());
-				if(ChessPiece(cGasket.getElementAt(1)).label==ChessPiecesConstants.BLUE_MARSHAL.label)
-				{
-					GameManager.humanWin();	
-				}
-				if(ChessPiece(cGasket.getElementAt(1)).label==ChessPiecesConstants.RED_MARSHAL.label)
-				{
-					GameManager.computerWin();
-				}
-				//clean this bit at pieces.
-				BitBoard(ChessPiecesModel.getInstance()[removedPiece.type]).setBitt(removedPiece.position.y,removedPiece.position.x,false);
-				//remove pieces data.
-				if(GameManager.turnFlag==CcjConstants.FLAG_RED)
-				{
-					//clean this bit at bluePieces.
-					chessPiecesModel.blues.removeItemAt(removedIndex);
-				}else
-				{
-					//clean this bit at redPieces.
-					chessPiecesModel.reds.removeItemAt(removedIndex);
-				}
-				//remove element from gasket.
-				cGasket.removeElementAt(1);
-			}
-			//adjust the chess piece's position.
-			conductVO.target.x = 0;
-			conductVO.target.y = 0;
 			//update conductsHistorys
-			_crossOverValue = pmPRNG.nextInt();
-			LOG.debug("_crossOverValue:{0}",_crossOverValue.toString());
-			conductsHistorys.push({con:conductVO,cov:_crossOverValue});
+			updateConductHistory(conductVO);
 			//update bitboard.
 			updatePieceBitboard(conductVO);
 			//update allPieces.
@@ -178,23 +142,12 @@ package com.lookbackon.ccj.managers
 			//update allPieces' chessVO.
 			updateAllPiecesChessVO();
 			//update ZobristKeys
-//			updateZobristKeysModel(conductVO);
+			updateZobristKeysModel(conductVO);
 			//buffer here,after update all data,then refresh view.
-			cGasket.addElement(conductVO.target as IVisualElement);
+			updateChessPieces(conductVO,cGasket);
 			//switch turn flag.
-			if(GameManager.turnFlag==CcjConstants.FLAG_BLUE)
-			{
-				//indicate check.
-				indicateCheck(chessPiecesModel.blues,chessPiecesModel.RED_MARSHAL);
-				//
-				GameManager.isHumanTurnNow();
-			}else
-			{
-				//indicate check.
-				indicateCheck(chessPiecesModel.reds,chessPiecesModel.BLUE_MARSHAL);
-				//
-				GameManager.isComputerTurnNow();
-			}
+			switchGameTurnFlag();
+			//
 			LOG.info("End makeMove:{0}",conductVO.brevity);
 		}
 		public static function unmakeMove():void
@@ -215,8 +168,8 @@ package com.lookbackon.ccj.managers
 			_zKey.position.sett(pX,pY,_crossOverValue^_zKey.position.gett(pX,pY) );
 			//
 			LOG.debug("after unmakemove:{0}",_zKey.dump());
-			//TODO:unmake updateAllPiecesPosition(based on game turn phase.)
-			//
+			//TODO:un-update functions.
+			makeMove(conductVO);
 		}
 		/**
 		 * 
@@ -259,7 +212,6 @@ package com.lookbackon.ccj.managers
 			BitBoard(ChessPiecesModel.getInstance()[conductVO.target.type]).setBitt(conductVO.previousPosition.y,conductVO.previousPosition.x,false);
 			LOG.info("after move,allPieces:{0}",ChessPiecesModel.getInstance().allPieces.dump());
 		}
-		
 		//	
 		private static function updateAllPiecesChessVO():void
 		{
@@ -276,6 +228,68 @@ package com.lookbackon.ccj.managers
 //				LOG.info("after move,chessPiece's chessVO's legal moves:{0}",chessPiece.chessVO.moves.dump());
 			}
 			LOG.info("{0} Chess Pieces' ChessVO Updated !!!",chessPiecesModel.pieces.length.toString());
+		}
+		//updateConductHistory
+		private static function updateConductHistory(conductVO:ConductVO):void
+		{
+			_crossOverValue = pmPRNG.nextInt();
+			LOG.debug("_crossOverValue:{0}",_crossOverValue.toString());
+			conductsHistorys.push({con:conductVO,cov:_crossOverValue});
+		}
+		//
+		private static function updateChessPieces(conductVO:ConductVO,cGasket:ChessGasket):void
+		{
+			if(cGasket.numElements>1)
+			{
+				//TODO:chess piece eat off.
+				var removedPiece:ChessPiece = cGasket.getElementAt(1) as ChessPiece;
+				var removedIndex:int = calculatePieceIndex(removedPiece);
+				LOG.info("Eat Off@{0} target:{1}",cGasket.position.toString(),removedPiece.toString());
+				if(ChessPiece(cGasket.getElementAt(1)).label==ChessPiecesConstants.BLUE_MARSHAL.label)
+				{
+					GameManager.humanWin();	
+				}
+				if(ChessPiece(cGasket.getElementAt(1)).label==ChessPiecesConstants.RED_MARSHAL.label)
+				{
+					GameManager.computerWin();
+				}
+				//clean this bit at pieces.
+				BitBoard(ChessPiecesModel.getInstance()[removedPiece.type]).setBitt(removedPiece.position.y,removedPiece.position.x,false);
+				//remove pieces data.
+				if(GameManager.turnFlag==CcjConstants.FLAG_RED)
+				{
+					//clean this bit at bluePieces.
+					chessPiecesModel.blues.removeItemAt(removedIndex);
+				}else
+				{
+					//clean this bit at redPieces.
+					chessPiecesModel.reds.removeItemAt(removedIndex);
+				}
+				//remove element from gasket.
+				cGasket.removeElementAt(1);
+			}
+			//adjust the chess piece's position.
+			conductVO.target.x = 0;
+			conductVO.target.y = 0;
+			//
+			cGasket.addElement(conductVO.target as IVisualElement);
+		}
+		//
+		private static function switchGameTurnFlag():void
+		{
+			if(GameManager.turnFlag==CcjConstants.FLAG_BLUE)
+			{
+				//indicate check.
+				indicateCheck(chessPiecesModel.blues,chessPiecesModel.RED_MARSHAL);
+				//
+				GameManager.isHumanTurnNow();
+			}else
+			{
+				//indicate check.
+				indicateCheck(chessPiecesModel.reds,chessPiecesModel.BLUE_MARSHAL);
+				//
+				GameManager.isComputerTurnNow();
+			}
 		}
 		//notice:why not using ArrayCollection.getItemIndex(object)?
 		//cuz our chess piece's position property always change here.
@@ -343,6 +357,24 @@ package com.lookbackon.ccj.managers
 				return true;
 			}
 			return false;
+		}
+		/**
+		 * 
+		 * @param gamePosition the current blue/red game position.
+		 * @return whether or not blue/red check mated.
+		 * 
+		 */		
+		public static function indicateCheckmate(gamePosition:PositionVO):Boolean
+		{
+			var checkmated:Boolean;
+			if(gamePosition.color==CcjConstants.FLAG_BLUE)
+			{
+				checkmated = ChessPiecesModel.getInstance().BLUE_MARSHAL.isEmpty;
+			}else
+			{
+				checkmated = ChessPiecesModel.getInstance().RED_MARSHAL.isEmpty;
+			}
+			return checkmated;
 		}
 	}
 	

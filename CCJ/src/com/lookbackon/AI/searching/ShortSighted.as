@@ -60,7 +60,7 @@ package com.lookbackon.AI.searching
 				//				bestMove = moves.getItemAt(randomStep) as ConductVO;
 				trace("shortSighted bestMove:",bestMove.dump());
 				trace("max position value:",pValue);
-				applyMovement(bestMove);
+				makeMove(bestMove);
 			}
 		}	
 		//
@@ -106,7 +106,7 @@ package com.lookbackon.AI.searching
 							conductVO.newPosition[1]
 																	 ),true).length;
 				//backup gamePosition;
-				unmakePreMove(conductVO);	
+				unmakeMove(conductVO);	
 				trace( "hResult+vResult+hResultPlus+vResultPlus:",hResult+vResult+hResultPlus+vResultPlus);
 				trace("#####################doEvaluation end##########################");									 
 				return 	hResult+vResult+hResultPlus+vResultPlus;												 
@@ -114,7 +114,7 @@ package com.lookbackon.AI.searching
 			//knowlege 04:just run away.
 			
 			//backup gamePosition;
-			unmakePreMove(conductVO);
+			unmakeMove(conductVO);
 			
 			trace( "hResult+vResult:",hResult+vResult);
 			trace("#####################doEvaluation end##########################");

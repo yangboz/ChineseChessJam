@@ -2,6 +2,7 @@ package com.lookbackon.ccj.managers
 {
 	import com.lookbackon.AI.searching.ISearching;
 	import com.lookbackon.AI.searching.MinMax;
+	import com.lookbackon.AI.searching.MiniMax;
 	import com.lookbackon.AI.searching.RandomWalk;
 	import com.lookbackon.AI.searching.SearchingBase;
 	import com.lookbackon.ccj.CcjConstants;
@@ -107,8 +108,9 @@ package com.lookbackon.ccj.managers
 			GameManager.indicatorReadOut = true;
 			//about data
 			//TODO:switch any searching class to test.
-			gameAI = new RandomWalk(ChessPiecesModel.getInstance().allPieces);
+//			gameAI = new RandomWalk(ChessPiecesModel.getInstance().allPieces);
 //			gameAI = new MinMax(ChessPiecesModel.getInstance().allPieces);
+			gameAI = new MiniMax(ChessPiecesModel.getInstance().gamePosition,1);
 		}
 		//----------------------------------
 		//  isHumanTurnNow
