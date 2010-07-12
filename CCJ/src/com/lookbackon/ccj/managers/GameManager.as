@@ -108,9 +108,9 @@ package com.lookbackon.ccj.managers
 			GameManager.indicatorReadOut = true;
 			//about data
 			//TODO:switch any searching class to test.
-//			gameAI = new RandomWalk(ChessPiecesModel.getInstance().allPieces);
-//			gameAI = new MinMax(ChessPiecesModel.getInstance().allPieces);
-			gameAI = new MiniMax(ChessPiecesModel.getInstance().gamePosition,1);
+			gameAI = new RandomWalk(ChessPiecesModel.getInstance().gamePosition);
+//			gameAI = new MinMax(ChessPiecesModel.getInstance().gamePosition);
+//			gameAI = new MiniMax(ChessPiecesModel.getInstance().gamePosition,1);
 		}
 		//----------------------------------
 		//  isHumanTurnNow

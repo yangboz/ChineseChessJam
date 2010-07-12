@@ -1,18 +1,30 @@
 package com.lookbackon.ccj.model.vos
 {
+	import com.lookbackon.ccj.CcjConstants;
+	import com.lookbackon.ccj.ChessPiecesConstants;
+	import com.lookbackon.ccj.managers.ChessPieceManager;
+	import com.lookbackon.ccj.managers.GameManager;
+	import com.lookbackon.ccj.model.ChessPiecesModel;
+	import com.lookbackon.ccj.utils.LogUtil;
+	import com.lookbackon.ccj.view.components.ChessGasket;
 	import com.lookbackon.ccj.view.components.ChessPiece;
+	import com.lookbackon.ds.BitBoard;
 	
 	import flash.events.EventDispatcher;
 	import flash.geom.Point;
+	
+	import mx.logging.ILogger;
 
 	/**
 	 * This conduct entity model with basic information as follows:</p>
 	 * 1.moved chess prototype(ChessPieces);</br>
 	 * 2.moved destination position(Point(x,y));</br>
 	 * 3.a brevity string such as "Pg3g4(兵3进4)";</br>
-	 * 
+	 * 4."eat off" reference on be eatten off chess pieces;</br>
+	 * 5.crossValue the current conductVO's zobrist key value;</br>
 	 * @author Knight.zhou
 	 * @history 2010-6-24,re-construct:newPositon to currentPosition,keep previousPosition.
+	 * @history 2010-7-12,add-construct:eatOff,crossValue.
 	 */
 	public class ConductVO extends EventDispatcher
 	{
@@ -25,8 +37,16 @@ package com.lookbackon.ccj.model.vos
 		private var _prviousPosition:Point	=	new Point(-1,-1);
 		//private var _currentPosition:Point  =  	new Point(-1,-1);
 		private var _nextPosition:Point 	=	new Point(-1,-1);
-
+		//
 		private var _brevity:String="";
+		//
+		private var _eatOff:ChessPiece;
+		//
+		private var _crossValue:int;
+		//----------------------------------
+		//  CONSTANTS
+		//----------------------------------
+		private static const LOG:ILogger = LogUtil.getLogger(ConductVO);
 		//--------------------------------------------------------------------------
 		//
 		//  Properties
@@ -75,10 +95,68 @@ package com.lookbackon.ccj.model.vos
 		public function set nextPosition(value:Point):void
 		{
 			_nextPosition = value;
+			//
+			var cGasket:ChessGasket = 
+				ChessPieceManager.gaskets.gett(value.x,value.y) as ChessGasket;
+			if(cGasket.numElements>1)
+			{
+				//TODO:chess piece eat off.
+				var removedPiece:ChessPiece = cGasket.getElementAt(1) as ChessPiece;
+				var removedIndex:int = ChessPieceManager.calculatePieceIndex(removedPiece);
+				LOG.info("Eat Off@{0} target:{1}",cGasket.position.toString(),removedPiece.toString());
+				if(ChessPiece(cGasket.getElementAt(1)).label==ChessPiecesConstants.BLUE_MARSHAL.label)
+				{
+					GameManager.humanWin();	
+				}
+				if(ChessPiece(cGasket.getElementAt(1)).label==ChessPiecesConstants.RED_MARSHAL.label)
+				{
+					GameManager.computerWin();
+				}
+				//clean this bit at pieces.
+				BitBoard(ChessPiecesModel.getInstance()[removedPiece.type]).setBitt(removedPiece.position.y,removedPiece.position.x,false);
+				//set eat off value.
+				eatOff = removedPiece;
+				//remove pieces data.
+				if(GameManager.turnFlag==CcjConstants.FLAG_RED)
+				{
+					//clean this bit at bluePieces.
+					ChessPiecesModel.getInstance().blues.removeItemAt(removedIndex);
+				}else
+				{
+					//clean this bit at redPieces.
+					ChessPiecesModel.getInstance().reds.removeItemAt(removedIndex);
+				}
+				//remove element from gasket.
+				cGasket.removeElementAt(1);
+			}
 		}
 		public function get nextPosition():Point
 		{
 			return _nextPosition;
+		}
+		//----------------------------------
+		//  eatOff(read-write)
+		//----------------------------------
+		public function get eatOff():ChessPiece
+		{
+			return _eatOff;
+		}
+		public function set eatOff(value:ChessPiece):void
+		{
+			_eatOff = value;
+			//
+			ChessPieceManager.eatOffs.push(value);
+		}
+		//----------------------------------
+		//  crossValue(read-write)
+		//----------------------------------
+		public function get crossValue():int
+		{
+			return _crossValue;
+		}
+		public function set crossValue(value:int):void
+		{
+			_crossValue = value;
 		}
 		//--------------------------------------------------------------------------
 		//
@@ -103,7 +181,14 @@ package com.lookbackon.ccj.model.vos
 				+"\n" + "\t"
 				+"nextPosition:"+nextPosition.toString()+","
 				+"\n" + "\t"
-				+"brevity:"+brevity.toString();
+				+"brevity:"+brevity.toString()+","
+				+"\n" + "\t"
+				+"crossValue:"+crossValue.toString()+","
+				+"\n" + "\t";
+			if(null!=eatOff)
+			{
+				s +="eat off:"+eatOff.toString();
+			}
 			s += "\n}";
 			return s;
 		}

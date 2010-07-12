@@ -1,31 +1,30 @@
-package com.lookbackon.ccj.model.vos
+package com.lookbackon.ccj.controller
 {
-	import de.polygonal.ds.Array2;
-
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
+	import com.adobe.cairngorm.control.FrontController;
+	import com.lookbackon.ccj.business.command.GameCommand;
+	import com.lookbackon.ccj.events.GameEvent;
+	
 	
 	/**
-	 * PositionVO.as class.   	
+	 * GameController.as class.   	
 	 * @author Knight.zhou
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
-	 * Created Jul 9, 2010 4:19:38 PM
+	 * Created Jul 12, 2010 11:07:33 AM
 	 */   	 
-	public class PositionVO
+	public class GameController extends FrontController
 	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		public var board:Array2;
-		public var color:int;
-		public var marshalFaceToFace:Boolean;
-		public var check:Boolean;
+		
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -47,34 +46,20 @@ package com.lookbackon.ccj.model.vos
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function PositionVO()
+		public function GameController()
 		{
+			//TODO: implement function
+			super();
+			
+			addCommand(GameEvent.IS_COMPUTER_TURN_NOW,GameCommand);
+			addCommand(GameEvent.IS_HUMAN_TURN_NOW,GameCommand);
 		}     	
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		/**
-		 * Prints out all elements (for debug/demo purposes).
-		 * 
-		 * @return A human-readable representation of the structure.
-		 */
-		public function dump():String
-		{
-			var s:String = "PositionVO";
-			s += "\n{";
-			s += "\n" + "\t";
-			s += "board:"+board.dump()+"\t";
-			s += "\n" + "\t";
-			s += "color:"+color.toString()+"\t";
-			s += "\n" + "\t";
-			s += "check:"+check.toString()+"\t";
-			s += "\n" + "\t";
-			s += "marshalFaceToFace:"+marshalFaceToFace.toString()+"\t";
-			s += "\n}";
-			return s;
-		}
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods

@@ -180,11 +180,10 @@ package com.lookbackon.AI.searching
 		//----------------------------------
 		/**
 		 * Unmake preview move,for all kinds of searching tree algorithms.
-		 * @param conductVO
 		 */		
 		final public function unmakeMove(conductVO:ConductVO):void
 		{
-			ChessPieceManager.unmakeMove();
+			ChessPieceManager.unmakeMove(conductVO);
 		}
 		//----------------------------------
 		//  doEvaluation(virtual)

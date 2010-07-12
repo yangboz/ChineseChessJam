@@ -6,7 +6,7 @@
 			   creationComplete="application1_creationCompleteHandler(event)" 
 			   applicationComplete="application1_applicationCompleteHandler(event)" 
 			   xmlns:popup="com.adobe.cairngorm.popup.*" 
-			   scriptTimeLimit="60" 
+			   scriptTimeLimit="60" xmlns:controller="com.lookbackon.ccj.controller.*" 
 			   >
 	<s:layout>
 		<s:BasicLayout/>
@@ -50,7 +50,7 @@
 //												,
 //												"com.lookbackon.ccj.view.components.ChessPiece"
 //												,
-												"com.lookbackon.AI.searching.MinMax"
+												"com.lookbackon.AI.searching.MiniMax"
 											];
 			//----------------------------------
 			//  CONSTANTS
@@ -160,6 +160,9 @@
 		<popup:PopUpWrapper open="{GameManager.indicatorReadOut}" center="true" modal="true" >
 			<components:IndicatoryProgressBar label="{GameManager.indication}"/>
 		</popup:PopUpWrapper>
+		<!-- Controllers here -->
+		<controller:GameController/>
+		<!-- Services here -->
 	</fx:Declarations>
 	
 	<!-- Views here -->

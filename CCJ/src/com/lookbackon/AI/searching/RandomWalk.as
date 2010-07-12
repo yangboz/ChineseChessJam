@@ -1,8 +1,11 @@
 package com.lookbackon.AI.searching
 {
+	import com.adobe.cairngorm.control.CairngormEventDispatcher;
 	import com.lookbackon.ccj.ChessPiecesConstants;
+	import com.lookbackon.ccj.events.GameEvent;
 	import com.lookbackon.ccj.managers.GameManager;
 	import com.lookbackon.ccj.model.vos.ConductVO;
+	import com.lookbackon.ccj.model.vos.PositionVO;
 	import com.lookbackon.ccj.utils.LogUtil;
 	import com.lookbackon.ccj.utils.MathUtil;
 	import com.lookbackon.ds.BitBoard;
@@ -31,7 +34,7 @@ package com.lookbackon.AI.searching
 		 * return minimal score of calling minimax on all the children
 		 * 
 		 */		
-		public function RandomWalk(gamePosition:BitBoard) 
+		public function RandomWalk(gamePosition:PositionVO) 
 		{
 			super(gamePosition);
 			//
@@ -60,7 +63,10 @@ package com.lookbackon.AI.searching
 				}
 				LOG.debug("randomed bestMove:{0}",bestMove.dump());
 				LOG.debug("max position value:{0}",pValue);
+				//
 				makeMove(bestMove);
+				//
+				CairngormEventDispatcher.getInstance().dispatchEvent(new GameEvent(GameEvent.IS_HUMAN_TURN_NOW));
 			}
 		}	
 		//return random position value.

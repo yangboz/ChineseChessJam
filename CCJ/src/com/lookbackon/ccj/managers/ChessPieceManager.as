@@ -1,7 +1,6 @@
 package com.lookbackon.ccj.managers
 {
 	import com.lookbackon.ccj.CcjConstants;
-	import com.lookbackon.ccj.ChessPiecesConstants;
 	import com.lookbackon.ccj.business.factory.ChessFactory;
 	import com.lookbackon.ccj.errors.CcjErrors;
 	import com.lookbackon.ccj.model.ChessPiecesModel;
@@ -9,7 +8,6 @@ package com.lookbackon.ccj.managers
 	import com.lookbackon.ccj.model.vos.ConductVO;
 	import com.lookbackon.ccj.model.vos.PositionVO;
 	import com.lookbackon.ccj.model.vos.ZobristKeyVO;
-	import com.lookbackon.ccj.model.vos.cvo.ChessVO;
 	import com.lookbackon.ccj.utils.LogUtil;
 	import com.lookbackon.ccj.view.components.ChessGasket;
 	import com.lookbackon.ccj.view.components.ChessPiece;
@@ -18,20 +16,10 @@ package com.lookbackon.ccj.managers
 	import de.polygonal.ds.Array2;
 	import de.polygonal.math.PM_PRNG;
 	
-	import flash.events.Event;
-	import flash.events.EventDispatcher;
-	import flash.events.MouseEvent;
-	
 	import mx.collections.ArrayCollection;
-	import mx.controls.Alert;
-	import mx.core.FlexGlobals;
-	import mx.core.IUIComponent;
 	import mx.core.IVisualElement;
-	import mx.events.DragEvent;
 	import mx.logging.ILogger;
-	import mx.managers.DragManager;
 	
-	import spark.events.ElementExistenceEvent;
 	import spark.filters.GlowFilter;
 
 	/**
@@ -51,14 +39,16 @@ package com.lookbackon.ccj.managers
 		//
 		private static var _gaskets:Array2 = new Array2(CcjConstants.BOARD_H_LINES,CcjConstants.BOARD_V_LINES);
 		//
-		private static var _conductsHistorys:Array = [];
+		private static var _conductsHistorys:Vector.<ConductVO> = new Vector.<ConductVO>();
 		//But the real trick is if we do the XOR operation again we get the initial number back.
 		//a ^ b = c
 		//c ^ b = a
-		private static var _crossOverValue:int;//and we using _crossOverValue for store the value "b";
+//		private static var _crossOverValue:int;//and we using _crossOverValue for store the value "b";
 		private static var _zKey:ZobristKeyVO;//current chess piece's zobrist key value object.
 		//
 		private static var chessPiecesModel:ChessPiecesModel = ChessPiecesModel.getInstance();
+		//
+		private static var _eatOffs:Vector.<ChessPiece> = new Vector.<ChessPiece>();
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -82,13 +72,24 @@ package com.lookbackon.ccj.managers
 		//----------------------------------
 		//  conductsHistorys
 		//----------------------------------
-		public static function get conductsHistorys():Array
+		public static function get conductsHistorys():Vector.<ConductVO>
 		{
 			return _conductsHistorys;
 		}
-		public static function set conductsHistorys(value:Array):void
+		public static function set conductsHistorys(value:Vector.<ConductVO>):void
 		{
 			_conductsHistorys = value;
+		}
+		//----------------------------------
+		//  eatOffs
+		//----------------------------------
+		public static function get eatOffs():Vector.<ChessPiece>
+		{
+			return _eatOffs;
+		}
+		public static function set eatOffs(value:Vector.<ChessPiece>):void
+		{
+			_eatOffs = value;
 		}
 		//generation.
 		//--------------------------------------------------------------------------
@@ -145,34 +146,29 @@ package com.lookbackon.ccj.managers
 			updateZobristKeysModel(conductVO);
 			//buffer here,after update all data,then refresh view.
 			updateChessPieces(conductVO,cGasket);
-			//switch turn flag.
-			switchGameTurnFlag();
 			//
 			LOG.info("End makeMove:{0}",conductVO.brevity);
 		}
-		public static function unmakeMove():void
+		public static function unmakeMove(conductVO:ConductVO):void
 		{
-			var conductHistory:* = conductsHistorys.pop();
-			var conductVO:ConductVO = conductHistory["con"] as ConductVO;
-			var _crossOverValue:int = conductHistory["cov"];
-			var oX:int = conductVO.target.position.x;
-			var oY:int = conductVO.target.position.y;
-			var pX:int = conductVO.previousPosition.x;
-			var pY:int = conductVO.previousPosition.y;
-			//TODO:implement functions.
-			//ref:http://mediocrechess.blogspot.com/2007/01/guide-zobrist-keys.html.
-			_zKey = ZobristKeysModel.getInstance().getZobristKey();
-			LOG.debug("before unmakemove:{0}",_zKey.dump());
-			//update zobristkey.
-			_zKey.position.sett(oX,oY,_crossOverValue^_zKey.position.gett(oX,oY) );
-			_zKey.position.sett(pX,pY,_crossOverValue^_zKey.position.gett(pX,pY) );
-			//
-			LOG.debug("after unmakemove:{0}",_zKey.dump());
+			var reversedConductVO:ConductVO = new ConductVO();
+			reversedConductVO.crossValue = conductVO.crossValue;
+			reversedConductVO.eatOff = conductVO.eatOff;
+			reversedConductVO.nextPosition = conductVO.previousPosition;
+			reversedConductVO.previousPosition = conductVO.nextPosition;
+			reversedConductVO.target = conductVO.target;
+			LOG.info("Begin unmakeMove:{0}",reversedConductVO.brevity);
+			//reverse conductVO to unmakeMove.
+			if(null!=conductVO.eatOff)
+			{
+				eatOffs.pop();
+			}
 			//TODO:un-update functions.
-			makeMove(conductVO);
+			makeMove(reversedConductVO);
+			LOG.info("End unmakeMove:{0}",reversedConductVO.brevity);
 		}
 		/**
-		 * 
+		 * @see http://mediocrechess.blogspot.com/2007/01/guide-zobrist-keys.html
 		 * @param conductVO the conduct value object of moving chess piece.
 		 * 
 		 */
@@ -187,8 +183,8 @@ package com.lookbackon.ccj.managers
 			_zKey = ZobristKeysModel.getInstance().getZobristKey();
 			LOG.debug("before makemove:{0}",_zKey.dump());
 			//update zobristkey.
-			_zKey.position.sett(oX,oY,_crossOverValue^_zKey.position.gett(oX,oY) );
-			_zKey.position.sett(pX,pY,_crossOverValue^_zKey.position.gett(pX,pY) );
+			_zKey.position.sett(oX,oY,conductVO.crossValue^_zKey.position.gett(oX,oY) );
+			_zKey.position.sett(pX,pY,conductVO.crossValue^_zKey.position.gett(pX,pY) );
 			//
 			LOG.debug("after makemove:{0}",_zKey.dump());
 			//for testing unmakeMove();
@@ -232,42 +228,13 @@ package com.lookbackon.ccj.managers
 		//updateConductHistory
 		private static function updateConductHistory(conductVO:ConductVO):void
 		{
-			_crossOverValue = pmPRNG.nextInt();
-			LOG.debug("_crossOverValue:{0}",_crossOverValue.toString());
-			conductsHistorys.push({con:conductVO,cov:_crossOverValue});
+			conductVO.crossValue = pmPRNG.nextInt();
+			LOG.debug("crossOverValue:{0}",conductVO.crossValue.toString());
+			conductsHistorys.push(conductVO);
 		}
 		//
 		private static function updateChessPieces(conductVO:ConductVO,cGasket:ChessGasket):void
 		{
-			if(cGasket.numElements>1)
-			{
-				//TODO:chess piece eat off.
-				var removedPiece:ChessPiece = cGasket.getElementAt(1) as ChessPiece;
-				var removedIndex:int = calculatePieceIndex(removedPiece);
-				LOG.info("Eat Off@{0} target:{1}",cGasket.position.toString(),removedPiece.toString());
-				if(ChessPiece(cGasket.getElementAt(1)).label==ChessPiecesConstants.BLUE_MARSHAL.label)
-				{
-					GameManager.humanWin();	
-				}
-				if(ChessPiece(cGasket.getElementAt(1)).label==ChessPiecesConstants.RED_MARSHAL.label)
-				{
-					GameManager.computerWin();
-				}
-				//clean this bit at pieces.
-				BitBoard(ChessPiecesModel.getInstance()[removedPiece.type]).setBitt(removedPiece.position.y,removedPiece.position.x,false);
-				//remove pieces data.
-				if(GameManager.turnFlag==CcjConstants.FLAG_RED)
-				{
-					//clean this bit at bluePieces.
-					chessPiecesModel.blues.removeItemAt(removedIndex);
-				}else
-				{
-					//clean this bit at redPieces.
-					chessPiecesModel.reds.removeItemAt(removedIndex);
-				}
-				//remove element from gasket.
-				cGasket.removeElementAt(1);
-			}
 			//adjust the chess piece's position.
 			conductVO.target.x = 0;
 			conductVO.target.y = 0;
@@ -293,7 +260,7 @@ package com.lookbackon.ccj.managers
 		}
 		//notice:why not using ArrayCollection.getItemIndex(object)?
 		//cuz our chess piece's position property always change here.
-		private static function calculatePieceIndex(chessPiece:ChessPiece):int
+		public static function calculatePieceIndex(chessPiece:ChessPiece):int
 		{
 			for(var i:int=0;i<chessPiecesModel.reds.length;i++)
 			{

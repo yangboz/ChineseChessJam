@@ -8,6 +8,8 @@
 		 >
 	<fx:Script>
 		<![CDATA[
+			import com.adobe.cairngorm.control.CairngormEventDispatcher;
+			import com.lookbackon.ccj.events.GameEvent;
 			import com.lookbackon.ccj.managers.ChessPieceManager;
 			import com.lookbackon.ccj.model.vos.ConductVO;
 			import com.lookbackon.ccj.utils.LogUtil;
@@ -86,6 +88,8 @@
 				ChessPieceManager.makeMove(myConductVO);
 				//
 				event.stopImmediatePropagation();
+				//computer take turns.
+				CairngormEventDispatcher.getInstance().dispatchEvent(new GameEvent(GameEvent.IS_COMPUTER_TURN_NOW));
 			}
 			
 			private function elementAddHandler(event:ElementExistenceEvent):void

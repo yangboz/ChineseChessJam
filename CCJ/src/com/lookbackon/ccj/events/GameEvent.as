@@ -1,35 +1,33 @@
-package com.lookbackon.ccj.model.vos
+package com.lookbackon.ccj.events
 {
-	import de.polygonal.ds.Array2;
-
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
+	import com.adobe.cairngorm.control.CairngormEvent;
+	
 	
 	/**
-	 * PositionVO.as class.   	
+	 * GameEvent.as class.   	
 	 * @author Knight.zhou
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
-	 * Created Jul 9, 2010 4:19:38 PM
+	 * Created Jul 12, 2010 10:55:42 AM
 	 */   	 
-	public class PositionVO
+	public class GameEvent extends CairngormEvent
 	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		public var board:Array2;
-		public var color:int;
-		public var marshalFaceToFace:Boolean;
-		public var check:Boolean;
+		
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		
+		public static const IS_COMPUTER_TURN_NOW:String = "Is compurter turn now!";
+		public static const IS_HUMAN_TURN_NOW:String 	= "Is human turn now!";
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -47,34 +45,17 @@ package com.lookbackon.ccj.model.vos
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function PositionVO()
+		public function GameEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false)
 		{
+			//TODO: implement function
+			super(type, bubbles, cancelable);
 		}     	
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		/**
-		 * Prints out all elements (for debug/demo purposes).
-		 * 
-		 * @return A human-readable representation of the structure.
-		 */
-		public function dump():String
-		{
-			var s:String = "PositionVO";
-			s += "\n{";
-			s += "\n" + "\t";
-			s += "board:"+board.dump()+"\t";
-			s += "\n" + "\t";
-			s += "color:"+color.toString()+"\t";
-			s += "\n" + "\t";
-			s += "check:"+check.toString()+"\t";
-			s += "\n" + "\t";
-			s += "marshalFaceToFace:"+marshalFaceToFace.toString()+"\t";
-			s += "\n}";
-			return s;
-		}
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
