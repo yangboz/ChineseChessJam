@@ -1,106 +1,161 @@
 package com.lookbackon.AI.searching
 {
+	import com.lookbackon.ccj.CcjConstants;
+	import com.lookbackon.ccj.managers.GameManager;
+	import com.lookbackon.ccj.model.vos.ConductVO;
+	import com.lookbackon.ccj.model.vos.PositionVO;
+	import com.lookbackon.ccj.utils.LogUtil;
+	
 	import de.polygonal.ds.Array2;
+	
+	import mx.logging.ILogger;
 	/**
-	 * @author Knight-errant
+	 * The normal MiniMax code is a bit clumsy, </br>
+	 * since one side is trying to maximize the value and the other 
+	 * is trying to minimize - therefore, </br>
+	 * with MiniMax we always have to check if we are the side 
+	 * trying to maximize or the side trying to minimize. </br>
+	 * A neat way to get rid of this and to have a simpler function is NegaMax.</br>
+	 * With the NegaMax algorithm both sides try to maximize all the time.</br>
+	 * NegaMax is identical to MiniMax, it's just a nicer formulation.</br>
+	 * 
+	 * You can see that the NegaMax algorithm is shorter and simpler than the MiniMax algorithm.</br>
+	 * At first sight, NegaMax is a bit harder to understand than MiniMax, but it's in fact much easier to use. </br>
+	 * The side to move is always trying to maximize the value. </br>
+	 * NegaMax is no better or worse than MiniMax - it's identical. </br>
+	 * It's just a better framework to use. </br>
+	 * 
+	 * @param postion the piece's postion in board.</br>
+	 * @param depth the piece's depth in this game tree.</br>
+	 * 
+	 * @see http://www.fierz.ch/strategy.htm
+	 * @author Knight.zhou
 	 */	
 	public class NegaMax extends SearchingBase
 	{
-		 /**
-		 * The normal MiniMax code is a bit clumsy, </br>
-		 * since one side is trying to maximize the value and the other 
-		 * is trying to minimize - therefore, </br>
-		 * with MiniMax we always have to check if we are the side 
-		 * trying to maximize or the side trying to minimize. </br>
-		 * A neat way to get rid of this and to have a simpler function is NegaMax.</br>
-		 * With the NegaMax algorithm both sides try to maximize all the time.</br>
-		 * NegaMax is identical to MiniMax, it's just a nicer formulation.</br>
-		 * 
-		 * @param postion the piece's postion in board.</br>
-		 * @param depth the piece's depth in this game tree.</br>
-		 * 
-		 * @see http://www.fierz.ch/strategy.htm
-		 * @author Knight.zhou
-		 */	
-		 //You can see that the NegaMax algorithm is shorter and simpler than the MiniMax algorithm.
-		 //At first sight, NegaMax is a bit harder to understand than MiniMax, 
-		 //but it's in fact much easier to use. 
-		 //The side to move is always trying to maximize the value. 
-		 //NegaMax is no better or worse than MiniMax - it's identical. 
-		 //It's just a better framework to use. 
-		public function NegaMax(position:Array2,depth:int)
+		//--------------------------------------------------------------------------
+		//
+		//  Variables
+		//
+		//--------------------------------------------------------------------------
+		//----------------------------------
+		//  CONSTANTS
+		//----------------------------------
+		private static const LOG:ILogger = LogUtil.getLogger(NegaMax);
+		//--------------------------------------------------------------------------
+		//
+		//  Public properties
+		//
+		//-------------------------------------------------------------------------- 
+		
+		//--------------------------------------------------------------------------
+		//
+		//  Protected properties
+		//
+		//-------------------------------------------------------------------------- 
+		
+		//--------------------------------------------------------------------------
+		//
+		//  Constructor
+		//
+		//--------------------------------------------------------------------------
+		public function NegaMax(gamePosition:PositionVO,depth:int)
 		{
-			/*
-			function negamax(node, depth, α, β, color)
-		    if node is a terminal node or depth = 0
-		        return color * the heuristic value of node
-		    else
-		        foreach child of node
-		            α := max(α, -negamax(child, depth-1, -β, -α, -color))
-		            {the following if statement constitutes alpha-beta pruning}
-		            if α≥β
-		                return α
-		        return α
-			*/
+			super(gamePosition);
+			//
+			negaMax(gamePosition,depth);
+			//
+			this.applyMove(bestMove);
+		}
+		
+		private function negaMax(gamePosition:PositionVO,depth:int):int
+		{
 			/*
 			int negamax(POSITION *p, int depth)
 			{
 			MOVE list[MAXMOVES];
 			int i,n,value,bestvalue=-INFINITY;
-		
+			
 			if(checkwin(p)) 
-				return -INFINITY;
+			return -INFINITY;
 			
 			if(depth == 0)	
-				return evaluation(p);
+			return evaluation(p);
 			n = makemovelist(p,list);
 			if(n == 0) 
-				return handlenomove(p);
+			return handlenomove(p);
 			
 			for(i=0; i<n; i++)
-				{
-				domove(&list[i],p);
-				value = -negamax(p,depth-1);
-				undomove(&list[i],p);
-				bestvalue = max(value,bestvalue);
-				}
+			{
+			domove(&list[i],p);
+			value = -negamax(p,depth-1);
+			undomove(&list[i],p);
+			bestvalue = max(value,bestvalue);
+			}
 			return bestvalue;
 			}*/
-			var best:int = int.MIN_VALUE;
-			var val:int; 
-			if(depth<=0)
+			LOG.debug("depth:{0}",depth.toString());
+			//
+			bestValue = int.MIN_VALUE;
+			//
+			if(willNoneMove(gamePosition))
 			{
-				return doEvaluation();
+				return int.MIN_VALUE;
 			}
-			moves = generateMoves( PiecesModel.getInstance().redPiecesCollection, BoardModel.getInstance().gamePosition );
-			for(var i:int=0;i<moves.length;i++)
+			//
+			if(0==depth)
 			{
-				makeNextMove(moves.getItemAt(i));
-				val = -NegaMax(BoardModel.getInstance().gamePosition,depth-1);
-				unmakeMove(moves.getItemAt(i));
-				if(val>best)
+				return doEvaluation(tempMove,gamePosition);
+			}
+			//
+			if(0==orderingMoves.length)
+			{
+				return noneMove();
+			}
+			//
+			var len:int = orderingMoves.length;
+			LOG.debug("orderingMoves.length:{0}",len);
+			//
+			for(var i:int=0;i<len/2;i++)
+			{
+				LOG.debug("current orderingMoves.step:{0}",i.toString());
+				makeMove(tempMove);
+				tempValue = -negaMax(gamePosition,depth-1);
+				unmakeMove(tempMove);
+				bestValue = Math.max(tempValue,bestValue);
+				//
+				if(tempValue>=bestValue)
 				{
-					best = val;
+					bestMove = tempMove;
 				}
 			}
-			return best;
+			LOG.debug("bestValue:{0}",bestValue.toString());
+			return bestValue;
 		}
 		/**
-		 * The point is that the call value = -negamax(p,d-1); 
-		 * takes care of the signs - or nearly. 
-		 * There is one further modification we must make for this code to work: 
-		 * The evaluation function must be sensitive to the side to move - for a position with red 
-		 * to move it must return its normal evaluation, 
-		 * for a position with blue to move it must return -evaluation.  
+		 * The point is that the call value = -negamax(p,d-1); </br>
+		 * takes care of the signs - or nearly. </br>
+		 * There is one further modification we must make for this code to work:</br> 
+		 * The evaluation function must be sensitive to the side to move 
+		 * - for a position with red to move it must return its normal evaluation, 
+		 * for a position with blue to move it must return -evaluation.  </br>
 		 * 
 		 * @param conductVO
+		 * @param gamePosition
 		 * @return evaluation result
 		 * 
-		 */		
-		override public function doEvaluation(conductVO:ConductVO) : int
+		 */
+		override public function doEvaluation(conductVO:ConductVO,gamePosition:PositionVO) : int
 		{
-			//TODO:
-			return -1;
+			if(GameManager.turnFlag==CcjConstants.FLAG_BLUE)
+			{
+				positionEvaluation = super.doEvaluation(conductVO,gamePosition);
+			}
+			else
+			{
+				positionEvaluation = -super.doEvaluation(conductVO,gamePosition);
+			}
+			return positionEvaluation;	
 		}
 	}
 }

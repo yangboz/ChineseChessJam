@@ -41,9 +41,9 @@ package com.lookbackon.ccj.model
 		private static const LOG:ILogger = LogUtil.getLogger(ChessPiecesModel);
 		//generation.
 		//obtain reds/blues chess pieces entity.
-		private var _reds:ArrayCollection   = new ArrayCollection();
-		private var _blues:ArrayCollection  = new ArrayCollection();
-		private var _pieces:ArrayCollection = new ArrayCollection();
+		private var _reds:Vector.<ChessPiece>   = new Vector.<ChessPiece>();
+		private var _blues:Vector.<ChessPiece>  = new Vector.<ChessPiece>();
+		private var _pieces:Vector.<ChessPiece> = new Vector.<ChessPiece>();
 		//
 		private var _bluePieces:BitBoard	= new BitBoard(9,10);
 		private var _redPieces:BitBoard		= new BitBoard(9,10);
@@ -88,31 +88,31 @@ package com.lookbackon.ccj.model
 		//----------------------------------
 		//  blues
 		//----------------------------------
-		public function get blues():ArrayCollection
+		public function get blues():Vector.<ChessPiece>
 		{
 			return _blues;
 		}
-		public function set blues(value:ArrayCollection):void
+		public function set blues(value:Vector.<ChessPiece>):void
 		{
 			_blues = value;
 		}
 		//----------------------------------
 		//  reds
 		//----------------------------------
-		public function get reds():ArrayCollection
+		public function get reds():Vector.<ChessPiece>
 		{
 			return _reds;
 		}
-		public function set reds(value:ArrayCollection):void
+		public function set reds(value:Vector.<ChessPiece>):void
 		{
 			_reds = value;
 		}
 		//----------------------------------
 		//  pieces
 		//----------------------------------
-		public function get pieces():ArrayCollection
+		public function get pieces():Vector.<ChessPiece>
 		{
-			return new ArrayCollection(_blues.source.concat(_reds.source));
+			return reds.concat(blues);
 		}
 		//----------------------------------
 		//  gamePosition
@@ -123,7 +123,7 @@ package com.lookbackon.ccj.model
 			var board:Array2 = new Array2(9,10);
 			for(var i:int=0;i<pieces.length;i++)
 			{
-				var cp:ChessPiece = pieces.getItemAt(i) as ChessPiece;
+				var cp:ChessPiece = pieces[i];
 				board.sett(cp.position.x,cp.position.y,cp);
 			}
 			_gamePosition.board = board;
@@ -417,7 +417,7 @@ package com.lookbackon.ccj.model
 		 */		
 		public function numberOf(type:String,flag:int):int
 		{
-			var fResult:ArrayCollection = new ArrayCollection();
+			var fResult:Vector.<ChessPiece> = new Vector.<ChessPiece>();
 			if(flag==CcjConstants.FLAG_RED)
 			{
 				fResult = reds;
@@ -425,10 +425,7 @@ package com.lookbackon.ccj.model
 			{
 				fResult = blues;
 			}
-			fResult.filterFunction = function(item:Object):Boolean
-			{
-				return (item as ConductVO).target.label == type;
-			};
+			//TODO:
 			return fResult.length;
 		}
 	}

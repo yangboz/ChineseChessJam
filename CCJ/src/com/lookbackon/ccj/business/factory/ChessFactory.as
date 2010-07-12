@@ -167,7 +167,7 @@ package com.lookbackon.ccj.business.factory
 					//push to reds collection.
 					if(myChessPiece.name!="")
 					{
-						ChessPiecesModel.getInstance().reds.addItem(myChessPiece);
+						ChessPiecesModel.getInstance().reds.push(myChessPiece);
 					}
 				}else//blue
 				{
@@ -177,7 +177,7 @@ package com.lookbackon.ccj.business.factory
 					//push to blues collection.
 					if(myChessPiece.name!="")
 					{
-						ChessPiecesModel.getInstance().blues.addItem(myChessPiece);
+						ChessPiecesModel.getInstance().blues.push(myChessPiece);
 					}
 				}
 			}

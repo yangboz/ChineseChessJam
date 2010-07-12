@@ -104,30 +104,8 @@ package com.lookbackon.ccj.model.vos
 				var removedPiece:ChessPiece = cGasket.getElementAt(1) as ChessPiece;
 				var removedIndex:int = ChessPieceManager.calculatePieceIndex(removedPiece);
 				LOG.info("Eat Off@{0} target:{1}",cGasket.position.toString(),removedPiece.toString());
-				if(ChessPiece(cGasket.getElementAt(1)).label==ChessPiecesConstants.BLUE_MARSHAL.label)
-				{
-					GameManager.humanWin();	
-				}
-				if(ChessPiece(cGasket.getElementAt(1)).label==ChessPiecesConstants.RED_MARSHAL.label)
-				{
-					GameManager.computerWin();
-				}
-				//clean this bit at pieces.
-				BitBoard(ChessPiecesModel.getInstance()[removedPiece.type]).setBitt(removedPiece.position.y,removedPiece.position.x,false);
 				//set eat off value.
 				eatOff = removedPiece;
-				//remove pieces data.
-				if(GameManager.turnFlag==CcjConstants.FLAG_RED)
-				{
-					//clean this bit at bluePieces.
-					ChessPiecesModel.getInstance().blues.removeItemAt(removedIndex);
-				}else
-				{
-					//clean this bit at redPieces.
-					ChessPiecesModel.getInstance().reds.removeItemAt(removedIndex);
-				}
-				//remove element from gasket.
-				cGasket.removeElementAt(1);
 			}
 		}
 		public function get nextPosition():Point

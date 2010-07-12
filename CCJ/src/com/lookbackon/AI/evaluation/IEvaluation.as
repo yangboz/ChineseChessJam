@@ -1,6 +1,8 @@
 package com.lookbackon.AI.evaluation
 {
 	import com.lookbackon.ccj.model.vos.ConductVO;
+	import com.lookbackon.ccj.model.vos.PositionVO;
+
 	/**
 	 * 
 	 * @author Knight.zhou
@@ -19,6 +21,6 @@ package com.lookbackon.AI.evaluation
 		//  Methods
 		//
 		//--------------------------------------------------------------------------
-		function doEvaluation(conductVO:ConductVO):int;
+		function doEvaluation(conductVO:ConductVO,gamePosition:PositionVO):int;
 	}
 }

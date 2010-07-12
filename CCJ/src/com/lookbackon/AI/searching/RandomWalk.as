@@ -1,14 +1,11 @@
 package com.lookbackon.AI.searching
 {
-	import com.adobe.cairngorm.control.CairngormEventDispatcher;
 	import com.lookbackon.ccj.ChessPiecesConstants;
-	import com.lookbackon.ccj.events.GameEvent;
 	import com.lookbackon.ccj.managers.GameManager;
 	import com.lookbackon.ccj.model.vos.ConductVO;
 	import com.lookbackon.ccj.model.vos.PositionVO;
 	import com.lookbackon.ccj.utils.LogUtil;
 	import com.lookbackon.ccj.utils.MathUtil;
-	import com.lookbackon.ds.BitBoard;
 	
 	import mx.logging.ILogger;
 	
@@ -36,6 +33,7 @@ package com.lookbackon.AI.searching
 		 */		
 		public function RandomWalk(gamePosition:PositionVO) 
 		{
+			//
 			super(gamePosition);
 			//
 			bestMove = new ConductVO();
@@ -63,14 +61,12 @@ package com.lookbackon.AI.searching
 				}
 				LOG.debug("randomed bestMove:{0}",bestMove.dump());
 				LOG.debug("max position value:{0}",pValue);
-				//
-				makeMove(bestMove);
-				//
-				CairngormEventDispatcher.getInstance().dispatchEvent(new GameEvent(GameEvent.IS_HUMAN_TURN_NOW));
 			}
+			//
+			this.applyMove(bestMove);
 		}	
 		//return random position value.
-		override public function doEvaluation(conductVO:ConductVO):int
+		override public function doEvaluation(conductVO:ConductVO,gamePosition:PositionVO):int
 		{
 			//Todo:doEvaluation about assumpted conductVO;
 			var importantValue:int = ChessPiecesConstants[conductVO.target.type].important.gett(conductVO.nextPosition.x,conductVO.nextPosition.y);

@@ -2,24 +2,23 @@ package com.lookbackon.AI.searching
 {
 	import com.lookbackon.AI.evaluation.IEvaluation;
 	import com.lookbackon.AI.evaluation.linear.LinearEvaluationProxy;
-	import com.lookbackon.ccj.business.factory.ChessFactory;
 	import com.lookbackon.ccj.managers.ChessPieceManager;
 	import com.lookbackon.ccj.model.ChessPiecesModel;
 	import com.lookbackon.ccj.model.vos.ConductVO;
 	import com.lookbackon.ccj.model.vos.PositionVO;
 	import com.lookbackon.ccj.view.components.ChessPiece;
-	import com.lookbackon.ds.BitBoard;
 	
 	import flash.geom.Point;
 	
 	import mx.collections.ArrayCollection;
+	import mx.rpc.mxml.Concurrency;
 	
 	 /**
 	 * This essay is a detailed explanation of one of the most important
 	 * data structures ever created for Game Artificial Intelligence. </p>
 	 * The minimax tree is at the heart of almost every board game program in existence.</p>
 	 * 
-	 * @author Knight-errant
+	 * @author Knight.zhou
 	 */	
 	public class SearchingBase implements ISearching,IEvaluation
 	{
@@ -29,14 +28,17 @@ package com.lookbackon.AI.searching
 		//
 		//--------------------------------------------------------------------------
 		protected var bestMove:ConductVO;
+		protected var bestValue:int;
 		//conductVO's collection;
 		protected var tempMove:ConductVO;
+		protected var tempValue:int;
+		//
 		protected var positionEvaluation:int;
 		//
 		protected var gamePosition:PositionVO;
 		protected var evaluation:IEvaluation = new LinearEvaluationProxy();//Notice:this is all kinds of evaluation method entry,should be test.
 		
-		private var _orderingMoves:ArrayCollection;	
+		private var _orderingMoves:Vector.<ConductVO>;	
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -59,6 +61,8 @@ package com.lookbackon.AI.searching
 			this.gamePosition = gamePosition;
 			//init ordering moves.
 			this.orderingMoves = generateMoves( ChessPiecesModel.getInstance().blues);
+			//temporary define first move from ording moves for hard-code test purpose.
+			this.tempMove = this.orderingMoves[0];
 		}
 		//--------------------------------------------------------------------------
 		//
@@ -72,7 +76,7 @@ package com.lookbackon.AI.searching
 		 * @return all legal moves.
 		 */		
 		[Deprecated(replacement="com.lookbackon.AI.searching.SearchingBase.orderingMoves")]
-		public function get moves():ArrayCollection
+		public function get moves():Vector.<ConductVO>
 		{
 			return generateMoves( ChessPiecesModel.getInstance().blues);
 		}
@@ -110,12 +114,12 @@ package com.lookbackon.AI.searching
 		 * @return ordering legal moves,prototype is ArrayCollection.
 		 * 
 		 */		
-		public function get orderingMoves():ArrayCollection
+		public function get orderingMoves():Vector.<ConductVO>
 		{
 			//TODO:ordering moves by order.
 			return _orderingMoves;
 		}
-		public function set orderingMoves(value:ArrayCollection):void
+		public function set orderingMoves(value:Vector.<ConductVO>):void
 		{
 			_orderingMoves = value;
 		}
@@ -129,18 +133,18 @@ package com.lookbackon.AI.searching
 		//----------------------------------
 		//return all possbility movements;
 		/**
-		 * This function generates all possible moves and stores them in the arraycollection.</p>
-		 * It returns the arraycollection of the legal moves.</p>
+		 * This function generates all possible moves and stores them in the vector.</p>
+		 * It returns the vector of the legal moves.</p>
 		 * @param pieces chess pieces collection.
 		 * @return all possible moves.
 		 * 
 		 */		
-		final public function generateMoves(pieces:ArrayCollection):ArrayCollection
+		final public function generateMoves(pieces:Vector.<ChessPiece>):Vector.<ConductVO>
 		{
-			var resultAC:ArrayCollection = new ArrayCollection();
+			var resultAC:Vector.<ConductVO> = new Vector.<ConductVO>();
 			for(var i:int=0;i<pieces.length;i++)
 			{
-				var cp:ChessPiece = pieces.getItemAt(i) as ChessPiece;
+				var cp:ChessPiece = pieces[i];
 				for(var c:int=0;c<cp.chessVO.moves.column;c++)
 				{
 					for(var r:int=0;r<cp.chessVO.moves.row;r++)
@@ -151,7 +155,7 @@ package com.lookbackon.AI.searching
 							conductVO.target = cp;
 							conductVO.previousPosition = conductVO.target.position;
 							conductVO.nextPosition = new Point(c,r);
-							resultAC.addItem(conductVO);
+							resultAC.push(conductVO);
 //							trace("anew ",conductVO.dump());
 						}
 					}
@@ -186,6 +190,27 @@ package com.lookbackon.AI.searching
 			ChessPieceManager.unmakeMove(conductVO);
 		}
 		//----------------------------------
+		//  applyMove(native)
+		//----------------------------------
+		final public function applyMove(conductVO:ConductVO):void
+		{
+			ChessPieceManager.applyMove(conductVO);
+		}
+		//----------------------------------
+		//  noneMove(native)
+		//----------------------------------
+		final public function noneMove():int
+		{
+			return ChessPieceManager.noneMove();
+		}
+		//----------------------------------
+		//  willNoneMove(native)
+		//----------------------------------
+		final public function willNoneMove(gamePosition:PositionVO):Boolean
+		{
+			return ChessPieceManager.willNoneMove(gamePosition);
+		}
+		//----------------------------------
 		//  doEvaluation(virtual)
 		//----------------------------------
 		/**
@@ -199,15 +224,16 @@ package com.lookbackon.AI.searching
 		 * an accurate evaluation function probably is slower than a 'quick-and-dirty' one.</br>
 		 * The evaluation function I'm taking about here is a heuristic one -not a exact one.</br>
 		 * @see http://www.fierz.ch/strategy1.htm
-		 * @param conductVO
+		 * @param conductVO the current condutVO value.
+		 * @param gamePosition the current game board positon info.
 		 * @return evaluation result 
 		 * 
 		 */		
 		//virtual functions.
-		public function doEvaluation(conductVO:ConductVO):int
+		public function doEvaluation(conductVO:ConductVO,gamePosition:PositionVO):int
 		{
 			//delegate to evaluation proxy to do evaluation(); 
-			return evaluation.doEvaluation(conductVO);
+			return evaluation.doEvaluation(conductVO,gamePosition);
 		}
 	}
 }

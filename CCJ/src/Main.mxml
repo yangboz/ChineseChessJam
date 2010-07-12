@@ -50,7 +50,7 @@
 //												,
 //												"com.lookbackon.ccj.view.components.ChessPiece"
 //												,
-												"com.lookbackon.AI.searching.MiniMax"
+												"com.lookbackon.AI.searching.NegaMax"
 											];
 			//----------------------------------
 			//  CONSTANTS
@@ -98,7 +98,7 @@
 				//create chess pieces' omenVO;
 				for(var cp:int=0;cp<chessPiecesModel.pieces.length;cp++)
 				{
-					var chessPiece:ChessPiece = chessPiecesModel.pieces.getItemAt(cp) as ChessPiece;
+					var chessPiece:ChessPiece = chessPiecesModel.pieces[cp];
 					//generateChessPieceVO
 					var conductVO:ConductVO = new ConductVO();
 					conductVO.target = chessPiece;

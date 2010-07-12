@@ -5,6 +5,7 @@ package com.lookbackon.AI.evaluation.linear
 	import com.lookbackon.ccj.ChessPiecesConstants;
 	import com.lookbackon.ccj.model.ChessPiecesModel;
 	import com.lookbackon.ccj.model.vos.ConductVO;
+	import com.lookbackon.ccj.model.vos.PositionVO;
 	
 	import flash.utils.Proxy;
 	import flash.utils.flash_proxy;
@@ -56,10 +57,11 @@ package com.lookbackon.AI.evaluation.linear
 		/**
 		 * 
 		 * @param conductVO The conductVO which obtained position information.
+		 * @param gamePosition The game position which obtained board position information.
 		 * @return Red should try to maximize T as large as possible,
 		 * while the Blue should try to minimize T as small as possible. 
 		 */		
-		public function doEvaluation(conductVO:ConductVO):int
+		public function doEvaluation(conductVO:ConductVO,gamePosition:PositionVO):int
 		{
 			//TODO: implement function
 			var T_red:int = 

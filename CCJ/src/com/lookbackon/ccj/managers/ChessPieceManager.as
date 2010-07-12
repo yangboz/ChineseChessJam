@@ -1,8 +1,11 @@
 package com.lookbackon.ccj.managers
 {
+	import com.adobe.cairngorm.control.CairngormEventDispatcher;
 	import com.lookbackon.ccj.CcjConstants;
+	import com.lookbackon.ccj.ChessPiecesConstants;
 	import com.lookbackon.ccj.business.factory.ChessFactory;
 	import com.lookbackon.ccj.errors.CcjErrors;
+	import com.lookbackon.ccj.events.GameEvent;
 	import com.lookbackon.ccj.model.ChessPiecesModel;
 	import com.lookbackon.ccj.model.ZobristKeysModel;
 	import com.lookbackon.ccj.model.vos.ConductVO;
@@ -149,14 +152,15 @@ package com.lookbackon.ccj.managers
 			//
 			LOG.info("End makeMove:{0}",conductVO.brevity);
 		}
+		//
 		public static function unmakeMove(conductVO:ConductVO):void
 		{
 			var reversedConductVO:ConductVO = new ConductVO();
 			reversedConductVO.crossValue = conductVO.crossValue;
-			reversedConductVO.eatOff = conductVO.eatOff;
 			reversedConductVO.nextPosition = conductVO.previousPosition;
 			reversedConductVO.previousPosition = conductVO.nextPosition;
 			reversedConductVO.target = conductVO.target;
+			reversedConductVO.eatOff = conductVO.eatOff;
 			LOG.info("Begin unmakeMove:{0}",reversedConductVO.brevity);
 			//reverse conductVO to unmakeMove.
 			if(null!=conductVO.eatOff)
@@ -166,6 +170,64 @@ package com.lookbackon.ccj.managers
 			//TODO:un-update functions.
 			makeMove(reversedConductVO);
 			LOG.info("End unmakeMove:{0}",reversedConductVO.brevity);
+		}
+		//
+		public static function applyMove(conductVO:ConductVO):void
+		{
+			//TODO:
+			var cGasket:ChessGasket = 
+				ChessPieceManager.gaskets.gett(conductVO.nextPosition.x,conductVO.nextPosition.y) as ChessGasket;
+			if(cGasket.numElements>1)
+			{
+				//TODO:chess piece eat off.
+				var removedPiece:ChessPiece = cGasket.getElementAt(1) as ChessPiece;
+				var removedIndex:int = ChessPieceManager.calculatePieceIndex(removedPiece);
+				LOG.info("Eat Off@{0} target:{1}",cGasket.position.toString(),removedPiece.toString());
+				if(ChessPiece(cGasket.getElementAt(1)).label==ChessPiecesConstants.BLUE_MARSHAL.label)
+				{
+					GameManager.humanWin();	
+				}
+				if(ChessPiece(cGasket.getElementAt(1)).label==ChessPiecesConstants.RED_MARSHAL.label)
+				{
+					GameManager.computerWin();
+				}
+				//clean this bit at pieces.
+				BitBoard(ChessPiecesModel.getInstance()[removedPiece.type]).setBitt(removedPiece.position.y,removedPiece.position.x,false);
+				//remove pieces data.
+				if(GameManager.turnFlag==CcjConstants.FLAG_RED)
+				{
+					//clean this bit at bluePieces.
+					ChessPiecesModel.getInstance().blues = 
+						ChessPiecesModel.getInstance().blues.splice(removedIndex,1);
+				}else
+				{
+					//clean this bit at redPieces.
+					ChessPiecesModel.getInstance().reds.splice(removedIndex,1);
+				}
+				//remove element from gasket.
+				cGasket.removeElementAt(1);
+			}
+			//
+			makeMove(conductVO);
+			//Trigger in-turn system .
+			CairngormEventDispatcher.getInstance().dispatchEvent(new GameEvent(GameEvent.IS_HUMAN_TURN_NOW));
+		}
+		//pluge to death.	
+		public static function noneMove():int
+		{
+			if(GameManager.turnFlag==CcjConstants.FLAG_BLUE)
+			{
+				GameManager.humanWin();
+			}else
+			{
+				GameManager.computerWin();
+			}
+			return -1;
+		}
+		public static function willNoneMove(gamePosition:PositionVO):Boolean
+		{
+			//TODO:
+			return false;
 		}
 		/**
 		 * @see http://mediocrechess.blogspot.com/2007/01/guide-zobrist-keys.html
@@ -213,7 +275,7 @@ package com.lookbackon.ccj.managers
 		{
 			for(var i:int=0;i<chessPiecesModel.pieces.length;i++)
 			{
-				var chessPiece:ChessPiece = chessPiecesModel.pieces.getItemAt(i) as ChessPiece;
+				var chessPiece:ChessPiece = chessPiecesModel.pieces[i];
 				//renew data.
 				var currentConductVO:ConductVO = new ConductVO();
 				currentConductVO.target = chessPiece;
@@ -235,6 +297,38 @@ package com.lookbackon.ccj.managers
 		//
 		private static function updateChessPieces(conductVO:ConductVO,cGasket:ChessGasket):void
 		{
+			//
+			if(cGasket.numElements>1)
+			{
+				//TODO:chess piece eat off.
+				var removedPiece:ChessPiece = cGasket.getElementAt(1) as ChessPiece;
+				var removedIndex:int = ChessPieceManager.calculatePieceIndex(removedPiece);
+				LOG.info("Eat Off@{0} target:{1}",cGasket.position.toString(),removedPiece.toString());
+				if(ChessPiece(cGasket.getElementAt(1)).label==ChessPiecesConstants.BLUE_MARSHAL.label)
+				{
+					GameManager.humanWin();	
+				}
+				if(ChessPiece(cGasket.getElementAt(1)).label==ChessPiecesConstants.RED_MARSHAL.label)
+				{
+					GameManager.computerWin();
+				}
+				//clean this bit at pieces.
+				BitBoard(ChessPiecesModel.getInstance()[removedPiece.type]).setBitt(removedPiece.position.y,removedPiece.position.x,false);
+				//set eat off value.
+				eatOffs.push(removedPiece);
+				//remove pieces data.
+				if(GameManager.turnFlag==CcjConstants.FLAG_RED)
+				{
+					//clean this bit at bluePieces.
+					ChessPiecesModel.getInstance().blues.splice(removedIndex,1);
+				}else
+				{
+					//clean this bit at redPieces.
+					ChessPiecesModel.getInstance().reds.splice(removedIndex,1);
+				}
+				//remove element from gasket.
+				cGasket.removeElementAt(1);
+			}
 			//adjust the chess piece's position.
 			conductVO.target.x = 0;
 			conductVO.target.y = 0;
@@ -264,14 +358,14 @@ package com.lookbackon.ccj.managers
 		{
 			for(var i:int=0;i<chessPiecesModel.reds.length;i++)
 			{
-				if(chessPiece.uid == ChessPiece(chessPiecesModel.reds.getItemAt(i)).uid)
+				if(chessPiece.uid == ChessPiece(chessPiecesModel.reds[i]).uid)
 				{
 					return i;
 				}
 			}
 			for(var j:int=0;j<chessPiecesModel.blues.length;j++)
 			{
-				if(chessPiece.uid == ChessPiece(chessPiecesModel.blues.getItemAt(j)).uid)
+				if(chessPiece.uid == ChessPiece(chessPiecesModel.blues[j]).uid)
 				{
 					return j;
 				}
@@ -308,13 +402,13 @@ package com.lookbackon.ccj.managers
 		 * @return the result of check pattern,if neccessary.
 		 * 
 		 */		
-		private static function indicateCheck(pieces:ArrayCollection,marshal:BitBoard):Boolean
+		private static function indicateCheck(pieces:Vector.<ChessPiece>,marshal:BitBoard):Boolean
 		{
 			//TODO:
 			var totalCaptures:BitBoard = new BitBoard(CcjConstants.BOARD_H_LINES,CcjConstants.BOARD_V_LINES);
 			for(var i:int=0;i<pieces.length;i++)
 			{
-				totalCaptures = (pieces.getItemAt(i) as ChessPiece).chessVO.captures.or(totalCaptures);
+				totalCaptures = pieces[i].chessVO.captures.or(totalCaptures);
 			}
 			LOG.debug("totalCaptures:{0}",totalCaptures.dump());
 			if(!totalCaptures.and(marshal).isEmpty)
