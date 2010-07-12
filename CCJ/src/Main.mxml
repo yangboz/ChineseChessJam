@@ -50,7 +50,7 @@
 //												,
 //												"com.lookbackon.ccj.view.components.ChessPiece"
 //												,
-												"com.lookbackon.AI.searching.NegaMax"
+												"com.lookbackon.AI.searching.AlphaBeta"
 											];
 			//----------------------------------
 			//  CONSTANTS

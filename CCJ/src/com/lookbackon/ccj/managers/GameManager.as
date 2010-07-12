@@ -1,5 +1,6 @@
 package com.lookbackon.ccj.managers
 {
+	import com.lookbackon.AI.searching.AlphaBeta;
 	import com.lookbackon.AI.searching.ISearching;
 	import com.lookbackon.AI.searching.MinMax;
 	import com.lookbackon.AI.searching.MiniMax;
@@ -112,7 +113,8 @@ package com.lookbackon.ccj.managers
 //			gameAI = new RandomWalk(ChessPiecesModel.getInstance().gamePosition);
 //			gameAI = new MinMax(ChessPiecesModel.getInstance().gamePosition);
 //			gameAI = new MiniMax(ChessPiecesModel.getInstance().gamePosition,1);
-			gameAI = new NegaMax(ChessPiecesModel.getInstance().gamePosition,1);
+//			gameAI = new NegaMax(ChessPiecesModel.getInstance().gamePosition,1);
+			gameAI = new AlphaBeta(ChessPiecesModel.getInstance().gamePosition);
 		}
 		//----------------------------------
 		//  isHumanTurnNow
