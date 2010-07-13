@@ -22,11 +22,9 @@ package com.lookbackon.AI.searching
 		private static const LOG:ILogger = LogUtil.getLogger(RandomWalk);
 		/**
 		 * About RandomWalkAI(瞎走)
-		 * if(game over in current board position)
-		 * return winner
+		 * if(game over in current board position) return winner,
 		 * children = all legal moves for player from this board
-		 * if(max's turn)
-		 * return maximal score of calling minimax on all the children
+		 * if(max's turn) return maximal score of calling minimax on all the children.
 		 * else (min's turn)
 		 * return minimal score of calling minimax on all the children
 		 * 
@@ -35,6 +33,10 @@ package com.lookbackon.AI.searching
 		{
 			//
 			super(gamePosition);
+		}	
+		
+		override public function execute():void
+		{
 			//
 			bestMove = new ConductVO();
 			if(orderingMoves.length<=0)
@@ -45,7 +47,7 @@ package com.lookbackon.AI.searching
 				//for test.
 				for(var t:int=0;t<orderingMoves.length;t++)
 				{
-					LOG.debug("moves:#{0},detail:{1}",t.toString(),orderingMoves.getItemAt(t).dump());
+					LOG.debug("moves:#{0},detail:{1}",t.toString(),orderingMoves[t].dump());
 				}
 				var randomStep:int = MathUtil.transactRandomNumberInRange(0,orderingMoves.length-1);
 				LOG.debug("randomStep:{0}",randomStep.toString());
@@ -53,18 +55,17 @@ package com.lookbackon.AI.searching
 				var pValue:int=-1;
 				for(var i:int=0;i<orderingMoves.length;i++)
 				{
-					if(doEvaluation(orderingMoves.getItemAt(i) as ConductVO)>pValue)
+					if(doEvaluation(orderingMoves[i],gamePosition)>pValue)
 					{
-						bestMove = orderingMoves.getItemAt(i) as ConductVO;
-						pValue = doEvaluation(orderingMoves.getItemAt(i) as ConductVO);
+						bestMove = orderingMoves[i];
+						pValue = doEvaluation(orderingMoves[i],gamePosition);
 					}
 				}
 				LOG.debug("randomed bestMove:{0}",bestMove.dump());
 				LOG.debug("max position value:{0}",pValue);
 			}
-			//
-			this.applyMove(bestMove);
-		}	
+		}
+		
 		//return random position value.
 		override public function doEvaluation(conductVO:ConductVO,gamePosition:PositionVO):int
 		{

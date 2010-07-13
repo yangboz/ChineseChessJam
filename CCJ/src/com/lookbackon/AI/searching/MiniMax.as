@@ -10,8 +10,10 @@ package com.lookbackon.AI.searching
 	import com.lookbackon.ccj.model.ChessPiecesModel;
 	import com.lookbackon.ccj.model.vos.PositionVO;
 	import com.lookbackon.ccj.utils.LogUtil;
+	import com.vizsage.as3mathlib.math.alg.Point;
 	
 	import mx.logging.ILogger;
+
 	/**
 	 * <b>MiniMax.as class.</b></br>
 	 * 
@@ -74,18 +76,21 @@ package com.lookbackon.AI.searching
 		//--------------------------------------------------------------------------
 		public function MiniMax(gamePosition:PositionVO,depth:int)
 		{
-			//TODO: implement function
+			//
+			this.depth = depth;
+			//
 			super(gamePosition);
-			//
-			miniMax(gamePosition,depth);
-			//
-			this.applyMove(bestMove);
 		}     	
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
+		override public function execute():void
+		{
+			//
+			miniMax(gamePosition,depth);
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods

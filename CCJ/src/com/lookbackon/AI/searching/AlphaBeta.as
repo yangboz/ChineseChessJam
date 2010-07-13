@@ -14,6 +14,31 @@ package com.lookbackon.AI.searching
 	 * These enhancements try to exploit the nature of the AlphaBeta algorithm, 
 	 * which has to search fewer nodes when the alpha-beta window is smaller. </br>
 	 * 
+	 * <b>Note</b> how AlphaBeta receives the parameters alpha and beta which tell it what range 
+	 * the value of the current position should lie. </br>
+	 * Once a move has returned with a higher value than alpha, 
+	 * this best value is saved in the variable localalpha and used for the next recursive call of AlphaBeta. </br>
+	 * If the best value is larger than beta, 
+	 * the search terminates immediately - we have found a move which refutes the notion that this position 
+	 * has a value in the range from alpha to beta, 
+	 * and do not need to look for another one. </br>
+	 * 
+	 * <b>Note</b> how my AlphaBeta function is returning the highest value it found, 
+	 * this can be higher than beta. </br>
+	 * Some people prefer to return beta instead of the best value on a fail high, 
+	 * that formulation of AlphaBeta is known as fail-hard. </br>
+	 * My formulation above is called fail-soft. </br>
+	 * The names come from the fact that in fail hard, 
+	 * the bounds alpha and beta are "hard", 
+	 * the return value cannot be outside the alpha-beta window. </br>
+	 * It would seem that fail-soft is much more sensible, as it might lead to more cutoffs: </br>
+	 * If you can return a higher value than beta (or a lower value than alpha), 
+	 * then perhaps you might get a cutoff in a previous instance of AlphBeta 
+	 * at a lower level in the search tree that you wouldn't get otherwise. </br>
+	 * 
+	 * <b>However,</b> the fail-hard camp says they get less search instabilities 
+	 * when using advanced techniques such as pruning. </br>
+	 * 
 	 * @see http://www.fierz.ch/strategy1.htm
 	 * @author Knight.zhou
 	 */    
@@ -24,7 +49,9 @@ package com.lookbackon.AI.searching
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
+		//
 		private var localAlpha:int;
+		private var hashValue:int;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -71,19 +98,24 @@ package com.lookbackon.AI.searching
 		 * @see http://www.fierz.ch/strategy.htm
 		 * 
 		 */		
-		public function AlphaBeta(gamePosition:PositionVO,depth:int=5,alpha:int=int.MIN_VALUE,beta:int=int.MAX_VALUE)
+		public function AlphaBeta(gamePosition:PositionVO,depth:int=1,alpha:int=int.MIN_VALUE,beta:int=int.MAX_VALUE)
 		{
+			//
+			this.depth = depth;
+			this.alpha = alpha;
+			this.beta = beta;
+			//
 			super(gamePosition);
-			//
-			alphaBeta(gamePosition,depth,alpha,beta);
-			//
-			this.applyMove(bestMove);
 		}
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
+		override public function execute():void
+		{
+			alphaBeta(gamePosition,depth,alpha,beta);
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
@@ -95,40 +127,46 @@ package com.lookbackon.AI.searching
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
+		//pseudo-code here.
+		/*int alphabeta(POSITION *p, int depth, int alpha, int beta)
+		{
+		MOVE list[MAXMOVES];
+		int i,n,value,localalpha=alpha,bestvalue=-INFINITY;
+		
+		if(checkwin(p)) 
+		return -INFINITY;
+		
+		if(depth == 0)	
+		return evaluation(p);
+		
+		n = makemovelist(p,list);
+		if(n == 0) 
+		return handlenomove(p);
+		
+		for(i=0; i<n; i++)
+		{
+		domove(&list[i],p);
+		value = -alphabeta(p,d-1,-beta,-localalpha);
+		undomove(&list[i],p);
+		bestvalue = max(value,bestvalue);
+		if(bestvalue>=beta) 
+		break;
+		if(bestvalue>localalpha) 
+		localalpha=bestvalue;
+		}
+		return bestvalue;
+		}*/
 		private function alphaBeta(gamePosition:PositionVO,depth:int,alpha:int,beta:int):int
 		{
-			/*int alphabeta(POSITION *p, int depth, int alpha, int beta)
-			{
-				MOVE list[MAXMOVES];
-				int i,n,value,localalpha=alpha,bestvalue=-INFINITY;
-				
-				if(checkwin(p)) 
-					return -INFINITY;
-				
-				if(depth == 0)	
-					return evaluation(p);
-				
-				n = makemovelist(p,list);
-				if(n == 0) 
-					return handlenomove(p);
-				
-				for(i=0; i<n; i++)
-				{
-					domove(&list[i],p);
-					value = -alphabeta(p,d-1,-beta,-localalpha);
-					undomove(&list[i],p);
-					bestvalue = max(value,bestvalue);
-					if(bestvalue>=beta) 
-						break;
-					if(bestvalue>localalpha) 
-						localalpha=bestvalue;
-				}
-				return bestvalue;
-			}*/
 			LOG.debug("depth:{0}",depth.toString());
 			//
 			bestValue = int.MIN_VALUE;
 			localAlpha = alpha;
+			//
+			if(lookup(gamePosition,depth,alpha,beta,hashValue))
+			{
+				return hashValue;
+			}
 			//
 			if(willNoneMove(gamePosition))
 			{
@@ -148,7 +186,7 @@ package com.lookbackon.AI.searching
 			var len:int = orderingMoves.length;
 			LOG.debug("orderingMoves.length:{0}",len);
 			//
-			for(var i:int=0;i<len/2;i++)
+			for(var i:int=0;i<len;i++)
 			{
 				LOG.debug("current orderingMoves.step:{0}",i.toString());
 				makeMove(tempMove);
@@ -165,8 +203,39 @@ package com.lookbackon.AI.searching
 					localAlpha = bestValue;
 				}
 			}
+			//
+			store(gamePosition,depth,bestValue,alpha,beta);
+			//
 			LOG.debug("bestValue:{0}",bestValue.toString());
 			return bestValue;
+		}
+		//
+		/**
+		 * The lookup function returns true if it finds the position in the hashtable 
+		 * and the value in the hashtable can be returned immediately. </br>
+		 * Lookup() might also encounter a lower value in the hashtable that is larger than alpha.</br> 
+		 * In this case, the current alpha can immediately be set to the hashvalue. </br>
+		 * For this reason, I pass alpha and beta by reference to lookup(), 
+		 * so lookup() can modify their values.  </br>
+		 * 
+		 * @param gamePosition the full board game position info.
+		 * @param depth the searching node depth value.
+		 * @param alpha the reference of alpha value.
+		 * @param beta the reference of beta value.
+		 * @param hashValue the reference of hashValue.
+		 * 
+		 * @return a nonzero value, we have some information available on the position.
+		 * 
+		 */		
+		private function lookup(gamePosition:PositionVO,depth:int,alpha:int,beta:int,hashValue:int):int
+		{
+			//TODO:
+			return 0;
+		}
+		//
+		private function store(gamePosition:PositionVO,depth:int,bestValue:int,alpha:int,beta:int):void
+		{
+			//TODO:
 		}
 	}
 }

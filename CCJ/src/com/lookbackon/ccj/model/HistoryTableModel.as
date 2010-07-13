@@ -19,8 +19,24 @@ package com.lookbackon.ccj.model
 	import mx.logging.ILogger;
 	
 	/**
-	 * A singleton model hold chess board history table information.
+	 * A singleton model hold chess board history table information.</br>
 	 * 
+	 * History heuristics are in some way an extension of killer moves. </br>
+	 * With killer moves, the problem is that we forget them again immediately. </br>
+	 * You can think of killer moves as some kind of short-term memory, 
+	 * while history heuristics is long-term memory. </br>
+	 * In history heuristics we keep track of all good moves. </br>
+	 * For a game like chess or checkers, we take a double-indexed counter array, 
+	 * history[][], which we index with the from and to squares of the move. </br>
+	 * Every time we find a move from a-to-b to be good, we increment the value of history[a][b]. </br>
+	 * When we generate the movelist, 
+	 * we can then order it according to the values of the history array. </br>
+	 * You might want to experiment with the history heuristic too, 
+	 * e.g. you could decide only to increment the counter for moves which caused a fail-high 
+	 * (after all, in all other nodes you will have to search all moves anyway, 
+	 * so it doesn't matter as much in which order you search them). </br>
+	 * 
+	 * @see http://www.fierz.ch/strategy2.htm
 	 * @author Knight.zhou
 	 * 
 	 */	

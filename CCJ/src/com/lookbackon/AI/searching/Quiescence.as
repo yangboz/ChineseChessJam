@@ -1,37 +1,62 @@
 package com.lookbackon.AI.searching
 {
-	import com.godpaper.twoHitOne.busniess.managers.BoardManager;
-	import com.godpaper.twoHitOne.busniess.managers.PiecesManager;
-	import com.godpaper.twoHitOne.busniess.managers.PlayerManager;
-	import com.godpaper.twoHitOne.model.BoardModel;
-	import com.godpaper.twoHitOne.model.PiecesModel;
-	import com.godpaper.twoHitOne.util.PositionTransactUtil;
-	import com.godpaper.twoHitOne.util.NumberUtil;
-	import com.godpaper.twoHitOne.views.components.GasketButton;
-	import com.godpaper.twoHitOne.views.components.PieceButton;
-	import com.godpaper.twoHitOne.vo.ConductVO;
+	//--------------------------------------------------------------------------
+	//
+	//  Imports
+	//
+	//--------------------------------------------------------------------------
+	import com.lookbackon.ccj.model.vos.ConductVO;
+	import com.lookbackon.ccj.model.vos.PositionVO;
+	import com.lookbackon.ccj.utils.LogUtil;
 	
 	import de.polygonal.ds.Array2;
 	
-	import mx.collections.ArrayCollection;
+	import mx.logging.ILogger;
 
 	public class Quiescence extends SearchingBase
 	{
+		//--------------------------------------------------------------------------
+		//
+		//  Variables
+		//
+		//--------------------------------------------------------------------------
+		//----------------------------------
+		//  CONSTANTS
+		//----------------------------------
+		private static const LOG:ILogger = LogUtil.getLogger(Quiescence);
+		//--------------------------------------------------------------------------
+		//
+		//  Public properties
+		//
+		//-------------------------------------------------------------------------- 
+		
+		//--------------------------------------------------------------------------
+		//
+		//  Protected properties
+		//
+		//-------------------------------------------------------------------------- 
+		
+		//--------------------------------------------------------------------------
+		//
+		//  Constructor
+		//
+		//--------------------------------------------------------------------------
 		/**
-		 * Quiescence search 
-		 * As I just said above, the basic search algorithm I presented always goes to a fixed depth. 
-		 * However, it may often not be a good idea to evaluate a position if it is too chaotic. 
-		 * Exactly what too chaotic might mean depends on the game. 
-		 * A simple example in chess is a position where white to move is a rook down but can promote a pawn to a queen, 
-		 * winning the game. If we were to call our static evaluation function in this position, 
-		 * it would (unless it was smart, which evaluation functions usually aren't) conclude that white is dead lost, 
-		 * a rook down. Therefore, a technique called quiescence search is often used: Once you want to call your evaluation function, 
-		 * you take a look at very few select moves that need to be checked further. You have to make sure that you are very restrictive in your quiescence search, 
-		 * otherwise your search tree will explode completely. 
-		 * @see http://www.fierz.ch/strategy.htm
+		 * <b>Quiescence search</b></br> 
+		 * As I just said above, the basic search algorithm I presented always goes to a fixed depth.</br>  
+		 * However, it may often not be a good idea to evaluate a position if it is too chaotic. </br> 
+		 * Exactly what too chaotic might mean depends on the game. </br> 
+		 * A simple example in chess is a position where white to move is a rook down but can promote a pawn to a queen, </br> 
+		 * winning the game. If we were to call our static evaluation function in this position, </br> 
+		 * it would (unless it was smart, which evaluation functions usually aren't) conclude that white is dead lost, </br> 
+		 * a rook down. Therefore, a technique called quiescence search is often used: Once you want to call your evaluation function, </br> 
+		 * you take a look at very few select moves that need to be checked further. </br> 
+		 * You have to make sure that you are very restrictive in your quiescence search, 
+		 * otherwise your search tree will explode completely. </br> 
 		 * 
-		 * 静态搜索
-		 *　      在国际象棋或其他棋类中，有吃子和不吃子的着法(西洋跳棋、围棋、Fanorano等)，如果有吃子的情况，那么每次吃子时评价都会改变。
+		 * 
+		 * <b>静态搜索</b></br>
+		 *　  在国际象棋或其他棋类中，有吃子和不吃子的着法(西洋跳棋、围棋、Fanorano等)，如果有吃子的情况，那么每次吃子时评价都会改变。
 		 *  “静态搜索”(Quiescence Search)的思想是，到达主搜索的水平线后，用一个图灵型的搜索只展开吃子(有时是吃子加将军)的着法。
 		 *  其他棋类不同于国际象棋，可能只包括一些会很大程度上改变评价的着法。静态搜索还必须包括放弃的着法，来决定停止吃子。
 		 *  因此，主Alpha-Beta搜索中每个调用评价函数的地方，都会被一个类似Alpha-Beta的但只搜索吃子着法的函数代替，
@@ -40,127 +65,93 @@ package com.lookbackon.AI.searching
 		 *  吃子通常是有限的(在棋子全部吃完以前你只能有16次子)，而将军可以一直进行下去并导致无限制递归。
 		 * 【对于是否展开将军着法的问题，可以尝试一种做法，如果局面被将军，就展开全部着法，即做应将处理，而不对当前局面作评价，参阅“静态搜索”一文。】 
 		 * 
+		 * @see http://www.fierz.ch/strategy.htm
+		 * @see http://chessprogramming.wikispaces.com/Quiescence+Search
+		 * @author Knight.zhou
 		 * */			
-		public function Quiescence(gamePosition:Array2):void
+		public function Quiescence(gamePosition:PositionVO,alpha:int=int.MIN_VALUE,beta:int=int.MAX_VALUE)
 		{
+			//init.
+			this.alpha = alpha;
+			this.beta = beta;
+			//
 			super(gamePosition);
-			//prepare moves
-			moves =  generateMoves(PiecesModel.getInstance().redPiecesCollection,gamePosition);
-			//excute quiesceSearcher
-			if(moves.length<=0)
-			{
-				PlayerManager.humanWin();//pluge to death.
-			}else
-			{
-				quiescence(2,-2,moves.getItemAt(NumberUtil.randomNumberWithScope(0,moves.length-1)) as ConductVO);
-			}	
+			//
+			this.tempCapture = this.captures[0];
 		}
-		// 静态搜索
-	    // 主Alpha-Beta搜索中，原来出现“eval()”的地方现在调用这个函数
-		private function quiescence(alpha:int,beta:int,conductVO:ConductVO):int
+		//--------------------------------------------------------------------------
+		//
+		//  Public methods
+		//
+		//--------------------------------------------------------------------------
+		override public function execute():void
 		{
-//		    quiesce(int alpha, int beta) {
-//			    　int score = eval();
-//			    　if (score >= beta) {
-//			    　　return score;
-//			    　}
-//			    　for (每个吃子着法 m) {
-//			    　　执行着法 m;
-//			    　　score = -quiesce(-beta,-alpha);
-//			    　　撤消着法 m;
-//			    　　if (score >= alpha) {
-//			    　　　alpha = score;
-//			    　　　if (score >= beta) {
-//			    　　　　break;
-//			    　　　}
-//			    　　}
-//			    　}
-//			    　return score;
-//		     }
-		     
-			var score:int = doEvaluation(conductVO);
-			trace("score@QuiesceSearch:",score);
-			if(score>=beta)
+			quiesence(alpha,beta);
+		}
+		//--------------------------------------------------------------------------
+		//
+		//  Protected methods
+		//
+		//--------------------------------------------------------------------------
+		//--------------------------------------------------------------------------
+		//
+		//  Private methods
+		//
+		//--------------------------------------------------------------------------
+		//pesudo-code here.
+		/*int Quiesce( int alpha, int beta ) {
+		int stand_pat = Evaluate();
+		if( stand_pat >= beta )
+		return beta;
+		if( alpha < stand_pat )
+		alpha = stand_pat;
+		
+		until( every_capture_has_been_examined )  {
+		MakeCapture();
+		score = -Quiesce( -beta, -alpha );
+		TakeBackMove();
+		
+		if( score >= beta )
+		return beta;
+		if( score > alpha )
+		alpha = score;
+		}
+		return alpha;
+		}*/
+		private function quiesence(alpha:int, beta:int):int
+		{
+			//standPat:@see http://chessprogramming.wikispaces.com/Quiescence+Search
+			var standPat:int = doEvaluation(tempMove,gamePosition);
+			if(standPat>=beta)
 			{
-				makeMove(conductVO);
-				return score;
+				return beta;
 			}
-			
-			for(var i:int=0;i<moves.length;i++)
+			if(alpha<standPat)
 			{
-				trace("all possbility conducts @QuiesceAI.quiesce:",(moves.getItemAt(i) as ConductVO).dump());
-				makeNextMove(moves.getItemAt(i) as ConductVO);//执行着法 m;
-				score = -quiescence(alpha,beta,moves.getItemAt(i) as ConductVO);
-				unmakeMove(moves.getItemAt(i) as ConductVO);//撤消着法 m;
-				if(score>=alpha)
+				alpha = standPat;
+			}
+			//MakeCapture;
+			for(var i:int=0;i<captures.length;i++)
+			{
+				tempCapture = captures[i];
+				//
+				makeMove(tempCapture);
+				var score:int = -quiesence(-beta,-alpha);
+				unmakeMove(tempCapture);
+				if(score>=beta)
+				{
+					bestMove = tempCapture;
+					LOG.debug("beta:{0},bestMove:{1}",beta.toString(),bestMove.dump());
+					return beta;
+				}
+				if(score>alpha)
 				{
 					alpha = score;
-					if(score>=beta)
-					{
-						break;
-					}
 				}
 			}
-			makeMove(conductVO);
-			return score;
+			bestMove = tempCapture;
+			LOG.debug("alpha:{0},bestMove:{1}",alpha.toString(),bestMove.dump());
+			return alpha;
 		}
-		
-		override public function doEvaluation(conductVO:ConductVO) : int
-		{
-			//TODO: implement function
-			//Todo:doEvaluation about assumpted conductVO;
-			trace("#####################doEvaluation begin##########################");
-			//make next move;
-			makeNextMove(conductVO);
-			
-			//PreSelect some piece:
-			PiecesModel.getInstance().selectedPiece = conductVO.target;
-				//horizontal analysis
-			var hResult:int =  BoardManager.horizontalAnalysis(
-					BoardModel.getInstance().gamePosition.getCol(
-						conductVO.newPosition[0]
-																 ),true).length;
-				//vertical analysis
-			var vResult:int =  BoardManager.verticalAnalysis(
-					BoardModel.getInstance().gamePosition.getRow(
-						conductVO.newPosition[1]
-																 ),true).length;
-			
-			
-			//Todo:doEvaluation about assumpted conductVO;
-			
-			//knowlege 01:can kill two negative pieces;
-			//knowlege 02:can kill one negative piece;
-			//knowlege 03:kill none of negative piece,but next step will better.
-			if(hResult+vResult==0)
-			{
-				//PreSelect some piece:
-				PiecesModel.getInstance().selectedPiece = conductVO.target;
-					//horizontal analysis
-				var hResultPlus:int =  BoardManager.horizontalAnalysis(
-						cloneOfGamePosition.getCol(
-							conductVO.newPosition[0]
-																	 ),true).length;
-					//vertical analysis
-				var vResultPlus:int =  BoardManager.verticalAnalysis(
-						cloneOfGamePosition.getRow(
-							conductVO.newPosition[1]
-																	 ),true).length;
-				//backup gamePosition;
-				unmakeMove(conductVO);	
-				trace( "hResult+vResult+hResultPlus+vResultPlus:",hResult+vResult+hResultPlus+vResultPlus);
-				trace("#####################doEvaluation end##########################");									 
-				return 	hResult+vResult+hResultPlus+vResultPlus;												 
-			}
-			//knowlege 04:just run away.
-			
-			//backup gamePosition;
-			unmakeMove(conductVO);
-			
-			trace( "hResult+vResult:",hResult+vResult);
-			trace("#####################doEvaluation end##########################");
-			return hResult+vResult;	
-		}
-		
 	}
 }

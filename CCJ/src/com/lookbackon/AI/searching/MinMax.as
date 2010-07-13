@@ -22,20 +22,9 @@ package com.lookbackon.AI.searching
 	 */	
 	public class MinMax extends SearchingBase
 	{
-		//param alpha the alpha value which hold the best MAX value found;
-		// At MAX level, before evaluating each child path, 
-		// compare the returned value with of the previous path with the beta value. 
-		// If the value is greater than it abort the search for the current node;
-		private var alpha:int;
-		//param beta the beta value which hold the best MIN value found;
-		// At MIN level, before evaluating each child path, 
-		// compare the returned value with of the previous path with the alpha value. 
-		// If the value is lesser than it abort the search for the current node.
-		private var beta:int; 
 		//
 		private static const LOG:ILogger = LogUtil.getLogger(MinMax);
 		private static const MAX_DEPTH:int = 5;
-		private static var depth:int=0;
 		//	
 		/**
     	 * if(game over in current board position)
@@ -50,26 +39,20 @@ package com.lookbackon.AI.searching
 		public function MinMax(gamePosition:PositionVO) 
 		{
 			super(gamePosition);
-			/*
-			function minimax(node, depth)
-		    if node is a terminal node or depth = 0
-		        return the heuristic value of node
-		    else
-		        let α := -∞
-		        foreach child of node                       { evaluation is identical for both players }
-		            let α := max(α, -minimax(child, depth-1))
-		        return α
-			*/
+		}	
+		//
+		override public function execute():void
+		{
 			if( orderingMoves.length<=0 )
 			{
 				GameManager.humanWin();//pluge to death.
 			}else
 			{
-				this.bestMove = orderingMoves.getItemAt(0) as ConductVO;
+				this.bestMove = this.tempMove;
 				//	
 				this.makeMove(MaxMove(gamePosition));
 			}
-		}	
+		}
 		/**
 		 * 
 		 * @param gamePosition the current game position.

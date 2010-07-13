@@ -2,30 +2,14 @@ package com.lookbackon.ccj.managers
 {
 	import com.lookbackon.AI.searching.AlphaBeta;
 	import com.lookbackon.AI.searching.ISearching;
-	import com.lookbackon.AI.searching.MinMax;
-	import com.lookbackon.AI.searching.MiniMax;
-	import com.lookbackon.AI.searching.NegaMax;
+	import com.lookbackon.AI.searching.PVS;
+	import com.lookbackon.AI.searching.Quiescence;
 	import com.lookbackon.AI.searching.RandomWalk;
-	import com.lookbackon.AI.searching.SearchingBase;
 	import com.lookbackon.ccj.CcjConstants;
 	import com.lookbackon.ccj.model.ChessPiecesModel;
-	import com.lookbackon.ccj.model.HistoryTableModel;
-	import com.lookbackon.ccj.model.vos.ConductVO;
 	import com.lookbackon.ccj.utils.LogUtil;
-	import com.lookbackon.ccj.utils.MathUtil;
-	import com.lookbackon.ccj.view.components.ChessPiece;
-	import com.lookbackon.ccj.view.components.IndicatoryProgressBar;
 	
-	import de.polygonal.ds.Array2;
-	
-	import flash.display.DisplayObject;
-	import flash.geom.Point;
-	
-	import mx.collections.ArrayCollection;
 	import mx.controls.Alert;
-	import mx.core.Application;
-	import mx.core.FlexGlobals;
-	import mx.core.IFlexDisplayObject;
 	import mx.logging.ILogger;
 	import mx.managers.CursorManager;
 
@@ -110,11 +94,13 @@ package com.lookbackon.ccj.managers
 			GameManager.indicatorReadOut = true;
 			//about data
 			//TODO:switch any searching class to test.
-//			gameAI = new RandomWalk(ChessPiecesModel.getInstance().gamePosition);
+			gameAI = new RandomWalk(ChessPiecesModel.getInstance().gamePosition);
 //			gameAI = new MinMax(ChessPiecesModel.getInstance().gamePosition);
 //			gameAI = new MiniMax(ChessPiecesModel.getInstance().gamePosition,1);
 //			gameAI = new NegaMax(ChessPiecesModel.getInstance().gamePosition,1);
-			gameAI = new AlphaBeta(ChessPiecesModel.getInstance().gamePosition);
+//			gameAI = new AlphaBeta(ChessPiecesModel.getInstance().gamePosition);
+//			gameAI = new Quiescence(ChessPiecesModel.getInstance().gamePosition);
+//			gameAI = new PVS(ChessPiecesModel.getInstance().gamePosition);
 		}
 		//----------------------------------
 		//  isHumanTurnNow

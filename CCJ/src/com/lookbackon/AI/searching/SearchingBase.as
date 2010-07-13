@@ -6,7 +6,9 @@ package com.lookbackon.AI.searching
 	import com.lookbackon.ccj.model.ChessPiecesModel;
 	import com.lookbackon.ccj.model.vos.ConductVO;
 	import com.lookbackon.ccj.model.vos.PositionVO;
+	import com.lookbackon.ccj.utils.VectorUtil;
 	import com.lookbackon.ccj.view.components.ChessPiece;
+	import com.lookbackon.ds.BitBoard;
 	
 	import flash.geom.Point;
 	
@@ -27,17 +29,31 @@ package com.lookbackon.AI.searching
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		protected var bestMove:ConductVO;
-		protected var bestValue:int;
+		//param alpha the alpha value which hold the best MAX value found;
+		// At MAX level, before evaluating each child path, 
+		// compare the returned value with of the previous path with the beta value. 
+		// If the value is greater than it abort the search for the current node;
+		protected var alpha:int;
+		//param beta the beta value which hold the best MIN value found;
+		// At MIN level, before evaluating each child path, 
+		// compare the returned value with of the previous path with the alpha value. 
+		// If the value is lesser than it abort the search for the current node.
+		protected var beta:int; 
+		//
+		protected var depth:int;
 		//conductVO's collection;
 		protected var tempMove:ConductVO;
+		protected var tempCapture:ConductVO;//Notice:null capture move should handled.
+		protected var bestMove:ConductVO;
+		//
 		protected var tempValue:int;
+		protected var bestValue:int;
 		//
 		protected var positionEvaluation:int;
 		//
 		protected var gamePosition:PositionVO;
 		protected var evaluation:IEvaluation = new LinearEvaluationProxy();//Notice:this is all kinds of evaluation method entry,should be test.
-		
+		//
 		private var _orderingMoves:Vector.<ConductVO>;	
 		//----------------------------------
 		//  CONSTANTS
@@ -60,9 +76,21 @@ package com.lookbackon.AI.searching
 			//TODO: implement function
 			this.gamePosition = gamePosition;
 			//init ordering moves.
-			this.orderingMoves = generateMoves( ChessPiecesModel.getInstance().blues);
+			this.orderingMoves = this.moves.sort(VectorUtil.sortOnCaptures).reverse();
+			/*for(var m:int=0;m<this.moves.length;m++)
+			{
+				trace("move's celled:",this.moves[m].target.chessVO.captures.celled);
+			}*/
+			/*for(var om:int=0;om<this.moves.length;om++)
+			{
+				trace("orderingMove's celled:",this.orderingMoves[om].target.chessVO.captures.celled);
+			}*/
 			//temporary define first move from ording moves for hard-code test purpose.
 			this.tempMove = this.orderingMoves[0];
+			//SimpleComamnd,to be overrided.
+			this.execute();
+			//after execute all kinds of searching algorithm,always applymove.
+			this.applyMove(this.bestMove);
 		}
 		//--------------------------------------------------------------------------
 		//
@@ -75,7 +103,7 @@ package com.lookbackon.AI.searching
 		/**
 		 * @return all legal moves.
 		 */		
-		[Deprecated(replacement="com.lookbackon.AI.searching.SearchingBase.orderingMoves")]
+//		[Deprecated(replacement="com.lookbackon.AI.searching.SearchingBase.orderingMoves")]
 		public function get moves():Vector.<ConductVO>
 		{
 			return generateMoves( ChessPiecesModel.getInstance().blues);
@@ -109,7 +137,14 @@ package com.lookbackon.AI.searching
 		 * for example, if capturing the King would be a valid reply to Move X, 
 		 * then Move X is illegal and search should be terminated.  </br> 
 		 * Of course, if search is cutoff before the move has to be examined, validation never has to take place. </br> 
+		 * 
+		 * Move ordering techniques can be divided in three classes:  </br>
+		 * <b>results of a previous search,</b>  </br>
+		 * <b>dynamic move ordering</b>  </br>
+		 * <b>and static move ordering.</b>  </br>
+		 * 
 		 * @see http://www.gamedev.net/reference/articles/article1126.asp
+		 * @see http://chessprogramming.wikispaces.com/Move+Ordering
 		 * 
 		 * @return ordering legal moves,prototype is ArrayCollection.
 		 * 
@@ -123,6 +158,20 @@ package com.lookbackon.AI.searching
 		{
 			_orderingMoves = value;
 		}
+		//----------------------------------
+		//  captures(native)
+		//----------------------------------
+		/**
+		 * This function generates all possible captures and stores them in the vector.</br>
+		 * It returns the vector of the legal captures for Quiescene searching.</br>
+		 * 
+		 * @return all legal captures.
+		 */		
+		//		[Deprecated(replacement="com.lookbackon.AI.searching.SearchingBase.orderingMoves")]
+		public function get captures():Vector.<ConductVO>
+		{
+			return orderingMoves.filter(VectorUtil.filterOnCaptures);
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Methods
@@ -133,8 +182,8 @@ package com.lookbackon.AI.searching
 		//----------------------------------
 		//return all possbility movements;
 		/**
-		 * This function generates all possible moves and stores them in the vector.</p>
-		 * It returns the vector of the legal moves.</p>
+		 * This function generates all possible moves and stores them in the vector.</br>
+		 * It returns the vector of the legal moves.</br>
 		 * @param pieces chess pieces collection.
 		 * @return all possible moves.
 		 * 
@@ -230,10 +279,15 @@ package com.lookbackon.AI.searching
 		 * 
 		 */		
 		//virtual functions.
-		public function doEvaluation(conductVO:ConductVO,gamePosition:PositionVO):int
+		virtual public function doEvaluation(conductVO:ConductVO,gamePosition:PositionVO):int
 		{
 			//delegate to evaluation proxy to do evaluation(); 
 			return evaluation.doEvaluation(conductVO,gamePosition);
+		}
+		//virtual functions.
+		virtual public function execute():void
+		{
+			//TODO:implement functions.
 		}
 	}
 }

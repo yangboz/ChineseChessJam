@@ -246,6 +246,32 @@ package com.lookbackon.ds
 			return bb;
 		}
 		//----------------------------------
+		//  Utilities
+		//----------------------------------
+		//----------------------------------
+		//  celled
+		//----------------------------------
+		/**
+		 * 
+		 * @return total cell be filled or cell-free.
+		 * 
+		 */		
+		public function get celled():int
+		{
+			var _celled:int = 0;
+			for(var h:int=0;h<_row;h++)
+			{
+				for(var w:int=0;w<_column;w++)
+				{
+					if(this.getBitt(h,w))
+					{
+						_celled++;
+					}
+				}
+			}
+			return _celled;
+		}
+		//----------------------------------
 		//  isEmpty
 		//----------------------------------
 		/**
