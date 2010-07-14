@@ -1,5 +1,6 @@
 package com.lookbackon.AI.searching
 {
+	import com.lookbackon.AI.evaluation.IEvaluation;
 	import com.lookbackon.ccj.model.vos.ConductVO;
 	import com.lookbackon.ccj.model.vos.PositionVO;
 	import com.lookbackon.ccj.view.components.ChessPiece;
@@ -12,6 +13,7 @@ package com.lookbackon.AI.searching
 	 * @history before 2010-7-12 generateMoves/makeMove/unmakeMove/applyMove
 	 * @history 2010-7-12 noneMove/willNoneMove.
 	 * @history 2010-7-13 moves/captures/orderingMoves.
+	 * @history 2010-7-14 evaluation.
 	 */	
 	public interface ISearching
 	{
@@ -25,6 +27,9 @@ package com.lookbackon.AI.searching
 		
 		function set orderingMoves(value:Vector.<ConductVO>):void;
 		function get orderingMoves():Vector.<ConductVO>;
+		
+		function set evaluation(value:IEvaluation):void;
+		function get evaluation():IEvaluation;
 		//--------------------------------------------------------------------------
 		//
 		//  Methods

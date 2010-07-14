@@ -145,6 +145,8 @@ package com.lookbackon.ccj.managers
 			updatePiecePosition(conductVO,cGasket);
 			//update allPieces' chessVO.
 			updateAllPiecesChessVO();
+			//update allPieces' omenVO.
+			updateAllChessPiecesOmenVO();
 			//update ZobristKeys
 			updateZobristKeysModel(conductVO);
 			//buffer here,after update all data,then refresh view.
@@ -334,6 +336,10 @@ package com.lookbackon.ccj.managers
 			conductVO.target.y = 0;
 			//
 			cGasket.addElement(conductVO.target as IVisualElement);
+		}
+		private static function updateAllChessPiecesOmenVO():void
+		{
+			//TODO:
 		}
 		//
 		private static function switchGameTurnFlag():void

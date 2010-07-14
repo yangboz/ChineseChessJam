@@ -22,7 +22,7 @@ package com.lookbackon.AI.searching
 	 * 
 	 * @author Knight.zhou
 	 */	
-	public class SearchingBase implements ISearching,IEvaluation
+	public class SearchingBase implements ISearching
 	{
 		//--------------------------------------------------------------------------
 		//
@@ -49,15 +49,17 @@ package com.lookbackon.AI.searching
 		protected var tempValue:int;
 		protected var bestValue:int;
 		//
-		protected var positionEvaluation:int;
+		protected var positionEvaluated:int;
 		//
 		protected var gamePosition:PositionVO;
-		protected var evaluation:IEvaluation = new LinearEvaluationProxy();//Notice:this is all kinds of evaluation method entry,should be test.
+		private var _evaluation:IEvaluation = new LinearEvaluationProxy();//Default Evaluation functions.
+//Notice:this is all kinds of evaluation method entry,should be test.
 		//
 		private var _orderingMoves:Vector.<ConductVO>;	
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
+		public const MAX_SEARCH_DEPTH:int = 5;
 		//--------------------------------------------------------------------------
 		//
 		//  Constructor
@@ -76,15 +78,15 @@ package com.lookbackon.AI.searching
 			//TODO: implement function
 			this.gamePosition = gamePosition;
 			//init ordering moves.
-			this.orderingMoves = this.moves.sort(VectorUtil.sortOnCaptures).reverse();
-			/*for(var m:int=0;m<this.moves.length;m++)
+			this.orderingMoves = this.moves.sort(VectorUtil.sortOnMoves).reverse();
+			for(var m:int=0;m<this.moves.length;m++)
 			{
-				trace("move's celled:",this.moves[m].target.chessVO.captures.celled);
-			}*/
-			/*for(var om:int=0;om<this.moves.length;om++)
+				trace("move's celled:",this.moves[m].target.chessVO.moves.celled);
+			}
+			for(var om:int=0;om<this.moves.length;om++)
 			{
-				trace("orderingMove's celled:",this.orderingMoves[om].target.chessVO.captures.celled);
-			}*/
+				trace("orderingMove's celled:",this.orderingMoves[om].target.chessVO.moves.celled);
+			}
 			//temporary define first move from ording moves for hard-code test purpose.
 			this.tempMove = this.orderingMoves[0];
 			//SimpleComamnd,to be overrided.
@@ -167,10 +169,20 @@ package com.lookbackon.AI.searching
 		 * 
 		 * @return all legal captures.
 		 */		
-		//		[Deprecated(replacement="com.lookbackon.AI.searching.SearchingBase.orderingMoves")]
 		public function get captures():Vector.<ConductVO>
 		{
 			return orderingMoves.filter(VectorUtil.filterOnCaptures);
+		}
+		//----------------------------------
+		//  evaluation(native)
+		//----------------------------------
+		public function get evaluation():IEvaluation
+		{
+			return _evaluation;
+		}
+		public function set evaluation(value:IEvaluation):void
+		{
+			_evaluation = value;
 		}
 		//--------------------------------------------------------------------------
 		//

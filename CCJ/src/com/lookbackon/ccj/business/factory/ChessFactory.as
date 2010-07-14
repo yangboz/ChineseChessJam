@@ -283,46 +283,116 @@ package com.lookbackon.ccj.business.factory
 			switch(conductVO.target.name)
 			{
 				case ChessPiecesConstants.BLUE_BISHOP.label:
-					omenVO = new OmenVO(ChessPiecesConstants.BLUE_BISHOP.strength,ChessPiecesConstants.BLUE_BISHOP.important,-1,-1,-1);
+					omenVO = new OmenVO(
+						ChessPiecesConstants.BLUE_BISHOP.strength,
+						ChessPiecesConstants.BLUE_BISHOP.important,
+						conductVO.target.chessVO.moves.celled,
+						conductVO.target.chessVO.captures.celled,
+						-1);
 					break;
 				case ChessPiecesConstants.RED_BISHOP.label:
-					omenVO = new OmenVO(ChessPiecesConstants.RED_BISHOP.strength,ChessPiecesConstants.RED_BISHOP.important,-1,-1,-1);
+					omenVO = new OmenVO(
+						ChessPiecesConstants.RED_BISHOP.strength,
+						ChessPiecesConstants.RED_BISHOP.important,
+						conductVO.target.chessVO.moves.celled,
+						conductVO.target.chessVO.captures.celled,
+						-1);
 					break;
 				case ChessPiecesConstants.BLUE_CANNON.label:
-					omenVO = new OmenVO(ChessPiecesConstants.BLUE_CANNON.strength,ChessPiecesConstants.BLUE_CANNON.important,-1,-1,-1);
+					omenVO = new OmenVO(
+						ChessPiecesConstants.BLUE_CANNON.strength,
+						ChessPiecesConstants.BLUE_CANNON.important,
+						conductVO.target.chessVO.moves.celled,
+						conductVO.target.chessVO.captures.celled,
+						-1);
 					break;
 				case ChessPiecesConstants.RED_CANNON.label:
-					omenVO = new OmenVO(ChessPiecesConstants.RED_CANNON.strength,ChessPiecesConstants.RED_CANNON.important,-1,-1,-1);
+					omenVO = new OmenVO(
+						ChessPiecesConstants.RED_CANNON.strength,
+						ChessPiecesConstants.RED_CANNON.important,
+						conductVO.target.chessVO.moves.celled,
+						conductVO.target.chessVO.captures.celled,
+						-1);
 					break;
 				case ChessPiecesConstants.BLUE_ROOK.label:
-					omenVO = new OmenVO(ChessPiecesConstants.BLUE_ROOK.strength,ChessPiecesConstants.BLUE_ROOK.important,-1,-1,-1);
+					omenVO = new OmenVO(
+						ChessPiecesConstants.BLUE_ROOK.strength,
+						ChessPiecesConstants.BLUE_ROOK.important,
+						conductVO.target.chessVO.moves.celled,
+						conductVO.target.chessVO.captures.celled,
+						-1);
 					break;
 				case ChessPiecesConstants.RED_ROOK.label:
-					omenVO = new OmenVO(ChessPiecesConstants.RED_ROOK.strength,ChessPiecesConstants.RED_ROOK.important,-1,-1,-1);
+					omenVO = new OmenVO(
+						ChessPiecesConstants.RED_ROOK.strength,
+						ChessPiecesConstants.RED_ROOK.important,
+						conductVO.target.chessVO.moves.celled,
+						conductVO.target.chessVO.captures.celled,
+						-1);
 					break;
 				case ChessPiecesConstants.BLUE_KNIGHT.label:
-					omenVO = new OmenVO(ChessPiecesConstants.BLUE_KNIGHT.strength,ChessPiecesConstants.BLUE_KNIGHT.important,-1,-1,-1);
+					omenVO = new OmenVO(
+						ChessPiecesConstants.BLUE_KNIGHT.strength,
+						ChessPiecesConstants.BLUE_KNIGHT.important,
+						conductVO.target.chessVO.moves.celled,
+						conductVO.target.chessVO.captures.celled,
+						-1);
 					break;
 				case ChessPiecesConstants.RED_KNIGHT.label:
-					omenVO = new OmenVO(ChessPiecesConstants.RED_KNIGHT.strength,ChessPiecesConstants.RED_KNIGHT.important,-1,-1,-1);
+					omenVO = new OmenVO(
+						ChessPiecesConstants.RED_KNIGHT.strength,
+						ChessPiecesConstants.RED_KNIGHT.important,
+						conductVO.target.chessVO.moves.celled,
+						conductVO.target.chessVO.captures.celled,
+						-1);
 					break;
 				case ChessPiecesConstants.BLUE_MARSHAL.label:
-					omenVO = new OmenVO(ChessPiecesConstants.BLUE_MARSHAL.strength,ChessPiecesConstants.BLUE_MARSHAL.important,-1,-1,-1);
+					omenVO = new OmenVO(
+						ChessPiecesConstants.BLUE_MARSHAL.strength,
+						ChessPiecesConstants.BLUE_MARSHAL.important,
+						conductVO.target.chessVO.moves.celled,
+						conductVO.target.chessVO.captures.celled,
+						-1);
 					break;
 				case ChessPiecesConstants.RED_MARSHAL.label:
-					omenVO = new OmenVO(ChessPiecesConstants.RED_MARSHAL.strength,ChessPiecesConstants.RED_MARSHAL.important,-1,-1,-1);
+					omenVO = new OmenVO(
+						ChessPiecesConstants.RED_MARSHAL.strength,
+						ChessPiecesConstants.RED_MARSHAL.important,
+						conductVO.target.chessVO.moves.celled,
+						conductVO.target.chessVO.captures.celled,
+						-1);
 					break;
 				case ChessPiecesConstants.BLUE_OFFICAL.label:
-					omenVO = new OmenVO(ChessPiecesConstants.BLUE_OFFICAL.strength,ChessPiecesConstants.BLUE_OFFICAL.important,-1,-1,-1);
+					omenVO = new OmenVO(
+						ChessPiecesConstants.BLUE_OFFICAL.strength,
+						ChessPiecesConstants.BLUE_OFFICAL.important,
+						conductVO.target.chessVO.moves.celled,
+						conductVO.target.chessVO.captures.celled,
+						-1);
 					break;
 				case ChessPiecesConstants.RED_OFFICAL.label:
-					omenVO = new OmenVO(ChessPiecesConstants.RED_OFFICAL.strength,ChessPiecesConstants.RED_OFFICAL.important,-1,-1,-1);
+					omenVO = new OmenVO(
+						ChessPiecesConstants.RED_OFFICAL.strength,
+						ChessPiecesConstants.RED_OFFICAL.important,
+						conductVO.target.chessVO.moves.celled,
+						conductVO.target.chessVO.captures.celled,
+						-1);
 					break;
 				case ChessPiecesConstants.BLUE_PAWN.label:
-					omenVO = new OmenVO(ChessPiecesConstants.BLUE_PAWN.strength,ChessPiecesConstants.BLUE_PAWN.important,-1,-1,-1);
+					omenVO = new OmenVO(
+						ChessPiecesConstants.BLUE_PAWN.strength,
+						ChessPiecesConstants.BLUE_PAWN.important,
+						conductVO.target.chessVO.moves.celled,
+						conductVO.target.chessVO.captures.celled,
+						-1);
 					break;
 				case ChessPiecesConstants.RED_PAWN.label:
-					omenVO = new OmenVO(ChessPiecesConstants.RED_PAWN.strength,ChessPiecesConstants.RED_PAWN.important,-1,-1,-1);
+					omenVO = new OmenVO(
+						ChessPiecesConstants.RED_PAWN.strength,
+						ChessPiecesConstants.RED_PAWN.important,
+						conductVO.target.chessVO.moves.celled,
+						conductVO.target.chessVO.captures.celled,
+						-1);
 					break;
 				default:
 					break;

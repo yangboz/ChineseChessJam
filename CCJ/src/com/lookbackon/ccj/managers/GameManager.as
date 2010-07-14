@@ -1,10 +1,12 @@
 package com.lookbackon.ccj.managers
 {
 	import com.lookbackon.AI.searching.AlphaBeta;
+	import com.lookbackon.AI.searching.AttackFalse;
 	import com.lookbackon.AI.searching.ISearching;
 	import com.lookbackon.AI.searching.PVS;
 	import com.lookbackon.AI.searching.Quiescence;
 	import com.lookbackon.AI.searching.RandomWalk;
+	import com.lookbackon.AI.searching.ShortSighted;
 	import com.lookbackon.ccj.CcjConstants;
 	import com.lookbackon.ccj.model.ChessPiecesModel;
 	import com.lookbackon.ccj.utils.LogUtil;
@@ -94,13 +96,15 @@ package com.lookbackon.ccj.managers
 			GameManager.indicatorReadOut = true;
 			//about data
 			//TODO:switch any searching class to test.
-			gameAI = new RandomWalk(ChessPiecesModel.getInstance().gamePosition);
+//			gameAI = new RandomWalk(ChessPiecesModel.getInstance().gamePosition);
 //			gameAI = new MinMax(ChessPiecesModel.getInstance().gamePosition);
 //			gameAI = new MiniMax(ChessPiecesModel.getInstance().gamePosition,1);
 //			gameAI = new NegaMax(ChessPiecesModel.getInstance().gamePosition,1);
 //			gameAI = new AlphaBeta(ChessPiecesModel.getInstance().gamePosition);
 //			gameAI = new Quiescence(ChessPiecesModel.getInstance().gamePosition);
 //			gameAI = new PVS(ChessPiecesModel.getInstance().gamePosition);
+//			gameAI = new ShortSighted(ChessPiecesModel.getInstance().gamePosition);
+			gameAI = new AttackFalse(ChessPiecesModel.getInstance().gamePosition);
 		}
 		//----------------------------------
 		//  isHumanTurnNow

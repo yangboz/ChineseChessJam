@@ -1,34 +1,37 @@
-package com.lookbackon.ccj.model.vos
+package com.lookbackon.AI.searching
 {
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import de.polygonal.ds.Array2;
+	import com.lookbackon.ccj.managers.GameManager;
+	import com.lookbackon.ccj.model.vos.ConductVO;
+	import com.lookbackon.ccj.model.vos.PositionVO;
+	import com.lookbackon.ccj.utils.LogUtil;
+	import com.lookbackon.ccj.utils.VectorUtil;
+	
+	import mx.logging.ILogger;
+	
 	
 	/**
-	 * PositionVO.as class.   	
+	 * AttackFalse.as class.(假进攻)   	
 	 * @author Knight.zhou
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
-	 * Created Jul 9, 2010 4:19:38 PM
+	 * Created Jul 14, 2010 10:29:00 AM
 	 */   	 
-	public class PositionVO
+	public class AttackFalse extends SearchingBase
 	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		public var board:Array2;
-		public var color:int;
-		public var marshalFaceToFace:Boolean;
-		public var check:Boolean;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		
+		private static const LOG:ILogger = LogUtil.getLogger(AttackFalse);
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -46,33 +49,47 @@ package com.lookbackon.ccj.model.vos
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function PositionVO()
+		public function AttackFalse(gamePosition:PositionVO)
 		{
+			//TODO: implement function
+			super(gamePosition);
 		}     	
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		/**
-		 * Prints out all elements (for debug/demo purposes).
-		 * 
-		 * @return A human-readable representation of the structure.
-		 */
-		public function dump():String
+		override public function execute():void
 		{
-			var s:String = "PositionVO";
-			s += "\n{";
-			s += "\n" + "\t";
-			s += "board:"+board.dump()+"\t";
-			s += "\n" + "\t";
-			s += "color:"+color.toString()+"\t";
-			s += "\n" + "\t";
-			s += "check:"+check.toString()+"\t";
-			s += "\n" + "\t";
-			s += "marshalFaceToFace:"+marshalFaceToFace.toString()+"\t";
-			s += "\n}";
-			return s;
+			if(orderingMoves.length<=0)
+			{
+				//pluge to death.
+				GameManager.humanWin();
+			}else
+			{
+				var pValue:int=-1;
+				var attackMoves:Vector.<ConductVO>;
+				if(captures.length>0)
+				{
+					attackMoves = captures.filter(VectorUtil.filterOnEatOff);
+				}else
+				{
+					attackMoves = orderingMoves;
+				}
+				bestMove = tempMove;//set default bestMove.
+				for(var i:int=0;i<attackMoves.length;i++)
+				{
+					positionEvaluated = doEvaluation(orderingMoves[i],gamePosition);
+					if(positionEvaluated>pValue)
+					{
+						LOG.debug("selected attackMoves:{0}",attackMoves[i].dump());
+						bestMove = attackMoves[i];
+						pValue = positionEvaluated;
+					}
+				}
+				LOG.debug("bestMove:{0}",bestMove.dump());
+				LOG.debug("max position value:{0}",pValue);
+			}
 		}
 		//--------------------------------------------------------------------------
 		//

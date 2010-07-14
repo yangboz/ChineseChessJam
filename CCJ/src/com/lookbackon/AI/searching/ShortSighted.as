@@ -1,7 +1,18 @@
 package com.lookbackon.AI.searching
 {
-	import de.polygonal.ds.Array2;
+	//--------------------------------------------------------------------------
+	//
+	//  Imports
+	//
+	//--------------------------------------------------------------------------
+	import com.lookbackon.ccj.managers.GameManager;
+	import com.lookbackon.ccj.model.vos.ConductVO;
+	import com.lookbackon.ccj.model.vos.PositionVO;
+	import com.lookbackon.ccj.utils.LogUtil;
+	import com.lookbackon.ccj.utils.VectorUtil;
 	
+	import mx.logging.ILogger;
+
 	/**
 	 * About ShortSightedAI(鼠目寸光)</br>
 	 * Cannot see beyond one's nose; </br>
@@ -13,44 +24,86 @@ package com.lookbackon.AI.searching
 	 */	
 	public class ShortSighted extends SearchingBase
 	{
+		//--------------------------------------------------------------------------
+		//
+		//  Variables
+		//
+		//--------------------------------------------------------------------------
+		
+		//----------------------------------
+		//  CONSTANTS
+		//----------------------------------
+		private static const LOG:ILogger = LogUtil.getLogger(ShortSighted);
+		//--------------------------------------------------------------------------
+		//
+		//  Public properties
+		//
+		//-------------------------------------------------------------------------- 
+		
+		//--------------------------------------------------------------------------
+		//
+		//  Protected properties
+		//
+		//-------------------------------------------------------------------------- 
+		
+		//--------------------------------------------------------------------------
+		//
+		//  Constructor
+		//
+		//--------------------------------------------------------------------------
 		/**
 		 * ShortSightedAI(鼠目寸光)
 		 * 优先选择当前一步最佳着法
 		 * @param gamePosition
-		 * 
+		 * @inheritDoc
 		 */		
-		public function ShortSighted(gamePosition:Array2) 
+		public function ShortSighted(gamePosition:PositionVO) 
 		{
 			super(gamePosition);
+		}	
+		//--------------------------------------------------------------------------
+		//
+		//  Public methods
+		//
+		//--------------------------------------------------------------------------
+		override public function execute():void
+		{
 			//Why named it "ShortSightedAI"？ 
 			//cuz this gameAI just only scan the next step and then judgement it.
 			//Maybe it is the right choice for the current game status. 
 			//
-			
-			bestMove = new ConductVO();
-			moves =  generateMoves(PiecesModel.getInstance().redPiecesCollection,gamePosition);
-			if(moves.length<=0)
+			if(orderingMoves.length<=0)
 			{
-				PlayerManager.humanWin();//pluge to death.
+				//pluge to death.
+				GameManager.humanWin();
 			}else
 			{
-				trace("all possbility moves:",moves.toArray().toString());
-				
 				var pValue:int=-1;
-				for(var i:int=0;i<moves.length;i++)
+				bestMove = tempMove;//set default bestMove.
+				for(var i:int=0;i<orderingMoves.length;i++)
 				{
-					if(doEvaluation(moves.getItemAt(i) as ConductVO)>pValue)
+					positionEvaluated = doEvaluation(orderingMoves[i],gamePosition);
+					if(positionEvaluated>pValue)
 					{
-						bestMove = moves.getItemAt(i) as ConductVO;
-						pValue = doEvaluation(moves.getItemAt(i) as ConductVO);
+						bestMove = orderingMoves[i];
+						pValue = positionEvaluated;
 					}
 				}
-				//				bestMove = moves.getItemAt(randomStep) as ConductVO;
-				trace("shortSighted bestMove:",bestMove.dump());
-				trace("max position value:",pValue);
-				makeMove(bestMove);
+				LOG.debug("bestMove:{0}",bestMove.dump());
+				LOG.debug("max position value:{0}",pValue);
 			}
-		}	
+		}
+		//--------------------------------------------------------------------------
+		//
+		//  Protected methods
+		//
+		//--------------------------------------------------------------------------
+		
+		//--------------------------------------------------------------------------
+		//
+		//  Private methods
+		//
+		//--------------------------------------------------------------------------
 	}	
 	
 }

@@ -149,13 +149,13 @@ package com.lookbackon.AI.searching
 		{
 			if(GameManager.turnFlag==CcjConstants.FLAG_BLUE)
 			{
-				positionEvaluation = super.doEvaluation(conductVO,gamePosition);
+				positionEvaluated = super.doEvaluation(conductVO,gamePosition);
 			}
 			else
 			{
-				positionEvaluation = -super.doEvaluation(conductVO,gamePosition);
+				positionEvaluated = -super.doEvaluation(conductVO,gamePosition);
 			}
-			return positionEvaluation;	
+			return positionEvaluated;	
 		}
 	}
 }

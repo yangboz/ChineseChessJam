@@ -408,26 +408,6 @@ package com.lookbackon.ccj.model
 			}
 			return instance;
 		}
-		/**
-		 * 
-		 * @param type the piece's type.
-		 * @param flag the piece's flag.
-		 * @return the number of specified type piece.
-		 * 
-		 */		
-		public function numberOf(type:String,flag:int):int
-		{
-			var fResult:Vector.<ChessPiece> = new Vector.<ChessPiece>();
-			if(flag==CcjConstants.FLAG_RED)
-			{
-				fResult = reds;
-			}else
-			{
-				fResult = blues;
-			}
-			//TODO:
-			return fResult.length;
-		}
 	}
 }
 /**

@@ -38,6 +38,10 @@ package com.lookbackon.ccj.utils
 		{
 			return Boolean(item.target.chessVO.captures.celled);
 		}
+		public static function filterOnEatOff(item:ConductVO, index:int, vector:Vector.<ConductVO>):Boolean
+		{
+			return Boolean(item.eatOff!=null);
+		}
 		//About sort
 		//
 		public static function sortOnCaptures(cd1:ConductVO,cd2:ConductVO):int

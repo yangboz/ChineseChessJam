@@ -3,7 +3,7 @@ package com.lookbackon.AI.searching
 	public class SE
 	{
 		/**
-		 *Singular extensions 
+		 * Singular extensions 
 		 * Singular extensions (SE) got their 15 minutes of fame when they were used by the Deep Blue team 
 		 * which won it's chess match against world champion Garry Kasparov.
 		 * Since then, SE seems to have been abandoned by most. The idea of singular extensions is appealing, 

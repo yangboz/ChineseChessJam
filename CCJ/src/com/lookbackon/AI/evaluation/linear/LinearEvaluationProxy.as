@@ -6,6 +6,7 @@ package com.lookbackon.AI.evaluation.linear
 	import com.lookbackon.ccj.model.ChessPiecesModel;
 	import com.lookbackon.ccj.model.vos.ConductVO;
 	import com.lookbackon.ccj.model.vos.PositionVO;
+	import com.lookbackon.ds.BitBoard;
 	
 	import flash.utils.Proxy;
 	import flash.utils.flash_proxy;
@@ -55,7 +56,11 @@ package com.lookbackon.AI.evaluation.linear
 			_item = new Array();
 		}
 		/**
+		 * KQRBNP = number of kings, queens, rooks, bishops, knights and pawns;</br>
+		 * D,S,I = doubled, blocked and isolated pawns;</br>
+		 * M = Mobility (the number of legal moves);</br>
 		 * 
+		 * @see http://chessprogramming.wikispaces.com/Evaluation
 		 * @param conductVO The conductVO which obtained position information.
 		 * @param gamePosition The game position which obtained board position information.
 		 * @return Red should try to maximize T as large as possible,
@@ -64,32 +69,38 @@ package com.lookbackon.AI.evaluation.linear
 		public function doEvaluation(conductVO:ConductVO,gamePosition:PositionVO):int
 		{
 			//TODO: implement function
-			var T_red:int = 
-				ChessPiecesModel.getInstance().numberOf(ChessPiecesConstants.RED_OFFICAL.label,CcjConstants.FLAG_RED)*133
-				+
-				ChessPiecesModel.getInstance().numberOf(ChessPiecesConstants.RED_BISHOP.label,CcjConstants.FLAG_RED)*166
-				+
-				ChessPiecesModel.getInstance().numberOf(ChessPiecesConstants.RED_ROOK.label,CcjConstants.FLAG_RED)*600
-				+
-				ChessPiecesModel.getInstance().numberOf(ChessPiecesConstants.RED_KNIGHT.label,CcjConstants.FLAG_RED)*266
-				+
-				ChessPiecesModel.getInstance().numberOf(ChessPiecesConstants.RED_CANNON.label,CcjConstants.FLAG_RED)*300
-				+
-				ChessPiecesModel.getInstance().numberOf(ChessPiecesConstants.RED_PAWN.label,CcjConstants.FLAG_RED)*66
-				;
-			var T_blue:int = 
-				ChessPiecesModel.getInstance().numberOf(ChessPiecesConstants.BLUE_OFFICAL.label,CcjConstants.FLAG_BLUE)*133
-				+
-				ChessPiecesModel.getInstance().numberOf(ChessPiecesConstants.BLUE_BISHOP.label,CcjConstants.FLAG_BLUE)*166
-				+
-				ChessPiecesModel.getInstance().numberOf(ChessPiecesConstants.BLUE_ROOK.label,CcjConstants.FLAG_BLUE)*600
-				+
-				ChessPiecesModel.getInstance().numberOf(ChessPiecesConstants.BLUE_KNIGHT.label,CcjConstants.FLAG_BLUE)*266
-				+
-				ChessPiecesModel.getInstance().numberOf(ChessPiecesConstants.BLUE_CANNON.label,CcjConstants.FLAG_BLUE)*300
-				+
-				ChessPiecesModel.getInstance().numberOf(ChessPiecesConstants.BLUE_PAWN.label,CcjConstants.FLAG_BLUE)*66
-				;
+			//Material
+			var M:BitBoard = ChessPiecesModel.getInstance()[CcjConstants.RED_MARSHAL] as BitBoard;
+			var m:BitBoard = ChessPiecesModel.getInstance()[CcjConstants.BLUE_MARSHAL] as BitBoard;
+			var R:BitBoard = ChessPiecesModel.getInstance()[CcjConstants.RED_ROOK] as BitBoard;
+			var r:BitBoard = ChessPiecesModel.getInstance()[CcjConstants.BLUE_ROOK] as BitBoard;
+			var K:BitBoard = ChessPiecesModel.getInstance()[CcjConstants.RED_KNIGHT] as BitBoard;
+			var k:BitBoard = ChessPiecesModel.getInstance()[CcjConstants.BLUE_KNIGHT] as BitBoard;
+			var O:BitBoard = ChessPiecesModel.getInstance()[CcjConstants.RED_OFFICAL] as BitBoard;
+			var o:BitBoard = ChessPiecesModel.getInstance()[CcjConstants.BLUE_OFFICAL] as BitBoard;
+			var C:BitBoard = ChessPiecesModel.getInstance()[CcjConstants.RED_CANNON] as BitBoard;
+			var c:BitBoard = ChessPiecesModel.getInstance()[CcjConstants.BLUE_CANNON] as BitBoard;
+			var P:BitBoard = ChessPiecesModel.getInstance()[CcjConstants.RED_PAWN] as BitBoard;
+			var p:BitBoard = ChessPiecesModel.getInstance()[CcjConstants.BLUE_PAWN] as BitBoard;
+			var B:BitBoard = ChessPiecesModel.getInstance()[CcjConstants.RED_BISHOP] as BitBoard;
+			var b:BitBoard = ChessPiecesModel.getInstance()[CcjConstants.BLUE_BISHOP] as BitBoard;
+			
+			var T_red:int = M.celled*133
+							+B.celled*166
+							+R.celled*600
+							+K.celled*266
+							+C.celled*300
+							+P.celled*66
+							;
+			var T_blue:int = m.celled*133
+							+b.celled*166
+							+r.celled*600
+							+k.celled*266
+							+c.celled*300
+							+p.celled*66
+							;
+			//Mobility
+			//TODO:
 			return T_blue-T_red;
 		}
 		//--------------------------------------------------------------------------
