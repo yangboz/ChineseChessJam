@@ -101,6 +101,8 @@ package com.lookbackon.AI.evaluation.linear
 							;
 			//Mobility
 			//TODO:
+			//Threat
+			//TODO:
 			return T_blue-T_red;
 		}
 		//--------------------------------------------------------------------------

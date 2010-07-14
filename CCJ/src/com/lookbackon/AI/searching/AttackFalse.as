@@ -69,6 +69,7 @@ package com.lookbackon.AI.searching
 			{
 				var pValue:int=-1;
 				var attackMoves:Vector.<ConductVO>;
+				var evaluatedValue:int=int.MIN_VALUE;
 				if(captures.length>0)
 				{
 					attackMoves = captures.filter(VectorUtil.filterOnEatOff);
@@ -79,12 +80,20 @@ package com.lookbackon.AI.searching
 				bestMove = tempMove;//set default bestMove.
 				for(var i:int=0;i<attackMoves.length;i++)
 				{
-					positionEvaluated = doEvaluation(orderingMoves[i],gamePosition);
+					positionEvaluated = doEvaluation(attackMoves[i],gamePosition);
 					if(positionEvaluated>pValue)
 					{
 						LOG.debug("selected attackMoves:{0}",attackMoves[i].dump());
 						bestMove = attackMoves[i];
 						pValue = positionEvaluated;
+					}else
+					{
+						if(positionEvaluated>evaluatedValue)
+						{
+							evaluatedValue = positionEvaluated;
+							bestMove = attackMoves[i];
+							pValue = positionEvaluated;
+						}
 					}
 				}
 				LOG.debug("bestMove:{0}",bestMove.dump());

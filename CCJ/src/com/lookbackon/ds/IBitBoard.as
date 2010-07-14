@@ -20,5 +20,7 @@ package com.lookbackon.ds
 		//misc..
 		function getRows(rowIndex:int):Array;
 		function getCols(colIndex:int):Array;
+		//the summed celled of cells.
+		function get celled():int;
 	}
 }

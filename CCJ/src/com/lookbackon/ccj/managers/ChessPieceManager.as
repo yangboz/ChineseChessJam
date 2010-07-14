@@ -340,23 +340,14 @@ package com.lookbackon.ccj.managers
 		private static function updateAllChessPiecesOmenVO():void
 		{
 			//TODO:
-		}
-		//
-		private static function switchGameTurnFlag():void
-		{
-			if(GameManager.turnFlag==CcjConstants.FLAG_BLUE)
+			for(var i:int=0;i<chessPiecesModel.pieces.length;i++)
 			{
-				//indicate check.
-				indicateCheck(chessPiecesModel.blues,chessPiecesModel.RED_MARSHAL);
-				//
-				GameManager.isHumanTurnNow();
-			}else
-			{
-				//indicate check.
-				indicateCheck(chessPiecesModel.reds,chessPiecesModel.BLUE_MARSHAL);
-				//
-				GameManager.isComputerTurnNow();
+				var chessPiece:ChessPiece = chessPiecesModel.pieces[i];
+				//renew chessVO.
+				chessPiece.omenVO.flexibility  = chessPiece.chessVO.moves.celled;
+				chessPiece.omenVO.threat  = chessPiece.chessVO.captures.celled;
 			}
+			LOG.info("{0} Chess Pieces' OmenVO Updated !!!",chessPiecesModel.pieces.length.toString());
 		}
 		//notice:why not using ArrayCollection.getItemIndex(object)?
 		//cuz our chess piece's position property always change here.
