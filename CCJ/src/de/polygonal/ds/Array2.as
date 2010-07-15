@@ -22,6 +22,7 @@
 /**
  * @history 2010-01-21 rename set/get function name to sett/gett.
  * @history 2010-06-10 added setXs/setYs help functions. 
+ * @history 2010-07-15 added celled property. 
  */
 package de.polygonal.ds
 {
@@ -491,6 +492,30 @@ package de.polygonal.ds
 			}
 			s += "\n}";
 			return s;
+		}
+		
+		//----------------------------------
+		//  celled
+		//----------------------------------
+		/**
+		 * 
+		 * @return total cell be filled or cell-free.
+		 * 
+		 */		
+		public function get celled():int
+		{
+			var _celled:int = 0;
+			for(var h:int=0;h<height;h++)
+			{
+				for(var w:int=0;w<width;w++)
+				{
+					if(this.gett(w,h))
+					{
+						_celled++;
+					}
+				}
+			}
+			return _celled;
 		}
 	}
 }

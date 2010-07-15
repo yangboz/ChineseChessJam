@@ -24,10 +24,14 @@ package com.lookbackon.AI.evaluation.factors
 	
 	This does not affect the playing strength of the program (if done right), but avoids some useless draws. 
 	*/
+	/**
+	 * @see http://mediocrechess.varten.org/guides/see.html
+	 * @author Knight.zhou
+	 */	
 	public class ContemptFactor
 	{
-		public function ContemptFactor()
-		{
-		}
+		public static const CONTEMPT_OPENING:int	= 50;
+		public static const CONTEMPT_MIDDLE:int 	= 25;
+		public static const CONTEMPT_ENDING:int 	= 0;
 	}
 }

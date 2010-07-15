@@ -9,6 +9,7 @@ package com.lookbackon.ccj.managers
 	import com.lookbackon.AI.searching.ShortSighted;
 	import com.lookbackon.ccj.CcjConstants;
 	import com.lookbackon.ccj.model.ChessPiecesModel;
+	import com.lookbackon.ccj.model.vos.PositionVO;
 	import com.lookbackon.ccj.utils.LogUtil;
 	
 	import mx.controls.Alert;
@@ -39,6 +40,12 @@ package com.lookbackon.ccj.managers
 		private static const LOG:ILogger = LogUtil.getLogger(GameManager);
 		public static const INDICATION_THINKING:String 	= "Thinking..";
 		public static const INDICATION_CHECK:String 	= "Eschequier";
+		//game phase
+		//Masks for bits inside the 'flags' var
+		//which store the state of Boolean game phase properties.
+		public static const PHASE_OPENING:uint  = 1<<0;
+		public static const PHASE_MIDDLE:uint 	= 1<<1;
+		public static const PHASE_ENDING:String	= 1<<2;
 		//--------------------------------------------------------------------------
 		//
 		//  Properties
@@ -121,6 +128,27 @@ package com.lookbackon.ccj.managers
 			//about data
 			
 		}
-		
+		//----------------------------------
+		//  getGamePhase
+		//----------------------------------
+		/**
+		 * The game phase is decided by how many pieces both sides have left.
+		 * @param gamePosition the current game position information.
+		 * @return the current game position's game phase.
+		 * 
+		 */		
+		public static function getGamePhase(gamePosition:PositionVO):uint
+		{
+			var gamePhase:uin = PHASE_OPENING;
+			if(gamePosition.board.celled<=14 && gamePosition.board.celled>=6)
+			{
+				gamePhase = PHASE_MIDDLE;
+			}
+			if(gamePosition.board.celled<6 && gamePosition.board.celled>=1)
+			{
+				gamePhase = PHASE_END;
+			}
+			return gamePhase;
+		}
 	}
 }
