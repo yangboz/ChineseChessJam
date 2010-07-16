@@ -22,7 +22,7 @@ package com.lookbackon.AI.searching
 	 * 
 	 * @author Knight.zhou
 	 */	
-	public class SearchingBase implements ISearching
+	public class SearchingBase implements ISearching,IStrategy
 	{
 		//--------------------------------------------------------------------------
 		//
