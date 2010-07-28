@@ -45,7 +45,7 @@ package com.lookbackon.ccj.managers
 		//which store the state of Boolean game phase properties.
 		public static const PHASE_OPENING:uint  = 1<<0;
 		public static const PHASE_MIDDLE:uint 	= 1<<1;
-		public static const PHASE_ENDING:String	= 1<<2;
+		public static const PHASE_ENDING:uint	= 1<<2;
 		//--------------------------------------------------------------------------
 		//
 		//  Properties
@@ -139,14 +139,14 @@ package com.lookbackon.ccj.managers
 		 */		
 		public static function getGamePhase(gamePosition:PositionVO):uint
 		{
-			var gamePhase:uin = PHASE_OPENING;
+			var gamePhase:uint = PHASE_OPENING;
 			if(gamePosition.board.celled<=14 && gamePosition.board.celled>=6)
 			{
 				gamePhase = PHASE_MIDDLE;
 			}
 			if(gamePosition.board.celled<6 && gamePosition.board.celled>=1)
 			{
-				gamePhase = PHASE_END;
+				gamePhase = PHASE_ENDING;
 			}
 			return gamePhase;
 		}
