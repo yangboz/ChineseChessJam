@@ -150,6 +150,7 @@ package com.lookbackon.ccj.business.factory
 			//view
 			myChessPiece.label = myChessPiece.name = chessPieceLabel;
 			myChessPiece.type = chessPieceType;
+			myChessPiece.swfLoader.source = String("./assets/").concat(chessPieceType,".swf");
 			/*myChessPiece.x = 
 			position.x*CcjConstants.BOARD_LATTICE - myChessPiece.width/2 +50;
 			myChessPiece.y = 
@@ -204,7 +205,7 @@ package com.lookbackon.ccj.business.factory
 			myChessGasket.x = 
 				position.x*CcjConstants.BOARD_LATTICE - myChessGasket.width/2 +50;
 			myChessGasket.y = 
-				position.y*CcjConstants.BOARD_LATTICE + myChessGasket.height/2 -25;
+				position.y*CcjConstants.BOARD_LATTICE;
 			myChessGasket.toolTip = position.toString();
 			return myChessGasket;
 		}

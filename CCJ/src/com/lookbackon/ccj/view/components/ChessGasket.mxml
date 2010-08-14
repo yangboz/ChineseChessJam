@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+<s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
 		 xmlns:mx="library://ns.adobe.com/flex/halo" 
 		 width="50" height="50"
 		 implements="com.lookbackon.ccj.view.components.IChessGasket" 
 		 creationComplete="group1_creationCompleteHandler(event)" 
-		 >
+		 borderVisible="false" backgroundAlpha="0.0" contentBackgroundAlpha="0.0" borderAlpha="0.0">
 	<fx:Script>
 		<![CDATA[
 			import com.adobe.cairngorm.control.CairngormEventDispatcher;
@@ -107,12 +107,12 @@
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
-	<s:Rect width="100%" height="100%">
+	<!--<s:Rect width="100%" height="100%">
 		<s:stroke>
-			<s:SolidColorStroke color="white"/>
+			<s:SolidColorStroke color="white" alpha=".5"/>
 		</s:stroke>
 		<s:fill>
-			<s:SolidColor color="white"/>
+			<s:SolidColor color="white" alpha=".5"/>
 		</s:fill>
-	</s:Rect>
-</s:Group>
+	</s:Rect>-->
+</s:BorderContainer>

@@ -6,7 +6,9 @@
 			   creationComplete="application1_creationCompleteHandler(event)" 
 			   applicationComplete="application1_applicationCompleteHandler(event)" 
 			   xmlns:popup="com.adobe.cairngorm.popup.*" 
-			   scriptTimeLimit="60" xmlns:controller="com.lookbackon.ccj.controller.*" 
+			   maxHeight="500" maxWidth="500"
+			   scriptTimeLimit="60" 
+			   xmlns:controller="com.lookbackon.ccj.controller.*" 
 			   >
 	<s:layout>
 		<s:BasicLayout/>
@@ -37,6 +39,8 @@
 			//  Variables
 			//
 			//--------------------------------------------------------------------------
+			public var _mochiads_game_id:String = "47de4a85dd3e213a";//For mochi.
+			
 			private var chessPiecesModel:ChessPiecesModel = ChessPiecesModel.getInstance();
 			//
 			[Bindable]
@@ -167,6 +171,8 @@
 	</fx:Declarations>
 	
 	<!-- Views here -->
-	<components:ChessBoard id="chessBoard" left="50" right="50" top="25" bottom="25"/>
+	<components:ChessBoard id="chessBoard" left="25" right="25" top="25" bottom="25" 
+						   backgroundImage="@Embed('./assets/images/ChessBoardBG.png')"
+						   />
 	
 </s:Application>
