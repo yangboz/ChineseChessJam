@@ -6,10 +6,10 @@
 			   creationComplete="application1_creationCompleteHandler(event)" 
 			   applicationComplete="application1_applicationCompleteHandler(event)" 
 			   xmlns:popup="com.adobe.cairngorm.popup.*" 
-			   maxHeight="500" maxWidth="500"
+			   maxHeight="520" maxWidth="500"
 			   scriptTimeLimit="60" 
 			   xmlns:controller="com.lookbackon.ccj.controller.*" 
-			   >
+>
 	<s:layout>
 		<s:BasicLayout/>
 	</s:layout>
