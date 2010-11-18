@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600" xmlns:godpaper="com.godpaper.*">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<!---
+			The signal context for bootstrapping the whole RobotLegs framework.
+		-->
+		<godpaper:CCJSignalContext contextView="{this}"/>
+		
+		<!---
+			The system unique logging component provider LOG.debug/info/warn/error/fatal avenues.
+		-->
+		<mx:TraceTarget 
+			includeTime="true" 
+			fieldSeparator="->" 
+			includeLevel="true"
+			includeCategory="true"
+			level="0"
+		>
+			<mx:filters>
+				
+			</mx:filters>
+		</mx:TraceTarget>
+	</fx:Declarations>
+	<!---
+		Vistual elements at stage here.
+	-->
+</s:Application>
