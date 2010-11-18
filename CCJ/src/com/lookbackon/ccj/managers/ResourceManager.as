@@ -18,7 +18,7 @@ package com.lookbackon.ccj.managers
 	 * @author Knight.zhou
 	 * 
 	 */	
-	public class ResourceMananger extends EventDispatcher
+	public class ResourceManager extends EventDispatcher
 	{
 		//--------------------------------------------------------------------------
 		//
@@ -39,13 +39,13 @@ package com.lookbackon.ccj.managers
 		//  CONSTANTS
 		//----------------------------------
 		public static const LOAD_CUSTOM_RESOURCE_BUNDLE_COMPLETE:String 	= "LoadCustomResourceBundleComplete";
-		private static const LOG:ILogger = LogUtil.getLogger(ResourceMananger);
+		private static const LOG:ILogger = LogUtil.getLogger(ResourceManager);
 		//--------------------------------------------------------------------------
 		//
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function ResourceMananger()
+		public function ResourceManager()
 		{
 			//TODO: implement function
 			super();
@@ -68,7 +68,7 @@ package com.lookbackon.ccj.managers
 		public function loadResourceModules():void
 		{
 			var iEventDispatcher:IEventDispatcher = 
-				ResourceManager.getInstance().loadResourceModule(this.resourceModules[resourceModuleIndex]);
+				mx.resources.ResourceManager.getInstance().loadResourceModule(this.resourceModules[resourceModuleIndex]);
 			iEventDispatcher.addEventListener(ResourceEvent.COMPLETE,loadResourcesModuleComplete);
 			iEventDispatcher.addEventListener(ResourceEvent.PROGRESS,loadResourcesModuleProgressHandler);
 			iEventDispatcher.addEventListener(ResourceEvent.ERROR,loadResourcesModuleErrorHandler);

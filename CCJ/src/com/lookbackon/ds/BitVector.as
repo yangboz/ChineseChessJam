@@ -178,6 +178,8 @@ package com.lookbackon.ds
 		
 	}
 }
+import com.lookbackon.ds.BitVector;
+
 import flash.display.Stage;
 import flash.events.KeyboardEvent;
 

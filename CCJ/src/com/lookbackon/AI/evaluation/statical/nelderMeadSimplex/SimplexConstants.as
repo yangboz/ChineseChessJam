@@ -1,4 +1,4 @@
-package com.lookbackon.AI.evaluation
+package com.lookbackon.AI.evaluation.statical.nelderMeadSimplex
 {
 	/**
 	 *
@@ -7,12 +7,12 @@ package com.lookbackon.AI.evaluation
 	 * @author Knight.zhou
 	 * 
 	 */	
-	public class SimplexConstant
+	public class SimplexConstants
 	{
 		private var _value:Number;
 		private var _initialPerturbation:Number;
 
-		public function SimplexConstant(value:Number, initialPerturbation:Number)
+		public function SimplexConstants(value:Number, initialPerturbation:Number)
 		{
 			_value = value;
 			_initialPerturbation = initialPerturbation;

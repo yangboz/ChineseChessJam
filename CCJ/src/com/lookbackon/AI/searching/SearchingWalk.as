@@ -1,5 +1,7 @@
 package com.lookbackon.AI.searching
 {
+	import flash.geom.Point;
+
 	/**
 	 * private var _array1:Array = [
 	 *									[  0 , 'a',  0  ],

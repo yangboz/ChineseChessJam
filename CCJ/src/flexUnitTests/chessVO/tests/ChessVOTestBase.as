@@ -5,7 +5,7 @@ package flexUnitTests.chessVO.tests
 	import com.lookbackon.ds.BitBoard;
 	
 	import org.flexunit.Assert;
-
+	
 	public class ChessVOTestBase
 	{
 		//should bitscan all bitboard cell.

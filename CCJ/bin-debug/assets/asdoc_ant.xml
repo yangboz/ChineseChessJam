@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<project name="ASDoc Builder" basedir="."> 
+    <property name="FLEX_HOME" value="D:/software/flex_sdk_4/"/> 
+    <property name="OUTPUT_DIR" value="C:/workspace/CCJ/src/ccjDocs"/> 
+            
+    <taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar" /> 
+    <target name="doc"> 
+        <asdoc output="${OUTPUT_DIR}" lenient="true" failonerror="true" strict="false"> 
+           <doc-sources 
+                path-element="C:/workspace/CCJ/src/"/> 
+           <exclude-classes 
+           		class="com.lookbackon.AI.evaluation.statical.nelderMeadSimplex.NelderMeadSimplex"/>
+           	<exclude-sources 
+           		path-element="C:/workspace/CCJ/src/com/vizsage"/>
+           	<exclude-sources 
+           		path-element="C:/workspace/CCJ/src/com/lookbackon/AI/evaluation/statical/nelderMeadSimplex"/>		
+        </asdoc> 
+    </target> 
+    <target name="clean"> 
+        <delete includeEmptyDirs="true"> 
+            <fileset dir="${OUTPUT_DIR}" includes="**/*"/> 
+        </delete> 
+    </target> 
+</project>

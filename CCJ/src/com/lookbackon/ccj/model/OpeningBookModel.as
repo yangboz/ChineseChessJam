@@ -196,7 +196,7 @@ internal class BookNode
 	public var huristic:int;
 	public var propagated:int;
 	
-	public function BookNode(huristic:int=-1,propagated=-1)
+	public function BookNode(huristic:int=-1,propagated:int=-1)
 	{
 		this.huristic =  huristic;
 		this.propagated = propagated;

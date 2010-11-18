@@ -9,7 +9,7 @@ package com.lookbackon.ccj.utils
 	 * for a particular class, instead of passing
 	 * in the qualified class name as a string.
 	 *
-	 * @example:(Declare Loggers as Static Constants)
+	 * example:(Declare Loggers as Static Constants)
 	 * private static const LOG:ILogger = LogUtil.getLogger(MyClass);
 	 *
 	 * Format Log Statements Consistently:

@@ -97,10 +97,12 @@ package com.lookbackon.AI.searching
 			var bestMoveValue:int;
 			for(var i:int=0;i<len;i++)
 			{
-				var conductVO:ConductVO = orderingMoves.getItemAt(i) as ConductVO;
-				tempMove = MinMove(makeMove(conductVO));
-				tempMoveValue = doEvaluation(tempMove);
-				bestMoveValue = doEvaluation(bestMove);
+				var conductVO:ConductVO = orderingMoves[i];
+//				tempMove = MinMove(makeMove(conductVO));//FIXME:makeMove return void to be value assigned.
+				var positionVO:PositionVO = new PositionVO();
+				tempMove = MinMove(positionVO);
+				tempMoveValue = doEvaluation(tempMove,positionVO);
+				bestMoveValue = doEvaluation(bestMove,positionVO);
 				if(tempMoveValue>bestMoveValue)
 				{
 					bestMove = tempMove;
@@ -151,10 +153,12 @@ package com.lookbackon.AI.searching
 			var bestMoveValue:int;
 			for(var i:int=0;i<len;i++)
 			{
-				var conductVO:ConductVO = orderingMoves.getItemAt(i) as ConductVO;
-				tempMove = MaxMove(makeMove(conductVO));
-				tempMoveValue = doEvaluation(tempMove);
-				bestMoveValue = doEvaluation(bestMove);
+				var conductVO:ConductVO = orderingMoves[i];
+//				tempMove = MinMove(makeMove(conductVO));//FIXME:makeMove return void to be value assigned.
+				var positionVO:PositionVO = new PositionVO();
+				tempMove = MinMove(positionVO);
+				tempMoveValue = doEvaluation(tempMove,positionVO);
+				bestMoveValue = doEvaluation(bestMove,positionVO);
 				if(tempMoveValue>bestMoveValue)
 				{
 					bestMove = tempMove;
@@ -183,7 +187,7 @@ package com.lookbackon.AI.searching
 		after all, it does little good to be able to look ahead 20 moves,
 		if, after we do, we decide that the position is good for us, when in fact, it is terrible! 
 		*/
-		override public function doEvaluation(conductVO:ConductVO):int
+		override public function doEvaluation(conductVO:ConductVO,gamePosition:PositionVO):int
 		{
 //			return MathUtil.transactRandomNumberInRange(0,100);
 			//Todo:doEvaluation about assumpted conductVO;

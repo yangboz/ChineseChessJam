@@ -30,9 +30,9 @@ package com.lookbackon.AI.evaluation.statical.nelderMeadSimplex
 			var numDimensions:int = simplexConstants.Length;
 			var numVertices:int = numDimensions + 1;
 //			Vector[] vertices = _initializeVertices(simplexConstants);
-			var vertices:Vector.<Vector> = _initializeVertices(simplexConstants);
+			var vertices:SimpleVector.<SimpleVector> = _initializeVertices(simplexConstants);
 //			double[] errorValues = new double[numVertices];
-			var errorValues:Vector.<uint> = new Vector.<uint>(numVertices);
+			var errorValues:SimpleVector.<uint> = new SimpleVector.<uint>(numVertices);
 			
 			var evaluationCount:int = 0;
 //			TerminationReason terminationReason = TerminationReason.Unspecified;
@@ -98,11 +98,11 @@ package com.lookbackon.AI.evaluation.statical.nelderMeadSimplex
 		/// </summary>
 		/// <param name="vertices"></param>
 		/// <returns></returns>
-		private static function _initializeErrorValues( vertices:Vector.<Vector>, 
+		private static function _initializeErrorValues( vertices:SimpleVector.<SimpleVector>, 
 														objectiveFunction:ObjectiveFunctionDelegate):Array
 		{
 //			double[] errorValues = new double[vertices.Length];
-			var errorValues:Vector.<Number> = new Vector.<Number>(vertices.Length);
+			var errorValues:SimpleVector.<Number> = new SimpleVector.<Number>(vertices.Length);
 			for (var i:int = 0; i < vertices.Length; i++)
 			{
 				errorValues[i] = objectiveFunction(vertices[i].Components);
@@ -178,10 +178,10 @@ package com.lookbackon.AI.evaluation.statical.nelderMeadSimplex
 		private static function _initializeVertices(simplexConstants:Array):Array
 		{
 			var numDimensions:int = simplexConstants.Length;
-			var vertices:Vector.<Vector> = new Vector.<Vector>(numDimensions + 1);
+			var vertices:SimpleVector.<SimpleVector> = new SimpleVector.<SimpleVector>(numDimensions + 1);
 			
 			// define one point of the simplex as the given initial guesses
-			var p0:Vector.<Number> = new Vector.<Number>(numDimensions);
+			var p0:SimpleVector.<Number> = new SimpleVector.<Number>(numDimensions);
 			for (var i:int = 0; i < numDimensions; i++)
 			{
 				p0[i] = simplexConstants[i].Value;
@@ -193,7 +193,7 @@ package com.lookbackon.AI.evaluation.statical.nelderMeadSimplex
 			for (var i:int = 0; i < numDimensions; i++)
 			{
 				var scale:Number = simplexConstants[i].InitialPerturbation;
-				var unitVector:Vector.<Number> = new Vector.<Number>(numDimensions);
+				var unitVector:SimpleVector.<Number> = new SimpleVector.<Number>(numDimensions);
 				unitVector[i] = 1;
 				vertices[i + 1] = p0.Add(unitVector.Multiply(scale));
 			}
@@ -217,14 +217,14 @@ package com.lookbackon.AI.evaluation.statical.nelderMeadSimplex
 													):Number
 		{
 			// find the centroid through which we will reflect
-			var centroid:Vector.<Vector> = _computeCentroid(vertices, errorProfile);
+			var centroid:SimpleVector.<SimpleVector> = _computeCentroid(vertices, errorProfile);
 			
 			
 			// define the vector from the centroid to the high point
-			var centroidToHighPoint:Vector.<Vector> = vertices[errorProfile.HighestIndex].Subtract(centroid);
+			var centroidToHighPoint:SimpleVector.<SimpleVector> = vertices[errorProfile.HighestIndex].Subtract(centroid);
 			
 			// scale and position the vector to determine the new trial point
-			var newPoint:Vector.<Vector> = centroidToHighPoint.Multiply(scaleFactor).Add(centroid);
+			var newPoint:SimpleVector.<SimpleVector> = centroidToHighPoint.Multiply(scaleFactor).Add(centroid);
 			
 			// evaluate the new point
 			var newErrorValue:Number = objectiveFunction(newPoint.Components);
@@ -252,7 +252,7 @@ package com.lookbackon.AI.evaluation.statical.nelderMeadSimplex
 													objectiveFunction//ObjectiveFunctionDelegate
 												):void
 		{
-			var lowestVertex:Vector.<Vector> = vertices[errorProfile.LowestIndex];
+			var lowestVertex:SimpleVector.<SimpleVector> = vertices[errorProfile.LowestIndex];
 			for (var i:int = 0; i < vertices.Length; i++)
 			{
 				if (i != errorProfile.LowestIndex)
@@ -269,11 +269,11 @@ package com.lookbackon.AI.evaluation.statical.nelderMeadSimplex
 		/// <param name="vertices"></param>
 		/// <param name="errorProfile"></param>
 		/// <returns></returns>
-		private static function _computeCentroid(vertices:Vector.<Vector>, errorProfile:ErrorProfile):Vector
+		private static function _computeCentroid(vertices:SimpleVector.<SimpleVector>, errorProfile:ErrorProfile):SimpleVector
 		{
 			var numVertices:int = vertices.Length;
 			// find the centroid of all points except the worst one
-			var centroid:Vector.<Vector> = new Vector(numVertices - 1);
+			var centroid:SimpleVector.<SimpleVector> = new SimpleVector(numVertices - 1);
 			for (var i:int = 0; i < numVertices; i++)
 			{
 				if (i != errorProfile.HighestIndex)
@@ -325,14 +325,14 @@ internal class ErrorProfile
 	}
 	
 }
-internal class Vector
+internal class SimpleVector
 {
-	private var _components:Vector.<Number>;
+	private var _components:SimpleVector.<Number>;
 	private var _nDimensions:int;
 	
-	public function Vector(dimensions:int)
+	public function SimpleVector(dimensions:int)
 	{
-		_components = new Vector.<Number>(dimensions);
+		_components = new SimpleVector.<Number>(dimensions);
 		_nDimensions = dimensions;
 	}
 	
@@ -347,7 +347,7 @@ internal class Vector
 		set { _components[index] = value; }
 	}*/
 	
-	public function get Components():Vector.<Number>
+	public function get Components():SimpleVector.<Number>
 	{
 		return _components;
 	}
@@ -357,12 +357,12 @@ internal class Vector
 	/// </summary>
 	/// <param name="v"></param>
 	/// <returns></returns>
-	public function Add(v:Vector):Vector
+	public function Add(v:SimpleVector):SimpleVector
 	{
 		if (v.NDimensions != this.NDimensions)
 			throw new ArgumentError("Can only add vectors of the same dimensionality");
 		
-		var vector:Vector = new Vector(v.NDimensions);
+		var vector:SimpleVector = new SimpleVector(v.NDimensions);
 		for (var i:int = 0; i < v.NDimensions; i++)
 		{
 			vector[i] = this[i] + v[i];
@@ -375,12 +375,12 @@ internal class Vector
 	/// </summary>
 	/// <param name="v"></param>
 	/// <returns></returns>
-	public function Subtract(v:Vector):Vector
+	public function Subtract(v:SimpleVector):SimpleVector
 	{
 		if (v.NDimensions != this.NDimensions)
 			throw new ArgumentException("Can only subtract vectors of the same dimensionality");
 		
-		var vector:Vector = new Vector(v.NDimensions);
+		var vector:SimpleVector = new SimpleVector(v.NDimensions);
 		for (var i:int = 0; i < v.NDimensions; i++)
 		{
 			vector[i] = this[i] - v[i];
@@ -393,9 +393,9 @@ internal class Vector
 	/// </summary>
 	/// <param name="scalar"></param>
 	/// <returns></returns>
-	public function Multiply(scalar:Number):Vector
+	public function Multiply(scalar:Number):SimpleVector
 	{
-		var scaledVector:Vector = new Vector(this.NDimensions);
+		var scaledVector:SimpleVector = new SimpleVector(this.NDimensions);
 		for (var i:int = 0; i < this.NDimensions; i++)
 		{
 			scaledVector[i] = this[i] * scalar;
@@ -408,7 +408,7 @@ internal class Vector
 	/// </summary>
 	/// <param name="v"></param>
 	/// <returns></returns>
-	public function DotProduct(v:Vector):Number
+	public function DotProduct(v:SimpleVector):Number
 	{
 		if (v.NDimensions != this.NDimensions)
 			throw new ArgumentException("Can only compute dot product for vectors of the same dimensionality");
@@ -423,7 +423,7 @@ internal class Vector
 	
 	public function ToString():String
 	{
-		var components:Vector.<String> = new Vector.<String>(_components.Length);
+		var components:SimpleVector.<String> = new SimpleVector.<String>(_components.Length);
 		for (var i:int = 0; i < components.Length; i++)
 		{
 			components[i] = _components[i].ToString();

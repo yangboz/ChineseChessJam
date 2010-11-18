@@ -9,9 +9,6 @@ package com.lookbackon.ccj.model.vos.cvo
 	import com.lookbackon.ccj.utils.MathUtil;
 	
 	import mx.logging.ILogger;
-	
-	import org.osmf.layout.AbsoluteLayoutFacet;
-
 	/**
 	 * 
 	 * @author Knight.zhou

@@ -98,6 +98,7 @@ package com.lookbackon.AI.searching
 		private function negaScout(gamePosition:PositionVO,alpha:int,beta:int):int
 		{
 			//TODO:
+			return -1;
 		}
 	}
 	

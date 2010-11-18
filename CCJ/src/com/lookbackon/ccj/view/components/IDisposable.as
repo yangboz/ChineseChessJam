@@ -22,13 +22,13 @@ package com.lookbackon.ccj.view.components
 		//--------------------------------------------------------------------------
 		// Implements dispose method that must be called just before
 		// releasing a MyComponent object
-		function dispose():void
-		{
+		function dispose():void;
+//		{
 			// Clean up:
 			//      - Remove event listeners
 			//      - Stop timers
 			//      - Set references to null
 			//      - ...
-		}
+//		}
 	}
 }

@@ -1,6 +1,9 @@
 package com.lookbackon.AI.fuzzyLogicSystem
 {
+	import com.lookbackon.ccj.utils.LogUtil;
+	
 	import mx.logging.ILogger;
+
     /**
      * Right shoulder member ship functions
      * 
