@@ -16,9 +16,10 @@
     <sourceAttachmentPath/>
   </compiler>
   <applications>
+    <application path="MainFixture.mxml"/>
     <application path="FlexUnitCompilerApplication.mxml"/>
-    <application path="FlexUnitApplication.mxml"/>
     <application path="Flex4Test.mxml"/>
+    <application path="FlexUnitApplication.mxml"/>
     <application path="Main.mxml"/>
   </applications>
   <modules/>

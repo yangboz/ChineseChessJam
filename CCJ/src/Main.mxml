@@ -1,51 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
-			   xmlns:s="library://ns.adobe.com/flex/spark" 
-			   xmlns:mx="library://ns.adobe.com/flex/halo" 
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/halo"
 			   xmlns:components="com.lookbackon.ccj.view.components.*"
-			   creationComplete="application1_creationCompleteHandler(event)" 
-			   applicationComplete="application1_applicationCompleteHandler(event)" 
-			   xmlns:popup="com.adobe.cairngorm.popup.*" 
-			   maxHeight="520" maxWidth="500"
-			   scriptTimeLimit="60" 
-			   xmlns:controller="com.lookbackon.ccj.controller.*" 
->
+			   creationComplete="application1_creationCompleteHandler(event)"
+			   applicationComplete="application1_applicationCompleteHandler(event)"
+			   xmlns:popup="com.adobe.cairngorm.popup.*"
+			   maxHeight="520"
+			   maxWidth="500"
+			   scriptTimeLimit="60"
+			   xmlns:controller="com.lookbackon.ccj.controller.*"
+			   xmlns:task="com.adobe.cairngorm.task.*"
+			   xmlns:tasks="com.godpaper.tasks.*">
 	<s:layout>
 		<s:BasicLayout/>
 	</s:layout>
 	<fx:Script>
 		<![CDATA[
 			import com.adobe.cairngorm.contract.Contract;
-			import com.lookbackon.ccj.CcjConstants;
-			import com.lookbackon.ccj.ChessPiecesConstants;
-			import com.lookbackon.ccj.business.factory.ChessFactory;
-			import com.lookbackon.ccj.managers.ChessPieceManager;
 			import com.lookbackon.ccj.managers.GameManager;
 			import com.lookbackon.ccj.model.ChessPiecesModel;
-			import com.lookbackon.ccj.model.vos.ConductVO;
-			import com.lookbackon.ccj.model.vos.OmenVO;
 			import com.lookbackon.ccj.utils.LogUtil;
-			import com.lookbackon.ccj.view.components.ChessGasket;
-			import com.lookbackon.ccj.view.components.ChessPiece;
-			import com.lookbackon.ccj.view.components.IChessPiece;
 			
-			import mx.core.IVisualElement;
 			import mx.events.FlexEvent;
 			import mx.logging.ILogger;
 			import mx.logging.LogEventLevel;
-			
+
 			//--------------------------------------------------------------------------
 			//
 			//  Variables
 			//
 			//--------------------------------------------------------------------------
-			public var _mochiads_game_id:String = "47de4a85dd3e213a";//For mochi.
-			
-			private var chessPiecesModel:ChessPiecesModel = ChessPiecesModel.getInstance();
+			public var _mochiads_game_id:String="47de4a85dd3e213a"; //For mochi.
+
+			private var chessPiecesModel:ChessPiecesModel=ChessPiecesModel.getInstance();
 			//
 			[Bindable]
-			private var logFilters:Array = 
-											[ 
+			private var logFilters:Array=[
 //												"com.lookbackon.ccj.view.components.ChessPiece"
 //												,
 //												"com.lookbackon.ccj.managers.ChessPieceManager"
@@ -54,12 +45,12 @@
 //												,
 //												"com.lookbackon.ccj.view.components.ChessPiece"
 //												,
-												"com.lookbackon.AI.searching.*"
-											];
+				"com.lookbackon.AI.searching.*"];
 			//----------------------------------
 			//  CONSTANTS
 			//----------------------------------
-			private static const LOG:ILogger = LogUtil.getLogger(Main);
+			private static const LOG:ILogger=LogUtil.getLogger(Main);
+
 			//--------------------------------------------------------------------------
 			//
 			//  Methods
@@ -70,53 +61,14 @@
 			{
 				// TODO Auto-generated method stub
 				//create chess gaskets.
-				for(var v:int=0;v<CcjConstants.BOARD_V_LINES;v++)
-				{
-					for(var h:int=0;h<CcjConstants.BOARD_H_LINES;h++)
-					{
-						var cGasket:IVisualElement = 
-							this.addElement( ChessFactory.createChessGasket(new Point(h,v)) );
-						//
-						ChessPieceManager.gaskets.sett(h,v,cGasket);
-					}
-				}
 				//create chess piece
-				for(var hh:int=0;hh<CcjConstants.BOARD_H_LINES;hh++)
-				{
-					for(var vv:int=0;vv<CcjConstants.BOARD_V_LINES;vv++)
-					{
-						var iChessPiece:IChessPiece = ChessFactory.createChessPiece(new Point(hh,vv));
-						if(iChessPiece!=null)
-						{
-//							trace("index:",vv*CcjConstants.BOARD_V_LINES+hh);
-							var ecGasket:ChessGasket = ChessPieceManager.gaskets.gett(hh,vv) as ChessGasket;
-							ecGasket.addElement( iChessPiece );
-							//
-							iChessPiece.x = 0;
-							iChessPiece.y = 0;
-							//
-						}
-					}
-				}
 				//create chess pieces' chessVO;
 				//create chess pieces' omenVO;
-				for(var cp:int=0;cp<chessPiecesModel.pieces.length;cp++)
-				{
-					var chessPiece:ChessPiece = chessPiecesModel.pieces[cp];
-					//generateChessPieceVO
-					var conductVO:ConductVO = new ConductVO();
-					conductVO.target = chessPiece;
-					conductVO.previousPosition = chessPiece.position;
-					chessPiece.chessVO = ChessFactory.generateChessVO(conductVO);
-					//generateOmenVO
-					var omenVO:OmenVO = ChessFactory.generateOmenVO(conductVO);
-					LOG.debug(omenVO.dump());
-					chessPiece.omenVO = omenVO;
-				}
+				this.startUpSequenceTask.start();
 				//init data struct.@see ChessPieceModel dump info.
 				this.dumpFootSprint();
 			}
-			
+
 			protected function dumpFootSprint():void
 			{
 				//design by contract.
@@ -124,20 +76,21 @@
 				try
 				{
 					Contract.precondition(CONFIG::debugging);
-					this.traceTarget.level = LogEventLevel.DEBUG;
+					this.traceTarget.level=LogEventLevel.DEBUG;
 					Contract.postcondition(CONFIG::debugging);
-				}catch(error:Error)
+				}
+				catch (error:Error)
 				{
-					LOG.warn("CONFIG::debugging {0}",error.toString());
+					LOG.warn("CONFIG::debugging {0}", error.toString());
 				}
 				//
-				LOG.debug("redPieces:{0}",chessPiecesModel.redPieces.dump());
-				LOG.debug("bluePieces:{0}",chessPiecesModel.bluePieces.dump());
-				LOG.debug("allPieces:{0}",chessPiecesModel.allPieces.dump());
+				LOG.debug("redPieces:{0}", chessPiecesModel.redPieces.dump());
+				LOG.debug("bluePieces:{0}", chessPiecesModel.bluePieces.dump());
+				LOG.debug("allPieces:{0}", chessPiecesModel.allPieces.dump());
 				//
-				LOG.debug("allPieces rotate90:{0}",chessPiecesModel.allPieces.rotate90().dump());
-				LOG.debug("allPieces rotate90.bitCount:{0}",chessPiecesModel.allPieces.bitCount);
-				LOG.debug("allPieces rotate90.cellCount:{0}",chessPiecesModel.allPieces.cellCount);
+				LOG.debug("allPieces rotate90:{0}", chessPiecesModel.allPieces.rotate90().dump());
+				LOG.debug("allPieces rotate90.bitCount:{0}", chessPiecesModel.allPieces.bitCount);
+				LOG.debug("allPieces rotate90.cellCount:{0}", chessPiecesModel.allPieces.cellCount);
 			}
 
 			protected function application1_applicationCompleteHandler(event:FlexEvent):void
@@ -147,32 +100,40 @@
 				GameManager.startGame();
 				//
 			}
-
 		]]>
 	</fx:Script>
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
-		<s:TraceTarget 
-					   id="traceTarget"
+		<s:TraceTarget id="traceTarget"
 					   fieldSeparator="->"
 					   includeCategory="true"
 					   includeDate="false"
 					   includeLevel="true"
 					   includeTime="true"
 					   level="{LogEventLevel.DEBUG}"
-					   filters="{logFilters}"
-					   />
-		<popup:PopUpWrapper open="{GameManager.indicatorReadOut}" center="true" modal="true" >
+					   filters="{logFilters}"/>
+		<popup:PopUpWrapper open="{GameManager.indicatorReadOut}"
+							center="true"
+							modal="true">
 			<components:IndicatoryProgressBar label="{GameManager.indication}"/>
 		</popup:PopUpWrapper>
 		<!-- Controllers here -->
+		<!-- Tasks -->
+		<task:SequenceTask id="startUpSequenceTask">
+			<tasks:CreateChessGasketTask/>
+			<tasks:CreateChessPieceTask/>
+			<tasks:CreateChessVoTask/>
+		</task:SequenceTask>
 		<controller:GameController/>
 		<!-- Services here -->
 	</fx:Declarations>
-	
+
 	<!-- Views here -->
-	<components:ChessBoard id="chessBoard" left="25" right="25" top="25" bottom="25" 
-						   backgroundImage="@Embed('./assets/images/ChessBoardBG.png')"
-						   />
-	
+	<components:ChessBoard id="chessBoard"
+						   left="25"
+						   right="25"
+						   top="25"
+						   bottom="25"
+						   backgroundImage="@Embed('./assets/images/ChessBoardBG.png')"/>
+
 </s:Application>

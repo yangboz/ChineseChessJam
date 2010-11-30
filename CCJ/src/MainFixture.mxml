@@ -1,27 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
-			   xmlns:s="library://ns.adobe.com/flex/spark" 
-			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600" xmlns:godpaper="com.godpaper.*">
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   minWidth="955"
+			   minHeight="600"
+			   xmlns:parsley="http://www.spicefactory.org/parsley">
+	<fx:Script>
+		<![CDATA[
+			import com.godpaper.configs.CCJContextConfig;
+
+			import mx.logging.LogEventLevel;
+
+			[Bindable]
+			private var logFilters:Array=[
+				//												"com.lookbackon.ccj.view.components.ChessPiece"
+				//												,
+				//												"com.lookbackon.ccj.managers.ChessPieceManager"
+				//												,
+				//												"com.lookbackon.ccj.model.vos.cvo.CannonVO"		
+				//												,
+				//												"com.lookbackon.ccj.view.components.ChessPiece"
+				//												,
+				"com.lookbackon.AI.searching.*"];
+		]]>
+	</fx:Script>
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 		<!---
-			The signal context for bootstrapping the whole RobotLegs framework.
+			The context for bootstrapping the whole Parsley framework.
 		-->
-		<godpaper:CCJSignalContext contextView="{this}"/>
-		
+		<parsley:ContextBuilder config="{CCJContextConfig}"/>
+
 		<!---
 			The system unique logging component provider LOG.debug/info/warn/error/fatal avenues.
 		-->
-		<mx:TraceTarget 
-			includeTime="true" 
-			fieldSeparator="->" 
-			includeLevel="true"
-			includeCategory="true"
-			level="0"
-		>
-			<mx:filters>
-				
-			</mx:filters>
+		<mx:TraceTarget id="traceTarget"
+						fieldSeparator="->"
+						includeCategory="true"
+						includeDate="false"
+						includeLevel="true"
+						includeTime="true"
+						level="{LogEventLevel.DEBUG}"
+						filters="{logFilters}">
 		</mx:TraceTarget>
 	</fx:Declarations>
 	<!---
