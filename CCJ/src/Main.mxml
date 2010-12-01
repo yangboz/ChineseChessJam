@@ -37,14 +37,14 @@
 			//
 			[Bindable]
 			private var logFilters:Array=[
-//												"com.lookbackon.ccj.view.components.ChessPiece"
+//												"com.lookbackon.ccj.view.components.ChessGasket"
 //												,
-//												"com.lookbackon.ccj.managers.ChessPieceManager"
-//												,
+												"com.lookbackon.ccj.managers.ChessPieceManager"
+												,
 //												"com.lookbackon.ccj.model.vos.cvo.CannonVO"		
 //												,
-//												"com.lookbackon.ccj.view.components.ChessPiece"
-//												,
+												"com.lookbackon.ccj.view.components.ChessPiece"
+												,
 				"com.lookbackon.AI.searching.*"];
 			//----------------------------------
 			//  CONSTANTS
@@ -110,7 +110,7 @@
 					   includeDate="false"
 					   includeLevel="true"
 					   includeTime="true"
-					   level="{LogEventLevel.DEBUG}"
+					   level="{LogEventLevel.INFO}"
 					   filters="{logFilters}"/>
 		<popup:PopUpWrapper open="{GameManager.indicatorReadOut}"
 							center="true"

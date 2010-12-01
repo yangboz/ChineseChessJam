@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
-		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/halo" 
-		 width="50" height="50"
-		 implements="com.lookbackon.ccj.view.components.IChessGasket" 
-		 creationComplete="group1_creationCompleteHandler(event)" 
-		 borderVisible="false" backgroundAlpha="0.0" contentBackgroundAlpha="0.0" borderAlpha="0.0">
+<s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009"
+				   xmlns:s="library://ns.adobe.com/flex/spark"
+				   xmlns:mx="library://ns.adobe.com/flex/halo"
+				   width="50"
+				   height="50"
+				   implements="com.lookbackon.ccj.view.components.IChessGasket"
+				   creationComplete="group1_creationCompleteHandler(event)"
+				   borderVisible="false"
+				   backgroundAlpha="0.0"
+				   contentBackgroundAlpha="0.0"
+				   borderAlpha="0.0">
 	<fx:Script>
 		<![CDATA[
 			import com.adobe.cairngorm.control.CairngormEventDispatcher;
@@ -14,24 +18,24 @@
 			import com.lookbackon.ccj.model.vos.ConductVO;
 			import com.lookbackon.ccj.utils.LogUtil;
 			import com.lookbackon.ds.BitBoard;
-			
+
 			import mx.core.IUIComponent;
 			import mx.events.DragEvent;
 			import mx.events.FlexEvent;
 			import mx.logging.ILogger;
 			import mx.managers.DragManager;
-			
+
 			import spark.events.ElementExistenceEvent;
 			//--------------------------------------------------------------------------
 			//
 			//  Variables
 			//
 			//--------------------------------------------------------------------------
+			private var currentConductVO:ConductVO;
 			//----------------------------------
 			//  CONSTANTS
 			//----------------------------------
-			private static const LOG:ILogger = LogUtil.getLogger(ChessGasket);
-			private var currentConductVO:ConductVO;
+			private static const LOG:ILogger=LogUtil.getLogger(ChessGasket);
 			//--------------------------------------------------------------------------
 			//
 			//  Properties(implement)
@@ -41,14 +45,17 @@
 			//  position
 			//----------------------------------
 			private var _position:Point;
+
 			public function get position():Point
 			{
 				return _position;
 			}
+
 			public function set position(value:Point):void
 			{
-				_position = value;
+				_position=value;
 			}
+
 			//--------------------------------------------------------------------------
 			//
 			//  Methods
@@ -58,18 +65,19 @@
 			protected function group1_creationCompleteHandler(event:FlexEvent):void
 			{
 				// TODO Auto-generated method stub
-				this.addEventListener(DragEvent.DRAG_ENTER,dragEnterHandler);
-				this.addEventListener(DragEvent.DRAG_DROP,dragDropHandler);
+				this.addEventListener(DragEvent.DRAG_ENTER, dragEnterHandler);
+				this.addEventListener(DragEvent.DRAG_DROP, dragDropHandler);
 				//
-				this.addEventListener(ElementExistenceEvent.ELEMENT_ADD,elementAddHandler);
+				this.addEventListener(ElementExistenceEvent.ELEMENT_ADD, elementAddHandler);
 			}
+
 			//dragEnterHandler
 			private function dragEnterHandler(event:DragEvent):void
 			{
-				var myConductVO:ConductVO = new ConductVO();
-				myConductVO.target = event.dragInitiator as ChessPiece;
-				myConductVO.previousPosition = this.position;
-				if(ChessPieceManager.doMoveValidation(myConductVO))
+				var myConductVO:ConductVO=new ConductVO();
+				myConductVO.target=event.dragInitiator as ChessPiece;
+				myConductVO.previousPosition=this.position;
+				if (ChessPieceManager.doMoveValidation(myConductVO))
 				{
 					DragManager.acceptDragDrop(event.currentTarget as IUIComponent);
 					DragManager.showFeedback(DragManager.LINK);
@@ -77,28 +85,29 @@
 				// remove event listener
 //				this.removeEventListener(DragEvent.DRAG_ENTER,dragEnterHandler);
 			}
+
 			//dragDropHandler
 			private function dragDropHandler(event:DragEvent):void
 			{
-				var myConductVO:ConductVO = new ConductVO();
-				myConductVO.target = event.dragInitiator as ChessPiece;
-				myConductVO.previousPosition = (event.dragInitiator as ChessPiece).position;
-				myConductVO.nextPosition = this.position;
+				var myConductVO:ConductVO=new ConductVO();
+				myConductVO.target=event.dragInitiator as ChessPiece;
+				myConductVO.previousPosition=(event.dragInitiator as ChessPiece).position;
+				myConductVO.nextPosition=this.position;
 				//make move.
 				ChessPieceManager.makeMove(myConductVO);
 				//
 				event.stopImmediatePropagation();
 				//computer take turns.
-				CairngormEventDispatcher.getInstance().dispatchEvent(new GameEvent(GameEvent.IS_COMPUTER_TURN_NOW));
+//				CairngormEventDispatcher.getInstance().dispatchEvent(new GameEvent(GameEvent.IS_COMPUTER_TURN_NOW));
 			}
-			
+
 			private function elementAddHandler(event:ElementExistenceEvent):void
 			{
-				LOG.debug("ElementExistenceEvent,element:{0},@index:{1}",event.element,event.index.toString());
+				LOG.debug("ElementExistenceEvent,element:{0},@index:{1}", event.element, event.index.toString());
 				//renew ChessPiece's position.
 //				ChessPiece(event.element).position = this.position;
 				//clear gasket indicate effect.
-				var emptyLegalMoves:BitBoard = new BitBoard(9,10);
+				var emptyLegalMoves:BitBoard=new BitBoard(9, 10);
 				emptyLegalMoves.clear();
 				ChessPieceManager.indicatedGaskets(emptyLegalMoves);
 			}

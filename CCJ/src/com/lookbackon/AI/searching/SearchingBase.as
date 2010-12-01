@@ -81,11 +81,11 @@ package com.lookbackon.AI.searching
 			this.orderingMoves = this.moves.sort(VectorUtil.sortOnMoves).reverse();
 			for(var m:int=0;m<this.moves.length;m++)
 			{
-				trace("move's celled:",this.moves[m].target.chessVO.moves.celled);
+//				trace("move's celled:",this.moves[m].target.chessVO.moves.celled);
 			}
 			for(var om:int=0;om<this.moves.length;om++)
 			{
-				trace("orderingMove's celled:",this.orderingMoves[om].target.chessVO.moves.celled);
+//				trace("orderingMove's celled:",this.orderingMoves[om].target.chessVO.moves.celled);
 			}
 			//temporary define first move from ording moves for hard-code test purpose.
 			this.tempMove = this.orderingMoves[0];

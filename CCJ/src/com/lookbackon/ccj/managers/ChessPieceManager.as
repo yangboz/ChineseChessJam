@@ -153,6 +153,14 @@ package com.lookbackon.ccj.managers
 			updateChessPieces(conductVO,cGasket);
 			//
 			LOG.info("End makeMove:{0}",conductVO.brevity);
+			//Trigger in-turn system .
+			if(GameManager.turnFlag==CcjConstants.FLAG_RED)
+			{
+				CairngormEventDispatcher.getInstance().dispatchEvent(new GameEvent(GameEvent.IS_COMPUTER_TURN_NOW));
+			}else
+			{
+				CairngormEventDispatcher.getInstance().dispatchEvent(new GameEvent(GameEvent.IS_HUMAN_TURN_NOW));
+			}
 		}
 		//
 		public static function unmakeMove(conductVO:ConductVO):void
@@ -179,17 +187,17 @@ package com.lookbackon.ccj.managers
 			//TODO:
 			var cGasket:ChessGasket = 
 				ChessPieceManager.gaskets.gett(conductVO.nextPosition.x,conductVO.nextPosition.y) as ChessGasket;
-			if(cGasket.numElements>1)
+			if(cGasket.numElements>=1)
 			{
 				//TODO:chess piece eat off.
-				var removedPiece:ChessPiece = cGasket.getElementAt(1) as ChessPiece;
+				var removedPiece:ChessPiece = cGasket.getElementAt(0) as ChessPiece;
 				var removedIndex:int = ChessPieceManager.calculatePieceIndex(removedPiece);
 				LOG.info("Eat Off@{0} target:{1}",cGasket.position.toString(),removedPiece.toString());
-				if(ChessPiece(cGasket.getElementAt(1)).label==ChessPiecesConstants.BLUE_MARSHAL.label)
+				if(ChessPiece(cGasket.getElementAt(0)).label==ChessPiecesConstants.BLUE_MARSHAL.label)
 				{
 					GameManager.humanWin();	
 				}
-				if(ChessPiece(cGasket.getElementAt(1)).label==ChessPiecesConstants.RED_MARSHAL.label)
+				if(ChessPiece(cGasket.getElementAt(0)).label==ChessPiecesConstants.RED_MARSHAL.label)
 				{
 					GameManager.computerWin();
 				}
@@ -199,20 +207,21 @@ package com.lookbackon.ccj.managers
 				if(GameManager.turnFlag==CcjConstants.FLAG_RED)
 				{
 					//clean this bit at bluePieces.
-					ChessPiecesModel.getInstance().blues = 
-						ChessPiecesModel.getInstance().blues.splice(removedIndex,1);
+					//notice array splice without copy
+//					chessPiecesModel.blues = 
+						chessPiecesModel.blues.splice(removedIndex,1);
 				}else
 				{
 					//clean this bit at redPieces.
-					ChessPiecesModel.getInstance().reds.splice(removedIndex,1);
+					//notice array splice without copy
+//					chessPiecesModel.reds = 
+						chessPiecesModel.reds.splice(removedIndex,1);
 				}
 				//remove element from gasket.
-				cGasket.removeElementAt(1);
+				cGasket.removeElementAt(0);
 			}
 			//
 			makeMove(conductVO);
-			//Trigger in-turn system .
-			CairngormEventDispatcher.getInstance().dispatchEvent(new GameEvent(GameEvent.IS_HUMAN_TURN_NOW));
 		}
 		//pluge to death.	
 		public static function noneMove():int
@@ -300,17 +309,17 @@ package com.lookbackon.ccj.managers
 		private static function updateChessPieces(conductVO:ConductVO,cGasket:ChessGasket):void
 		{
 			//
-			if(cGasket.numElements>1)
+			if(cGasket.numElements>=1)
 			{
 				//TODO:chess piece eat off.
-				var removedPiece:ChessPiece = cGasket.getElementAt(1) as ChessPiece;
+				var removedPiece:ChessPiece = cGasket.getElementAt(0) as ChessPiece;
 				var removedIndex:int = ChessPieceManager.calculatePieceIndex(removedPiece);
 				LOG.info("Eat Off@{0} target:{1}",cGasket.position.toString(),removedPiece.toString());
-				if(ChessPiece(cGasket.getElementAt(1)).label==ChessPiecesConstants.BLUE_MARSHAL.label)
+				if(ChessPiece(cGasket.getElementAt(0)).label==ChessPiecesConstants.BLUE_MARSHAL.label)
 				{
 					GameManager.humanWin();	
 				}
-				if(ChessPiece(cGasket.getElementAt(1)).label==ChessPiecesConstants.RED_MARSHAL.label)
+				if(ChessPiece(cGasket.getElementAt(0)).label==ChessPiecesConstants.RED_MARSHAL.label)
 				{
 					GameManager.computerWin();
 				}
@@ -329,7 +338,7 @@ package com.lookbackon.ccj.managers
 					ChessPiecesModel.getInstance().reds.splice(removedIndex,1);
 				}
 				//remove element from gasket.
-				cGasket.removeElementAt(1);
+				cGasket.removeElementAt(0);
 			}
 			//adjust the chess piece's position.
 			conductVO.target.x = 0;

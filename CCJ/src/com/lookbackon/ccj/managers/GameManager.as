@@ -3,6 +3,7 @@ package com.lookbackon.ccj.managers
 	import com.lookbackon.AI.searching.AlphaBeta;
 	import com.lookbackon.AI.searching.AttackFalse;
 	import com.lookbackon.AI.searching.ISearching;
+	import com.lookbackon.AI.searching.MiniMax;
 	import com.lookbackon.AI.searching.PVS;
 	import com.lookbackon.AI.searching.Quiescence;
 	import com.lookbackon.AI.searching.RandomWalk;

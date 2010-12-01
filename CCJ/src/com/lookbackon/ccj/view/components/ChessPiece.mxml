@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
-		  xmlns:s="library://ns.adobe.com/flex/spark" 
-		  implements="com.lookbackon.ccj.view.components.IChessPiece" 
-		  creationComplete="button1_creationCompleteHandler(event)" 
-		  xmlns:mx="library://ns.adobe.com/flex/mx" 
-		   width="50" height="50">
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 implements="com.lookbackon.ccj.view.components.IChessPiece"
+		 creationComplete="button1_creationCompleteHandler(event)"
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 width="50"
+		 height="50">
 	<fx:Script>
 		<![CDATA[
 			import com.lookbackon.ccj.CcjConstants;
@@ -16,7 +17,7 @@
 			import com.lookbackon.ccj.model.vos.OmenVO;
 			import com.lookbackon.ccj.model.vos.cvo.IChessVO;
 			import com.lookbackon.ccj.utils.LogUtil;
-			
+
 			import mx.core.IUIComponent;
 			import mx.events.FlexEvent;
 			import mx.logging.ILogger;
@@ -28,11 +29,11 @@
 			//--------------------------------------------------------------------------
 			public var attackState:AttackState;
 			public var defenseState:DefenseState;
-			private var textColor:String = CcjConstants.COLOR_BLUE;//default is blue.
+			private var textColor:String=CcjConstants.COLOR_BLUE; //default is blue.
 			//----------------------------------
 			//  CONSTANTS
 			//----------------------------------
-			private static const LOG:ILogger = LogUtil.getLogger(ChessPiece);
+			private static const LOG:ILogger=LogUtil.getLogger(ChessPiece);
 			//--------------------------------------------------------------------------
 			//
 			//  Properties(implementataion)
@@ -42,93 +43,108 @@
 			//  agent
 			//----------------------------------
 			private var _agent:ChessAgent;
+
 			public function get agent():ChessAgent
 			{
 				return _agent;
 			}
+
 			public function set agent(value:ChessAgent):void
 			{
-				_agent = value;
+				_agent=value;
 			}
 			//----------------------------------
 			//  position
 			//----------------------------------
 			private var _position:Point;
+
 			public function get position():Point
 			{
 				return _position;
 			}
+
 			public function set position(value:Point):void
 			{
 				//
-				_position = value;
+				_position=value;
 			}
 			//----------------------------------
 			//  chessVO
 			//----------------------------------
 			private var _chessVO:IChessVO;
+
 			public function get chessVO():IChessVO
 			{
 				return _chessVO;
 			}
+
 			public function set chessVO(value:IChessVO):void
 			{
-				_chessVO = value;
+				_chessVO=value;
 			}
 			//----------------------------------
 			//  flag
 			//----------------------------------
 			private var _flag:int;
+
 			public function get flag():int
 			{
 				return _flag;
 			}
+
 			public function set flag(value:int):void
 			{
-				_flag = value;
+				_flag=value;
 				//
-				if(value!=CcjConstants.FLAG_BLUE)
+				if (value != CcjConstants.FLAG_BLUE)
 				{
-					this.textColor = CcjConstants.COLOR_RED;
-					this.addEventListener(MouseEvent.MOUSE_DOWN,mouseDownHandler);
+					this.textColor=CcjConstants.COLOR_RED;
+					this.addEventListener(MouseEvent.MOUSE_DOWN, mouseDownHandler);
 				}
 			}
 			//----------------------------------
 			//  omenVO
 			//----------------------------------
 			private var _omenVO:OmenVO;
+
 			public function get omenVO():OmenVO
 			{
 				return _omenVO;
 			}
+
 			public function set omenVO(value:OmenVO):void
 			{
-				_omenVO = value;
+				_omenVO=value;
 			}
 			//----------------------------------
 			//  type(RED_ROOK/BLUE_ROOK...)
 			//----------------------------------
 			private var _type:String;
+
 			public function get type():String
 			{
 				return _type;
 			}
+
 			public function set type(value:String):void
 			{
-				_type = value;
+				_type=value;
 			}
 			//----------------------------------
 			//  label
 			//----------------------------------
 			private var _label:String;
+
 			public function get label():String
 			{
 				return _label;
 			}
+
 			public function set label(value:String):void
 			{
-				_label = value;
+				_label=value;
 			}
+
 			//--------------------------------------------------------------------------
 			//
 			//  Methods
@@ -139,33 +155,35 @@
 			{
 				// TODO Auto-generated method stub
 				// finite state machine initialization.
-				this.agent = new ChessAgent(this.name,this,null);
-				this.attackState = new AttackState(this.agent,null,"Attack");
-				this.defenseState = new DefenseState(this.agent,null,"Defense");
+				this.agent=new ChessAgent(this.name, this, null);
+				this.attackState=new AttackState(this.agent, null, "Attack");
+				this.defenseState=new DefenseState(this.agent, null, "Defense");
 				// add event listener
-				
+
 				//set text style.
-				this.setStyle("color",textColor);
-				this.setStyle("fillColor",textColor);
+				this.setStyle("color", textColor);
+				this.setStyle("fillColor", textColor);
 			}
+
 			//mouseDownHandler
 			private function mouseDownHandler(event:MouseEvent):void
 			{
-				DragManager.doDrag(event.currentTarget as IUIComponent,null,event);
+				DragManager.doDrag(event.currentTarget as IUIComponent, null, event);
 				// remove event listener
 //				this.removeEventListener(MouseEvent.MOUSE_DOWN,mouseDownHandler);
 //				LOG.debug("occupies:{0}",this.chessVO.occupies.dump());
-				LOG.debug("captures:{0}",this.chessVO.captures.dump());
-				LOG.debug("moves:{0}",this.chessVO.moves.dump());
-				LOG.debug("current bitboard:{0}",ChessPiecesModel.getInstance().allPieces.dump());
+				LOG.debug("captures:{0}", this.chessVO.captures.dump());
+				LOG.debug("moves:{0}", this.chessVO.moves.dump());
+				LOG.debug("current bitboard:{0}", ChessPiecesModel.getInstance().allPieces.dump());
 				//indicate gasket can fill with chess piece.
 				ChessPieceManager.indicatedGaskets(this.chessVO.moves);
 			}
-			
 		]]>
 	</fx:Script>
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
-	<mx:SWFLoader id="swfLoader" verticalCenter="0" horizontalCenter="0"/>
+	<mx:SWFLoader id="swfLoader"
+				  verticalCenter="0"
+				  horizontalCenter="0"/>
 </s:Group>

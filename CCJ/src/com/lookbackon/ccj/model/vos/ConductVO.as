@@ -98,10 +98,10 @@ package com.lookbackon.ccj.model.vos
 			//
 			var cGasket:ChessGasket = 
 				ChessPieceManager.gaskets.gett(value.x,value.y) as ChessGasket;
-			if(cGasket.numElements>1)
+			if(cGasket.numElements>=1)
 			{
 				//TODO:chess piece eat off.
-				var removedPiece:ChessPiece = cGasket.getElementAt(1) as ChessPiece;
+				var removedPiece:ChessPiece = cGasket.getElementAt(0) as ChessPiece;
 				var removedIndex:int = ChessPieceManager.calculatePieceIndex(removedPiece);
 				LOG.info("Eat Off@{0} target:{1}",cGasket.position.toString(),removedPiece.toString());
 				//set eat off value.
