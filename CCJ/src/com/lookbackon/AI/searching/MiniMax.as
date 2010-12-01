@@ -176,7 +176,7 @@ package com.lookbackon.AI.searching
 				}
 			}
 			//
-			this.threadDone = true;
+			this.processDone = true;
 			return bestValue;
 		}
 	}

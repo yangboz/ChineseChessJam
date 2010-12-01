@@ -54,8 +54,8 @@ package com.lookbackon.AI.searching
 		private var _evaluation:IEvaluation=new LinearEvaluationProxy(); //Notice:this is all kinds of evaluation method entry,should be test.
 		//
 		private var _orderingMoves:Vector.<ConductVO>;
-		//flag this thread is done.
-		private var _threadDone:Boolean;
+		//flag wheater this process done.
+		private var _processDone:Boolean;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -91,7 +91,7 @@ package com.lookbackon.AI.searching
 			//temporary define first move from ording moves for hard-code test purpose.
 			this.tempMove=this.orderingMoves[0];
 			//default execute run,to be overrided.
-			this.run();
+//			this.run();
 			//
 			super(isSelfManaging);
 		}
@@ -194,14 +194,14 @@ package com.lookbackon.AI.searching
 		//----------------------------------
 		//  threadDone(native)
 		//----------------------------------
-		public function get threadDone():Boolean
+		public function get processDone():Boolean
 		{
-			return _threadDone;
+			return _processDone;
 		}
 		
-		public function set threadDone(value:Boolean):void
+		public function set processDone(value:Boolean):void
 		{
-			_threadDone = value;
+			_processDone = value;
 			if(value)
 			{
 				//after execute all kinds of searching algorithm,always apply move.
@@ -335,7 +335,7 @@ package com.lookbackon.AI.searching
 		//return thread calculate precentage.
 		override public function get percentage():Number
 		{
-			return threadDone ? 1.0 : 0.33;
+			return processDone ? 1.0 : 0.33;
 		}
 	}
 }

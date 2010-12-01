@@ -66,7 +66,7 @@ package com.lookbackon.AI.searching
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		override public function execute():void
+		override public function run():void
 		{
 			//Why named it "ShortSightedAI"？ 
 			//cuz this gameAI just only scan the next step and then judgement it.
@@ -91,6 +91,8 @@ package com.lookbackon.AI.searching
 				}
 				LOG.debug("bestMove:{0}",bestMove.dump());
 				LOG.debug("max position value:{0}",pValue);
+				//
+				this.processDone = true;
 			}
 		}
 		//--------------------------------------------------------------------------

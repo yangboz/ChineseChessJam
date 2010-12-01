@@ -13,9 +13,17 @@ package com.lookbackon.ccj.managers
 	import com.lookbackon.ccj.model.vos.PositionVO;
 	import com.lookbackon.ccj.utils.LogUtil;
 	
+	import flash.events.Event;
+	
 	import mx.controls.Alert;
+	import mx.core.FlexGlobals;
 	import mx.logging.ILogger;
 	import mx.managers.CursorManager;
+	
+	import org.flexunit.runner.notification.IRunListener;
+	import org.generalrelativity.thread.GreenThread;
+	import org.generalrelativity.thread.IRunnable;
+	import org.generalrelativity.thread.event.GreenThreadEvent;
 
 	/**
 	 * A player manager class to maintain turn-based game.
@@ -113,6 +121,32 @@ package com.lookbackon.ccj.managers
 //			gameAI = new PVS(ChessPiecesModel.getInstance().gamePosition);
 //			gameAI = new ShortSighted(ChessPiecesModel.getInstance().gamePosition);
 			gameAI = new AttackFalse(ChessPiecesModel.getInstance().gamePosition);
+			
+			//using this flash green thread algorithm to avoid script time limition only 15s.
+			var processes:Vector.<IRunnable> = new Vector.<IRunnable>();
+			processes.push(gameAI);
+			var greenThread:GreenThread = new GreenThread(processes,
+				mx.core.FlexGlobals.topLevelApplication.stage.frameRate
+			);
+			//
+			greenThread.addEventListener(GreenThreadEvent.PROCESS_TIMEOUT,function(event:GreenThread):void
+			{
+				LOG.error(event.toString());
+			});
+			greenThread.addEventListener(GreenThread.CYCLE,function(event:Event):void
+			{
+				LOG.debug(event.toString());
+			});
+			greenThread.addEventListener(GreenThreadEvent.PROCESS_COMPLETE,function(event:GreenThreadEvent):void
+			{
+				LOG.info(event.toString());
+			});
+			greenThread.addEventListener(Event.COMPLETE,function(event:Event):void
+			{
+				LOG.info(event.toString());
+			});
+			//
+			greenThread.open();
 		}
 		//----------------------------------
 		//  isHumanTurnNow

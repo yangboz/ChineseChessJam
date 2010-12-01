@@ -64,7 +64,7 @@ package com.lookbackon.AI.searching
 				LOG.debug("randomed bestMove:{0}",bestMove.dump());
 				LOG.debug("max position value:{0}",pValue);
 				//
-				this.threadDone = true;
+				this.processDone = true;
 			}
 		}
 		
