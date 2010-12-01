@@ -2,17 +2,47 @@
 
 <!-- This is an auto generated file and is not intended for modification. -->
 
-<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
-			   xmlns:s="library://ns.adobe.com/flex/spark" 
-			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600" xmlns:flexui="flexunit.flexui.*" creationComplete="onCreationComplete()">
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   xmlns:flexui="flexunit.flexui.*"
+			   minWidth="955" minHeight="600" creationComplete="onCreationComplete()">
 	<fx:Script>
 		<![CDATA[
+			import flexUnitTests.RookVOSuite;
+			import flexUnitTests.PawnVOSuite;
+			import flexUnitTests.OfficalVOSuite;
+			import flexUnitTests.MarshalVOSuite;
+			import flexUnitTests.KnightVOSuite;
+			import flexUnitTests.CannonVOSuite;
+			import flexUnitTests.BishopVOSuite;
 			import flexUnitTests.ds.tests.ZobristHashTableTest;
+			import flexUnitTests.chessVO.tests.RookVOTest;
+			import flexUnitTests.chessVO.tests.PawnVOTest;
+			import flexUnitTests.chessVO.tests.OfficalVOTest;
+			import flexUnitTests.chessVO.tests.MarshalVOTest;
+			import flexUnitTests.chessVO.tests.KnightVOTest;
+			import flexUnitTests.chessVO.tests.CannonVOTest;
+			import flexUnitTests.chessVO.tests.BishopVOTest;
 			
 			public function currentRunTestSuite():Array
 			{
 				var testsToRun:Array = new Array();
+				testsToRun.push(flexUnitTests.chessVO.tests.BishopVOTest);
+				testsToRun.push(flexUnitTests.chessVO.tests.CannonVOTest);
+				testsToRun.push(flexUnitTests.chessVO.tests.KnightVOTest);
+				testsToRun.push(flexUnitTests.chessVO.tests.MarshalVOTest);
+				testsToRun.push(flexUnitTests.chessVO.tests.OfficalVOTest);
+				testsToRun.push(flexUnitTests.chessVO.tests.PawnVOTest);
+				testsToRun.push(flexUnitTests.chessVO.tests.RookVOTest);
 				testsToRun.push(flexUnitTests.ds.tests.ZobristHashTableTest);
+				testsToRun.push(flexUnitTests.BishopVOSuite);
+				testsToRun.push(flexUnitTests.CannonVOSuite);
+				testsToRun.push(flexUnitTests.KnightVOSuite);
+				testsToRun.push(flexUnitTests.MarshalVOSuite);
+				testsToRun.push(flexUnitTests.OfficalVOSuite);
+				testsToRun.push(flexUnitTests.PawnVOSuite);
+				testsToRun.push(flexUnitTests.RookVOSuite);
 				return testsToRun;
 			}
 			

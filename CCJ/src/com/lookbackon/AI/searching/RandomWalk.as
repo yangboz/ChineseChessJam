@@ -35,7 +35,7 @@ package com.lookbackon.AI.searching
 			super(gamePosition);
 		}	
 		
-		override public function execute():void
+		override public function run():void
 		{
 			//
 			bestMove = new ConductVO();
@@ -63,6 +63,8 @@ package com.lookbackon.AI.searching
 				}
 				LOG.debug("randomed bestMove:{0}",bestMove.dump());
 				LOG.debug("max position value:{0}",pValue);
+				//
+				this.threadDone = true;
 			}
 		}
 		

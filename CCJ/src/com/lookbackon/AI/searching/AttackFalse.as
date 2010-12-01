@@ -59,7 +59,7 @@ package com.lookbackon.AI.searching
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		override public function execute():void
+		override public function run():void
 		{
 			if(orderingMoves.length<=0)
 			{
@@ -98,6 +98,8 @@ package com.lookbackon.AI.searching
 				}
 				LOG.debug("bestMove:{0}",bestMove.dump());
 				LOG.debug("max position value:{0}",pValue);
+				//
+				this.threadDone = true;
 			}
 		}
 		//--------------------------------------------------------------------------

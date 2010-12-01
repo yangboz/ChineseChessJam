@@ -86,7 +86,7 @@ package com.lookbackon.AI.searching
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		override public function execute():void
+		override public function run():void
 		{
 			//
 			miniMax(gamePosition,depth);
@@ -175,6 +175,8 @@ package com.lookbackon.AI.searching
 					LOG.debug("BLUE,bestMove:{0}",bestMove.dump());
 				}
 			}
+			//
+			this.threadDone = true;
 			return bestValue;
 		}
 	}

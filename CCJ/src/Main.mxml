@@ -114,7 +114,9 @@
 					   filters="{logFilters}"/>
 		<popup:PopUpWrapper open="{GameManager.indicatorReadOut}"
 							center="true"
-							modal="true">
+							modal="true"
+						    reuse="false"
+							>
 			<components:IndicatoryProgressBar label="{GameManager.indication}"/>
 		</popup:PopUpWrapper>
 		<!-- Controllers here -->
