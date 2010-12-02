@@ -1,13 +1,19 @@
 package com.lookbackon.ccj.managers
 {
 	import com.adobe.cairngorm.control.CairngormEventDispatcher;
+	import com.adobe.cairngorm.task.ParallelTask;
+	import com.godpaper.tasks.UpdateChessPiecesTask;
+	import com.godpaper.tasks.UpdatePiecesBitboardTask;
+	import com.godpaper.tasks.UpdatePiecesChessVoTask;
+	import com.godpaper.tasks.UpdatePiecesOmenVoTask;
+	import com.godpaper.tasks.UpdatePiecesPositionTask;
+	import com.godpaper.tasks.UpdateZobristKeysTask;
 	import com.lookbackon.ccj.CcjConstants;
 	import com.lookbackon.ccj.ChessPiecesConstants;
-	import com.lookbackon.ccj.business.factory.ChessFactory;
 	import com.lookbackon.ccj.errors.CcjErrors;
 	import com.lookbackon.ccj.events.GameEvent;
+	import com.lookbackon.ccj.model.ChessPiecesMemento;
 	import com.lookbackon.ccj.model.ChessPiecesModel;
-	import com.lookbackon.ccj.model.ZobristKeysModel;
 	import com.lookbackon.ccj.model.vos.ConductVO;
 	import com.lookbackon.ccj.model.vos.PositionVO;
 	import com.lookbackon.ccj.model.vos.ZobristKeyVO;
@@ -19,17 +25,15 @@ package com.lookbackon.ccj.managers
 	import de.polygonal.ds.Array2;
 	import de.polygonal.math.PM_PRNG;
 	
-	import mx.collections.ArrayCollection;
-	import mx.core.IVisualElement;
 	import mx.logging.ILogger;
 	
 	import spark.filters.GlowFilter;
 
 	/**
 	 * The chess piece manager manage chess piece move's validation/makeMove/unMakeMove.
-	 * 
+	 * Also a way for the originator to be responsible for saving and restoring its states.
 	 * @author Knight.zhou
-	 * 
+	 * @history 2010-12-02 using memento design pattern to implment make/unmake functions.
 	 */	
 	public class ChessPieceManager
 	{
@@ -52,6 +56,12 @@ package com.lookbackon.ccj.managers
 		private static var chessPiecesModel:ChessPiecesModel = ChessPiecesModel.getInstance();
 		//
 		private static var _eatOffs:Vector.<ChessPiece> = new Vector.<ChessPiece>();
+		//
+//		private static var _memento:ChessPiecesMemento;
+		private static var _conduct:ConductVO;
+		//
+		private static var _previousMementos:Array=[];
+		private static var _nextMementos:Array=[];
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -61,6 +71,19 @@ package com.lookbackon.ccj.managers
 		//  Properties
 		//
 		//--------------------------------------------------------------------------
+		//----------------------------------
+		//  memento
+		//----------------------------------
+		public static function get memento():ChessPiecesMemento
+		{
+			return new ChessPiecesMemento(_conduct);
+		}
+		public static function set memento(value:ChessPiecesMemento):void
+		{
+			_conduct = value.conduct;
+			//
+			update();
+		}
 		//----------------------------------
 		//  gaskets
 		//----------------------------------
@@ -131,26 +154,15 @@ package com.lookbackon.ccj.managers
 		public static function makeMove(conductVO:ConductVO):void
 		{
 			LOG.info("Begin makeMove:{0}",conductVO.brevity);
-			//TODO:implement functions.
-			//manually move chess pieces handler.;
-//			var cGasketIndex:int = conductVO.nextPosition.y*CcjConstants.BOARD_H_LINES+conductVO.nextPosition.x;
-//			trace(cGasketIndex.toString(),"cGasketIndex");
-			var cGasket:ChessGasket = 
-				ChessPieceManager.gaskets.gett(conductVO.nextPosition.x,conductVO.nextPosition.y) as ChessGasket;
-			//update conductsHistorys
-			updateConductHistory(conductVO);
-			//update bitboard.
-			updatePieceBitboard(conductVO);
-			//update allPieces.
-			updatePiecePosition(conductVO,cGasket);
-			//update allPieces' chessVO.
-			updateAllPiecesChessVO();
-			//update allPieces' omenVO.
-			updateAllChessPiecesOmenVO();
-			//update ZobristKeys
-			updateZobristKeysModel(conductVO);
-			//buffer here,after update all data,then refresh view.
-			updateChessPieces(conductVO,cGasket);
+			//update conduct
+			_conduct = conductVO;
+			_conduct.crossValue = pmPRNG.nextInt();
+			LOG.debug("crossOverValue:{0}",conductVO.crossValue.toString());
+			conductsHistorys.push(conductVO);
+			//update mememto
+			_nextMementos = [];
+			_previousMementos.push(conductVO);
+			ChessPieceManager.memento = new ChessPiecesMemento(conductVO);
 			//
 			LOG.info("End makeMove:{0}",conductVO.brevity);
 			//Trigger in-turn system .
@@ -180,6 +192,20 @@ package com.lookbackon.ccj.managers
 			//TODO:un-update functions.
 			makeMove(reversedConductVO);
 			LOG.info("End unmakeMove:{0}",reversedConductVO.brevity);
+			//update mememto(unmake)
+			var mememto:ChessPiecesMemento;
+			if(_previousMementos.length>0)
+			{
+				mememto = _previousMementos.pop();
+				_nextMementos.push(mememto);
+				ChessPieceManager.memento = mememto;
+			}
+			//update mememto(remake)
+//			if(_nextMementos.length > 0) {
+//				memento = _nextMementos.pop();
+//				_previousMementos.push(memento);
+//				ChessPieceManager.memento = mememto;
+//			}
 		}
 		//
 		public static function applyMove(conductVO:ConductVO):void
@@ -239,124 +265,6 @@ package com.lookbackon.ccj.managers
 		{
 			//TODO:
 			return false;
-		}
-		/**
-		 * @see http://mediocrechess.blogspot.com/2007/01/guide-zobrist-keys.html
-		 * @param conductVO the conduct value object of moving chess piece.
-		 * 
-		 */
-		private static function updateZobristKeysModel(conductVO:ConductVO):void
-		{
-			//TODO:update ZobristKeys
-			var pX:int = conductVO.previousPosition.x;
-			var pY:int = conductVO.previousPosition.y;
-			var oX:int = conductVO.nextPosition.x;
-			var oY:int = conductVO.nextPosition.y;
-			//ref:http://mediocrechess.blogspot.com/2007/01/guide-zobrist-keys.html
-			_zKey = ZobristKeysModel.getInstance().getZobristKey();
-			LOG.debug("before makemove:{0}",_zKey.dump());
-			//update zobristkey.
-			_zKey.position.sett(oX,oY,conductVO.crossValue^_zKey.position.gett(oX,oY) );
-			_zKey.position.sett(pX,pY,conductVO.crossValue^_zKey.position.gett(pX,pY) );
-			//
-			LOG.debug("after makemove:{0}",_zKey.dump());
-			//for testing unmakeMove();
-//			unmakeMove();
-		}
-		/**
-		 * @param conductVO the conduct value object of moving chess piece.
-		 * @param gasket the chess piece's gasket.
-		 */
-		private static function updatePiecePosition(conductVO:ConductVO,gasket:ChessGasket):void
-		{
-			conductVO.target.position = gasket.position;
-		}
-		/**
-		 * @param conductVO the conduct value object of moving chess piece.
-		 */
-		private static function updatePieceBitboard(conductVO:ConductVO):void
-		{
-			LOG.debug("before move,allPieces:{0}",ChessPiecesModel.getInstance().allPieces.dump());
-			BitBoard(ChessPiecesModel.getInstance()[conductVO.target.type]).setBitt(conductVO.nextPosition.y,conductVO.nextPosition.x,true);
-			BitBoard(ChessPiecesModel.getInstance()[conductVO.target.type]).setBitt(conductVO.previousPosition.y,conductVO.previousPosition.x,false);
-			LOG.info("after move,allPieces:{0}",ChessPiecesModel.getInstance().allPieces.dump());
-		}
-		//	
-		private static function updateAllPiecesChessVO():void
-		{
-			for(var i:int=0;i<chessPiecesModel.pieces.length;i++)
-			{
-				var chessPiece:ChessPiece = chessPiecesModel.pieces[i];
-				//renew data.
-				var currentConductVO:ConductVO = new ConductVO();
-				currentConductVO.target = chessPiece;
-//				LOG.info("before move,currentConductVO:{0}",currentConductVO.dump());
-//				LOG.info("before move,chessPiece's chessVO's legal moves:{0}",chessPiece.chessVO.moves.dump());
-				//renew chessVO.
-				chessPiece.chessVO = ChessFactory.generateChessVO(currentConductVO);
-//				LOG.info("after move,chessPiece's chessVO's legal moves:{0}",chessPiece.chessVO.moves.dump());
-			}
-			LOG.info("{0} Chess Pieces' ChessVO Updated !!!",chessPiecesModel.pieces.length.toString());
-		}
-		//updateConductHistory
-		private static function updateConductHistory(conductVO:ConductVO):void
-		{
-			conductVO.crossValue = pmPRNG.nextInt();
-			LOG.debug("crossOverValue:{0}",conductVO.crossValue.toString());
-			conductsHistorys.push(conductVO);
-		}
-		//
-		private static function updateChessPieces(conductVO:ConductVO,cGasket:ChessGasket):void
-		{
-			//
-			if(cGasket.numElements>=1)
-			{
-				//TODO:chess piece eat off.
-				var removedPiece:ChessPiece = cGasket.getElementAt(0) as ChessPiece;
-				var removedIndex:int = ChessPieceManager.calculatePieceIndex(removedPiece);
-				LOG.info("Eat Off@{0} target:{1}",cGasket.position.toString(),removedPiece.toString());
-				if(ChessPiece(cGasket.getElementAt(0)).label==ChessPiecesConstants.BLUE_MARSHAL.label)
-				{
-					GameManager.humanWin();	
-				}
-				if(ChessPiece(cGasket.getElementAt(0)).label==ChessPiecesConstants.RED_MARSHAL.label)
-				{
-					GameManager.computerWin();
-				}
-				//clean this bit at pieces.
-				BitBoard(ChessPiecesModel.getInstance()[removedPiece.type]).setBitt(removedPiece.position.y,removedPiece.position.x,false);
-				//set eat off value.
-				eatOffs.push(removedPiece);
-				//remove pieces data.
-				if(GameManager.turnFlag==CcjConstants.FLAG_RED)
-				{
-					//clean this bit at bluePieces.
-					ChessPiecesModel.getInstance().blues.splice(removedIndex,1);
-				}else
-				{
-					//clean this bit at redPieces.
-					ChessPiecesModel.getInstance().reds.splice(removedIndex,1);
-				}
-				//remove element from gasket.
-				cGasket.removeElementAt(0);
-			}
-			//adjust the chess piece's position.
-			conductVO.target.x = 0;
-			conductVO.target.y = 0;
-			//
-			cGasket.addElement(conductVO.target as IVisualElement);
-		}
-		private static function updateAllChessPiecesOmenVO():void
-		{
-			//TODO:
-			for(var i:int=0;i<chessPiecesModel.pieces.length;i++)
-			{
-				var chessPiece:ChessPiece = chessPiecesModel.pieces[i];
-				//renew chessVO.
-				chessPiece.omenVO.flexibility  = chessPiece.chessVO.moves.celled;
-				chessPiece.omenVO.threat  = chessPiece.chessVO.captures.celled;
-			}
-			LOG.info("{0} Chess Pieces' OmenVO Updated !!!",chessPiecesModel.pieces.length.toString());
 		}
 		//notice:why not using ArrayCollection.getItemIndex(object)?
 		//cuz our chess piece's position property always change here.
@@ -442,6 +350,27 @@ package com.lookbackon.ccj.managers
 				checkmated = ChessPiecesModel.getInstance().RED_MARSHAL.isEmpty;
 			}
 			return checkmated;
+		}
+		//
+		private static function update():void
+		{
+			var task:ParallelTask = new ParallelTask();
+			//
+			//update bitboard.
+			//update allPieces.
+			//update allPieces' chessVO.
+			//update allPieces' omenVO.
+			//update ZobristKeys
+			//buffer here,after update all data,then refresh view.
+			task.addChild(new UpdatePiecesBitboardTask(_conduct));
+			task.addChild(new UpdatePiecesPositionTask(_conduct));
+			task.addChild(new UpdateZobristKeysTask(_conduct));
+			task.addChild(new UpdatePiecesChessVoTask());
+			task.addChild(new UpdatePiecesOmenVoTask());
+			//
+			task.addChild(new UpdateChessPiecesTask(_conduct));
+			//
+			task.start();
 		}
 	}
 	

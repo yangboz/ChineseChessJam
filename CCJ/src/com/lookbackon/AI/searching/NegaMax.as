@@ -63,11 +63,14 @@ package com.lookbackon.AI.searching
 		{
 			super(gamePosition);
 			//
-			negaMax(gamePosition,depth);
-			//
-			this.applyMove(bestMove);
 		}
-		
+		//
+		override public function run():void
+		{
+			//
+			negaMax(gamePosition,depth);
+		}
+		//
 		private function negaMax(gamePosition:PositionVO,depth:int):int
 		{
 			/*
@@ -130,6 +133,9 @@ package com.lookbackon.AI.searching
 				}
 			}
 			LOG.debug("bestValue:{0}",bestValue.toString());
+			//
+			this.processDone = true;
+			//
 			return bestValue;
 		}
 		/**

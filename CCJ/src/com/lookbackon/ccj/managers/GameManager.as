@@ -3,7 +3,9 @@ package com.lookbackon.ccj.managers
 	import com.lookbackon.AI.searching.AlphaBeta;
 	import com.lookbackon.AI.searching.AttackFalse;
 	import com.lookbackon.AI.searching.ISearching;
+	import com.lookbackon.AI.searching.MinMax;
 	import com.lookbackon.AI.searching.MiniMax;
+	import com.lookbackon.AI.searching.NegaMax;
 	import com.lookbackon.AI.searching.PVS;
 	import com.lookbackon.AI.searching.Quiescence;
 	import com.lookbackon.AI.searching.RandomWalk;
@@ -111,6 +113,7 @@ package com.lookbackon.ccj.managers
 			//
 			GameManager.indicatorReadOut = true;
 			//about data
+			
 			//TODO:switch any searching class to test.
 //			gameAI = new RandomWalk(ChessPiecesModel.getInstance().gamePosition);
 //			gameAI = new MinMax(ChessPiecesModel.getInstance().gamePosition);
@@ -129,7 +132,7 @@ package com.lookbackon.ccj.managers
 				mx.core.FlexGlobals.topLevelApplication.stage.frameRate
 			);
 			//
-			greenThread.addEventListener(GreenThreadEvent.PROCESS_TIMEOUT,function(event:GreenThread):void
+			greenThread.addEventListener(GreenThreadEvent.PROCESS_TIMEOUT,function(event:GreenThreadEvent):void
 			{
 				LOG.error(event.toString());
 			});

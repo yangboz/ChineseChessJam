@@ -41,7 +41,7 @@ package com.lookbackon.AI.searching
 			super(gamePosition);
 		}	
 		//
-		override public function execute():void
+		override public function run():void
 		{
 			if( orderingMoves.length<=0 )
 			{
@@ -88,10 +88,13 @@ package com.lookbackon.AI.searching
 			//
 			if(depthLimitReached)
 			{
+				//
+				this.processDone = true;
+				//
 				return bestMove;			
 			}
 			//			
-			LOG.debug("Max orderingMoves.len:{0}",orderingMoves.length);
+			trace("Max orderingMoves.len:{0}",orderingMoves.length);
 			var len:int = orderingMoves.length;
 			var tempMoveValue:int;
 			var bestMoveValue:int;
@@ -106,16 +109,22 @@ package com.lookbackon.AI.searching
 				if(tempMoveValue>bestMoveValue)
 				{
 					bestMove = tempMove;
-					LOG.debug("Max bestMove:{0}",bestMove.dump());
+					trace("Max bestMove:{0}",bestMove.dump());
 					//
 					this.alpha = tempMoveValue;
 				}
 				//Ignore the remaing moves.
 				if(beta>alpha)
 				{
+					//
+					this.processDone = true;
+					//
 					return bestMove;
 				}
 			}
+			//
+			this.processDone = true;
+			//
 			return bestMove;						   
 		}
 		/**
@@ -145,9 +154,12 @@ package com.lookbackon.AI.searching
 			//
 			if(depthLimitReached)
 			{
+				//
+				this.processDone = true;
+				//
 				return bestMove;			
 			}
-			LOG.debug("Min orderingMoves.len:{0}",orderingMoves.length);
+			trace("Min orderingMoves.len:{0}",orderingMoves.length);
 			var len:int = orderingMoves.length;
 			var tempMoveValue:int;
 			var bestMoveValue:int;
@@ -162,16 +174,22 @@ package com.lookbackon.AI.searching
 				if(tempMoveValue>bestMoveValue)
 				{
 					bestMove = tempMove;
-					LOG.debug("Min bestMove:{0}",bestMove.dump());
+					trace("Min bestMove:{0}",bestMove.dump());
 					//
 					this.beta = tempMoveValue;
 				}
 				// Ignore remaining moves
 				if (beta < alpha)
 				{
+					//
+					this.processDone = true;
+					//
 					return bestMove;
 				}
 			}
+			//
+			this.processDone = true;
+			//
 			return bestMove;
 		}
 		
@@ -195,6 +213,7 @@ package com.lookbackon.AI.searching
 			var fuzzyImportValue:int = ChessPiecesConstants[conductVO.target.type].convertedImportant.gett(conductVO.nextPosition.x,conductVO.nextPosition.y);
 			//TODO:dynamic omenVO value to be calculated. 
 			//precies evaluation value.
+			trace("evaluation value: ",importantValue+fuzzyImportValue);
 			return importantValue+fuzzyImportValue;
 		};
 		//

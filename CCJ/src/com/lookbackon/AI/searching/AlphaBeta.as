@@ -211,8 +211,8 @@ package com.lookbackon.AI.searching
 		}
 		//
 		/**
-		 * The lookup function returns true if it finds the position in the hashtable 
-		 * and the value in the hashtable can be returned immediately. </br>
+		 * The lookup function returns true if it finds the position in the hash table 
+		 * and the value in the hash table can be returned immediately. </br>
 		 * Lookup() might also encounter a lower value in the hashtable that is larger than alpha.</br> 
 		 * In this case, the current alpha can immediately be set to the hashvalue. </br>
 		 * For this reason, I pass alpha and beta by reference to lookup(), 
