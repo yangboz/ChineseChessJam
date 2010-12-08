@@ -1,5 +1,7 @@
 package com.lookbackon.ccj.business.factory
 {
+	import assets.EmbededAssets;
+	
 	import com.lookbackon.ccj.CcjConstants;
 	import com.lookbackon.ccj.ChessPiecesConstants;
 	import com.lookbackon.ccj.model.ChessPiecesModel;
@@ -150,7 +152,8 @@ package com.lookbackon.ccj.business.factory
 			//view
 			myChessPiece.label = myChessPiece.name = chessPieceLabel;
 			myChessPiece.type = chessPieceType;
-			myChessPiece.swfLoader.source = String("./assets/").concat(chessPieceType,".swf");
+//			myChessPiece.swfLoader.source = String("./assets/").concat(chessPieceType,".swf");
+			myChessPiece.swfLoader.source = EmbededAssets[chessPieceType];
 			/*myChessPiece.x = 
 			position.x*CcjConstants.BOARD_LATTICE - myChessPiece.width/2 +50;
 			myChessPiece.y = 

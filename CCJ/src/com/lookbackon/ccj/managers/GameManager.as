@@ -106,6 +106,9 @@ package com.lookbackon.ccj.managers
 		public static function isComputerTurnNow():void
 		{
 			//TODO:
+			//unmakeMove test.
+			ChessPieceManager.unmakeMove(ChessPieceManager.memento.conduct);
+			return;
 			//hold turn flag
 			_turnFlag = CcjConstants.FLAG_BLUE;
 			//about view
@@ -117,13 +120,13 @@ package com.lookbackon.ccj.managers
 			//TODO:switch any searching class to test.
 //			gameAI = new RandomWalk(ChessPiecesModel.getInstance().gamePosition);
 //			gameAI = new MinMax(ChessPiecesModel.getInstance().gamePosition);
-//			gameAI = new MiniMax(ChessPiecesModel.getInstance().gamePosition,1);
+			gameAI = new MiniMax(ChessPiecesModel.getInstance().gamePosition,1);
 //			gameAI = new NegaMax(ChessPiecesModel.getInstance().gamePosition,1);
 //			gameAI = new AlphaBeta(ChessPiecesModel.getInstance().gamePosition);
 //			gameAI = new Quiescence(ChessPiecesModel.getInstance().gamePosition);
 //			gameAI = new PVS(ChessPiecesModel.getInstance().gamePosition);
 //			gameAI = new ShortSighted(ChessPiecesModel.getInstance().gamePosition);
-			gameAI = new AttackFalse(ChessPiecesModel.getInstance().gamePosition);
+//			gameAI = new AttackFalse(ChessPiecesModel.getInstance().gamePosition);
 			
 			//using this flash green thread algorithm to avoid script time limition only 15s.
 			var processes:Vector.<IRunnable> = new Vector.<IRunnable>();

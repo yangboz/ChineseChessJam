@@ -109,14 +109,23 @@ package com.lookbackon.AI.searching
 			{
 				if(gamePosition.color==CcjConstants.FLAG_RED)
 				{
+					//
+					this.processDone = true;
+					//
 					return int.MIN_VALUE;
 				}else
 				{
+					//
+					this.processDone = true;
+					//
 					return int.MAX_VALUE;
 				}
 			}
 			if(depth==0)
 			{
+				//
+				this.processDone = true;
+				//
 				return doEvaluation(bestMove,gamePosition);
 			}
 			if(gamePosition.color==CcjConstants.FLAG_RED)
@@ -177,6 +186,7 @@ package com.lookbackon.AI.searching
 			}
 			//
 			this.processDone = true;
+			//
 			return bestValue;
 		}
 	}

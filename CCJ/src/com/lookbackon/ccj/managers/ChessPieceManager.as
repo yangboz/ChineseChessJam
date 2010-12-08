@@ -147,7 +147,19 @@ package com.lookbackon.ccj.managers
 			return result;
 		}
 		/**
+		 * <b>Make Move</b> is a function inside a chess program to update the internal chess position 
+		 * and its Board representation as well as associated </br> 
+		 * or dependent state variables and data by a move made on the internal board, 
+		 * such as zobrist keys to index the transposition table. </br> 
+		 * That usually happens inside the Search algorithm, </br> 
+		 * where the move acts like an edge connecting two nodes of a search tree,
+		 * a parent and a child node. </br> 
+		 * Dependent on the design of the data structures 
+		 * and the used search algorithms there are different approaches 
+		 * with respect to randomly accessing aspects of nodes 
+		 * and restoring the position while unmaking the move.
 		 * 
+		 * @see http://chessprogramming.wikispaces.com/Make+Move
 		 * @param conductVO the conduct value object of moving chess piece.
 		 * 
 		 */		
@@ -160,9 +172,10 @@ package com.lookbackon.ccj.managers
 			LOG.debug("crossOverValue:{0}",conductVO.crossValue.toString());
 			conductsHistorys.push(conductVO);
 			//update mememto
+			var memento:ChessPiecesMemento = new ChessPiecesMemento(conductVO);
 			_nextMementos = [];
-			_previousMementos.push(conductVO);
-			ChessPieceManager.memento = new ChessPiecesMemento(conductVO);
+			_previousMementos.push(memento);
+			ChessPieceManager.memento = memento;
 			//
 			LOG.info("End makeMove:{0}",conductVO.brevity);
 			//Trigger in-turn system .
@@ -174,29 +187,49 @@ package com.lookbackon.ccj.managers
 				CairngormEventDispatcher.getInstance().dispatchEvent(new GameEvent(GameEvent.IS_HUMAN_TURN_NOW));
 			}
 		}
+		/**
+		 *
+		 * <b>Unmake Move</b> is a function inside a chess program to update the internal chess position 
+		 * and its Board representation as well as associated or dependent state variables 
+		 * and data by a move unmade on the internal board. </br>
+		 * In unmake move, reversible aspects of a position can be incrementally updated by the inverse 
+		 * or own inverse operation of Make Move. </br>
+		 * Irreversible aspects of a position, such as ep state, 
+		 * castling rights and the halfmove clock are either restored from a stack (LIFO), </br>
+		 * or simply kept in arrays indexed by current search or game ply. </br>
+		 * Alternatively, one may capacitate the move with all the necessary information 
+		 * to recover those irreversible aspects of a position as well.
+		 * 
+		 * @see http://chessprogramming.wikispaces.com/Unmake+Move
+		 *  
+		 * @param conductVO the conduct value object of moving chess piece.
+		 * 
+		 */		
 		//
 		public static function unmakeMove(conductVO:ConductVO):void
 		{
-			var reversedConductVO:ConductVO = new ConductVO();
-			reversedConductVO.crossValue = conductVO.crossValue;
-			reversedConductVO.nextPosition = conductVO.previousPosition;
-			reversedConductVO.previousPosition = conductVO.nextPosition;
-			reversedConductVO.target = conductVO.target;
-			reversedConductVO.eatOff = conductVO.eatOff;
+			var reversedConductVO:ConductVO = conductVO.reverse();
 			LOG.info("Begin unmakeMove:{0}",reversedConductVO.brevity);
 			//reverse conductVO to unmakeMove.
+			var eattenPiece:ChessPiece;
 			if(null!=conductVO.eatOff)
 			{
-				eatOffs.pop();
+				//thrown out the eatten piece;
+				eattenPiece =  eatOffs.pop();
+				//roll back the eatting piece;
+				var cGasket:ChessGasket = ChessPieceManager.gaskets.gett(
+					eattenPiece.position.x,
+					eattenPiece.position.y );
+				cGasket.addElement(eattenPiece);
 			}
 			//TODO:un-update functions.
-			makeMove(reversedConductVO);
 			LOG.info("End unmakeMove:{0}",reversedConductVO.brevity);
 			//update mememto(unmake)
 			var mememto:ChessPiecesMemento;
 			if(_previousMementos.length>0)
 			{
 				mememto = _previousMementos.pop();
+				mememto.conduct = mememto.conduct.reverse();
 				_nextMementos.push(mememto);
 				ChessPieceManager.memento = mememto;
 			}
@@ -206,11 +239,22 @@ package com.lookbackon.ccj.managers
 //				_previousMementos.push(memento);
 //				ChessPieceManager.memento = mememto;
 //			}
+			//roll back bitboard
+			BitBoard(chessPiecesModel[eattenPiece.type]).setBitt(cGasket.position.y,cGasket.position.x,true);
+			trace(chessPiecesModel.allPieces);
+			//roll back pieces data.
+			if(GameManager.turnFlag==CcjConstants.FLAG_RED)
+			{
+				chessPiecesModel.blues.push(eattenPiece);
+			}else
+			{
+				chessPiecesModel.reds.push(eattenPiece);
+			}
 		}
 		//
 		public static function applyMove(conductVO:ConductVO):void
 		{
-			//TODO:
+			//TODO:with roll back function support.
 			var cGasket:ChessGasket = 
 				ChessPieceManager.gaskets.gett(conductVO.nextPosition.x,conductVO.nextPosition.y) as ChessGasket;
 			if(cGasket.numElements>=1)
@@ -362,13 +406,13 @@ package com.lookbackon.ccj.managers
 			//update allPieces' omenVO.
 			//update ZobristKeys
 			//buffer here,after update all data,then refresh view.
-			task.addChild(new UpdatePiecesBitboardTask(_conduct));
-			task.addChild(new UpdatePiecesPositionTask(_conduct));
-			task.addChild(new UpdateZobristKeysTask(_conduct));
+			task.addChild(new UpdatePiecesBitboardTask(memento.conduct));
+			task.addChild(new UpdatePiecesPositionTask(memento.conduct));
+			task.addChild(new UpdateZobristKeysTask(memento.conduct));
 			task.addChild(new UpdatePiecesChessVoTask());
 			task.addChild(new UpdatePiecesOmenVoTask());
 			//
-			task.addChild(new UpdateChessPiecesTask(_conduct));
+			task.addChild(new UpdateChessPiecesTask(memento.conduct));
 			//
 			task.start();
 		}

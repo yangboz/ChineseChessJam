@@ -25,6 +25,7 @@ package com.lookbackon.ccj.model.vos
 	 * @author Knight.zhou
 	 * @history 2010-6-24,re-construct:newPositon to currentPosition,keep previousPosition.
 	 * @history 2010-7-12,add-construct:eatOff,crossValue.
+	 * @history 2010-12-02,reverse() added.
 	 */
 	public class ConductVO extends EventDispatcher
 	{
@@ -170,6 +171,20 @@ package com.lookbackon.ccj.model.vos
 			s += "\n}";
 			return s;
 		}
-		
+		/**
+		 * 
+		 * @return reversed itself,for unmaking functions;
+		 * 
+		 */		
+		public function reverse():ConductVO
+		{
+			var reversedConductVO:ConductVO = new ConductVO();
+			reversedConductVO.crossValue = this.crossValue;
+			reversedConductVO.nextPosition = this.previousPosition;
+			reversedConductVO.previousPosition = this.nextPosition;
+			reversedConductVO.target = this.target;
+			reversedConductVO.eatOff = this.eatOff;
+			return reversedConductVO;
+		}
 	}
 }

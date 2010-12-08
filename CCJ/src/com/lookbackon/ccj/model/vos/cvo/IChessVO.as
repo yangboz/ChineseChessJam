@@ -3,7 +3,7 @@ package com.lookbackon.ccj.model.vos.cvo
 	import com.lookbackon.ds.BitBoard;
 	/**
 	 * The interface of chess pieces,about occupy,moves,captures.
-	 * 
+	 * @see http://chess.dubmun.com/bitboard.html
 	 * @author knight.zhou
 	 * 
 	 */	

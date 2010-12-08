@@ -3,15 +3,13 @@
 			   xmlns:s="library://ns.adobe.com/flex/spark"
 			   xmlns:mx="library://ns.adobe.com/flex/halo"
 			   xmlns:components="com.lookbackon.ccj.view.components.*"
-			   creationComplete="application1_creationCompleteHandler(event)"
-			   applicationComplete="application1_applicationCompleteHandler(event)"
 			   xmlns:popup="com.adobe.cairngorm.popup.*"
-			   maxHeight="520"
-			   maxWidth="500"
-			   scriptTimeLimit="60"
 			   xmlns:controller="com.lookbackon.ccj.controller.*"
 			   xmlns:task="com.adobe.cairngorm.task.*"
-			   xmlns:tasks="com.godpaper.tasks.*">
+			   xmlns:tasks="com.godpaper.tasks.*"
+			   width="500" height="520" maxWidth="500" maxHeight="520"
+			   applicationComplete="application1_applicationCompleteHandler(event)"
+			   creationComplete="application1_creationCompleteHandler(event)" scriptTimeLimit="60">
 	<s:layout>
 		<s:BasicLayout/>
 	</s:layout>
@@ -39,13 +37,16 @@
 			private var logFilters:Array=[
 //												"com.lookbackon.ccj.view.components.ChessGasket"
 //												,
-												"com.lookbackon.ccj.managers.ChessPieceManager"
-												,
+//												"com.lookbackon.ccj.managers.ChessPieceManager"
+//												,
 //												"com.lookbackon.ccj.model.vos.cvo.CannonVO"		
 //												,
-												"com.lookbackon.ccj.view.components.ChessPiece"
-												,
-				"com.lookbackon.AI.searching.*"];
+//												"com.lookbackon.ccj.view.components.ChessPiece"
+//												,
+//				"com.lookbackon.AI.searching.*"
+//				,
+				"*"
+			];
 			//----------------------------------
 			//  CONSTANTS
 			//----------------------------------
@@ -136,6 +137,8 @@
 						   right="25"
 						   top="25"
 						   bottom="25"
-						   backgroundImage="@Embed('./assets/images/ChessBoardBG.png')"/>
+						   backgroundImage="@Embed('./assets/images/ChessBoardBG.png')"
+						   backgroundImageFillMode="scale"
+						   />
 
 </s:Application>
