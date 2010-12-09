@@ -270,7 +270,7 @@ package com.lookbackon.AI.searching
 		//  unmakeMove(native)
 		//----------------------------------
 		/**
-		 * Unmake preview move,for all kinds of searching tree algorithms.
+		 * Unmake previous move,for all kinds of searching tree algorithms.
 		 */
 		final public function unmakeMove(conductVO:ConductVO):void
 		{
@@ -326,12 +326,17 @@ package com.lookbackon.AI.searching
 			//delegate to evaluation proxy to do evaluation(); 
 			return evaluation.doEvaluation(conductVO, gamePosition);
 		}
-
+		/**
+		 *@inheritDoc 
+		 */		
 		//virtual functions.
 		override public function run():void
 		{
 			//TODO:implement functions.
 		}
+		/**
+		 *@inheritDoc 
+		 */
 		//return thread calculate precentage.
 		override public function get percentage():Number
 		{

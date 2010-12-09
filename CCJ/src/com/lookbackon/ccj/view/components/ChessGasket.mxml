@@ -18,13 +18,13 @@
 			import com.lookbackon.ccj.model.vos.ConductVO;
 			import com.lookbackon.ccj.utils.LogUtil;
 			import com.lookbackon.ds.BitBoard;
-
+			
 			import mx.core.IUIComponent;
 			import mx.events.DragEvent;
 			import mx.events.FlexEvent;
 			import mx.logging.ILogger;
 			import mx.managers.DragManager;
-
+			
 			import spark.events.ElementExistenceEvent;
 			//--------------------------------------------------------------------------
 			//
@@ -55,7 +55,26 @@
 			{
 				_position=value;
 			}
-
+			//----------------------------------
+			//  chessPiece
+			//----------------------------------
+			private var _chessPiece:IChessPiece;
+			public function get chessPiece():IChessPiece
+			{
+				return _chessPiece;
+			}
+			public function set chessPiece(value:IChessPiece):void
+			{
+				_chessPiece = value;
+				//
+				if(null!=value)
+				{
+					this.addElement(value);
+				}else
+				{
+					this.removeElementAt(0);
+				}
+			}
 			//--------------------------------------------------------------------------
 			//
 			//  Methods

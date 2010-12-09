@@ -1,27 +1,21 @@
-package com.godpaper.tasks
+package com.lookbackon.ccj.business.fsm.states
 {
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.adobe.cairngorm.task.Task;
-	import com.lookbackon.ccj.CcjConstants;
-	import com.lookbackon.ccj.business.factory.ChessFactory;
-	import com.lookbackon.ccj.managers.ChessPieceManager;
-	import com.lookbackon.ccj.view.components.ChessGasket;
-	import com.lookbackon.ccj.view.components.IChessPiece;
+	import com.lookbackon.ccj.business.fsm.ChessAgent;
 	
-	import flash.geom.Point;
 	
 	/**
-	 * CreateChessPieceTask.as class.   	
+	 * NascenceState.as class. Chess piece nacency state after created from chess factory;  	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
-	 * Created Nov 30, 2010 12:00:05 PM
+	 * Created Dec 9, 2010 11:02:11 AM
 	 */   	 
-	public class CreateChessPieceTask extends Task
+	public class NascenceState extends StateBase
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -50,46 +44,36 @@ package com.godpaper.tasks
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function CreateChessPieceTask()
+		public function NascenceState(agent:ChessAgent, resource:Object, description:String=null)
 		{
 			//TODO: implement function
-			super();
+			super(agent, resource, description);
 		}     	
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
+		override public function enter():void
+		{
+			//TODO: implement function
+		}
 		
+		override public function exit():void
+		{
+			//TODO: implement function
+		}
+		
+		override public function update(time:Number=0):void
+		{
+			//TODO: implement function
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		override protected function performTask():void
-		{
-			//create chess piece
-			for(var hh:int=0;hh<CcjConstants.BOARD_H_LINES;hh++)
-			{
-				for(var vv:int=0;vv<CcjConstants.BOARD_V_LINES;vv++)
-				{
-					var iChessPiece:IChessPiece = ChessFactory.createChessPiece(new Point(hh,vv));
-					if(iChessPiece!=null)
-					{
-//						trace("index:",vv*CcjConstants.BOARD_V_LINES+hh);
-						var ecGasket:ChessGasket = ChessPieceManager.gaskets.gett(hh,vv) as ChessGasket;
-						ecGasket.chessPiece = iChessPiece;
-//						ecGasket.addElement( iChessPiece );
-						//
-						iChessPiece.x = 0;
-						iChessPiece.y = 0;
-						//
-					}
-				}
-			}
-			//
-			this.complete();
-		}
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods
