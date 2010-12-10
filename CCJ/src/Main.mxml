@@ -127,7 +127,6 @@
 			<tasks:CreateChessPieceTask/>
 			<tasks:CreateChessVoTask/>
 		</task:SequenceTask>
-		<controller:GameController/>
 		<!-- Services here -->
 	</fx:Declarations>
 

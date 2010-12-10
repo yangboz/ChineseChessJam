@@ -1,6 +1,5 @@
 package com.lookbackon.ccj.managers
 {
-	import com.adobe.cairngorm.control.CairngormEventDispatcher;
 	import com.adobe.cairngorm.task.ParallelTask;
 	import com.godpaper.tasks.UpdateChessPiecesTask;
 	import com.godpaper.tasks.UpdatePiecesBitboardTask;
@@ -11,7 +10,6 @@ package com.lookbackon.ccj.managers
 	import com.lookbackon.ccj.CcjConstants;
 	import com.lookbackon.ccj.ChessPiecesConstants;
 	import com.lookbackon.ccj.errors.CcjErrors;
-	import com.lookbackon.ccj.events.GameEvent;
 	import com.lookbackon.ccj.model.ChessPiecesMemento;
 	import com.lookbackon.ccj.model.ChessPiecesModel;
 	import com.lookbackon.ccj.model.vos.ConductVO;
@@ -176,11 +174,11 @@ package com.lookbackon.ccj.managers
 			//Trigger in-turn system .
 			if (GameManager.turnFlag == CcjConstants.FLAG_RED)
 			{
-				CairngormEventDispatcher.getInstance().dispatchEvent(new GameEvent(GameEvent.IS_COMPUTER_TURN_NOW));
+				GameManager.isComputerTurnNow();
 			}
 			else
 			{
-				CairngormEventDispatcher.getInstance().dispatchEvent(new GameEvent(GameEvent.IS_HUMAN_TURN_NOW));
+				GameManager.isHumanTurnNow();
 			}
 		}
 

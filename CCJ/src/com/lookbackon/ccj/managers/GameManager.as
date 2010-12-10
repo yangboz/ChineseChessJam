@@ -1,31 +1,15 @@
 package com.lookbackon.ccj.managers
 {
-	import com.lookbackon.AI.searching.AlphaBeta;
-	import com.lookbackon.AI.searching.AttackFalse;
 	import com.lookbackon.AI.searching.ISearching;
-	import com.lookbackon.AI.searching.MinMax;
-	import com.lookbackon.AI.searching.MiniMax;
-	import com.lookbackon.AI.searching.NegaMax;
-	import com.lookbackon.AI.searching.PVS;
-	import com.lookbackon.AI.searching.Quiescence;
-	import com.lookbackon.AI.searching.RandomWalk;
-	import com.lookbackon.AI.searching.ShortSighted;
 	import com.lookbackon.ccj.CcjConstants;
-	import com.lookbackon.ccj.model.ChessPiecesModel;
+	import com.lookbackon.ccj.business.fsm.GameAgent;
 	import com.lookbackon.ccj.model.vos.PositionVO;
 	import com.lookbackon.ccj.utils.LogUtil;
-
-	import flash.events.Event;
-
+	
 	import mx.controls.Alert;
 	import mx.core.FlexGlobals;
+	import mx.core.IVisualElement;
 	import mx.logging.ILogger;
-	import mx.managers.CursorManager;
-
-	import org.flexunit.runner.notification.IRunListener;
-	import org.generalrelativity.thread.GreenThread;
-	import org.generalrelativity.thread.IRunnable;
-	import org.generalrelativity.thread.event.GreenThreadEvent;
 
 	/**
 	 * A player manager class to maintain turn-based game.
@@ -41,12 +25,12 @@ package com.lookbackon.ccj.managers
 		//
 		//--------------------------------------------------------------------------
 		private static var _turnFlag:int=CcjConstants.FLAG_BLUE;
-//		private static var iThinkingProgressBar:IFlexDisplayObject;
-		private static var gameAI:ISearching;
 		[Bindable]
 		public static var indicatorReadOut:Boolean=false;
 		[Bindable]
 		public static var indication:String=INDICATION_THINKING;
+		//
+		public static var agent:GameAgent;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -66,8 +50,13 @@ package com.lookbackon.ccj.managers
 		//
 		//--------------------------------------------------------------------------
 		//----------------------------------
-		//  turnFlag(read-only)
+		//  turnFlag(read-write)
 		//----------------------------------
+		public static function set turnFlag(value:int):void
+		{
+			_turnFlag=value;
+		}
+
 		public static function get turnFlag():int
 		{
 			return _turnFlag;
@@ -84,6 +73,8 @@ package com.lookbackon.ccj.managers
 		public static function startGame():void
 		{
 			//TODO:
+			//agent initialization.
+			agent = new GameAgent("CCJGameAgent",FlexGlobals.topLevelApplication as IVisualElement);
 			//logic condition who's turn now at first.
 //			isComputerTurnNow();
 			isHumanTurnNow();
@@ -112,52 +103,8 @@ package com.lookbackon.ccj.managers
 		//----------------------------------
 		public static function isComputerTurnNow():void
 		{
-			//TODO:
-			//unmakeMove test.
-//			ChessPieceManager.unmakeMove(ChessPieceManager.memento.conduct);
-//			return;
-			//hold turn flag
-			_turnFlag=CcjConstants.FLAG_BLUE;
-			//about view
-			CursorManager.setBusyCursor();
-			//
-			GameManager.indicatorReadOut=true;
-			//about data
-
-			//TODO:switch any searching class to test.
-//			gameAI = new RandomWalk(ChessPiecesModel.getInstance().gamePosition);
-//			gameAI=new MinMax(ChessPiecesModel.getInstance().gamePosition);
-//			gameAI = new MiniMax(ChessPiecesModel.getInstance().gamePosition,1);
-//			gameAI = new NegaMax(ChessPiecesModel.getInstance().gamePosition,1);
-//			gameAI = new AlphaBeta(ChessPiecesModel.getInstance().gamePosition);
-//			gameAI = new Quiescence(ChessPiecesModel.getInstance().gamePosition);
-//			gameAI = new PVS(ChessPiecesModel.getInstance().gamePosition);
-//			gameAI = new ShortSighted(ChessPiecesModel.getInstance().gamePosition);
-			gameAI = new AttackFalse(ChessPiecesModel.getInstance().gamePosition);
-
-			//using this flash green thread algorithm to avoid script time limition only 15s.
-			var processes:Vector.<IRunnable>=new Vector.<IRunnable>();
-			processes.push(gameAI);
-			var greenThread:GreenThread=new GreenThread(processes, mx.core.FlexGlobals.topLevelApplication.stage.frameRate);
-			//
-			greenThread.addEventListener(GreenThreadEvent.PROCESS_TIMEOUT, function(event:GreenThreadEvent):void
-			{
-				LOG.error(event.toString());
-			});
-			greenThread.addEventListener(GreenThread.CYCLE, function(event:Event):void
-			{
-				LOG.debug(event.toString());
-			});
-			greenThread.addEventListener(GreenThreadEvent.PROCESS_COMPLETE, function(event:GreenThreadEvent):void
-			{
-				LOG.info(event.toString());
-			});
-			greenThread.addEventListener(Event.COMPLETE, function(event:Event):void
-			{
-				LOG.info(event.toString());
-			});
-			//
-			greenThread.open();
+			//delegate fsm transition to computer state.
+			agent.fsm.changeState(agent.computerState);
 		}
 
 		//----------------------------------
@@ -165,15 +112,8 @@ package com.lookbackon.ccj.managers
 		//----------------------------------
 		public static function isHumanTurnNow():void
 		{
-			//TODO:
-			//hold turn flag
-			_turnFlag=CcjConstants.FLAG_RED;
-			//about view
-			CursorManager.removeBusyCursor();
-			//
-			GameManager.indicatorReadOut=false;
-			//about data
-
+			//delegate fsm transition to computer state.
+			agent.fsm.changeState(agent.humanState);
 		}
 
 		//----------------------------------

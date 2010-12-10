@@ -1,19 +1,19 @@
-package com.lookbackon.ccj.business.fsm.states
+package com.lookbackon.ccj.business.fsm.states.chess
 {
 	import com.lookbackon.ccj.business.fsm.ChessAgent;
-	
+	import com.lookbackon.ccj.business.fsm.StateBase;
+
 	/**
 	 * 
 	 * @author Knight.zhou
 	 * 
 	 */	
-	public class DefenseState extends StateBase
+	public class AttackState extends StateBase
 	{
-		public function DefenseState(agent:ChessAgent,resource:Object,description:String=null)
+		public function AttackState(agent:ChessAgent,resource:Object,description:String=null)
 		{
 			super(agent,resource,description);
 		}
-		
 		override public function enter():void
 		{
 			//TODO: implement function

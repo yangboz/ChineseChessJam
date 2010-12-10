@@ -1,23 +1,22 @@
-package com.lookbackon.ccj.controller
+package com.lookbackon.ccj.business.fsm.states.game
 {
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.adobe.cairngorm.control.FrontController;
-	import com.lookbackon.ccj.business.command.GameCommand;
-	import com.lookbackon.ccj.events.GameEvent;
+	import com.lookbackon.AI.finiteStateMachine.IAgent;
+	import com.lookbackon.ccj.business.fsm.StateBase;
 	
 	
 	/**
-	 * GameController.as class.   	
-	 * @author Knight.zhou
+	 * AnotherHumanState.as class.   	
+	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
-	 * Created Jul 12, 2010 11:07:33 AM
+	 * Created Dec 10, 2010 11:12:44 AM
 	 */   	 
-	public class GameController extends FrontController
+	public class AnotherHumanState extends StateBase
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -46,13 +45,10 @@ package com.lookbackon.ccj.controller
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function GameController()
+		public function AnotherHumanState(agent:IAgent, resource:Object, description:String=null)
 		{
 			//TODO: implement function
-			super();
-			
-			addCommand(GameEvent.IS_COMPUTER_TURN_NOW,GameCommand);
-			addCommand(GameEvent.IS_HUMAN_TURN_NOW,GameCommand);
+			super(agent, resource, description);
 		}     	
 		//--------------------------------------------------------------------------
 		//

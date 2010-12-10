@@ -1,24 +1,24 @@
-package com.lookbackon.ccj.business.command
+package com.lookbackon.ccj.business.fsm.states.game
 {
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.adobe.cairngorm.commands.Command;
-	import com.adobe.cairngorm.control.CairngormEvent;
-	import com.lookbackon.ccj.events.GameEvent;
+	import com.lookbackon.AI.finiteStateMachine.IAgent;
+	import com.lookbackon.ccj.CcjConstants;
+	import com.lookbackon.ccj.business.fsm.StateBase;
 	import com.lookbackon.ccj.managers.GameManager;
 	
 	
 	/**
-	 * GameTurnCommand.as class.   	
-	 * @author Knight.zhou
+	 * HumanState.as class.   	
+	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
-	 * Created Jul 12, 2010 11:01:03 AM
+	 * Created Dec 10, 2010 11:12:15 AM
 	 */   	 
-	public class GameCommand implements Command
+	public class HumanState extends StateBase
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -47,28 +47,34 @@ package com.lookbackon.ccj.business.command
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function GameCommand()
+		public function HumanState(agent:IAgent, resource:Object, description:String=null)
 		{
 			//TODO: implement function
-		}
-		
-		public function execute(event:CairngormEvent):void
-		{
-			//TODO: implement function
-			if(event.type==GameEvent.IS_COMPUTER_TURN_NOW)
-			{
-				GameManager.isComputerTurnNow();
-			}else
-			{
-				GameManager.isHumanTurnNow();
-			}
+			super(agent, resource, description);
 		}     	
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
+		override public function enter():void
+		{
+			//hold turn flag
+			GameManager.turnFlag = CcjConstants.FLAG_RED;
+			//
+			GameManager.indicatorReadOut=false;
+			//about data
+		}
 		
+		override public function exit():void
+		{
+			//TODO: implement function
+		}
+		
+		override public function update(time:Number=0):void
+		{
+			//TODO: implement function
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods

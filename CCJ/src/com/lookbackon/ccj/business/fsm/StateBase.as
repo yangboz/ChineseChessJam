@@ -1,7 +1,7 @@
-package com.lookbackon.ccj.business.fsm.states
+package com.lookbackon.ccj.business.fsm
 {
+	import com.lookbackon.AI.finiteStateMachine.IAgent;
 	import com.lookbackon.AI.finiteStateMachine.states.IState;
-	import com.lookbackon.ccj.business.fsm.ChessAgent;
 
 	/**
 	 * The base class of chess state.
@@ -10,14 +10,14 @@ package com.lookbackon.ccj.business.fsm.states
 	 */	
 	public class StateBase implements IState
 	{
-		protected var agent:ChessAgent;
+		protected var agent:IAgent;
 		protected var resource:Object;//the current state's resource(effect,movie,etc...)
 		//--------------------------------------------------------------------------
 		//
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function StateBase(agent:ChessAgent,resource:Object,description:String=null)
+		public function StateBase(agent:IAgent,resource:Object,description:String=null)
 		{
 			this.agent = agent;
 			this.resource = resource;

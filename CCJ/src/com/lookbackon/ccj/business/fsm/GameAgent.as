@@ -1,33 +1,42 @@
-package com.lookbackon.ccj.events
+package com.lookbackon.ccj.business.fsm
 {
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.adobe.cairngorm.control.CairngormEvent;
+	import com.lookbackon.AI.finiteStateMachine.Agent;
+	import com.lookbackon.AI.searching.ISearching;
+	import com.lookbackon.ccj.CcjConstants;
+	import com.lookbackon.ccj.business.fsm.states.game.AnotherHumanState;
+	import com.lookbackon.ccj.business.fsm.states.game.ComputerState;
+	import com.lookbackon.ccj.business.fsm.states.game.HumanState;
+	
+	import mx.core.IVisualElement;
 	
 	
 	/**
-	 * GameEvent.as class.   	
-	 * @author Knight.zhou
+	 * GameAgent.as class.   	
+	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
-	 * Created Jul 12, 2010 10:55:42 AM
+	 * Created Dec 10, 2010 11:29:30 AM
 	 */   	 
-	public class GameEvent extends CairngormEvent
+	public class GameAgent extends Agent
 	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		
+		//The agent obtains states.
+		public var humanState:HumanState;
+		public var computerState:ComputerState;
+		public var anotherHumanState:AnotherHumanState;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		public static const IS_COMPUTER_TURN_NOW:String = "Is compurter turn now!";
-		public static const IS_HUMAN_TURN_NOW:String 	= "Is human turn now!";
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -45,10 +54,14 @@ package com.lookbackon.ccj.events
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function GameEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false)
+		public function GameAgent(name:String, carrier:IVisualElement)
 		{
 			//TODO: implement function
-			super(type, bubbles, cancelable);
+			super(name, carrier);
+			//
+			this.humanState = new HumanState(this,null,CcjConstants.STATE_HUMAN);
+			this.computerState = new ComputerState(this,null,CcjConstants.STATE_COMPUTER);
+			this.anotherHumanState = new AnotherHumanState(this,null,CcjConstants.STATE_ANOTHER_HUMAN);
 		}     	
 		//--------------------------------------------------------------------------
 		//

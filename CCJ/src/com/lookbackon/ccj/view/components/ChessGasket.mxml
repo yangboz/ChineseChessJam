@@ -12,8 +12,6 @@
 				   borderAlpha="0.0">
 	<fx:Script>
 		<![CDATA[
-			import com.adobe.cairngorm.control.CairngormEventDispatcher;
-			import com.lookbackon.ccj.events.GameEvent;
 			import com.lookbackon.ccj.managers.ChessPieceManager;
 			import com.lookbackon.ccj.model.vos.ConductVO;
 			import com.lookbackon.ccj.utils.LogUtil;

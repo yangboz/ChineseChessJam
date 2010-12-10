@@ -1,21 +1,21 @@
-package com.lookbackon.ccj.business.fsm.states
+package com.lookbackon.AI.finiteStateMachine
 {
+	import mx.core.IVisualElement;
+
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.lookbackon.ccj.business.fsm.ChessAgent;
-	
 	
 	/**
-	 * RenascenceState.as class. Chess piece rebirth state by unmake move.
+	 * IAgent.as class.   	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
-	 * Created Dec 9, 2010 11:00:50 AM
+	 * Created Dec 10, 2010 11:14:57 AM
 	 */   	 
-	public class RenascenceState extends StateBase
+	public interface IAgent
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -32,7 +32,16 @@ package com.lookbackon.ccj.business.fsm.states
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
+		function get name():String;
+		function set name(value:String):void;
 		
+		function get carrier():IVisualElement;
+		function set carrier(value:IVisualElement):void;
+		
+		function get traceTarget():IVisualElement;
+		function set traceTarget(value:IVisualElement):void;
+		
+		function get fsm():FiniteStateMachine;
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -44,30 +53,12 @@ package com.lookbackon.ccj.business.fsm.states
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function RenascenceState(agent:ChessAgent, resource:Object, description:String=null)
-		{
-			//TODO: implement function
-			super(agent, resource, description);
-		}     	
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		override public function enter():void
-		{
-			//TODO: implement function
-		}
 		
-		override public function exit():void
-		{
-			//TODO: implement function
-		}
-		
-		override public function update(time:Number=0):void
-		{
-			//TODO: implement function
-		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
