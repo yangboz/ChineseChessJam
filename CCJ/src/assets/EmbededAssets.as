@@ -7,7 +7,8 @@ package assets
 	//--------------------------------------------------------------------------
 	
 	/**
-	 * EmbededAssets.as class.   	
+	 * EmbededAssets.as class.For obtainning static embeded resources.
+	 * @see http://livedocs.adobe.com/flex/3/html/help.html?content=embed_3.html  	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0

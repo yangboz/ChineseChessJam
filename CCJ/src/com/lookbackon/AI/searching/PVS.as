@@ -83,7 +83,7 @@ package com.lookbackon.AI.searching
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		override public function execute():void
+		override public function run():void
 		{
 			//TODO:
 			pvSearch(alpha,beta,depth);

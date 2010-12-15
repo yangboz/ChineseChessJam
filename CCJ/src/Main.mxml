@@ -76,9 +76,9 @@
 				//@see http://opensource.adobe.com/wiki/display/cairngorm/HowToUseCairngormContract
 				try
 				{
-					Contract.precondition(CONFIG::debugging);
+//					Contract.precondition(CONFIG::debugging);
 					this.traceTarget.level=LogEventLevel.DEBUG;
-					Contract.postcondition(CONFIG::debugging);
+//					Contract.postcondition(CONFIG::debugging);
 				}
 				catch (error:Error)
 				{

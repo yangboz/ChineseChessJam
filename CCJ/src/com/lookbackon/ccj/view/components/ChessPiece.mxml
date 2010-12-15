@@ -10,10 +10,6 @@
 		<![CDATA[
 			import com.lookbackon.ccj.CcjConstants;
 			import com.lookbackon.ccj.business.fsm.ChessAgent;
-			import com.lookbackon.ccj.business.fsm.states.chess.AttackState;
-			import com.lookbackon.ccj.business.fsm.states.chess.DefenseState;
-			import com.lookbackon.ccj.business.fsm.states.chess.NascenceState;
-			import com.lookbackon.ccj.business.fsm.states.chess.RenascenceState;
 			import com.lookbackon.ccj.managers.ChessPieceManager;
 			import com.lookbackon.ccj.model.ChessPiecesModel;
 			import com.lookbackon.ccj.model.vos.OmenVO;
@@ -29,10 +25,6 @@
 			//  Variables
 			//
 			//--------------------------------------------------------------------------
-			public var attackState:AttackState;
-			public var defenseState:DefenseState;
-			public var nascenceState:NascenceState;
-			public var renascenceState:RenascenceState;
 			//
 			private var textColor:String=CcjConstants.COLOR_BLUE; //default is blue.
 			//----------------------------------
@@ -161,12 +153,8 @@
 				// TODO Auto-generated method stub
 				// finite state machine initialization.
 				this.agent=new ChessAgent(this.name, this, null);
-				this.attackState=new AttackState(this.agent, null, CcjConstants.STATE_ATTACK);
-				this.defenseState=new DefenseState(this.agent, null, CcjConstants.STATE_DEFENCE);
-				this.nascenceState=new NascenceState(this.agent, null, CcjConstants.STATE_NASCENCE);
-				this.renascenceState=new RenascenceState(this.agent, null, CcjConstants.STATE_RENASCENCE);
 				//fsm enter to default state.
-				this.agent.fsm.changeState(this.nascenceState);
+				this.agent.fsm.changeState(this.agent.nascenceState);
 				// add event listener
 
 				//set text style.

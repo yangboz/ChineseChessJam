@@ -62,7 +62,7 @@ package com.lookbackon.AI.searching
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		override public function execute():void
+		override public function run():void
 		{
 			negaScout(gamePosition,alpha,beta);
 		}

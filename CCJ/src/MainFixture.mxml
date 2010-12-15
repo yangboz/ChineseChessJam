@@ -4,11 +4,15 @@
 			   xmlns:mx="library://ns.adobe.com/flex/mx"
 			   minWidth="955"
 			   minHeight="600"
-			   xmlns:parsley="http://www.spicefactory.org/parsley">
+			   xmlns:parsley="http://www.spicefactory.org/parsley"
+			   creationComplete="application1_creationCompleteHandler(event)"
+			   >
 	<fx:Script>
 		<![CDATA[
 			import com.godpaper.configs.CCJContextConfig;
-
+			import com.lookbackon.AI.artificalNeuralNetwork.NeuronNetWorkTest;
+			
+			import mx.events.FlexEvent;
 			import mx.logging.LogEventLevel;
 
 			[Bindable]
@@ -22,6 +26,13 @@
 				//												"com.lookbackon.ccj.view.components.ChessPiece"
 				//												,
 				"com.lookbackon.AI.searching.*"];
+
+			protected function application1_creationCompleteHandler(event:FlexEvent):void
+			{
+				// TODO Auto-generated method stub
+				var annTest:NeuronNetWorkTest = new NeuronNetWorkTest();
+			}
+
 		]]>
 	</fx:Script>
 	<fx:Declarations>
