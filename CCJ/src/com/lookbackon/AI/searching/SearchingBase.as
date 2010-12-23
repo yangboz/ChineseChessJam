@@ -90,6 +90,7 @@ package com.lookbackon.AI.searching
 			}
 			//temporary define first move from ording moves for hard-code test purpose.
 			this.tempMove=this.orderingMoves[0];
+			this.bestMove=this.orderingMoves[0];
 			//default execute run,to be overrided.
 //			this.run();
 			//
@@ -340,7 +341,7 @@ package com.lookbackon.AI.searching
 		//return thread calculate precentage.
 		override public function get percentage():Number
 		{
-			return processDone ? 1.0 : 0.33;
+			return processDone ? 1 : 0.33;
 		}
 	}
 }

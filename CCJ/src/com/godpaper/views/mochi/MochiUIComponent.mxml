@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:UIComponent xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				xmlns:mx="library://ns.adobe.com/flex/mx" 
+				xmlns:parsley="http://www.spicefactory.org/parsley"
+			    creationComplete="creationCompleteHandler(event)"
+				>
+	<fx:Script>
+		<![CDATA[
+			import com.godpaper.model.MochiModel;
+			
+			import mochi.as3.MochiServices;
+			
+			import mx.controls.Alert;
+			import mx.core.FlexGlobals;
+			import mx.events.CloseEvent;
+			import mx.events.FlexEvent;
+			//
+			[Inject][Bindable]
+//			public var mochiModel:MochiModel = new MochiModel();
+			public var mochiModel:MochiModel;
+			
+			protected function creationCompleteHandler(event:FlexEvent):void
+			{
+				// 
+				FlexGlobals.topLevelApplication._mochiClip = new MovieClip();
+				//
+				this.addChild(FlexGlobals.topLevelApplication._mochiClip);
+				//
+				FlexGlobals.topLevelApplication._mochiClip.addEventListener(Event.ADDED_TO_STAGE,mochiClipOnStage);
+			}
+			
+			private function mochiClipOnStage(event:Event):void
+			{
+				MochiServices.connect(mochiModel.gameID,FlexGlobals.topLevelApplication._mochiClip,onMochiServiceConnectionError);
+			}
+			
+			private function onMochiServiceConnectionError(status:String):void
+			{
+				Alert.show("Re-connect MochiService?",status,Alert.YES|Alert.NO,null,onCloseHandler);
+			}
+			
+			private function onCloseHandler(event:CloseEvent):void
+			{
+				//re-connect mochi service.\
+				if(event.detail==Alert.YES)
+				{
+					FlexGlobals.topLevelApplication._mochiClip.dispatchEvent(new Event(Event.ADDED_TO_STAGE,mochiClipOnStage));
+				}
+			}
+
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<parsley:Configure/>
+	</fx:Declarations>
+</mx:UIComponent>

@@ -2,6 +2,32 @@ package com.lookbackon.ccj.utils
 {
 	/**
 	 *
+	 * 
+	 * Permutation Utility class version 1.
+	 * 
+	 * Copyright (c) 2008 H. Melih Elibol
+	 * 
+	 * Permission is hereby granted, free of charge, to any person obtaining a copy
+	 * of this software and associated documentation files (the "Software"), to deal
+	 * in the Software without restriction, including without limitation the rights
+	 * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	 * copies of the Software, and to permit persons to whom the Software is
+	 * furnished to do so, subject to the following conditions:
+	 * 
+	 * The above copyright notice and this permission notice shall be included in
+	 * all copies or substantial portions of the Software.
+	 * 
+	 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+	 * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	 * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+	 * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+	 * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+	 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+	 * THE SOFTWARE.
+	 * 
+	 * /
+	 /**
+	 * 
 	 * @author Knight.zhou
 	 *
 	 */
@@ -95,6 +121,99 @@ package com.lookbackon.ccj.utils
 			UINT_RANDOM ^= (UINT_RANDOM >>> 35);
 			UINT_RANDOM ^= (UINT_RANDOM << 4);
 			return (UINT_RANDOM * UINT_MAX_RATIO);
+		}
+		
+		/**
+		 * Computes the factorial of parameter n.
+		 * 
+		 * @param n the number
+		 * @return the factorial of n
+		 * 
+		 */		
+		public static function factorial(n:Number):Number {
+			if(n>1) return n*arguments.callee(n-1);
+			return 1;
+		}
+		
+		/**
+		 * 
+		 * logic (lsd = least significant digit):
+		 * 
+		 * j++; //move to next digit
+		 * n/=(j-1); //move "decimal place" of n (this is to create the next lsd) by previous base j-1, which does not move (since j is 1)
+		 * Number(n)%j; //get the lsd of n in base j
+		 * 
+		 * @param k positive integer to represent
+		 * @return Factoradic representation of integer k as an Array
+		 * 
+		 */
+		public static function toFactoradic(n:Number):Array {
+			var factoradic:Array = [0];
+			var j:Number = 1;
+			while(j<=n) factoradic.unshift(Number(n/=j++)%j);
+			return factoradic;
+		}
+		
+		/**
+		 * 
+		 * This function can be used with a permutation generator.
+		 * 
+		 * @param n positive integer to represent
+		 * @param k factoradic length
+		 * @return Factoradic representation of integer k as an Array
+		 * 
+		 */
+		public static function toFactoradic2(n:Number, k:Number):Array {
+			var factoradic:Array = [0];
+			for(var j:Number = 1;j++<n;){
+				k = k/(j-1);
+				factoradic.unshift(k%j);
+			}
+			return factoradic;
+		}
+		
+		/**
+		 * @param n Order
+		 * @param k Factoradic
+		 * @return kth permutation of order n
+		 */
+		public static function permutation(n:Number, k:Number):Array {
+			var r:Array = [], j:Number = 1, i:Number, p:Number;
+			r[n-1] = 0;
+			while(j++<n){
+				p = i = n-j;
+				r[p] = Math.floor((k/=(j-1))%j);
+				while(i++<n)
+					if(r[i] >= r[p])
+						++r[i];
+			}
+			return r;
+		}
+		
+		/**
+		 * 
+		 * @param n Order as an array
+		 * @param k Factoradic
+		 * @return kth permutation of order n
+		 * 
+		 */
+		public static function permutateArray(n:Array, k:Number):Array {
+			var r:Array = permutation(n.length, k);
+			for(var i:int = -1;++i<n.length;)
+				r[i] = n[r[i]];
+			return r;
+		}
+		/**
+		 * 
+		 * @param n number of blanket elements.
+		 * @param r number of picking elements from blanket.
+		 * @return the premutated number with picked elements.
+		 * 
+		 */		
+		public static function premutate(n:Number,r:Number):Number
+		{
+			if(r>=n) throw new Error("Invalid parameter!!!");
+			return factorial(n)/factorial(n-r);
 		}
 	}
 }

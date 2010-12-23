@@ -24,15 +24,18 @@ package com.lookbackon.ccj.business.fsm.states.game
 	import com.lookbackon.ccj.model.vos.PositionVO;
 	import com.lookbackon.ccj.utils.LogUtil;
 	
+	import flash.events.Event;
+	
+	import mx.core.FlexGlobals;
 	import mx.logging.ILogger;
 	import mx.managers.CursorManager;
-	import flash.events.Event;
-	import mx.core.FlexGlobals;
 	
 	import org.flexunit.runner.notification.IRunListener;
 	import org.generalrelativity.thread.GreenThread;
 	import org.generalrelativity.thread.IRunnable;
 	import org.generalrelativity.thread.event.GreenThreadEvent;
+	import org.generalrelativity.thread.util.ThreadUtil;
+
 	/**
 	 * ComputerState.as class.   	
 	 * @author yangboz
@@ -49,6 +52,9 @@ package com.lookbackon.ccj.business.fsm.states.game
 		//--------------------------------------------------------------------------
 		//The agent obtans searching.
 		public var searching:ISearching;
+		//
+		private var processes:Vector.<IRunnable>;
+		private var greenThread:GreenThread;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -92,36 +98,36 @@ package com.lookbackon.ccj.business.fsm.states.game
 			//
 			//TODO:switch any searching class to test.
 			//			gameAI = new RandomWalk(ChessPiecesModel.getInstance().gamePosition);
-			//			gameAI=new MinMax(ChessPiecesModel.getInstance().gamePosition);
-			//			gameAI = new MiniMax(ChessPiecesModel.getInstance().gamePosition,1);
+//			searching = new MinMax(ChessPiecesModel.getInstance().gamePosition);
+			searching = new MiniMax(ChessPiecesModel.getInstance().gamePosition,5);
 			//			gameAI = new NegaMax(ChessPiecesModel.getInstance().gamePosition,1);
 			//			gameAI = new AlphaBeta(ChessPiecesModel.getInstance().gamePosition);
 			//			gameAI = new Quiescence(ChessPiecesModel.getInstance().gamePosition);
 			//			gameAI = new PVS(ChessPiecesModel.getInstance().gamePosition);
 			//			gameAI = new ShortSighted(ChessPiecesModel.getInstance().gamePosition);
-			searching = new AttackFalse(ChessPiecesModel.getInstance().gamePosition);
+//			searching = new AttackFalse(ChessPiecesModel.getInstance().gamePosition);
 			//
 			//using this flash green thread algorithm to avoid script time limition only 15s.
-			var processes:Vector.<IRunnable>=new Vector.<IRunnable>();
+			processes = new Vector.<IRunnable>();
 			processes.push(searching);
-			var greenThread:GreenThread=new GreenThread(processes, FlexGlobals.topLevelApplication.stage.frameRate);
+			greenThread = new GreenThread(processes, FlexGlobals.topLevelApplication.stage.frameRate);
 			//
-			greenThread.addEventListener(GreenThreadEvent.PROCESS_TIMEOUT, function(event:GreenThreadEvent):void
-			{
-				LOG.error(event.toString());
-			});
-			greenThread.addEventListener(GreenThread.CYCLE, function(event:Event):void
-			{
-				LOG.debug(event.toString());
-			});
-			greenThread.addEventListener(GreenThreadEvent.PROCESS_COMPLETE, function(event:GreenThreadEvent):void
-			{
-				LOG.info(event.toString());
-			});
-			greenThread.addEventListener(Event.COMPLETE, function(event:Event):void
-			{
-				LOG.info(event.toString());
-			});
+//			greenThread.addEventListener(GreenThreadEvent.PROCESS_TIMEOUT, function(event:GreenThreadEvent):void
+//			{
+//				LOG.error(event.toString());
+//			});
+//			greenThread.addEventListener(GreenThread.CYCLE, function(event:Event):void
+//			{
+//				LOG.debug(event.toString());
+//			});
+//			greenThread.addEventListener(GreenThreadEvent.PROCESS_COMPLETE, function(event:GreenThreadEvent):void
+//			{
+//				LOG.info(event.toString());
+//			});
+//			greenThread.addEventListener(Event.COMPLETE, function(event:Event):void
+//			{
+//				LOG.info(event.toString());
+//			});
 			//
 			greenThread.open();
 		}
@@ -132,7 +138,6 @@ package com.lookbackon.ccj.business.fsm.states.game
 			CursorManager.removeBusyCursor();
 			//
 			GameManager.indicatorReadOut=false;
-			//
 		}
 		
 		override public function update(time:Number=0):void

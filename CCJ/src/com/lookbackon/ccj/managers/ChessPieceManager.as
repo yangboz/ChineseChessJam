@@ -172,13 +172,16 @@ package com.lookbackon.ccj.managers
 			//
 			LOG.info("End makeMove:{0}", conductVO.brevity);
 			//Trigger in-turn system .
-			if (GameManager.turnFlag == CcjConstants.FLAG_RED)
+			if(GameManager.isRunning)
 			{
-				GameManager.isComputerTurnNow();
-			}
-			else
-			{
-				GameManager.isHumanTurnNow();
+				if (GameManager.turnFlag == CcjConstants.FLAG_RED)
+				{
+					GameManager.isComputerTurnNow();
+				}
+				else
+				{
+					GameManager.isHumanTurnNow();
+				}
 			}
 		}
 
@@ -218,7 +221,11 @@ package com.lookbackon.ccj.managers
 			}
 			//TODO:un-update functions.
 			//roll back bitboard
-			BitBoard(chessPiecesModel[eattenPiece.type]).setBitt(cGasket.position.y, cGasket.position.x, true);
+			if(null!=eattenPiece)
+			{
+				BitBoard(chessPiecesModel[eattenPiece.type]).setBitt(cGasket.position.y, cGasket.position.x, true);
+			}
+			//
 			LOG.debug(chessPiecesModel.allPieces.dump());
 			//roll back pieces data.
 			if (GameManager.turnFlag == CcjConstants.FLAG_RED)

@@ -89,14 +89,81 @@ package com.lookbackon.AI.searching
 		override public function run():void
 		{
 			//
-			miniMax(gamePosition,depth);
+//			miniMax(gamePosition,depth);
+			//
+			maxi(depth);
 		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
+		private function maxi(depth:int):int
+		{
+			if(this.processDone) return int.MIN_VALUE;
+			//
+			if(depth==0)
+			{
+				//
+				var result:int = doEvaluation(bestMove,gamePosition);
+				trace("maxi do evaluation result:",result);
+				//
+				this.processDone = true;
+				//
+				return result; 
+			}
+			var max:int = int.MIN_VALUE;
+			//
+			orderingMoves = generateMoves(ChessPiecesModel.getInstance().blues);
+			var len:int = orderingMoves.length;
+			//
+			for(var i:int=0;i<len;i++)
+			{
+				var score:int = mini(depth-1);
+				if(score>max)
+				{
+					max = score;
+					//
+					this.bestMove = this.orderingMoves[i];
+				}
+			}
+			//
+			trace("maxi result:",result);
+			return max;
+		}
 		
+		private function mini(depth:int):int
+		{
+			if(this.processDone) return int.MIN_VALUE;
+			//
+			if(depth==0)
+			{
+				var result:int = -doEvaluation(bestMove,gamePosition);
+				trace("mini do evaluation result:",result);
+				//
+				this.processDone = true;
+				//
+				return result;  
+			}
+			var min:int = int.MAX_VALUE;
+			//
+			orderingMoves = generateMoves(ChessPiecesModel.getInstance().blues);
+			var len:int = orderingMoves.length;
+			//
+			for(var i:int=0;i<len;i++)
+			{
+				var score:int = maxi(depth-1);
+				if(score<min)
+				{
+					min = score;
+					//
+					this.bestMove = this.orderingMoves[i];
+				}
+			}
+			//
+			trace("mini result:",result);
+			return min;
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods

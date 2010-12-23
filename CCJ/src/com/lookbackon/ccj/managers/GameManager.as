@@ -25,10 +25,15 @@ package com.lookbackon.ccj.managers
 		//
 		//--------------------------------------------------------------------------
 		private static var _turnFlag:int=CcjConstants.FLAG_BLUE;
+		public static var isRunning:Boolean=true;
+		//indicators
 		[Bindable]
 		public static var indicatorReadOut:Boolean=false;
 		[Bindable]
 		public static var indication:String=INDICATION_THINKING;
+		//about mochi
+		[Bindable]
+		public static var indicatorSubmitScore:Boolean = false;
 		//
 		public static var agent:GameAgent;
 		//----------------------------------
@@ -86,7 +91,7 @@ package com.lookbackon.ccj.managers
 		public static function computerWin():void
 		{
 			//TODO:
-			Alert.show("COMPUTER WIN!!!");
+			agent.fsm.changeState(agent.computerWinState);
 		}
 
 		//----------------------------------
@@ -95,7 +100,7 @@ package com.lookbackon.ccj.managers
 		public static function humanWin():void
 		{
 			//TODO:
-			Alert.show("HUMAN WIN!!!");
+			agent.fsm.changeState(agent.humanWinState);
 		}
 
 		//----------------------------------

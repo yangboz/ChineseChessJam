@@ -28,12 +28,12 @@ package com.lookbackon.AI.searching
 		//	
 		/**
     	 * if(game over in current board position)
-         * return winner
-         * children = all legal moves for player from this board
+         * return winner </br>
+         * children = all legal moves for player from this board</br>
          * if(max's turn)
-         * return maximal score of calling minimax on all the children
+         * return maximal score of calling minimax on all the children</br>
          * else (min's turn)
-         * return minimal score of calling minimax on all the children
+         * return minimal score of calling minimax on all the children</br>
 		 * @see http://www.fierz.ch/strategy.htm
 		*/		
 		public function MinMax(gamePosition:PositionVO) 
@@ -79,7 +79,7 @@ package com.lookbackon.AI.searching
 			orderingMoves = generateMoves(ChessPiecesModel.getInstance().blues);
 			//depth auto increasement.
 			depth++;
-			trace("depth:",depth);
+			trace("Max depth:",depth);
 			//
 			if( orderingMoves.length<=0 )
 			{

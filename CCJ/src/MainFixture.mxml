@@ -10,11 +10,10 @@
 	<fx:Script>
 		<![CDATA[
 			import com.godpaper.configs.CCJContextConfig;
-			import com.lookbackon.AI.artificalNeuralNetwork.NeuronNetWorkTest;
 			
 			import mx.events.FlexEvent;
 			import mx.logging.LogEventLevel;
-
+			
 			[Bindable]
 			private var logFilters:Array=[
 				//												"com.lookbackon.ccj.view.components.ChessPiece"
@@ -30,7 +29,11 @@
 			protected function application1_creationCompleteHandler(event:FlexEvent):void
 			{
 				// TODO Auto-generated method stub
-				var annTest:NeuronNetWorkTest = new NeuronNetWorkTest();
+				var pgnLoader:URLLoader = new URLLoader(new URLRequest("assets/pgn/sample.PGN"));
+				pgnLoader.addEventListener(Event.COMPLETE,function():void
+				{
+					trace(pgnLoader.data);
+				});
 			}
 
 		]]>

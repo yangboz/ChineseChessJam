@@ -1,42 +1,32 @@
-package com.lookbackon.ccj.business.fsm
+package com.godpaper.model
 {
+	import flash.display.MovieClip;
+	
+	import mochi.as3.MochiDigits;
+
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.lookbackon.AI.finiteStateMachine.Agent;
-	import com.lookbackon.AI.searching.ISearching;
-	import com.lookbackon.ccj.CcjConstants;
-	import com.lookbackon.ccj.business.fsm.states.game.AnotherHumanState;
-	import com.lookbackon.ccj.business.fsm.states.game.ComputerState;
-	import com.lookbackon.ccj.business.fsm.states.game.ComputerWinState;
-	import com.lookbackon.ccj.business.fsm.states.game.HumanState;
-	import com.lookbackon.ccj.business.fsm.states.game.HumanWinState;
-	
-	import mx.core.IVisualElement;
-	
-	
 	/**
-	 * GameAgent.as class.   	
+	 * MochiModel.as class.   	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
-	 * Created Dec 10, 2010 11:29:30 AM
+	 * Created Dec 23, 2010 1:06:55 PM
 	 */   	 
-	public class GameAgent extends Agent
+	public class MochiModel
 	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		//The agent obtains states.
-		public var humanState:HumanState;
-		public var computerState:ComputerState;
-		public var anotherHumanState:AnotherHumanState;
-		public var humanWinState:HumanWinState;
-		public var computerWinState:ComputerWinState;
+		public var gameID:String = "47de4a85dd3e213a";
+		public var score:MochiDigits = new MochiDigits();//the player's score to submit (integer, or time in milliseconds)
+		public var name:String;//the player's name
+		public var boradID:String = "3a460211409897f4";//board ID (overrides setBoardID) 
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -58,16 +48,10 @@ package com.lookbackon.ccj.business.fsm
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function GameAgent(name:String, carrier:IVisualElement)
+		public function MochiModel()
 		{
-			//TODO: implement function
-			super(name, carrier);
 			//
-			this.humanState = new HumanState(this,null,CcjConstants.STATE_HUMAN);
-			this.computerState = new ComputerState(this,null,CcjConstants.STATE_COMPUTER);
-			this.anotherHumanState = new AnotherHumanState(this,null,CcjConstants.STATE_ANOTHER_HUMAN);
-			this.humanWinState = new HumanWinState(this,null,CcjConstants.STATE_HUMAN_WIN);
-			this.computerWinState = new ComputerWinState(this,null,CcjConstants.STATE_COMPUTER_WIN);
+			score.setValue(0);
 		}     	
 		//--------------------------------------------------------------------------
 		//

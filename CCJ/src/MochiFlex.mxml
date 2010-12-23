@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" width="640" height="480" preloader="MochiPreloader" applicationComplete="complete()">
+		<mx:Script>
+		<![CDATA[
+			import flash.display.MovieClip;
+			import mochi.as3.*;
+			
+			private var _clip:MovieClip;
+			private var clickAwayMC:MovieClip;
+			private var INTER_OPTIONS:Object;
+			private var CLICKAWAY_OPTIONS:Object;
+			
+	        private var _storeItems:Object;
+
+			/*
+				complete() is called via the ApplicationComplete event and sets up 
+				the MovieClip for the MochiAd Interlevel Ad. MovieClip objects
+				cannot be added as children to Flex containers, so you must use
+				a proxy UIComponent to hold the MovieClip.
+			
+				Since the clip holding the Ad is independent of your game, you must
+				start and stop gameplay yourself by using the ad_started and ad_finished
+				callbacks to the showInterLevelAd() and showPreGameAd() functions.
+			*/
+			private function complete():void {
+				_clip = new MovieClip();
+
+				MochiAdComponent.addChild(_clip);
+				MochiAdPanel.title = "MochiAds " + MochiAd.getVersion() + " Flex Example";
+				
+				unloadClickAwayButton.visible = false;
+				
+				INTER_OPTIONS = {clip:_clip, id:"test", res:MochiAdComponent.width + "x" + MochiAdComponent.height, 
+								 ad_loaded:function(w:Number, h:Number):void { status.text = status.text + w + "x" + h + " Interlevel Ad loaded\n" },
+								 ad_finished:function():void { status.text = status.text + "Interlevel Ad Finished Playing\n" }
+								 };
+
+	    		MochiServices.connect("84993a1de4031cd8", _clip);
+
+	            MochiSocial.addEventListener(MochiSocial.ERROR, coinsError);
+	            MochiSocial.addEventListener(MochiSocial.LOGGED_IN, coinsEvent);
+	            MochiCoins.addEventListener(MochiCoins.ITEM_OWNED, coinsEvent);
+	            MochiCoins.addEventListener(MochiCoins.STORE_ITEMS, storeItems);
+
+	            MochiCoins.getStoreItems();
+	            MochiSocial.showLoginWidget({x:420, y:430});
+			}
+			
+	        private function coinsError(error:Object):void {
+	            trace("[GAME] [coinsError] " + error.type);
+	        }
+	
+	        private function onError(status:String):void {
+	            trace("[GAME] Connect onError called " + status);
+	        }
+
+			private function showLeaderboard(event:Event):void {
+					var boardID:String = "1e113c7239048b3f";
+					MochiScores.setBoardID(boardID);
+					
+					var score:MochiDigits = new MochiDigits();
+					
+					score.setValue(0);
+					score.addValue( 1000 );
+					score.addValue( int(Math.random() * 500) );
+					
+					MochiScores.showLeaderboard( { res: "640x480", clip: _clip, score: score.value } );
+			}
+			
+			private function showInterlevelAd(event:Event):void {
+				MochiAd.showInterLevelAd(INTER_OPTIONS);
+			}
+			
+			private function showClickAwayAd(event:Event):void {
+				clickAwayMC = new MovieClip();
+				ClickAwayAdComponent.addChild(clickAwayMC);
+				clickAwayButton.visible = false;
+				
+				CLICKAWAY_OPTIONS = {clip:clickAwayMC, id:"test", 
+								   ad_loaded:function(w:Number, h:Number):void { status.text = status.text + "ClickAway Ad Loaded\n";
+								 												 unloadClickAwayButton.visible = true }
+								   };
+				
+				MochiAd.showClickAwayAd(CLICKAWAY_OPTIONS);
+			}
+			
+			private function unloadClickAwayAd(event:Event):void {
+				unloadClickAwayButton.visible = false;
+				clickAwayButton.visible = true;
+				
+				MochiAd.unload(clickAwayMC);
+				status.text = status.text + "ClickAway Ad Unloaded\n";
+			}
+			
+	        private function showStore(ev:Object = null):void {
+	            MochiCoins.showStore({clip:_clip});
+	        }
+
+	        private function showItem(ev:Object = null):void {
+	            MochiCoins.showItem({x:150, y:150, item: "7eb8d3ef7793239b"});
+	        }
+
+	        private function showLogin(ev:Object = null):void {
+	            MochiSocial.showLoginWidget({x:420, y:430});
+	        }
+
+	        private function hideLogin(ev:Object = null):void {
+	            MochiSocial.hideLoginWidget()
+	        }
+
+	        private function coinsEvent(event:Object):void {
+	            trace("[GAME] [coinsEvent] " + event);
+	        }
+
+	        private function storeItems(arg:Object):void {
+	            _storeItems = arg;
+	            for (var key:String in _storeItems) {
+	                trace("[GAME] [StoreItems] " + key);
+	            }
+	        }
+
+		]]>
+	</mx:Script>
+
+	<mx:Panel id="MochiAdPanel" x="0" y="-2" width="640" height="480" layout="absolute">
+		<mx:Button x="10" y="10" label="Show Interlevel Ad" width="156" height="33" click="showInterlevelAd(event)" />
+		<mx:Button id="clickAwayButton" x="10" y="51" label="Show ClickAway Ad" width="156" height="33" click="showClickAwayAd(event)" />
+		<mx:Button id="unloadClickAwayButton" x="10" y="51" label="Unload ClickAway Ad" width="156" height="33" click="unloadClickAwayAd(event)"/>
+		<mx:Button id="showLeaderboardButton" x="10" y="92" label="Show Leaderboard" width="156" height="33" click="showLeaderboard(event)"/>
+
+		<mx:Button id="showStoreButton" x="10" y="133" label="Show game store" width="156" height="33" click="showStore(event)"/>
+		<mx:Button id="showItemButton" x="10" y="174" label="Show single item" width="156" height="33" click="showItem(event)"/>
+		<mx:Button id="showLoginButton" x="10" y="215" label="Show login" width="156" height="33" click="showLogin(event)"/>
+		<mx:Button id="hideLoginButton" x="10" y="256" label="Hide login" width="156" height="33" click="hideLogin(event)"/>
+		
+		<mx:TextArea id="status" x="196" y="10" width="379" height="74"/>
+		<mx:Label x="196" y="100" text="ClickAway Ad will appear in the UIComponent below" width="301" height="20"/>
+		
+		<mx:UIComponent id="ClickAwayAdComponent" x="153.5" y="180" width="313" height="250">
+		</mx:UIComponent>
+	</mx:Panel>
+	
+	<mx:UIComponent id="MochiAdComponent" x="0" y="0">
+	</mx:UIComponent>
+
+</mx:Application>

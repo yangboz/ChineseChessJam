@@ -1,42 +1,29 @@
-package com.lookbackon.ccj.business.fsm
+package com.lookbackon.ccj.business.fsm.states.game
 {
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.lookbackon.AI.finiteStateMachine.Agent;
-	import com.lookbackon.AI.searching.ISearching;
-	import com.lookbackon.ccj.CcjConstants;
-	import com.lookbackon.ccj.business.fsm.states.game.AnotherHumanState;
-	import com.lookbackon.ccj.business.fsm.states.game.ComputerState;
-	import com.lookbackon.ccj.business.fsm.states.game.ComputerWinState;
-	import com.lookbackon.ccj.business.fsm.states.game.HumanState;
-	import com.lookbackon.ccj.business.fsm.states.game.HumanWinState;
-	
-	import mx.core.IVisualElement;
+	import com.lookbackon.AI.finiteStateMachine.IAgent;
+	import com.lookbackon.ccj.business.fsm.StateBase;
+	import com.lookbackon.ccj.managers.GameManager;
 	
 	
 	/**
-	 * GameAgent.as class.   	
+	 * HumanWinState.as class.   	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
-	 * Created Dec 10, 2010 11:29:30 AM
+	 * Created Dec 23, 2010 1:01:43 PM
 	 */   	 
-	public class GameAgent extends Agent
+	public class HumanWinState extends StateBase
 	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		//The agent obtains states.
-		public var humanState:HumanState;
-		public var computerState:ComputerState;
-		public var anotherHumanState:AnotherHumanState;
-		public var humanWinState:HumanWinState;
-		public var computerWinState:ComputerWinState;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -58,23 +45,31 @@ package com.lookbackon.ccj.business.fsm
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function GameAgent(name:String, carrier:IVisualElement)
+		public function HumanWinState(agent:IAgent, resource:Object, description:String=null)
 		{
 			//TODO: implement function
-			super(name, carrier);
-			//
-			this.humanState = new HumanState(this,null,CcjConstants.STATE_HUMAN);
-			this.computerState = new ComputerState(this,null,CcjConstants.STATE_COMPUTER);
-			this.anotherHumanState = new AnotherHumanState(this,null,CcjConstants.STATE_ANOTHER_HUMAN);
-			this.humanWinState = new HumanWinState(this,null,CcjConstants.STATE_HUMAN_WIN);
-			this.computerWinState = new ComputerWinState(this,null,CcjConstants.STATE_COMPUTER_WIN);
+			super(agent, resource, description);
 		}     	
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
+		override public function enter():void
+		{
+			GameManager.isRunning = false;
+			GameManager.indicatorSubmitScore = true;
+		}
 		
+		override public function update(time:Number=0):void
+		{
+			
+		}
+		
+		override public function exit():void
+		{
+			GameManager.indicatorSubmitScore = false;
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods

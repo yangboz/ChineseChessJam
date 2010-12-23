@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   title="You Win!"
+			   creationComplete="titlewindow1_creationCompleteHandler(event)" 
+			   xmlns:parsley="http://www.spicefactory.org/parsley"
+			   show="titlewindow1_showHandler(event)"
+			   >
+	<fx:Script>
+		<![CDATA[
+			import com.godpaper.model.MochiModel;
+			
+			import mochi.as3.MochiScores;
+			
+			import mx.core.FlexGlobals;
+			import mx.events.FlexEvent;
+			
+			import org.spicefactory.parsley.core.context.Context;
+			//
+			[Inject][Bindable]
+			private var mochiModel:MochiModel;
+			//
+			[Inject]
+			private var context:Context;
+
+			protected function titlewindow1_creationCompleteHandler(event:FlexEvent):void
+			{
+				this.closeButton.visible = false;
+				// set properties
+				context.viewManager.addViewRoot(this);
+			}
+			
+			private function submitBtnClickHandler(event:MouseEvent):void
+			{
+				//
+				mochiModel.score.addValue(Number(scoreTextInput.text));
+				//
+				MochiScores.showLeaderboard(
+					{   res: "640x480", 
+						clip: mx.core.FlexGlobals.topLevelApplication, 
+						score: mochiModel.score.value
+					}
+				);
+			}
+
+			protected function titlewindow1_showHandler(event:FlexEvent):void
+			{
+				//
+				MochiScores.setBoardID(mochiModel.boradID);
+			}
+
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<parsley:Configure/>
+	</fx:Declarations>
+	<mx:Form width="100%" height="100%" defaultButton="{submitBtn}">
+		<mx:FormItem label="Your name:" required="true">
+			<s:TextInput/>
+		</mx:FormItem>
+		<mx:FormItem label="Your score:" required="true">
+			<s:TextInput id="scoreTextInput" enabled="false" text="10"/>
+		</mx:FormItem>
+	</mx:Form>
+	
+	<s:controlBarContent>
+		<s:HGroup width="100%" horizontalAlign="center">
+			<s:Button id="submitBtn" label="Submit" click="submitBtnClickHandler(event)"/>
+		</s:HGroup>
+	</s:controlBarContent>
+</s:TitleWindow>

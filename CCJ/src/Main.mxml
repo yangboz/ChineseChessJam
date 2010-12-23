@@ -7,15 +7,17 @@
 			   xmlns:controller="com.lookbackon.ccj.controller.*"
 			   xmlns:task="com.adobe.cairngorm.task.*"
 			   xmlns:tasks="com.godpaper.tasks.*"
-			   width="500" height="520" maxWidth="500" maxHeight="520"
+			   width="520" height="520" maxWidth="500" maxHeight="520"
 			   applicationComplete="application1_applicationCompleteHandler(event)"
-			   creationComplete="application1_creationCompleteHandler(event)" scriptTimeLimit="60">
+			   creationComplete="application1_creationCompleteHandler(event)" scriptTimeLimit="60" 
+			   xmlns:mochi="com.godpaper.views.mochi.*" xmlns:parsley="http://www.spicefactory.org/parsley">
 	<s:layout>
 		<s:BasicLayout/>
 	</s:layout>
 	<fx:Script>
 		<![CDATA[
 			import com.adobe.cairngorm.contract.Contract;
+			import com.godpaper.configs.CCJContextConfig;
 			import com.lookbackon.ccj.managers.GameManager;
 			import com.lookbackon.ccj.model.ChessPiecesModel;
 			import com.lookbackon.ccj.utils.LogUtil;
@@ -29,23 +31,26 @@
 			//  Variables
 			//
 			//--------------------------------------------------------------------------
-			public var _mochiads_game_id:String="47de4a85dd3e213a"; //For mochi.
-
+			//For mochi.
+			public var _mochiads_game_id:String="47de4a85dd3e213a"; 
+			public var _mochiClip:MovieClip;
+			//
 			private var chessPiecesModel:ChessPiecesModel=ChessPiecesModel.getInstance();
 			//
 			[Bindable]
 			private var logFilters:Array=[
 //												"com.lookbackon.ccj.view.components.ChessGasket"
 //												,
-//												"com.lookbackon.ccj.managers.ChessPieceManager"
-//												,
+												"com.lookbackon.ccj.managers.ChessPieceManager"
+												,
+												"com.lookbackon.AI.searching.*"
 //												"com.lookbackon.ccj.model.vos.cvo.CannonVO"		
 //												,
 //												"com.lookbackon.ccj.view.components.ChessPiece"
 //												,
 //				"com.lookbackon.AI.searching.*"
 //				,
-				"*"
+//				"*"
 			];
 			//----------------------------------
 			//  CONSTANTS
@@ -76,9 +81,9 @@
 				//@see http://opensource.adobe.com/wiki/display/cairngorm/HowToUseCairngormContract
 				try
 				{
-//					Contract.precondition(CONFIG::debugging);
+					Contract.precondition(CONFIG::debugging);
 					this.traceTarget.level=LogEventLevel.DEBUG;
-//					Contract.postcondition(CONFIG::debugging);
+					Contract.postcondition(CONFIG::debugging);
 				}
 				catch (error:Error)
 				{
@@ -105,6 +110,14 @@
 	</fx:Script>
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<!---
+		The context for bootstrapping the whole Parsley framework.
+		-->
+		<parsley:ContextBuilder config="{CCJContextConfig}"/>
+		
+		<!---
+		The system unique logging component provider LOG.debug/info/warn/error/fatal avenues.
+		-->
 		<s:TraceTarget id="traceTarget"
 					   fieldSeparator="->"
 					   includeCategory="true"
@@ -113,13 +126,22 @@
 					   includeTime="true"
 					   level="{LogEventLevel.INFO}"
 					   filters="{logFilters}"/>
-		<popup:PopUpWrapper open="{GameManager.indicatorReadOut}"
+		<!-- Popups here -->
+		<parsley:PopUp open="{GameManager.indicatorReadOut}"
 							center="true"
 							modal="true"
 						    reuse="false"
 							>
 			<components:IndicatoryProgressBar label="{GameManager.indication}"/>
-		</popup:PopUpWrapper>
+		</parsley:PopUp>
+		
+		<parsley:PopUp open="{GameManager.indicatorSubmitScore}"
+							center="true"
+							modal="true"
+							reuse="false"
+							>
+			<mochi:SubmitScoreAndName/>
+		</parsley:PopUp>
 		<!-- Controllers here -->
 		<!-- Tasks -->
 		<task:SequenceTask id="startUpSequenceTask">
@@ -133,11 +155,14 @@
 	<!-- Views here -->
 	<components:ChessBoard id="chessBoard"
 						   left="25"
-						   right="25"
+						   right="45"
 						   top="25"
 						   bottom="25"
 						   backgroundImage="@Embed('./assets/images/ChessBoardBG.png')"
 						   backgroundImageFillMode="scale"
 						   />
-
+	<!-- MochiMedia View -->
+	<mochi:MochiUIComponent x="0" y="0">
+	</mochi:MochiUIComponent>
+	
 </s:Application>

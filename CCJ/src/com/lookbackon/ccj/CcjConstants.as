@@ -50,5 +50,7 @@ package com.lookbackon.ccj
 		public static const STATE_HUMAN:String 		= "HumanTurn";
 		public static const STATE_ANOTHER_HUMAN:String 		= "AnotherHumanTurn";
 		public static const STATE_COMPUTER:String 		= "ComputerTurn";
+		public static const STATE_HUMAN_WIN:String 	= "HumanWin";
+		public static const STATE_COMPUTER_WIN:String 	= "ComputerWin";
 	}
 }

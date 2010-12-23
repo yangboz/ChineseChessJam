@@ -3,6 +3,7 @@ package com.lookbackon.AI.evaluation.linear
 	import com.lookbackon.AI.evaluation.IEvaluation;
 	import com.lookbackon.ccj.CcjConstants;
 	import com.lookbackon.ccj.ChessPiecesConstants;
+	import com.lookbackon.ccj.managers.ChessPieceManager;
 	import com.lookbackon.ccj.model.ChessPiecesModel;
 	import com.lookbackon.ccj.model.vos.ConductVO;
 	import com.lookbackon.ccj.model.vos.PositionVO;
@@ -102,7 +103,7 @@ package com.lookbackon.AI.evaluation.linear
 			//Mobility
 			//TODO:
 			//Threat
-			//TODO:
+			//
 			return T_blue-T_red;
 		}
 		//--------------------------------------------------------------------------
