@@ -7,15 +7,19 @@
 			   xmlns:controller="com.lookbackon.ccj.controller.*"
 			   xmlns:task="com.adobe.cairngorm.task.*"
 			   xmlns:tasks="com.godpaper.tasks.*"
+			   xmlns:mochi="com.godpaper.views.mochi.*"
+			   xmlns:parsley="http://www.spicefactory.org/parsley"
+			   xmlns:mx1="library://ns.adobe.com/flex/mx"
 			   width="520" height="520" maxWidth="500" maxHeight="520"
 			   applicationComplete="application1_applicationCompleteHandler(event)"
-			   creationComplete="application1_creationCompleteHandler(event)" scriptTimeLimit="60" 
-			   xmlns:mochi="com.godpaper.views.mochi.*" xmlns:parsley="http://www.spicefactory.org/parsley">
+			   creationComplete="application1_creationCompleteHandler(event)" scriptTimeLimit="60">
 	<s:layout>
 		<s:BasicLayout/>
 	</s:layout>
 	<fx:Script>
 		<![CDATA[
+			import assets.EmbededAssets;
+			
 			import com.adobe.cairngorm.contract.Contract;
 			import com.godpaper.configs.CCJContextConfig;
 			import com.lookbackon.ccj.managers.GameManager;
@@ -25,6 +29,8 @@
 			import mx.events.FlexEvent;
 			import mx.logging.ILogger;
 			import mx.logging.LogEventLevel;
+			
+			import org.spicefactory.parsley.core.context.Context;
 
 			//--------------------------------------------------------------------------
 			//
@@ -52,6 +58,7 @@
 //				,
 //				"*"
 			];
+			//
 			//----------------------------------
 			//  CONSTANTS
 			//----------------------------------
@@ -106,6 +113,13 @@
 				GameManager.startGame();
 				//
 			}
+
+			protected function tollgateIconView_addedToStageHandler(event:Event):void
+			{
+				// TODO Auto-generated method stub
+				MovieClip(tollgateIconView.content).gotoAndStop(1);
+			}
+
 		]]>
 	</fx:Script>
 	<fx:Declarations>
@@ -113,7 +127,9 @@
 		<!---
 		The context for bootstrapping the whole Parsley framework.
 		-->
-		<parsley:ContextBuilder config="{CCJContextConfig}"/>
+		<parsley:Configure/>
+		<parsley:ContextBuilder config="{CCJContextConfig}">
+		</parsley:ContextBuilder>
 		
 		<!---
 		The system unique logging component provider LOG.debug/info/warn/error/fatal avenues.
@@ -127,21 +143,15 @@
 					   level="{LogEventLevel.INFO}"
 					   filters="{logFilters}"/>
 		<!-- Popups here -->
-		<parsley:PopUp open="{GameManager.indicatorReadOut}"
-							center="true"
-							modal="true"
-						    reuse="false"
-							>
-			<components:IndicatoryProgressBar label="{GameManager.indication}"/>
-		</parsley:PopUp>
 		
-		<parsley:PopUp open="{GameManager.indicatorSubmitScore}"
-							center="true"
-							modal="true"
-							reuse="false"
-							>
-			<mochi:SubmitScoreAndName/>
-		</parsley:PopUp>
+		<popup:PopUpWrapper open="{GameManager.indicatorReadOut}" center="true" modal="true">
+			<components:IndicatoryProgressBar label="{GameManager.indication}"/>
+		</popup:PopUpWrapper>
+		 
+		<popup:PopUpWrapper open="{GameManager.indicatorSubmitScore}" center="true" modal="true" parent="{this}">
+			<mochi:SubmitScoreAndName id="submitScoreAndNamePopup"/>
+		</popup:PopUpWrapper>
+		
 		<!-- Controllers here -->
 		<!-- Tasks -->
 		<task:SequenceTask id="startUpSequenceTask">
@@ -161,8 +171,13 @@
 						   backgroundImage="@Embed('./assets/images/ChessBoardBG.png')"
 						   backgroundImageFillMode="scale"
 						   />
-	<!-- MochiMedia View -->
-	<mochi:MochiUIComponent x="0" y="0">
-	</mochi:MochiUIComponent>
+	<!-- MochiMedia popup View -->
+	<mochi:MochiUIComponent id="mochiUIComponent" x="0" y="0"/>
+	<!-- Tollgate icon View -->
+	<mx1:SWFLoader id="tollgateIconView" right="0" top="0" 
+				   source="./assets/icon_toll_gate.swf"
+				   addedToStage="tollgateIconView_addedToStageHandler(event)"
+				   maxHeight="25" maxWidth="25"
+				   />
 	
 </s:Application>

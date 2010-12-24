@@ -14,6 +14,8 @@ package com.godpaper.tasks
 	
 	import flash.geom.Point;
 	
+	import mx.core.FlexGlobals;
+	
 	/**
 	 * CreateChessPieceTask.as class.   	
 	 * @author yangboz

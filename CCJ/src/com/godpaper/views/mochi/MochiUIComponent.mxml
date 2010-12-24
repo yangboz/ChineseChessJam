@@ -16,9 +16,8 @@
 			import mx.events.CloseEvent;
 			import mx.events.FlexEvent;
 			//
-			[Inject][Bindable]
-//			public var mochiModel:MochiModel = new MochiModel();
-			public var mochiModel:MochiModel;
+			[Bindable]
+			private var mochiModel:MochiModel = MochiModel.getInstance();
 			
 			protected function creationCompleteHandler(event:FlexEvent):void
 			{
@@ -53,6 +52,5 @@
 	</fx:Script>
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
-		<parsley:Configure/>
 	</fx:Declarations>
 </mx:UIComponent>

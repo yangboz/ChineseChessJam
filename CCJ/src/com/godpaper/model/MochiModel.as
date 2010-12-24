@@ -1,8 +1,11 @@
 package com.godpaper.model
 {
+	import com.lookbackon.ccj.errors.CcjErrors;
+	
 	import flash.display.MovieClip;
 	
 	import mochi.as3.MochiDigits;
+	
 
 	//--------------------------------------------------------------------------
 	//
@@ -27,6 +30,11 @@ package com.godpaper.model
 		public var score:MochiDigits = new MochiDigits();//the player's score to submit (integer, or time in milliseconds)
 		public var name:String;//the player's name
 		public var boradID:String = "3a460211409897f4";//board ID (overrides setBoardID) 
+		//
+		public var tollgates:Array = [];
+		//
+		//Singleton instance of MochiModel;
+		private static var instance:MochiModel;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -48,17 +56,36 @@ package com.godpaper.model
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function MochiModel()
+		public function MochiModel(access:Private)
 		{
-			//
-			score.setValue(0);
+			if (access != null) {
+				if (instance == null) {
+					instance=this;
+					//
+					score.setValue(0);
+				}
+			} else {
+				throw new CcjErrors(CcjErrors.INITIALIZE_SINGLETON_CLASS);
+			}
 		}     	
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		
+		/**
+		 *
+		 * @return the singleton instance of MochiModel
+		 *
+		 */
+		public static function getInstance():MochiModel 
+		{
+			if (instance == null) 
+			{
+				instance=new MochiModel(new Private());
+			}
+			return instance;
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
@@ -72,4 +99,10 @@ package com.godpaper.model
 		//--------------------------------------------------------------------------
 	}
 	
+}
+/**
+ *Inner class which restricts construtor access to Private
+ */
+internal class Private 
+{
 }

@@ -9,7 +9,6 @@ package com.lookbackon.ccj.business.fsm.states.game
 	import com.lookbackon.ccj.business.fsm.StateBase;
 	import com.lookbackon.ccj.managers.GameManager;
 	
-	
 	/**
 	 * HumanWinState.as class.   	
 	 * @author yangboz

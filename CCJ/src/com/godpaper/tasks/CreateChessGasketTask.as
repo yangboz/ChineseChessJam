@@ -82,6 +82,11 @@ package com.godpaper.tasks
 					ChessPieceManager.gaskets.sett(h,v,cGasket);
 				}
 			}
+			//mochi uicomponent at the top of game ui.
+			FlexGlobals.topLevelApplication.setElementIndex(
+				FlexGlobals.topLevelApplication.mochiUIComponent,
+				FlexGlobals.topLevelApplication.numElements-1
+			);
 			//
 			this.complete();
 		}

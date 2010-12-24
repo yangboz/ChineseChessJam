@@ -10,6 +10,7 @@
 	<fx:Script>
 		<![CDATA[
 			import com.godpaper.model.MochiModel;
+			import com.lookbackon.ccj.managers.GameManager;
 			
 			import mochi.as3.MochiScores;
 			
@@ -18,17 +19,13 @@
 			
 			import org.spicefactory.parsley.core.context.Context;
 			//
-			[Inject][Bindable]
-			private var mochiModel:MochiModel;
+			[Bindable]
+			private var mochiModel:MochiModel = MochiModel.getInstance();
 			//
-			[Inject]
-			private var context:Context;
 
 			protected function titlewindow1_creationCompleteHandler(event:FlexEvent):void
 			{
 				this.closeButton.visible = false;
-				// set properties
-				context.viewManager.addViewRoot(this);
 			}
 			
 			private function submitBtnClickHandler(event:MouseEvent):void
@@ -38,10 +35,13 @@
 				//
 				MochiScores.showLeaderboard(
 					{   res: "640x480", 
-						clip: mx.core.FlexGlobals.topLevelApplication, 
-						score: mochiModel.score.value
+						clip: FlexGlobals.topLevelApplication._mochiClip, 
+						score: mochiModel.score.value,
+						name: nameTextInput.text
 					}
 				);
+				//
+				GameManager.indicatorSubmitScore = false;
 			}
 
 			protected function titlewindow1_showHandler(event:FlexEvent):void
@@ -54,11 +54,10 @@
 	</fx:Script>
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
-		<parsley:Configure/>
 	</fx:Declarations>
 	<mx:Form width="100%" height="100%" defaultButton="{submitBtn}">
 		<mx:FormItem label="Your name:" required="true">
-			<s:TextInput/>
+			<s:TextInput id="nameTextInput"/>
 		</mx:FormItem>
 		<mx:FormItem label="Your score:" required="true">
 			<s:TextInput id="scoreTextInput" enabled="false" text="10"/>

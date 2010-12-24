@@ -67,6 +67,9 @@ package assets
 		
 		[Embed(source="./RED_ROOK.swf")]
 		public static const RED_ROOK:Class;
+		//
+		[Embed(source="./icon_toll_gate.swf")]
+		public static const ICON_TOLL_GATE:Class;
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
