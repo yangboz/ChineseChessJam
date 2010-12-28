@@ -9,7 +9,9 @@
 		<![CDATA[
 			import com.godpaper.model.MochiModel;
 			
+			import mochi.as3.MochiCoins;
 			import mochi.as3.MochiServices;
+			import mochi.as3.MochiSocial;
 			
 			import mx.controls.Alert;
 			import mx.core.FlexGlobals;
@@ -31,9 +33,34 @@
 			
 			private function mochiClipOnStage(event:Event):void
 			{
+				MochiSocial.addEventListener(MochiSocial.LOGGED_IN,logginHandler);
+				MochiCoins.addEventListener(MochiCoins.ITEM_OWNED,itemOwendHandler);
+				MochiCoins.addEventListener(MochiCoins.ITEM_NEW,itemNewHandler);
+				//
 				MochiServices.connect(mochiModel.gameID,FlexGlobals.topLevelApplication._mochiClip,onMochiServiceConnectionError);
 			}
-			
+			//
+			private function logginHandler(event:Object):void
+			{
+				// receive {name: name, uid: uid, profileImgURL: profileImgURL, hasCoins: True, userProperties: { hitPoints: 120 }}
+				trace("Hello " + event.name);
+			}
+			//
+			private function itemOwendHandler(event:Object):void
+			{
+				// receive {id: id, count: count}
+//				trace("Player owns " + event.count + " of " + event.id);
+				//
+				mochiModel.storeItemsRegister.insert(event.id,event.count);
+			}
+			//
+			private function itemNewHandler(event:Object):void
+			{
+				// receive {id: id, count: count}
+//				trace("Player just bought " + event.count + " of " + event.id);
+				//
+				mochiModel.storeItemsRegister.insert(event.id,event.count);
+			}
 			private function onMochiServiceConnectionError(status:String):void
 			{
 				Alert.show("Re-connect MochiService?",status,Alert.YES|Alert.NO,null,onCloseHandler);

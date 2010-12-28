@@ -126,6 +126,7 @@
 				//clear gasket indicate effect.
 				var emptyLegalMoves:BitBoard=new BitBoard(9, 10);
 				emptyLegalMoves.clear();
+				//
 				ChessPieceManager.indicatedGaskets(emptyLegalMoves);
 			}
 		]]>

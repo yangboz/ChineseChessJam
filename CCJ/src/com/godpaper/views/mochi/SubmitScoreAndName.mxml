@@ -34,7 +34,8 @@
 				mochiModel.score.addValue(Number(scoreTextInput.text));
 				//
 				MochiScores.showLeaderboard(
-					{   res: "640x480", 
+					{   res: FlexGlobals.topLevelApplication.width.toString().concat(
+						"x",FlexGlobals.topLevelApplication.height), 
 						clip: FlexGlobals.topLevelApplication._mochiClip, 
 						score: mochiModel.score.value,
 						name: nameTextInput.text

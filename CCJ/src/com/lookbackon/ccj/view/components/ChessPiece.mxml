@@ -8,6 +8,7 @@
 		 height="50">
 	<fx:Script>
 		<![CDATA[
+			import com.godpaper.model.MochiModel;
 			import com.lookbackon.ccj.CcjConstants;
 			import com.lookbackon.ccj.business.fsm.ChessAgent;
 			import com.lookbackon.ccj.managers.ChessPieceManager;
@@ -27,6 +28,9 @@
 			//--------------------------------------------------------------------------
 			//
 			private var textColor:String=CcjConstants.COLOR_BLUE; //default is blue.
+			//
+			[Bindable]
+			private var mochiModel:MochiModel = MochiModel.getInstance();
 			//----------------------------------
 			//  CONSTANTS
 			//----------------------------------
@@ -173,7 +177,10 @@
 				LOG.debug("moves:{0}", this.chessVO.moves.dump());
 				LOG.debug("current bitboard:{0}", ChessPiecesModel.getInstance().allPieces.dump());
 				//indicate gasket can fill with chess piece.
-				ChessPieceManager.indicatedGaskets(this.chessVO.moves);
+				if(mochiModel.hasChessPieceIndicator)
+				{
+					ChessPieceManager.indicatedGaskets(this.chessVO.moves);
+				}
 			}
 		]]>
 	</fx:Script>

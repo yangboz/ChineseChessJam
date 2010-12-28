@@ -10,16 +10,18 @@
 			   xmlns:mochi="com.godpaper.views.mochi.*"
 			   xmlns:parsley="http://www.spicefactory.org/parsley"
 			   xmlns:mx1="library://ns.adobe.com/flex/mx"
-			   width="520" height="520" maxWidth="500" maxHeight="520"
+			   width="550"
+			   height="520"
+			   maxWidth="550"
+			   maxHeight="520"
 			   applicationComplete="application1_applicationCompleteHandler(event)"
-			   creationComplete="application1_creationCompleteHandler(event)" scriptTimeLimit="60">
+			   creationComplete="application1_creationCompleteHandler(event)"
+			   scriptTimeLimit="60">
 	<s:layout>
 		<s:BasicLayout/>
 	</s:layout>
 	<fx:Script>
 		<![CDATA[
-			import assets.EmbededAssets;
-			
 			import com.adobe.cairngorm.contract.Contract;
 			import com.godpaper.configs.CCJContextConfig;
 			import com.lookbackon.ccj.managers.GameManager;
@@ -29,8 +31,6 @@
 			import mx.events.FlexEvent;
 			import mx.logging.ILogger;
 			import mx.logging.LogEventLevel;
-			
-			import org.spicefactory.parsley.core.context.Context;
 
 			//--------------------------------------------------------------------------
 			//
@@ -38,7 +38,7 @@
 			//
 			//--------------------------------------------------------------------------
 			//For mochi.
-			public var _mochiads_game_id:String="47de4a85dd3e213a"; 
+			public var _mochiads_game_id:String="47de4a85dd3e213a";
 			public var _mochiClip:MovieClip;
 			//
 			private var chessPiecesModel:ChessPiecesModel=ChessPiecesModel.getInstance();
@@ -47,9 +47,7 @@
 			private var logFilters:Array=[
 //												"com.lookbackon.ccj.view.components.ChessGasket"
 //												,
-												"com.lookbackon.ccj.managers.ChessPieceManager"
-												,
-												"com.lookbackon.AI.searching.*"
+				"com.lookbackon.ccj.managers.ChessPieceManager", "com.lookbackon.AI.searching.*"
 //												"com.lookbackon.ccj.model.vos.cvo.CannonVO"		
 //												,
 //												"com.lookbackon.ccj.view.components.ChessPiece"
@@ -57,7 +55,7 @@
 //				"com.lookbackon.AI.searching.*"
 //				,
 //				"*"
-			];
+				];
 			//
 			//----------------------------------
 			//  CONSTANTS
@@ -113,13 +111,6 @@
 				GameManager.startGame();
 				//
 			}
-
-			protected function tollgateIconView_addedToStageHandler(event:Event):void
-			{
-				// TODO Auto-generated method stub
-				MovieClip(tollgateIconView.content).gotoAndStop(1);
-			}
-
 		]]>
 	</fx:Script>
 	<fx:Declarations>
@@ -130,7 +121,7 @@
 		<parsley:Configure/>
 		<parsley:ContextBuilder config="{CCJContextConfig}">
 		</parsley:ContextBuilder>
-		
+
 		<!---
 		The system unique logging component provider LOG.debug/info/warn/error/fatal avenues.
 		-->
@@ -143,15 +134,20 @@
 					   level="{LogEventLevel.INFO}"
 					   filters="{logFilters}"/>
 		<!-- Popups here -->
-		
-		<popup:PopUpWrapper open="{GameManager.indicatorReadOut}" center="true" modal="true">
+
+		<popup:PopUpWrapper open="{GameManager.indicatorReadOut}"
+							center="true"
+							modal="true">
 			<components:IndicatoryProgressBar label="{GameManager.indication}"/>
 		</popup:PopUpWrapper>
-		 
-		<popup:PopUpWrapper open="{GameManager.indicatorSubmitScore}" center="true" modal="true" parent="{this}">
+
+		<popup:PopUpWrapper open="{GameManager.indicatorSubmitScore}"
+							center="true"
+							modal="true"
+							parent="{this}">
 			<mochi:SubmitScoreAndName id="submitScoreAndNamePopup"/>
 		</popup:PopUpWrapper>
-		
+
 		<!-- Controllers here -->
 		<!-- Tasks -->
 		<task:SequenceTask id="startUpSequenceTask">
@@ -165,19 +161,16 @@
 	<!-- Views here -->
 	<components:ChessBoard id="chessBoard"
 						   left="25"
-						   right="45"
+						   right="75"
 						   top="25"
 						   bottom="25"
 						   backgroundImage="@Embed('./assets/images/ChessBoardBG.png')"
-						   backgroundImageFillMode="scale"
-						   />
+						   backgroundImageFillMode="scale"/>
 	<!-- MochiMedia popup View -->
-	<mochi:MochiUIComponent id="mochiUIComponent" x="0" y="0"/>
-	<!-- Tollgate icon View -->
-	<mx1:SWFLoader id="tollgateIconView" right="0" top="0" 
-				   source="./assets/icon_toll_gate.swf"
-				   addedToStage="tollgateIconView_addedToStageHandler(event)"
-				   maxHeight="25" maxWidth="25"
-				   />
-	
+	<mochi:MochiUIComponent id="mochiUIComponent"
+							x="0"
+							y="0"/>
+	<!-- MochiMedia toolbar View -->
+	<mochi:MochiToolBarVGroup right="0"/>
+
 </s:Application>

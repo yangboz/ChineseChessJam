@@ -2,6 +2,8 @@ package com.godpaper.model
 {
 	import com.lookbackon.ccj.errors.CcjErrors;
 	
+	import de.polygonal.ds.HashMap;
+	
 	import flash.display.MovieClip;
 	
 	import mochi.as3.MochiDigits;
@@ -33,6 +35,8 @@ package com.godpaper.model
 		//
 		public var tollgates:Array = [];
 		//
+		public var storeItemsRegister:HashMap = new HashMap();
+		//
 		//Singleton instance of MochiModel;
 		private static var instance:MochiModel;
 		//----------------------------------
@@ -44,7 +48,11 @@ package com.godpaper.model
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-		
+		//
+		public function get hasChessPieceIndicator():Boolean
+		{
+			return (null!=storeItemsRegister.find("abfa5115d7c3dc75"));//chess piece indicator id.
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -63,6 +71,7 @@ package com.godpaper.model
 					instance=this;
 					//
 					score.setValue(0);
+					//
 				}
 			} else {
 				throw new CcjErrors(CcjErrors.INITIALIZE_SINGLETON_CLASS);
