@@ -109,13 +109,15 @@ package com.godpaper.tasks
 					ChessPiecesModel.getInstance().reds.splice(removedIndex,1);
 				}
 				//remove element from gasket.
-				cGasket.removeElementAt(0);
+//				cGasket.removeElementAt(0);
+				cGasket.chessPiece = null;
 			}
 			//adjust the chess piece's position.
 			conductVO.target.x = 0;
 			conductVO.target.y = 0;
 			//
-			cGasket.addElement(conductVO.target as IVisualElement);
+//			cGasket.addElement(conductVO.target as IVisualElement);
+			cGasket.chessPiece = conductVO.target;
 			//
 			this.complete();
 		}

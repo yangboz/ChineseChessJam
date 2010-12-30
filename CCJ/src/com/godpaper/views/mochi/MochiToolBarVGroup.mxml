@@ -1,99 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
-		  xmlns:s="library://ns.adobe.com/flex/spark" 
-		  xmlns:mx="library://ns.adobe.com/flex/mx" 
-		  >
+<s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009"
+		  xmlns:s="library://ns.adobe.com/flex/spark"
+		  xmlns:mx="library://ns.adobe.com/flex/mx">
 	<fx:Script>
 		<![CDATA[
 			import assets.EmbededAssets;
 			
+			import com.godpaper.model.MochiModel;
+			
+			import mochi.as3.MochiAd;
 			import mochi.as3.MochiCoins;
+			import mochi.as3.MochiScores;
 			import mochi.as3.MochiSocial;
 			
 			import mx.core.FlexGlobals;
 			//
-			private var loginWidgetShowed:Boolean = false;
+			private var loginWidgetShowed:Boolean=false;
+			//
+			[Bindable]
+			private var mochiModel:MochiModel = MochiModel.getInstance();
 			//
 			protected function tollgateIconView_addedToStageHandler(event:Event):void
 			{
 				getIconSerials(SWFLoader(event.target)).gotoAndStop(1);
 			}
+
 			//
 			protected function store_addedToStageHandler(event:Event):void
 			{
-				getIconSerials(SWFLoader(event.target)).gotoAndStop(6);
+				getIconSerials(SWFLoader(event.target)).gotoAndStop(8);
 			}
 			//
-//			protected function item_addedToStageHandler(event:MouseEvent):void
-//			{
-//				getIconSerials(event.target).gotoAndStop(1);
-//				MochiCoins.showItem({x:150, y:150,item: "abfa5115d7c3dc75"});
-//			}
+			protected function leaderboard_addedToStageHandler(event:Event):void
+			{
+				getIconSerials(SWFLoader(event.target)).gotoAndStop(6);
+			}
 			//
 			protected function login_addedToStageHandler(event:Event):void
 			{
 				getIconSerials(SWFLoader(event.target)).gotoAndStop(7);
 			}
+
 			//
 			protected function store_clickHandler(event:MouseEvent):void
 			{
-				MochiCoins.showStore({clip:FlexGlobals.topLevelApplication._mochiClip});
+				MochiCoins.showStore({clip: FlexGlobals.topLevelApplication._mochiClip});
+			}
+			//
+			protected function leaderboard_clickHandler(event:MouseEvent):void
+			{
+				MochiScores.showLeaderboard({boardID:mochiModel.boradID});
+				//leader board ad here.
+//				MochiAd.showInterLevelAd({clip:FlexGlobals.topLevelApplication._mochiClip,
+//					id:mochiModel.gameID});
 			}
 			//
 			protected function login_clickHandler(event:MouseEvent):void
 			{
 				//
-				if(!loginWidgetShowed)
+				if (!loginWidgetShowed)
 				{
-					MochiSocial.showLoginWidget(
-						{x:FlexGlobals.topLevelApplication.width/2-100, 
-							y:FlexGlobals.topLevelApplication.height/2}
-					);
+					MochiSocial.showLoginWidget({x: FlexGlobals.topLevelApplication.width / 2 - 100, y: FlexGlobals.topLevelApplication.height / 2});
 					//
-					loginWidgetShowed = true;
-				}else
+					loginWidgetShowed=true;
+				}
+				else
 				{
 					MochiSocial.hideLoginWidget();
 					//
-					loginWidgetShowed = false;
+					loginWidgetShowed=false;
 				}
 			}
 			//
 			protected function getIconSerials(target:SWFLoader):MovieClip
 			{
 				// computer agent level initialization.
-				var iconMC:MovieClip = Loader(DisplayObjectContainer(target.content).getChildAt(0)).content as MovieClip;
+				var iconMC:MovieClip=Loader(DisplayObjectContainer(target.content).getChildAt(0)).content as MovieClip;
 				return iconMC;
 			}
+
 		]]>
 	</fx:Script>
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
-	
-	<mx:SWFLoader  right="0" top="0" 
-				   source="{EmbededAssets.ICON_TOLL_GATE}"
-				   addedToStage="tollgateIconView_addedToStageHandler(event)"
-				   maxHeight="50" maxWidth="50"
-				   toolTip="baby intelligence"
-				   />
-	<mx:SWFLoader right="0" top="0" 
+
+	<mx:SWFLoader right="0"
+				  top="0"
+				  source="{EmbededAssets.ICON_TOLL_GATE}"
+				  addedToStage="tollgateIconView_addedToStageHandler(event)"
+				  maxHeight="50"
+				  maxWidth="50"
+				  toolTip="baby intelligence"/>
+	<mx:SWFLoader right="0"
+				  top="0"
 				  source="{EmbededAssets.ICON_TOLL_GATE}"
 				  addedToStage="store_addedToStageHandler(event)"
-				  maxHeight="50" maxWidth="50"
+				  maxHeight="50"
+				  maxWidth="50"
 				  click="store_clickHandler(event)"
-				  toolTip="mochi store"
-				  />
-	<!--<mx:SWFLoader right="0" top="0" 
+				  toolTip="mochi store"/>
+	<mx:SWFLoader right="0"
+				  top="0"
 				  source="{EmbededAssets.ICON_TOLL_GATE}"
-				  addedToStage="item_addedToStageHandler(event)"
-	maxHeight="50" maxWidth="50"
-				  />-->
-	<mx:SWFLoader right="0" top="0" 
+				  addedToStage="leaderboard_addedToStageHandler(event)"
+				  maxHeight="50"
+				  maxWidth="50"
+				  click="leaderboard_clickHandler(event)"
+				  toolTip="mochi leader board"
+				  />
+	<mx:SWFLoader right="0"
+				  top="0"
 				  source="{EmbededAssets.ICON_TOLL_GATE}"
 				  addedToStage="login_addedToStageHandler(event)"
-				  maxHeight="50" maxWidth="50"
+				  maxHeight="50"
+				  maxWidth="50"
 				  click="login_clickHandler(event)"
-				  toolTip="mochi login"
-				  />
+				  toolTip="mochi login"/>
 </s:VGroup>

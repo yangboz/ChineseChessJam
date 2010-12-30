@@ -13,6 +13,7 @@ package com.lookbackon.ccj.business.fsm
 	import mx.logging.ILogger;
 	
 	/**
+	 * ChessAgent to agently maintain all of chess state.
 	 * 
 	 * @author Knight.zhou
 	 * 

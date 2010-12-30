@@ -1,5 +1,9 @@
 package com.lookbackon.ccj.managers
 {
+	import com.adobe.cairngorm.task.ITask;
+	import com.adobe.cairngorm.task.SequenceTask;
+	import com.godpaper.tasks.CreateChessPieceTask;
+	import com.godpaper.tasks.CreateChessVoTask;
 	import com.lookbackon.AI.searching.ISearching;
 	import com.lookbackon.ccj.CcjConstants;
 	import com.lookbackon.ccj.business.fsm.GameAgent;
@@ -25,7 +29,7 @@ package com.lookbackon.ccj.managers
 		//
 		//--------------------------------------------------------------------------
 		private static var _turnFlag:int=CcjConstants.FLAG_BLUE;
-		public static var isRunning:Boolean=true;
+		public static var isRunning:Boolean;
 		//indicators
 		[Bindable]
 		public static var indicatorReadOut:Boolean=false;
@@ -61,12 +65,10 @@ package com.lookbackon.ccj.managers
 		{
 			_turnFlag=value;
 		}
-
 		public static function get turnFlag():int
 		{
 			return _turnFlag;
 		}
-
 		//--------------------------------------------------------------------------
 		//
 		//  Methods
@@ -83,8 +85,27 @@ package com.lookbackon.ccj.managers
 			//logic condition who's turn now at first.
 //			isComputerTurnNow();
 			isHumanTurnNow();
+			//flag game is running.
+			isRunning = true;
 		}
-
+		//----------------------------------
+		//  restartGame
+		//----------------------------------
+		public static function restartGame():void
+		{
+			//TODO:re-start game
+			//clear board,chess pieces
+			FlexGlobals.topLevelApplication.cleanUp.start();
+			//put down chess pieces again
+			//no more create chess gasket again.
+			//no more using start up task at Main.mxml.
+			var startUpTask:SequenceTask = new SequenceTask();
+			startUpTask.addChild(new CreateChessPieceTask());
+			startUpTask.addChild(new CreateChessVoTask());
+			startUpTask.start();
+			//
+			startGame();
+		}
 		//----------------------------------
 		//  computerWin
 		//----------------------------------

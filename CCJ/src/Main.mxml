@@ -47,14 +47,14 @@
 			private var logFilters:Array=[
 //												"com.lookbackon.ccj.view.components.ChessGasket"
 //												,
-				"com.lookbackon.ccj.managers.ChessPieceManager", "com.lookbackon.AI.searching.*"
+//				"com.lookbackon.ccj.managers.ChessPieceManager", "com.lookbackon.AI.searching.*"
 //												"com.lookbackon.ccj.model.vos.cvo.CannonVO"		
 //												,
 //												"com.lookbackon.ccj.view.components.ChessPiece"
 //												,
 //				"com.lookbackon.AI.searching.*"
 //				,
-//				"*"
+				"*"
 				];
 			//
 			//----------------------------------
@@ -145,16 +145,21 @@
 							center="true"
 							modal="true"
 							parent="{this}">
-			<mochi:SubmitScoreAndName id="submitScoreAndNamePopup"/>
+			<mochi:SubmitScoreAndNextRound id="submitScoreAndNamePopup"/>
 		</popup:PopUpWrapper>
 
 		<!-- Controllers here -->
 		<!-- Tasks -->
-		<task:SequenceTask id="startUpSequenceTask">
-			<tasks:CreateChessGasketTask/>
-			<tasks:CreateChessPieceTask/>
-			<tasks:CreateChessVoTask/>
+		<task:SequenceTask id="startUpSequenceTask" label="startUp">
+			<tasks:CreateChessGasketTask id="ccgTask" label="create chess gasket"/>
+			<tasks:CreateChessPieceTask label="create chess piece"/>
+			<tasks:CreateChessVoTask label="create chess VO"/>
 		</task:SequenceTask>
+		
+		<task:SequenceTask id="cleanUp" label="cleanUp">
+			<tasks:CleanUpChessPieceTask label="clean up chess pieces"/>
+		</task:SequenceTask>
+		
 		<!-- Services here -->
 	</fx:Declarations>
 

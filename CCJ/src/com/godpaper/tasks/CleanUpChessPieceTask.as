@@ -1,45 +1,38 @@
-package com.godpaper.model
+package com.godpaper.tasks
 {
-	import com.lookbackon.ccj.errors.CcjErrors;
-	
-	import de.polygonal.ds.HashMap;
-	
-	import flash.display.MovieClip;
-	
-	import mochi.as3.MochiDigits;
-	
-
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
+	import com.adobe.cairngorm.task.Task;
+	import com.lookbackon.ccj.CcjConstants;
+	import com.lookbackon.ccj.business.factory.ChessFactory;
+	import com.lookbackon.ccj.managers.ChessPieceManager;
+	import com.lookbackon.ccj.view.components.ChessGasket;
+	import com.lookbackon.ccj.view.components.ChessPiece;
+	import com.lookbackon.ccj.view.components.IChessPiece;
+	
+	import flash.display.DisplayObject;
+	import flash.geom.Point;
+	
+	import mx.core.FlexGlobals;
+	
 	/**
-	 * MochiModel.as class.   	
+	 * CleanUpChessPieceTask.as class.   	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
-	 * Created Dec 23, 2010 1:06:55 PM
+	 * Created Dec 29, 2010 11:51:40 AM
 	 */   	 
-	public class MochiModel
+	public class CleanUpChessPieceTask extends Task
 	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		private var _gameID:String = "47de4a85dd3e213a";
-		private var _boradID:String = "3a460211409897f4";//board ID (overrides setBoardID)
-		//
-		private var _tollgates:Array = [];
-		//
-		public var score:MochiDigits = new MochiDigits();//the player's score to submit (integer, or time in milliseconds)
-		public var name:String;//the player's name
-		//
-		public var storeItemsRegister:HashMap = new HashMap();
-		//
-		//Singleton instance of MochiModel;
-		private static var instance:MochiModel;
+		
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -49,26 +42,7 @@ package com.godpaper.model
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-		//
-		public function get hasChessPieceIndicator():Boolean
-		{
-			return (null!=storeItemsRegister.find("abfa5115d7c3dc75"));//chess piece indicator id.
-		}
-		//
-		public function get gameID():String
-		{
-			return _gameID;
-		}
-		//
-		public function get boradID():String
-		{
-			return _boradID;
-		}
-		//
-		public function get tollgates():Array
-		{
-			return _tollgates;
-		}
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -80,36 +54,39 @@ package com.godpaper.model
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function MochiModel(access:Private)
+		public function CleanUpChessPieceTask()
 		{
-			if (access != null) {
-				if (instance == null) {
-					instance=this;
-					//
-					score.setValue(0);
-					//
-				}
-			} else {
-				throw new CcjErrors(CcjErrors.INITIALIZE_SINGLETON_CLASS);
-			}
+			//TODO: implement function
+			super();
 		}     	
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		/**
-		 *
-		 * @return the singleton instance of MochiModel
-		 *
-		 */
-		public static function getInstance():MochiModel 
+		override protected function performTask():void
 		{
-			if (instance == null) 
+			//clean up chess piece
+			for(var v:int=0;v<CcjConstants.BOARD_V_LINES;v++)
 			{
-				instance=new MochiModel(new Private());
+				for(var h:int=0;h<CcjConstants.BOARD_H_LINES;h++)
+				{
+					var chessGasket:ChessGasket = (ChessPieceManager.gaskets.gett(h,v) as ChessGasket);
+					if( chessGasket.chessPiece )
+					{
+						trace("removed piece:",ChessPiece(chessGasket.chessPiece).label );
+						try{
+							chessGasket.removeElement( chessGasket.chessPiece );
+						}catch(error:Error)
+						{
+							//
+							trace(error);
+						}
+					}
+				}
 			}
-			return instance;
+			//
+			this.complete();
 		}
 		//--------------------------------------------------------------------------
 		//
@@ -124,10 +101,4 @@ package com.godpaper.model
 		//--------------------------------------------------------------------------
 	}
 	
-}
-/**
- *Inner class which restricts construtor access to Private
- */
-internal class Private 
-{
 }

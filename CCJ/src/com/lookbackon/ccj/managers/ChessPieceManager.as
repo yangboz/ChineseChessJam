@@ -292,7 +292,8 @@ package com.lookbackon.ccj.managers
 					chessPiecesModel.reds.splice(removedIndex, 1);
 				}
 				//remove element from gasket.
-				cGasket.removeElementAt(0);
+//				cGasket.removeElementAt(0);
+				cGasket.chessPiece = null;
 			}
 			//
 			makeMove(conductVO);
