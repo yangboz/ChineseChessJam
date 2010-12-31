@@ -50,9 +50,14 @@ package com.godpaper.model
 		//
 		//-------------------------------------------------------------------------- 
 		//
-		public function get hasChessPieceIndicator():Boolean
+		public function get hasCaptureIndicator():Boolean
 		{
-			return (null!=storeItemsRegister.find("abfa5115d7c3dc75"));//chess piece indicator id.
+			return (null!=storeItemsRegister.find("abfa5115d7c3dc75"));//chess piece capture indicator id.
+		}
+		//
+		public function get hasCheckIndicator():Boolean
+		{
+			return (null!=storeItemsRegister.find("8661560570f7f8e6"));//chess piece check indicator id.
 		}
 		//
 		public function get gameID():String

@@ -1,63 +1,83 @@
 package com.lookbackon.ccj.model.vos.cvo
 {
 	import com.lookbackon.ccj.CcjConstants;
-	import com.lookbackon.ccj.ChessPiecesConstants;
 	import com.lookbackon.ccj.model.ChessPiecesModel;
 	import com.lookbackon.ccj.utils.LogUtil;
+	import com.lookbackon.ds.BitBoard;
 	
 	import mx.logging.ILogger;
 
 	/**
-	 * 
+	 * MarshalVO.as
 	 * @author Knight.zhou
-	 * 
-	 */	
+	 *
+	 */
 	public class MarshalVO extends ChessVO
 	{
-		private static const LOG:ILogger = LogUtil.getLogger(MarshalVO);
+		private static const LOG:ILogger=LogUtil.getLogger(MarshalVO);
+
 		/**
 		 * @inheritDoc
-		 */		
-		public function MarshalVO(width:int, height:int, rowIndex:int, colIndex:int,flag:int=0)
+		 */
+		public function MarshalVO(width:int, height:int, rowIndex:int, colIndex:int, flag:int=0)
 		{
 			//TODO: implement function
 			super(width, height, rowIndex, colIndex, flag);
 		}
+
 		/**
 		 * @inheritDoc
-		 */	
-		override public function initialization(rowIndex:int, colIndex:int,flag:int=0) : void
+		 */
+		override public function initialization(rowIndex:int, colIndex:int, flag:int=0):void
 		{
 			//TODO: implement function
 			//serveral admental(将对面问题)
 			//about occupies.
-			this.occupies.setBitt(rowIndex,colIndex+1,true);
-			this.occupies.setBitt(rowIndex,colIndex-1,true);
-			this.occupies.setBitt(rowIndex+1,colIndex,true);
-			this.occupies.setBitt(rowIndex-1,colIndex,true);
+			//restricted in forbidden city.
+			var forbiddenCity:BitBoard=new BitBoard(CcjConstants.BOARD_H_LINES, CcjConstants.BOARD_V_LINES);
+			//forbidden city pre-define.
+			forbiddenCity.setBitt(0, 3, true);
+			forbiddenCity.setBitt(0, 4, true);
+			forbiddenCity.setBitt(0, 5, true);
+			forbiddenCity.setBitt(1, 3, true);
+			forbiddenCity.setBitt(1, 4, true);
+			forbiddenCity.setBitt(1, 5, true);
+			forbiddenCity.setBitt(2, 3, true);
+			forbiddenCity.setBitt(2, 4, true);
+			forbiddenCity.setBitt(2, 5, true);
+			//
+			if (flag == CcjConstants.FLAG_RED)
+			{
+				forbiddenCity=forbiddenCity.reverse();
+			}
+			//set marshall 's left/right/up/down bit value.
+			this.occupies.setBitt(rowIndex, colIndex - 1, Boolean(forbiddenCity.getBitt(rowIndex, colIndex - 1)));
+			this.occupies.setBitt(rowIndex, colIndex + 1, Boolean(forbiddenCity.getBitt(rowIndex, colIndex + 1)));
+			this.occupies.setBitt(rowIndex - 1, colIndex, Boolean(forbiddenCity.getBitt(rowIndex - 1, colIndex)));
+			this.occupies.setBitt(rowIndex + 1, colIndex, Boolean(forbiddenCity.getBitt(rowIndex + 1, colIndex)));
 			//about legal moves.
-			if(flag==CcjConstants.FLAG_RED)
+			if (flag == CcjConstants.FLAG_RED)
 			{
 				//serveral admental(将对面问题)
-				this.moves = this.occupies.xor(this.occupies.and(ChessPiecesModel.getInstance().redPieces));
+				this.moves=this.occupies.xor(this.occupies.and(ChessPiecesModel.getInstance().redPieces));
 			}
-			if(flag==CcjConstants.FLAG_BLUE)
+			if (flag == CcjConstants.FLAG_BLUE)
 			{
-				this.moves = this.occupies.xor(this.occupies.and(ChessPiecesModel.getInstance().bluePieces));
+				this.moves=this.occupies.xor(this.occupies.and(ChessPiecesModel.getInstance().bluePieces));
 			}
 			//about attacked captures.
-			if(flag==CcjConstants.FLAG_RED)
+			if (flag == CcjConstants.FLAG_RED)
 			{
-				this.captures = this.moves.and(ChessPiecesModel.getInstance().bluePieces);
+				this.captures=this.moves.and(ChessPiecesModel.getInstance().bluePieces);
 			}
-			if(flag==CcjConstants.FLAG_BLUE)
+			if (flag == CcjConstants.FLAG_BLUE)
 			{
-				this.captures = this.moves.and(ChessPiecesModel.getInstance().redPieces);
+				this.captures=this.moves.and(ChessPiecesModel.getInstance().redPieces);
 			}
 			//
-			LOG.info("occupies:{0}",this.occupies.dump());
-			LOG.info("moves:{0}",this.moves.dump());
-			LOG.info("captures:{0}",this.captures.dump());
+			LOG.info("occupies:{0}", this.occupies.dump());
+			LOG.info("moves:{0}", this.moves.dump());
+			LOG.info("captures:{0}", this.captures.dump());
 		}
 	}
 }

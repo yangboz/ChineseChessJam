@@ -177,7 +177,7 @@
 				LOG.debug("moves:{0}", this.chessVO.moves.dump());
 				LOG.debug("current bitboard:{0}", ChessPiecesModel.getInstance().allPieces.dump());
 				//indicate gasket can fill with chess piece.
-				if(mochiModel.hasChessPieceIndicator)
+				if(mochiModel.hasCaptureIndicator)
 				{
 					ChessPieceManager.indicatedGaskets(this.chessVO.moves);
 				}

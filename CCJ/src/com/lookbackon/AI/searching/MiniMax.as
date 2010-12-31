@@ -117,14 +117,22 @@ package com.lookbackon.AI.searching
 			orderingMoves = generateMoves(ChessPiecesModel.getInstance().blues);
 			var len:int = orderingMoves.length;
 			//
-			for(var i:int=0;i<len;i++)
+			if(orderingMoves.length<=0)
 			{
-				var score:int = mini(depth-1);
-				if(score>max)
+				//pluge to death.
+				GameManager.humanWin();
+			}else
+			{
+				//
+				for(var i:int=0;i<len;i++)
 				{
-					max = score;
-					//
-					this.bestMove = this.orderingMoves[i];
+					var score:int = mini(depth-1);
+					if(score>max)
+					{
+						max = score;
+						//
+						this.bestMove = this.orderingMoves[i];
+					}
 				}
 			}
 			//
@@ -150,14 +158,21 @@ package com.lookbackon.AI.searching
 			orderingMoves = generateMoves(ChessPiecesModel.getInstance().blues);
 			var len:int = orderingMoves.length;
 			//
-			for(var i:int=0;i<len;i++)
+			if(orderingMoves.length<=0)
 			{
-				var score:int = maxi(depth-1);
-				if(score<min)
+				//pluge to death.
+				GameManager.humanWin();
+			}else
+			{
+				for(var i:int=0;i<len;i++)
 				{
-					min = score;
-					//
-					this.bestMove = this.orderingMoves[i];
+					var score:int = maxi(depth-1);
+					if(score<min)
+					{
+						min = score;
+						//
+						this.bestMove = this.orderingMoves[i];
+					}
 				}
 			}
 			//
