@@ -81,9 +81,9 @@ package com.lookbackon.ccj.model.vos.cvo
 			{
 				this.captures = this.moves.and(ChessPiecesModel.getInstance().redPieces);
 			}
-			LOG.info("occupies:{0}",this.occupies.dump());
-			LOG.info("moves:{0}",this.moves.dump());
-			LOG.info("captures:{0}",this.captures.dump());
+			LOG.debug("occupies:{0}",this.occupies.dump());
+			LOG.debug("moves:{0}",this.moves.dump());
+			LOG.debug("captures:{0}",this.captures.dump());
 		}
 	}
 }

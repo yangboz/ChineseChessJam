@@ -6,7 +6,7 @@ package com.lookbackon.ccj.business.fsm.states.chess
 	//
 	//--------------------------------------------------------------------------
 	import com.lookbackon.ccj.business.fsm.ChessAgent;
-	import com.lookbackon.ccj.business.fsm.StateBase;
+	import com.lookbackon.AI.FSM.states.StateBase;
 	
 	
 	/**

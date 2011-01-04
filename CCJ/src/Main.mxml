@@ -16,7 +16,7 @@
 			   maxHeight="520"
 			   applicationComplete="application1_applicationCompleteHandler(event)"
 			   creationComplete="application1_creationCompleteHandler(event)"
-			   scriptTimeLimit="60">
+			   >
 	<s:layout>
 		<s:BasicLayout/>
 	</s:layout>
@@ -87,7 +87,7 @@
 				try
 				{
 					Contract.precondition(CONFIG::debugging);
-					this.traceTarget.level=LogEventLevel.DEBUG;
+					this.traceTarget.level=LogEventLevel.INFO;
 					Contract.postcondition(CONFIG::debugging);
 				}
 				catch (error:Error)
@@ -95,13 +95,13 @@
 					LOG.warn("CONFIG::debugging {0}", error.toString());
 				}
 				//
-				LOG.debug("redPieces:{0}", chessPiecesModel.redPieces.dump());
-				LOG.debug("bluePieces:{0}", chessPiecesModel.bluePieces.dump());
-				LOG.debug("allPieces:{0}", chessPiecesModel.allPieces.dump());
+				LOG.info("redPieces:{0}", chessPiecesModel.redPieces.dump());
+				LOG.info("bluePieces:{0}", chessPiecesModel.bluePieces.dump());
+				LOG.info("allPieces:{0}", chessPiecesModel.allPieces.dump());
 				//
-				LOG.debug("allPieces rotate90:{0}", chessPiecesModel.allPieces.rotate90().dump());
-				LOG.debug("allPieces rotate90.bitCount:{0}", chessPiecesModel.allPieces.bitCount);
-				LOG.debug("allPieces rotate90.cellCount:{0}", chessPiecesModel.allPieces.cellCount);
+				LOG.info("allPieces rotate90:{0}", chessPiecesModel.allPieces.rotate90().dump());
+				LOG.info("allPieces rotate90.bitCount:{0}", chessPiecesModel.allPieces.bitCount);
+				LOG.info("allPieces rotate90.cellCount:{0}", chessPiecesModel.allPieces.cellCount);
 			}
 
 			protected function application1_applicationCompleteHandler(event:FlexEvent):void

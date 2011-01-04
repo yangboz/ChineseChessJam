@@ -5,9 +5,9 @@ package com.lookbackon.ccj.business.fsm.states.game
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.lookbackon.AI.finiteStateMachine.IAgent;
+	import com.lookbackon.AI.FSM.IAgent;
 	import com.lookbackon.ccj.CcjConstants;
-	import com.lookbackon.ccj.business.fsm.StateBase;
+	import com.lookbackon.AI.FSM.states.StateBase;
 	import com.lookbackon.ccj.managers.GameManager;
 	
 	

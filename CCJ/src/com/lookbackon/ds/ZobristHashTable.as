@@ -88,7 +88,7 @@ package com.lookbackon.ds
 		 * ... xor [Hash for White Knight on c3] ( placing the knight on the new square )</br>
 		 * ... xor [Hash for Black to move] ( change sides)</b>
 		 * 
-		 * @param anewTable to be xored.
+		 * @param anewTable to be xor-ed.
 		 * @return after xoring anew zobrist hash table. 
 		 * 
 		 */		

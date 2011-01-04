@@ -5,7 +5,9 @@ package com.lookbackon.ccj.business.fsm.states.game
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.lookbackon.AI.finiteStateMachine.IAgent;
+	import com.godpaper.model.MochiModel;
+	import com.lookbackon.AI.FSM.IAgent;
+	import com.lookbackon.AI.FSM.states.StateBase;
 	import com.lookbackon.AI.searching.AlphaBeta;
 	import com.lookbackon.AI.searching.AttackFalse;
 	import com.lookbackon.AI.searching.ISearching;
@@ -18,13 +20,14 @@ package com.lookbackon.ccj.business.fsm.states.game
 	import com.lookbackon.AI.searching.ShortSighted;
 	import com.lookbackon.ccj.CcjConstants;
 	import com.lookbackon.ccj.business.fsm.GameAgent;
-	import com.lookbackon.ccj.business.fsm.StateBase;
 	import com.lookbackon.ccj.managers.GameManager;
 	import com.lookbackon.ccj.model.ChessPiecesModel;
 	import com.lookbackon.ccj.model.vos.PositionVO;
 	import com.lookbackon.ccj.utils.LogUtil;
 	
 	import flash.events.Event;
+	import flash.utils.getDefinitionByName;
+	import flash.utils.getQualifiedClassName;
 	
 	import mx.core.FlexGlobals;
 	import mx.logging.ILogger;
@@ -55,6 +58,7 @@ package com.lookbackon.ccj.business.fsm.states.game
 		//
 		private var processes:Vector.<IRunnable>;
 		private var greenThread:GreenThread;
+		//
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -96,40 +100,6 @@ package com.lookbackon.ccj.business.fsm.states.game
 			//
 			GameManager.indicatorReadOut=true;
 			//
-			//TODO:switch any searching class to test.
-			//			gameAI = new RandomWalk(ChessPiecesModel.getInstance().gamePosition);
-//			searching = new MinMax(ChessPiecesModel.getInstance().gamePosition);
-			searching = new MiniMax(ChessPiecesModel.getInstance().gamePosition,5);
-			//			gameAI = new NegaMax(ChessPiecesModel.getInstance().gamePosition,1);
-			//			gameAI = new AlphaBeta(ChessPiecesModel.getInstance().gamePosition);
-			//			gameAI = new Quiescence(ChessPiecesModel.getInstance().gamePosition);
-			//			gameAI = new PVS(ChessPiecesModel.getInstance().gamePosition);
-			//			gameAI = new ShortSighted(ChessPiecesModel.getInstance().gamePosition);
-//			searching = new AttackFalse(ChessPiecesModel.getInstance().gamePosition);
-			//
-			//using this flash green thread algorithm to avoid script time limition only 15s.
-			processes = new Vector.<IRunnable>();
-			processes.push(searching);
-			greenThread = new GreenThread(processes, FlexGlobals.topLevelApplication.stage.frameRate);
-			//
-//			greenThread.addEventListener(GreenThreadEvent.PROCESS_TIMEOUT, function(event:GreenThreadEvent):void
-//			{
-//				LOG.error(event.toString());
-//			});
-//			greenThread.addEventListener(GreenThread.CYCLE, function(event:Event):void
-//			{
-//				LOG.debug(event.toString());
-//			});
-//			greenThread.addEventListener(GreenThreadEvent.PROCESS_COMPLETE, function(event:GreenThreadEvent):void
-//			{
-//				LOG.info(event.toString());
-//			});
-//			greenThread.addEventListener(Event.COMPLETE, function(event:Event):void
-//			{
-//				LOG.info(event.toString());
-//			});
-			//
-			greenThread.open();
 		}
 		
 		override public function exit():void
@@ -142,7 +112,44 @@ package com.lookbackon.ccj.business.fsm.states.game
 		
 		override public function update(time:Number=0):void
 		{
-			//TODO: implement function
+			//TODO:switch any searching class to test.
+			//			gameAI = new RandomWalk(ChessPiecesModel.getInstance().gamePosition);
+			//			searching = new MinMax(ChessPiecesModel.getInstance().gamePosition);
+//			searching = new MiniMax(ChessPiecesModel.getInstance().gamePosition,5);
+			//			gameAI = new NegaMax(ChessPiecesModel.getInstance().gamePosition,1);
+			//			gameAI = new AlphaBeta(ChessPiecesModel.getInstance().gamePosition);
+			//			gameAI = new Quiescence(ChessPiecesModel.getInstance().gamePosition);
+			//			gameAI = new PVS(ChessPiecesModel.getInstance().gamePosition);
+			//			gameAI = new ShortSighted(ChessPiecesModel.getInstance().gamePosition);
+			//			searching = new AttackFalse(ChessPiecesModel.getInstance().gamePosition);
+			//
+			var implementation:Object = getDefinitionByName(getQualifiedClassName(GameManager.tollgates[time]));
+			searching = new implementation(ChessPiecesModel.getInstance().gamePosition);
+			//
+			LOG.info("current toll gate is:",getQualifiedClassName(implementation));
+			//using this flash green thread algorithm to avoid script time limition only 15s.
+			processes = new Vector.<IRunnable>();
+			processes.push(searching);
+			greenThread = new GreenThread(processes, FlexGlobals.topLevelApplication.stage.frameRate);
+			//
+			//			greenThread.addEventListener(GreenThreadEvent.PROCESS_TIMEOUT, function(event:GreenThreadEvent):void
+			//			{
+			//				LOG.error(event.toString());
+			//			});
+			//			greenThread.addEventListener(GreenThread.CYCLE, function(event:Event):void
+			//			{
+			//				LOG.debug(event.toString());
+			//			});
+			//			greenThread.addEventListener(GreenThreadEvent.PROCESS_COMPLETE, function(event:GreenThreadEvent):void
+			//			{
+			//				LOG.info(event.toString());
+			//			});
+			//			greenThread.addEventListener(Event.COMPLETE, function(event:Event):void
+			//			{
+			//				LOG.info(event.toString());
+			//			});
+			//
+			greenThread.open();
 		}
 		//--------------------------------------------------------------------------
 		//

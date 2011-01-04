@@ -104,7 +104,7 @@ package com.lookbackon.ccj.model.vos
 				//TODO:chess piece eat off.
 				var removedPiece:ChessPiece = cGasket.getElementAt(0) as ChessPiece;
 				var removedIndex:int = ChessPieceManager.calculatePieceIndex(removedPiece);
-				LOG.info("Eat Off@{0} target:{1}",cGasket.position.toString(),removedPiece.toString());
+				LOG.debug("Eat Off@{0} target:{1}",cGasket.position.toString(),removedPiece.toString());
 				//set eat off value.
 				eatOff = removedPiece;
 			}

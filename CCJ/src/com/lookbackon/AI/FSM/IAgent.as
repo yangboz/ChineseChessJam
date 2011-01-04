@@ -1,5 +1,7 @@
-package com.lookbackon.AI.hierarchicalFiniteStateMachine
+package com.lookbackon.AI.FSM
 {
+	import mx.core.IVisualElement;
+
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
@@ -7,20 +9,21 @@ package com.lookbackon.AI.hierarchicalFiniteStateMachine
 	//--------------------------------------------------------------------------
 	
 	/**
-	 * Message.as class.   	
+	 * IAgent.as class.   	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
-	 * Created Dec 27, 2010 5:52:12 PM
+	 * Created Dec 10, 2010 11:14:57 AM
+	 * @history 01/04/2011 agent with message handler,for multi-agent communication.
 	 */   	 
-	public class Message
+	public interface IAgent
 	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		public var id:int; 
+		
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -30,7 +33,16 @@ package com.lookbackon.AI.hierarchicalFiniteStateMachine
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
+		function get name():String;
+		function set name(value:String):void;
 		
+		function get carrier():IVisualElement;
+		function set carrier(value:IVisualElement):void;
+		
+		function get traceTarget():IVisualElement;
+		function set traceTarget(value:IVisualElement):void;
+		
+		function get fsm():FiniteStateMachine;
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -42,15 +54,12 @@ package com.lookbackon.AI.hierarchicalFiniteStateMachine
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function Message()
-		{
-		}     	
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		
+		function onMessage(message:Message):void;
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods

@@ -152,7 +152,7 @@ package com.lookbackon.AI.searching
 		 * @see http://www.gamedev.net/reference/articles/article1126.asp
 		 * @see http://chessprogramming.wikispaces.com/Move+Ordering
 		 *
-		 * @return ordering legal moves,prototype is ArrayCollection.
+		 * @return ordering legal moves,prototype is Vector.
 		 *
 		 */
 		public function get orderingMoves():Vector.<ConductVO>

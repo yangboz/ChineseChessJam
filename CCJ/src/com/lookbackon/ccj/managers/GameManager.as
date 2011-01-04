@@ -1,16 +1,19 @@
 package com.lookbackon.ccj.managers
 {
-	import com.adobe.cairngorm.task.ITask;
 	import com.adobe.cairngorm.task.SequenceTask;
+	import com.adobe.cairngorm.task.TaskEvent;
+	import com.godpaper.model.MochiModel;
 	import com.godpaper.tasks.CreateChessPieceTask;
 	import com.godpaper.tasks.CreateChessVoTask;
-	import com.lookbackon.AI.searching.ISearching;
+	import com.lookbackon.AI.searching.AttackFalse;
+	import com.lookbackon.AI.searching.MiniMax;
+	import com.lookbackon.AI.searching.RandomWalk;
+	import com.lookbackon.AI.searching.ShortSighted;
 	import com.lookbackon.ccj.CcjConstants;
 	import com.lookbackon.ccj.business.fsm.GameAgent;
 	import com.lookbackon.ccj.model.vos.PositionVO;
 	import com.lookbackon.ccj.utils.LogUtil;
 	
-	import mx.controls.Alert;
 	import mx.core.FlexGlobals;
 	import mx.core.IVisualElement;
 	import mx.logging.ILogger;
@@ -29,6 +32,9 @@ package com.lookbackon.ccj.managers
 		//
 		//--------------------------------------------------------------------------
 		private static var _turnFlag:int=CcjConstants.FLAG_BLUE;
+		//toll gate setting here.
+		private static var _tollgates:Array=[RandomWalk, ShortSighted, AttackFalse, MiniMax];
+		//
 		public static var isRunning:Boolean;
 		//indicators
 		[Bindable]
@@ -37,9 +43,12 @@ package com.lookbackon.ccj.managers
 		public static var indication:String=INDICATION_THINKING;
 		//about mochi
 		[Bindable]
-		public static var indicatorSubmitScore:Boolean = false;
+		public static var indicatorSubmitScore:Boolean=false;
 		//
 		public static var agent:GameAgent;
+		//mochi model
+		[Bindable]
+		private static var mochiModel:MochiModel = MochiModel.getInstance();
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -65,10 +74,20 @@ package com.lookbackon.ccj.managers
 		{
 			_turnFlag=value;
 		}
+
 		public static function get turnFlag():int
 		{
 			return _turnFlag;
 		}
+
+		//----------------------------------
+		//  tollgates(read-only)
+		//----------------------------------
+		public static function get tollgates():Array
+		{
+			return _tollgates;
+		}
+
 		//--------------------------------------------------------------------------
 		//
 		//  Methods
@@ -81,13 +100,14 @@ package com.lookbackon.ccj.managers
 		{
 			//TODO:
 			//agent initialization.
-			agent = new GameAgent("CCJGameAgent",FlexGlobals.topLevelApplication as IVisualElement);
+			agent=new GameAgent("CCJGameAgent", FlexGlobals.topLevelApplication as IVisualElement);
 			//logic condition who's turn now at first.
 //			isComputerTurnNow();
 			isHumanTurnNow();
 			//flag game is running.
-			isRunning = true;
+			isRunning=true;
 		}
+
 		//----------------------------------
 		//  restartGame
 		//----------------------------------
@@ -96,16 +116,23 @@ package com.lookbackon.ccj.managers
 			//TODO:re-start game
 			//clear board,chess pieces
 			FlexGlobals.topLevelApplication.cleanUp.start();
-			//put down chess pieces again
-			//no more create chess gasket again.
-			//no more using start up task at Main.mxml.
-			var startUpTask:SequenceTask = new SequenceTask();
-			startUpTask.addChild(new CreateChessPieceTask());
-			startUpTask.addChild(new CreateChessVoTask());
-			startUpTask.start();
 			//
-			startGame();
+			FlexGlobals.topLevelApplication.cleanUp.addEventListener(TaskEvent.TASK_COMPLETE,function(event:TaskEvent):void
+			{
+				//put down chess pieces again
+				//no more create chess gasket again.
+				//no more using start up task at Main.mxml.
+				var startUpTask:SequenceTask=new SequenceTask();
+				startUpTask.addChild(new CreateChessPieceTask());
+				startUpTask.addChild(new CreateChessVoTask());
+				startUpTask.start();
+				//
+				startGame();
+				//
+				event.target.removeEventListener(TaskEvent.TASK_COMPLETE,arguments.callee);
+			});
 		}
+
 		//----------------------------------
 		//  computerWin
 		//----------------------------------
@@ -131,6 +158,8 @@ package com.lookbackon.ccj.managers
 		{
 			//delegate fsm transition to computer state.
 			agent.fsm.changeState(agent.computerState);
+			//delegate fsm update current state.
+			agent.fsm.update(mochiModel.level);
 		}
 
 		//----------------------------------

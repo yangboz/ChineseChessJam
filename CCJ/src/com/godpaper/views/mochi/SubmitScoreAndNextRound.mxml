@@ -12,13 +12,10 @@
 			import com.godpaper.model.MochiModel;
 			import com.lookbackon.ccj.managers.GameManager;
 			
-			import mochi.as3.MochiAd;
 			import mochi.as3.MochiScores;
 			
 			import mx.core.FlexGlobals;
 			import mx.events.FlexEvent;
-			
-			import org.spicefactory.parsley.core.context.Context;
 			//
 			[Bindable]
 			private var mochiModel:MochiModel = MochiModel.getInstance();
@@ -61,6 +58,13 @@
 				GameManager.indicatorSubmitScore = false;
 				//
 				GameManager.restartGame();
+				//increase intelligence level.
+				mochiModel.level++;
+			}
+			
+			protected function get currentScore():int
+			{
+				return (mochiModel.level+1)*10;
 			}
 
 		]]>
@@ -73,14 +77,14 @@
 			<s:TextInput id="nameTextInput"/>
 		</mx:FormItem>
 		<mx:FormItem label="Your score:" required="true">
-			<s:TextInput id="scoreTextInput" enabled="false" text="10"/>
+			<s:TextInput id="scoreTextInput" enabled="false" text="{currentScore}"/>
 		</mx:FormItem>
 	</mx:Form>
 	
 	<s:controlBarContent>
 		<s:HGroup width="100%" horizontalAlign="center">
 			<s:Button id="submitBtn" label="Submit" click="submitBtnClickHandler(event)"/>
-			<s:Button id="nextRoundBtn" label="NextRound" click="nextRoundBtn_clickHandler(event)" enabled="false"/>
+			<s:Button id="nextRoundBtn" label="NextRound" click="nextRoundBtn_clickHandler(event)" enabled="true"/>
 		</s:HGroup>
 	</s:controlBarContent>
 </s:TitleWindow>

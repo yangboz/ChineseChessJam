@@ -5,7 +5,7 @@ package com.lookbackon.ccj.business.fsm
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.lookbackon.AI.finiteStateMachine.Agent;
+	import com.lookbackon.AI.FSM.Agent;
 	import com.lookbackon.AI.searching.ISearching;
 	import com.lookbackon.ccj.CcjConstants;
 	import com.lookbackon.ccj.business.fsm.states.game.AnotherHumanState;

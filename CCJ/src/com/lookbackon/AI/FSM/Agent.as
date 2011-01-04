@@ -1,4 +1,4 @@
-package com.lookbackon.AI.finiteStateMachine
+package com.lookbackon.AI.FSM
 {
 	import mx.core.IUIComponent;
 	import mx.core.IVisualElement;
@@ -104,6 +104,15 @@ package com.lookbackon.AI.finiteStateMachine
 		public function update():void
 		{
 			fsm.update();
+		}
+		/**
+		 * delegate fsm to message handle;
+		 * @param message from other agent.
+		 * 
+		 */		
+		public function onMessage(message:Message):void
+		{
+			fsm.onMessage(message);
 		}
 
 	}

@@ -1,22 +1,21 @@
-package com.lookbackon.ccj.business.fsm.states.chess
+package com.lookbackon.AI.HFSM.states
 {
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.lookbackon.ccj.business.fsm.ChessAgent;
+	import com.lookbackon.AI.FSM.IAgent;
+	import com.lookbackon.AI.FSM.states.IState;
 	import com.lookbackon.AI.FSM.states.StateBase;
-	
-	
 	/**
-	 * NascenceState.as class. Chess piece nacency state after created from chess factory;  	
+	 * HStateBase.as class. The base class of HFSM state.  	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
-	 * Created Dec 9, 2010 11:02:11 AM
+	 * Created Jan 4, 2011 1:25:11 PM
 	 */   	 
-	public class NascenceState extends StateBase
+	public class HStateBase extends StateBase implements IHState
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -45,30 +44,26 @@ package com.lookbackon.ccj.business.fsm.states.chess
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function NascenceState(agent:ChessAgent, resource:Object, description:String=null)
+		public function HStateBase(agent:IAgent, resource:Object, description:String=null)
 		{
 			//TODO: implement function
 			super(agent, resource, description);
+		}
+		/**
+		 * Note that derivesFrom() is a template function in a class template and to use it, 
+		 * each sub-state should override this function.
+		 */		
+		virtual public function derivesFrom(state:IState):Boolean
+		{
+			//TODO: implement function
+			return false;
 		}     	
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		override public function enter():void
-		{
-			//TODO: implement function
-		}
 		
-		override public function exit():void
-		{
-			//TODO: implement function
-		}
-		
-		override public function update(time:Number=0):void
-		{
-			//TODO: implement function
-		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods

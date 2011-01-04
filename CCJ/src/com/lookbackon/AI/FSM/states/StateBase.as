@@ -1,10 +1,9 @@
-package com.lookbackon.ccj.business.fsm
+package com.lookbackon.AI.FSM.states
 {
-	import com.lookbackon.AI.finiteStateMachine.IAgent;
-	import com.lookbackon.AI.finiteStateMachine.states.IState;
+	import com.lookbackon.AI.FSM.IAgent;
 
 	/**
-	 * The base class of chess state.
+	 * The base class of FSM state.
 	 * @author Knight.zhou
 	 * 
 	 */	

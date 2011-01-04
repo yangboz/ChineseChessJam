@@ -1,6 +1,6 @@
 package com.lookbackon.ccj.business.fsm
 {
-	import com.lookbackon.AI.finiteStateMachine.Agent;
+	import com.lookbackon.AI.FSM.Agent;
 	import com.lookbackon.ccj.CcjConstants;
 	import com.lookbackon.ccj.utils.LogUtil;
 	

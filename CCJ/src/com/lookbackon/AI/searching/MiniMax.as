@@ -74,7 +74,7 @@ package com.lookbackon.AI.searching
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function MiniMax(gamePosition:PositionVO,depth:int)
+		public function MiniMax(gamePosition:PositionVO,depth:int=5)
 		{
 			//
 			this.depth = depth;

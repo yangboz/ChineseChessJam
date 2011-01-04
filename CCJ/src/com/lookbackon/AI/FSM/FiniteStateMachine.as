@@ -1,6 +1,6 @@
-package com.lookbackon.AI.finiteStateMachine
+package com.lookbackon.AI.FSM
 {
-	import com.lookbackon.AI.finiteStateMachine.states.IState;
+	import com.lookbackon.AI.FSM.states.IState;
 	import com.lookbackon.ccj.utils.LogUtil;
 	
 	import mx.logging.ILogger;
@@ -101,13 +101,13 @@ package com.lookbackon.AI.finiteStateMachine
 			return _previousState;
 		}
 		/**
-		 * Update the FSM.
+		 * Update the fsm state with time interval.
 		 */		
-		public function update():void
+		public function update(time:int=0):void
 		{
 			if(currentState)
 			{
-				currentState.update();
+				currentState.update(time);
 			}
 		}
 		/**
@@ -147,6 +147,15 @@ package com.lookbackon.AI.finiteStateMachine
 		{
 			changeState( nextState );
 		}
+		/**
+		 * 
+		 * @param message 
+		 * 
+		 */		
+		public function onMessage(message:Message):void
+		{
+			//TODO: implement function
+		} 
 		
 	}
 }

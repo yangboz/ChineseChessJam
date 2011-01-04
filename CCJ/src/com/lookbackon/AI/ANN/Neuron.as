@@ -1,4 +1,4 @@
-package com.lookbackon.AI.artificalNeuralNetwork
+package com.lookbackon.AI.ANN
 {
 	/**
 	 * A Neuron is the basic building block of a Neural Network

@@ -1,7 +1,5 @@
-package com.lookbackon.AI.finiteStateMachine
+package com.lookbackon.AI.FSM
 {
-	import mx.core.IVisualElement;
-
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
@@ -9,20 +7,20 @@ package com.lookbackon.AI.finiteStateMachine
 	//--------------------------------------------------------------------------
 	
 	/**
-	 * IAgent.as class.   	
+	 * Message.as class.   	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
-	 * Created Dec 10, 2010 11:14:57 AM
+	 * Created Dec 27, 2010 5:52:12 PM
 	 */   	 
-	public interface IAgent
+	public class Message
 	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		
+		public var id:int; 
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -32,16 +30,7 @@ package com.lookbackon.AI.finiteStateMachine
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-		function get name():String;
-		function set name(value:String):void;
 		
-		function get carrier():IVisualElement;
-		function set carrier(value:IVisualElement):void;
-		
-		function get traceTarget():IVisualElement;
-		function set traceTarget(value:IVisualElement):void;
-		
-		function get fsm():FiniteStateMachine;
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -53,6 +42,9 @@ package com.lookbackon.AI.finiteStateMachine
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
+		public function Message()
+		{
+		}     	
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods

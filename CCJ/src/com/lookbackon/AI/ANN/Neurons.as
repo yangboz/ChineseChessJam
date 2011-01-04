@@ -1,4 +1,4 @@
-package com.lookbackon.AI.artificalNeuralNetwork
+package com.lookbackon.AI.ANN
 {
 	import mx.collections.ArrayCollection;
 	

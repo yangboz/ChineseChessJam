@@ -1,12 +1,13 @@
-package com.lookbackon.AI.finiteStateMachine
+package com.lookbackon.AI.FSM
 {
-	import com.lookbackon.AI.finiteStateMachine.states.IState;
+	import com.lookbackon.AI.FSM.states.IState;
 	
 	/**
 	 * Our FiniteStateMachine must implment this interface.
 	 * 
 	 * @author Knight.zhou
 	 * 
+	 * @history 01/04/2011 agent with message handler,for multi-agent communication.
 	 */    
 	public interface IFiniteStateMachine
 	{
@@ -21,5 +22,7 @@ package com.lookbackon.AI.finiteStateMachine
 		
 		function set nextState(s:IState):void;
 		function get nextState():IState;
+		
+		function onMessage(message:Message):void;
 	}
 }

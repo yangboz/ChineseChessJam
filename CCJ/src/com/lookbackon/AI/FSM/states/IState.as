@@ -1,4 +1,4 @@
-package com.lookbackon.AI.finiteStateMachine.states
+package com.lookbackon.AI.FSM.states
 {
 	/**
 	 * Each state implements the IState interface. 
