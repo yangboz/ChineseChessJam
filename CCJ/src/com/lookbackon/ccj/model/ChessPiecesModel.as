@@ -192,7 +192,7 @@ package com.lookbackon.ccj.model
 		}
 
 		/**
-		 *
+		 * Notice:set only for unit-test.
 		 * @param value a BitBoard representation of bluePieces.
 		 *
 		 */
@@ -228,7 +228,7 @@ package com.lookbackon.ccj.model
 		}
 
 		/**
-		 *
+		 * Notice:set only for unit-test.
 		 * @param value a BitBoard representation of redPieces.
 		 *
 		 */

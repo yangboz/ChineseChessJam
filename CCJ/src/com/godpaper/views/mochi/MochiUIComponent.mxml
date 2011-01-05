@@ -18,8 +18,11 @@
 			import mx.events.CloseEvent;
 			import mx.events.FlexEvent;
 			//
+//			[Bindable]
+//			private var mochiModel:MochiModel = MochiModel.getInstance();
+			[Inject]
 			[Bindable]
-			private var mochiModel:MochiModel = MochiModel.getInstance();
+			public var mochiModel:MochiModel;
 			
 			protected function creationCompleteHandler(event:FlexEvent):void
 			{
@@ -71,7 +74,7 @@
 				//re-connect mochi service.\
 				if(event.detail==Alert.YES)
 				{
-					FlexGlobals.topLevelApplication._mochiClip.dispatchEvent(new Event(Event.ADDED_TO_STAGE,mochiClipOnStage));
+					FlexGlobals.topLevelApplication._mochiClip.dispatchEvent(new Event(Event.ADDED_TO_STAGE));
 				}
 			}
 
@@ -79,5 +82,6 @@
 	</fx:Script>
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<parsley:Configure/>
 	</fx:Declarations>
 </mx:UIComponent>

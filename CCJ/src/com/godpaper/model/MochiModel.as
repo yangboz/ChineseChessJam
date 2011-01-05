@@ -35,12 +35,6 @@ package com.godpaper.model
 		public var name:String; //the player's name
 		//
 		public var storeItemsRegister:HashMap=new HashMap();
-		//
-		[Bindable]
-		public var level:int=0;
-		//Singleton instance of MochiModel;
-		private static var instance:MochiModel;
-
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -55,19 +49,16 @@ package com.godpaper.model
 		{
 			return (null != storeItemsRegister.find("abfa5115d7c3dc75")); //chess piece capture indicator id.
 		}
-
 		//
 		public function get hasCheckIndicator():Boolean
 		{
 			return (null != storeItemsRegister.find("8661560570f7f8e6")); //chess piece check indicator id.
 		}
-
 		//
 		public function get gameID():String
 		{
 			return _gameID;
 		}
-
 		//
 		public function get boradID():String
 		{
@@ -84,24 +75,36 @@ package com.godpaper.model
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function MochiModel(access:Private)
+//		public function MochiModel(access:Private=null)
+//		{
+//			if (access != null)
+//			{
+//				if (instance == null)
+//				{
+//					instance=this;
+//					//
+//					score.setValue(0);
+//						//
+//				}
+//			}
+//			else
+//			{
+//				throw new CcjErrors(CcjErrors.INITIALIZE_SINGLETON_CLASS);
+//			}
+//		}
+		public function MochiModel()
 		{
-			if (access != null)
-			{
-				if (instance == null)
-				{
-					instance=this;
-					//
-					score.setValue(0);
-						//
-				}
-			}
-			else
-			{
-				throw new CcjErrors(CcjErrors.INITIALIZE_SINGLETON_CLASS);
-			}
+			
 		}
-
+		/**
+		 * The [Init] metadata tells Parsley to call the annotated method after 
+		 * an instance of this object is created and configured.
+		 */ 
+		[Init]
+		public function init() : void 
+		{
+			score.setValue(0);
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
@@ -112,14 +115,14 @@ package com.godpaper.model
 		 * @return the singleton instance of MochiModel
 		 *
 		 */
-		public static function getInstance():MochiModel
-		{
-			if (instance == null)
-			{
-				instance=new MochiModel(new Private());
-			}
-			return instance;
-		}
+//		public static function getInstance():MochiModel
+//		{
+//			if (instance == null)
+//			{
+//				instance=new MochiModel(new Private());
+//			}
+//			return instance;
+//		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods

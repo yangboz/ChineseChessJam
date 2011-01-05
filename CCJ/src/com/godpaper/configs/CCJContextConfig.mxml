@@ -9,6 +9,6 @@ features.  This is a MXML implementation, but this can also be declared in and X
 		   xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:model="com.godpaper.model.*">
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
-		<!--<model:MochiModel/>-->
+		<model:MochiModel/>
 	</fx:Declarations>
 </fx:Object>

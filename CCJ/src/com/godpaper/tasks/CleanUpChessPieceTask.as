@@ -9,6 +9,7 @@ package com.godpaper.tasks
 	import com.lookbackon.ccj.CcjConstants;
 	import com.lookbackon.ccj.business.factory.ChessFactory;
 	import com.lookbackon.ccj.managers.ChessPieceManager;
+	import com.lookbackon.ccj.model.ChessPiecesModel;
 	import com.lookbackon.ccj.view.components.ChessGasket;
 	import com.lookbackon.ccj.view.components.ChessPiece;
 	import com.lookbackon.ccj.view.components.IChessPiece;
@@ -32,7 +33,8 @@ package com.godpaper.tasks
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		
+		[Bindable]
+		private var chessPiecesModel:ChessPiecesModel = ChessPiecesModel.getInstance();
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -76,7 +78,14 @@ package com.godpaper.tasks
 					{
 						trace("removed piece:",ChessPiece(chessGasket.chessPiece).label );
 						try{
-							chessGasket.removeElement( chessGasket.chessPiece );
+							chessGasket.chessPiece.chessVO = null;
+							chessGasket.chessPiece.omenVO = null;
+							chessGasket.chessPiece = null;
+//							chessGasket.removeElement( chessGasket.chessPiece );
+							//
+							chessPiecesModel.reds.length = 0;
+							chessPiecesModel.blues.length = 0;
+							//
 						}catch(error:Error)
 						{
 							//

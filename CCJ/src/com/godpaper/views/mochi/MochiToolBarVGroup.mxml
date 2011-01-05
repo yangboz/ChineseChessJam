@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009"
 		  xmlns:s="library://ns.adobe.com/flex/spark"
-		  xmlns:mx="library://ns.adobe.com/flex/mx">
+		  xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:parsley="http://www.spicefactory.org/parsley">
 	<fx:Script>
 		<![CDATA[
 			import assets.EmbededAssets;
 			
+			import com.godpaper.messages.LevelUpMessage;
 			import com.godpaper.model.MochiModel;
+			import com.lookbackon.ccj.managers.GameManager;
 			
-			import mochi.as3.MochiAd;
 			import mochi.as3.MochiCoins;
 			import mochi.as3.MochiScores;
 			import mochi.as3.MochiSocial;
@@ -17,12 +18,13 @@
 			//
 			private var loginWidgetShowed:Boolean=false;
 			//
-			[Bindable]
-			private var mochiModel:MochiModel = MochiModel.getInstance();
+			[Inject][Bindable]
+			public var mochiModel:MochiModel;
 			//
 			protected function tollgateIconView_addedToStageHandler(event:Event):void
 			{
-				getIconSerials(SWFLoader(event.target)).gotoAndStop(1);
+				getIconSerials(SWFLoader(event.target)).gotoAndStop(GameManager.level);
+				tollgateSWFLoader.toolTip = GameManager.tollgateTips[GameManager.level-1];
 			}
 
 			//
@@ -78,20 +80,29 @@
 				var iconMC:MovieClip=Loader(DisplayObjectContainer(target.content).getChildAt(0)).content as MovieClip;
 				return iconMC;
 			}
-
+			//parsley message handler
+			[MessageHandler]
+			public function levelUpHandler(message:LevelUpMessage):void
+			{
+				getIconSerials(tollgateSWFLoader).gotoAndStop(GameManager.level);
+				tollgateSWFLoader.toolTip = GameManager.tollgateTips[GameManager.level-1];
+			}
 		]]>
 	</fx:Script>
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<parsley:Configure/>
 	</fx:Declarations>
 
-	<mx:SWFLoader right="0"
+	<mx:SWFLoader 
+				  id="tollgateSWFLoader"
+				  right="0"
 				  top="0"
 				  source="{EmbededAssets.ICON_TOLL_GATE}"
 				  addedToStage="tollgateIconView_addedToStageHandler(event)"
 				  maxHeight="50"
 				  maxWidth="50"
-				  toolTip="baby intelligence"/>
+				  />
 	<mx:SWFLoader right="0"
 				  top="0"
 				  source="{EmbededAssets.ICON_TOLL_GATE}"

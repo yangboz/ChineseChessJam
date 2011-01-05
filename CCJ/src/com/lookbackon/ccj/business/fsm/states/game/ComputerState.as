@@ -58,7 +58,6 @@ package com.lookbackon.ccj.business.fsm.states.game
 		//
 		private var processes:Vector.<IRunnable>;
 		private var greenThread:GreenThread;
-		//
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -99,7 +98,8 @@ package com.lookbackon.ccj.business.fsm.states.game
 			CursorManager.setBusyCursor();
 			//
 			GameManager.indicatorReadOut=true;
-			//
+			//default update current state.
+			update(GameManager.level-1);
 		}
 		
 		override public function exit():void

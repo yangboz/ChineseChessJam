@@ -11,14 +11,23 @@
 		<![CDATA[
 			import com.godpaper.model.MochiModel;
 			import com.lookbackon.ccj.managers.GameManager;
+			import com.godpaper.messages.LevelUpMessage;
 			
 			import mochi.as3.MochiScores;
 			
 			import mx.core.FlexGlobals;
 			import mx.events.FlexEvent;
 			//
-			[Bindable]
-			private var mochiModel:MochiModel = MochiModel.getInstance();
+			[Inject][Bindable]
+//			private var mochiModel:MochiModel = MochiModel.getInstance();
+			public var mochiModel:MochiModel;
+			//parsley message dispatcher
+			/**
+			 * The [MessageDispatcher] metadata tells Parsley to configure the 
+			 * function so it can be used to send (dispatch) messages.
+			 */
+			[MessageDispatcher]
+			public var dispatcher:Function;
 			//
 			protected function titlewindow1_creationCompleteHandler(event:FlexEvent):void
 			{
@@ -52,25 +61,26 @@
 			//
 			protected function nextRoundBtn_clickHandler(event:MouseEvent):void
 			{
-				// TODO Auto-generated method stub
-				
 				//
 				GameManager.indicatorSubmitScore = false;
 				//
 				GameManager.restartGame();
 				//increase intelligence level.
-				mochiModel.level++;
+				GameManager.level++;
+				//
+				dispatcher(new LevelUpMessage(GameManager.level));
 			}
 			
 			protected function get currentScore():int
 			{
-				return (mochiModel.level+1)*10;
+				return (GameManager.level)*10;
 			}
 
 		]]>
 	</fx:Script>
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<parsley:Configure/>
 	</fx:Declarations>
 	<mx:Form width="100%" height="100%" defaultButton="{submitBtn}">
 		<mx:FormItem label="Your name:" required="true">

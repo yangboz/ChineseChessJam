@@ -5,7 +5,7 @@
 		 creationComplete="button1_creationCompleteHandler(event)"
 		 xmlns:mx="library://ns.adobe.com/flex/mx"
 		 width="50"
-		 height="50">
+		 height="50" xmlns:parsley="http://www.spicefactory.org/parsley">
 	<fx:Script>
 		<![CDATA[
 			import com.godpaper.model.MochiModel;
@@ -29,8 +29,8 @@
 			//
 			private var textColor:String=CcjConstants.COLOR_BLUE; //default is blue.
 			//
-			[Bindable]
-			private var mochiModel:MochiModel = MochiModel.getInstance();
+			[Inject][Bindable]
+			public var mochiModel:MochiModel;
 			//----------------------------------
 			//  CONSTANTS
 			//----------------------------------
@@ -186,6 +186,7 @@
 	</fx:Script>
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<parsley:Configure/>
 	</fx:Declarations>
 	<mx:SWFLoader id="swfLoader"
 				  verticalCenter="0"

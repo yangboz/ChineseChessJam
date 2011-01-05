@@ -80,7 +80,7 @@
 				this.dumpFootSprint();
 			}
 
-			protected function dumpFootSprint():void
+			public function dumpFootSprint():void
 			{
 				//design by contract.
 				//@see http://opensource.adobe.com/wiki/display/cairngorm/HowToUseCairngormContract
@@ -118,8 +118,7 @@
 		<!---
 		The context for bootstrapping the whole Parsley framework.
 		-->
-		<parsley:Configure/>
-		<parsley:ContextBuilder config="{CCJContextConfig}">
+		<parsley:ContextBuilder config="com.godpaper.configs.CCJContextConfig">
 		</parsley:ContextBuilder>
 
 		<!---
@@ -141,13 +140,13 @@
 			<components:IndicatoryProgressBar label="{GameManager.indication}"/>
 		</popup:PopUpWrapper>
 
-		<popup:PopUpWrapper open="{GameManager.indicatorSubmitScore}"
+		<parsley:PopUp  open="{GameManager.indicatorSubmitScore}"
 							center="true"
 							modal="true"
 							parent="{this}">
 			<mochi:SubmitScoreAndNextRound id="submitScoreAndNamePopup"/>
-		</popup:PopUpWrapper>
-
+		</parsley:PopUp >
+		
 		<!-- Controllers here -->
 		<!-- Tasks -->
 		<task:SequenceTask id="startUpSequenceTask" label="startUp">
@@ -158,6 +157,7 @@
 		
 		<task:SequenceTask id="cleanUp" label="cleanUp">
 			<tasks:CleanUpChessPieceTask label="clean up chess pieces"/>
+			<tasks:CleanUpPiecesBitboardTask label="clean up pieces bitboard"/>
 		</task:SequenceTask>
 		
 		<!-- Services here -->
