@@ -5,7 +5,8 @@ package com.godpaper.tasks
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.adobe.cairngorm.task.Task;
+//	import com.adobe.cairngorm.task.Task;
+	import org.spicefactory.lib.task.Task;
 	import com.lookbackon.ccj.CcjConstants;
 	import com.lookbackon.ccj.business.factory.ChessFactory;
 	import com.lookbackon.ccj.managers.ChessPieceManager;
@@ -66,7 +67,8 @@ package com.godpaper.tasks
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		override protected function performTask():void
+//		override protected function performTask():void
+		override protected function doStart():void	
 		{
 			//clean up chess piece
 			for(var v:int=0;v<CcjConstants.BOARD_V_LINES;v++)

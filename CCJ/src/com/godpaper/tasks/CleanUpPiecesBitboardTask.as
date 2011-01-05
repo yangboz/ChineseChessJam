@@ -5,7 +5,8 @@ package com.godpaper.tasks
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.adobe.cairngorm.task.Task;
+//	import com.adobe.cairngorm.task.Task;
+	import org.spicefactory.lib.task.Task;
 	import com.lookbackon.ccj.model.ChessPiecesModel;
 	import com.lookbackon.ccj.model.vos.ConductVO;
 	import com.lookbackon.ccj.utils.LogUtil;
@@ -69,7 +70,8 @@ package com.godpaper.tasks
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		override protected function performTask():void
+//		override protected function performTask():void
+		override protected function doStart():void
 		{
 			//TODO:
 			LOG.info("before clean up,allPieces:{0}", chessPiecesModel.allPieces.dump());

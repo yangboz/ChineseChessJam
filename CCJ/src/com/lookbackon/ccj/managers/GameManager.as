@@ -1,6 +1,8 @@
 package com.lookbackon.ccj.managers
 {
 	import com.adobe.cairngorm.task.SequenceTask;
+	import com.godpaper.tasks.CleanUpChessPieceTask;
+	import com.godpaper.tasks.CleanUpPiecesBitboardTask;
 	import com.godpaper.tasks.CreateChessPieceTask;
 	import com.godpaper.tasks.CreateChessVoTask;
 	import com.lookbackon.AI.searching.AttackFalse;
@@ -15,6 +17,7 @@ package com.lookbackon.ccj.managers
 	import mx.core.FlexGlobals;
 	import mx.core.IVisualElement;
 	import mx.logging.ILogger;
+
 	/**
 	 * A player manager class to maintain turn-based game.
 	 *
@@ -124,9 +127,11 @@ package com.lookbackon.ccj.managers
 		{
 			//TODO:re-start game
 			//clear board,chess pieces
+			FlexGlobals.topLevelApplication.cleanUp.addTask(new CleanUpChessPieceTask());
+			FlexGlobals.topLevelApplication.cleanUp.addTask(new CleanUpPiecesBitboardTask());
 			FlexGlobals.topLevelApplication.cleanUp.start();
 			//
-			mx.core.FlexGlobals.topLevelApplication.dumpFootSprint();
+//			mx.core.FlexGlobals.topLevelApplication.dumpFootSprint();
 			//
 			//put down chess pieces again
 			//no more create chess gasket again.
@@ -136,7 +141,7 @@ package com.lookbackon.ccj.managers
 			startUpTask.addChild(new CreateChessVoTask());
 			startUpTask.start();
 			//
-			mx.core.FlexGlobals.topLevelApplication.dumpFootSprint();
+//			mx.core.FlexGlobals.topLevelApplication.dumpFootSprint();
 			//
 			startGame();
 		}

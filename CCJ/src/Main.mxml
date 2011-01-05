@@ -15,7 +15,7 @@
 			   maxWidth="550"
 			   maxHeight="520"
 			   applicationComplete="application1_applicationCompleteHandler(event)"
-			   creationComplete="application1_creationCompleteHandler(event)"
+			   creationComplete="application1_creationCompleteHandler(event)" xmlns:task1="org.spicefactory.lib.task.*"
 			   >
 	<s:layout>
 		<s:BasicLayout/>
@@ -155,10 +155,13 @@
 			<tasks:CreateChessVoTask label="create chess VO"/>
 		</task:SequenceTask>
 		
-		<task:SequenceTask id="cleanUp" label="cleanUp">
+		<!--<task:SequenceTask id="cleanUp" label="cleanUp">
 			<tasks:CleanUpChessPieceTask label="clean up chess pieces"/>
 			<tasks:CleanUpPiecesBitboardTask label="clean up pieces bitboard"/>
-		</task:SequenceTask>
+		</task:SequenceTask>-->
+		<task1:SequentialTaskGroup id="cleanUp" autoStart="false">
+
+		</task1:SequentialTaskGroup>
 		
 		<!-- Services here -->
 	</fx:Declarations>
