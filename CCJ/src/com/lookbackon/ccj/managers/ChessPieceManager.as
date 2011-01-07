@@ -20,12 +20,12 @@ package com.lookbackon.ccj.managers
 	import com.lookbackon.ccj.view.components.ChessPiece;
 	import com.lookbackon.ccj.view.components.IChessPiece;
 	import com.lookbackon.ds.BitBoard;
-
+	
 	import de.polygonal.ds.Array2;
 	import de.polygonal.math.PM_PRNG;
-
+	
 	import mx.logging.ILogger;
-
+	
 	import spark.filters.GlowFilter;
 
 	/**
@@ -59,6 +59,9 @@ package com.lookbackon.ccj.managers
 		//
 		private static var _previousMementos:Array=[];
 		private static var _nextMementos:Array=[];
+		//flag is checked.
+		[Bindable]
+		private static var _isChecking:Boolean = false;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -120,7 +123,13 @@ package com.lookbackon.ccj.managers
 		{
 			_eatOffs=value;
 		}
-
+		//----------------------------------
+		//  isChecking
+		//----------------------------------
+		public static function get isChecking():Boolean
+		{
+			return _isChecking;
+		}	
 		//generation.
 		//--------------------------------------------------------------------------
 		//
@@ -395,8 +404,14 @@ package com.lookbackon.ccj.managers
 			if (!totalCaptures.and(marshal).isEmpty)
 			{
 				GameManager.indicatorCheck=true;
+				//
+				_isChecking = true;
+				//
 				return true;
 			}
+			//
+			_isChecking = false;
+			//
 			return false;
 		}
 
@@ -406,7 +421,7 @@ package com.lookbackon.ccj.managers
 		 * @return whether or not blue/red check mated.
 		 *
 		 */
-		public static function indicateCheckmate(gamePosition:PositionVO):Boolean
+		private static function indicateCheckmate(gamePosition:PositionVO):Boolean
 		{
 			var checkmated:Boolean;
 			if (gamePosition.color == CcjConstants.FLAG_BLUE)

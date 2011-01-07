@@ -66,10 +66,12 @@ package com.lookbackon.ccj.model.vos.cvo
 			//TODO:
 			if(flag==CcjConstants.FLAG_RED)
 			{
+				this.defends = 
 				this.moves = this.occupies.xor(this.occupies.and(ChessPiecesModel.getInstance().redPieces));
 			}
 			if(flag==CcjConstants.FLAG_BLUE)
 			{
+				this.defends = 
 				this.moves = this.occupies.xor(this.occupies.and(ChessPiecesModel.getInstance().bluePieces));
 			}
 			//about attacked captures.

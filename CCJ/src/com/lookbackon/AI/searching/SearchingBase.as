@@ -1,16 +1,18 @@
 package com.lookbackon.AI.searching
 {
+	import com.godpaper.utils.FilterUtil;
+	import com.godpaper.utils.SortUtil;
 	import com.lookbackon.AI.evaluation.IEvaluation;
 	import com.lookbackon.AI.evaluation.linear.LinearEvaluationProxy;
 	import com.lookbackon.ccj.managers.ChessPieceManager;
 	import com.lookbackon.ccj.model.ChessPiecesModel;
 	import com.lookbackon.ccj.model.vos.ConductVO;
 	import com.lookbackon.ccj.model.vos.PositionVO;
-	import com.lookbackon.ccj.utils.VectorUtil;
 	import com.lookbackon.ccj.view.components.ChessPiece;
-
+	import com.lookbackon.ds.BitBoard;
+	
 	import flash.geom.Point;
-
+	
 	import org.generalrelativity.thread.process.AbstractProcess;
 
 	/**
@@ -79,7 +81,7 @@ package com.lookbackon.AI.searching
 			//TODO: implement function
 			this.gamePosition=gamePosition;
 			//init ordering moves.
-			this.orderingMoves=this.moves.sort(VectorUtil.sortOnMoves).reverse();
+			this.orderingMoves=this.moves.sort(SortUtil.sortOnMoves).reverse();
 			for (var m:int=0; m < this.moves.length; m++)
 			{
 //				trace("move's celled:",this.moves[m].target.chessVO.moves.celled);
@@ -177,7 +179,7 @@ package com.lookbackon.AI.searching
 		 */
 		public function get captures():Vector.<ConductVO>
 		{
-			return orderingMoves.filter(VectorUtil.filterOnCaptures);
+			return orderingMoves.filter(FilterUtil.filterOnCaptures);
 		}
 
 		//----------------------------------
@@ -221,6 +223,7 @@ package com.lookbackon.AI.searching
 		/**
 		 * This function generates all possible moves and stores them in the vector.</br>
 		 * It returns the vector of the legal moves.</br>
+		 * While is checking,defend moves with high priority.</br>
 		 * @param pieces chess pieces collection.
 		 * @return all possible moves.
 		 *
@@ -231,11 +234,18 @@ package com.lookbackon.AI.searching
 			for (var i:int=0; i < pieces.length; i++)
 			{
 				var cp:ChessPiece=pieces[i];
-				for (var c:int=0; c < cp.chessVO.moves.column; c++)
+				var moves:BitBoard = cp.chessVO.moves;
+				//while checking,defends move first.
+				if(ChessPieceManager.isChecking)
 				{
-					for (var r:int=0; r < cp.chessVO.moves.row; r++)
+					moves = cp.chessVO.defends;
+				}
+				//
+				for (var c:int=0; c < moves.column; c++)
+				{
+					for (var r:int=0; r < moves.row; r++)
 					{
-						if (cp.chessVO.moves.getBitt(r, c))
+						if ( moves.getBitt(r, c) )
 						{
 							var conductVO:ConductVO=new ConductVO();
 							conductVO.target=cp;

@@ -1,21 +1,19 @@
-package com.lookbackon.ccj.utils
+package com.godpaper.utils
 {
-	import com.lookbackon.ccj.model.vos.ConductVO;
-
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	
+	import com.lookbackon.ccj.model.vos.ConductVO;
 	/**
 	 * SortUtil.as class.   	
-	 * @author Knight.zhou
+	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
-	 * Created Jul 13, 2010 1:56:49 PM
+	 * Created Jan 7, 2011 5:12:25 PM
 	 */   	 
-	public class VectorUtil
+	public class SortUtil
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -29,20 +27,27 @@ package com.lookbackon.ccj.utils
 		
 		//--------------------------------------------------------------------------
 		//
+		//  Public properties
+		//
+		//-------------------------------------------------------------------------- 
+		
+		//--------------------------------------------------------------------------
+		//
+		//  Protected properties
+		//
+		//-------------------------------------------------------------------------- 
+		
+		//--------------------------------------------------------------------------
+		//
+		//  Constructor
+		//
+		//--------------------------------------------------------------------------
+		    	
+		//--------------------------------------------------------------------------
+		//
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		//About filter
-		//
-		public static function filterOnCaptures(item:ConductVO, index:int, vector:Vector.<ConductVO>):Boolean
-		{
-			return Boolean(item.target.chessVO.captures.celled);
-		}
-		public static function filterOnEatOff(item:ConductVO, index:int, vector:Vector.<ConductVO>):Boolean
-		{
-			return Boolean(item.eatOff!=null);
-		}
-		//About sort
 		//
 		public static function sortOnCaptures(cd1:ConductVO,cd2:ConductVO):int
 		{

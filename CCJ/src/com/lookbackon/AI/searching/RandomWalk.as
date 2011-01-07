@@ -39,26 +39,26 @@ package com.lookbackon.AI.searching
 		{
 			//
 			bestMove = new ConductVO();
-			if(orderingMoves.length<=0)
+			if(moves.length<=0)
 			{
 				GameManager.humanWin();//pluge to death.
 			}else
 			{
 				//for test.
-				for(var t:int=0;t<orderingMoves.length;t++)
+				for(var t:int=0;t<moves.length;t++)
 				{
-					LOG.debug("moves:#{0},detail:{1}",t.toString(),orderingMoves[t].dump());
+					LOG.info("moves:#{0},detail:{1}",t.toString(),moves[t].dump());
 				}
-				var randomStep:int = MathUtil.transactRandomNumberInRange(0,orderingMoves.length-1);
+				var randomStep:int = MathUtil.transactRandomNumberInRange(0,moves.length-1);
 				LOG.debug("randomStep:{0}",randomStep.toString());
 				//evaluation.
 				var pValue:int=-1;
-				for(var i:int=0;i<orderingMoves.length;i++)
+				for(var i:int=0;i<moves.length;i++)
 				{
-					if(doEvaluation(orderingMoves[i],gamePosition)>pValue)
+					if(doEvaluation(moves[i],gamePosition)>pValue)
 					{
-						bestMove = orderingMoves[i];
-						pValue = doEvaluation(orderingMoves[i],gamePosition);
+						bestMove = moves[i];
+						pValue = doEvaluation(moves[i],gamePosition);
 					}
 				}
 				LOG.debug("randomed bestMove:{0}",bestMove.dump());

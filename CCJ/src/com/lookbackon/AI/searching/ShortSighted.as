@@ -9,7 +9,6 @@ package com.lookbackon.AI.searching
 	import com.lookbackon.ccj.model.vos.ConductVO;
 	import com.lookbackon.ccj.model.vos.PositionVO;
 	import com.lookbackon.ccj.utils.LogUtil;
-	import com.lookbackon.ccj.utils.VectorUtil;
 	
 	import mx.logging.ILogger;
 

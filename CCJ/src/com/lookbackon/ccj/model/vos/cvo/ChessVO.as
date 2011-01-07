@@ -52,6 +52,7 @@ package com.lookbackon.ccj.model.vos.cvo
 		private var _occupies:BitBoard;
 		private var _moves:BitBoard;
 		private var _captures:BitBoard;
+		private var _defends:BitBoard;
 		//for Rook/Cannon condition filter.
 		protected var blocker:BitBoard;
 		//chess flag value(red or blue).
@@ -80,9 +81,10 @@ package com.lookbackon.ccj.model.vos.cvo
 			//
 			this.flag = flag;
 			//init.
-			this.occupies = new BitBoard(width,height);
-			this.moves = new BitBoard(width,height);
-			this.captures = new BitBoard(width,height);
+			this._occupies = new BitBoard(width,height);
+			this._moves = new BitBoard(width,height);
+			this._captures = new BitBoard(width,height);
+			this._defends = new BitBoard(width,height);
 			this.initialization(rowIndex,colIndex,flag);
 		}
 		//--------------------------------------------------------------------------
@@ -140,6 +142,22 @@ package com.lookbackon.ccj.model.vos.cvo
 		{
 			_captures = value;
 //			LOG.info("anew captures:{0}",value.dump());
+		}
+		//----------------------------------
+		//  defends(implements)
+		//----------------------------------
+		public function get defends():BitBoard
+		{
+			return _defends;
+		}
+		/**
+		 * 
+		 * @param value "marshal" defends by blue pieces.
+		 * 
+		 */		
+		public function set defends(value:BitBoard):void
+		{
+			_defends = value;
 		}
 		//--------------------------------------------------------------------------
 		//

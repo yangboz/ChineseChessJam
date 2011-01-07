@@ -48,8 +48,8 @@
 			{
 				// TODO Auto-generated method stub
 				this.closeButton.visible=false;
-				//
-				_timer=new Timer(3000, 1);
+				//delay 2 seconds.
+				_timer=new Timer(2000, 1);
 				_timer.addEventListener(TimerEvent.TIMER_COMPLETE, timerCompleteHandler);
 				_timer.start();
 				//broad cast check message.

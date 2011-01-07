@@ -5,7 +5,7 @@ package com.lookbackon.ccj.model.vos.cvo
 	 * The interface of chess pieces,about occupy,moves,captures.
 	 * @see http://chess.dubmun.com/bitboard.html
 	 * @author knight.zhou
-	 * 
+	 * @history 01/07/2011 ADDED:defends bitboard property.
 	 */	
 	public interface IChessVO
 	{
@@ -20,5 +20,8 @@ package com.lookbackon.ccj.model.vos.cvo
 		//red/blue piece positions to compute captures.
 		function set captures(value:BitBoard):void;
 		function get captures():BitBoard;
+		//legal moves for these chess types that can keep "marshal" safty.
+		function set defends(value:BitBoard):void;
+		function get defends():BitBoard;
 	}
 }
