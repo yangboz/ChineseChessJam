@@ -67,7 +67,7 @@
 				GameManager.restartGame();
 				//increase intelligence level.
 				GameManager.level++;
-				//
+				//broad cast level up message.
 				dispatcher(new LevelUpMessage(GameManager.level));
 			}
 			

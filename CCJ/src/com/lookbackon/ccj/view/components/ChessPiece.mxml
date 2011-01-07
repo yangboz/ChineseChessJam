@@ -9,6 +9,7 @@
 	<fx:Script>
 		<![CDATA[
 			import com.godpaper.model.MochiModel;
+			import com.lookbackon.AI.FSM.Message;
 			import com.lookbackon.ccj.CcjConstants;
 			import com.lookbackon.ccj.business.fsm.ChessAgent;
 			import com.lookbackon.ccj.managers.ChessPieceManager;
@@ -179,7 +180,17 @@
 				//indicate gasket can fill with chess piece.
 				if(mochiModel.hasCaptureIndicator)
 				{
-					ChessPieceManager.indicatedGaskets(this.chessVO.moves);
+					ChessPieceManager.indicateGaskets(this.chessVO.moves);
+				}
+			}
+			//parsley message handler
+			[MessageHandler]
+			public function checkHandler(message:Message):void
+			{
+				if(CcjConstants.FLAG_BLUE == flag)
+				{
+					//filter on moves.
+					agent.fsm.changeState(agent.defenseState);
 				}
 			}
 		]]>

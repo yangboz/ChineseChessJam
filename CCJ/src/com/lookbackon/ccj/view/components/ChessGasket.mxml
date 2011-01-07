@@ -9,10 +9,14 @@
 				   borderVisible="false"
 				   backgroundAlpha="0.0"
 				   contentBackgroundAlpha="0.0"
-				   borderAlpha="0.0">
+				   borderAlpha="0.0" xmlns:parsley="http://www.spicefactory.org/parsley">
 	<fx:Script>
 		<![CDATA[
+			import com.godpaper.model.MochiModel;
+			import com.lookbackon.ccj.CcjConstants;
 			import com.lookbackon.ccj.managers.ChessPieceManager;
+			import com.lookbackon.ccj.managers.GameManager;
+			import com.lookbackon.ccj.model.ChessPiecesModel;
 			import com.lookbackon.ccj.model.vos.ConductVO;
 			import com.lookbackon.ccj.utils.LogUtil;
 			import com.lookbackon.ds.BitBoard;
@@ -30,6 +34,12 @@
 			//
 			//--------------------------------------------------------------------------
 			private var currentConductVO:ConductVO;
+			//mochi model
+			[Inject][Bindable]
+			public var mochiModel:MochiModel;
+			//chess pieces model
+			[Bindable]
+			private var chessPiecesModel:ChessPiecesModel = ChessPiecesModel.getInstance();
 			//----------------------------------
 			//  CONSTANTS
 			//----------------------------------
@@ -84,8 +94,9 @@
 				// TODO Auto-generated method stub
 				this.addEventListener(DragEvent.DRAG_ENTER, dragEnterHandler);
 				this.addEventListener(DragEvent.DRAG_DROP, dragDropHandler);
-				//
+				//once piece add or remove,maybe check event triggled.
 				this.addEventListener(ElementExistenceEvent.ELEMENT_ADD, elementAddHandler);
+				this.addEventListener(ElementExistenceEvent.ELEMENT_REMOVE, elementRemoveHandler);
 			}
 
 			//dragEnterHandler
@@ -127,12 +138,41 @@
 				var emptyLegalMoves:BitBoard=new BitBoard(9, 10);
 				emptyLegalMoves.clear();
 				//
-				ChessPieceManager.indicatedGaskets(emptyLegalMoves);
+				ChessPieceManager.indicateGaskets(emptyLegalMoves);
+				//
+				if(!mochiModel.hasCheckIndicator)
+				{
+					//Notice:after apply move ture flag changed immidiatly,but check indicator ongoing.
+					if(CcjConstants.FLAG_BLUE == GameManager.turnFlag)
+					{
+						ChessPieceManager.indicateCheck(chessPiecesModel.pieces,chessPiecesModel.BLUE_MARSHAL);
+					}else
+					{
+						ChessPieceManager.indicateCheck(chessPiecesModel.pieces,chessPiecesModel.RED_MARSHAL);
+					}
+				}
+			}
+			
+			private function elementRemoveHandler(event:ElementExistenceEvent):void
+			{
+				//
+				if(!mochiModel.hasCheckIndicator)
+				{
+					//Notice:turn flag change after remove piece at apply move behavior.
+					if(CcjConstants.FLAG_BLUE == GameManager.turnFlag)
+					{
+						ChessPieceManager.indicateCheck(chessPiecesModel.pieces,chessPiecesModel.RED_MARSHAL);
+					}else
+					{
+						ChessPieceManager.indicateCheck(chessPiecesModel.pieces,chessPiecesModel.BLUE_MARSHAL);
+					}
+				}
 			}
 		]]>
 	</fx:Script>
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<parsley:Configure/>
 	</fx:Declarations>
 	<!--<s:Rect width="100%" height="100%">
 		<s:stroke>

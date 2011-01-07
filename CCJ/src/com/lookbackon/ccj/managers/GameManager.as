@@ -33,14 +33,14 @@ package com.lookbackon.ccj.managers
 		//--------------------------------------------------------------------------
 		private static var _turnFlag:int=CcjConstants.FLAG_BLUE;
 		//toll gate setting here.
-		private static var _tollgates:Array=[RandomWalk, ShortSighted, AttackFalse, MiniMax];
+		private static var _tollgates:Array=[RandomWalk, ShortSighted, AttackFalse, AttackFalse, MiniMax];
 		//
 		public static var isRunning:Boolean;
 		//indicators
 		[Bindable]
 		public static var indicatorReadOut:Boolean=false;
 		[Bindable]
-		public static var indication:String=INDICATION_THINKING;
+		public static var indicatorCheck:Boolean=false;
 		//about mochi
 		[Bindable]
 		public static var indicatorSubmitScore:Boolean=false;
@@ -54,8 +54,6 @@ package com.lookbackon.ccj.managers
 		//  CONSTANTS
 		//----------------------------------
 		private static const LOG:ILogger=LogUtil.getLogger(GameManager);
-		public static const INDICATION_THINKING:String="Thinking..";
-		public static const INDICATION_CHECK:String="Eschequier";
 		//game phase
 		//Masks for bits inside the 'flags' var
 		//which store the state of Boolean game phase properties.
@@ -131,7 +129,7 @@ package com.lookbackon.ccj.managers
 			FlexGlobals.topLevelApplication.cleanUp.addTask(new CleanUpPiecesBitboardTask());
 			FlexGlobals.topLevelApplication.cleanUp.start();
 			//
-//			mx.core.FlexGlobals.topLevelApplication.dumpFootSprint();
+			mx.core.FlexGlobals.topLevelApplication.dumpFootSprint();
 			//
 			//put down chess pieces again
 			//no more create chess gasket again.
@@ -141,7 +139,7 @@ package com.lookbackon.ccj.managers
 			startUpTask.addChild(new CreateChessVoTask());
 			startUpTask.start();
 			//
-//			mx.core.FlexGlobals.topLevelApplication.dumpFootSprint();
+			mx.core.FlexGlobals.topLevelApplication.dumpFootSprint();
 			//
 			startGame();
 		}

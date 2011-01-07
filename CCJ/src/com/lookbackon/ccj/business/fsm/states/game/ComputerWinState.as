@@ -9,6 +9,8 @@ package com.lookbackon.ccj.business.fsm.states.game
 	import com.lookbackon.AI.FSM.states.StateBase;
 	import com.lookbackon.ccj.managers.GameManager;
 	
+	import mx.controls.Alert;
+	
 	
 	/**
 	 * ComputerWinState.as class.   	
@@ -59,6 +61,8 @@ package com.lookbackon.ccj.business.fsm.states.game
 		override public function enter():void
 		{
 			GameManager.isRunning = false;
+			//
+			Alert.show("You play like a monkey,@-@","Computer Win!");
 		}
 		
 		override public function update(time:Number=0):void

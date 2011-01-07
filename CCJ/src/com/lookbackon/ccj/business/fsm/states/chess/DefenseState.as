@@ -4,6 +4,7 @@ package com.lookbackon.ccj.business.fsm.states.chess
 	import com.lookbackon.AI.FSM.states.StateBase;
 	
 	/**
+	 * Defense state try to keep "marshal" safty.
 	 * 
 	 * @author Knight.zhou
 	 * 

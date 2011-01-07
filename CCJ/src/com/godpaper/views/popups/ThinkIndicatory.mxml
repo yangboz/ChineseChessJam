@@ -3,8 +3,14 @@
 				xmlns:s="library://ns.adobe.com/flex/spark" 
 				xmlns:mx="library://ns.adobe.com/flex/mx" 
 				indeterminate="true" 
-				labelPlacement="center" 
+				labelPlacement="center"
+			    label="{CcjConstants.INDICATION_THINK}"
 				>
+	<fx:Script>
+		<![CDATA[
+			import com.lookbackon.ccj.CcjConstants;
+		]]>
+	</fx:Script>
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>

@@ -15,8 +15,9 @@
 			   maxWidth="550"
 			   maxHeight="520"
 			   applicationComplete="application1_applicationCompleteHandler(event)"
-			   creationComplete="application1_creationCompleteHandler(event)" xmlns:task1="org.spicefactory.lib.task.*"
-			   >
+			   creationComplete="application1_creationCompleteHandler(event)"
+			   xmlns:task1="org.spicefactory.lib.task.*"
+			   xmlns:popups="com.godpaper.views.popups.*">
 	<s:layout>
 		<s:BasicLayout/>
 	</s:layout>
@@ -27,7 +28,7 @@
 			import com.lookbackon.ccj.managers.GameManager;
 			import com.lookbackon.ccj.model.ChessPiecesModel;
 			import com.lookbackon.ccj.utils.LogUtil;
-			
+
 			import mx.events.FlexEvent;
 			import mx.logging.ILogger;
 			import mx.logging.LogEventLevel;
@@ -54,8 +55,7 @@
 //												,
 //				"com.lookbackon.AI.searching.*"
 //				,
-				"*"
-				];
+				"*"];
 			//
 			//----------------------------------
 			//  CONSTANTS
@@ -133,36 +133,43 @@
 					   level="{LogEventLevel.INFO}"
 					   filters="{logFilters}"/>
 		<!-- Popups here -->
-
 		<popup:PopUpWrapper open="{GameManager.indicatorReadOut}"
 							center="true"
 							modal="true">
-			<components:IndicatoryProgressBar label="{GameManager.indication}"/>
+			<popups:ThinkIndicatory/>
 		</popup:PopUpWrapper>
 
-		<parsley:PopUp  open="{GameManager.indicatorSubmitScore}"
-							center="true"
-							modal="true"
-							parent="{this}">
+		<parsley:PopUp open="{GameManager.indicatorCheck}"
+					   center="true"
+					   modal="true">
+			<popups:CheckIndicatory/>
+		</parsley:PopUp>
+
+		<parsley:PopUp open="{GameManager.indicatorSubmitScore}"
+					   center="true"
+					   modal="true">
 			<mochi:SubmitScoreAndNextRound id="submitScoreAndNamePopup"/>
-		</parsley:PopUp >
-		
+		</parsley:PopUp>
+
 		<!-- Controllers here -->
 		<!-- Tasks -->
-		<task:SequenceTask id="startUpSequenceTask" label="startUp">
-			<tasks:CreateChessGasketTask id="ccgTask" label="create chess gasket"/>
+		<task:SequenceTask id="startUpSequenceTask"
+						   label="startUp">
+			<tasks:CreateChessGasketTask id="ccgTask"
+										 label="create chess gasket"/>
 			<tasks:CreateChessPieceTask label="create chess piece"/>
 			<tasks:CreateChessVoTask label="create chess VO"/>
 		</task:SequenceTask>
-		
+
 		<!--<task:SequenceTask id="cleanUp" label="cleanUp">
 			<tasks:CleanUpChessPieceTask label="clean up chess pieces"/>
 			<tasks:CleanUpPiecesBitboardTask label="clean up pieces bitboard"/>
 		</task:SequenceTask>-->
-		<task1:SequentialTaskGroup id="cleanUp" autoStart="false">
+		<task1:SequentialTaskGroup id="cleanUp"
+								   autoStart="false">
 
 		</task1:SequentialTaskGroup>
-		
+
 		<!-- Services here -->
 	</fx:Declarations>
 
