@@ -126,7 +126,7 @@ package com.lookbackon.ccj.business.fsm.states.game
 			var implementation:Object = getDefinitionByName(getQualifiedClassName(GameManager.tollgates[time]));
 			searching = new implementation(ChessPiecesModel.getInstance().gamePosition);
 			//
-			LOG.info("current toll gate is:",getQualifiedClassName(implementation));
+			LOG.info("current toll gate is:{0}",getQualifiedClassName(implementation));
 			//using this flash green thread algorithm to avoid script time limition only 15s.
 			processes = new Vector.<IRunnable>();
 			processes.push(searching);

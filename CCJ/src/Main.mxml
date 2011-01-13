@@ -28,7 +28,7 @@
 			import com.lookbackon.ccj.managers.GameManager;
 			import com.lookbackon.ccj.model.ChessPiecesModel;
 			import com.lookbackon.ccj.utils.LogUtil;
-
+			
 			import mx.events.FlexEvent;
 			import mx.logging.ILogger;
 			import mx.logging.LogEventLevel;
@@ -86,6 +86,7 @@
 				//@see http://opensource.adobe.com/wiki/display/cairngorm/HowToUseCairngormContract
 				try
 				{
+					var CONFIG:Namespace = new Namespace("CONFIG");
 					Contract.precondition(CONFIG::debugging);
 					this.traceTarget.level=LogEventLevel.INFO;
 					Contract.postcondition(CONFIG::debugging);

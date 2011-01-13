@@ -66,15 +66,15 @@ package com.godpaper.tasks
 		//--------------------------------------------------------------------------
 		override protected function performTask():void
 		{
-			//TODO:
+			//TODO:update omen vo.
 			for(var i:int=0;i<chessPiecesModel.pieces.length;i++)
 			{
 				var chessPiece:ChessPiece = chessPiecesModel.pieces[i];
 				//renew chessVO.
-				chessPiece.omenVO.flexibility  = chessPiece.chessVO.moves.celled;
-				chessPiece.omenVO.threat  = chessPiece.chessVO.captures.celled;
+				chessPiece.omenVO.flexibility  = chessPiece.chessVO.moves.cellCount;
+				chessPiece.omenVO.threat  = chessPiece.chessVO.captures.cellCount - chessPiece.chessVO.defends.cellCount;
 			}
-			LOG.info("{0} Chess Pieces' OmenVO Updated !!!",chessPiecesModel.pieces.length.toString());
+			LOG.info("{0} Chess Pieces' OmenVO Updated !",chessPiecesModel.pieces.length.toString());
 			//
 			this.complete();
 		}

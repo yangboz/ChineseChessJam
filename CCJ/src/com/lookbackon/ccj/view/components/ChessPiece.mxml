@@ -5,7 +5,8 @@
 		 creationComplete="button1_creationCompleteHandler(event)"
 		 xmlns:mx="library://ns.adobe.com/flex/mx"
 		 width="50"
-		 height="50" xmlns:parsley="http://www.spicefactory.org/parsley">
+		 height="50"
+		 xmlns:parsley="http://www.spicefactory.org/parsley">
 	<fx:Script>
 		<![CDATA[
 			import com.godpaper.model.MochiModel;
@@ -17,7 +18,7 @@
 			import com.lookbackon.ccj.model.vos.OmenVO;
 			import com.lookbackon.ccj.model.vos.cvo.IChessVO;
 			import com.lookbackon.ccj.utils.LogUtil;
-			
+
 			import mx.core.IUIComponent;
 			import mx.events.FlexEvent;
 			import mx.logging.ILogger;
@@ -30,7 +31,8 @@
 			//
 			private var textColor:String=CcjConstants.COLOR_BLUE; //default is blue.
 			//
-			[Inject][Bindable]
+			[Inject]
+			[Bindable]
 			public var mochiModel:MochiModel;
 			//----------------------------------
 			//  CONSTANTS
@@ -178,16 +180,17 @@
 				LOG.debug("moves:{0}", this.chessVO.moves.dump());
 				LOG.debug("current bitboard:{0}", ChessPiecesModel.getInstance().allPieces.dump());
 				//indicate gasket can fill with chess piece.
-				if(mochiModel.hasCaptureIndicator)
+				if (mochiModel.hasCaptureIndicator)
 				{
 					ChessPieceManager.indicateGaskets(this.chessVO.moves);
 				}
 			}
+
 			//parsley message handler
 			[MessageHandler]
 			public function checkHandler(message:Message):void
 			{
-				if(CcjConstants.FLAG_BLUE == flag)
+				if (CcjConstants.FLAG_BLUE == flag)
 				{
 					//filter on moves.
 					agent.fsm.changeState(agent.defenseState);

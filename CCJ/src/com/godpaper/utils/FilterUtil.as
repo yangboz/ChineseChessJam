@@ -48,13 +48,21 @@ package com.godpaper.utils
 		//
 		//--------------------------------------------------------------------------
 		//
-		public static function filterOnCaptures(item:ConductVO, index:int, vector:Vector.<ConductVO>):Boolean
+		public static function onCaptures(item:ConductVO, index:int, vector:Vector.<ConductVO>):Boolean
 		{
 			return Boolean(item.target.chessVO.captures.celled);
 		}
-		public static function filterOnEatOff(item:ConductVO, index:int, vector:Vector.<ConductVO>):Boolean
+		public static function onEatOff(item:ConductVO, index:int, vector:Vector.<ConductVO>):Boolean
 		{
 			return Boolean(item.eatOff!=null);
+		}
+		public static function onDefends(item:ConductVO, index:int, vector:Vector.<ConductVO>):Boolean
+		{
+			return Boolean(item.target.chessVO.defends.celled);
+		}
+		public static function onSuicide(item:ConductVO, index:int, vector:Vector.<ConductVO>):Boolean
+		{
+			return Boolean(item.target.omenVO.threat>=0);
 		}
 		//--------------------------------------------------------------------------
 		//

@@ -2,6 +2,7 @@ package com.lookbackon.AI.searching
 {
 	import com.godpaper.utils.FilterUtil;
 	import com.godpaper.utils.SortUtil;
+	import com.lookbackon.AI.FSM.Message;
 	import com.lookbackon.AI.evaluation.IEvaluation;
 	import com.lookbackon.AI.evaluation.linear.LinearEvaluationProxy;
 	import com.lookbackon.ccj.managers.ChessPieceManager;
@@ -58,6 +59,8 @@ package com.lookbackon.AI.searching
 		private var _orderingMoves:Vector.<ConductVO>;
 		//flag wheater this process done.
 		private var _processDone:Boolean;
+		//
+		private var _moves:Vector.<ConductVO>
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -113,9 +116,13 @@ package com.lookbackon.AI.searching
 //		[Deprecated(replacement="com.lookbackon.AI.searching.SearchingBase.orderingMoves")]
 		public function get moves():Vector.<ConductVO>
 		{
-			return generateMoves(ChessPiecesModel.getInstance().blues);
+			var _moves:Vector.<ConductVO> = generateMoves(ChessPiecesModel.getInstance().blues);
+			//filter suicide moves.
+			_moves = _moves.filter(FilterUtil.onSuicide);
+			//TBC
+			return _moves;
 		}
-
+		
 		//----------------------------------
 		//  orderingMoves(native)
 		//----------------------------------
@@ -179,7 +186,7 @@ package com.lookbackon.AI.searching
 		 */
 		public function get captures():Vector.<ConductVO>
 		{
-			return orderingMoves.filter(FilterUtil.filterOnCaptures);
+			return orderingMoves.filter(FilterUtil.onCaptures);
 		}
 
 		//----------------------------------
@@ -235,11 +242,6 @@ package com.lookbackon.AI.searching
 			{
 				var cp:ChessPiece=pieces[i];
 				var moves:BitBoard = cp.chessVO.moves;
-				//while checking,defends move first.
-				if(ChessPieceManager.isChecking)
-				{
-					moves = cp.chessVO.defends;
-				}
 				//
 				for (var c:int=0; c < moves.column; c++)
 				{

@@ -1,23 +1,5 @@
-Text for description in com.lookbackon.AI.searching:SearchingBase is not valid.
-No matching start tag.
-
-Text for description in com.lookbackon.AI.fuzzyLogicSystem:FuzzyRule is not valid.
-org.xml.sax.SAXParseException: Attribute name "variable" associated with an element type "linguistic" must be followed by the ' = ' character.
-
-Text for description in com.lookbackon.ccj.managers:EventManager is not valid.
-org.xml.sax.SAXParseException: The element type "p" must be terminated by the matching end-tag "</p>".
-
-Text for description in com.lookbackon.ccj.model.vos.cvo:ChessVO is not valid.
-No matching start tag.
-
-Text for description in com.lookbackon.ccj.model.vos.cvo:CannonVO is not valid.
-No matching start tag.
-
-Text for description in com.lookbackon.ds:BitBoard is not valid.
-No matching start tag.
-
-Text for description in com.lookbackon.ds:ZobristHashTable is not valid.
-No matching start tag.
+Text for example in org.generalrelativity.thread:GreenThread is not valid.
+org.xml.sax.SAXParseException: The element type "IRunnable" must be terminated by the matching end-tag "</IRunnable>".
 
 Text for description in com.lookbackon.ccj:CcjConstants is not valid.
 No matching start tag.
@@ -28,22 +10,46 @@ No matching start tag.
 Text for description in com.lookbackon.ccj:ChessPiecesConstants is not valid.
 No matching start tag.
 
-Text for description in com.lookbackon.ccj.model:OpeningBookModel is not valid.
+Text for description in com.lookbackon.AI.fuzzyLogicSystem:FuzzyRule is not valid.
+org.xml.sax.SAXParseException: Attribute name "variable" associated with an element type "linguistic" must be followed by the ' = ' character.
+
+Text for description in com.lookbackon.AI.searching:SearchingBase is not valid.
 No matching start tag.
 
+Text for description in com.lookbackon.ccj.managers:EventManager is not valid.
+org.xml.sax.SAXParseException: The element type "p" must be terminated by the matching end-tag "</p>".
+
 Text for description in com.lookbackon.ccj.model:EndingGameModel is not valid.
+No matching start tag.
+
+Text for description in com.lookbackon.ccj.model:OpeningBookModel is not valid.
 No matching start tag.
 
 Text for description in com.lookbackon.ccj.model.vos:ConductVO is not valid.
 No matching start tag.
 
+Text for description in com.lookbackon.ccj.model.vos.cvo:ChessVO is not valid.
+No matching start tag.
+
+Text for description in com.lookbackon.ccj.model.vos.cvo:CannonVO is not valid.
+No matching start tag.
+
+Text for description in com.lookbackon.ds:ZobristHashTable is not valid.
+No matching start tag.
+
+Text for description in com.lookbackon.ds:BitBoard is not valid.
+No matching start tag.
+
+Text for description in com.godpaper.tasks:CreateChessVoTask is not valid.
+org.xml.sax.SAXParseException: Element type "conduct" must be followed by either attribute specifications, ">" or "/>".
+
 Text for description in de.polygonal.math.null is not valid.
 org.xml.sax.SAXParseException: The entity name must immediately follow the '&' in the entity reference.
 
-Text for param in de.polygonal.ds:SLinkedList/sort is not valid.
+Text for param in de.polygonal.ds:DLinkedList/sort is not valid.
 org.xml.sax.SAXParseException: The content of elements must consist of well-formed character data or markup.
 
-Text for param in de.polygonal.ds:DLinkedList/sort is not valid.
+Text for param in de.polygonal.ds:SLinkedList/sort is not valid.
 org.xml.sax.SAXParseException: The content of elements must consist of well-formed character data or markup.
 
 Text for description in com.lookbackon.AI.searching:SearchingBase/SearchingBase is not valid.
@@ -54,6 +60,9 @@ No matching start tag.
 
 Text for description in com.lookbackon.AI.searching:SearchingBase/orderingMoves/get is not valid.
 No matching start tag.
+
+Text for example in org.generalrelativity.thread.util:ThreadUtil/open is not valid.
+org.xml.sax.SAXParseException: The element type "IRunnable" must be terminated by the matching end-tag "</IRunnable>".
 
 Text for description in com.lookbackon.ds:ZobristHashTable/xor is not valid.
 No matching start tag.

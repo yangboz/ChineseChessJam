@@ -82,7 +82,7 @@ package com.godpaper.tasks
 				chessPiece.chessVO = ChessFactory.generateChessVO(currentConductVO);
 				//				LOG.info("after move,chessPiece's chessVO's legal moves:{0}",chessPiece.chessVO.moves.dump());
 			}
-			LOG.info("{0} Chess Pieces' ChessVO Updated !!!",chessPiecesModel.pieces.length.toString());
+			LOG.info("{0} Chess Pieces' ChessVO Updated !",chessPiecesModel.pieces.length.toString());
 			//
 			this.complete();
 		}

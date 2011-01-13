@@ -3,47 +3,36 @@
 			   xmlns:s="library://ns.adobe.com/flex/spark"
 			   xmlns:mx="library://ns.adobe.com/flex/mx"
 			   xmlns:parsley="http://www.spicefactory.org/parsley"
-			   borderColor="#FF0000" chromeColor="#FF0000"
+			   borderColor="#FF0000"
+			   chromeColor="#FF0000"
 			   creationComplete="titlewindow1_creationCompleteHandler(event)"
-			   show="titlewindow1_showHandler(event)" symbolColor="#FF0000"
+			   symbolColor="#FF0000"
 			   title="{CcjConstants.INDICATION_CHECK}">
 	<fx:Script>
 		<![CDATA[
 			import com.lookbackon.AI.FSM.Message;
 			import com.lookbackon.ccj.CcjConstants;
 			import com.lookbackon.ccj.ChessPiecesConstants;
-			import com.lookbackon.ccj.managers.ChessPieceManager;
 			import com.lookbackon.ccj.managers.GameManager;
-			import com.lookbackon.ccj.model.ChessPiecesModel;
-			
+
 			import mx.events.FlexEvent;
 
 			private var _timer:Timer;
-			//
-			[Bindable]
-			private var chessPieceModel:ChessPiecesModel = ChessPiecesModel.getInstance();
 			//parsley message dispatcher
 			/**
-			 * The [MessageDispatcher] metadata tells Parsley to configure the 
+			 * The [MessageDispatcher] metadata tells Parsley to configure the
 			 * function so it can be used to send (dispatch) messages.
 			 */
 			[MessageDispatcher]
 			public var dispatcher:Function;
-			
 			//
-			protected function titlewindow1_showHandler(event:FlexEvent):void
-			{
-				// TODO Auto-generated method stub
-
-			}
-
 			private function timerCompleteHandler(event:TimerEvent):void
 			{
 				GameManager.indicatorCheck=false;
 				//
 				_timer.removeEventListener(TimerEvent.TIMER_COMPLETE, timerCompleteHandler);
 			}
-
+			//
 			protected function titlewindow1_creationCompleteHandler(event:FlexEvent):void
 			{
 				// TODO Auto-generated method stub
@@ -53,8 +42,8 @@
 				_timer.addEventListener(TimerEvent.TIMER_COMPLETE, timerCompleteHandler);
 				_timer.start();
 				//broad cast check message.
-				var message:Message = new Message();
-				message.priority = ChessPiecesConstants.BLUE_MARSHAL.strength;
+				var message:Message=new Message();
+				message.priority=ChessPiecesConstants.BLUE_MARSHAL.strength;
 //				message.data = chessPieceModel.BLUE_MARSHAL
 				dispatcher(message);
 			}

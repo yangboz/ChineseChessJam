@@ -1,6 +1,8 @@
 package com.lookbackon.ccj.managers
 {
 	import com.adobe.cairngorm.task.ParallelTask;
+	import com.adobe.cairngorm.task.SequenceTask;
+	import com.adobe.cairngorm.task.TaskEvent;
 	import com.godpaper.tasks.UpdateChessPiecesTask;
 	import com.godpaper.tasks.UpdatePiecesBitboardTask;
 	import com.godpaper.tasks.UpdatePiecesChessVoTask;
@@ -84,7 +86,7 @@ package com.lookbackon.ccj.managers
 		{
 			_conduct=value.conduct;
 			//
-			update();
+			updateTasksProcess();
 		}
 
 		//----------------------------------
@@ -126,6 +128,10 @@ package com.lookbackon.ccj.managers
 		//----------------------------------
 		//  isChecking
 		//----------------------------------
+		public static function set isChecking(value:Boolean):void
+		{
+			_isChecking = value;
+		}	
 		public static function get isChecking():Boolean
 		{
 			return _isChecking;
@@ -191,18 +197,6 @@ package com.lookbackon.ccj.managers
 			ChessPieceManager.memento=memento;
 			//
 			LOG.info("End makeMove:{0}", conductVO.brevity);
-			//Trigger in-turn system .
-			if (GameManager.isRunning)
-			{
-				if (GameManager.turnFlag == CcjConstants.FLAG_RED)
-				{
-					GameManager.isComputerTurnNow();
-				}
-				else
-				{
-					GameManager.isHumanTurnNow();
-				}
-			}
 		}
 
 		/**
@@ -362,13 +356,13 @@ package com.lookbackon.ccj.managers
 		}
 
 		/**
-		 * @see Main.application1_creationCompleteHandler.createGasket.
+		 * @see Main.application1_creationCompleteHandler.createGasket().
 		 * @param legalMoves current chess piece's legal moves.
 		 *
 		 */
 		public static function indicateGaskets(legalMoves:BitBoard):void
 		{
-			//@see Main.application1_creationCompleteHandler.createGasket.
+			//@see Main.application1_creationCompleteHandler.createGasket().
 			for (var v:int=0; v < CcjConstants.BOARD_V_LINES; v++)
 			{
 				for (var h:int=0; h < CcjConstants.BOARD_H_LINES; h++)
@@ -404,13 +398,12 @@ package com.lookbackon.ccj.managers
 			if (!totalCaptures.and(marshal).isEmpty)
 			{
 				GameManager.indicatorCheck=true;
-				//
+				//update is checking flag.
+				LOG.info("___isChecking___true");
 				_isChecking = true;
 				//
 				return true;
 			}
-			//
-			_isChecking = false;
 			//
 			return false;
 		}
@@ -436,7 +429,7 @@ package com.lookbackon.ccj.managers
 		}
 
 		//update-relatived tasks here.
-		private static function update():void
+		private static function updateTasksProcess():void
 		{
 			var task:ParallelTask=new ParallelTask();
 			//
@@ -453,6 +446,22 @@ package com.lookbackon.ccj.managers
 			task.addChild(new UpdatePiecesOmenVoTask());
 			//
 			task.addChild(new UpdateChessPiecesTask(memento.conduct));
+			//
+			task.addEventListener(TaskEvent.TASK_COMPLETE,function(event:TaskEvent):void
+			{
+				//Trigger in-turn system .
+				if (GameManager.isRunning)
+				{
+					if (GameManager.turnFlag == CcjConstants.FLAG_RED)
+					{
+						GameManager.isComputerTurnNow();
+					}
+					else
+					{
+						GameManager.isHumanTurnNow();
+					}
+				}
+			});
 			//
 			task.start();
 		}

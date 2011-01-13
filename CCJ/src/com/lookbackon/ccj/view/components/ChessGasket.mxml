@@ -9,7 +9,8 @@
 				   borderVisible="false"
 				   backgroundAlpha="0.0"
 				   contentBackgroundAlpha="0.0"
-				   borderAlpha="0.0" xmlns:parsley="http://www.spicefactory.org/parsley">
+				   borderAlpha="0.0"
+				   xmlns:parsley="http://www.spicefactory.org/parsley">
 	<fx:Script>
 		<![CDATA[
 			import com.godpaper.model.MochiModel;
@@ -20,13 +21,13 @@
 			import com.lookbackon.ccj.model.vos.ConductVO;
 			import com.lookbackon.ccj.utils.LogUtil;
 			import com.lookbackon.ds.BitBoard;
-			
+
 			import mx.core.IUIComponent;
 			import mx.events.DragEvent;
 			import mx.events.FlexEvent;
 			import mx.logging.ILogger;
 			import mx.managers.DragManager;
-			
+
 			import spark.events.ElementExistenceEvent;
 			//--------------------------------------------------------------------------
 			//
@@ -35,11 +36,12 @@
 			//--------------------------------------------------------------------------
 			private var currentConductVO:ConductVO;
 			//mochi model
-			[Inject][Bindable]
+			[Inject]
+			[Bindable]
 			public var mochiModel:MochiModel;
 			//chess pieces model
 			[Bindable]
-			private var chessPiecesModel:ChessPiecesModel = ChessPiecesModel.getInstance();
+			private var chessPiecesModel:ChessPiecesModel=ChessPiecesModel.getInstance();
 			//----------------------------------
 			//  CONSTANTS
 			//----------------------------------
@@ -67,22 +69,26 @@
 			//  chessPiece
 			//----------------------------------
 			private var _chessPiece:IChessPiece;
+
 			public function get chessPiece():IChessPiece
 			{
 				return _chessPiece;
 			}
+
 			public function set chessPiece(value:IChessPiece):void
 			{
-				_chessPiece = value;
+				_chessPiece=value;
 				//
-				if(null!=value)
+				if (null != value)
 				{
 					this.addElement(value);
-				}else
+				}
+				else
 				{
 					this.removeElementAt(0);
 				}
 			}
+
 			//--------------------------------------------------------------------------
 			//
 			//  Methods
@@ -129,6 +135,7 @@
 //				CairngormEventDispatcher.getInstance().dispatchEvent(new GameEvent(GameEvent.IS_COMPUTER_TURN_NOW));
 			}
 
+			//
 			private function elementAddHandler(event:ElementExistenceEvent):void
 			{
 				LOG.debug("ElementExistenceEvent,element:{0},@index:{1}", event.element, event.index.toString());
@@ -137,34 +144,37 @@
 				//clear gasket indicate effect.
 				var emptyLegalMoves:BitBoard=new BitBoard(9, 10);
 				emptyLegalMoves.clear();
-				//
+				//empty indicate effect.
 				ChessPieceManager.indicateGaskets(emptyLegalMoves);
-				//
-				if(!mochiModel.hasCheckIndicator)
+				//check indicate handler.
+				if (mochiModel.hasCheckIndicator && GameManager.isRunning)
 				{
 					//Notice:after apply move ture flag changed immidiatly,but check indicator ongoing.
-					if(CcjConstants.FLAG_BLUE == GameManager.turnFlag)
+					if (CcjConstants.FLAG_BLUE == GameManager.turnFlag)
 					{
-						ChessPieceManager.indicateCheck(chessPiecesModel.pieces,chessPiecesModel.BLUE_MARSHAL);
-					}else
+						ChessPieceManager.indicateCheck(chessPiecesModel.pieces, chessPiecesModel.BLUE_MARSHAL);
+					}
+					else
 					{
-						ChessPieceManager.indicateCheck(chessPiecesModel.pieces,chessPiecesModel.RED_MARSHAL);
+						ChessPieceManager.indicateCheck(chessPiecesModel.pieces, chessPiecesModel.RED_MARSHAL);
 					}
 				}
 			}
-			
+
+			//
 			private function elementRemoveHandler(event:ElementExistenceEvent):void
 			{
 				//
-				if(!mochiModel.hasCheckIndicator)
+				if (mochiModel.hasCheckIndicator && GameManager.isRunning)
 				{
 					//Notice:turn flag change after remove piece at apply move behavior.
-					if(CcjConstants.FLAG_BLUE == GameManager.turnFlag)
+					if (CcjConstants.FLAG_BLUE == GameManager.turnFlag)
 					{
-						ChessPieceManager.indicateCheck(chessPiecesModel.pieces,chessPiecesModel.RED_MARSHAL);
-					}else
+						ChessPieceManager.indicateCheck(chessPiecesModel.pieces, chessPiecesModel.RED_MARSHAL);
+					}
+					else
 					{
-						ChessPieceManager.indicateCheck(chessPiecesModel.pieces,chessPiecesModel.BLUE_MARSHAL);
+						ChessPieceManager.indicateCheck(chessPiecesModel.pieces, chessPiecesModel.BLUE_MARSHAL);
 					}
 				}
 			}

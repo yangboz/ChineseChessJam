@@ -1,11 +1,11 @@
 package com.godpaper.model
 {
 	import com.lookbackon.ccj.errors.CcjErrors;
-	
+
 	import de.polygonal.ds.HashMap;
-	
+
 	import flash.display.MovieClip;
-	
+
 	import mochi.as3.MochiDigits;
 
 
@@ -35,6 +35,7 @@ package com.godpaper.model
 		public var name:String; //the player's name
 		//
 		public var storeItemsRegister:HashMap=new HashMap();
+
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -49,21 +50,25 @@ package com.godpaper.model
 		{
 			return (null != storeItemsRegister.find("abfa5115d7c3dc75")); //chess piece capture indicator id.
 		}
+
 		//
 		public function get hasCheckIndicator():Boolean
 		{
 			return (null != storeItemsRegister.find("8661560570f7f8e6")); //chess piece check indicator id.
 		}
+
 		//
 		public function get gameID():String
 		{
 			return _gameID;
 		}
+
 		//
 		public function get boradID():String
 		{
 			return _boradID;
 		}
+
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -75,33 +80,17 @@ package com.godpaper.model
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-//		public function MochiModel(access:Private=null)
-//		{
-//			if (access != null)
-//			{
-//				if (instance == null)
-//				{
-//					instance=this;
-//					//
-//					score.setValue(0);
-//						//
-//				}
-//			}
-//			else
-//			{
-//				throw new CcjErrors(CcjErrors.INITIALIZE_SINGLETON_CLASS);
-//			}
-//		}
 		public function MochiModel()
 		{
-			
+
 		}
+
 		/**
-		 * The [Init] metadata tells Parsley to call the annotated method after 
+		 * The [Init] metadata tells Parsley to call the annotated method after
 		 * an instance of this object is created and configured.
-		 */ 
+		 */
 		[Init]
-		public function init() : void 
+		public function init():void
 		{
 			score.setValue(0);
 		}
@@ -110,37 +99,18 @@ package com.godpaper.model
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		/**
-		 *
-		 * @return the singleton instance of MochiModel
-		 *
-		 */
-//		public static function getInstance():MochiModel
-//		{
-//			if (instance == null)
-//			{
-//				instance=new MochiModel(new Private());
-//			}
-//			return instance;
-//		}
+		
 		//--------------------------------------------------------------------------
-		//
-		//  Protected methods
-		//
-		//--------------------------------------------------------------------------
+		 //
+		 //  Protected methods
+		 //
+		 //--------------------------------------------------------------------------
 
-		//--------------------------------------------------------------------------
-		//
-		//  Private methods
-		//
-		//--------------------------------------------------------------------------
+		 //--------------------------------------------------------------------------
+		 //
+		 //  Private methods
+		 //
+		 //--------------------------------------------------------------------------
 	}
 
-}
-
-/**
- *Inner class which restricts construtor access to Private
- */
-internal class Private
-{
 }

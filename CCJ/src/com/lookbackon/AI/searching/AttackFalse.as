@@ -72,7 +72,7 @@ package com.lookbackon.AI.searching
 				var evaluatedValue:int=int.MIN_VALUE;
 				if(captures.length>0)
 				{
-					attackMoves = captures.filter(FilterUtil.filterOnEatOff);
+					attackMoves = captures.filter(FilterUtil.onEatOff);
 				}else
 				{
 					attackMoves = orderingMoves;

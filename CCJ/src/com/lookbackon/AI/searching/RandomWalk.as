@@ -1,6 +1,8 @@
 package com.lookbackon.AI.searching
 {
+	import com.godpaper.utils.FilterUtil;
 	import com.lookbackon.ccj.ChessPiecesConstants;
+	import com.lookbackon.ccj.managers.ChessPieceManager;
 	import com.lookbackon.ccj.managers.GameManager;
 	import com.lookbackon.ccj.model.vos.ConductVO;
 	import com.lookbackon.ccj.model.vos.PositionVO;
@@ -37,6 +39,7 @@ package com.lookbackon.AI.searching
 		
 		override public function run():void
 		{
+			var randomMoves:Vector.<ConductVO> = moves;//default randomMoves.
 			//
 			bestMove = new ConductVO();
 			if(moves.length<=0)
@@ -44,21 +47,29 @@ package com.lookbackon.AI.searching
 				GameManager.humanWin();//pluge to death.
 			}else
 			{
-				//for test.
-				for(var t:int=0;t<moves.length;t++)
+				//while checking,defends move first.
+				trace(ChessPieceManager.isChecking);
+				if(ChessPieceManager.isChecking)
 				{
-					LOG.info("moves:#{0},detail:{1}",t.toString(),moves[t].dump());
+					randomMoves = moves.filter(FilterUtil.onDefends);
+					//reset this flag
+					ChessPieceManager.isChecking = false;
 				}
-				var randomStep:int = MathUtil.transactRandomNumberInRange(0,moves.length-1);
+				//for test.
+				for(var t:int=0;t<randomMoves.length;t++)
+				{
+					LOG.info("randomMoves:#{0},detail:{1}",t.toString(),randomMoves[t].dump());
+				}
+				var randomStep:int = MathUtil.transactRandomNumberInRange(0,randomMoves.length-1);
 				LOG.debug("randomStep:{0}",randomStep.toString());
 				//evaluation.
 				var pValue:int=-1;
-				for(var i:int=0;i<moves.length;i++)
+				for(var i:int=0;i<randomMoves.length;i++)
 				{
-					if(doEvaluation(moves[i],gamePosition)>pValue)
+					if(doEvaluation(randomMoves[i],gamePosition)>pValue)
 					{
-						bestMove = moves[i];
-						pValue = doEvaluation(moves[i],gamePosition);
+						bestMove = randomMoves[i];
+						pValue = doEvaluation(randomMoves[i],gamePosition);
 					}
 				}
 				LOG.debug("randomed bestMove:{0}",bestMove.dump());

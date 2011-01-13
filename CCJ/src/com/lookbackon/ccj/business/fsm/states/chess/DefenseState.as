@@ -23,6 +23,7 @@ package com.lookbackon.ccj.business.fsm.states.chess
 		{
 			//TODO: implement function
 			_carrier = this.resource as ChessPiece;
+			//
 		}
 		
 		override public function exit():void
