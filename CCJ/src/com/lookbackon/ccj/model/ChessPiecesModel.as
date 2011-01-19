@@ -1,5 +1,6 @@
 package com.lookbackon.ccj.model
 {
+	import com.godpaper.configs.BoardConfig;
 	import com.lookbackon.ccj.CcjConstants;
 	import com.lookbackon.ccj.errors.CcjErrors;
 	import com.lookbackon.ccj.model.vos.ConductVO;
@@ -14,9 +15,9 @@ package com.lookbackon.ccj.model
 	import com.lookbackon.ccj.utils.LogUtil;
 	import com.lookbackon.ccj.view.components.ChessPiece;
 	import com.lookbackon.ds.BitBoard;
-
+	
 	import de.polygonal.ds.Array2;
-
+	
 	import mx.collections.ArrayCollection;
 	import mx.logging.ILogger;
 
@@ -131,7 +132,7 @@ package com.lookbackon.ccj.model
 		public function get gamePosition():PositionVO
 		{
 			var _gamePosition:PositionVO=new PositionVO();
-			var board:Array2=new Array2(9, 10);
+			var board:Array2=new Array2(BoardConfig.xLines,BoardConfig.yLines);
 			for (var i:int=0; i < pieces.length; i++)
 			{
 				var cp:ChessPiece=pieces[i];

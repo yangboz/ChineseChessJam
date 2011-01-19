@@ -1,7 +1,5 @@
 package com.lookbackon.ds
 {
-	import com.lookbackon.ccj.errors.CcjErrors;
-	
 	import de.polygonal.ds.BitVector;
 
 	/**

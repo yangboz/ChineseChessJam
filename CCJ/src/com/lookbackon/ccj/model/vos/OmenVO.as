@@ -1,5 +1,6 @@
 package com.lookbackon.ccj.model.vos
 {
+	import com.godpaper.configs.BoardConfig;
 	import com.lookbackon.ccj.CcjConstants;
 	
 	import de.polygonal.ds.Array2;
@@ -56,7 +57,7 @@ package com.lookbackon.ccj.model.vos
 		//8 4 8 16 8 16 8 4 8 0 2 4 
 		//-2 10 6 14 12 14 6 10 -2 0 
 		//Figure 4: Position values of a Rook.
-		public var important:Array2 = new Array2(CcjConstants.BOARD_H_LINES,CcjConstants.BOARD_V_LINES);
+		public var important:Array2;
 		//If a piece could move freely, its attacking power is restricted. 
 		//The possible positions of a piece except for the
 		//Cannons give the attacking range. 
@@ -86,6 +87,8 @@ package com.lookbackon.ccj.model.vos
 		//--------------------------------------------------------------------------
 		public function OmenVO(strength:int,important:Array2,flexibility:int,threat:int,adjustment:int)
 		{
+			important = new Array2(BoardConfig.xLines,BoardConfig.yLines);
+			//
 			this.strength = strength;
 			this.important = important;
 			this.flexibility = flexibility;

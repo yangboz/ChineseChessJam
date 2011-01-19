@@ -1,6 +1,6 @@
 package com.lookbackon.ccj.model.vos
 {
-	import com.lookbackon.ccj.CcjConstants;
+	import com.godpaper.configs.BoardConfig;
 	import com.lookbackon.ds.BitBoard;
 	
 	import de.polygonal.ds.Array2;
@@ -15,11 +15,20 @@ package com.lookbackon.ccj.model.vos
 	public class ZobristKeyVO extends EventDispatcher
 	{
 		//chess colour bit board.
-		public var color:Array2 = new Array2(CcjConstants.BOARD_H_LINES,CcjConstants.BOARD_V_LINES);
+		public var color:Array2;
 		//chess type bit board.
-		public var type:Array2 = new Array2(CcjConstants.BOARD_H_LINES,CcjConstants.BOARD_V_LINES);
+		public var type:Array2;
 		//chess position bit board.
-		public var position:Array2 = new Array2(CcjConstants.BOARD_H_LINES,CcjConstants.BOARD_V_LINES);
+		public var position:Array2;
+		
+		public function ZobristKeyVO()
+		{
+			super();
+			//
+			color = new Array2(BoardConfig.xLines,BoardConfig.yLines);
+			type = new Array2(BoardConfig.xLines,BoardConfig.yLines);
+			position = new Array2(BoardConfig.xLines,BoardConfig.yLines);
+		}
 		/**
 		 * Prints out all elements (for debug/demo purposes).
 		 * 

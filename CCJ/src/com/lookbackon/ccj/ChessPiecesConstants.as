@@ -1,5 +1,6 @@
 package com.lookbackon.ccj
 {
+	import com.godpaper.configs.BoardConfig;
 	import com.lookbackon.ccj.utils.Enum;
 	
 	import de.polygonal.ds.Array2;
@@ -63,8 +64,8 @@ package com.lookbackon.ccj
 			this.label = label;
 			this.value = value;
 			this.strength = strength;
-			this.important = new Array2(CcjConstants.BOARD_H_LINES,CcjConstants.BOARD_V_LINES);
-			this.convertedImportant = new Array2(CcjConstants.BOARD_H_LINES,CcjConstants.BOARD_V_LINES);
+			this.important = new Array2(BoardConfig.xLines,BoardConfig.yLines);
+			this.convertedImportant = new Array2(BoardConfig.xLines,BoardConfig.yLines);
 			//TODO:manually set chess pieces' important,reference@2004ccc.pdf.
 			switch(label)
 			{

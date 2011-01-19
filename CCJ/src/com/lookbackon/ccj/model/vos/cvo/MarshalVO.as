@@ -1,5 +1,6 @@
 package com.lookbackon.ccj.model.vos.cvo
 {
+	import com.godpaper.configs.BoardConfig;
 	import com.lookbackon.ccj.CcjConstants;
 	import com.lookbackon.ccj.model.ChessPiecesModel;
 	import com.lookbackon.ccj.utils.LogUtil;
@@ -34,7 +35,7 @@ package com.lookbackon.ccj.model.vos.cvo
 			//serveral admental(将对面问题)
 			//about occupies.
 			//restricted in forbidden city.
-			var forbiddenCity:BitBoard=new BitBoard(CcjConstants.BOARD_H_LINES, CcjConstants.BOARD_V_LINES);
+			var forbiddenCity:BitBoard=new BitBoard(BoardConfig.xLines, BoardConfig.yLines);
 			//forbidden city pre-define.
 			forbiddenCity.setBitt(0, 3, true);
 			forbiddenCity.setBitt(0, 4, true);

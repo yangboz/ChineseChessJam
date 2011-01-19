@@ -1,7 +1,8 @@
 package com.lookbackon.ccj.business.factory
 {
 	import assets.EmbededAssets;
-
+	
+	import com.godpaper.configs.BoardConfig;
 	import com.lookbackon.ccj.CcjConstants;
 	import com.lookbackon.ccj.ChessPiecesConstants;
 	import com.lookbackon.ccj.model.ChessPiecesModel;
@@ -20,12 +21,12 @@ package com.lookbackon.ccj.business.factory
 	import com.lookbackon.ccj.view.components.ChessPiece;
 	import com.lookbackon.ccj.view.components.IChessGasket;
 	import com.lookbackon.ccj.view.components.IChessPiece;
-
+	
 	import de.polygonal.ds.Array2;
-
+	
 	import flash.geom.Point;
 	import flash.utils.getQualifiedClassName;
-
+	
 	import mx.logging.ILogger;
 
 	/**
@@ -207,8 +208,8 @@ package com.lookbackon.ccj.business.factory
 			//TODO: implement function
 			var myChessGasket:ChessGasket=new ChessGasket();
 			myChessGasket.position=position;
-			myChessGasket.x=position.x * CcjConstants.BOARD_LATTICE - myChessGasket.width / 2 + 50;
-			myChessGasket.y=position.y * CcjConstants.BOARD_LATTICE;
+			myChessGasket.x=position.x * BoardConfig.xOffset - myChessGasket.width / 2 + 50;
+			myChessGasket.y=position.y * BoardConfig.yOffset;
 			myChessGasket.toolTip=position.toString();
 			return myChessGasket;
 		}

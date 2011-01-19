@@ -7,7 +7,8 @@ package com.godpaper.messages
 	//--------------------------------------------------------------------------
 	
 	/**
-	 * LevelUpMessage.as class.   	
+	 * LevelUpMessage.as class. 
+	 * @see http://www.spicefactory.org/parsley/docs/2.4/manual/  	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0

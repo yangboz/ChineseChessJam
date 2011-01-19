@@ -106,7 +106,7 @@ package com.lookbackon.ccj.managers
 		//----------------------------------
 		//  startGame
 		//----------------------------------
-		public static function startGame():void
+		public static function start():void
 		{
 			//TODO:
 			//agent initialization.
@@ -121,7 +121,7 @@ package com.lookbackon.ccj.managers
 		//----------------------------------
 		//  restartGame
 		//----------------------------------
-		public static function restartGame():void
+		public static function restart():void
 		{
 			//TODO:re-start game
 			//clear board,chess pieces
@@ -141,7 +141,7 @@ package com.lookbackon.ccj.managers
 			//
 			mx.core.FlexGlobals.topLevelApplication.dumpFootSprint();
 			//
-			startGame();
+			start();
 		}
 
 		//----------------------------------

@@ -1,5 +1,6 @@
 package flexUnitTests.ds.tests
 {
+	import com.godpaper.configs.BoardConfig;
 	import com.lookbackon.ccj.CcjConstants;
 	import com.lookbackon.ccj.ZobristConstants;
 	import com.lookbackon.ccj.model.vos.ZobristKeyVO;
@@ -20,7 +21,7 @@ package flexUnitTests.ds.tests
 		public function setUp():void
 		{
 			_pm_PRNG = new PM_PRNG();
-			_zobristHT = new ZobristHashTable(CcjConstants.BOARD_H_LINES*CcjConstants.BOARD_V_LINES,ZobristConstants.BLUE_BISHOP.key);
+			_zobristHT = new ZobristHashTable(BoardConfig.xLines*BoardConfig.yLines,ZobristConstants.BLUE_BISHOP.key);
 			_zobristKeyVO = new ZobristKeyVO();
 		}
 		
@@ -43,11 +44,11 @@ package flexUnitTests.ds.tests
 		public function testXor():void
 		{
 			//TODO:before xoring,after xoring test.
-			_zobristKeyVO.color = new Array2(CcjConstants.BOARD_H_LINES,CcjConstants.BOARD_V_LINES);
+			_zobristKeyVO.color = new Array2(BoardConfig.xLines,BoardConfig.yLines);
 			//ZobristConstants.BLUE_BISHOP.color;
-			_zobristKeyVO.position =  new Array2(CcjConstants.BOARD_H_LINES,CcjConstants.BOARD_V_LINES);
+			_zobristKeyVO.position =  new Array2(BoardConfig.xLines,BoardConfig.yLines);
 			//ZobristConstants.BLUE_BISHOP.position;
-			_zobristKeyVO.type =  new Array2(CcjConstants.BOARD_H_LINES,CcjConstants.BOARD_V_LINES);
+			_zobristKeyVO.type =  new Array2(BoardConfig.xLines,BoardConfig.yLines);
 			//ZobristConstants.BLUE_BISHOP.type;
 			
 			_zobristHT.insert(ZobristConstants.BLUE_BISHOP.key,_zobristKeyVO);

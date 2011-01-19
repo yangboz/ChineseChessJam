@@ -14,6 +14,7 @@
 			   height="520"
 			   maxWidth="550"
 			   maxHeight="520"
+			   initialize="application1_initializeHandler(event)"
 			   applicationComplete="application1_applicationCompleteHandler(event)"
 			   creationComplete="application1_creationCompleteHandler(event)"
 			   xmlns:task1="org.spicefactory.lib.task.*"
@@ -24,6 +25,7 @@
 	<fx:Script>
 		<![CDATA[
 			import com.adobe.cairngorm.contract.Contract;
+			import com.godpaper.configs.BoardConfig;
 			import com.godpaper.configs.CCJContextConfig;
 			import com.lookbackon.ccj.managers.GameManager;
 			import com.lookbackon.ccj.model.ChessPiecesModel;
@@ -32,7 +34,6 @@
 			import mx.events.FlexEvent;
 			import mx.logging.ILogger;
 			import mx.logging.LogEventLevel;
-
 			//--------------------------------------------------------------------------
 			//
 			//  Variables
@@ -67,6 +68,16 @@
 			//  Methods
 			//
 			//--------------------------------------------------------------------------
+			//application1_initializeHandler
+			protected function application1_initializeHandler(event:FlexEvent):void
+			{
+				//config initialization here.
+				//				XmlContextBuilder.build("com/godpaper/configs/logConfig.xml");
+				BoardConfig.xLines = 9;
+				BoardConfig.yLines = 10;
+				BoardConfig.xOffset = 50;
+				BoardConfig.yOffset = 50;
+			}
 			//  application1_creationCompleteHandler
 			protected function application1_creationCompleteHandler(event:FlexEvent):void
 			{
@@ -88,7 +99,7 @@
 				{
 					var CONFIG:Namespace = new Namespace("CONFIG");
 					Contract.precondition(CONFIG::debugging);
-					this.traceTarget.level=LogEventLevel.INFO;
+					this.traceTarget.level=LogEventLevel.DEBUG;
 					Contract.postcondition(CONFIG::debugging);
 				}
 				catch (error:Error)
@@ -107,9 +118,10 @@
 
 			protected function application1_applicationCompleteHandler(event:FlexEvent):void
 			{
+				
 				// TODO Auto-generated method stub
 				//GameManager start.
-				GameManager.startGame();
+				GameManager.start();
 				//
 			}
 		]]>
@@ -132,7 +144,8 @@
 					   includeLevel="true"
 					   includeTime="true"
 					   level="{LogEventLevel.INFO}"
-					   filters="{logFilters}"/>
+					   filters="{logFilters}"
+					   />
 		<!-- Popups here -->
 		<popup:PopUpWrapper open="{GameManager.indicatorReadOut}"
 							center="true"

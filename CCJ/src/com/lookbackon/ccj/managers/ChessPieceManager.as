@@ -3,6 +3,7 @@ package com.lookbackon.ccj.managers
 	import com.adobe.cairngorm.task.ParallelTask;
 	import com.adobe.cairngorm.task.SequenceTask;
 	import com.adobe.cairngorm.task.TaskEvent;
+	import com.godpaper.configs.BoardConfig;
 	import com.godpaper.tasks.UpdateChessPiecesTask;
 	import com.godpaper.tasks.UpdatePiecesBitboardTask;
 	import com.godpaper.tasks.UpdatePiecesChessVoTask;
@@ -45,7 +46,7 @@ package com.lookbackon.ccj.managers
 		//--------------------------------------------------------------------------
 		private static var pmPRNG:PM_PRNG=new PM_PRNG();
 		//
-		private static var _gaskets:Array2=new Array2(CcjConstants.BOARD_H_LINES, CcjConstants.BOARD_V_LINES);
+		private static var _gaskets:Array2=new Array2(BoardConfig.xLines, BoardConfig.yLines);
 		//But the real trick is if we do the XOR operation again we get the initial number back.
 		//a ^ b = c
 		//c ^ b = a
@@ -363,9 +364,9 @@ package com.lookbackon.ccj.managers
 		public static function indicateGaskets(legalMoves:BitBoard):void
 		{
 			//@see Main.application1_creationCompleteHandler.createGasket().
-			for (var v:int=0; v < CcjConstants.BOARD_V_LINES; v++)
+			for (var v:int=0; v < BoardConfig.yLines; v++)
 			{
-				for (var h:int=0; h < CcjConstants.BOARD_H_LINES; h++)
+				for (var h:int=0; h < BoardConfig.xLines; h++)
 				{
 					if (legalMoves.getBitt(v, h))
 					{
@@ -389,7 +390,7 @@ package com.lookbackon.ccj.managers
 		public static function indicateCheck(pieces:Vector.<ChessPiece>, marshal:BitBoard):Boolean
 		{
 			//TODO:
-			var totalCaptures:BitBoard=new BitBoard(CcjConstants.BOARD_H_LINES, CcjConstants.BOARD_V_LINES);
+			var totalCaptures:BitBoard=new BitBoard(BoardConfig.xLines, BoardConfig.yLines);
 			for (var i:int=0; i < pieces.length; i++)
 			{
 				totalCaptures=pieces[i].chessVO.captures.or(totalCaptures);

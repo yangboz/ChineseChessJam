@@ -50,7 +50,7 @@
 				//
 				GameManager.indicatorSubmitScore = false;
 				//
-				GameManager.restartGame();
+				GameManager.restart();
 			}
 			//
 			protected function titlewindow1_showHandler(event:FlexEvent):void
@@ -64,7 +64,7 @@
 				//
 				GameManager.indicatorSubmitScore = false;
 				//
-				GameManager.restartGame();
+				GameManager.restart();
 				//increase intelligence level.
 				GameManager.level++;
 				//broad cast level up message.
@@ -94,7 +94,7 @@
 	<s:controlBarContent>
 		<s:HGroup width="100%" horizontalAlign="center">
 			<s:Button id="submitBtn" label="Submit" click="submitBtnClickHandler(event)"/>
-			<s:Button id="nextRoundBtn" label="NextRound" click="nextRoundBtn_clickHandler(event)" enabled="true"/>
+			<s:Button id="nextRoundBtn" label="NextRound" click="nextRoundBtn_clickHandler(event)"/>
 		</s:HGroup>
 	</s:controlBarContent>
 </s:TitleWindow>

@@ -1,37 +1,34 @@
-package com.godpaper.tasks
+package com.godpaper.configs
 {
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.adobe.cairngorm.task.Task;
-	import com.godpaper.configs.BoardConfig;
-	import com.lookbackon.ccj.CcjConstants;
-	import com.lookbackon.ccj.business.factory.ChessFactory;
-	import com.lookbackon.ccj.managers.ChessPieceManager;
-	import com.lookbackon.ccj.view.components.ChessGasket;
-	import com.lookbackon.ccj.view.components.IChessPiece;
-	
-	import flash.geom.Point;
-	
-	import mx.core.FlexGlobals;
 	
 	/**
-	 * CreateChessPieceTask.as class.   	
+	 * BoardConfig.as class.Global board configuration,(which one) set up at application's initialization stage.   	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
-	 * Created Nov 30, 2010 12:00:05 PM
+	 * Created Jan 19, 2011 2:20:20 PM
 	 */   	 
-	public class CreateChessPieceTask extends Task
+	public class BoardConfig
 	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		
+		//global board config.
+		private static var _xLines:Number;
+		private static var _yLines:Number;
+		//board scale
+		private static var _xScale:Number;
+		private static var _yScale:Number;
+		//board lattic
+		private static var _xOffset:Number;
+		private static var _yOffset:Number;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -41,7 +38,65 @@ package com.godpaper.tasks
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
+		public static function get yOffset():Number
+		{
+			return _yOffset;
+		}
 		
+		public static function set yOffset(value:Number):void
+		{
+			_yOffset = value;
+		}
+		//
+		public static function get xOffset():Number
+		{
+			return _xOffset;
+		}
+		
+		public static function set xOffset(value:Number):void
+		{
+			_xOffset = value;
+		}
+		//
+		public static function get yLines():Number
+		{
+			return _yLines;
+		}
+		
+		public static function set yLines(value:Number):void
+		{
+			_yLines = value;
+		}
+		//
+		public static function get xLines():Number
+		{
+			return _xLines;
+		}
+		
+		public static function set xLines(value:Number):void
+		{
+			_xLines = value;
+		}
+		//
+		public static function get yScale():Number
+		{
+			return _yScale;
+		}
+		
+		public static function set yScale(value:Number):void
+		{
+			_yScale = value;
+		}
+		//
+		public static function get xScale():Number
+		{
+			return _xScale;
+		}
+		
+		public static function set xScale(value:Number):void
+		{
+			_xScale = value;
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -53,11 +108,7 @@ package com.godpaper.tasks
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function CreateChessPieceTask()
-		{
-			//TODO: implement function
-			super();
-		}     	
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
@@ -69,35 +120,13 @@ package com.godpaper.tasks
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		override protected function performTask():void
-		{
-			//create chess piece
-			for(var hh:int=0;hh<BoardConfig.xLines;hh++)
-			{
-				for(var vv:int=0;vv<BoardConfig.yLines;vv++)
-				{
-					var iChessPiece:IChessPiece = ChessFactory.createChessPiece(new Point(hh,vv));
-					if(iChessPiece!=null)
-					{
-//						trace("index:",vv*CcjConstants.BOARD_V_LINES+hh);
-						var ecGasket:ChessGasket = ChessPieceManager.gaskets.gett(hh,vv) as ChessGasket;
-						ecGasket.chessPiece = iChessPiece;
-//						ecGasket.addElement( iChessPiece );
-						//
-						iChessPiece.x = 0;
-						iChessPiece.y = 0;
-						//
-					}
-				}
-			}
-			//
-			this.complete();
-		}
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
+
 	}
 	
 }

@@ -6,7 +6,7 @@ package com.godpaper.tasks
 	//
 	//--------------------------------------------------------------------------
 //	import com.adobe.cairngorm.task.Task;
-	import org.spicefactory.lib.task.Task;
+	import com.godpaper.configs.BoardConfig;
 	import com.lookbackon.ccj.CcjConstants;
 	import com.lookbackon.ccj.business.factory.ChessFactory;
 	import com.lookbackon.ccj.managers.ChessPieceManager;
@@ -19,6 +19,8 @@ package com.godpaper.tasks
 	import flash.geom.Point;
 	
 	import mx.core.FlexGlobals;
+	
+	import org.spicefactory.lib.task.Task;
 	
 	/**
 	 * CleanUpChessPieceTask.as class.   	
@@ -71,9 +73,9 @@ package com.godpaper.tasks
 		override protected function doStart():void	
 		{
 			//clean up chess piece
-			for(var v:int=0;v<CcjConstants.BOARD_V_LINES;v++)
+			for(var v:int=0;v<BoardConfig.yLines;v++)
 			{
-				for(var h:int=0;h<CcjConstants.BOARD_H_LINES;h++)
+				for(var h:int=0;h<BoardConfig.xLines;h++)
 				{
 					var chessGasket:ChessGasket = (ChessPieceManager.gaskets.gett(h,v) as ChessGasket);
 					if( chessGasket.chessPiece )
