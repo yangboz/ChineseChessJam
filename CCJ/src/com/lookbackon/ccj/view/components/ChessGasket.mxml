@@ -4,8 +4,8 @@
 				   xmlns:mx="library://ns.adobe.com/flex/halo"
 				   width="50"
 				   height="50"
-				   implements="com.lookbackon.ccj.view.components.IChessGasket"
-				   creationComplete="group1_creationCompleteHandler(event)"
+				   implements="com.godpaper.core.IChessGasket"
+				   creationComplete="creationCompleteHandler(event)"
 				   borderVisible="false"
 				   backgroundAlpha="0.0"
 				   contentBackgroundAlpha="0.0"
@@ -13,6 +13,8 @@
 				   xmlns:parsley="http://www.spicefactory.org/parsley">
 	<fx:Script>
 		<![CDATA[
+			import com.godpaper.core.IChessPiece;
+			import com.godpaper.configs.GameConfig;
 			import com.godpaper.model.MochiModel;
 			import com.lookbackon.ccj.CcjConstants;
 			import com.lookbackon.ccj.managers.ChessPieceManager;
@@ -21,13 +23,13 @@
 			import com.lookbackon.ccj.model.vos.ConductVO;
 			import com.lookbackon.ccj.utils.LogUtil;
 			import com.lookbackon.ds.BitBoard;
-
+			
 			import mx.core.IUIComponent;
 			import mx.events.DragEvent;
 			import mx.events.FlexEvent;
 			import mx.logging.ILogger;
 			import mx.managers.DragManager;
-
+			
 			import spark.events.ElementExistenceEvent;
 			//--------------------------------------------------------------------------
 			//
@@ -94,8 +96,8 @@
 			//  Methods
 			//
 			//--------------------------------------------------------------------------
-			//group1_creationCompleteHandler
-			protected function group1_creationCompleteHandler(event:FlexEvent):void
+			//creationCompleteHandler
+			protected function creationCompleteHandler(event:FlexEvent):void
 			{
 				// TODO Auto-generated method stub
 				this.addEventListener(DragEvent.DRAG_ENTER, dragEnterHandler);
@@ -106,7 +108,7 @@
 			}
 
 			//dragEnterHandler
-			private function dragEnterHandler(event:DragEvent):void
+			protected function dragEnterHandler(event:DragEvent):void
 			{
 				var myConductVO:ConductVO=new ConductVO();
 				myConductVO.target=event.dragInitiator as ChessPiece;
@@ -121,7 +123,7 @@
 			}
 
 			//dragDropHandler
-			private function dragDropHandler(event:DragEvent):void
+			protected function dragDropHandler(event:DragEvent):void
 			{
 				var myConductVO:ConductVO=new ConductVO();
 				myConductVO.target=event.dragInitiator as ChessPiece;
@@ -131,12 +133,10 @@
 				ChessPieceManager.makeMove(myConductVO);
 				//
 				event.stopImmediatePropagation();
-				//computer take turns.
-//				CairngormEventDispatcher.getInstance().dispatchEvent(new GameEvent(GameEvent.IS_COMPUTER_TURN_NOW));
 			}
 
 			//
-			private function elementAddHandler(event:ElementExistenceEvent):void
+			protected function elementAddHandler(event:ElementExistenceEvent):void
 			{
 				LOG.debug("ElementExistenceEvent,element:{0},@index:{1}", event.element, event.index.toString());
 				//renew ChessPiece's position.
@@ -150,7 +150,7 @@
 				if (mochiModel.hasCheckIndicator && GameManager.isRunning)
 				{
 					//Notice:after apply move ture flag changed immidiatly,but check indicator ongoing.
-					if (CcjConstants.FLAG_BLUE == GameManager.turnFlag)
+					if (CcjConstants.FLAG_BLUE == GameConfig.turnFlag)
 					{
 						ChessPieceManager.indicateCheck(chessPiecesModel.pieces, chessPiecesModel.BLUE_MARSHAL);
 					}
@@ -162,13 +162,13 @@
 			}
 
 			//
-			private function elementRemoveHandler(event:ElementExistenceEvent):void
+			protected function elementRemoveHandler(event:ElementExistenceEvent):void
 			{
 				//
 				if (mochiModel.hasCheckIndicator && GameManager.isRunning)
 				{
 					//Notice:turn flag change after remove piece at apply move behavior.
-					if (CcjConstants.FLAG_BLUE == GameManager.turnFlag)
+					if (CcjConstants.FLAG_BLUE == GameConfig.turnFlag)
 					{
 						ChessPieceManager.indicateCheck(chessPiecesModel.pieces, chessPiecesModel.RED_MARSHAL);
 					}

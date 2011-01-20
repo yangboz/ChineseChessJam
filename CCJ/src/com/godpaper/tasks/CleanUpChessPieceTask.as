@@ -13,7 +13,7 @@ package com.godpaper.tasks
 	import com.lookbackon.ccj.model.ChessPiecesModel;
 	import com.lookbackon.ccj.view.components.ChessGasket;
 	import com.lookbackon.ccj.view.components.ChessPiece;
-	import com.lookbackon.ccj.view.components.IChessPiece;
+	import com.godpaper.core.IChessPiece;
 	
 	import flash.display.DisplayObject;
 	import flash.geom.Point;

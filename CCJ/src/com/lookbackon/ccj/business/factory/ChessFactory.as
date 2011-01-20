@@ -19,8 +19,8 @@ package com.lookbackon.ccj.business.factory
 	import com.lookbackon.ccj.utils.LogUtil;
 	import com.lookbackon.ccj.view.components.ChessGasket;
 	import com.lookbackon.ccj.view.components.ChessPiece;
-	import com.lookbackon.ccj.view.components.IChessGasket;
-	import com.lookbackon.ccj.view.components.IChessPiece;
+	import com.godpaper.core.IChessGasket;
+	import com.godpaper.core.IChessPiece;
 	
 	import de.polygonal.ds.Array2;
 	

@@ -4,6 +4,9 @@ package com.lookbackon.ccj.business.fsm.states.chess
 	import com.lookbackon.AI.FSM.states.StateBase;
 
 	/**
+	 * - Attack Nearest Enemy Unit</br>
+	 * - Attack Weakest Enemy Unit</br>
+	 * - Attack Strongest Enemy Unit</br>
 	 * 
 	 * @author Knight.zhou
 	 * 

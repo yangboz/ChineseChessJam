@@ -5,27 +5,19 @@ package com.lookbackon.ccj.business.fsm.states.game
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.godpaper.model.MochiModel;
+	import com.godpaper.configs.GameConfig;
 	import com.lookbackon.AI.FSM.IAgent;
 	import com.lookbackon.AI.FSM.states.StateBase;
-	import com.lookbackon.AI.searching.AlphaBeta;
 	import com.lookbackon.AI.searching.AttackFalse;
 	import com.lookbackon.AI.searching.ISearching;
-	import com.lookbackon.AI.searching.MinMax;
 	import com.lookbackon.AI.searching.MiniMax;
-	import com.lookbackon.AI.searching.NegaMax;
-	import com.lookbackon.AI.searching.PVS;
-	import com.lookbackon.AI.searching.Quiescence;
 	import com.lookbackon.AI.searching.RandomWalk;
 	import com.lookbackon.AI.searching.ShortSighted;
 	import com.lookbackon.ccj.CcjConstants;
-	import com.lookbackon.ccj.business.fsm.GameAgent;
 	import com.lookbackon.ccj.managers.GameManager;
 	import com.lookbackon.ccj.model.ChessPiecesModel;
-	import com.lookbackon.ccj.model.vos.PositionVO;
 	import com.lookbackon.ccj.utils.LogUtil;
 	
-	import flash.events.Event;
 	import flash.utils.getDefinitionByName;
 	import flash.utils.getQualifiedClassName;
 	
@@ -33,11 +25,8 @@ package com.lookbackon.ccj.business.fsm.states.game
 	import mx.logging.ILogger;
 	import mx.managers.CursorManager;
 	
-	import org.flexunit.runner.notification.IRunListener;
 	import org.generalrelativity.thread.GreenThread;
 	import org.generalrelativity.thread.IRunnable;
-	import org.generalrelativity.thread.event.GreenThreadEvent;
-	import org.generalrelativity.thread.util.ThreadUtil;
 
 	/**
 	 * ComputerState.as class.   	
@@ -93,7 +82,7 @@ package com.lookbackon.ccj.business.fsm.states.game
 		{
 			//TODO: implement function
 			//hold turn flag
-			GameManager.turnFlag = CcjConstants.FLAG_BLUE;
+			GameConfig.turnFlag = CcjConstants.FLAG_BLUE;
 			//about view
 			CursorManager.setBusyCursor();
 			//
@@ -123,7 +112,8 @@ package com.lookbackon.ccj.business.fsm.states.game
 			//			gameAI = new ShortSighted(ChessPiecesModel.getInstance().gamePosition);
 			//			searching = new AttackFalse(ChessPiecesModel.getInstance().gamePosition);
 			//
-			var implementation:Object = getDefinitionByName(getQualifiedClassName(GameManager.tollgates[time]));
+			var className:String = getQualifiedClassName(GameConfig.tollgates[time]);
+			var implementation:Object = getDefinitionByName(className);
 			searching = new implementation(ChessPiecesModel.getInstance().gamePosition);
 			//
 			LOG.info("current toll gate is:{0}",getQualifiedClassName(implementation));
@@ -162,6 +152,7 @@ package com.lookbackon.ccj.business.fsm.states.game
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
+
 	}
 	
 }

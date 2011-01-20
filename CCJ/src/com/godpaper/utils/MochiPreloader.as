@@ -1,4 +1,4 @@
-package
+package com.godpaper.utils
 {
 	import com.godpaper.model.MochiModel;
 	

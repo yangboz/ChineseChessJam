@@ -6,6 +6,7 @@ package com.godpaper.tasks
 	//
 	//--------------------------------------------------------------------------
 	import com.adobe.cairngorm.task.Task;
+	import com.godpaper.configs.GameConfig;
 	import com.lookbackon.ccj.CcjConstants;
 	import com.lookbackon.ccj.ChessPiecesConstants;
 	import com.lookbackon.ccj.managers.ChessPieceManager;
@@ -17,8 +18,8 @@ package com.godpaper.tasks
 	import com.lookbackon.ccj.view.components.ChessPiece;
 	import com.lookbackon.ds.BitBoard;
 	
-	import mx.logging.ILogger;
 	import mx.core.IVisualElement;
+	import mx.logging.ILogger;
 	
 	/**
 	 * UpdateChessPiecesTask.as class.   	
@@ -99,7 +100,7 @@ package com.godpaper.tasks
 				//set eat off value.
 				ChessPieceManager.eatOffs.push(removedPiece);
 				//remove pieces data.
-				if(GameManager.turnFlag==CcjConstants.FLAG_RED)
+				if(GameConfig.turnFlag==CcjConstants.FLAG_RED)
 				{
 					//clean this bit at bluePieces.
 					ChessPiecesModel.getInstance().blues.splice(removedIndex,1);

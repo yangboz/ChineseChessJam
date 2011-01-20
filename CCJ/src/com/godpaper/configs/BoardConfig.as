@@ -24,11 +24,14 @@ package com.godpaper.configs
 		private static var _xLines:Number;
 		private static var _yLines:Number;
 		//board scale
-		private static var _xScale:Number;
-		private static var _yScale:Number;
+		private static var _xScale:Number=1;
+		private static var _yScale:Number=1;
 		//board lattic
 		private static var _xOffset:Number;
 		private static var _yOffset:Number;
+		//board size
+		private static var _width:Number;
+		private static var _height:Number;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -38,6 +41,27 @@ package com.godpaper.configs
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
+		//
+		public static function get height():Number
+		{
+			return _height;
+		}
+
+		public static function set height(value:Number):void
+		{
+			_height = value;
+		}
+		//
+		public static function get width():Number
+		{
+			return _width;
+		}
+
+		public static function set width(value:Number):void
+		{
+			_width = value;
+		}
+		//
 		public static function get yOffset():Number
 		{
 			return _yOffset;

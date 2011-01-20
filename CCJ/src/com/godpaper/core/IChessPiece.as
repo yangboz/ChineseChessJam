@@ -1,4 +1,4 @@
-package com.lookbackon.ccj.view.components
+package com.godpaper.core
 {
 	import com.lookbackon.ccj.business.fsm.ChessAgent;
 	import com.lookbackon.ccj.model.vos.OmenVO;

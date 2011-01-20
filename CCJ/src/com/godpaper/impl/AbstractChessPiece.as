@@ -1,25 +1,21 @@
-package com.lookbackon.ccj.business.fsm.states.game
+package com.godpaper.impl
 {
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.godpaper.configs.GameConfig;
-	import com.lookbackon.AI.FSM.IAgent;
-	import com.lookbackon.AI.FSM.states.StateBase;
-	import com.lookbackon.ccj.CcjConstants;
-	import com.lookbackon.ccj.managers.GameManager;
+	import spark.components.Group;
 	
 	
 	/**
-	 * HumanState.as class.   	
+	 * AbstractChessPiece.as class.   	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
-	 * Created Dec 10, 2010 11:12:15 AM
+	 * Created Jan 20, 2011 3:47:27 PM
 	 */   	 
-	public class HumanState extends StateBase
+	public class AbstractChessPiece extends Group
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -48,34 +44,17 @@ package com.lookbackon.ccj.business.fsm.states.game
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function HumanState(agent:IAgent, resource:Object, description:String=null)
+		public function AbstractChessPiece()
 		{
 			//TODO: implement function
-			super(agent, resource, description);
+			super();
 		}     	
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		override public function enter():void
-		{
-			//hold turn flag
-			GameConfig.turnFlag = CcjConstants.FLAG_RED;
-			//
-			GameManager.indicatorReadOut=false;
-			//about data
-		}
 		
-		override public function exit():void
-		{
-			//TODO: implement function
-		}
-		
-		override public function update(time:Number=0):void
-		{
-			//TODO: implement function
-		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods

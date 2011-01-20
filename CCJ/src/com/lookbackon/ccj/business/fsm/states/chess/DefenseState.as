@@ -5,7 +5,9 @@ package com.lookbackon.ccj.business.fsm.states.chess
 	import com.lookbackon.ccj.view.components.ChessPiece;
 	
 	/**
-	 * Defense state try to keep "marshal" safty.
+	 * Defense state try to keep "marshal" safty.</br>
+	 * - Fortify Position </br>
+	 * - Defend Friendly Unit By Attacking Threatening Unit</br>
 	 * 
 	 * @author Knight.zhou
 	 * 

@@ -27,6 +27,12 @@
 			import com.adobe.cairngorm.contract.Contract;
 			import com.godpaper.configs.BoardConfig;
 			import com.godpaper.configs.CCJContextConfig;
+			import com.godpaper.configs.GameConfig;
+			import com.lookbackon.AI.searching.AttackFalse;
+			import com.lookbackon.AI.searching.MiniMax;
+			import com.lookbackon.AI.searching.RandomWalk;
+			import com.lookbackon.AI.searching.ShortSighted;
+			import com.lookbackon.ccj.CcjConstants;
 			import com.lookbackon.ccj.managers.GameManager;
 			import com.lookbackon.ccj.model.ChessPiecesModel;
 			import com.lookbackon.ccj.utils.LogUtil;
@@ -77,6 +83,10 @@
 				BoardConfig.yLines = 10;
 				BoardConfig.xOffset = 50;
 				BoardConfig.yOffset = 50;
+				//number of tollgate tips would be matched with tollgates!
+				GameConfig.tollgates = [RandomWalk,ShortSighted,AttackFalse,AttackFalse,MiniMax];
+				GameConfig.tollgateTips = ["baby intelligence","fellow intelligence","man intelligence","guru intelligence"];
+				GameConfig.turnFlag = CcjConstants.FLAG_RED;
 			}
 			//  application1_creationCompleteHandler
 			protected function application1_creationCompleteHandler(event:FlexEvent):void

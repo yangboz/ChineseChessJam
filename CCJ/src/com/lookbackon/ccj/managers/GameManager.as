@@ -1,6 +1,7 @@
 package com.lookbackon.ccj.managers
 {
 	import com.adobe.cairngorm.task.SequenceTask;
+	import com.godpaper.configs.GameConfig;
 	import com.godpaper.tasks.CleanUpChessPieceTask;
 	import com.godpaper.tasks.CleanUpPiecesBitboardTask;
 	import com.godpaper.tasks.CreateChessPieceTask;
@@ -11,6 +12,7 @@ package com.lookbackon.ccj.managers
 	import com.lookbackon.AI.searching.ShortSighted;
 	import com.lookbackon.ccj.CcjConstants;
 	import com.lookbackon.ccj.business.fsm.GameAgent;
+	import com.lookbackon.ccj.model.ChessPiecesModel;
 	import com.lookbackon.ccj.model.vos.PositionVO;
 	import com.lookbackon.ccj.utils.LogUtil;
 	
@@ -31,9 +33,8 @@ package com.lookbackon.ccj.managers
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		private static var _turnFlag:int=CcjConstants.FLAG_BLUE;
-		//toll gate setting here.
-		private static var _tollgates:Array=[RandomWalk, ShortSighted, AttackFalse, AttackFalse, MiniMax];
+		//
+		private static var chessPieceModel:ChessPiecesModel = ChessPiecesModel.getInstance();
 		//
 		public static var isRunning:Boolean;
 		//indicators
@@ -47,9 +48,7 @@ package com.lookbackon.ccj.managers
 		//
 		public static var agent:GameAgent;
 		//
-		private static var _level:int=1;
-		//
-		public static var tollgateTips:Array = ["baby intelligence","fellow intelligence","man intelligence","guru intelligence"];
+		public static var level:int=1;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -60,43 +59,35 @@ package com.lookbackon.ccj.managers
 		public static const PHASE_OPENING:uint=1 << 0;
 		public static const PHASE_MIDDLE:uint=1 << 1;
 		public static const PHASE_ENDING:uint=1 << 2;
-		
 		//--------------------------------------------------------------------------
 		//
 		//  Properties
 		//
 		//--------------------------------------------------------------------------
 		//----------------------------------
-		//  turnFlag(read-write)
+		//  get Game Phase
 		//----------------------------------
-		public static function set turnFlag(value:int):void
+		/**
+		 * The game phase is decided by how many pieces both sides have left.
+		 * @param gamePosition the current game position information.
+		 * @return the current game position's game phase.
+		 */
+		public static function get phase():uint
 		{
-			_turnFlag=value;
-		}
-
-		public static function get turnFlag():int
-		{
-			return _turnFlag;
-		}
-
-		//----------------------------------
-		//  tollgates(read-only)
-		//----------------------------------
-		public static function get tollgates():Array
-		{
-			return _tollgates;
-		}
-		//----------------------------------
-		//  level(read-write)
-		//----------------------------------
-		public static function get level():int
-		{
-			return _level;
-		}
-		//
-		public static function set level(value:int):void
-		{
-			_level = value;
+			var gamePhase:uint=PHASE_OPENING;
+			if (chessPieceModel.gamePosition.board.celled <= 14 
+				&& chessPieceModel.gamePosition.board.celled >= 6
+			)
+			{
+				gamePhase=PHASE_MIDDLE;
+			}
+			if (chessPieceModel.gamePosition.board.celled < 6 
+				&& chessPieceModel.gamePosition.board.celled >= 1
+			)
+			{
+				gamePhase=PHASE_ENDING;
+			}
+			return gamePhase;
 		}
 		//--------------------------------------------------------------------------
 		//
@@ -112,8 +103,13 @@ package com.lookbackon.ccj.managers
 			//agent initialization.
 			agent=new GameAgent("CCJGameAgent", FlexGlobals.topLevelApplication as IVisualElement);
 			//logic condition who's turn now at first.
-//			isComputerTurnNow();
-			isHumanTurnNow();
+			if(GameConfig.turnFlag)
+			{
+				isComputerTurnNow();
+			}else
+			{
+				isHumanTurnNow();
+			}
 			//flag game is running.
 			isRunning=true;
 		}
@@ -178,29 +174,6 @@ package com.lookbackon.ccj.managers
 		{
 			//delegate fsm transition to computer state.
 			agent.fsm.changeState(agent.humanState);
-		}
-
-		//----------------------------------
-		//  getGamePhase
-		//----------------------------------
-		/**
-		 * The game phase is decided by how many pieces both sides have left.
-		 * @param gamePosition the current game position information.
-		 * @return the current game position's game phase.
-		 *
-		 */
-		public static function getGamePhase(gamePosition:PositionVO):uint
-		{
-			var gamePhase:uint=PHASE_OPENING;
-			if (gamePosition.board.celled <= 14 && gamePosition.board.celled >= 6)
-			{
-				gamePhase=PHASE_MIDDLE;
-			}
-			if (gamePosition.board.celled < 6 && gamePosition.board.celled >= 1)
-			{
-				gamePhase=PHASE_ENDING;
-			}
-			return gamePhase;
 		}
 	}
 }

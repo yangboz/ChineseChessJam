@@ -11,7 +11,7 @@ package com.godpaper.tasks
 	import com.lookbackon.ccj.business.factory.ChessFactory;
 	import com.lookbackon.ccj.managers.ChessPieceManager;
 	import com.lookbackon.ccj.view.components.ChessGasket;
-	import com.lookbackon.ccj.view.components.IChessPiece;
+	import com.godpaper.core.IChessPiece;
 	
 	import flash.geom.Point;
 	

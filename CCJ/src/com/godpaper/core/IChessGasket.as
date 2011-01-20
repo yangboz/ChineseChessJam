@@ -1,4 +1,4 @@
-package com.lookbackon.ccj.view.components
+package com.godpaper.core
 {
 	import mx.core.IVisualElement;
 

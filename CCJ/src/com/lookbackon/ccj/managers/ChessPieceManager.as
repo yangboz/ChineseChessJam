@@ -4,6 +4,7 @@ package com.lookbackon.ccj.managers
 	import com.adobe.cairngorm.task.SequenceTask;
 	import com.adobe.cairngorm.task.TaskEvent;
 	import com.godpaper.configs.BoardConfig;
+	import com.godpaper.configs.GameConfig;
 	import com.godpaper.tasks.UpdateChessPiecesTask;
 	import com.godpaper.tasks.UpdatePiecesBitboardTask;
 	import com.godpaper.tasks.UpdatePiecesChessVoTask;
@@ -21,7 +22,7 @@ package com.lookbackon.ccj.managers
 	import com.lookbackon.ccj.utils.LogUtil;
 	import com.lookbackon.ccj.view.components.ChessGasket;
 	import com.lookbackon.ccj.view.components.ChessPiece;
-	import com.lookbackon.ccj.view.components.IChessPiece;
+	import com.godpaper.core.IChessPiece;
 	import com.lookbackon.ds.BitBoard;
 	
 	import de.polygonal.ds.Array2;
@@ -243,7 +244,7 @@ package com.lookbackon.ccj.managers
 			//
 			LOG.debug(chessPiecesModel.allPieces.dump());
 			//roll back pieces data.
-			if (GameManager.turnFlag == CcjConstants.FLAG_RED)
+			if (GameConfig.turnFlag == CcjConstants.FLAG_RED)
 			{
 				chessPiecesModel.blues.push(eattenPiece);
 			}
@@ -292,7 +293,7 @@ package com.lookbackon.ccj.managers
 				//clean this bit at pieces.
 				BitBoard(ChessPiecesModel.getInstance()[removedPiece.type]).setBitt(removedPiece.position.y, removedPiece.position.x, false);
 				//remove pieces data.
-				if (GameManager.turnFlag == CcjConstants.FLAG_RED)
+				if (GameConfig.turnFlag == CcjConstants.FLAG_RED)
 				{
 					//clean this bit at bluePieces.
 					//notice array splice without copy
@@ -317,7 +318,7 @@ package com.lookbackon.ccj.managers
 		//pluge to death.	
 		public static function noneMove():int
 		{
-			if (GameManager.turnFlag == CcjConstants.FLAG_BLUE)
+			if (GameConfig.turnFlag == CcjConstants.FLAG_BLUE)
 			{
 				GameManager.humanWin();
 			}
@@ -453,7 +454,7 @@ package com.lookbackon.ccj.managers
 				//Trigger in-turn system .
 				if (GameManager.isRunning)
 				{
-					if (GameManager.turnFlag == CcjConstants.FLAG_RED)
+					if (GameConfig.turnFlag == CcjConstants.FLAG_RED)
 					{
 						GameManager.isComputerTurnNow();
 					}
