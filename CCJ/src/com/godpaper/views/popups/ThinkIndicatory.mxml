@@ -8,7 +8,7 @@
 				>
 	<fx:Script>
 		<![CDATA[
-			import com.lookbackon.ccj.CcjConstants;
+			import com.godpaper.consts.CcjConstants;
 		]]>
 	</fx:Script>
 	<fx:Declarations>

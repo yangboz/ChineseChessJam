@@ -11,9 +11,9 @@
 	<fx:Script>
 		<![CDATA[
 			import com.lookbackon.AI.FSM.Message;
-			import com.lookbackon.ccj.CcjConstants;
-			import com.lookbackon.ccj.ChessPiecesConstants;
-			import com.lookbackon.ccj.managers.GameManager;
+			import com.godpaper.consts.CcjConstants;
+			import com.godpaper.consts.ChessPiecesConstants;
+			import com.godpaper.business.managers.GameManager;
 
 			import mx.events.FlexEvent;
 

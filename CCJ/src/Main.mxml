@@ -2,7 +2,7 @@
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
 			   xmlns:s="library://ns.adobe.com/flex/spark"
 			   xmlns:mx="library://ns.adobe.com/flex/halo"
-			   xmlns:components="com.lookbackon.ccj.view.components.*"
+			   xmlns:components="com.godpaper.views.components.*"
 			   xmlns:popup="com.adobe.cairngorm.popup.*"
 			   xmlns:controller="com.lookbackon.ccj.controller.*"
 			   xmlns:task="com.adobe.cairngorm.task.*"
@@ -32,10 +32,10 @@
 			import com.lookbackon.AI.searching.MiniMax;
 			import com.lookbackon.AI.searching.RandomWalk;
 			import com.lookbackon.AI.searching.ShortSighted;
-			import com.lookbackon.ccj.CcjConstants;
-			import com.lookbackon.ccj.managers.GameManager;
-			import com.lookbackon.ccj.model.ChessPiecesModel;
-			import com.lookbackon.ccj.utils.LogUtil;
+			import com.godpaper.consts.CcjConstants;
+			import com.godpaper.business.managers.GameManager;
+			import com.godpaper.model.ChessPiecesModel;
+			import com.godpaper.utils.LogUtil;
 			
 			import mx.events.FlexEvent;
 			import mx.logging.ILogger;

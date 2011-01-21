@@ -6,11 +6,11 @@ package com.godpaper.tasks
 	//
 	//--------------------------------------------------------------------------
 	import com.adobe.cairngorm.task.Task;
-	import com.lookbackon.ccj.business.factory.ChessFactory;
-	import com.lookbackon.ccj.model.ChessPiecesModel;
-	import com.lookbackon.ccj.model.vos.ConductVO;
-	import com.lookbackon.ccj.model.vos.OmenVO;
-	import com.lookbackon.ccj.view.components.ChessPiece;
+	import com.godpaper.business.factory.ChessFactory;
+	import com.godpaper.model.ChessPiecesModel;
+	import com.godpaper.model.vos.ConductVO;
+	import com.godpaper.model.vos.OmenVO;
+	import com.godpaper.views.components.ChessPiece;
 	
 	
 	/**

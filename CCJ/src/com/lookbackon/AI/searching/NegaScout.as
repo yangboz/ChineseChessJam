@@ -5,7 +5,7 @@ package com.lookbackon.AI.searching
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.lookbackon.ccj.model.vos.PositionVO;
+	import com.godpaper.model.vos.PositionVO;
 	
 	
 	/**

@@ -9,7 +9,7 @@
 			import com.godpaper.configs.GameConfig;
 			import com.godpaper.messages.LevelUpMessage;
 			import com.godpaper.model.MochiModel;
-			import com.lookbackon.ccj.managers.GameManager;
+			import com.godpaper.business.managers.GameManager;
 			
 			import mochi.as3.MochiCoins;
 			import mochi.as3.MochiScores;

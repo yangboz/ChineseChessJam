@@ -5,10 +5,10 @@ package com.lookbackon.AI.searching
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.lookbackon.ccj.managers.GameManager;
-	import com.lookbackon.ccj.model.vos.ConductVO;
-	import com.lookbackon.ccj.model.vos.PositionVO;
-	import com.lookbackon.ccj.utils.LogUtil;
+	import com.godpaper.business.managers.GameManager;
+	import com.godpaper.model.vos.ConductVO;
+	import com.godpaper.model.vos.PositionVO;
+	import com.godpaper.utils.LogUtil;
 	
 	import mx.logging.ILogger;
 

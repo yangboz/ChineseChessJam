@@ -1,8 +1,8 @@
 package com.lookbackon.AI.evaluation.statical.exchange
 {
 	import com.lookbackon.AI.evaluation.IEvaluation;
-	import com.lookbackon.ccj.model.vos.ConductVO;
-	import com.lookbackon.ccj.model.vos.PositionVO;
+	import com.godpaper.model.vos.ConductVO;
+	import com.godpaper.model.vos.PositionVO;
 
 	/*
 	Static exchange evaluation is a very powerful tool for evaluating a capture without actually playing out the moves.

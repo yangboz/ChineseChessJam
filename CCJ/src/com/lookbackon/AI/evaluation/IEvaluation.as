@@ -1,7 +1,7 @@
 package com.lookbackon.AI.evaluation
 {
-	import com.lookbackon.ccj.model.vos.ConductVO;
-	import com.lookbackon.ccj.model.vos.PositionVO;
+	import com.godpaper.model.vos.ConductVO;
+	import com.godpaper.model.vos.PositionVO;
 
 	/**
 	 * An <b>evaluation</b> function is used to heuristically determine the relative value of a position, 

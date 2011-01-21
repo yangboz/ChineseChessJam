@@ -5,7 +5,7 @@ package com.godpaper.utils
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.lookbackon.ccj.model.vos.ConductVO;
+	import com.godpaper.model.vos.ConductVO;
 	/**
 	 * FilterUtil.as class.   	
 	 * @author yangboz

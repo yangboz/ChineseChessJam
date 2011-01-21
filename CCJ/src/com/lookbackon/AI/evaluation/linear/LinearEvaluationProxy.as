@@ -1,12 +1,12 @@
 package com.lookbackon.AI.evaluation.linear
 {
 	import com.lookbackon.AI.evaluation.IEvaluation;
-	import com.lookbackon.ccj.CcjConstants;
-	import com.lookbackon.ccj.ChessPiecesConstants;
-	import com.lookbackon.ccj.managers.ChessPieceManager;
-	import com.lookbackon.ccj.model.ChessPiecesModel;
-	import com.lookbackon.ccj.model.vos.ConductVO;
-	import com.lookbackon.ccj.model.vos.PositionVO;
+	import com.godpaper.consts.CcjConstants;
+	import com.godpaper.consts.ChessPiecesConstants;
+	import com.godpaper.business.managers.ChessPieceManager;
+	import com.godpaper.model.ChessPiecesModel;
+	import com.godpaper.model.vos.ConductVO;
+	import com.godpaper.model.vos.PositionVO;
 	import com.lookbackon.ds.BitBoard;
 	
 	import flash.utils.Proxy;

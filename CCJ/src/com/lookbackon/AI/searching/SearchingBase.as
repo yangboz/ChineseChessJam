@@ -5,11 +5,11 @@ package com.lookbackon.AI.searching
 	import com.lookbackon.AI.FSM.Message;
 	import com.lookbackon.AI.evaluation.IEvaluation;
 	import com.lookbackon.AI.evaluation.linear.LinearEvaluationProxy;
-	import com.lookbackon.ccj.managers.ChessPieceManager;
-	import com.lookbackon.ccj.model.ChessPiecesModel;
-	import com.lookbackon.ccj.model.vos.ConductVO;
-	import com.lookbackon.ccj.model.vos.PositionVO;
-	import com.lookbackon.ccj.view.components.ChessPiece;
+	import com.godpaper.business.managers.ChessPieceManager;
+	import com.godpaper.model.ChessPiecesModel;
+	import com.godpaper.model.vos.ConductVO;
+	import com.godpaper.model.vos.PositionVO;
+	import com.godpaper.views.components.ChessPiece;
 	import com.lookbackon.ds.BitBoard;
 	
 	import flash.geom.Point;

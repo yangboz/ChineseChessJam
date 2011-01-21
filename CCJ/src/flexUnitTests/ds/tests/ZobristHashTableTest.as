@@ -1,9 +1,9 @@
 package flexUnitTests.ds.tests
 {
 	import com.godpaper.configs.BoardConfig;
-	import com.lookbackon.ccj.CcjConstants;
-	import com.lookbackon.ccj.ZobristConstants;
-	import com.lookbackon.ccj.model.vos.ZobristKeyVO;
+	import com.godpaper.consts.CcjConstants;
+	import com.godpaper.consts.ZobristConstants;
+	import com.godpaper.model.vos.ZobristKeyVO;
 	import com.lookbackon.ds.ZobristHashTable;
 	
 	import de.polygonal.ds.Array2;

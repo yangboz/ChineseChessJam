@@ -1,7 +1,7 @@
 package com.lookbackon.AI.FSM
 {
 	import com.lookbackon.AI.FSM.states.IState;
-	import com.lookbackon.ccj.utils.LogUtil;
+	import com.godpaper.utils.LogUtil;
 	
 	import mx.logging.ILogger;
 	

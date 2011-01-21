@@ -8,7 +8,7 @@ package com.lookbackon.AI.HFSM
 	import com.lookbackon.AI.FSM.Agent;
 	import com.lookbackon.AI.FSM.FiniteStateMachine;
 	import com.lookbackon.AI.FSM.states.IState;
-	import com.lookbackon.ccj.utils.LogUtil;
+	import com.godpaper.utils.LogUtil;
 
 	import mx.logging.ILogger;
 	import com.lookbackon.AI.FSM.Message;

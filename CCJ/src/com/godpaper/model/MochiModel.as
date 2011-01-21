@@ -1,6 +1,6 @@
 package com.godpaper.model
 {
-	import com.lookbackon.ccj.errors.CcjErrors;
+	import com.godpaper.errors.CcjErrors;
 
 	import de.polygonal.ds.HashMap;
 

@@ -6,11 +6,11 @@ package com.godpaper.tasks
 	//
 	//--------------------------------------------------------------------------
 	import com.adobe.cairngorm.task.Task;
-	import com.lookbackon.ccj.business.factory.ChessFactory;
-	import com.lookbackon.ccj.model.ChessPiecesModel;
-	import com.lookbackon.ccj.model.vos.ConductVO;
-	import com.lookbackon.ccj.utils.LogUtil;
-	import com.lookbackon.ccj.view.components.ChessPiece;
+	import com.godpaper.business.factory.ChessFactory;
+	import com.godpaper.model.ChessPiecesModel;
+	import com.godpaper.model.vos.ConductVO;
+	import com.godpaper.utils.LogUtil;
+	import com.godpaper.views.components.ChessPiece;
 	
 	import mx.logging.ILogger;
 	

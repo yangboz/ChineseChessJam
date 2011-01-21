@@ -6,10 +6,10 @@ package com.godpaper.tasks
 	//
 	//--------------------------------------------------------------------------
 	import com.adobe.cairngorm.task.Task;
-	import com.lookbackon.ccj.model.ZobristKeysModel;
-	import com.lookbackon.ccj.model.vos.ConductVO;
-	import com.lookbackon.ccj.model.vos.ZobristKeyVO;
-	import com.lookbackon.ccj.utils.LogUtil;
+	import com.godpaper.model.ZobristKeysModel;
+	import com.godpaper.model.vos.ConductVO;
+	import com.godpaper.model.vos.ZobristKeyVO;
+	import com.godpaper.utils.LogUtil;
 	
 	import mx.logging.ILogger;
 	

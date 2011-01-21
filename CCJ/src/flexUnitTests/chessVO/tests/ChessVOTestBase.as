@@ -1,7 +1,7 @@
 package flexUnitTests.chessVO.tests
 {
-	import com.lookbackon.ccj.model.ChessPiecesModel;
-	import com.lookbackon.ccj.model.vos.cvo.IChessVO;
+	import com.godpaper.model.ChessPiecesModel;
+	import com.godpaper.core.IChessVO;
 	import com.lookbackon.ds.BitBoard;
 	
 	import org.flexunit.Assert;

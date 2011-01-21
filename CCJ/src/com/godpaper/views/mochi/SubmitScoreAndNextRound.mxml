@@ -10,7 +10,7 @@
 	<fx:Script>
 		<![CDATA[
 			import com.godpaper.model.MochiModel;
-			import com.lookbackon.ccj.managers.GameManager;
+			import com.godpaper.business.managers.GameManager;
 			import com.godpaper.messages.LevelUpMessage;
 			
 			import mochi.as3.MochiScores;

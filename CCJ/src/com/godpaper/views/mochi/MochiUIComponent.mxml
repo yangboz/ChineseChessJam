@@ -8,7 +8,7 @@
 	<fx:Script>
 		<![CDATA[
 			import com.godpaper.model.MochiModel;
-			import com.lookbackon.ccj.utils.LogUtil;
+			import com.godpaper.utils.LogUtil;
 			
 			import mochi.as3.MochiCoins;
 			import mochi.as3.MochiServices;

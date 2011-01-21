@@ -7,9 +7,9 @@ package com.godpaper.tasks
 	//--------------------------------------------------------------------------
 //	import com.adobe.cairngorm.task.Task;
 	import org.spicefactory.lib.task.Task;
-	import com.lookbackon.ccj.model.ChessPiecesModel;
-	import com.lookbackon.ccj.model.vos.ConductVO;
-	import com.lookbackon.ccj.utils.LogUtil;
+	import com.godpaper.model.ChessPiecesModel;
+	import com.godpaper.model.vos.ConductVO;
+	import com.godpaper.utils.LogUtil;
 	import com.lookbackon.ds.BitBoard;
 
 	import mx.logging.ILogger;

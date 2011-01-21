@@ -47,7 +47,7 @@ package com.lookbackon.AI.evaluation.statical.nelderMeadSimplex
 		}
 	}
 }
-import com.lookbackon.ccj.utils.Enum;
+import com.godpaper.utils.Enum;
 
 internal class TerminationReason extends Enum
 {

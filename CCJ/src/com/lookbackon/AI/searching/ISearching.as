@@ -1,9 +1,9 @@
 package com.lookbackon.AI.searching
 {
 	import com.lookbackon.AI.evaluation.IEvaluation;
-	import com.lookbackon.ccj.model.vos.ConductVO;
-	import com.lookbackon.ccj.model.vos.PositionVO;
-	import com.lookbackon.ccj.view.components.ChessPiece;
+	import com.godpaper.model.vos.ConductVO;
+	import com.godpaper.model.vos.PositionVO;
+	import com.godpaper.views.components.ChessPiece;
 	
 	import mx.collections.ArrayCollection;
 

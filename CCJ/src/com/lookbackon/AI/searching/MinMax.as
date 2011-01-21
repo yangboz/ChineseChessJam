@@ -1,13 +1,13 @@
 package com.lookbackon.AI.searching
 {
-	import com.lookbackon.ccj.CcjConstants;
-	import com.lookbackon.ccj.ChessPiecesConstants;
-	import com.lookbackon.ccj.managers.GameManager;
-	import com.lookbackon.ccj.model.ChessPiecesModel;
-	import com.lookbackon.ccj.model.vos.ConductVO;
-	import com.lookbackon.ccj.model.vos.PositionVO;
-	import com.lookbackon.ccj.utils.LogUtil;
-	import com.lookbackon.ccj.utils.MathUtil;
+	import com.godpaper.consts.CcjConstants;
+	import com.godpaper.consts.ChessPiecesConstants;
+	import com.godpaper.business.managers.GameManager;
+	import com.godpaper.model.ChessPiecesModel;
+	import com.godpaper.model.vos.ConductVO;
+	import com.godpaper.model.vos.PositionVO;
+	import com.godpaper.utils.LogUtil;
+	import com.godpaper.utils.MathUtil;
 	import com.lookbackon.ds.BitBoard;
 	
 	import de.polygonal.ds.Array2;

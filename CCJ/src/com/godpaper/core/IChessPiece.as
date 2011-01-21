@@ -1,8 +1,7 @@
 package com.godpaper.core
 {
-	import com.lookbackon.ccj.business.fsm.ChessAgent;
-	import com.lookbackon.ccj.model.vos.OmenVO;
-	import com.lookbackon.ccj.model.vos.cvo.IChessVO;
+	import com.godpaper.business.fsm.ChessAgent;
+	import com.godpaper.model.vos.OmenVO;
 	
 	import mx.core.IVisualElement;
 

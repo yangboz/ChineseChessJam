@@ -7,10 +7,10 @@ package com.godpaper.tasks
 	//--------------------------------------------------------------------------
 	import com.adobe.cairngorm.task.Task;
 	import com.godpaper.configs.BoardConfig;
-	import com.lookbackon.ccj.CcjConstants;
-	import com.lookbackon.ccj.business.factory.ChessFactory;
-	import com.lookbackon.ccj.managers.ChessPieceManager;
-	import com.lookbackon.ccj.view.components.ChessGasket;
+	import com.godpaper.consts.CcjConstants;
+	import com.godpaper.business.factory.ChessFactory;
+	import com.godpaper.business.managers.ChessPieceManager;
+	import com.godpaper.views.components.ChessGasket;
 	import com.godpaper.core.IChessPiece;
 	
 	import flash.geom.Point;
