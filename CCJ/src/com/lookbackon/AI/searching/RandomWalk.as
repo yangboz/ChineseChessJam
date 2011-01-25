@@ -8,15 +8,15 @@ package com.lookbackon.AI.searching
 	import com.godpaper.model.vos.PositionVO;
 	import com.godpaper.utils.LogUtil;
 	import com.godpaper.utils.MathUtil;
-	
+
 	import mx.logging.ILogger;
-	
+
 	/**
 	 *
 	 * This essay is a detailed explanation of one of the most important
-	 * data structures ever created for Game Artificial Intelligence. 
+	 * data structures ever created for Game Artificial Intelligence.
 	 * The minimax tree is at the heart of almost every board game program in existence.
-	 * 
+	 *
 	 * @author Knight-errant
 	 */	
 	public class RandomWalk extends SearchingBase
@@ -29,14 +29,14 @@ package com.lookbackon.AI.searching
 		 * if(max's turn) return maximal score of calling minimax on all the children.
 		 * else (min's turn)
 		 * return minimal score of calling minimax on all the children
-		 * 
+		 *
 		 */		
 		public function RandomWalk(gamePosition:PositionVO) 
 		{
 			//
 			super(gamePosition);
 		}	
-		
+
 		override public function run():void
 		{
 			var randomMoves:Vector.<ConductVO> = moves;//default randomMoves.
@@ -58,7 +58,15 @@ package com.lookbackon.AI.searching
 				//for test.
 				for(var t:int=0;t<randomMoves.length;t++)
 				{
-					LOG.info("randomMoves:#{0},detail:{1}",t.toString(),randomMoves[t].dump());
+					LOG.info("randomMoves with suicide:#{0},detail:{1}",t.toString(),randomMoves[t].dump());
+				}
+				randomMoves = moves.filter(FilterUtil.onSuicide);
+				if(randomMoves.length<moves.length)
+				{
+					for(var tt:int=0;tt<randomMoves.length;tt++)
+					{
+						LOG.info("randomMoves without suicide:#{0},detail:{1}",tt.toString(),randomMoves[t].dump());
+					}
 				}
 				var randomStep:int = MathUtil.transactRandomNumberInRange(0,randomMoves.length-1);
 				LOG.debug("randomStep:{0}",randomStep.toString());
@@ -78,7 +86,7 @@ package com.lookbackon.AI.searching
 				this.processDone = true;
 			}
 		}
-		
+
 		//return random position value.
 		override public function doEvaluation(conductVO:ConductVO,gamePosition:PositionVO):int
 		{
@@ -92,7 +100,9 @@ package com.lookbackon.AI.searching
 			//			return Math.random()*100;
 			//			return super.doEvaluation(conductVO);
 		};
-		
+
 	}	
-	
+
 }
+
+

@@ -36,7 +36,7 @@
 			import com.godpaper.business.managers.GameManager;
 			import com.godpaper.model.ChessPiecesModel;
 			import com.godpaper.utils.LogUtil;
-			
+
 			import mx.events.FlexEvent;
 			import mx.logging.ILogger;
 			import mx.logging.LogEventLevel;
@@ -128,7 +128,7 @@
 
 			protected function application1_applicationCompleteHandler(event:FlexEvent):void
 			{
-				
+
 				// TODO Auto-generated method stub
 				//GameManager start.
 				GameManager.start();

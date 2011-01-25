@@ -1,7 +1,11 @@
 package com.godpaper.utils
 {
 	import flash.utils.*;
-	
+	/**
+	 * AS3 Fake Enum class
+	 * @see http://scottbilas.com/blog/ultimate-as3-fake-enums/
+	 *
+	 */	
 	public /*abstract*/class Enum
 	{
 		public function get Name():String
@@ -133,3 +137,4 @@ class EnumConstants
 	public var ByIndex:Array;
 	public var ByName:Object={};
 }
+

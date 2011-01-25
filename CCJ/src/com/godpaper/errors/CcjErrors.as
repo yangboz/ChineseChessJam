@@ -1,9 +1,13 @@
 package com.godpaper.errors
 {
+	import mx.utils.UIDUtil;
+
 	/**
-	 * 
+	 *
+	 * Customize errors occured at CCJ.
+	 *
 	 * @author Knight.zhou
-	 * 
+	 *
 	 */	
 	public class CcjErrors extends Error
 	{
@@ -31,3 +35,4 @@ package com.godpaper.errors
 		}
 	}
 }
+

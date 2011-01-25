@@ -13,7 +13,7 @@ package com.lookbackon.AI.HFSM
 	import mx.logging.ILogger;
 	import com.lookbackon.AI.FSM.Message;
 
-
+	import com.lookbackon.AI.HFSM.states.IHState;
 	/**
 	 * HierarchicalFiniteStateMachine.as class.
 	 * In a hierarchical finite state machine,any state can be  a substate of some large state.
@@ -66,7 +66,7 @@ package com.lookbackon.AI.HFSM
 		//--------------------------------------------------------------------------
 		/**
 		 * Change to another sub-state.
-		 * 
+		 *
 		 * @param s is anew state.actually is IHState.
 		 *
 		 */
@@ -108,3 +108,4 @@ package com.lookbackon.AI.HFSM
 	}
 
 }
+

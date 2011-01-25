@@ -21,6 +21,7 @@
     <application path="Flex4Test.mxml"/>
     <application path="FlexUnitApplication.mxml"/>
     <application path="Main.mxml"/>
+    <application path="com/godpaper/utils/P2PChat.mxml"/>
   </applications>
   <modules/>
   <buildCSSFiles/>
