@@ -15,9 +15,9 @@ package com.godpaper.model
 	import com.godpaper.utils.LogUtil;
 	import com.godpaper.views.components.ChessPiece;
 	import com.lookbackon.ds.BitBoard;
-	
+
 	import de.polygonal.ds.Array2;
-	
+
 	import mx.collections.ArrayCollection;
 	import mx.logging.ILogger;
 
@@ -34,7 +34,7 @@ package com.godpaper.model
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		//Singleton instance of ChessPositionModelLocator;
+		//Singleton instance of ChessPiecesModel;
 		private static var instance:ChessPiecesModel;
 		//----------------------------------
 		//  CONSTANTS
@@ -462,3 +462,4 @@ package com.godpaper.model
 internal class Private
 {
 }
+

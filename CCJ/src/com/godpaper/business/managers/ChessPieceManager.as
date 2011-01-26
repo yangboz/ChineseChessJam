@@ -5,31 +5,32 @@ package com.godpaper.business.managers
 	import com.adobe.cairngorm.task.TaskEvent;
 	import com.godpaper.configs.BoardConfig;
 	import com.godpaper.configs.GameConfig;
+	import com.godpaper.consts.CcjConstants;
+	import com.godpaper.consts.ChessPiecesConstants;
+	import com.godpaper.core.IChessPiece;
+	import com.godpaper.errors.CcjErrors;
+	import com.godpaper.model.ChessGasketsModel;
+	import com.godpaper.model.ChessPiecesMemento;
+	import com.godpaper.model.ChessPiecesModel;
+	import com.godpaper.model.vos.ConductVO;
+	import com.godpaper.model.vos.PositionVO;
+	import com.godpaper.model.vos.ZobristKeyVO;
 	import com.godpaper.tasks.UpdateChessPiecesTask;
 	import com.godpaper.tasks.UpdatePiecesBitboardTask;
 	import com.godpaper.tasks.UpdatePiecesChessVoTask;
 	import com.godpaper.tasks.UpdatePiecesOmenVoTask;
 	import com.godpaper.tasks.UpdatePiecesPositionTask;
 	import com.godpaper.tasks.UpdateZobristKeysTask;
-	import com.godpaper.consts.CcjConstants;
-	import com.godpaper.consts.ChessPiecesConstants;
-	import com.godpaper.errors.CcjErrors;
-	import com.godpaper.model.ChessPiecesMemento;
-	import com.godpaper.model.ChessPiecesModel;
-	import com.godpaper.model.vos.ConductVO;
-	import com.godpaper.model.vos.PositionVO;
-	import com.godpaper.model.vos.ZobristKeyVO;
 	import com.godpaper.utils.LogUtil;
 	import com.godpaper.views.components.ChessGasket;
 	import com.godpaper.views.components.ChessPiece;
-	import com.godpaper.core.IChessPiece;
 	import com.lookbackon.ds.BitBoard;
-	
+
 	import de.polygonal.ds.Array2;
 	import de.polygonal.math.PM_PRNG;
-	
+
 	import mx.logging.ILogger;
-	
+
 	import spark.filters.GlowFilter;
 
 	/**
@@ -46,8 +47,6 @@ package com.godpaper.business.managers
 		//
 		//--------------------------------------------------------------------------
 		private static var pmPRNG:PM_PRNG=new PM_PRNG();
-		//
-		private static var _gaskets:Array2=new Array2(BoardConfig.xLines, BoardConfig.yLines);
 		//But the real trick is if we do the XOR operation again we get the initial number back.
 		//a ^ b = c
 		//c ^ b = a
@@ -100,19 +99,6 @@ package com.godpaper.business.managers
 		public static function get previousMementos():Array
 		{
 			return _previousMementos;
-		}
-
-		//----------------------------------
-		//  gaskets
-		//----------------------------------
-		public static function get gaskets():Array2
-		{
-			return _gaskets;
-		}
-
-		public static function set gaskets(value:Array2):void
-		{
-			_gaskets=value;
 		}
 
 		//----------------------------------
@@ -231,7 +217,7 @@ package com.godpaper.business.managers
 				//thrown out the eatten piece;
 				eattenPiece=eatOffs.pop() as IChessPiece;
 				//roll back the eatting piece;
-				var cGasket:ChessGasket=ChessPieceManager.gaskets.gett(eattenPiece.position.x, eattenPiece.position.y);
+				var cGasket:ChessGasket=ChessGasketsModel.getInstance().gaskets.gett(eattenPiece.position.x, eattenPiece.position.y);
 //				cGasket.addElement(eattenPiece);
 				cGasket.chessPiece=eattenPiece;
 			}
@@ -275,7 +261,7 @@ package com.godpaper.business.managers
 		public static function applyMove(conductVO:ConductVO):void
 		{
 			//TODO:with roll back function support.
-			var cGasket:ChessGasket=ChessPieceManager.gaskets.gett(conductVO.nextPosition.x, conductVO.nextPosition.y) as ChessGasket;
+			var cGasket:ChessGasket=ChessGasketsModel.getInstance().gaskets.gett(conductVO.nextPosition.x, conductVO.nextPosition.y) as ChessGasket;
 			if (cGasket.numElements >= 1)
 			{
 				//TODO:chess piece eat off.
@@ -371,11 +357,11 @@ package com.godpaper.business.managers
 				{
 					if (legalMoves.getBitt(v, h))
 					{
-						(ChessPieceManager.gaskets.gett(h, v) as ChessGasket).filters=[new GlowFilter()];
+						(ChessGasketsModel.getInstance().gaskets.gett(h, v) as ChessGasket).filters=[new GlowFilter()];
 					}
 					else
 					{
-						(ChessPieceManager.gaskets.gett(h, v) as ChessGasket).filters=[];
+						(ChessGasketsModel.getInstance().gaskets.gett(h, v) as ChessGasket).filters=[];
 					}
 				}
 			}
@@ -470,3 +456,5 @@ package com.godpaper.business.managers
 	}
 
 }
+
+

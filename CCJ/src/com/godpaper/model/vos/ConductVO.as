@@ -5,6 +5,7 @@ package com.godpaper.model.vos
 	import com.godpaper.consts.CcjConstants;
 	import com.godpaper.consts.ChessPiecesConstants;
 	import com.godpaper.core.IChessPiece;
+	import com.godpaper.model.ChessGasketsModel;
 	import com.godpaper.model.ChessPiecesModel;
 	import com.godpaper.utils.LogUtil;
 	import com.godpaper.views.components.ChessGasket;
@@ -99,7 +100,7 @@ package com.godpaper.model.vos
 			_nextPosition = value;
 			//
 			var cGasket:ChessGasket = 
-				ChessPieceManager.gaskets.gett(value.x,value.y) as ChessGasket;
+				ChessGasketsModel.getInstance().gaskets.gett(value.x,value.y) as ChessGasket;
 			if(cGasket.numElements>=1)
 			{
 				//TODO:chess piece eat off.

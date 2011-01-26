@@ -17,19 +17,19 @@ package com.godpaper.business.fsm.states.game
 	import com.godpaper.business.managers.GameManager;
 	import com.godpaper.model.ChessPiecesModel;
 	import com.godpaper.utils.LogUtil;
-	
+
 	import flash.utils.getDefinitionByName;
 	import flash.utils.getQualifiedClassName;
-	
+
 	import mx.core.FlexGlobals;
 	import mx.logging.ILogger;
 	import mx.managers.CursorManager;
-	
+
 	import org.generalrelativity.thread.GreenThread;
 	import org.generalrelativity.thread.IRunnable;
 
 	/**
-	 * ComputerState.as class.   	
+	 * ComputerState.as class.
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
@@ -42,7 +42,7 @@ package com.godpaper.business.fsm.states.game
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		//The agent obtans searching.
+		//The agent obtains searching.
 		public var searching:ISearching;
 		//
 		private var processes:Vector.<IRunnable>;
@@ -56,13 +56,13 @@ package com.godpaper.business.fsm.states.game
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
 		//
 		//-------------------------------------------------------------------------- 
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Constructor
@@ -90,7 +90,7 @@ package com.godpaper.business.fsm.states.game
 			//default update current state.
 			update(GameManager.level-1);
 		}
-		
+
 		override public function exit():void
 		{
 			//about view
@@ -98,7 +98,7 @@ package com.godpaper.business.fsm.states.game
 			//
 			GameManager.indicatorReadOut=false;
 		}
-		
+
 		override public function update(time:Number=0):void
 		{
 			//TODO:switch any searching class to test.
@@ -146,7 +146,7 @@ package com.godpaper.business.fsm.states.game
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods
@@ -154,5 +154,6 @@ package com.godpaper.business.fsm.states.game
 		//--------------------------------------------------------------------------
 
 	}
-	
+
 }
+

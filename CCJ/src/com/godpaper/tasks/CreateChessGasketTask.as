@@ -6,20 +6,21 @@ package com.godpaper.tasks
 	//
 	//--------------------------------------------------------------------------
 	import com.adobe.cairngorm.task.Task;
-	import com.godpaper.configs.BoardConfig;
-	import com.godpaper.consts.CcjConstants;
 	import com.godpaper.business.factory.ChessFactory;
 	import com.godpaper.business.managers.ChessPieceManager;
-	
+	import com.godpaper.configs.BoardConfig;
+	import com.godpaper.consts.CcjConstants;
+	import com.godpaper.model.ChessGasketsModel;
+
 	import flash.geom.Point;
-	
+
 	import mx.core.FlexGlobals;
 	import mx.core.IVisualElement;
-	
+
 	import spark.components.Application;
 
 	/**
-	 * CreateChessGasketTask.as class.   	
+	 * CreateChessGasketTask.as class.
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
@@ -32,23 +33,23 @@ package com.godpaper.tasks
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		
+
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
 		//
 		//-------------------------------------------------------------------------- 
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Constructor
@@ -64,7 +65,7 @@ package com.godpaper.tasks
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
@@ -80,14 +81,14 @@ package com.godpaper.tasks
 					var cGasket:IVisualElement = 
 						FlexGlobals.topLevelApplication.addElement( ChessFactory.createChessGasket(new Point(h,v)) );
 					//
-					ChessPieceManager.gaskets.sett(h,v,cGasket);
+					ChessGasketsModel.getInstance().gaskets.sett(h,v,cGasket);
 				}
 			}
 			//mochi uicomponent at the top of game ui.
 			FlexGlobals.topLevelApplication.setElementIndex(
 				FlexGlobals.topLevelApplication.mochiUIComponent,
 				FlexGlobals.topLevelApplication.numElements-1
-			);
+				);
 			//
 			this.complete();
 		}
@@ -97,5 +98,6 @@ package com.godpaper.tasks
 		//
 		//--------------------------------------------------------------------------
 	}
-	
+
 }
+

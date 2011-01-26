@@ -6,19 +6,20 @@ package com.godpaper.tasks
 	//
 	//--------------------------------------------------------------------------
 	import com.adobe.cairngorm.task.Task;
-	import com.godpaper.configs.BoardConfig;
-	import com.godpaper.consts.CcjConstants;
 	import com.godpaper.business.factory.ChessFactory;
 	import com.godpaper.business.managers.ChessPieceManager;
-	import com.godpaper.views.components.ChessGasket;
+	import com.godpaper.configs.BoardConfig;
+	import com.godpaper.consts.CcjConstants;
 	import com.godpaper.core.IChessPiece;
-	
+	import com.godpaper.model.ChessGasketsModel;
+	import com.godpaper.views.components.ChessGasket;
+
 	import flash.geom.Point;
-	
+
 	import mx.core.FlexGlobals;
-	
+
 	/**
-	 * CreateChessPieceTask.as class.   	
+	 * CreateChessPieceTask.as class.
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
@@ -31,23 +32,23 @@ package com.godpaper.tasks
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		
+
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
 		//
 		//-------------------------------------------------------------------------- 
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Constructor
@@ -63,7 +64,7 @@ package com.godpaper.tasks
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
@@ -80,13 +81,13 @@ package com.godpaper.tasks
 					if(iChessPiece!=null)
 					{
 //						trace("index:",vv*CcjConstants.BOARD_V_LINES+hh);
-						var ecGasket:ChessGasket = ChessPieceManager.gaskets.gett(hh,vv) as ChessGasket;
+						var ecGasket:ChessGasket = ChessGasketsModel.getInstance().gaskets.gett(hh,vv) as ChessGasket;
 						ecGasket.chessPiece = iChessPiece;
 //						ecGasket.addElement( iChessPiece );
 						//
 						iChessPiece.x = 0;
 						iChessPiece.y = 0;
-						//
+							//
 					}
 				}
 			}
@@ -99,5 +100,6 @@ package com.godpaper.tasks
 		//
 		//--------------------------------------------------------------------------
 	}
-	
+
 }
+

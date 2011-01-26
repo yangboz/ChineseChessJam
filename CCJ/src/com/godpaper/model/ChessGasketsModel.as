@@ -1,44 +1,50 @@
-package com.godpaper.tasks
+package com.godpaper.model
 {
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-//	import com.adobe.cairngorm.task.Task;
-	import com.godpaper.business.factory.ChessFactory;
-	import com.godpaper.business.managers.ChessPieceManager;
 	import com.godpaper.configs.BoardConfig;
 	import com.godpaper.consts.CcjConstants;
-	import com.godpaper.core.IChessPiece;
-	import com.godpaper.model.ChessGasketsModel;
-	import com.godpaper.model.ChessPiecesModel;
-	import com.godpaper.views.components.ChessGasket;
+	import com.godpaper.errors.CcjErrors;
+	import com.godpaper.model.vos.ConductVO;
+	import com.godpaper.model.vos.PositionVO;
+	import com.godpaper.model.vos.cvo.BishopVO;
+	import com.godpaper.model.vos.cvo.CannonVO;
+	import com.godpaper.model.vos.cvo.KnightVO;
+	import com.godpaper.model.vos.cvo.MarshalVO;
+	import com.godpaper.model.vos.cvo.OfficalVO;
+	import com.godpaper.model.vos.cvo.PawnVO;
+	import com.godpaper.model.vos.cvo.RookVO;
+	import com.godpaper.utils.LogUtil;
 	import com.godpaper.views.components.ChessPiece;
+	import com.lookbackon.ds.BitBoard;
 
-	import flash.display.DisplayObject;
-	import flash.geom.Point;
+	import de.polygonal.ds.Array2;
 
-	import mx.core.FlexGlobals;
+	import mx.collections.ArrayCollection;
+	import mx.logging.ILogger;
 
-	import org.spicefactory.lib.task.Task;
 
 	/**
-	 * CleanUpChessPieceTask.as class.
+	 * ChessGasketsModel.as class. A singleton model hold all Chess gaskets' information.
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
-	 * Created Dec 29, 2010 11:51:40 AM
+	 * Created Jan 26, 2011 12:37:31 PM
 	 */   	 
-	public class CleanUpChessPieceTask extends Task
+	public class ChessGasketsModel
 	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		[Bindable]
-		private var chessPiecesModel:ChessPiecesModel = ChessPiecesModel.getInstance();
+		//Singleton instance of ChessGasketsModel;
+		private static var instance:ChessGasketsModel;
+		//
+		private var _gaskets:Array2=new Array2(BoardConfig.xLines, BoardConfig.yLines);
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -48,7 +54,17 @@ package com.godpaper.tasks
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-
+		//----------------------------------
+		//  gaskets
+		//----------------------------------
+		public function get gaskets():Array2
+		{
+			return _gaskets;
+		}
+		public function set gaskets(value:Array2):void
+		{
+			_gaskets = value;
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -60,47 +76,37 @@ package com.godpaper.tasks
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function CleanUpChessPieceTask()
+		public function ChessGasketsModel(access:Private)
 		{
-			//TODO: implement function
-			super();
-		}     	
+			if (access != null)
+			{
+				if (instance == null)
+				{
+					instance=this;
+				}
+			}
+			else
+			{
+				throw new CcjErrors(CcjErrors.INITIALIZE_SINGLETON_CLASS);
+			}
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-//		override protected function performTask():void
-		override protected function doStart():void	
+		/**
+		 *
+		 * @return the singleton instance of ChessGasketsModel
+		 *
+		 */
+		public static function getInstance():ChessGasketsModel
 		{
-			//clean up chess piece
-			for(var v:int=0;v<BoardConfig.yLines;v++)
+			if (instance == null)
 			{
-				for(var h:int=0;h<BoardConfig.xLines;h++)
-				{
-					var chessGasket:ChessGasket = (ChessGasketsModel.getInstance().gaskets.gett(h,v) as ChessGasket);
-					if( chessGasket.chessPiece )
-					{
-						trace("removed piece:",ChessPiece(chessGasket.chessPiece).label );
-						try{
-							chessGasket.chessPiece.chessVO = null;
-							chessGasket.chessPiece.omenVO = null;
-							chessGasket.chessPiece = null;
-//							chessGasket.removeElement( chessGasket.chessPiece );
-							//
-							chessPiecesModel.reds.length = 0;
-							chessPiecesModel.blues.length = 0;
-								//
-						}catch(error:Error)
-						{
-							//
-							trace(error);
-						}
-					}
-				}
+				instance=new ChessGasketsModel(new Private());
 			}
-			//
-			this.complete();
+			return instance;
 		}
 		//--------------------------------------------------------------------------
 		//
@@ -116,4 +122,11 @@ package com.godpaper.tasks
 	}
 
 }
+/**
+ *Inner class which restricts construtor access to Private
+ */
+internal class Private
+{
+}
+
 

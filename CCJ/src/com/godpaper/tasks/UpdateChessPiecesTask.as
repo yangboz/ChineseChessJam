@@ -12,6 +12,7 @@ package com.godpaper.tasks
 	import com.godpaper.consts.CcjConstants;
 	import com.godpaper.consts.ChessPiecesConstants;
 	import com.godpaper.core.IChessPiece;
+	import com.godpaper.model.ChessGasketsModel;
 	import com.godpaper.model.ChessPiecesModel;
 	import com.godpaper.model.vos.ConductVO;
 	import com.godpaper.utils.LogUtil;
@@ -80,7 +81,7 @@ package com.godpaper.tasks
 		{
 			//TODO:
 			var cGasket:ChessGasket = 
-				ChessPieceManager.gaskets.gett(conductVO.nextPosition.x,conductVO.nextPosition.y) as ChessGasket;
+				ChessGasketsModel.getInstance().gaskets.gett(conductVO.nextPosition.x,conductVO.nextPosition.y) as ChessGasket;
 			//
 			if(cGasket.numElements>=1)
 			{

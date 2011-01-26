@@ -7,15 +7,16 @@ package com.godpaper.tasks
 	//--------------------------------------------------------------------------
 	import com.adobe.cairngorm.task.Task;
 	import com.godpaper.business.managers.ChessPieceManager;
+	import com.godpaper.model.ChessGasketsModel;
 	import com.godpaper.model.vos.ConductVO;
 	import com.godpaper.utils.LogUtil;
 	import com.godpaper.views.components.ChessGasket;
-	
+
 	import mx.logging.ILogger;
-	
-	
+
+
 	/**
-	 * UpdatePiecesPostionTask.as class.   	
+	 * UpdatePiecesPostionTask.as class.
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
@@ -38,13 +39,13 @@ package com.godpaper.tasks
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
 		//
 		//-------------------------------------------------------------------------- 
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Constructor
@@ -62,7 +63,7 @@ package com.godpaper.tasks
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
@@ -72,7 +73,7 @@ package com.godpaper.tasks
 		{
 			//TODO:
 			var cGasket:ChessGasket = 
-				ChessPieceManager.gaskets.gett(conductVO.nextPosition.x,conductVO.nextPosition.y) as ChessGasket;
+				ChessGasketsModel.getInstance().gaskets.gett(conductVO.nextPosition.x,conductVO.nextPosition.y) as ChessGasket;
 			this.conductVO.target.position = cGasket.position;
 			//
 			this.complete();
@@ -83,5 +84,6 @@ package com.godpaper.tasks
 		//
 		//--------------------------------------------------------------------------
 	}
-	
+
 }
+

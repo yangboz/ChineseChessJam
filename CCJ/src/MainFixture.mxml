@@ -13,12 +13,12 @@
 		<![CDATA[
 			import com.godpaper.configs.BoardConfig;
 			import com.godpaper.configs.CCJContextConfig;
-			
+
 			import mx.events.FlexEvent;
 			import mx.logging.LogEventLevel;
 
 			[Bindable]private var logFilters:Array=["*"];
-			
+
 			protected function application1_preinitializeHandler(event:FlexEvent):void
 			{
 				BoardConfig.xLines = 9;
@@ -30,7 +30,7 @@
 				BoardConfig.xScale = 1;
 				BoardConfig.yScale = 1;
 			}
-			
+
 			protected function application1_initializeHandler(event:FlexEvent):void
 			{
 			}
@@ -71,9 +71,6 @@
 		Vistual elements at stage here.
 	-->
 	<s:VGroup width="100%" height="100%">
-		<impl:ChessBoardDefault/>
-		<s:Form width="100%">
-			
-		</s:Form>
+		<impl:ChessBoardDefault id="defaultChessBoard"/>
 	</s:VGroup>
 </s:Application>
