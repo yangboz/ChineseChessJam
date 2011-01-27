@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<actionScriptProperties analytics="false" mainApplicationPath="Main.mxml" projectUUID="63170f75-37ba-4a1e-a503-ab4ebe061d42" version="7">
+<actionScriptProperties analytics="false" mainApplicationPath="CCJ.mxml" projectUUID="63170f75-37ba-4a1e-a503-ab4ebe061d42" version="7">
   <compiler additionalCompilerArguments="-locale en_US -define=CONFIG::debugging,true" autoRSLOrdering="true" copyDependentFiles="true" flex3CompatMode="false" flexSDK="Flex Hero" fteInMXComponents="false" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="true" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="bin-debug" sourceFolderPath="src" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="false" useDebugRSLSwfs="true" verifyDigests="true" warn="true">
     <compilerSourcePath/>
     <libraryPath defaultLinkType="3">
@@ -16,12 +16,12 @@
     <sourceAttachmentPath/>
   </compiler>
   <applications>
-    <application path="MainFixture.mxml"/>
-    <application path="FlexUnitCompilerApplication.mxml"/>
+    <application path="CCJ.mxml"/>
+    <application path="TwoHitOne.mxml"/>
     <application path="Flex4Test.mxml"/>
     <application path="FlexUnitApplication.mxml"/>
-    <application path="Main.mxml"/>
     <application path="com/godpaper/utils/P2PChat.mxml"/>
+    <application path="FlexUnitCompilerApplication.mxml"/>
   </applications>
   <modules/>
   <buildCSSFiles/>

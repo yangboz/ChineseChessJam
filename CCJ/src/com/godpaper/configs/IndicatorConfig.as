@@ -1,33 +1,30 @@
-package com.godpaper.business.fsm.states.game
+package com.godpaper.configs
 {
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.godpaper.business.managers.GameManager;
-	import com.godpaper.configs.GameConfig;
-	import com.godpaper.configs.IndicatorConfig;
-	import com.godpaper.consts.CcjConstants;
-	import com.lookbackon.AI.FSM.IAgent;
-	import com.lookbackon.AI.FSM.states.StateBase;
-
-
 	/**
-	 * HumanState.as class.
+	 * IndicatorConfig.as class.All kinds of indicators configurations here.
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
-	 * Created Dec 10, 2010 11:12:15 AM
+	 * Created Jan 27, 2011 2:07:57 PM
 	 */   	 
-	public class HumanState extends StateBase
+	public class IndicatorConfig
 	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-
+		//default
+		[Bindable]public static var readOut:Boolean=false;
+		//
+		[Bindable]public static var check:Boolean=false;
+		//about mochi
+		[Bindable]public static var submitScore:Boolean=false;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -49,34 +46,13 @@ package com.godpaper.business.fsm.states.game
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function HumanState(agent:IAgent, resource:Object, description:String=null)
-		{
-			//TODO: implement function
-			super(agent, resource, description);
-		}     	
+
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		override public function enter():void
-		{
-			//hold turn flag
-			GameConfig.turnFlag = CcjConstants.FLAG_RED;
-			//
-			IndicatorConfig.readOut=false;
-			//about data
-		}
 
-		override public function exit():void
-		{
-			//TODO: implement function
-		}
-
-		override public function update(time:Number=0):void
-		{
-			//TODO: implement function
-		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
@@ -88,6 +64,7 @@ package com.godpaper.business.fsm.states.game
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
+
 	}
 
 }

@@ -25,21 +25,26 @@
 	<fx:Script>
 		<![CDATA[
 			import com.adobe.cairngorm.contract.Contract;
+			import com.godpaper.business.managers.GameManager;
 			import com.godpaper.configs.BoardConfig;
 			import com.godpaper.configs.CCJContextConfig;
 			import com.godpaper.configs.GameConfig;
+			import com.godpaper.configs.IndicatorConfig;
+			import com.godpaper.consts.CcjConstants;
+			import com.godpaper.model.ChessPiecesModel;
+			import com.godpaper.utils.LogUtil;
 			import com.lookbackon.AI.searching.AttackFalse;
 			import com.lookbackon.AI.searching.MiniMax;
 			import com.lookbackon.AI.searching.RandomWalk;
 			import com.lookbackon.AI.searching.ShortSighted;
-			import com.godpaper.consts.CcjConstants;
-			import com.godpaper.business.managers.GameManager;
-			import com.godpaper.model.ChessPiecesModel;
-			import com.godpaper.utils.LogUtil;
 
 			import mx.events.FlexEvent;
 			import mx.logging.ILogger;
 			import mx.logging.LogEventLevel;
+
+			import org.spicefactory.lib.logging.LogContext;
+			import org.spicefactory.lib.logging.Logger;
+
 			//--------------------------------------------------------------------------
 			//
 			//  Variables
@@ -49,26 +54,10 @@
 			public var _mochiads_game_id:String="47de4a85dd3e213a";
 			public var _mochiClip:MovieClip;
 			//
-			private var chessPiecesModel:ChessPiecesModel=ChessPiecesModel.getInstance();
-			//
-			[Bindable]
-			private var logFilters:Array=[
-//												"com.lookbackon.ccj.view.components.ChessGasket"
-//												,
-//				"com.lookbackon.ccj.managers.ChessPieceManager", "com.lookbackon.AI.searching.*"
-//												"com.lookbackon.ccj.model.vos.cvo.CannonVO"		
-//												,
-//												"com.lookbackon.ccj.view.components.ChessPiece"
-//												,
-//				"com.lookbackon.AI.searching.*"
-//				,
-				"*"];
-			//
 			//----------------------------------
 			//  CONSTANTS
 			//----------------------------------
-			private static const LOG:ILogger=LogUtil.getLogger(Main);
-
+			private static const LOG:Logger=LogContext.getLogger(CCJ);
 			//--------------------------------------------------------------------------
 			//
 			//  Methods
@@ -78,7 +67,6 @@
 			protected function application1_initializeHandler(event:FlexEvent):void
 			{
 				//config initialization here.
-				//				XmlContextBuilder.build("com/godpaper/configs/logConfig.xml");
 				BoardConfig.xLines = 9;
 				BoardConfig.yLines = 10;
 				BoardConfig.xOffset = 50;
@@ -117,13 +105,13 @@
 					LOG.warn("CONFIG::debugging {0}", error.toString());
 				}
 				//
-				LOG.info("redPieces:{0}", chessPiecesModel.redPieces.dump());
-				LOG.info("bluePieces:{0}", chessPiecesModel.bluePieces.dump());
-				LOG.info("allPieces:{0}", chessPiecesModel.allPieces.dump());
+				LOG.info("redPieces:{0}", ChessPiecesModel.getInstance().redPieces.dump());
+				LOG.info("bluePieces:{0}", ChessPiecesModel.getInstance().bluePieces.dump());
+				LOG.info("allPieces:{0}", ChessPiecesModel.getInstance().allPieces.dump());
 				//
-				LOG.info("allPieces rotate90:{0}", chessPiecesModel.allPieces.rotate90().dump());
-				LOG.info("allPieces rotate90.bitCount:{0}", chessPiecesModel.allPieces.bitCount);
-				LOG.info("allPieces rotate90.cellCount:{0}", chessPiecesModel.allPieces.cellCount);
+				LOG.info("allPieces rotate90:{0}", ChessPiecesModel.getInstance().allPieces.rotate90().dump());
+				LOG.info("allPieces rotate90.bitCount:{0}", ChessPiecesModel.getInstance().allPieces.bitCount);
+				LOG.info("allPieces rotate90.cellCount:{0}", ChessPiecesModel.getInstance().allPieces.cellCount);
 			}
 
 			protected function application1_applicationCompleteHandler(event:FlexEvent):void
@@ -142,6 +130,7 @@
 		The context for bootstrapping the whole Parsley framework.
 		-->
 		<parsley:ContextBuilder config="com.godpaper.configs.CCJContextConfig">
+
 		</parsley:ContextBuilder>
 
 		<!---
@@ -154,22 +143,29 @@
 					   includeLevel="true"
 					   includeTime="true"
 					   level="{LogEventLevel.INFO}"
-					   filters="{logFilters}"
-					   />
+					   >
+			<s:filters>
+				[
+					com.lookbackon.AI.searching.*,
+					*
+				]
+			</s:filters>
+		</s:TraceTarget>
+
 		<!-- Popups here -->
-		<popup:PopUpWrapper open="{GameManager.indicatorReadOut}"
+		<popup:PopUpWrapper open="{IndicatorConfig.readOut}"
 							center="true"
 							modal="true">
 			<popups:ThinkIndicatory/>
 		</popup:PopUpWrapper>
 
-		<parsley:PopUp open="{GameManager.indicatorCheck}"
+		<parsley:PopUp open="{IndicatorConfig.check}"
 					   center="true"
 					   modal="true">
 			<popups:CheckIndicatory/>
 		</parsley:PopUp>
 
-		<parsley:PopUp open="{GameManager.indicatorSubmitScore}"
+		<parsley:PopUp open="{IndicatorConfig.submitScore}"
 					   center="true"
 					   modal="true">
 			<mochi:SubmitScoreAndNextRound id="submitScoreAndNamePopup"/>
@@ -189,14 +185,13 @@
 			<tasks:CleanUpChessPieceTask label="clean up chess pieces"/>
 			<tasks:CleanUpPiecesBitboardTask label="clean up pieces bitboard"/>
 		</task:SequenceTask>-->
-		<task1:SequentialTaskGroup id="cleanUp"
+		<task1:SequentialTaskGroup id="cleanUpSequenceTask"
 								   autoStart="false">
 
 		</task1:SequentialTaskGroup>
 
 		<!-- Services here -->
 	</fx:Declarations>
-
 	<!-- Views here -->
 	<components:ChessBoard id="chessBoard"
 						   left="25"

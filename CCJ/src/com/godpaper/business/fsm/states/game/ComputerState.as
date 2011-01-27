@@ -5,7 +5,12 @@ package com.godpaper.business.fsm.states.game
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
+	import com.godpaper.business.managers.GameManager;
 	import com.godpaper.configs.GameConfig;
+	import com.godpaper.configs.IndicatorConfig;
+	import com.godpaper.consts.CcjConstants;
+	import com.godpaper.model.ChessPiecesModel;
+	import com.godpaper.utils.LogUtil;
 	import com.lookbackon.AI.FSM.IAgent;
 	import com.lookbackon.AI.FSM.states.StateBase;
 	import com.lookbackon.AI.searching.AttackFalse;
@@ -13,10 +18,6 @@ package com.godpaper.business.fsm.states.game
 	import com.lookbackon.AI.searching.MiniMax;
 	import com.lookbackon.AI.searching.RandomWalk;
 	import com.lookbackon.AI.searching.ShortSighted;
-	import com.godpaper.consts.CcjConstants;
-	import com.godpaper.business.managers.GameManager;
-	import com.godpaper.model.ChessPiecesModel;
-	import com.godpaper.utils.LogUtil;
 
 	import flash.utils.getDefinitionByName;
 	import flash.utils.getQualifiedClassName;
@@ -86,7 +87,7 @@ package com.godpaper.business.fsm.states.game
 			//about view
 			CursorManager.setBusyCursor();
 			//
-			GameManager.indicatorReadOut=true;
+			IndicatorConfig.readOut=true;
 			//default update current state.
 			update(GameManager.level-1);
 		}
@@ -96,7 +97,7 @@ package com.godpaper.business.fsm.states.game
 			//about view
 			CursorManager.removeBusyCursor();
 			//
-			GameManager.indicatorReadOut=false;
+			IndicatorConfig.readOut=false;
 		}
 
 		override public function update(time:Number=0):void

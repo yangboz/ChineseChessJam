@@ -10,10 +10,11 @@
 			   title="{CcjConstants.INDICATION_CHECK}">
 	<fx:Script>
 		<![CDATA[
-			import com.lookbackon.AI.FSM.Message;
+			import com.godpaper.business.managers.GameManager;
+			import com.godpaper.configs.IndicatorConfig;
 			import com.godpaper.consts.CcjConstants;
 			import com.godpaper.consts.ChessPiecesConstants;
-			import com.godpaper.business.managers.GameManager;
+			import com.lookbackon.AI.FSM.Message;
 
 			import mx.events.FlexEvent;
 
@@ -28,7 +29,7 @@
 			//
 			private function timerCompleteHandler(event:TimerEvent):void
 			{
-				GameManager.indicatorCheck=false;
+				IndicatorConfig.check=false;
 				//
 				_timer.removeEventListener(TimerEvent.TIMER_COMPLETE, timerCompleteHandler);
 			}

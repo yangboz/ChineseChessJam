@@ -2,31 +2,33 @@
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
 			   xmlns:s="library://ns.adobe.com/flex/spark"
 			   xmlns:mx="library://ns.adobe.com/flex/mx"
-			   width="500"
-			   height="600"
+			   width="450"
+			   height="400"
 			   xmlns:parsley="http://www.spicefactory.org/parsley"
 			   preinitialize="application1_preinitializeHandler(event)"
 			   initialize="application1_initializeHandler(event)"
 			   creationComplete="application1_creationCompleteHandler(event)"
-			   xmlns:impl="com.godpaper.impl.*">
+			   xmlns:impl="com.godpaper.impl.*"
+			   xmlns:popup="com.adobe.cairngorm.popup.*"
+			   xmlns:popups="com.godpaper.views.popups.*"
+			   >
 	<fx:Script>
 		<![CDATA[
 			import com.godpaper.configs.BoardConfig;
 			import com.godpaper.configs.CCJContextConfig;
+			import com.godpaper.configs.IndicatorConfig;
 
 			import mx.events.FlexEvent;
 			import mx.logging.LogEventLevel;
 
-			[Bindable]private var logFilters:Array=["*"];
-
 			protected function application1_preinitializeHandler(event:FlexEvent):void
 			{
-				BoardConfig.xLines = 9;
-				BoardConfig.yLines = 10;
-				BoardConfig.xOffset = 50;
-				BoardConfig.yOffset = 50;
-				BoardConfig.width = 450;
-				BoardConfig.height = 500;
+				BoardConfig.xLines = 4;
+				BoardConfig.yLines = 4;
+				BoardConfig.xOffset = 100;
+				BoardConfig.yOffset = 100;
+				BoardConfig.width = 300;
+				BoardConfig.height = 300;
 				BoardConfig.xScale = 1;
 				BoardConfig.yScale = 1;
 			}
@@ -38,11 +40,6 @@
 			protected function application1_creationCompleteHandler(event:FlexEvent):void
 			{
 				// TODO Auto-generated method stub
-//				var pgnLoader:URLLoader = new URLLoader(new URLRequest("assets/pgn/sample.PGN"));
-//				pgnLoader.addEventListener(Event.COMPLETE,function():void
-//				{
-//					trace(pgnLoader.data);
-//				});
 			}
 
 		]]>
@@ -57,20 +54,33 @@
 		<!---
 			The system unique logging component provider LOG.debug/info/warn/error/fatal avenues.
 		-->
-		<mx:TraceTarget id="traceTarget"
-						fieldSeparator="->"
-						includeCategory="true"
-						includeDate="false"
-						includeLevel="true"
-						includeTime="true"
-						level="{LogEventLevel.DEBUG}"
-						filters="{logFilters}">
-		</mx:TraceTarget>
+		<s:TraceTarget id="traceTarget"
+					   fieldSeparator="->"
+					   includeCategory="true"
+					   includeDate="false"
+					   includeLevel="true"
+					   includeTime="true"
+					   level="{LogEventLevel.INFO}"
+					   >
+			<s:filters>
+				[
+				com.lookbackon.AI.searching.*,
+				*
+				]
+			</s:filters>
+		</s:TraceTarget>
+		<!-- Popups here -->
+		<popup:PopUpWrapper open="{IndicatorConfig.readOut}"
+							center="true"
+							modal="true">
+			<popups:ThinkIndicatory/>
+		</popup:PopUpWrapper>
 	</fx:Declarations>
+
 	<!---
 		Vistual elements at stage here.
 	-->
-	<s:VGroup width="100%" height="100%">
-		<impl:ChessBoardDefault id="defaultChessBoard"/>
+	<s:VGroup top="50" right="100" left="50" bottom="50">
+		<impl:ChessBoardDefault id="defaultChessBoard" />
 	</s:VGroup>
 </s:Application>

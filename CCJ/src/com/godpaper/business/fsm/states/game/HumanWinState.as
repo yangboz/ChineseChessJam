@@ -5,12 +5,13 @@ package com.godpaper.business.fsm.states.game
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
+	import com.godpaper.business.managers.GameManager;
+	import com.godpaper.configs.IndicatorConfig;
 	import com.lookbackon.AI.FSM.IAgent;
 	import com.lookbackon.AI.FSM.states.StateBase;
-	import com.godpaper.business.managers.GameManager;
-	
+
 	/**
-	 * HumanWinState.as class.   	
+	 * HumanWinState.as class.
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
@@ -26,19 +27,19 @@ package com.godpaper.business.fsm.states.game
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
 		//
 		//-------------------------------------------------------------------------- 
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Constructor
@@ -57,29 +58,31 @@ package com.godpaper.business.fsm.states.game
 		override public function enter():void
 		{
 			GameManager.isRunning = false;
-			GameManager.indicatorSubmitScore = true;
+			IndicatorConfig.submitScore = true;
 		}
-		
+
 		override public function update(time:Number=0):void
 		{
-			
+
 		}
-		
+
 		override public function exit():void
 		{
-			GameManager.indicatorSubmitScore = false;
+			//
+			IndicatorConfig.submitScore = false;
 		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
 	}
-	
+
 }
+

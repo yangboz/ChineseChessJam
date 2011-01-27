@@ -15,7 +15,7 @@ package com.godpaper.business.managers
 	import com.godpaper.model.ChessPiecesModel;
 	import com.godpaper.model.vos.PositionVO;
 	import com.godpaper.utils.LogUtil;
-	
+
 	import mx.core.FlexGlobals;
 	import mx.core.IVisualElement;
 	import mx.logging.ILogger;
@@ -37,14 +37,6 @@ package com.godpaper.business.managers
 		private static var chessPieceModel:ChessPiecesModel = ChessPiecesModel.getInstance();
 		//
 		public static var isRunning:Boolean;
-		//indicators
-		[Bindable]
-		public static var indicatorReadOut:Boolean=false;
-		[Bindable]
-		public static var indicatorCheck:Boolean=false;
-		//about mochi
-		[Bindable]
-		public static var indicatorSubmitScore:Boolean=false;
 		//
 		public static var agent:GameAgent;
 		//
@@ -77,13 +69,13 @@ package com.godpaper.business.managers
 			var gamePhase:uint=PHASE_OPENING;
 			if (chessPieceModel.gamePosition.board.celled <= 14 
 				&& chessPieceModel.gamePosition.board.celled >= 6
-			)
+				)
 			{
 				gamePhase=PHASE_MIDDLE;
 			}
 			if (chessPieceModel.gamePosition.board.celled < 6 
 				&& chessPieceModel.gamePosition.board.celled >= 1
-			)
+				)
 			{
 				gamePhase=PHASE_ENDING;
 			}
@@ -121,9 +113,9 @@ package com.godpaper.business.managers
 		{
 			//TODO:re-start game
 			//clear board,chess pieces
-			FlexGlobals.topLevelApplication.cleanUp.addTask(new CleanUpChessPieceTask());
-			FlexGlobals.topLevelApplication.cleanUp.addTask(new CleanUpPiecesBitboardTask());
-			FlexGlobals.topLevelApplication.cleanUp.start();
+			FlexGlobals.topLevelApplication.cleanUpSequenceTask.addTask(new CleanUpChessPieceTask());
+			FlexGlobals.topLevelApplication.cleanUpSequenceTask.addTask(new CleanUpPiecesBitboardTask());
+			FlexGlobals.topLevelApplication.cleanUpSequenceTask.start();
 			//
 			mx.core.FlexGlobals.topLevelApplication.dumpFootSprint();
 			//
@@ -177,3 +169,4 @@ package com.godpaper.business.managers
 		}
 	}
 }
+

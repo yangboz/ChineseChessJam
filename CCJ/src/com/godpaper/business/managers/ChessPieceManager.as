@@ -5,6 +5,7 @@ package com.godpaper.business.managers
 	import com.adobe.cairngorm.task.TaskEvent;
 	import com.godpaper.configs.BoardConfig;
 	import com.godpaper.configs.GameConfig;
+	import com.godpaper.configs.IndicatorConfig;
 	import com.godpaper.consts.CcjConstants;
 	import com.godpaper.consts.ChessPiecesConstants;
 	import com.godpaper.core.IChessPiece;
@@ -385,7 +386,7 @@ package com.godpaper.business.managers
 			LOG.debug("totalCaptures:{0}", totalCaptures.dump());
 			if (!totalCaptures.and(marshal).isEmpty)
 			{
-				GameManager.indicatorCheck=true;
+				IndicatorConfig.check=true;
 				//update is checking flag.
 				LOG.info("___isChecking___true");
 				_isChecking = true;

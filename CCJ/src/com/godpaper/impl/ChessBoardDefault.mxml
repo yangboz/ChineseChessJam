@@ -34,7 +34,7 @@
 			<repeaters:VerticalLineRepeater count="{BoardConfig.xLines}" stroke="{blackStroke}" y="0" y1="{BoardConfig.height}" x="0" moveOffsetX="{BoardConfig.xOffset}"/>
 		</degrafa:GeometryGroup>
 		<!-- Intersect lines . -->
-		<degrafa:GeometryGroup>
+		<!--<degrafa:GeometryGroup>
 			<geometry:Line x="{BoardConfig.xOffset*3}" y="0" x1="{BoardConfig.xOffset*5}" y1="{BoardConfig.yOffset*2}" stroke="{blackStroke}">
 			</geometry:Line>
 			<geometry:Line x="{BoardConfig.xOffset*5}" y="0" x1="{BoardConfig.xOffset*3}" y1="{BoardConfig.yOffset*2}" stroke="{blackStroke}">
@@ -43,6 +43,6 @@
 			</geometry:Line>
 			<geometry:Line x="{BoardConfig.xOffset*5}" y="{BoardConfig.height}" x1="{BoardConfig.xOffset*3}" y1="{BoardConfig.height-2*BoardConfig.yOffset}" stroke="{blackStroke}">
 			</geometry:Line>
-		</degrafa:GeometryGroup>
+		</degrafa:GeometryGroup>-->
 	</degrafa:Surface>
 </s:BorderContainer>
