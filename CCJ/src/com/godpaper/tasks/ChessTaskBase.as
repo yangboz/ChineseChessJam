@@ -6,36 +6,23 @@ package com.godpaper.tasks
 	//
 	//--------------------------------------------------------------------------
 	import com.adobe.cairngorm.task.Task;
-	import com.godpaper.business.factory.ChessFactoryBase;
-	import com.godpaper.core.IChessFactory;
-	import com.godpaper.business.managers.ChessPieceManager;
-	import com.godpaper.configs.BoardConfig;
-	import com.godpaper.consts.CcjConstants;
-	import com.godpaper.core.IChessPiece;
-	import com.godpaper.model.ChessGasketsModel;
-	import com.godpaper.views.components.ChessGasket;
 
-	import flash.geom.Point;
-	import flash.utils.getDefinitionByName;
-	import flash.utils.getQualifiedClassName;
-
-	import mx.core.FlexGlobals;
 
 	/**
-	 * ChessTaskBase.as class.
+	 * AbstractChessTask.as class.
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
-	 * Created Nov 30, 2010 12:00:05 PM
+	 * Created Jan 27, 2011 4:09:26 PM
 	 */   	 
-	public class CreateChessPieceTask extends ChessTaskBase
+	public class ChessTaskBase extends Task
 	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-
+		private var _factory:Class;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -45,7 +32,14 @@ package com.godpaper.tasks
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-
+		public function get factory():Class
+		{
+			return _factory;
+		}
+		public function set factory(value:Class):void
+		{
+			_factory = value;
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -57,7 +51,7 @@ package com.godpaper.tasks
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function CreateChessPieceTask()
+		public function ChessTaskBase()
 		{
 			//TODO: implement function
 			super();
@@ -73,38 +67,13 @@ package com.godpaper.tasks
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		override protected function performTask():void
-		{
-			var className:String = getQualifiedClassName(factory);
-			var implementation:Object = getDefinitionByName(className);
-			var realFactoy:IChessFactory  = new implementation();
-			//create chess piece
-			for(var hh:int=0;hh<BoardConfig.xLines;hh++)
-			{
-				for(var vv:int=0;vv<BoardConfig.yLines;vv++)
-				{
-					var iChessPiece:IChessPiece = realFactoy.createChessPiece(new Point(hh,vv));
-					if(iChessPiece!=null)
-					{
-//						trace("index:",vv*CcjConstants.BOARD_V_LINES+hh);
-						var ecGasket:ChessGasket = ChessGasketsModel.getInstance().gaskets.gett(hh,vv) as ChessGasket;
-						ecGasket.chessPiece = iChessPiece;
-//						ecGasket.addElement( iChessPiece );
-						//
-						iChessPiece.x = 0;
-						iChessPiece.y = 0;
-							//
-					}
-				}
-			}
-			//
-			this.complete();
-		}
+
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
+
 	}
 
 }

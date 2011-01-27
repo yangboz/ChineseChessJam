@@ -6,23 +6,25 @@ package com.godpaper.tasks
 	//
 	//--------------------------------------------------------------------------
 	import com.adobe.cairngorm.task.Task;
-	import com.godpaper.business.factory.ChessFactory;
+	import com.godpaper.core.IChessFactory;
 	import com.godpaper.model.ChessPiecesModel;
 	import com.godpaper.model.vos.ConductVO;
 	import com.godpaper.utils.LogUtil;
 	import com.godpaper.views.components.ChessPiece;
-	
+
 	import mx.logging.ILogger;
-	
-	
+
+	import flash.utils.getDefinitionByName;
+	import flash.utils.getQualifiedClassName;
+
 	/**
-	 * UpdatePiecesChessVoTask.as class.   	
+	 * UpdatePiecesChessVoTask.as class.
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
 	 * Created Dec 2, 2010 1:16:34 PM
 	 */   	 
-	public class UpdatePiecesChessVoTask extends Task
+	public class UpdatePiecesChessVoTask extends ChessTaskBase
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -39,13 +41,13 @@ package com.godpaper.tasks
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
 		//
 		//-------------------------------------------------------------------------- 
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Constructor
@@ -61,7 +63,7 @@ package com.godpaper.tasks
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
@@ -69,6 +71,9 @@ package com.godpaper.tasks
 		//--------------------------------------------------------------------------
 		override protected function performTask():void
 		{
+			var className:String = getQualifiedClassName(factory);
+			var implementation:Object = getDefinitionByName(className);
+			var realFactoy:IChessFactory  = new implementation();
 			//TODO:
 			for(var i:int=0;i<chessPiecesModel.pieces.length;i++)
 			{
@@ -79,8 +84,8 @@ package com.godpaper.tasks
 				//				LOG.info("before move,currentConductVO:{0}",currentConductVO.dump());
 				//				LOG.info("before move,chessPiece's chessVO's legal moves:{0}",chessPiece.chessVO.moves.dump());
 				//renew chessVO.
-				chessPiece.chessVO = ChessFactory.generateChessVO(currentConductVO);
-				//				LOG.info("after move,chessPiece's chessVO's legal moves:{0}",chessPiece.chessVO.moves.dump());
+				chessPiece.chessVO = realFactoy.generateChessVO(currentConductVO);
+					//				LOG.info("after move,chessPiece's chessVO's legal moves:{0}",chessPiece.chessVO.moves.dump());
 			}
 			LOG.info("{0} Chess Pieces' ChessVO Updated !",chessPiecesModel.pieces.length.toString());
 			//
@@ -92,5 +97,6 @@ package com.godpaper.tasks
 		//
 		//--------------------------------------------------------------------------
 	}
-	
+
 }
+

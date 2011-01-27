@@ -1,47 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
-			   xmlns:s="library://ns.adobe.com/flex/spark"
-			   xmlns:mx="library://ns.adobe.com/flex/mx"
-			   width="450"
-			   height="400"
-			   xmlns:parsley="http://www.spicefactory.org/parsley"
-			   preinitialize="application1_preinitializeHandler(event)"
-			   initialize="application1_initializeHandler(event)"
-			   creationComplete="application1_creationCompleteHandler(event)"
-			   xmlns:impl="com.godpaper.impl.*"
-			   xmlns:popup="com.adobe.cairngorm.popup.*"
-			   xmlns:popups="com.godpaper.views.popups.*"
-			   >
+<app:ApplicationBase xmlns:fx="http://ns.adobe.com/mxml/2009"
+					 xmlns:s="library://ns.adobe.com/flex/spark"
+					 xmlns:mx="library://ns.adobe.com/flex/mx"
+					 xmlns:app="*"
+					 width="450"
+					 height="400"
+					 xmlns:parsley="http://www.spicefactory.org/parsley"
+					 xmlns:impl="com.godpaper.impl.*"
+					 xmlns:popup="com.adobe.cairngorm.popup.*"
+					 xmlns:popups="com.godpaper.views.popups.*"
+					 xmlns:task="com.adobe.cairngorm.task.*"
+					 xmlns:tasks="com.godpaper.tasks.*"
+					 xmlns:task1="org.spicefactory.lib.task.*"
+					 xmlns:mochi="com.godpaper.views.mochi.*">
 	<fx:Script>
 		<![CDATA[
+			import com.godpaper.business.factory.CcjChessFactory;
+			import com.godpaper.business.factory.ChessFactoryBase;
+			import com.godpaper.business.factory.TwhChessFactory;
 			import com.godpaper.configs.BoardConfig;
 			import com.godpaper.configs.CCJContextConfig;
+			import com.godpaper.configs.GameConfig;
 			import com.godpaper.configs.IndicatorConfig;
+			import com.godpaper.consts.CcjConstants;
+			import com.lookbackon.AI.searching.*;
 
 			import mx.events.FlexEvent;
 			import mx.logging.LogEventLevel;
-
-			protected function application1_preinitializeHandler(event:FlexEvent):void
+			//
+			override protected function preinitializeHandler(event:FlexEvent):void
 			{
-				BoardConfig.xLines = 4;
-				BoardConfig.yLines = 4;
-				BoardConfig.xOffset = 100;
-				BoardConfig.yOffset = 100;
-				BoardConfig.width = 300;
-				BoardConfig.height = 300;
-				BoardConfig.xScale = 1;
-				BoardConfig.yScale = 1;
+				BoardConfig.xLines=4;
+				BoardConfig.yLines=4;
+				BoardConfig.xOffset=100;
+				BoardConfig.yOffset=100;
+				BoardConfig.width=300;
+				BoardConfig.height=300;
+				BoardConfig.xScale=1;
+				BoardConfig.yScale=1;
 			}
-
-			protected function application1_initializeHandler(event:FlexEvent):void
+			//	
+			override protected function initializeHandler(event:FlexEvent):void
 			{
+				//number of tollgate tips would be matched with tollgates!
+				GameConfig.tollgates=[RandomWalk, ShortSighted, AttackFalse, AttackFalse, MiniMax];
+				GameConfig.tollgateTips=["baby intelligence", "fellow intelligence", "man intelligence", "guru intelligence"];
+				GameConfig.turnFlag=CcjConstants.FLAG_RED;
 			}
-
-			protected function application1_creationCompleteHandler(event:FlexEvent):void
+			//
+			override protected function creationCompleteHandler(event:FlexEvent):void
 			{
 				// TODO Auto-generated method stub
+				startUpSequenceTask.start();
 			}
-
 		]]>
 	</fx:Script>
 	<fx:Declarations>
@@ -60,8 +71,7 @@
 					   includeDate="false"
 					   includeLevel="true"
 					   includeTime="true"
-					   level="{LogEventLevel.INFO}"
-					   >
+					   level="{LogEventLevel.INFO}">
 			<s:filters>
 				[
 				com.lookbackon.AI.searching.*,
@@ -75,12 +85,60 @@
 							modal="true">
 			<popups:ThinkIndicatory/>
 		</popup:PopUpWrapper>
+
+		<parsley:PopUp open="{IndicatorConfig.check}"
+					   center="true"
+					   modal="true">
+			<popups:CheckIndicatory/>
+		</parsley:PopUp>
+
+		<parsley:PopUp open="{IndicatorConfig.submitScore}"
+					   center="true"
+					   modal="true">
+			<mochi:SubmitScoreAndNextRound id="submitScoreAndNamePopup"/>
+		</parsley:PopUp>
+
+		<!-- Controllers here -->
+
+		<!-- Tasks -->
+		<task:SequenceTask id="startUpSequenceTask"
+						   label="startUp">
+			<tasks:CreateChessGasketTask id="ccgTask"
+										 label="create chess gasket"
+										 factory="{ChessFactoryBase}"/>
+			<tasks:CreateChessPieceTask label="create chess piece"
+										factory="{TwhChessFactory}"/>
+			<tasks:CreateChessVoTask label="create chess VO"
+									 factory="{TwhChessFactory}"
+									 />
+		</task:SequenceTask>
+
+		<!--<task:SequenceTask id="cleanUp" label="cleanUp">
+		<tasks:CleanUpChessPieceTask label="clean up chess pieces"/>
+		<tasks:CleanUpPiecesBitboardTask label="clean up pieces bitboard"/>
+		</task:SequenceTask>-->
+		<task1:SequentialTaskGroup id="cleanUpSequenceTask"
+								   autoStart="false">
+
+		</task1:SequentialTaskGroup>
+
+		<!-- Services here -->
 	</fx:Declarations>
 
 	<!---
 		Vistual elements at stage here.
 	-->
-	<s:VGroup top="50" right="100" left="50" bottom="50">
-		<impl:ChessBoardDefault id="defaultChessBoard" />
+	<s:VGroup top="50"
+			  right="100"
+			  left="50"
+			  bottom="50">
+		<impl:ChessBoardDefault id="defaultChessBoard"/>
 	</s:VGroup>
-</s:Application>
+
+	<!-- MochiMedia popup View -->
+	<mochi:MochiUIComponent id="mochiUIComponent"
+							x="0"
+							y="0"/>
+	<!-- MochiMedia toolbar View -->
+	<mochi:MochiToolBarVGroup right="0"/>
+</app:ApplicationBase>

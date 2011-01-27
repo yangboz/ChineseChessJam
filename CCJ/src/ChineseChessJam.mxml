@@ -1,30 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
-			   xmlns:s="library://ns.adobe.com/flex/spark"
-			   xmlns:mx="library://ns.adobe.com/flex/halo"
-			   xmlns:components="com.godpaper.views.components.*"
-			   xmlns:popup="com.adobe.cairngorm.popup.*"
-			   xmlns:controller="com.lookbackon.ccj.controller.*"
-			   xmlns:task="com.adobe.cairngorm.task.*"
-			   xmlns:tasks="com.godpaper.tasks.*"
-			   xmlns:mochi="com.godpaper.views.mochi.*"
-			   xmlns:parsley="http://www.spicefactory.org/parsley"
-			   xmlns:mx1="library://ns.adobe.com/flex/mx"
-			   width="550"
-			   height="520"
-			   maxWidth="550"
-			   maxHeight="520"
-			   initialize="application1_initializeHandler(event)"
-			   applicationComplete="application1_applicationCompleteHandler(event)"
-			   creationComplete="application1_creationCompleteHandler(event)"
-			   xmlns:task1="org.spicefactory.lib.task.*"
-			   xmlns:popups="com.godpaper.views.popups.*">
-	<s:layout>
-		<s:BasicLayout/>
-	</s:layout>
+<app:ApplicationBase xmlns:fx="http://ns.adobe.com/mxml/2009"
+					 xmlns:s="library://ns.adobe.com/flex/spark"
+					 xmlns:mx="library://ns.adobe.com/flex/halo"
+					 xmlns:app="*"
+					 xmlns:components="com.godpaper.views.components.*"
+					 xmlns:popup="com.adobe.cairngorm.popup.*"
+					 xmlns:controller="com.lookbackon.ccj.controller.*"
+					 xmlns:task="com.adobe.cairngorm.task.*"
+					 xmlns:tasks="com.godpaper.tasks.*"
+					 xmlns:mochi="com.godpaper.views.mochi.*"
+					 xmlns:parsley="http://www.spicefactory.org/parsley"
+					 xmlns:mx1="library://ns.adobe.com/flex/mx"
+					 width="550"
+					 height="520"
+					 maxWidth="550"
+					 maxHeight="520"
+					 xmlns:task1="org.spicefactory.lib.task.*"
+					 xmlns:popups="com.godpaper.views.popups.*">
 	<fx:Script>
 		<![CDATA[
 			import com.adobe.cairngorm.contract.Contract;
+			import com.godpaper.business.factory.CcjChessFactory;
+			import com.godpaper.business.factory.ChessFactoryBase;
 			import com.godpaper.business.managers.GameManager;
 			import com.godpaper.configs.BoardConfig;
 			import com.godpaper.configs.CCJContextConfig;
@@ -52,32 +49,37 @@
 			//--------------------------------------------------------------------------
 			//For mochi.
 			public var _mochiads_game_id:String="47de4a85dd3e213a";
-			public var _mochiClip:MovieClip;
 			//
 			//----------------------------------
 			//  CONSTANTS
 			//----------------------------------
-			private static const LOG:Logger=LogContext.getLogger(CCJ);
+			private static const LOG:Logger=LogContext.getLogger(ChineseChessJam);
 			//--------------------------------------------------------------------------
 			//
 			//  Methods
 			//
 			//--------------------------------------------------------------------------
-			//application1_initializeHandler
-			protected function application1_initializeHandler(event:FlexEvent):void
+			//application1_preinitializeHandler
+			override protected function preinitializeHandler(event:FlexEvent):void
 			{
 				//config initialization here.
-				BoardConfig.xLines = 9;
-				BoardConfig.yLines = 10;
-				BoardConfig.xOffset = 50;
-				BoardConfig.yOffset = 50;
-				//number of tollgate tips would be matched with tollgates!
-				GameConfig.tollgates = [RandomWalk,ShortSighted,AttackFalse,AttackFalse,MiniMax];
-				GameConfig.tollgateTips = ["baby intelligence","fellow intelligence","man intelligence","guru intelligence"];
-				GameConfig.turnFlag = CcjConstants.FLAG_RED;
+				BoardConfig.xLines=9;
+				BoardConfig.yLines=10;
+				BoardConfig.xOffset=50;
+				BoardConfig.yOffset=50;
 			}
+
+			//application1_initializeHandler
+			override protected function initializeHandler(event:FlexEvent):void
+			{
+				//number of tollgate tips would be matched with tollgates!
+				GameConfig.tollgates=[RandomWalk, ShortSighted, AttackFalse, AttackFalse, MiniMax];
+				GameConfig.tollgateTips=["baby intelligence", "fellow intelligence", "man intelligence", "guru intelligence"];
+				GameConfig.turnFlag=CcjConstants.FLAG_RED;
+			}
+
 			//  application1_creationCompleteHandler
-			protected function application1_creationCompleteHandler(event:FlexEvent):void
+			override protected function creationCompleteHandler(event:FlexEvent):void
 			{
 				// TODO Auto-generated method stub
 				//create chess gaskets.
@@ -88,14 +90,14 @@
 				//init data struct.@see ChessPieceModel dump info.
 				this.dumpFootSprint();
 			}
-
+			//
 			public function dumpFootSprint():void
 			{
 				//design by contract.
 				//@see http://opensource.adobe.com/wiki/display/cairngorm/HowToUseCairngormContract
 				try
 				{
-					var CONFIG:Namespace = new Namespace("CONFIG");
+					var CONFIG:Namespace=new Namespace("CONFIG");
 					Contract.precondition(CONFIG::debugging);
 					this.traceTarget.level=LogEventLevel.DEBUG;
 					Contract.postcondition(CONFIG::debugging);
@@ -112,15 +114,6 @@
 				LOG.info("allPieces rotate90:{0}", ChessPiecesModel.getInstance().allPieces.rotate90().dump());
 				LOG.info("allPieces rotate90.bitCount:{0}", ChessPiecesModel.getInstance().allPieces.bitCount);
 				LOG.info("allPieces rotate90.cellCount:{0}", ChessPiecesModel.getInstance().allPieces.cellCount);
-			}
-
-			protected function application1_applicationCompleteHandler(event:FlexEvent):void
-			{
-
-				// TODO Auto-generated method stub
-				//GameManager start.
-				GameManager.start();
-				//
 			}
 		]]>
 	</fx:Script>
@@ -142,8 +135,7 @@
 					   includeDate="false"
 					   includeLevel="true"
 					   includeTime="true"
-					   level="{LogEventLevel.INFO}"
-					   >
+					   level="{LogEventLevel.INFO}">
 			<s:filters>
 				[
 					com.lookbackon.AI.searching.*,
@@ -176,9 +168,12 @@
 		<task:SequenceTask id="startUpSequenceTask"
 						   label="startUp">
 			<tasks:CreateChessGasketTask id="ccgTask"
-										 label="create chess gasket"/>
-			<tasks:CreateChessPieceTask label="create chess piece"/>
-			<tasks:CreateChessVoTask label="create chess VO"/>
+										 label="create chess gasket"
+										 factory="{ChessFactoryBase}"/>
+			<tasks:CreateChessPieceTask label="create chess piece"
+										factory="{CcjChessFactory}"/>
+			<tasks:CreateChessVoTask label="create chess VO"
+									 factory="{CcjChessFactory}"/>
 		</task:SequenceTask>
 
 		<!--<task:SequenceTask id="cleanUp" label="cleanUp">
@@ -207,4 +202,4 @@
 	<!-- MochiMedia toolbar View -->
 	<mochi:MochiToolBarVGroup right="0"/>
 
-</s:Application>
+</app:ApplicationBase>

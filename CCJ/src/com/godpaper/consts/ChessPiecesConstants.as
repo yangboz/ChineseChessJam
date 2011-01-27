@@ -2,7 +2,7 @@ package com.godpaper.consts
 {
 	import com.godpaper.configs.BoardConfig;
 	import com.godpaper.utils.Enum;
-	
+
 	import de.polygonal.ds.Array2;
 
 	/**
@@ -13,7 +13,7 @@ package com.godpaper.consts
 	 * 4.important for chess pieces' important on board;</p>
 	 * 5.convertImportant for the chess pieces' fuzzy import on board;</p>
 	 * @author Knight.zhou
-	 * 
+	 *
 	 */	
 	final public class ChessPiecesConstants extends Enum
 	{
@@ -28,6 +28,7 @@ package com.godpaper.consts
 		//----------------------------------
 		//chessPieceType
 		//blue(at top)
+		public static const BLUE:ChessPiecesConstants 			= new ChessPiecesConstants("-",0,0);//default-
 		public static const BLUE_PAWN:ChessPiecesConstants 		= new ChessPiecesConstants("p",22,30);//pawn-
 		public static const BLUE_ROOK:ChessPiecesConstants 		= new ChessPiecesConstants("r",20,600);//castle-
 		public static const BLUE_KNIGHT:ChessPiecesConstants	= new ChessPiecesConstants("k",19,270);//knight-
@@ -36,6 +37,7 @@ package com.godpaper.consts
 		public static const BLUE_MARSHAL:ChessPiecesConstants	= new ChessPiecesConstants("m",17,6000);//marshal-
 		public static const BLUE_CANNON:ChessPiecesConstants	= new ChessPiecesConstants("c",21,285);//cannon-
 		//red(at bottom)
+		public static const RED:ChessPiecesConstants 			= new ChessPiecesConstants("+",0,0);//default+
 		public static const RED_PAWN:ChessPiecesConstants 		= new ChessPiecesConstants("P",14,30);//pawn+
 		public static const RED_ROOK:ChessPiecesConstants 		= new ChessPiecesConstants("R",12,600);//castle+
 		public static const RED_KNIGHT:ChessPiecesConstants		= new ChessPiecesConstants("K",11,270);//knight+
@@ -51,9 +53,9 @@ package com.godpaper.consts
 		//
 		public var label:String;//for labeling on chess pieces.
 		public var value:int;//B. 8~14依次表示红方的帅、仕、相、马、车、炮和兵；
-							 //C. 16~22依次表示蓝方的将、士、象、马、车、炮和卒。
+		//C. 16~22依次表示蓝方的将、士、象、马、车、炮和卒。
 		public var strength:int;//Piece: King Assistant Elephant Rook Horse Cannon Pawn
-								 //Value: 6000 120 		120 	 600  270    285    30
+		//Value: 6000 120 		120 	 600  270    285    30
 		public var important:Array2;//precise value.
 		//Worst: -4, much worse: -3, worse: -2, slightly worse: -1, even: 0, 
 		//slightly better: 1, better:2, much better: 3, best: 4
@@ -411,3 +413,5 @@ package com.godpaper.consts
 		}
 	}
 }
+
+

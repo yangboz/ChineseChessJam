@@ -50,6 +50,7 @@ package com.godpaper.model
 		private var _redPieces:BitBoard=new BitBoard(9, 10);
 		//special.
 		//red
+		private var _red:BitBoard = new BitBoard(4,4);
 		private var _redRook:BitBoard=new BitBoard(9, 10);
 		private var _redKnight:BitBoard=new BitBoard(9, 10);
 		private var _redBishop:BitBoard=new BitBoard(9, 10);
@@ -58,6 +59,7 @@ package com.godpaper.model
 		private var _redCannon:BitBoard=new BitBoard(9, 10);
 		private var _redPawn:BitBoard=new BitBoard(9, 10);
 		//blue
+		private var _blue:BitBoard = new BitBoard(4,4);
 		private var _blueRook:BitBoard=new BitBoard(9, 10);
 		private var _blueKnight:BitBoard=new BitBoard(9, 10);
 		private var _blueBishop:BitBoard=new BitBoard(9, 10);
@@ -238,7 +240,19 @@ package com.godpaper.model
 			_redPieces=value;
 			LOG.info("redPieces:{0}", value.dump());
 		}
+		//----------------------------------
+		//  red
+		//----------------------------------
+		public function get RED():BitBoard
+		{
+			return _red;
+		}
 
+		public function set RED(value:BitBoard):void
+		{
+			_red=value;
+			LOG.info("RED:{0}", value.dump());
+		}
 		//----------------------------------
 		//  redRook
 		//----------------------------------
@@ -335,6 +349,20 @@ package com.godpaper.model
 		{
 			_redPawn=value;
 			LOG.info("RED_PAWN:{0}", value.dump());
+		}
+
+		//----------------------------------
+		//  blue
+		//----------------------------------
+		public function get BLUE():BitBoard
+		{
+			return _blue;
+		}
+
+		public function set BLUE(value:BitBoard):void
+		{
+			_blue=value;
+			LOG.info("BLUE:{0}", value.dump());
 		}
 
 		//----------------------------------

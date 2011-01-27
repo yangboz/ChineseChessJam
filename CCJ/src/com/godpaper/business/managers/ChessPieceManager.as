@@ -3,6 +3,7 @@ package com.godpaper.business.managers
 	import com.adobe.cairngorm.task.ParallelTask;
 	import com.adobe.cairngorm.task.SequenceTask;
 	import com.adobe.cairngorm.task.TaskEvent;
+	import com.godpaper.business.factory.CcjChessFactory;
 	import com.godpaper.configs.BoardConfig;
 	import com.godpaper.configs.GameConfig;
 	import com.godpaper.configs.IndicatorConfig;
@@ -30,6 +31,7 @@ package com.godpaper.business.managers
 	import de.polygonal.ds.Array2;
 	import de.polygonal.math.PM_PRNG;
 
+	import mx.core.ClassFactory;
 	import mx.logging.ILogger;
 
 	import spark.filters.GlowFilter;
@@ -431,7 +433,9 @@ package com.godpaper.business.managers
 			task.addChild(new UpdatePiecesBitboardTask(memento.conduct));
 			task.addChild(new UpdatePiecesPositionTask(memento.conduct));
 			task.addChild(new UpdateZobristKeysTask(memento.conduct));
-			task.addChild(new UpdatePiecesChessVoTask());
+			var updateChessVOTask:UpdatePiecesChessVoTask = new UpdatePiecesChessVoTask();
+			updateChessVOTask.factory = CcjChessFactory;
+			task.addChild(updateChessVOTask);
 			task.addChild(new UpdatePiecesOmenVoTask());
 			//
 			task.addChild(new UpdateChessPiecesTask(memento.conduct));

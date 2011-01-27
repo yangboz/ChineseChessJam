@@ -5,22 +5,24 @@ package com.godpaper.tasks
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.adobe.cairngorm.task.Task;
-	import com.godpaper.business.factory.ChessFactory;
+	import com.godpaper.business.factory.ChessFactoryBase;
+	import com.godpaper.core.IChessFactory;
 	import com.godpaper.model.ChessPiecesModel;
 	import com.godpaper.model.vos.ConductVO;
 	import com.godpaper.model.vos.OmenVO;
 	import com.godpaper.views.components.ChessPiece;
-	
-	
+
+	import flash.utils.getDefinitionByName;
+	import flash.utils.getQualifiedClassName;
+
 	/**
-	 * CreateChessVoTask.as class. include<conduct,omen,etc>  	
+	 * CreateChessVoTask.as class. include<conduct,omen,etc>
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
 	 * Created Nov 30, 2010 12:04:11 PM
 	 */   	 
-	public class CreateChessVoTask extends Task
+	public class CreateChessVoTask extends ChessTaskBase
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -31,19 +33,19 @@ package com.godpaper.tasks
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
 		//
 		//-------------------------------------------------------------------------- 
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Constructor
@@ -59,7 +61,7 @@ package com.godpaper.tasks
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
@@ -67,6 +69,9 @@ package com.godpaper.tasks
 		//--------------------------------------------------------------------------
 		override protected function performTask():void
 		{
+			var className:String = getQualifiedClassName(factory);
+			var implementation:Object = getDefinitionByName(className);
+			var realFactoy:IChessFactory  = new implementation();
 			//create chess pieces' conductVO;
 			//create chess pieces' omenVO;
 			for(var cp:int=0;cp<chessPiecesModel.pieces.length;cp++)
@@ -76,9 +81,9 @@ package com.godpaper.tasks
 				var conductVO:ConductVO = new ConductVO();
 				conductVO.target = chessPiece;
 				conductVO.previousPosition = chessPiece.position;
-				chessPiece.chessVO = ChessFactory.generateChessVO(conductVO);
+				chessPiece.chessVO = realFactoy.generateChessVO(conductVO);
 				//generateOmenVO
-				var omenVO:OmenVO = ChessFactory.generateOmenVO(conductVO);
+				var omenVO:OmenVO = realFactoy.generateOmenVO(conductVO);
 //				LOG.debug(omenVO.dump());
 				chessPiece.omenVO = omenVO;
 			}
@@ -91,5 +96,6 @@ package com.godpaper.tasks
 		//
 		//--------------------------------------------------------------------------
 	}
-	
+
 }
+

@@ -1,34 +1,19 @@
-package com.godpaper.tasks
+package com.godpaper.consts
 {
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.adobe.cairngorm.task.Task;
-	import com.godpaper.business.factory.ChessFactoryBase;
-	import com.godpaper.core.IChessFactory;
-	import com.godpaper.business.managers.ChessPieceManager;
-	import com.godpaper.configs.BoardConfig;
-	import com.godpaper.consts.CcjConstants;
-	import com.godpaper.core.IChessPiece;
-	import com.godpaper.model.ChessGasketsModel;
-	import com.godpaper.views.components.ChessGasket;
-
-	import flash.geom.Point;
-	import flash.utils.getDefinitionByName;
-	import flash.utils.getQualifiedClassName;
-
-	import mx.core.FlexGlobals;
 
 	/**
-	 * ChessTaskBase.as class.
+	 * DefaultConstants.as class.
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
-	 * Created Nov 30, 2010 12:00:05 PM
+	 * Created Jan 27, 2011 5:15:29 PM
 	 */   	 
-	public class CreateChessPieceTask extends ChessTaskBase
+	public class DefaultConstants
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -39,7 +24,29 @@ package com.godpaper.tasks
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-
+		//about chess pieces' flag
+		public static const FLAG_RED:int=0;
+		public static const FLAG_BLUE:int=1;
+		//
+		public static const COLOR_RED:String="red"; //above;
+		public static const COLOR_BLUE:String="blue"; //below;
+		//chess pieces type consts
+		public static const BLUE:String="BLUE";
+		public static const RED:String="RED";
+		//chess pieces state label
+		public static const STATE_ATTACK:String="Attack";
+		public static const STATE_DEFENCE:String="Defence";
+		public static const STATE_NASCENCE:String="Nascence";
+		public static const STATE_RENASCENCE:String="Renascence";
+		//game states' label
+		public static const STATE_HUMAN:String="HumanTurn";
+		public static const STATE_ANOTHER_HUMAN:String="AnotherHumanTurn";
+		public static const STATE_COMPUTER:String="ComputerTurn";
+		public static const STATE_HUMAN_WIN:String="HumanWin";
+		public static const STATE_COMPUTER_WIN:String="ComputerWin";
+		//indications
+		public static const INDICATION_THINK:String="Thinking..";
+		public static const INDICATION_CHECK:String="Eschequier";
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -57,10 +64,8 @@ package com.godpaper.tasks
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function CreateChessPieceTask()
+		public function DefaultConstants()
 		{
-			//TODO: implement function
-			super();
 		}     	
 		//--------------------------------------------------------------------------
 		//
@@ -73,33 +78,7 @@ package com.godpaper.tasks
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		override protected function performTask():void
-		{
-			var className:String = getQualifiedClassName(factory);
-			var implementation:Object = getDefinitionByName(className);
-			var realFactoy:IChessFactory  = new implementation();
-			//create chess piece
-			for(var hh:int=0;hh<BoardConfig.xLines;hh++)
-			{
-				for(var vv:int=0;vv<BoardConfig.yLines;vv++)
-				{
-					var iChessPiece:IChessPiece = realFactoy.createChessPiece(new Point(hh,vv));
-					if(iChessPiece!=null)
-					{
-//						trace("index:",vv*CcjConstants.BOARD_V_LINES+hh);
-						var ecGasket:ChessGasket = ChessGasketsModel.getInstance().gaskets.gett(hh,vv) as ChessGasket;
-						ecGasket.chessPiece = iChessPiece;
-//						ecGasket.addElement( iChessPiece );
-						//
-						iChessPiece.x = 0;
-						iChessPiece.y = 0;
-							//
-					}
-				}
-			}
-			//
-			this.complete();
-		}
+
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods

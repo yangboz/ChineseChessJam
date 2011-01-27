@@ -2,13 +2,10 @@ package com.godpaper.business.factory
 {
 	import assets.EmbededAssets;
 
-	import com.godpaper.configs.BoardConfig;
 	import com.godpaper.consts.CcjConstants;
 	import com.godpaper.consts.ChessPiecesConstants;
-	import com.godpaper.core.IChessGasket;
 	import com.godpaper.core.IChessPiece;
 	import com.godpaper.core.IChessVO;
-	import com.godpaper.impl.AbstractChessVO;
 	import com.godpaper.model.ChessPiecesModel;
 	import com.godpaper.model.vos.ConductVO;
 	import com.godpaper.model.vos.OmenVO;
@@ -19,36 +16,64 @@ package com.godpaper.business.factory
 	import com.godpaper.model.vos.cvo.OfficalVO;
 	import com.godpaper.model.vos.cvo.PawnVO;
 	import com.godpaper.model.vos.cvo.RookVO;
-	import com.godpaper.utils.LogUtil;
-	import com.godpaper.views.components.ChessGasket;
 	import com.godpaper.views.components.ChessPiece;
 
-	import de.polygonal.ds.Array2;
-
 	import flash.geom.Point;
-	import flash.utils.getQualifiedClassName;
 
-	import mx.logging.ILogger;
+	//--------------------------------------------------------------------------
+	//
+	//  Imports
+	//
+	//--------------------------------------------------------------------------
 
 	/**
-	 * Simply factory produce ChessPiece/ChessGasket/ChessVO/OmenVO.
-	 *
-	 * @author Knight.zhou
-	 *
+	 * CcjChessFactory.as class.
+	 * @author yangboz
+	 * @langVersion 3.0
+	 * @playerVersion 9.0
+	 * Created Jan 27, 2011 4:15:49 PM
 	 */
-	public class ChessFactory
+	public class CcjChessFactory extends ChessFactoryBase
 	{
+		//--------------------------------------------------------------------------
 		//
-		private static const LOG:ILogger=LogUtil.getLogger(ChessFactory);
+		//  Variables
+		//
+		//--------------------------------------------------------------------------
 
-		/**
-		 *
-		 * @param position chessPiece's position type is Point(x, y).
-		 * @param flag chessPices's side flag.(red/blue).
-		 * @return ChessPiece component with implement IChessPiece
-		 *
-		 */
-		public static function createChessPiece(position:Point, flag:int=0):IChessPiece
+		//----------------------------------
+		//  CONSTANTS
+		//----------------------------------
+
+		//--------------------------------------------------------------------------
+		//
+		//  Public properties
+		//
+		//-------------------------------------------------------------------------- 
+
+		//--------------------------------------------------------------------------
+		//
+		//  Protected properties
+		//
+		//-------------------------------------------------------------------------- 
+
+		//--------------------------------------------------------------------------
+		//
+		//  Constructor
+		//
+		//--------------------------------------------------------------------------
+		public function CcjChessFactory()
+		{
+			//TODO: implement function
+			super();
+		}
+
+		//--------------------------------------------------------------------------
+		//
+		//  Public methods
+		//
+		//--------------------------------------------------------------------------
+		override public function createChessPiece(position:Point, flag:int=0):IChessPiece
 		{
 			//TODO: implement function
 			var myChessPiece:ChessPiece=new ChessPiece();
@@ -154,7 +179,7 @@ package com.godpaper.business.factory
 			//view
 			myChessPiece.label=myChessPiece.name=chessPieceLabel;
 			myChessPiece.type=chessPieceType;
-//			myChessPiece.swfLoader.source = String("./assets/").concat(chessPieceType,".swf");
+			//			myChessPiece.swfLoader.source = String("./assets/").concat(chessPieceType,".swf");
 			myChessPiece.swfLoader.source=EmbededAssets[chessPieceType];
 			/*myChessPiece.x =
 			position.x*CcjConstants.BOARD_LATTICE - myChessPiece.width/2 +50;
@@ -168,7 +193,7 @@ package com.godpaper.business.factory
 				if (chessPieceValue < 16)
 				{
 					myChessPiece.flag=CcjConstants.FLAG_RED; //red
-//					ChessPiecesModel.getInstance().redPieces.setBitt(position.y,position.x,true);
+					//					ChessPiecesModel.getInstance().redPieces.setBitt(position.y,position.x,true);
 					ChessPiecesModel.getInstance()[myChessPiece.type].setBitt(position.y, position.x, true);
 					//push to reds collection.
 					if (myChessPiece.name != "")
@@ -179,7 +204,7 @@ package com.godpaper.business.factory
 				else //blue
 				{
 					//myChessPiece.enabled = false;
-//					ChessPiecesModel.getInstance().bluePieces.setBitt(position.y,position.x,true);
+					//					ChessPiecesModel.getInstance().bluePieces.setBitt(position.y,position.x,true);
 					ChessPiecesModel.getInstance()[myChessPiece.type].setBitt(position.y, position.x, true);
 					//push to blues collection.
 					if (myChessPiece.name != "")
@@ -198,30 +223,8 @@ package com.godpaper.business.factory
 			return null;
 		}
 
-		/**
-		 *
-		 * @param position
-		 * @return ChessGasket component which implement IChessGasket
-		 *
-		 */
-		public static function createChessGasket(position:Point):IChessGasket
-		{
-			//TODO: implement function
-			var myChessGasket:ChessGasket=new ChessGasket();
-			myChessGasket.position=position;
-			myChessGasket.x=position.x * BoardConfig.xOffset - myChessGasket.width / 2 + 50;
-			myChessGasket.y=position.y * BoardConfig.yOffset;
-			myChessGasket.toolTip=position.toString();
-			return myChessGasket;
-		}
-
-		/**
-		 *
-		 * @param conductVO has property target(type is chessPiece) and newPosition([0,1]).
-		 * @return precise chess value object(prototype is chessVOBase).
-		 *
-		 */
-		public static function generateChessVO(conductVO:ConductVO):IChessVO
+		//
+		override public function generateChessVO(conductVO:ConductVO):IChessVO
 		{
 			var oColIndex:int=conductVO.currentPosition.x;
 			var oRowIndex:int=conductVO.currentPosition.y;
@@ -277,13 +280,8 @@ package com.godpaper.business.factory
 			return chessVO;
 		}
 
-		/**
-		 *
-		 * @param conductVO has property target(type is chessPiece) and newPosition([0,1]).
-		 * @return precise chess value object(prototype is OmenVO).
-		 *
-		 */
-		public static function generateOmenVO(conductVO:ConductVO):OmenVO
+		//
+		override public function generateOmenVO(conductVO:ConductVO):OmenVO
 		{
 			var omenVO:OmenVO;
 			//TODO:importance initialization.
@@ -337,6 +335,18 @@ package com.godpaper.business.factory
 			}
 			return omenVO;
 		}
+		//--------------------------------------------------------------------------
+		//
+		//  Protected methods
+		//
+		//--------------------------------------------------------------------------
+
+		//--------------------------------------------------------------------------
+		//
+		//  Private methods
+		//
+		//--------------------------------------------------------------------------
 	}
+
 }
 
