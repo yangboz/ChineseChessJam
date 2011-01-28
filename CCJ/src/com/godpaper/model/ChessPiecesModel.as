@@ -51,7 +51,7 @@ package com.godpaper.model
 		//special.
 		//red
 		private var _red:BitBoard = new BitBoard(4,4);
-		private var _redRook:BitBoard=new BitBoard(9, 10);
+		private var _redRook:BitBoard=new BitBoard(BoardConfig.xLines, BoardConfig.yLines);
 		private var _redKnight:BitBoard=new BitBoard(9, 10);
 		private var _redBishop:BitBoard=new BitBoard(9, 10);
 		private var _redOffical:BitBoard=new BitBoard(9, 10);
@@ -191,7 +191,7 @@ package com.godpaper.model
 		public function get bluePieces():BitBoard
 		{
 //			return _bluePieces;
-			return BLUE_ROOK.or(BLUE_KNIGHT).or(BLUE_BISHOP).or(BLUE_OFFICAL).or(BLUE_MARSHAL).or(BLUE_CANNON).or(BLUE_PAWN);
+			return BLUE.or(BLUE_ROOK).or(BLUE_KNIGHT).or(BLUE_BISHOP).or(BLUE_OFFICAL).or(BLUE_MARSHAL).or(BLUE_CANNON).or(BLUE_PAWN);
 		}
 
 		/**
@@ -227,7 +227,7 @@ package com.godpaper.model
 		public function get redPieces():BitBoard
 		{
 //			return 	_redPieces;
-			return RED_ROOK.or(RED_KNIGHT).or(RED_BISHOP).or(RED_OFFICAL).or(RED_MARSHAL).or(RED_CANNON).or(RED_PAWN);
+			return RED.or(RED_ROOK).or(RED_KNIGHT).or(RED_BISHOP).or(RED_OFFICAL).or(RED_MARSHAL).or(RED_CANNON).or(RED_PAWN);
 		}
 
 		/**

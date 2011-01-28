@@ -68,32 +68,27 @@ package com.godpaper.model.vos.twhVO
 			//  *
 			//Notice:Don't worry about bitboard over-fence issues,that it wouble be handle it as default.
 			//about occupies.
-			if(colIndex<=3)
+			if(colIndex<3)
 			{
 				this.occupies.setBitt(rowIndex,colIndex+1,true);
 			}
-			if(colIndex>=1)
+			if(colIndex>0)
 			{
 				this.occupies.setBitt(rowIndex,colIndex-1,true);
 			}
-			if(rowIndex<=3)
+			if(rowIndex<3)
 			{
 				this.occupies.setBitt(rowIndex+1,colIndex,true);
 			}
-			if(rowIndex>=1)
+			if(rowIndex>0)
 			{
 				this.occupies.setBitt(rowIndex-1,colIndex,true);
 			}
 			LOG.info("occupies:{0}",this.occupies.dump());
 			//about legal moves.
-			if(flag==CcjConstants.FLAG_RED)
-			{
-				this.moves = this.occupies.xor(this.occupies.and(ChessPiecesModel.getInstance().redPieces));
-			}
-			if(flag==CcjConstants.FLAG_BLUE)
-			{
-				this.moves = this.occupies.xor(this.occupies.and(ChessPiecesModel.getInstance().bluePieces));
-			}
+//			trace(ChessPiecesModel.getInstance().allPieces.dump());
+			this.moves = this.occupies.xor(this.occupies.and(ChessPiecesModel.getInstance().allPieces));
+			//
 			LOG.info("moves:{0}",this.moves.dump());
 			//blocker
 			//about attacked captures.

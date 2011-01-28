@@ -5,10 +5,10 @@
 						  xmlns:impl="com.godpaper.impl.*"
 						  width="50"
 						  height="50"
-						  borderVisible="false"
+						  borderVisible="true"
 						  backgroundAlpha="0.0"
 						  contentBackgroundAlpha="0.0"
-						  borderAlpha="0.0" 
+						  borderAlpha="1.0" 
 						  xmlns:parsley="http://www.spicefactory.org/parsley"
 						  >
 	<fx:Script>

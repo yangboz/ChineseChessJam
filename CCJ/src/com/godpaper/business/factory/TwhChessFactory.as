@@ -167,8 +167,21 @@ package com.godpaper.business.factory
 		//
 		override public function generateOmenVO(conductVO:ConductVO):OmenVO
 		{
-			//TODO
-			return null;
+			var omenVO:OmenVO;
+			//TODO:importance initialization.
+			//			LOG.info(omenVO.dump());
+			switch ((conductVO.target as ChessPiece).name)
+			{
+				case ChessPiecesConstants.BLUE.label:
+					omenVO=new OmenVO(ChessPiecesConstants.BLUE_BISHOP.strength, ChessPiecesConstants.BLUE.important, conductVO.target.chessVO.moves.celled, conductVO.target.chessVO.captures.celled, -1);
+					break;
+				case ChessPiecesConstants.RED.label:
+					omenVO=new OmenVO(ChessPiecesConstants.RED_BISHOP.strength, ChessPiecesConstants.RED.important, conductVO.target.chessVO.moves.celled, conductVO.target.chessVO.captures.celled, -1);
+					break;
+				default:
+					break;
+			}
+			return omenVO;
 		}
 		//--------------------------------------------------------------------------
 		//
