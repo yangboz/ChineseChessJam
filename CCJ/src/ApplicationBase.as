@@ -6,10 +6,14 @@ package
 	//
 	//--------------------------------------------------------------------------
 	import com.godpaper.business.managers.GameManager;
+	import com.godpaper.model.ChessPiecesModel;
 
 	import flash.display.MovieClip;
 
 	import mx.events.FlexEvent;
+
+	import org.spicefactory.lib.logging.LogContext;
+	import org.spicefactory.lib.logging.Logger;
 
 	import spark.components.Application;
 
@@ -33,7 +37,7 @@ package
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-
+		private static const LOG:Logger = LogContext.getLogger(ApplicationBase);
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -132,6 +136,13 @@ package
 			//GameManager start.
 			GameManager.start();
 			//
+			LOG.info("redPieces:{0}", ChessPiecesModel.getInstance().redPieces.dump());
+			LOG.info("bluePieces:{0}", ChessPiecesModel.getInstance().bluePieces.dump());
+			LOG.info("allPieces:{0}", ChessPiecesModel.getInstance().allPieces.dump());
+			//
+			LOG.info("allPieces rotate90:{0}", ChessPiecesModel.getInstance().allPieces.rotate90().dump());
+			LOG.info("allPieces rotate90.bitCount:{0}", ChessPiecesModel.getInstance().allPieces.bitCount);
+			LOG.info("allPieces rotate90.cellCount:{0}", ChessPiecesModel.getInstance().allPieces.cellCount);
 		}
 		//--------------------------------------------------------------------------
 		//

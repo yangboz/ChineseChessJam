@@ -9,13 +9,13 @@ package com.godpaper.business.factory
 	import com.godpaper.model.ChessPiecesModel;
 	import com.godpaper.model.vos.ConductVO;
 	import com.godpaper.model.vos.OmenVO;
-	import com.godpaper.model.vos.cvo.BishopVO;
-	import com.godpaper.model.vos.cvo.CannonVO;
-	import com.godpaper.model.vos.cvo.KnightVO;
-	import com.godpaper.model.vos.cvo.MarshalVO;
-	import com.godpaper.model.vos.cvo.OfficalVO;
-	import com.godpaper.model.vos.cvo.PawnVO;
-	import com.godpaper.model.vos.cvo.RookVO;
+	import com.godpaper.model.vos.ccjVO.BishopVO;
+	import com.godpaper.model.vos.ccjVO.CannonVO;
+	import com.godpaper.model.vos.ccjVO.KnightVO;
+	import com.godpaper.model.vos.ccjVO.MarshalVO;
+	import com.godpaper.model.vos.ccjVO.OfficalVO;
+	import com.godpaper.model.vos.ccjVO.PawnVO;
+	import com.godpaper.model.vos.ccjVO.RookVO;
 	import com.godpaper.views.components.ChessPiece;
 
 	import flash.geom.Point;

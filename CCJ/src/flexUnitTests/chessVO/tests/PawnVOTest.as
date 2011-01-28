@@ -1,7 +1,7 @@
 package flexUnitTests.chessVO.tests
 {
 	import com.godpaper.consts.CcjConstants;
-	import com.godpaper.model.vos.cvo.PawnVO;
+	import com.godpaper.model.vos.ccjVO.PawnVO;
 	import com.lookbackon.ds.BitBoard;
 	
 	import org.flexunit.Assert;

@@ -1,4 +1,4 @@
-package com.godpaper.model.vos.cvo
+package com.godpaper.model.vos.ccjVO
 {
 	import com.godpaper.consts.CcjConstants;
 	import com.godpaper.consts.ChessPiecesConstants;

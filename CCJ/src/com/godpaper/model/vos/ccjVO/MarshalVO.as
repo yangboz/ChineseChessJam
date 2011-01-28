@@ -1,4 +1,4 @@
-package com.godpaper.model.vos.cvo
+package com.godpaper.model.vos.ccjVO
 {
 	import com.godpaper.configs.BoardConfig;
 	import com.godpaper.consts.CcjConstants;

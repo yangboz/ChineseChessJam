@@ -2,13 +2,13 @@ package com.godpaper.model
 {
 	import com.godpaper.consts.ZobristConstants;
 	import com.godpaper.errors.CcjErrors;
-	import com.godpaper.model.vos.cvo.BishopVO;
-	import com.godpaper.model.vos.cvo.CannonVO;
-	import com.godpaper.model.vos.cvo.KnightVO;
-	import com.godpaper.model.vos.cvo.MarshalVO;
-	import com.godpaper.model.vos.cvo.OfficalVO;
-	import com.godpaper.model.vos.cvo.PawnVO;
-	import com.godpaper.model.vos.cvo.RookVO;
+	import com.godpaper.model.vos.ccjVO.BishopVO;
+	import com.godpaper.model.vos.ccjVO.CannonVO;
+	import com.godpaper.model.vos.ccjVO.KnightVO;
+	import com.godpaper.model.vos.ccjVO.MarshalVO;
+	import com.godpaper.model.vos.ccjVO.OfficalVO;
+	import com.godpaper.model.vos.ccjVO.PawnVO;
+	import com.godpaper.model.vos.ccjVO.RookVO;
 	import com.godpaper.utils.LogUtil;
 	import com.lookbackon.ds.BitBoard;
 	import com.lookbackon.ds.ZobristHashTable;

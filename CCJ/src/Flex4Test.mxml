@@ -7,7 +7,7 @@
 	<fx:Script>
 		<![CDATA[
 			import com.godpaper.consts.ChessPiecesConstants;
-			import com.godpaper.model.vos.cvo.PawnVO;
+			import com.godpaper.model.vos.ccjVO.PawnVO;
 			import com.godpaper.utils.LogUtil;
 			import com.lookbackon.ds.BitBoard;
 			

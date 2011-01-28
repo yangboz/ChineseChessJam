@@ -10,6 +10,7 @@ package com.godpaper.business.factory
 	import com.godpaper.model.ChessPiecesModel;
 	import com.godpaper.model.vos.ConductVO;
 	import com.godpaper.model.vos.OmenVO;
+	import com.godpaper.model.vos.twhVO.ChessVO;
 	import com.godpaper.views.components.ChessPiece;
 
 	import flash.geom.Point;
@@ -146,7 +147,22 @@ package com.godpaper.business.factory
 		override public function generateChessVO(conductVO:ConductVO):IChessVO
 		{
 			//TODO
-			return null;
+			var oColIndex:int=conductVO.currentPosition.x;
+			var oRowIndex:int=conductVO.currentPosition.y;
+			var chessVO:IChessVO;
+			//			LOG.info(conductVO.dump());
+			switch ((conductVO.target as ChessPiece).name)
+			{
+				case ChessPiecesConstants.BLUE.label:
+					chessVO=new ChessVO(4,4,oRowIndex, oColIndex,DefaultConstants.FLAG_BLUE);
+					break;
+				case ChessPiecesConstants.RED.label:
+					chessVO=new ChessVO(4, 4, oRowIndex, oColIndex,DefaultConstants.FLAG_RED);
+					break;
+				default:
+					break;
+			}
+			return chessVO;
 		}
 		//
 		override public function generateOmenVO(conductVO:ConductVO):OmenVO
