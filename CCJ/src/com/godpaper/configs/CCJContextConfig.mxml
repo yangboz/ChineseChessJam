@@ -6,9 +6,9 @@ features.  This is a MXML implementation, but this can also be declared in and X
 -->
 <fx:Object xmlns:fx="http://ns.adobe.com/mxml/2009"
 		   xmlns:s="library://ns.adobe.com/flex/spark"
-		   xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:model="com.godpaper.model.*">
+		   xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:model="com.godpaper.model.*" xmlns:plugin="com.godpaper.model.plugin.*">
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
-		<model:MochiModel/>
+		<plugin:MochiModel/>
 	</fx:Declarations>
 </fx:Object>

@@ -9,11 +9,14 @@ package com.godpaper.tasks
 	import com.godpaper.model.ChessPiecesModel;
 	import com.godpaper.utils.LogUtil;
 	import com.godpaper.views.components.ChessPiece;
-	
+
+	import flash.utils.getDefinitionByName;
+	import flash.utils.getQualifiedClassName;
+
 	import mx.logging.ILogger;
-	
+
 	/**
-	 * UpdatePiecesOmenVoTask.as class.   	
+	 * UpdatePiecesOmenVoTask.as class.
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
@@ -36,13 +39,13 @@ package com.godpaper.tasks
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
 		//
 		//-------------------------------------------------------------------------- 
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Constructor
@@ -58,7 +61,7 @@ package com.godpaper.tasks
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
@@ -70,7 +73,7 @@ package com.godpaper.tasks
 			for(var i:int=0;i<chessPiecesModel.pieces.length;i++)
 			{
 				var chessPiece:ChessPiece = chessPiecesModel.pieces[i];
-				//renew chessVO.
+				//update omenVO.
 				chessPiece.omenVO.flexibility  = chessPiece.chessVO.moves.cellCount;
 				chessPiece.omenVO.threat  = chessPiece.chessVO.captures.cellCount - chessPiece.chessVO.defends.cellCount;
 			}
@@ -84,5 +87,6 @@ package com.godpaper.tasks
 		//
 		//--------------------------------------------------------------------------
 	}
-	
+
 }
+

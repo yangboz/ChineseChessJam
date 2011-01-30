@@ -16,7 +16,7 @@
 			import com.godpaper.business.managers.ChessPieceManager;
 			import com.godpaper.consts.CcjConstants;
 			import com.godpaper.model.ChessPiecesModel;
-			import com.godpaper.model.MochiModel;
+			import com.godpaper.model.plugin.MochiModel;
 			import com.lookbackon.AI.FSM.Message;
 			//--------------------------------------------------------------------------
 			//
@@ -92,5 +92,6 @@
 	<!-- Place visual elements (e.g., components,popups) here -->
 	<mx:SWFLoader id="swfLoader"
 				  verticalCenter="0"
-				  horizontalCenter="0"/>
+				  horizontalCenter="0"
+				  />
 </impl:AbstractChessPiece>

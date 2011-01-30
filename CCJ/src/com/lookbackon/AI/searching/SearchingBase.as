@@ -1,19 +1,20 @@
 package com.lookbackon.AI.searching
 {
-	import com.godpaper.utils.FilterUtil;
-	import com.godpaper.utils.SortUtil;
-	import com.lookbackon.AI.FSM.Message;
-	import com.lookbackon.AI.evaluation.IEvaluation;
-	import com.lookbackon.AI.evaluation.linear.LinearEvaluationProxy;
 	import com.godpaper.business.managers.ChessPieceManager;
+	import com.godpaper.business.managers.GameManager;
 	import com.godpaper.model.ChessPiecesModel;
 	import com.godpaper.model.vos.ConductVO;
 	import com.godpaper.model.vos.PositionVO;
+	import com.godpaper.utils.FilterUtil;
+	import com.godpaper.utils.SortUtil;
 	import com.godpaper.views.components.ChessPiece;
+	import com.lookbackon.AI.FSM.Message;
+	import com.lookbackon.AI.evaluation.IEvaluation;
+	import com.lookbackon.AI.evaluation.linear.LinearEvaluationProxy;
 	import com.lookbackon.ds.BitBoard;
-	
+
 	import flash.geom.Point;
-	
+
 	import org.generalrelativity.thread.process.AbstractProcess;
 
 	/**
@@ -93,9 +94,16 @@ package com.lookbackon.AI.searching
 			{
 //				trace("orderingMove's celled:",this.orderingMoves[om].target.chessVO.moves.celled);
 			}
-			//temporary define first move from ording moves for hard-code test purpose.
-			this.tempMove=this.orderingMoves[0];
-			this.bestMove=this.orderingMoves[0];
+			//pluge to death.
+			if(this.orderingMoves.length==0)
+			{
+				GameManager.humanWin();
+			}else
+			{
+				//temporary define first move from ording moves for hard-code test purpose.
+				this.tempMove=this.orderingMoves[0];
+				this.bestMove=this.orderingMoves[0];
+			}
 			//default execute run,to be overrided.
 //			this.run();
 			//
@@ -122,7 +130,7 @@ package com.lookbackon.AI.searching
 			//TBC
 			return _moves;
 		}
-		
+
 		//----------------------------------
 		//  orderingMoves(native)
 		//----------------------------------
@@ -208,7 +216,7 @@ package com.lookbackon.AI.searching
 		{
 			return _processDone;
 		}
-		
+
 		public function set processDone(value:Boolean):void
 		{
 			_processDone = value;
@@ -340,7 +348,7 @@ package com.lookbackon.AI.searching
 			return evaluation.doEvaluation(conductVO, gamePosition);
 		}
 		/**
-		 *@inheritDoc 
+		 *@inheritDoc
 		 */		
 		//virtual functions.
 		override public function run():void
@@ -348,7 +356,7 @@ package com.lookbackon.AI.searching
 			//TODO:implement functions.
 		}
 		/**
-		 *@inheritDoc 
+		 *@inheritDoc
 		 */
 		//return thread calculate precentage.
 		override public function get percentage():Number
@@ -357,3 +365,4 @@ package com.lookbackon.AI.searching
 		}
 	}
 }
+

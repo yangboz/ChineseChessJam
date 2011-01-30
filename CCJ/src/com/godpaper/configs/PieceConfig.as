@@ -1,4 +1,4 @@
-package assets
+package com.godpaper.configs
 {
 	//--------------------------------------------------------------------------
 	//
@@ -7,81 +7,50 @@ package assets
 	//--------------------------------------------------------------------------
 
 	/**
-	 * EmbededAssets.as class.For obtainning static embeded resources.
-	 * @see http://livedocs.adobe.com/flex/3/html/help.html?content=embed_3.html
+	 * PieceConfig.as class.Global chess piece configuration(factory,skin,etc..),(which one) set up at application's initialization stage.
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
-	 * Created Dec 2, 2010 3:16:02 PM
+	 * Created Jan 30, 2011 2:18:35 PM
 	 */   	 
-	public class EmbededAssets
+	public class PieceConfig
 	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-
+		private static var _factory:Class;
+		private static var _skin:Class;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		//blues
-		[Embed(source="./BLUE.swf")]
-		public static const BLUE:Class;
 
-		[Embed(source="./BLUE_BISHOP.swf")]
-		public static const BLUE_BISHOP:Class;
-
-		[Embed(source="./BLUE_CANNON.swf")]
-		public static const BLUE_CANNON:Class;
-
-		[Embed(source="./BLUE_KNIGHT.swf")]
-		public static const BLUE_KNIGHT:Class;
-
-		[Embed(source="./BLUE_MARSHAL.swf")]
-		public static const BLUE_MARSHAL:Class;
-
-		[Embed(source="./BLUE_OFFICAL.swf")]
-		public static const BLUE_OFFICAL:Class;
-
-		[Embed(source="./BLUE_PAWN.swf")]
-		public static const BLUE_PAWN:Class;
-
-		[Embed(source="./BLUE_ROOK.swf")]
-		public static const BLUE_ROOK:Class;
-		//reds
-		[Embed(source="./RED.swf")]
-		public static const RED:Class;
-
-		[Embed(source="./RED_BISHOP.swf")]
-		public static const RED_BISHOP:Class;
-
-		[Embed(source="./RED_CANNON.swf")]
-		public static const RED_CANNON:Class;
-
-		[Embed(source="./RED_KNIGHT.swf")]
-		public static const RED_KNIGHT:Class;
-
-		[Embed(source="./RED_MARSHAL.swf")]
-		public static const RED_MARSHAL:Class;
-
-		[Embed(source="./RED_OFFICAL.swf")]
-		public static const RED_OFFICAL:Class;
-
-		[Embed(source="./RED_PAWN.swf")]
-		public static const RED_PAWN:Class;
-
-		[Embed(source="./RED_ROOK.swf")]
-		public static const RED_ROOK:Class;
-		//
-		[Embed(source="./icon_toll_gate.swf")]
-		public static const ICON_TOLL_GATE:Class;
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
+		//
+		public static function get skin():Class
+		{
+			return _skin;
+		}
 
+		public static function set skin(value:Class):void
+		{
+			_skin = value;
+		}
+		//	
+		public static function get factory():Class
+		{
+			return _factory;
+		}
+
+		public static function set factory(value:Class):void
+		{
+			_factory = value;
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -93,7 +62,7 @@ package assets
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function EmbededAssets()
+		public function PieceConfig()
 		{
 		}     	
 		//--------------------------------------------------------------------------
@@ -113,6 +82,7 @@ package assets
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
+
 	}
 
 }

@@ -7,6 +7,7 @@ package com.godpaper.business.managers
 	import com.godpaper.configs.BoardConfig;
 	import com.godpaper.configs.GameConfig;
 	import com.godpaper.configs.IndicatorConfig;
+	import com.godpaper.configs.PieceConfig;
 	import com.godpaper.consts.CcjConstants;
 	import com.godpaper.consts.ChessPiecesConstants;
 	import com.godpaper.core.IChessPiece;
@@ -37,8 +38,8 @@ package com.godpaper.business.managers
 	import spark.filters.GlowFilter;
 
 	/**
-	 * The chess piece manager manage chess piece move's validation/makeMove/unMakeMove.
-	 * Also a way for the originator to be responsible for saving and restoring its states.
+	 * The chess piece manager manage chess piece move's validation/makeMove/unMakeMove.</br>
+	 * Also a way for the originator to be responsible for saving and restoring its states.</br>
 	 * @author Knight.zhou
 	 * @history 2010-12-02 using memento design pattern to implment make/unmake functions.
 	 */
@@ -81,15 +82,23 @@ package com.godpaper.business.managers
 		//----------------------------------
 		//  memento
 		//----------------------------------
+		/**
+		 *
+		 * @return
+		 */
 		public static function get memento():ChessPiecesMemento
 		{
 			return new ChessPiecesMemento(_conduct);
 		}
 
+		/**
+		 *
+		 * @param value
+		 */
 		public static function set memento(value:ChessPiecesMemento):void
 		{
 			_conduct=value.conduct;
-			//
+			//trigger man of update tasks.
 			updateTasksProcess();
 		}
 
@@ -107,11 +116,19 @@ package com.godpaper.business.managers
 		//----------------------------------
 		//  eatOffs
 		//----------------------------------
+		/**
+		 *
+		 * @return the eaten chess pieces.
+		 */
 		public static function get eatOffs():Vector.<ChessPiece>
 		{
 			return _eatOffs;
 		}
 
+		/**
+		 *
+		 * @param value
+		 */
 		public static function set eatOffs(value:Vector.<ChessPiece>):void
 		{
 			_eatOffs=value;
@@ -119,10 +136,18 @@ package com.godpaper.business.managers
 		//----------------------------------
 		//  isChecking
 		//----------------------------------
+		/**
+		 *
+		 * @param value
+		 */
 		public static function set isChecking(value:Boolean):void
 		{
 			_isChecking = value;
 		}	
+		/**
+		 *
+		 * @return
+		 */
 		public static function get isChecking():Boolean
 		{
 			return _isChecking;
@@ -208,7 +233,6 @@ package com.godpaper.business.managers
 		 * @param conductVO the conduct value object of moving chess piece.
 		 *
 		 */
-		//
 		public static function unmakeMove(conductVO:ConductVO):void
 		{
 			var reversedConductVO:ConductVO=conductVO.reverse();
@@ -261,6 +285,10 @@ package com.godpaper.business.managers
 		}
 
 		//make move data and piece entity change behavior.
+		/**
+		 *
+		 * @param conductVO
+		 */
 		public static function applyMove(conductVO:ConductVO):void
 		{
 			//TODO:with roll back function support.
@@ -305,6 +333,10 @@ package com.godpaper.business.managers
 		}
 
 		//pluge to death.	
+		/**
+		 *
+		 * @return
+		 */
 		public static function noneMove():int
 		{
 			if (GameConfig.turnFlag == CcjConstants.FLAG_BLUE)
@@ -318,6 +350,11 @@ package com.godpaper.business.managers
 			return -1;
 		}
 
+		/**
+		 *
+		 * @param gamePosition
+		 * @return
+		 */
 		public static function willNoneMove(gamePosition:PositionVO):Boolean
 		{
 			//TODO:
@@ -326,6 +363,12 @@ package com.godpaper.business.managers
 
 		//notice:why not using ArrayCollection.getItemIndex(object)?
 		//cuz our chess piece's position property always change here.
+		/**
+		 *
+		 * @param chessPiece
+		 * @return
+		 * @throws CcjErrors
+		 */
 		public static function calculatePieceIndex(chessPiece:ChessPiece):int
 		{
 			for (var i:int=0; i < chessPiecesModel.reds.length; i++)
@@ -420,6 +463,7 @@ package com.godpaper.business.managers
 		}
 
 		//update-relatived tasks here.
+		//FIXME:cairngorm3 task can not restart,but parsley can do it.
 		private static function updateTasksProcess():void
 		{
 			var task:ParallelTask=new ParallelTask();
@@ -433,9 +477,9 @@ package com.godpaper.business.managers
 			task.addChild(new UpdatePiecesBitboardTask(memento.conduct));
 			task.addChild(new UpdatePiecesPositionTask(memento.conduct));
 			task.addChild(new UpdateZobristKeysTask(memento.conduct));
-			var updateChessVOTask:UpdatePiecesChessVoTask = new UpdatePiecesChessVoTask();
-			updateChessVOTask.factory = CcjChessFactory;
-			task.addChild(updateChessVOTask);
+			//
+			task.addChild(new UpdatePiecesChessVoTask(PieceConfig.factory));
+			//
 			task.addChild(new UpdatePiecesOmenVoTask());
 			//
 			task.addChild(new UpdateChessPiecesTask(memento.conduct));

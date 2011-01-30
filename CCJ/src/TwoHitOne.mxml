@@ -12,24 +12,42 @@
 					 xmlns:task="com.adobe.cairngorm.task.*"
 					 xmlns:tasks="com.godpaper.tasks.*"
 					 xmlns:task1="org.spicefactory.lib.task.*"
-					 xmlns:mochi="com.godpaper.views.mochi.*">
+					 xmlns:mochi="com.godpaper.views.mochi.*"
+					 >
 	<fx:Script>
 		<![CDATA[
 			import com.godpaper.business.factory.CcjChessFactory;
 			import com.godpaper.business.factory.ChessFactoryBase;
-			import com.godpaper.business.factory.TwhChessFactory;
+			import com.godpaper.business.factory.ThoChessFactory;
 			import com.godpaper.configs.BoardConfig;
 			import com.godpaper.configs.CCJContextConfig;
 			import com.godpaper.configs.GameConfig;
 			import com.godpaper.configs.IndicatorConfig;
+			import com.godpaper.configs.PieceConfig;
+			import com.godpaper.configs.PluginConfig;
 			import com.godpaper.consts.CcjConstants;
+			import com.godpaper.model.plugin.MochiModel;
 			import com.lookbackon.AI.searching.*;
 
 			import mx.events.FlexEvent;
 			import mx.logging.LogEventLevel;
+			//--------------------------------------------------------------------------
+			//
+			//  Variables
+			//
+			//--------------------------------------------------------------------------
+			//For mochi.
+			public var _mochiads_game_id:String = "cc2fd3b3196f4281";
+			//
+			[Inject][Bindable]
+			public var mochiModel:MochiModel;
+			//----------------------------------
+			//  CONSTANTS
+			//----------------------------------
 			//
 			override protected function preinitializeHandler(event:FlexEvent):void
 			{
+				//about board:
 				BoardConfig.xLines=4;
 				BoardConfig.yLines=4;
 				BoardConfig.xOffset=100;
@@ -38,14 +56,19 @@
 				BoardConfig.height=300;
 				BoardConfig.xScale=1;
 				BoardConfig.yScale=1;
+				//about piece:
+				PieceConfig.factory = ThoChessFactory;
+				//about plugin:
+				PluginConfig.mochiBoardID = "3a460211409897f4";
+				PluginConfig.mochiGameID = "cc2fd3b3196f4281";
 			}
 			//	
 			override protected function initializeHandler(event:FlexEvent):void
 			{
 				//number of tollgate tips would be matched with tollgates!
-				GameConfig.tollgates=[RandomWalk, ShortSighted, AttackFalse, AttackFalse, MiniMax];
-				GameConfig.tollgateTips=["baby intelligence", "fellow intelligence", "man intelligence", "guru intelligence"];
-				GameConfig.turnFlag=CcjConstants.FLAG_RED;
+				GameConfig.tollgates=[RandomWalk];
+				GameConfig.tollgateTips=["baby intelligence"];
+				GameConfig.turnFlag=CcjConstants.FLAG_RED;//human first.
 			}
 			//
 			override protected function creationCompleteHandler(event:FlexEvent):void
@@ -71,7 +94,7 @@
 					   includeDate="false"
 					   includeLevel="true"
 					   includeTime="true"
-					   level="{LogEventLevel.INFO}">
+					   level="{LogEventLevel.DEBUG}">
 			<s:filters>
 				[
 				com.lookbackon.AI.searching.*,
@@ -107,9 +130,9 @@
 										 label="create chess gasket"
 										 factory="{ChessFactoryBase}"/>
 			<tasks:CreateChessPieceTask label="create chess piece"
-										factory="{TwhChessFactory}"/>
+										factory="{ThoChessFactory}"/>
 			<tasks:CreateChessVoTask label="create chess VO"
-									 factory="{TwhChessFactory}"
+									 factory="{ThoChessFactory}"
 									 />
 		</task:SequenceTask>
 
@@ -131,8 +154,10 @@
 	<s:VGroup top="50"
 			  right="100"
 			  left="50"
-			  bottom="50">
-		<impl:ChessBoardDefault id="defaultChessBoard"/>
+			  bottom="50"
+			  >
+		<impl:ChessBoardDefault id="defaultChessBoard"
+								/>
 	</s:VGroup>
 
 	<!-- MochiMedia popup View -->

@@ -78,7 +78,7 @@ package
 		//--------------------------------------------------------------------------
 //		application1_preinitializeHandler
 		/**
-		 * Board initialization here.
+		 * All kinds of view components initialization here.
 		 *
 		 * @param event
 		 *

@@ -27,8 +27,11 @@
 			import com.godpaper.configs.CCJContextConfig;
 			import com.godpaper.configs.GameConfig;
 			import com.godpaper.configs.IndicatorConfig;
+			import com.godpaper.configs.PieceConfig;
+			import com.godpaper.configs.PluginConfig;
 			import com.godpaper.consts.CcjConstants;
 			import com.godpaper.model.ChessPiecesModel;
+			import com.godpaper.model.plugin.MochiModel;
 			import com.godpaper.utils.LogUtil;
 			import com.lookbackon.AI.searching.AttackFalse;
 			import com.lookbackon.AI.searching.MiniMax;
@@ -63,10 +66,16 @@
 			override protected function preinitializeHandler(event:FlexEvent):void
 			{
 				//config initialization here.
+				//about chess board:
 				BoardConfig.xLines=9;
 				BoardConfig.yLines=10;
 				BoardConfig.xOffset=50;
 				BoardConfig.yOffset=50;
+				//about piece:
+				PieceConfig.factory = CcjChessFactory;
+				//about plugin:
+				PluginConfig.mochiBoardID = "3a460211409897f4";
+				PluginConfig.mochiGameID = "47de4a85dd3e213a";
 			}
 
 			//application1_initializeHandler
@@ -90,6 +99,12 @@
 				//init data struct.@see ChessPieceModel dump info.
 				this.dumpFootSprint();
 			}
+			//
+			override protected function applicationCompleteHandler(event:FlexEvent):void
+			{
+				super.applicationCompleteHandler(event);
+			}
+
 			//
 			public function dumpFootSprint():void
 			{
@@ -185,7 +200,7 @@
 						   right="75"
 						   top="25"
 						   bottom="25"
-						   backgroundImage="@Embed('./assets/images/ChessBoardBG.png')"
+						   backgroundImage="@Embed('./assets/images/background/ChineseChessJam.png')"
 						   backgroundImageFillMode="scale"/>
 	<!-- MochiMedia popup View -->
 	<mochi:MochiUIComponent id="mochiUIComponent"

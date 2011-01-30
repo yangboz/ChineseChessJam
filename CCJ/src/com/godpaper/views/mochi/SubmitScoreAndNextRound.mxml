@@ -11,8 +11,9 @@
 		<![CDATA[
 			import com.godpaper.business.managers.GameManager;
 			import com.godpaper.configs.IndicatorConfig;
+			import com.godpaper.configs.PluginConfig;
 			import com.godpaper.messages.LevelUpMessage;
-			import com.godpaper.model.MochiModel;
+			import com.godpaper.model.plugin.MochiModel;
 
 			import mochi.as3.MochiScores;
 
@@ -57,7 +58,7 @@
 			protected function titlewindow1_showHandler(event:FlexEvent):void
 			{
 				//
-				MochiScores.setBoardID(mochiModel.boradID);
+				MochiScores.setBoardID(PluginConfig.mochiBoardID);
 			}
 			//
 			protected function nextRoundBtn_clickHandler(event:MouseEvent):void

@@ -28,7 +28,7 @@ package com.godpaper.business.factory
 	 * @playerVersion 9.0
 	 * Created Jan 27, 2011 4:56:24 PM
 	 */   	 
-	public class TwhChessFactory extends ChessFactoryBase
+	public class ThoChessFactory extends ChessFactoryBase
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -57,7 +57,7 @@ package com.godpaper.business.factory
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function TwhChessFactory()
+		public function ThoChessFactory()
 		{
 			//TODO: implement function
 			super();
@@ -106,6 +106,8 @@ package com.godpaper.business.factory
 			myChessPiece.type=chessPieceType;
 			//			myChessPiece.swfLoader.source = String("./assets/").concat(chessPieceType,".swf");
 			myChessPiece.swfLoader.source=EmbededAssets[chessPieceType];
+			myChessPiece.swfLoader.scaleX = .6;
+			myChessPiece.swfLoader.scaleY = .6;
 			//set flag to identify.
 			myChessPiece.flag=CcjConstants.FLAG_BLUE;
 			//

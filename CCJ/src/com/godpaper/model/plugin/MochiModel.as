@@ -1,4 +1,4 @@
-package com.godpaper.model
+package com.godpaper.model.plugin
 {
 	import com.godpaper.errors.CcjErrors;
 
@@ -28,8 +28,6 @@ package com.godpaper.model
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		private var _gameID:String="47de4a85dd3e213a";
-		private var _boradID:String="3a460211409897f4"; //board ID (overrides setBoardID)
 		//
 		public var score:MochiDigits=new MochiDigits(); //the player's score to submit (integer, or time in milliseconds)
 		public var name:String; //the player's name
@@ -56,19 +54,6 @@ package com.godpaper.model
 		{
 			return (null != storeItemsRegister.find("8661560570f7f8e6")); //chess piece check indicator id.
 		}
-
-		//
-		public function get gameID():String
-		{
-			return _gameID;
-		}
-
-		//
-		public function get boradID():String
-		{
-			return _boradID;
-		}
-
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -99,18 +84,20 @@ package com.godpaper.model
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		
-		//--------------------------------------------------------------------------
-		 //
-		 //  Protected methods
-		 //
-		 //--------------------------------------------------------------------------
 
-		 //--------------------------------------------------------------------------
-		 //
-		 //  Private methods
-		 //
-		 //--------------------------------------------------------------------------
+		//--------------------------------------------------------------------------
+		//
+		//  Protected methods
+		//
+		//--------------------------------------------------------------------------
+
+		//--------------------------------------------------------------------------
+		//
+		//  Private methods
+		//
+		//--------------------------------------------------------------------------
 	}
 
 }
+
+

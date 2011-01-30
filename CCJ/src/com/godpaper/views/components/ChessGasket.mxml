@@ -5,7 +5,7 @@
 						  xmlns:impl="com.godpaper.impl.*"
 						  width="50"
 						  height="50"
-						  borderVisible="true"
+						  borderVisible="false"
 						  backgroundAlpha="0.0"
 						  contentBackgroundAlpha="0.0"
 						  borderAlpha="1.0" 
@@ -18,7 +18,7 @@
 			import com.godpaper.configs.GameConfig;
 			import com.godpaper.consts.CcjConstants;
 			import com.godpaper.model.ChessPiecesModel;
-			import com.godpaper.model.MochiModel;
+			import com.godpaper.model.plugin.MochiModel;
 
 			import spark.events.ElementExistenceEvent;
 			//--------------------------------------------------------------------------

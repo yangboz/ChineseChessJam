@@ -50,8 +50,8 @@ package com.godpaper.model
 		private var _redPieces:BitBoard=new BitBoard(9, 10);
 		//special.
 		//red
-		private var _red:BitBoard = new BitBoard(4,4);
-		private var _redRook:BitBoard=new BitBoard(BoardConfig.xLines, BoardConfig.yLines);
+		private var _red:BitBoard = new BitBoard(9,10);
+		private var _redRook:BitBoard=new BitBoard(9, 10);
 		private var _redKnight:BitBoard=new BitBoard(9, 10);
 		private var _redBishop:BitBoard=new BitBoard(9, 10);
 		private var _redOffical:BitBoard=new BitBoard(9, 10);
@@ -59,7 +59,7 @@ package com.godpaper.model
 		private var _redCannon:BitBoard=new BitBoard(9, 10);
 		private var _redPawn:BitBoard=new BitBoard(9, 10);
 		//blue
-		private var _blue:BitBoard = new BitBoard(4,4);
+		private var _blue:BitBoard = new BitBoard(9,10);
 		private var _blueRook:BitBoard=new BitBoard(9, 10);
 		private var _blueKnight:BitBoard=new BitBoard(9, 10);
 		private var _blueBishop:BitBoard=new BitBoard(9, 10);

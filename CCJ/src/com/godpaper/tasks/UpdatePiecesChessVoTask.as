@@ -12,10 +12,10 @@ package com.godpaper.tasks
 	import com.godpaper.utils.LogUtil;
 	import com.godpaper.views.components.ChessPiece;
 
-	import mx.logging.ILogger;
-
 	import flash.utils.getDefinitionByName;
 	import flash.utils.getQualifiedClassName;
+
+	import mx.logging.ILogger;
 
 	/**
 	 * UpdatePiecesChessVoTask.as class.
@@ -53,10 +53,12 @@ package com.godpaper.tasks
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function UpdatePiecesChessVoTask()
+		public function UpdatePiecesChessVoTask(factory:Class)
 		{
 			//TODO: implement function
 			super();
+			//
+			this.factory = factory;
 		}     	
 		//--------------------------------------------------------------------------
 		//

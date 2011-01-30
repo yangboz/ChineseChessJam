@@ -3,17 +3,18 @@
 				xmlns:s="library://ns.adobe.com/flex/spark" 
 				xmlns:mx="library://ns.adobe.com/flex/mx" 
 				xmlns:parsley="http://www.spicefactory.org/parsley"
-			    creationComplete="creationCompleteHandler(event)"
+				creationComplete="creationCompleteHandler(event)"
 				>
 	<fx:Script>
 		<![CDATA[
-			import com.godpaper.model.MochiModel;
+			import com.godpaper.configs.PluginConfig;
+			import com.godpaper.model.plugin.MochiModel;
 			import com.godpaper.utils.LogUtil;
-			
+
 			import mochi.as3.MochiCoins;
 			import mochi.as3.MochiServices;
 			import mochi.as3.MochiSocial;
-			
+
 			import mx.controls.Alert;
 			import mx.core.FlexGlobals;
 			import mx.events.CloseEvent;
@@ -26,7 +27,7 @@
 			public var mochiModel:MochiModel;
 			//
 			private static const LOG:ILogger = LogUtil.getLogger(MochiUIComponent);
-			
+
 			protected function creationCompleteHandler(event:FlexEvent):void
 			{
 				// 
@@ -36,14 +37,14 @@
 				//
 				FlexGlobals.topLevelApplication._mochiClip.addEventListener(Event.ADDED_TO_STAGE,mochiClipOnStage);
 			}
-			
+
 			private function mochiClipOnStage(event:Event):void
 			{
 				MochiSocial.addEventListener(MochiSocial.LOGGED_IN,logginHandler);
 				MochiCoins.addEventListener(MochiCoins.ITEM_OWNED,itemOwendHandler);
 				MochiCoins.addEventListener(MochiCoins.ITEM_NEW,itemNewHandler);
 				//
-				MochiServices.connect(mochiModel.gameID,FlexGlobals.topLevelApplication._mochiClip,onMochiServiceConnectionError);
+				MochiServices.connect(PluginConfig.mochiGameID,FlexGlobals.topLevelApplication._mochiClip,onMochiServiceConnectionError);
 			}
 			//
 			private function logginHandler(event:Object):void
@@ -71,7 +72,7 @@
 			{
 				Alert.show("Re-connect MochiService?",status,Alert.YES|Alert.NO,null,onCloseHandler);
 			}
-			
+
 			private function onCloseHandler(event:CloseEvent):void
 			{
 				//re-connect mochi service.\

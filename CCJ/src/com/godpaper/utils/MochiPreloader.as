@@ -1,6 +1,6 @@
 package com.godpaper.utils
 {
-	import com.godpaper.model.MochiModel;
+	import com.godpaper.model.plugin.MochiModel;
 	
 	import flash.display.MovieClip;
 	import flash.display.Sprite;

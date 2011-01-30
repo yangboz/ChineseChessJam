@@ -5,9 +5,9 @@ package com.godpaper.configs
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	
+
 	/**
-	 * BoardConfig.as class.Global board configuration,(which one) set up at application's initialization stage.   	
+	 * BoardConfig.as class.Global board configuration,(which one) set up at application's initialization stage.
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
@@ -32,10 +32,12 @@ package com.godpaper.configs
 		//board size
 		private static var _width:Number;
 		private static var _height:Number;
+		//board background
+//		private static var _backGround:Class;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -66,7 +68,7 @@ package com.godpaper.configs
 		{
 			return _yOffset;
 		}
-		
+
 		public static function set yOffset(value:Number):void
 		{
 			_yOffset = value;
@@ -76,7 +78,7 @@ package com.godpaper.configs
 		{
 			return _xOffset;
 		}
-		
+
 		public static function set xOffset(value:Number):void
 		{
 			_xOffset = value;
@@ -86,7 +88,7 @@ package com.godpaper.configs
 		{
 			return _yLines;
 		}
-		
+
 		public static function set yLines(value:Number):void
 		{
 			_yLines = value;
@@ -96,7 +98,7 @@ package com.godpaper.configs
 		{
 			return _xLines;
 		}
-		
+
 		public static function set xLines(value:Number):void
 		{
 			_xLines = value;
@@ -106,7 +108,7 @@ package com.godpaper.configs
 		{
 			return _yScale;
 		}
-		
+
 		public static function set yScale(value:Number):void
 		{
 			_yScale = value;
@@ -116,7 +118,7 @@ package com.godpaper.configs
 		{
 			return _xScale;
 		}
-		
+
 		public static function set xScale(value:Number):void
 		{
 			_xScale = value;
@@ -126,25 +128,25 @@ package com.godpaper.configs
 		//  Protected properties
 		//
 		//-------------------------------------------------------------------------- 
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods
@@ -152,5 +154,6 @@ package com.godpaper.configs
 		//--------------------------------------------------------------------------
 
 	}
-	
+
 }
+
