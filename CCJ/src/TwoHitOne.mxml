@@ -59,7 +59,7 @@
 				//about piece:
 				PieceConfig.factory = ThoChessFactory;
 				//about plugin:
-				PluginConfig.mochiBoardID = "3a460211409897f4";
+				PluginConfig.mochiBoardID = "51c558cd0315f8e7";
 				PluginConfig.mochiGameID = "cc2fd3b3196f4281";
 			}
 			//	
@@ -117,7 +117,8 @@
 
 		<parsley:PopUp open="{IndicatorConfig.submitScore}"
 					   center="true"
-					   modal="true">
+					   modal="true"
+					   >
 			<mochi:SubmitScoreAndNextRound id="submitScoreAndNamePopup"/>
 		</parsley:PopUp>
 

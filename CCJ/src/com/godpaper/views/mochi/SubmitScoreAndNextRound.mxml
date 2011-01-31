@@ -10,13 +10,13 @@
 	<fx:Script>
 		<![CDATA[
 			import com.godpaper.business.managers.GameManager;
-			import com.godpaper.configs.IndicatorConfig;
+			import com.godpaper.configs.GameConfig;
 			import com.godpaper.configs.PluginConfig;
 			import com.godpaper.messages.LevelUpMessage;
 			import com.godpaper.model.plugin.MochiModel;
-
+			
 			import mochi.as3.MochiScores;
-
+			
 			import mx.core.FlexGlobals;
 			import mx.events.FlexEvent;
 			//
@@ -50,8 +50,6 @@
 					}
 					);
 				//
-				IndicatorConfig.submitScore = false;
-				//
 				GameManager.restart();
 			}
 			//
@@ -64,20 +62,22 @@
 			protected function nextRoundBtn_clickHandler(event:MouseEvent):void
 			{
 				//
-				IndicatorConfig.submitScore = false;
-				//
 				GameManager.restart();
 				//increase intelligence level.
 				GameManager.level++;
 				//broad cast level up message.
 				dispatcher(new LevelUpMessage(GameManager.level));
 			}
-
+			//
 			protected function get currentScore():int
 			{
 				return (GameManager.level)*10;
 			}
-
+			//
+			protected function get hasNextRound():Boolean
+			{
+				return GameManager.level<GameConfig.tollgates.length;
+			}
 		]]>
 	</fx:Script>
 	<fx:Declarations>
@@ -96,7 +96,7 @@
 	<s:controlBarContent>
 		<s:HGroup width="100%" horizontalAlign="center">
 			<s:Button id="submitBtn" label="Submit" click="submitBtnClickHandler(event)"/>
-			<s:Button id="nextRoundBtn" label="NextRound" click="nextRoundBtn_clickHandler(event)"/>
+			<s:Button id="nextRoundBtn" label="NextRound" enabled="{hasNextRound}" click="nextRoundBtn_clickHandler(event)"/>
 		</s:HGroup>
 	</s:controlBarContent>
 </s:TitleWindow>

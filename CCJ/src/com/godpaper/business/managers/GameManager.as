@@ -1,21 +1,23 @@
 package com.godpaper.business.managers
 {
 	import com.adobe.cairngorm.task.SequenceTask;
+	import com.godpaper.business.fsm.GameAgent;
 	import com.godpaper.configs.GameConfig;
+	import com.godpaper.configs.IndicatorConfig;
+	import com.godpaper.configs.PieceConfig;
+	import com.godpaper.consts.CcjConstants;
+	import com.godpaper.model.ChessPiecesModel;
+	import com.godpaper.model.vos.PositionVO;
 	import com.godpaper.tasks.CleanUpChessPieceTask;
 	import com.godpaper.tasks.CleanUpPiecesBitboardTask;
 	import com.godpaper.tasks.CreateChessPieceTask;
 	import com.godpaper.tasks.CreateChessVoTask;
+	import com.godpaper.utils.LogUtil;
 	import com.lookbackon.AI.searching.AttackFalse;
 	import com.lookbackon.AI.searching.MiniMax;
 	import com.lookbackon.AI.searching.RandomWalk;
 	import com.lookbackon.AI.searching.ShortSighted;
-	import com.godpaper.consts.CcjConstants;
-	import com.godpaper.business.fsm.GameAgent;
-	import com.godpaper.model.ChessPiecesModel;
-	import com.godpaper.model.vos.PositionVO;
-	import com.godpaper.utils.LogUtil;
-
+	
 	import mx.core.FlexGlobals;
 	import mx.core.IVisualElement;
 	import mx.logging.ILogger;
@@ -95,12 +97,15 @@ package com.godpaper.business.managers
 			//agent initialization.
 			agent=new GameAgent("CCJGameAgent", FlexGlobals.topLevelApplication as IVisualElement);
 			//logic condition who's turn now at first.
-			if(GameConfig.turnFlag)
+			if(GameConfig.turnFlag==CcjConstants.FLAG_BLUE)
 			{
 				isComputerTurnNow();
-			}else
+			}else if(GameConfig.turnFlag==CcjConstants.FLAG_RED)
 			{
 				isHumanTurnNow();
+			}else
+			{
+				//TODO,another human turn now.
 			}
 			//flag game is running.
 			isRunning=true;
@@ -112,22 +117,25 @@ package com.godpaper.business.managers
 		public static function restart():void
 		{
 			//TODO:re-start game
+			//clean up indicators.
+			IndicatorConfig.check = false;
+			IndicatorConfig.submitScore = false;
 			//clear board,chess pieces
 			FlexGlobals.topLevelApplication.cleanUpSequenceTask.addTask(new CleanUpChessPieceTask());
 			FlexGlobals.topLevelApplication.cleanUpSequenceTask.addTask(new CleanUpPiecesBitboardTask());
 			FlexGlobals.topLevelApplication.cleanUpSequenceTask.start();
-			//
-			mx.core.FlexGlobals.topLevelApplication.dumpFootSprint();
+			//dump the end of game messages.
+			FlexGlobals.topLevelApplication.dumpFootSprint();
 			//
 			//put down chess pieces again
 			//no more create chess gasket again.
 			//no more using start up task at Main.mxml.
 			var startUpTask:SequenceTask=new SequenceTask();
-			startUpTask.addChild(new CreateChessPieceTask());
-			startUpTask.addChild(new CreateChessVoTask());
+			startUpTask.addChild(new CreateChessPieceTask(PieceConfig.factory));
+			startUpTask.addChild(new CreateChessVoTask(PieceConfig.factory));
 			startUpTask.start();
 			//
-			mx.core.FlexGlobals.topLevelApplication.dumpFootSprint();
+			FlexGlobals.topLevelApplication.dumpFootSprint();
 			//
 			start();
 		}

@@ -6,6 +6,7 @@ package com.godpaper.tasks
 	//
 	//--------------------------------------------------------------------------
 	import com.adobe.cairngorm.task.Task;
+	import com.godpaper.configs.PieceConfig;
 
 
 	/**
@@ -34,6 +35,10 @@ package com.godpaper.tasks
 		//-------------------------------------------------------------------------- 
 		public function get factory():Class
 		{
+			if(null==_factory)
+			{
+				return PieceConfig.factory;
+			}
 			return _factory;
 		}
 		public function set factory(value:Class):void

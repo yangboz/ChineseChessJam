@@ -70,7 +70,13 @@ package
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-
+		/**
+		 * Foot sprint dump,optional for logging the end of turn messages.
+		 */		
+		public function dumpFootSprint():void
+		{
+			
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods

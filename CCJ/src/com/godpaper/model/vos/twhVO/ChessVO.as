@@ -86,7 +86,7 @@ package com.godpaper.model.vos.twhVO
 			}
 			LOG.info("occupies:{0}",this.occupies.dump());
 			//about legal moves.
-//			trace(ChessPiecesModel.getInstance().allPieces.dump());
+			LOG.info(ChessPiecesModel.getInstance().allPieces.dump());
 			this.moves = this.occupies.xor(this.occupies.and(ChessPiecesModel.getInstance().allPieces));
 			//
 			LOG.info("moves:{0}",this.moves.dump());

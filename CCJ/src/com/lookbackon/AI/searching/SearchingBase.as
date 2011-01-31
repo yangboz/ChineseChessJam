@@ -95,9 +95,11 @@ package com.lookbackon.AI.searching
 //				trace("orderingMove's celled:",this.orderingMoves[om].target.chessVO.moves.celled);
 			}
 			//pluge to death.
-			if(this.orderingMoves.length==0)
+			if(this.orderingMoves.length<1)
 			{
 				GameManager.humanWin();
+				//
+				this.processDone = true;
 			}else
 			{
 				//temporary define first move from ording moves for hard-code test purpose.
@@ -223,7 +225,10 @@ package com.lookbackon.AI.searching
 			if(value)
 			{
 				//after execute all kinds of searching algorithm,always apply move.
-				this.applyMove(this.bestMove);
+				if(this.bestMove)
+				{
+					this.applyMove(this.bestMove);
+				}
 			}
 		}
 		//--------------------------------------------------------------------------

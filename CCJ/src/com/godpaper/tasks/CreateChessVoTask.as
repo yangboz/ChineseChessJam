@@ -16,7 +16,7 @@ package com.godpaper.tasks
 	import flash.utils.getQualifiedClassName;
 
 	/**
-	 * CreateChessVoTask.as class. include<conduct,omen,etc>
+	 * CreateChessVoTask.as class. include<conduct,omen,etc..>
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
@@ -51,10 +51,12 @@ package com.godpaper.tasks
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function CreateChessVoTask()
+		public function CreateChessVoTask(factory:Class=null)
 		{
 			//TODO: implement function
 			super();
+			//
+			this.factory = factory;
 		}     	
 		//--------------------------------------------------------------------------
 		//

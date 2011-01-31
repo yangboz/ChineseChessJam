@@ -13,12 +13,12 @@ package com.godpaper.business.fsm
 	import com.godpaper.business.fsm.states.game.ComputerWinState;
 	import com.godpaper.business.fsm.states.game.HumanState;
 	import com.godpaper.business.fsm.states.game.HumanWinState;
-	
+
 	import mx.core.IVisualElement;
-	
-	
+
+
 	/**
-	 * GameAgent.as class.   	
+	 * GameAgent.as class.The game state agency class.
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
@@ -40,19 +40,19 @@ package com.godpaper.business.fsm
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
 		//
 		//-------------------------------------------------------------------------- 
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Constructor
@@ -74,18 +74,19 @@ package com.godpaper.business.fsm
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
 	}
-	
+
 }
+

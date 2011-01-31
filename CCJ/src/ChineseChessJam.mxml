@@ -106,7 +106,7 @@
 			}
 
 			//
-			public function dumpFootSprint():void
+			override public function dumpFootSprint():void
 			{
 				//design by contract.
 				//@see http://opensource.adobe.com/wiki/display/cairngorm/HowToUseCairngormContract
