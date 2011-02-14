@@ -5,11 +5,11 @@ package com.lookbackon.AI.searching
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.godpaper.business.managers.GameManager;
+	import com.godpaper.configs.GameConfig;
 	import com.godpaper.model.vos.ConductVO;
 	import com.godpaper.model.vos.PositionVO;
 	import com.godpaper.utils.LogUtil;
-	
+
 	import mx.logging.ILogger;
 
 	/**
@@ -18,7 +18,7 @@ package com.lookbackon.AI.searching
 	 * This essay is a detailed explanation of one of the most important
 	 * data structures ever created for Game Artificial Intelligence. </br>
 	 * The minimax tree is at the heart of almost every board game program in existence.</br>
-	 * 
+	 *
 	 * @author Knight.zhou
 	 */	
 	public class ShortSighted extends SearchingBase
@@ -28,7 +28,7 @@ package com.lookbackon.AI.searching
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		
+
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -38,13 +38,13 @@ package com.lookbackon.AI.searching
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
 		//
 		//-------------------------------------------------------------------------- 
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Constructor
@@ -74,7 +74,7 @@ package com.lookbackon.AI.searching
 			if(orderingMoves.length<=0)
 			{
 				//pluge to death.
-				GameManager.humanWin();
+				GameConfig.gameManager.humanWin();
 			}else
 			{
 				var pValue:int=-1;
@@ -99,12 +99,14 @@ package com.lookbackon.AI.searching
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
 	}	
-	
+
 }
+
+

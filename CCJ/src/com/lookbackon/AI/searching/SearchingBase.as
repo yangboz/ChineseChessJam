@@ -1,14 +1,12 @@
 package com.lookbackon.AI.searching
 {
-	import com.godpaper.business.managers.ChessPieceManager;
-	import com.godpaper.business.managers.GameManager;
+	import com.godpaper.configs.GameConfig;
 	import com.godpaper.model.ChessPiecesModel;
 	import com.godpaper.model.vos.ConductVO;
 	import com.godpaper.model.vos.PositionVO;
 	import com.godpaper.utils.FilterUtil;
 	import com.godpaper.utils.SortUtil;
 	import com.godpaper.views.components.ChessPiece;
-	import com.lookbackon.AI.FSM.Message;
 	import com.lookbackon.AI.evaluation.IEvaluation;
 	import com.lookbackon.AI.evaluation.linear.LinearEvaluationProxy;
 	import com.lookbackon.ds.BitBoard;
@@ -97,7 +95,8 @@ package com.lookbackon.AI.searching
 			//pluge to death.
 			if(this.orderingMoves.length<1)
 			{
-				GameManager.humanWin();
+				//
+				GameConfig.gameManager.humanWin();
 				//
 				this.processDone = true;
 			}else
@@ -289,7 +288,7 @@ package com.lookbackon.AI.searching
 		 */
 		final public function makeMove(conductVO:ConductVO):void
 		{
-			ChessPieceManager.makeMove(conductVO);
+			GameConfig.chessPieceManager.makeMove(conductVO);
 		}
 
 		//----------------------------------
@@ -300,7 +299,7 @@ package com.lookbackon.AI.searching
 		 */
 		final public function unmakeMove(conductVO:ConductVO):void
 		{
-			ChessPieceManager.unmakeMove(conductVO);
+			GameConfig.chessPieceManager.unmakeMove(conductVO);
 		}
 
 		//----------------------------------
@@ -308,7 +307,7 @@ package com.lookbackon.AI.searching
 		//----------------------------------
 		final public function applyMove(conductVO:ConductVO):void
 		{
-			ChessPieceManager.applyMove(conductVO);
+			GameConfig.chessPieceManager.applyMove(conductVO);
 		}
 
 		//----------------------------------
@@ -316,7 +315,7 @@ package com.lookbackon.AI.searching
 		//----------------------------------
 		final public function noneMove():int
 		{
-			return ChessPieceManager.noneMove();
+			return GameConfig.chessPieceManager.noneMove();
 		}
 
 		//----------------------------------
@@ -324,7 +323,7 @@ package com.lookbackon.AI.searching
 		//----------------------------------
 		final public function willNoneMove(gamePosition:PositionVO):Boolean
 		{
-			return ChessPieceManager.willNoneMove(gamePosition);
+			return GameConfig.chessPieceManager.willNoneMove(gamePosition);
 		}
 
 		//----------------------------------

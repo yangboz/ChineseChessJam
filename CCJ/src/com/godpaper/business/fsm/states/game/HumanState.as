@@ -5,7 +5,6 @@ package com.godpaper.business.fsm.states.game
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.godpaper.business.managers.GameManager;
 	import com.godpaper.configs.GameConfig;
 	import com.godpaper.configs.IndicatorConfig;
 	import com.godpaper.consts.CcjConstants;

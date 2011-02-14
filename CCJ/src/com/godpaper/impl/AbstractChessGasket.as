@@ -5,7 +5,7 @@ package com.godpaper.impl
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.godpaper.business.managers.ChessPieceManager;
+	import com.godpaper.configs.GameConfig;
 	import com.godpaper.core.IChessGasket;
 	import com.godpaper.core.IChessPiece;
 	import com.godpaper.model.vos.ConductVO;
@@ -134,7 +134,7 @@ package com.godpaper.impl
 			var myConductVO:ConductVO=new ConductVO();
 			myConductVO.target=event.dragInitiator as IChessPiece;
 			myConductVO.previousPosition=this.position;
-			if (ChessPieceManager.doMoveValidation(myConductVO))
+			if (GameConfig.chessPieceManager.doMoveValidation(myConductVO))
 			{
 				DragManager.acceptDragDrop(event.currentTarget as IUIComponent);
 				DragManager.showFeedback(DragManager.LINK);
@@ -151,7 +151,7 @@ package com.godpaper.impl
 			myConductVO.previousPosition=(event.dragInitiator as ChessPiece).position;
 			myConductVO.nextPosition=this.position;
 			//make move.
-			ChessPieceManager.makeMove(myConductVO);
+			GameConfig.chessPieceManager.makeMove(myConductVO);
 			//
 			event.stopImmediatePropagation();
 		}
@@ -166,7 +166,7 @@ package com.godpaper.impl
 			var emptyLegalMoves:BitBoard=new BitBoard(9, 10);
 			emptyLegalMoves.clear();
 			//empty indicate effect.
-			ChessPieceManager.indicateGaskets(emptyLegalMoves);
+			GameConfig.chessPieceManager.indicateGaskets(emptyLegalMoves);
 		}
 
 		//

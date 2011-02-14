@@ -1,4 +1,4 @@
-package com.godpaper.business.managers
+package com.godpaper.impl
 {
 	import com.adobe.cairngorm.task.SequenceTask;
 	import com.godpaper.business.fsm.GameAgent;
@@ -6,6 +6,7 @@ package com.godpaper.business.managers
 	import com.godpaper.configs.IndicatorConfig;
 	import com.godpaper.configs.PieceConfig;
 	import com.godpaper.consts.CcjConstants;
+	import com.godpaper.core.IGameStateManager;
 	import com.godpaper.model.ChessPiecesModel;
 	import com.godpaper.model.vos.PositionVO;
 	import com.godpaper.tasks.CleanUpChessPieceTask;
@@ -17,7 +18,7 @@ package com.godpaper.business.managers
 	import com.lookbackon.AI.searching.MiniMax;
 	import com.lookbackon.AI.searching.RandomWalk;
 	import com.lookbackon.AI.searching.ShortSighted;
-	
+
 	import mx.core.FlexGlobals;
 	import mx.core.IVisualElement;
 	import mx.logging.ILogger;
@@ -28,7 +29,7 @@ package com.godpaper.business.managers
 	 * @author Knight.zhou
 	 *
 	 */
-	public class GameManager
+	public class GameStateManagerDefault implements IGameStateManager
 	{
 		//--------------------------------------------------------------------------
 		//
@@ -36,23 +37,24 @@ package com.godpaper.business.managers
 		//
 		//--------------------------------------------------------------------------
 		//
-		private static var chessPieceModel:ChessPiecesModel = ChessPiecesModel.getInstance();
+		private var chessPieceModel:ChessPiecesModel=ChessPiecesModel.getInstance();
 		//
-		public static var isRunning:Boolean;
+		private var _isRunning:Boolean;
 		//
-		public static var agent:GameAgent;
+		private var _level:int=1;
 		//
-		public static var level:int=1;
+		public var agent:GameAgent;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:ILogger=LogUtil.getLogger(GameManager);
+		private const LOG:ILogger=LogUtil.getLogger(GameStateManagerDefault);
 		//game phase
 		//Masks for bits inside the 'flags' var
 		//which store the state of Boolean game phase properties.
-		public static const PHASE_OPENING:uint=1 << 0;
-		public static const PHASE_MIDDLE:uint=1 << 1;
-		public static const PHASE_ENDING:uint=1 << 2;
+		public const PHASE_OPENING:uint=1 << 0;
+		public const PHASE_MIDDLE:uint=1 << 1;
+		public const PHASE_ENDING:uint=1 << 2;
+
 		//--------------------------------------------------------------------------
 		//
 		//  Properties
@@ -66,22 +68,38 @@ package com.godpaper.business.managers
 		 * @param gamePosition the current game position information.
 		 * @return the current game position's game phase.
 		 */
-		public static function get phase():uint
+		public function get phase():uint
 		{
 			var gamePhase:uint=PHASE_OPENING;
-			if (chessPieceModel.gamePosition.board.celled <= 14 
-				&& chessPieceModel.gamePosition.board.celled >= 6
-				)
+			if (chessPieceModel.gamePosition.board.celled <= 14 && chessPieceModel.gamePosition.board.celled >= 6)
 			{
 				gamePhase=PHASE_MIDDLE;
 			}
-			if (chessPieceModel.gamePosition.board.celled < 6 
-				&& chessPieceModel.gamePosition.board.celled >= 1
-				)
+			if (chessPieceModel.gamePosition.board.celled < 6 && chessPieceModel.gamePosition.board.celled >= 1)
 			{
 				gamePhase=PHASE_ENDING;
 			}
 			return gamePhase;
+		}
+		//
+		public function get level():int
+		{
+			return _level;
+		}
+
+		public function set level(value:int):void
+		{
+			_level = value;
+		}
+		//
+		public function get isRunning():Boolean
+		{
+			return _isRunning;
+		}
+
+		public function set isRunning(value:Boolean):void
+		{
+			_isRunning = value;
 		}
 		//--------------------------------------------------------------------------
 		//
@@ -91,19 +109,21 @@ package com.godpaper.business.managers
 		//----------------------------------
 		//  startGame
 		//----------------------------------
-		public static function start():void
+		public function start():void
 		{
 			//TODO:
 			//agent initialization.
 			agent=new GameAgent("CCJGameAgent", FlexGlobals.topLevelApplication as IVisualElement);
 			//logic condition who's turn now at first.
-			if(GameConfig.turnFlag==CcjConstants.FLAG_BLUE)
+			if (GameConfig.turnFlag == CcjConstants.FLAG_BLUE)
 			{
 				isComputerTurnNow();
-			}else if(GameConfig.turnFlag==CcjConstants.FLAG_RED)
+			}
+			else if (GameConfig.turnFlag == CcjConstants.FLAG_RED)
 			{
 				isHumanTurnNow();
-			}else
+			}
+			else
 			{
 				//TODO,another human turn now.
 			}
@@ -114,12 +134,12 @@ package com.godpaper.business.managers
 		//----------------------------------
 		//  restartGame
 		//----------------------------------
-		public static function restart():void
+		public function restart():void
 		{
 			//TODO:re-start game
 			//clean up indicators.
-			IndicatorConfig.check = false;
-			IndicatorConfig.submitScore = false;
+			IndicatorConfig.check=false;
+			IndicatorConfig.submitScore=false;
 			//clear board,chess pieces
 			FlexGlobals.topLevelApplication.cleanUpSequenceTask.addTask(new CleanUpChessPieceTask());
 			FlexGlobals.topLevelApplication.cleanUpSequenceTask.addTask(new CleanUpPiecesBitboardTask());
@@ -143,7 +163,7 @@ package com.godpaper.business.managers
 		//----------------------------------
 		//  computerWin
 		//----------------------------------
-		public static function computerWin():void
+		public function computerWin():void
 		{
 			//TODO:
 			agent.fsm.changeState(agent.computerWinState);
@@ -152,7 +172,7 @@ package com.godpaper.business.managers
 		//----------------------------------
 		//  humanWin
 		//----------------------------------
-		public static function humanWin():void
+		public function humanWin():void
 		{
 			//TODO:
 			agent.fsm.changeState(agent.humanWinState);
@@ -161,7 +181,7 @@ package com.godpaper.business.managers
 		//----------------------------------
 		//  isComputerTurnNow
 		//----------------------------------
-		public static function isComputerTurnNow():void
+		public function isComputerTurnNow():void
 		{
 			//delegate fsm transition to computer state.
 			agent.fsm.changeState(agent.computerState);
@@ -170,7 +190,7 @@ package com.godpaper.business.managers
 		//----------------------------------
 		//  isHumanTurnNow
 		//----------------------------------
-		public static function isHumanTurnNow():void
+		public function isHumanTurnNow():void
 		{
 			//delegate fsm transition to computer state.
 			agent.fsm.changeState(agent.humanState);

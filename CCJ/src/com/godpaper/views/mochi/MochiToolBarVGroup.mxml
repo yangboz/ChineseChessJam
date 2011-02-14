@@ -6,7 +6,6 @@
 		<![CDATA[
 			import assets.EmbededAssets;
 
-			import com.godpaper.business.managers.GameManager;
 			import com.godpaper.configs.GameConfig;
 			import com.godpaper.configs.PluginConfig;
 			import com.godpaper.messages.LevelUpMessage;
@@ -25,8 +24,8 @@
 			//
 			protected function tollgateIconView_addedToStageHandler(event:Event):void
 			{
-				getIconSerials(SWFLoader(event.target)).gotoAndStop(GameManager.level);
-				tollgateSWFLoader.toolTip = GameConfig.tollgateTips[GameManager.level-1];
+				getIconSerials(SWFLoader(event.target)).gotoAndStop(GameConfig.gameManager.level);
+				tollgateSWFLoader.toolTip = GameConfig.tollgateTips[GameConfig.gameManager.level-1];
 			}
 
 			//
@@ -86,8 +85,8 @@
 			[MessageHandler]
 			public function levelUpHandler(message:LevelUpMessage):void
 			{
-				getIconSerials(tollgateSWFLoader).gotoAndStop(GameManager.level);
-				tollgateSWFLoader.toolTip = GameConfig.tollgateTips[GameManager.level-1];
+				getIconSerials(tollgateSWFLoader).gotoAndStop(GameConfig.gameManager.level);
+				tollgateSWFLoader.toolTip = GameConfig.tollgateTips[GameConfig.gameManager.level-1];
 			}
 		]]>
 	</fx:Script>

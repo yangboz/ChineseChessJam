@@ -1,20 +1,25 @@
 package com.godpaper.configs
 {
+	import com.godpaper.impl.ChessPieceManagerDefault;
+	import com.godpaper.impl.GameStateManagerDefault;
+	import com.godpaper.core.IChessPieceManager;
+	import com.godpaper.core.IGameStateManager;
+
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	
+
 	/**
-	 * GameConfig.as class. Global game configuration,(which one) set up at application's initialization stage.     	
+	 * GameConfig.as class. Global game configuration,(which one) set up at application's initialization stage.
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
 	 * Created Jan 20, 2011 11:34:56 AM
-	 */   	 
+	 */
 	public class GameConfig
-	{		
+	{
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
@@ -24,10 +29,14 @@ package com.godpaper.configs
 		private static var _turnFlag:int;
 		private static var _tollgates:Array;
 		private static var _tollgateTips:Array;
+		//
+		private static var _chessPieceManager:IChessPieceManager = new ChessPieceManagerDefault();
+		private static var _gameManager:IGameStateManager = new GameStateManagerDefault();
+
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -40,10 +49,12 @@ package com.godpaper.configs
 		{
 			return _tollgateTips;
 		}
+
 		public static function set tollgateTips(value:Array):void
 		{
-			_tollgateTips = value;
+			_tollgateTips=value;
 		}
+
 		//----------------------------------
 		//  tollgates(read-write)
 		//----------------------------------
@@ -51,10 +62,12 @@ package com.godpaper.configs
 		{
 			return _tollgates;
 		}
+
 		public static function set tollgates(value:Array):void
 		{
-			_tollgates = value;
+			_tollgates=value;
 		}
+
 		//----------------------------------
 		//  turnFlag(read-write)
 		//----------------------------------
@@ -62,28 +75,55 @@ package com.godpaper.configs
 		{
 			return _turnFlag;
 		}
+
 		public static function set turnFlag(value:int):void
 		{
-			_turnFlag = value;
+			_turnFlag=value;
+		}
+
+		//----------------------------------
+		//  gameManager(read-write)
+		//----------------------------------
+		public static function get gameManager():IGameStateManager
+		{
+			return _gameManager;
+		}
+
+		public static function set gameManager(value:IGameStateManager):void
+		{
+			_gameManager=value;
+		}
+
+		//----------------------------------
+		//  chessPieceManager(read-write)
+		//----------------------------------
+		public static function get chessPieceManager():IChessPieceManager
+		{
+			return _chessPieceManager;
+		}
+
+		public static function set chessPieceManager(value:IChessPieceManager):void
+		{
+			_chessPieceManager=value;
 		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
 		//
 		//-------------------------------------------------------------------------- 
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods
@@ -92,5 +132,6 @@ package com.godpaper.configs
 
 
 	}
-	
+
 }
+

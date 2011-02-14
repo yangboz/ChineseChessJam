@@ -5,15 +5,15 @@ package com.godpaper.business.fsm.states.game
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
+	import com.godpaper.configs.GameConfig;
 	import com.lookbackon.AI.FSM.IAgent;
 	import com.lookbackon.AI.FSM.states.StateBase;
-	import com.godpaper.business.managers.GameManager;
-	
+
 	import mx.controls.Alert;
-	
-	
+
+
 	/**
-	 * ComputerWinState.as class.   	
+	 * ComputerWinState.as class.
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
@@ -26,23 +26,23 @@ package com.godpaper.business.fsm.states.game
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		
+
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
 		//
 		//-------------------------------------------------------------------------- 
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Constructor
@@ -60,31 +60,32 @@ package com.godpaper.business.fsm.states.game
 		//--------------------------------------------------------------------------
 		override public function enter():void
 		{
-			GameManager.isRunning = false;
+			GameConfig.gameManager.isRunning = false;
 			//
 			Alert.show("You play like a monkey,@-@","Computer Win!");
 		}
-		
+
 		override public function update(time:Number=0):void
 		{
-			
+
 		}
-		
+
 		override public function exit():void
 		{
-			
+
 		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
 	}
-	
+
 }
+

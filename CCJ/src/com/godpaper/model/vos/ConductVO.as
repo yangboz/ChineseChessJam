@@ -1,7 +1,6 @@
 package com.godpaper.model.vos
 {
-	import com.godpaper.business.managers.ChessPieceManager;
-	import com.godpaper.business.managers.GameManager;
+	import com.godpaper.configs.GameConfig;
 	import com.godpaper.consts.CcjConstants;
 	import com.godpaper.consts.ChessPiecesConstants;
 	import com.godpaper.core.IChessPiece;
@@ -105,7 +104,7 @@ package com.godpaper.model.vos
 			{
 				//TODO:chess piece eat off.
 				var removedPiece:ChessPiece = cGasket.getElementAt(0) as ChessPiece;
-				var removedIndex:int = ChessPieceManager.calculatePieceIndex(removedPiece);
+				var removedIndex:int = GameConfig.chessPieceManager.calculatePieceIndex(removedPiece);
 				LOG.debug("Eat Off@{0} target:{1}",cGasket.position.toString(),removedPiece.toString());
 				//set eat off value.
 				eatOff = removedPiece;
@@ -126,7 +125,7 @@ package com.godpaper.model.vos
 		{
 			_eatOff = value;
 			//
-			ChessPieceManager.eatOffs.push(value);
+			GameConfig.chessPieceManager.eatOffs.push(value);
 		}
 		//----------------------------------
 		//  crossValue(read-write)

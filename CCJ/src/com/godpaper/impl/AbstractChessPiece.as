@@ -6,7 +6,6 @@ package com.godpaper.impl
 	//
 	//--------------------------------------------------------------------------
 	import com.godpaper.business.fsm.ChessAgent;
-	import com.godpaper.business.managers.ChessPieceManager;
 	import com.godpaper.consts.CcjConstants;
 	import com.godpaper.core.IChessPiece;
 	import com.godpaper.core.IChessVO;

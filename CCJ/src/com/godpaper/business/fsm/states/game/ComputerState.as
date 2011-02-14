@@ -5,7 +5,6 @@ package com.godpaper.business.fsm.states.game
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.godpaper.business.managers.GameManager;
 	import com.godpaper.configs.GameConfig;
 	import com.godpaper.configs.IndicatorConfig;
 	import com.godpaper.consts.CcjConstants;
@@ -35,9 +34,9 @@ package com.godpaper.business.fsm.states.game
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
 	 * Created Dec 10, 2010 11:11:56 AM
-	 */   	 
+	 */
 	public class ComputerState extends StateBase
-	{		
+	{
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
@@ -51,7 +50,8 @@ package com.godpaper.business.fsm.states.game
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:ILogger =  LogUtil.getLogger(ComputerState);
+		private static const LOG:ILogger=LogUtil.getLogger(ComputerState);
+
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -73,7 +73,8 @@ package com.godpaper.business.fsm.states.game
 		{
 			//TODO: implement function
 			super(agent, resource, description);
-		}     	
+		}
+
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
@@ -83,13 +84,13 @@ package com.godpaper.business.fsm.states.game
 		{
 			//TODO: implement function
 			//hold turn flag
-			GameConfig.turnFlag = CcjConstants.FLAG_BLUE;
+			GameConfig.turnFlag=CcjConstants.FLAG_BLUE;
 			//about view
 			CursorManager.setBusyCursor();
 			//
 			IndicatorConfig.readOut=true;
 			//default update current state.
-			update(GameManager.level-1);
+			update(GameConfig.gameManager.level - 1);
 		}
 
 		override public function exit():void
@@ -105,7 +106,7 @@ package com.godpaper.business.fsm.states.game
 			//TODO:switch any searching class to test.
 			//			gameAI = new RandomWalk(ChessPiecesModel.getInstance().gamePosition);
 			//			searching = new MinMax(ChessPiecesModel.getInstance().gamePosition);
-//			searching = new MiniMax(ChessPiecesModel.getInstance().gamePosition,5);
+			//			searching = new MiniMax(ChessPiecesModel.getInstance().gamePosition,5);
 			//			gameAI = new NegaMax(ChessPiecesModel.getInstance().gamePosition,1);
 			//			gameAI = new AlphaBeta(ChessPiecesModel.getInstance().gamePosition);
 			//			gameAI = new Quiescence(ChessPiecesModel.getInstance().gamePosition);
@@ -113,15 +114,15 @@ package com.godpaper.business.fsm.states.game
 			//			gameAI = new ShortSighted(ChessPiecesModel.getInstance().gamePosition);
 			//			searching = new AttackFalse(ChessPiecesModel.getInstance().gamePosition);
 			//
-			var className:String = getQualifiedClassName(GameConfig.tollgates[time]);
-			var implementation:Object = getDefinitionByName(className);
-			searching = new implementation(ChessPiecesModel.getInstance().gamePosition);
+			var className:String=getQualifiedClassName(GameConfig.tollgates[time]);
+			var implementation:Object=getDefinitionByName(className);
+			searching=new implementation(ChessPiecesModel.getInstance().gamePosition);
 			//
-			LOG.info("current toll gate is:{0}",getQualifiedClassName(implementation));
+			LOG.info("current toll gate is:{0}", getQualifiedClassName(implementation));
 			//using this flash green thread algorithm to avoid script time limition only 15s.
-			processes = new Vector.<IRunnable>();
+			processes=new Vector.<IRunnable>();
 			processes.push(searching);
-			greenThread = new GreenThread(processes, FlexGlobals.topLevelApplication.stage.frameRate);
+			greenThread=new GreenThread(processes, FlexGlobals.topLevelApplication.stage.frameRate);
 			//
 			//			greenThread.addEventListener(GreenThreadEvent.PROCESS_TIMEOUT, function(event:GreenThreadEvent):void
 			//			{

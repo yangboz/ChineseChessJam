@@ -6,8 +6,6 @@ package com.godpaper.tasks
 	//
 	//--------------------------------------------------------------------------
 	import com.adobe.cairngorm.task.Task;
-	import com.godpaper.business.managers.ChessPieceManager;
-	import com.godpaper.business.managers.GameManager;
 	import com.godpaper.configs.GameConfig;
 	import com.godpaper.consts.CcjConstants;
 	import com.godpaper.consts.ChessPiecesConstants;
@@ -87,20 +85,20 @@ package com.godpaper.tasks
 			{
 				//TODO:chess piece eat off.
 				var removedPiece:ChessPiece = cGasket.getElementAt(0) as ChessPiece;
-				var removedIndex:int = ChessPieceManager.calculatePieceIndex(removedPiece);
+				var removedIndex:int = GameConfig.chessPieceManager.calculatePieceIndex(removedPiece);
 				LOG.info("Eat Off@{0} target:{1}",cGasket.position.toString(),removedPiece.toString());
 				if(ChessPiece(cGasket.getElementAt(0)).label==ChessPiecesConstants.BLUE_MARSHAL.label)
 				{
-					GameManager.humanWin();	
+					GameConfig.gameManager.humanWin();	
 				}
 				if(ChessPiece(cGasket.getElementAt(0)).label==ChessPiecesConstants.RED_MARSHAL.label)
 				{
-					GameManager.computerWin();
+					GameConfig.gameManager.computerWin();
 				}
 				//clean this bit at pieces.
 				BitBoard(ChessPiecesModel.getInstance()[removedPiece.type]).setBitt(removedPiece.position.y,removedPiece.position.x,false);
 				//set eat off value.
-				ChessPieceManager.eatOffs.push(removedPiece);
+				GameConfig.chessPieceManager.eatOffs.push(removedPiece);
 				//remove pieces data.
 				if(GameConfig.turnFlag==CcjConstants.FLAG_RED)
 				{

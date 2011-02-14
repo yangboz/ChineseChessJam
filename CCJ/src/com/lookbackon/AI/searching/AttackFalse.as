@@ -5,17 +5,17 @@ package com.lookbackon.AI.searching
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.godpaper.utils.FilterUtil;
-	import com.godpaper.business.managers.GameManager;
+	import com.godpaper.configs.GameConfig;
 	import com.godpaper.model.vos.ConductVO;
 	import com.godpaper.model.vos.PositionVO;
+	import com.godpaper.utils.FilterUtil;
 	import com.godpaper.utils.LogUtil;
-	
+
 	import mx.logging.ILogger;
-	
-	
+
+
 	/**
-	 * AttackFalse.as class.(假进攻)   	
+	 * AttackFalse.as class.(假进攻)
 	 * @author Knight.zhou
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
@@ -37,13 +37,13 @@ package com.lookbackon.AI.searching
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
 		//
 		//-------------------------------------------------------------------------- 
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Constructor
@@ -64,7 +64,7 @@ package com.lookbackon.AI.searching
 			if(orderingMoves.length<=0)
 			{
 				//pluge to death.
-				GameManager.humanWin();
+				GameConfig.gameManager.humanWin();
 			}else
 			{
 				var pValue:int=-1;
@@ -107,12 +107,13 @@ package com.lookbackon.AI.searching
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
 	}
-	
+
 }
+

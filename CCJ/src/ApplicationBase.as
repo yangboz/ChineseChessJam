@@ -5,7 +5,7 @@ package
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.godpaper.business.managers.GameManager;
+	import com.godpaper.configs.GameConfig;
 	import com.godpaper.model.ChessPiecesModel;
 
 	import flash.display.MovieClip;
@@ -75,7 +75,7 @@ package
 		 */		
 		public function dumpFootSprint():void
 		{
-			
+
 		}
 		//--------------------------------------------------------------------------
 		//
@@ -140,7 +140,7 @@ package
 		{
 			// TODO Auto-generated method stub
 			//GameManager start.
-			GameManager.start();
+			GameConfig.gameManager.start();
 			//
 			LOG.info("redPieces:{0}", ChessPiecesModel.getInstance().redPieces.dump());
 			LOG.info("bluePieces:{0}", ChessPiecesModel.getInstance().bluePieces.dump());

@@ -9,14 +9,13 @@
 			   >
 	<fx:Script>
 		<![CDATA[
-			import com.godpaper.business.managers.GameManager;
 			import com.godpaper.configs.GameConfig;
 			import com.godpaper.configs.PluginConfig;
 			import com.godpaper.messages.LevelUpMessage;
 			import com.godpaper.model.plugin.MochiModel;
-			
+
 			import mochi.as3.MochiScores;
-			
+
 			import mx.core.FlexGlobals;
 			import mx.events.FlexEvent;
 			//
@@ -50,7 +49,7 @@
 					}
 					);
 				//
-				GameManager.restart();
+				GameConfig.gameManager.restart();
 			}
 			//
 			protected function titlewindow1_showHandler(event:FlexEvent):void
@@ -62,21 +61,21 @@
 			protected function nextRoundBtn_clickHandler(event:MouseEvent):void
 			{
 				//
-				GameManager.restart();
+				GameConfig.gameManager.restart();
 				//increase intelligence level.
-				GameManager.level++;
+				GameConfig.gameManager.level++;
 				//broad cast level up message.
-				dispatcher(new LevelUpMessage(GameManager.level));
+				dispatcher(new LevelUpMessage(GameConfig.gameManager.level));
 			}
 			//
 			protected function get currentScore():int
 			{
-				return (GameManager.level)*10;
+				return (GameConfig.gameManager.level)*10;
 			}
 			//
 			protected function get hasNextRound():Boolean
 			{
-				return GameManager.level<GameConfig.tollgates.length;
+				return GameConfig.gameManager.level<GameConfig.tollgates.length;
 			}
 		]]>
 	</fx:Script>

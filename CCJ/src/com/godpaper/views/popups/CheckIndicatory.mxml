@@ -10,7 +10,6 @@
 			   title="{CcjConstants.INDICATION_CHECK}">
 	<fx:Script>
 		<![CDATA[
-			import com.godpaper.business.managers.GameManager;
 			import com.godpaper.configs.IndicatorConfig;
 			import com.godpaper.consts.CcjConstants;
 			import com.godpaper.consts.ChessPiecesConstants;

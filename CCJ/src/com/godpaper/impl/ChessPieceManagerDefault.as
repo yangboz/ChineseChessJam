@@ -1,4 +1,4 @@
-package com.godpaper.business.managers
+package com.godpaper.impl
 {
 	import com.adobe.cairngorm.task.ParallelTask;
 	import com.adobe.cairngorm.task.SequenceTask;
@@ -11,6 +11,7 @@ package com.godpaper.business.managers
 	import com.godpaper.consts.CcjConstants;
 	import com.godpaper.consts.ChessPiecesConstants;
 	import com.godpaper.core.IChessPiece;
+	import com.godpaper.core.IChessPieceManager;
 	import com.godpaper.errors.CcjErrors;
 	import com.godpaper.model.ChessGasketsModel;
 	import com.godpaper.model.ChessPiecesMemento;
@@ -43,36 +44,36 @@ package com.godpaper.business.managers
 	 * @author Knight.zhou
 	 * @history 2010-12-02 using memento design pattern to implment make/unmake functions.
 	 */
-	public class ChessPieceManager
+	public class ChessPieceManagerDefault implements IChessPieceManager
 	{
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		private static var pmPRNG:PM_PRNG=new PM_PRNG();
+		private var pmPRNG:PM_PRNG=new PM_PRNG();
 		//But the real trick is if we do the XOR operation again we get the initial number back.
 		//a ^ b = c
 		//c ^ b = a
-//		private static var _crossOverValue:int;//and we using _crossOverValue for store the value "b";
-		private static var _zKey:ZobristKeyVO; //current chess piece's zobrist key value object.
+//		private  var _crossOverValue:int;//and we using _crossOverValue for store the value "b";
+		private var _zKey:ZobristKeyVO; //current chess piece's zobrist key value object.
 		//
-		private static var chessPiecesModel:ChessPiecesModel=ChessPiecesModel.getInstance();
+		private var chessPiecesModel:ChessPiecesModel=ChessPiecesModel.getInstance();
 		//
-		private static var _eatOffs:Vector.<ChessPiece>=new Vector.<ChessPiece>();
+		private var _eatOffs:Vector.<ChessPiece>=new Vector.<ChessPiece>();
 		//
-//		private static var _memento:ChessPiecesMemento;
-		private static var _conduct:ConductVO;
+//		private  var _memento:ChessPiecesMemento;
+		private var _conduct:ConductVO;
 		//
-		private static var _previousMementos:Array=[];
-		private static var _nextMementos:Array=[];
+		private var _previousMementos:Array=[];
+		private var _nextMementos:Array=[];
 		//flag is checked.
 		[Bindable]
-		private static var _isChecking:Boolean = false;
+		private var _isChecking:Boolean=false;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:ILogger=LogUtil.getLogger(ChessPieceManager);
+		private const LOG:ILogger=LogUtil.getLogger(ChessPieceManagerDefault);
 
 		//--------------------------------------------------------------------------
 		//
@@ -86,7 +87,7 @@ package com.godpaper.business.managers
 		 *
 		 * @return
 		 */
-		public static function get memento():ChessPiecesMemento
+		public function get memento():ChessPiecesMemento
 		{
 			return new ChessPiecesMemento(_conduct);
 		}
@@ -95,7 +96,7 @@ package com.godpaper.business.managers
 		 *
 		 * @param value
 		 */
-		public static function set memento(value:ChessPiecesMemento):void
+		public function set memento(value:ChessPiecesMemento):void
 		{
 			_conduct=value.conduct;
 			//trigger man of update tasks.
@@ -108,7 +109,7 @@ package com.godpaper.business.managers
 		/**
 		 * @return chess pieces' move history.
 		 */
-		public static function get previousMementos():Array
+		public function get previousMementos():Array
 		{
 			return _previousMementos;
 		}
@@ -120,7 +121,7 @@ package com.godpaper.business.managers
 		 *
 		 * @return the eaten chess pieces.
 		 */
-		public static function get eatOffs():Vector.<ChessPiece>
+		public function get eatOffs():Vector.<ChessPiece>
 		{
 			return _eatOffs;
 		}
@@ -129,10 +130,11 @@ package com.godpaper.business.managers
 		 *
 		 * @param value
 		 */
-		public static function set eatOffs(value:Vector.<ChessPiece>):void
+		public function set eatOffs(value:Vector.<ChessPiece>):void
 		{
 			_eatOffs=value;
 		}
+
 		//----------------------------------
 		//  isChecking
 		//----------------------------------
@@ -140,18 +142,20 @@ package com.godpaper.business.managers
 		 *
 		 * @param value
 		 */
-		public static function set isChecking(value:Boolean):void
+		public function set isChecking(value:Boolean):void
 		{
-			_isChecking = value;
-		}	
+			_isChecking=value;
+		}
+
 		/**
 		 *
 		 * @return
 		 */
-		public static function get isChecking():Boolean
+		public function get isChecking():Boolean
 		{
 			return _isChecking;
-		}	
+		}
+
 		//generation.
 		//--------------------------------------------------------------------------
 		//
@@ -164,7 +168,7 @@ package com.godpaper.business.managers
 		 * @return current chess piece's move validation result.
 		 *
 		 */
-		public static function doMoveValidation(conductVO:ConductVO):Boolean
+		public function doMoveValidation(conductVO:ConductVO):Boolean
 		{
 			var result:Boolean=true;
 			//begin:
@@ -199,7 +203,7 @@ package com.godpaper.business.managers
 		 * @param conductVO the conduct value object of moving chess piece.
 		 *
 		 */
-		public static function makeMove(conductVO:ConductVO):void
+		public function makeMove(conductVO:ConductVO):void
 		{
 			LOG.info("Begin makeMove:{0}", conductVO.brevity);
 			//update conduct
@@ -210,7 +214,7 @@ package com.godpaper.business.managers
 			var memento:ChessPiecesMemento=new ChessPiecesMemento(conductVO);
 			_nextMementos=[];
 			_previousMementos.push(memento);
-			ChessPieceManager.memento=memento;
+			GameConfig.chessPieceManager.memento=memento;
 			//
 			LOG.info("End makeMove:{0}", conductVO.brevity);
 		}
@@ -233,7 +237,7 @@ package com.godpaper.business.managers
 		 * @param conductVO the conduct value object of moving chess piece.
 		 *
 		 */
-		public static function unmakeMove(conductVO:ConductVO):void
+		public function unmakeMove(conductVO:ConductVO):void
 		{
 			var reversedConductVO:ConductVO=conductVO.reverse();
 			LOG.info("Begin unmakeMove:{0}", reversedConductVO.brevity);
@@ -272,7 +276,7 @@ package com.godpaper.business.managers
 				mememto=_previousMementos.pop();
 				mememto.conduct=mememto.conduct.reverse();
 				_nextMementos.push(mememto);
-				ChessPieceManager.memento=mememto;
+				this.memento=mememto;
 			}
 			//
 			LOG.info("End unmakeMove:{0}", reversedConductVO.brevity);
@@ -289,7 +293,7 @@ package com.godpaper.business.managers
 		 *
 		 * @param conductVO
 		 */
-		public static function applyMove(conductVO:ConductVO):void
+		public function applyMove(conductVO:ConductVO):void
 		{
 			//TODO:with roll back function support.
 			var cGasket:ChessGasket=ChessGasketsModel.getInstance().gaskets.gett(conductVO.nextPosition.x, conductVO.nextPosition.y) as ChessGasket;
@@ -297,15 +301,15 @@ package com.godpaper.business.managers
 			{
 				//TODO:chess piece eat off.
 				var removedPiece:ChessPiece=cGasket.getElementAt(0) as ChessPiece;
-				var removedIndex:int=ChessPieceManager.calculatePieceIndex(removedPiece);
+				var removedIndex:int=this.calculatePieceIndex(removedPiece);
 				LOG.info("Eat Off@{0} target:{1}", cGasket.position.toString(), removedPiece.toString());
 				if (ChessPiece(cGasket.getElementAt(0)).label == ChessPiecesConstants.BLUE_MARSHAL.label)
 				{
-					GameManager.humanWin();
+					GameConfig.gameManager.humanWin();
 				}
 				if (ChessPiece(cGasket.getElementAt(0)).label == ChessPiecesConstants.RED_MARSHAL.label)
 				{
-					GameManager.computerWin();
+					GameConfig.gameManager.computerWin();
 				}
 				//clean this bit at pieces.
 				BitBoard(ChessPiecesModel.getInstance()[removedPiece.type]).setBitt(removedPiece.position.y, removedPiece.position.x, false);
@@ -337,15 +341,15 @@ package com.godpaper.business.managers
 		 *
 		 * @return
 		 */
-		public static function noneMove():int
+		public function noneMove():int
 		{
 			if (GameConfig.turnFlag == CcjConstants.FLAG_BLUE)
 			{
-				GameManager.humanWin();
+				GameConfig.gameManager.humanWin();
 			}
 			else
 			{
-				GameManager.computerWin();
+				GameConfig.gameManager.computerWin();
 			}
 			return -1;
 		}
@@ -355,7 +359,7 @@ package com.godpaper.business.managers
 		 * @param gamePosition
 		 * @return
 		 */
-		public static function willNoneMove(gamePosition:PositionVO):Boolean
+		public function willNoneMove(gamePosition:PositionVO):Boolean
 		{
 			//TODO:
 			return false;
@@ -369,7 +373,7 @@ package com.godpaper.business.managers
 		 * @return
 		 * @throws CcjErrors
 		 */
-		public static function calculatePieceIndex(chessPiece:ChessPiece):int
+		public function calculatePieceIndex(chessPiece:ChessPiece):int
 		{
 			for (var i:int=0; i < chessPiecesModel.reds.length; i++)
 			{
@@ -394,7 +398,7 @@ package com.godpaper.business.managers
 		 * @param legalMoves current chess piece's legal moves.
 		 *
 		 */
-		public static function indicateGaskets(legalMoves:BitBoard):void
+		public function indicateGaskets(legalMoves:BitBoard):void
 		{
 			//@see Main.application1_creationCompleteHandler.createGasket().
 			for (var v:int=0; v < BoardConfig.yLines; v++)
@@ -420,7 +424,7 @@ package com.godpaper.business.managers
 		 * @return the result of check pattern,if neccessary.
 		 *
 		 */
-		public static function indicateCheck(pieces:Vector.<ChessPiece>, marshal:BitBoard):Boolean
+		public function indicateCheck(pieces:Vector.<ChessPiece>, marshal:BitBoard):Boolean
 		{
 			//TODO:
 			var totalCaptures:BitBoard=new BitBoard(BoardConfig.xLines, BoardConfig.yLines);
@@ -434,7 +438,7 @@ package com.godpaper.business.managers
 				IndicatorConfig.check=true;
 				//update is checking flag.
 				LOG.info("___isChecking___true");
-				_isChecking = true;
+				_isChecking=true;
 				//
 				return true;
 			}
@@ -448,7 +452,7 @@ package com.godpaper.business.managers
 		 * @return whether or not blue/red check mated.
 		 *
 		 */
-		private static function indicateCheckmate(gamePosition:PositionVO):Boolean
+		private function indicateCheckmate(gamePosition:PositionVO):Boolean
 		{
 			var checkmated:Boolean;
 			if (gamePosition.color == CcjConstants.FLAG_BLUE)
@@ -464,7 +468,7 @@ package com.godpaper.business.managers
 
 		//update-relatived tasks here.
 		//FIXME:cairngorm3 task can not restart,but parsley can do it.
-		private static function updateTasksProcess():void
+		private function updateTasksProcess():void
 		{
 			var task:ParallelTask=new ParallelTask();
 			//
@@ -484,18 +488,18 @@ package com.godpaper.business.managers
 			//
 			task.addChild(new UpdateChessPiecesTask(memento.conduct));
 			//
-			task.addEventListener(TaskEvent.TASK_COMPLETE,function(event:TaskEvent):void
+			task.addEventListener(TaskEvent.TASK_COMPLETE, function(event:TaskEvent):void
 			{
 				//Trigger in-turn system .
-				if (GameManager.isRunning)
+				if (GameConfig.gameManager.isRunning)
 				{
 					if (GameConfig.turnFlag == CcjConstants.FLAG_RED)
 					{
-						GameManager.isComputerTurnNow();
+						GameConfig.gameManager.isComputerTurnNow();
 					}
 					else
 					{
-						GameManager.isHumanTurnNow();
+						GameConfig.gameManager.isHumanTurnNow();
 					}
 				}
 			});

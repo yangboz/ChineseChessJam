@@ -2,12 +2,11 @@ package com.godpaper.model.vos.ccjVO
 {
 	import com.godpaper.consts.CcjConstants;
 	import com.godpaper.consts.ChessPiecesConstants;
-	import com.godpaper.business.managers.ChessPieceManager;
 	import com.godpaper.model.ChessPiecesModel;
 	import com.godpaper.utils.LogUtil;
 	import com.godpaper.utils.MathUtil;
 	import com.lookbackon.ds.BitBoard;
-	
+
 	import mx.logging.ILogger;
 	import com.godpaper.impl.AbstractChessVO;
 
@@ -19,7 +18,7 @@ package com.godpaper.model.vos.ccjVO
 	 * @see getNorth
 	 * @see getSouth
 	 * @author Knight.zhou
-	 * 
+	 *
 	 */	
 	public class CannonVO extends AbstractChessVO
 	{
@@ -102,7 +101,7 @@ package com.godpaper.model.vos.ccjVO
 			}
 			LOG.debug("captures:{0}",this.captures.dump());
 		}
-		
+
 		//----------------------------------
 		//  X-ray attacks(override)
 		//----------------------------------
@@ -270,6 +269,7 @@ package com.godpaper.model.vos.ccjVO
 			}
 			return bb;
 		}
-		
+
 	}
 }
+

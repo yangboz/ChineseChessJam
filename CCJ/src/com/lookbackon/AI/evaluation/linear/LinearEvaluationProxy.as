@@ -3,15 +3,14 @@ package com.lookbackon.AI.evaluation.linear
 	import com.lookbackon.AI.evaluation.IEvaluation;
 	import com.godpaper.consts.CcjConstants;
 	import com.godpaper.consts.ChessPiecesConstants;
-	import com.godpaper.business.managers.ChessPieceManager;
 	import com.godpaper.model.ChessPiecesModel;
 	import com.godpaper.model.vos.ConductVO;
 	import com.godpaper.model.vos.PositionVO;
 	import com.lookbackon.ds.BitBoard;
-	
+
 	import flash.utils.Proxy;
 	import flash.utils.flash_proxy;
-	
+
 	/**
 	 * LinearEvaluationProxy.as class.
 	 * Similar to Shannon’s 1949 paper, the evaluation for this type of evaluation is defined as:</br>
@@ -37,7 +36,7 @@ package com.lookbackon.AI.evaluation.linear
 		//  Protected properties
 		//
 		//--------------------------------------------------------------------------
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Private properties
@@ -60,12 +59,12 @@ package com.lookbackon.AI.evaluation.linear
 		 * KQRBNP = number of kings, queens, rooks, bishops, knights and pawns;</br>
 		 * D,S,I = doubled, blocked and isolated pawns;</br>
 		 * M = Mobility (the number of legal moves);</br>
-		 * 
+		 *
 		 * @see http://chessprogramming.wikispaces.com/Evaluation
 		 * @param conductVO The conductVO which obtained position information.
 		 * @param gamePosition The game position which obtained board position information.
 		 * @return Red should try to maximize T as large as possible,
-		 * while the Blue should try to minimize T as small as possible. 
+		 * while the Blue should try to minimize T as small as possible.
 		 */		
 		public function doEvaluation(conductVO:ConductVO,gamePosition:PositionVO):int
 		{
@@ -85,21 +84,21 @@ package com.lookbackon.AI.evaluation.linear
 			var p:BitBoard = ChessPiecesModel.getInstance()[CcjConstants.BLUE_PAWN] as BitBoard;
 			var B:BitBoard = ChessPiecesModel.getInstance()[CcjConstants.RED_BISHOP] as BitBoard;
 			var b:BitBoard = ChessPiecesModel.getInstance()[CcjConstants.BLUE_BISHOP] as BitBoard;
-			
+
 			var T_red:int = M.celled*133
-							+B.celled*166
-							+R.celled*600
-							+K.celled*266
-							+C.celled*300
-							+P.celled*66
-							;
+				+B.celled*166
+				+R.celled*600
+				+K.celled*266
+				+C.celled*300
+				+P.celled*66
+				;
 			var T_blue:int = m.celled*133
-							+b.celled*166
-							+r.celled*600
-							+k.celled*266
-							+c.celled*300
-							+p.celled*66
-							;
+				+b.celled*166
+				+r.celled*600
+				+k.celled*266
+				+c.celled*300
+				+p.celled*66
+				;
 			//Mobility
 			//TODO:
 			//Threat
@@ -137,12 +136,12 @@ package com.lookbackon.AI.evaluation.linear
 			}
 			return res;
 		}
-		
+
 		override flash_proxy function getProperty(name:*):* 
 		{
 			return _item[name];
 		}
-		
+
 		override flash_proxy function setProperty(name:*, value:*):void 
 		{
 			_item[name] = value;
@@ -152,12 +151,13 @@ package com.lookbackon.AI.evaluation.linear
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
 	}
-	
+
 }
+

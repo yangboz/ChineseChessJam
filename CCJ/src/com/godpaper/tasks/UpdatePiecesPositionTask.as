@@ -6,7 +6,6 @@ package com.godpaper.tasks
 	//
 	//--------------------------------------------------------------------------
 	import com.adobe.cairngorm.task.Task;
-	import com.godpaper.business.managers.ChessPieceManager;
 	import com.godpaper.model.ChessGasketsModel;
 	import com.godpaper.model.vos.ConductVO;
 	import com.godpaper.utils.LogUtil;

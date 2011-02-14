@@ -8,12 +8,7 @@
 						 height="50">
 	<fx:Script>
 		<![CDATA[
-			//--------------------------------------------------------------------------
-			//
-			//  Imports
-			//
-			//--------------------------------------------------------------------------
-			import com.godpaper.business.managers.ChessPieceManager;
+			import com.godpaper.configs.GameConfig;
 			import com.godpaper.consts.CcjConstants;
 			import com.godpaper.model.ChessPiecesModel;
 			import com.godpaper.model.plugin.MochiModel;
@@ -74,7 +69,7 @@
 				//indicate gasket can fill with chess piece.
 				if (mochiModel.hasCaptureIndicator)
 				{
-					ChessPieceManager.indicateGaskets(this.chessVO.moves);
+					GameConfig.chessPieceManager.indicateGaskets(this.chessVO.moves);
 				}
 			}
 			//--------------------------------------------------------------------------

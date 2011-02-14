@@ -5,8 +5,8 @@ package com.lookbackon.AI.searching
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
+	import com.godpaper.configs.GameConfig;
 	import com.godpaper.consts.CcjConstants;
-	import com.godpaper.business.managers.GameManager;
 	import com.godpaper.model.ChessPiecesModel;
 	import com.godpaper.model.vos.PositionVO;
 	import com.godpaper.utils.LogUtil;
@@ -119,7 +119,7 @@ package com.lookbackon.AI.searching
 			if(orderingMoves.length<=0)
 			{
 				//pluge to death.
-				GameManager.humanWin();
+				GameConfig.gameManager.humanWin();
 			}else
 			{
 				//
@@ -160,7 +160,7 @@ package com.lookbackon.AI.searching
 			if(orderingMoves.length<=0)
 			{
 				//pluge to death.
-				GameManager.humanWin();
+				GameConfig.gameManager.humanWin();
 			}else
 			{
 				for(var i:int=0;i<len;i++)
@@ -222,7 +222,7 @@ package com.lookbackon.AI.searching
 				//pluge to death.
 				if(0==orderingMoves.length)
 				{
-					GameManager.computerWin();
+					GameConfig.gameManager.computerWin();
 				}
 			}else
 			{
@@ -230,7 +230,7 @@ package com.lookbackon.AI.searching
 				//pluge to death.
 				if(0==orderingMoves.length)
 				{
-					GameManager.humanWin();
+					GameConfig.gameManager.humanWin();
 				}
 			}
 			LOG.debug("orderingMoves.length:{0}",orderingMoves.length);

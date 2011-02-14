@@ -22,7 +22,6 @@
 			import com.adobe.cairngorm.contract.Contract;
 			import com.godpaper.business.factory.CcjChessFactory;
 			import com.godpaper.business.factory.ChessFactoryBase;
-			import com.godpaper.business.managers.GameManager;
 			import com.godpaper.configs.BoardConfig;
 			import com.godpaper.configs.CCJContextConfig;
 			import com.godpaper.configs.GameConfig;
@@ -85,6 +84,7 @@
 				GameConfig.tollgates=[RandomWalk, ShortSighted, AttackFalse, AttackFalse, MiniMax];
 				GameConfig.tollgateTips=["baby intelligence", "fellow intelligence", "man intelligence", "guru intelligence"];
 				GameConfig.turnFlag=CcjConstants.FLAG_RED;
+				//
 			}
 
 			//  application1_creationCompleteHandler

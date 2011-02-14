@@ -17,7 +17,6 @@
 		<![CDATA[
 			import com.godpaper.configs.BoardConfig;
 			import mx.graphics.SolidColorStroke;
-
 		]]>
 	</fx:Script>
 	<fx:Declarations>

@@ -5,7 +5,7 @@ package com.godpaper.business.fsm.states.game
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.godpaper.business.managers.GameManager;
+	import com.godpaper.configs.GameConfig;
 	import com.godpaper.configs.IndicatorConfig;
 	import com.lookbackon.AI.FSM.IAgent;
 	import com.lookbackon.AI.FSM.states.StateBase;
@@ -57,7 +57,7 @@ package com.godpaper.business.fsm.states.game
 		//--------------------------------------------------------------------------
 		override public function enter():void
 		{
-			GameManager.isRunning = false;
+			GameConfig.gameManager.isRunning = false;
 			IndicatorConfig.submitScore = true;
 		}
 

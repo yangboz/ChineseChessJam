@@ -7,18 +7,17 @@ package com.godpaper.tasks
 	//--------------------------------------------------------------------------
 	import com.adobe.cairngorm.task.Task;
 	import com.godpaper.business.factory.ChessFactoryBase;
-	import com.godpaper.business.managers.ChessPieceManager;
 	import com.godpaper.configs.BoardConfig;
 	import com.godpaper.consts.CcjConstants;
 	import com.godpaper.core.IChessFactory;
 	import com.godpaper.core.IChessPiece;
 	import com.godpaper.model.ChessGasketsModel;
 	import com.godpaper.views.components.ChessGasket;
-	
+
 	import flash.geom.Point;
 	import flash.utils.getDefinitionByName;
 	import flash.utils.getQualifiedClassName;
-	
+
 	import mx.core.FlexGlobals;
 
 	/**
