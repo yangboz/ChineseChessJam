@@ -5,14 +5,15 @@ package com.godpaper.business.fsm
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.lookbackon.AI.FSM.Agent;
-	import com.lookbackon.AI.searching.ISearching;
-	import com.godpaper.consts.CcjConstants;
 	import com.godpaper.business.fsm.states.game.AnotherHumanState;
+	import com.godpaper.business.fsm.states.game.AnotherHumanWinState;
 	import com.godpaper.business.fsm.states.game.ComputerState;
 	import com.godpaper.business.fsm.states.game.ComputerWinState;
 	import com.godpaper.business.fsm.states.game.HumanState;
 	import com.godpaper.business.fsm.states.game.HumanWinState;
+	import com.godpaper.consts.CcjConstants;
+	import com.lookbackon.AI.FSM.Agent;
+	import com.lookbackon.AI.searching.ISearching;
 
 	import mx.core.IVisualElement;
 
@@ -37,6 +38,7 @@ package com.godpaper.business.fsm
 		public var anotherHumanState:AnotherHumanState;
 		public var humanWinState:HumanWinState;
 		public var computerWinState:ComputerWinState;
+		public var anotherHumanWinState:AnotherHumanWinState;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -68,6 +70,7 @@ package com.godpaper.business.fsm
 			this.anotherHumanState = new AnotherHumanState(this,null,CcjConstants.STATE_ANOTHER_HUMAN);
 			this.humanWinState = new HumanWinState(this,null,CcjConstants.STATE_HUMAN_WIN);
 			this.computerWinState = new ComputerWinState(this,null,CcjConstants.STATE_COMPUTER_WIN);
+			this.anotherHumanWinState = new AnotherHumanWinState(this,null,CcjConstants.STATE_ANOTHER_HUMAN_WIN);
 		}     	
 		//--------------------------------------------------------------------------
 		//

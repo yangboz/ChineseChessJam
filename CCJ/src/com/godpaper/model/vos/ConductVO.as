@@ -2,7 +2,7 @@ package com.godpaper.model.vos
 {
 	import com.godpaper.configs.GameConfig;
 	import com.godpaper.consts.CcjConstants;
-	import com.godpaper.consts.ChessPiecesConstants;
+	import com.godpaper.consts.CcjPiecesConstants;
 	import com.godpaper.core.IChessPiece;
 	import com.godpaper.model.ChessGasketsModel;
 	import com.godpaper.model.ChessPiecesModel;

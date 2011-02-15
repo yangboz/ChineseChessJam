@@ -126,6 +126,7 @@ package com.godpaper.impl
 			else
 			{
 				//TODO,another human turn now.
+				isAnotherHumanTurnNow();
 			}
 			//flag game is running.
 			isRunning=true;
@@ -179,6 +180,15 @@ package com.godpaper.impl
 		}
 
 		//----------------------------------
+		//  anotherHumanWin
+		//----------------------------------
+		public function anotherHumanWin():void
+		{
+			//TODO:
+			agent.fsm.changeState(agent.anotherHumanWinState);
+		}
+
+		//----------------------------------
 		//  isComputerTurnNow
 		//----------------------------------
 		public function isComputerTurnNow():void
@@ -194,6 +204,15 @@ package com.godpaper.impl
 		{
 			//delegate fsm transition to computer state.
 			agent.fsm.changeState(agent.humanState);
+		}
+
+		//----------------------------------
+		//  isAnotherHumanTurnNow
+		//----------------------------------
+		public function isAnotherHumanTurnNow():void
+		{
+			//delegate fsm transition to another human state.
+			agent.fsm.changeState(agent.anotherHumanState);
 		}
 	}
 }

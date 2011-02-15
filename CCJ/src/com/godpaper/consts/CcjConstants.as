@@ -23,6 +23,7 @@ package com.godpaper.consts
 		//about chess pieces' flag
 		public static const FLAG_RED:int=0;
 		public static const FLAG_BLUE:int=1;
+		public static const FLAG_GREEN:int=2;
 		//
 		public static const COLOR_RED:String="red"; //above;
 		public static const COLOR_BLUE:String="blue"; //below;
@@ -53,8 +54,10 @@ package com.godpaper.consts
 		public static const STATE_COMPUTER:String="ComputerTurn";
 		public static const STATE_HUMAN_WIN:String="HumanWin";
 		public static const STATE_COMPUTER_WIN:String="ComputerWin";
+		public static const STATE_ANOTHER_HUMAN_WIN:String = "AnotherHumanWin";
 		//indications
 		public static const INDICATION_THINK:String="Thinking..";
 		public static const INDICATION_CHECK:String="Eschequier";
 	}
 }
+

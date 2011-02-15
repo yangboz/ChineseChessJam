@@ -70,6 +70,8 @@
 				BoardConfig.yLines=10;
 				BoardConfig.xOffset=50;
 				BoardConfig.yOffset=50;
+				BoardConfig.xAdjust=50;
+				BoardConfig.yAdjust=-1;
 				//about piece:
 				PieceConfig.factory = CcjChessFactory;
 				//about plugin:

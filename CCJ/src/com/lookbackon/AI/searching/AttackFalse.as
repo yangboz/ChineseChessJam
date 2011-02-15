@@ -64,7 +64,7 @@ package com.lookbackon.AI.searching
 			if(orderingMoves.length<=0)
 			{
 				//pluge to death.
-				GameConfig.gameManager.humanWin();
+				GameConfig.gameStateManager.humanWin();
 			}else
 			{
 				var pValue:int=-1;

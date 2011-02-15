@@ -59,6 +59,8 @@ package
 		{
 			//TODO: implement function
 			super();
+			//popup 
+
 			//
 			this.addEventListener(FlexEvent.PREINITIALIZE,preinitializeHandler);
 			this.addEventListener(FlexEvent.INITIALIZE,initializeHandler);
@@ -140,7 +142,7 @@ package
 		{
 			// TODO Auto-generated method stub
 			//GameManager start.
-			GameConfig.gameManager.start();
+			GameConfig.gameStateManager.start();
 			//
 			LOG.info("redPieces:{0}", ChessPiecesModel.getInstance().redPieces.dump());
 			LOG.info("bluePieces:{0}", ChessPiecesModel.getInstance().bluePieces.dump());

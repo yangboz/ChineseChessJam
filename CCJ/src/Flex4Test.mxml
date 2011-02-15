@@ -6,7 +6,7 @@
 			   xmlns:mx="library://ns.adobe.com/flex/mx" >
 	<fx:Script>
 		<![CDATA[
-			import com.godpaper.consts.ChessPiecesConstants;
+			import com.godpaper.consts.CcjPiecesConstants;
 			import com.godpaper.model.vos.ccjVO.PawnVO;
 			import com.godpaper.utils.LogUtil;
 			import com.lookbackon.ds.BitBoard;

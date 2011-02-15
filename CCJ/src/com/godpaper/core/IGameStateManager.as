@@ -58,6 +58,10 @@ package com.godpaper.core
 		//----------------------------------
 		function humanWin():void;
 		//----------------------------------
+		//  anotherHumanWin
+		//----------------------------------
+		function anotherHumanWin():void;
+		//----------------------------------
 		//  isComputerTurnNow
 		//----------------------------------
 		function isComputerTurnNow():void;
@@ -65,6 +69,10 @@ package com.godpaper.core
 		//  isHumanTurnNow
 		//----------------------------------
 		function isHumanTurnNow():void;
+		//----------------------------------
+		//  isAnotherHumanTurnNow
+		//----------------------------------
+		function isAnotherHumanTurnNow():void;
 	}
 }
 

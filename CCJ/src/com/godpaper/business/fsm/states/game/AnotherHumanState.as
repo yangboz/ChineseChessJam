@@ -5,12 +5,17 @@ package com.godpaper.business.fsm.states.game
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
+	import com.godpaper.configs.GameConfig;
+	import com.godpaper.configs.IndicatorConfig;
+	import com.godpaper.consts.CcjConstants;
 	import com.lookbackon.AI.FSM.IAgent;
 	import com.lookbackon.AI.FSM.states.StateBase;
-	
-	
+
+	import mx.managers.CursorManager;
+
+
 	/**
-	 * AnotherHumanState.as class.   	
+	 * AnotherHumanState.as class.This state internal hold on another human state,such as board,chess pice,game info,etc..
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
@@ -23,23 +28,23 @@ package com.godpaper.business.fsm.states.game
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		
+
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
 		//
 		//-------------------------------------------------------------------------- 
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Constructor
@@ -55,18 +60,40 @@ package com.godpaper.business.fsm.states.game
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		
+		override public function enter():void
+		{
+			//hold turn flag
+			GameConfig.turnFlag = CcjConstants.FLAG_GREEN;
+			//TODO:logicly decide read out transition on this stage.(Opponent/Network transform wating).
+			IndicatorConfig.readOut=false;
+			//about view
+			CursorManager.setBusyCursor();
+			//about data
+
+		}
+
+		override public function exit():void
+		{
+			//about view
+			CursorManager.removeBusyCursor();
+		}
+
+		override public function update(time:Number=0):void
+		{
+
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
 	}
-	
+
 }
+

@@ -90,8 +90,8 @@ package com.godpaper.business.factory
 		{
 			var myChessGasket:ChessGasket=new ChessGasket();
 			myChessGasket.position=position;
-			myChessGasket.x=position.x * BoardConfig.xOffset - myChessGasket.width / 2 + 50;
-			myChessGasket.y=position.y * BoardConfig.yOffset;
+			myChessGasket.x=position.x * BoardConfig.xOffset - myChessGasket.width / 2 + BoardConfig.xAdjust;
+			myChessGasket.y=position.y * BoardConfig.yOffset + BoardConfig.yAdjust;
 			myChessGasket.toolTip=position.toString();
 			return myChessGasket;
 		}

@@ -1,7 +1,7 @@
 package com.lookbackon.AI.searching
 {
 	import com.godpaper.configs.GameConfig;
-	import com.godpaper.consts.ChessPiecesConstants;
+	import com.godpaper.consts.CcjPiecesConstants;
 	import com.godpaper.model.vos.ConductVO;
 	import com.godpaper.model.vos.PositionVO;
 	import com.godpaper.utils.FilterUtil;
@@ -43,7 +43,7 @@ package com.lookbackon.AI.searching
 			bestMove = new ConductVO();
 			if(moves.length<=0)
 			{
-				GameConfig.gameManager.humanWin();//pluge to death.
+				GameConfig.gameStateManager.humanWin();//pluge to death.
 			}else
 			{
 				//while checking,defends move first.
@@ -90,8 +90,8 @@ package com.lookbackon.AI.searching
 		override public function doEvaluation(conductVO:ConductVO,gamePosition:PositionVO):int
 		{
 			//Todo:doEvaluation about assumpted conductVO;
-			var importantValue:int = ChessPiecesConstants[conductVO.target.type].important.gett(conductVO.nextPosition.x,conductVO.nextPosition.y);
-			var fuzzyImportValue:int = ChessPiecesConstants[conductVO.target.type].convertedImportant.gett(conductVO.nextPosition.x,conductVO.nextPosition.y);
+			var importantValue:int = CcjPiecesConstants[conductVO.target.type].important.gett(conductVO.nextPosition.x,conductVO.nextPosition.y);
+			var fuzzyImportValue:int = CcjPiecesConstants[conductVO.target.type].convertedImportant.gett(conductVO.nextPosition.x,conductVO.nextPosition.y);
 			//TODO:dynamic omenVO value to be calculated. 
 			//precies evaluation value.
 			return importantValue+fuzzyImportValue;

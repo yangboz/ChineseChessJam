@@ -9,7 +9,7 @@ package com.godpaper.impl
 	import com.godpaper.configs.IndicatorConfig;
 	import com.godpaper.configs.PieceConfig;
 	import com.godpaper.consts.CcjConstants;
-	import com.godpaper.consts.ChessPiecesConstants;
+	import com.godpaper.consts.CcjPiecesConstants;
 	import com.godpaper.core.IChessPiece;
 	import com.godpaper.core.IChessPieceManager;
 	import com.godpaper.errors.CcjErrors;
@@ -303,13 +303,13 @@ package com.godpaper.impl
 				var removedPiece:ChessPiece=cGasket.getElementAt(0) as ChessPiece;
 				var removedIndex:int=this.calculatePieceIndex(removedPiece);
 				LOG.info("Eat Off@{0} target:{1}", cGasket.position.toString(), removedPiece.toString());
-				if (ChessPiece(cGasket.getElementAt(0)).label == ChessPiecesConstants.BLUE_MARSHAL.label)
+				if (ChessPiece(cGasket.getElementAt(0)).label == CcjPiecesConstants.BLUE_MARSHAL.label)
 				{
-					GameConfig.gameManager.humanWin();
+					GameConfig.gameStateManager.humanWin();
 				}
-				if (ChessPiece(cGasket.getElementAt(0)).label == ChessPiecesConstants.RED_MARSHAL.label)
+				if (ChessPiece(cGasket.getElementAt(0)).label == CcjPiecesConstants.RED_MARSHAL.label)
 				{
-					GameConfig.gameManager.computerWin();
+					GameConfig.gameStateManager.computerWin();
 				}
 				//clean this bit at pieces.
 				BitBoard(ChessPiecesModel.getInstance()[removedPiece.type]).setBitt(removedPiece.position.y, removedPiece.position.x, false);
@@ -345,11 +345,11 @@ package com.godpaper.impl
 		{
 			if (GameConfig.turnFlag == CcjConstants.FLAG_BLUE)
 			{
-				GameConfig.gameManager.humanWin();
+				GameConfig.gameStateManager.humanWin();
 			}
 			else
 			{
-				GameConfig.gameManager.computerWin();
+				GameConfig.gameStateManager.computerWin();
 			}
 			return -1;
 		}
@@ -491,15 +491,15 @@ package com.godpaper.impl
 			task.addEventListener(TaskEvent.TASK_COMPLETE, function(event:TaskEvent):void
 			{
 				//Trigger in-turn system .
-				if (GameConfig.gameManager.isRunning)
+				if (GameConfig.gameStateManager.isRunning)
 				{
 					if (GameConfig.turnFlag == CcjConstants.FLAG_RED)
 					{
-						GameConfig.gameManager.isComputerTurnNow();
+						GameConfig.gameStateManager.isComputerTurnNow();
 					}
 					else
 					{
-						GameConfig.gameManager.isHumanTurnNow();
+						GameConfig.gameStateManager.isHumanTurnNow();
 					}
 				}
 			});

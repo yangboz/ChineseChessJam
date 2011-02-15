@@ -15,9 +15,9 @@ package com.godpaper.consts
 	 * @author Knight.zhou
 	 *
 	 */	
-	final public class ChessPiecesConstants extends Enum
+	final public class CcjPiecesConstants extends Enum
 	{
-		{initEnum(ChessPiecesConstants);}//static construct.
+		{initEnum(CcjPiecesConstants);}//static construct.
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
@@ -28,23 +28,23 @@ package com.godpaper.consts
 		//----------------------------------
 		//chessPieceType
 		//blue(at top)
-		public static const BLUE:ChessPiecesConstants 			= new ChessPiecesConstants("-",0,0);//default-
-		public static const BLUE_PAWN:ChessPiecesConstants 		= new ChessPiecesConstants("p",22,30);//pawn-
-		public static const BLUE_ROOK:ChessPiecesConstants 		= new ChessPiecesConstants("r",20,600);//castle-
-		public static const BLUE_KNIGHT:ChessPiecesConstants	= new ChessPiecesConstants("k",19,270);//knight-
-		public static const BLUE_BISHOP:ChessPiecesConstants	= new ChessPiecesConstants("b",18,120);//bishop-
-		public static const BLUE_OFFICAL:ChessPiecesConstants 	= new ChessPiecesConstants("o",16,120);//offcial-
-		public static const BLUE_MARSHAL:ChessPiecesConstants	= new ChessPiecesConstants("m",17,6000);//marshal-
-		public static const BLUE_CANNON:ChessPiecesConstants	= new ChessPiecesConstants("c",21,285);//cannon-
+		public static const BLUE:CcjPiecesConstants 			= new CcjPiecesConstants("-",0,0);//default-
+		public static const BLUE_PAWN:CcjPiecesConstants 		= new CcjPiecesConstants("p",22,30);//pawn-
+		public static const BLUE_ROOK:CcjPiecesConstants 		= new CcjPiecesConstants("r",20,600);//castle-
+		public static const BLUE_KNIGHT:CcjPiecesConstants	= new CcjPiecesConstants("k",19,270);//knight-
+		public static const BLUE_BISHOP:CcjPiecesConstants	= new CcjPiecesConstants("b",18,120);//bishop-
+		public static const BLUE_OFFICAL:CcjPiecesConstants 	= new CcjPiecesConstants("o",16,120);//offcial-
+		public static const BLUE_MARSHAL:CcjPiecesConstants	= new CcjPiecesConstants("m",17,6000);//marshal-
+		public static const BLUE_CANNON:CcjPiecesConstants	= new CcjPiecesConstants("c",21,285);//cannon-
 		//red(at bottom)
-		public static const RED:ChessPiecesConstants 			= new ChessPiecesConstants("+",0,0);//default+
-		public static const RED_PAWN:ChessPiecesConstants 		= new ChessPiecesConstants("P",14,30);//pawn+
-		public static const RED_ROOK:ChessPiecesConstants 		= new ChessPiecesConstants("R",12,600);//castle+
-		public static const RED_KNIGHT:ChessPiecesConstants		= new ChessPiecesConstants("K",11,270);//knight+
-		public static const RED_BISHOP:ChessPiecesConstants		= new ChessPiecesConstants("B",10,120);//bishop+
-		public static const RED_OFFICAL:ChessPiecesConstants 	= new ChessPiecesConstants("O",8,120);//offcial+
-		public static const RED_MARSHAL:ChessPiecesConstants	= new ChessPiecesConstants("M",9,6000);//marshal+
-		public static const RED_CANNON:ChessPiecesConstants		= new ChessPiecesConstants("C",13,285);//cannon+
+		public static const RED:CcjPiecesConstants 			= new CcjPiecesConstants("+",0,0);//default+
+		public static const RED_PAWN:CcjPiecesConstants 		= new CcjPiecesConstants("P",14,30);//pawn+
+		public static const RED_ROOK:CcjPiecesConstants 		= new CcjPiecesConstants("R",12,600);//castle+
+		public static const RED_KNIGHT:CcjPiecesConstants		= new CcjPiecesConstants("K",11,270);//knight+
+		public static const RED_BISHOP:CcjPiecesConstants		= new CcjPiecesConstants("B",10,120);//bishop+
+		public static const RED_OFFICAL:CcjPiecesConstants 	= new CcjPiecesConstants("O",8,120);//offcial+
+		public static const RED_MARSHAL:CcjPiecesConstants	= new CcjPiecesConstants("M",9,6000);//marshal+
+		public static const RED_CANNON:CcjPiecesConstants		= new CcjPiecesConstants("C",13,285);//cannon+
 		//--------------------------------------------------------------------------
 		//
 		//  Constructor
@@ -61,7 +61,7 @@ package com.godpaper.consts
 		//slightly better: 1, better:2, much better: 3, best: 4
 		public var convertedImportant:Array2;//fuzzy value.
 		//
-		public function ChessPiecesConstants(label:String,value:int,strength:int=-1,important:Array2=null,convertedImportant:Array2=null)
+		public function CcjPiecesConstants(label:String,value:int,strength:int=-1,important:Array2=null,convertedImportant:Array2=null)
 		{
 			this.label = label;
 			this.value = value;

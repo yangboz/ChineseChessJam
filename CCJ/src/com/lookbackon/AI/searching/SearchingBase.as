@@ -96,7 +96,7 @@ package com.lookbackon.AI.searching
 			if(this.orderingMoves.length<1)
 			{
 				//
-				GameConfig.gameManager.humanWin();
+				GameConfig.gameStateManager.humanWin();
 				//
 				this.processDone = true;
 			}else

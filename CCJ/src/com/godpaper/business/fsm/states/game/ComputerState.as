@@ -90,7 +90,7 @@ package com.godpaper.business.fsm.states.game
 			//
 			IndicatorConfig.readOut=true;
 			//default update current state.
-			update(GameConfig.gameManager.level - 1);
+			update(GameConfig.gameStateManager.level - 1);
 		}
 
 		override public function exit():void

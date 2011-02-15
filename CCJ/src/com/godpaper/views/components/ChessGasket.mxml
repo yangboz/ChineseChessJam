@@ -3,17 +3,18 @@
 						  xmlns:s="library://ns.adobe.com/flex/spark"
 						  xmlns:mx="library://ns.adobe.com/flex/mx"
 						  xmlns:impl="com.godpaper.impl.*"
-						  width="50"
-						  height="50"
-						  borderVisible="false"
-						  backgroundAlpha="0.0"
-						  contentBackgroundAlpha="0.0"
-						  borderAlpha="1.0" 
+						  width="{GasketConfig.width}"
+						  height="{GasketConfig.height}"
+						  borderVisible="{GasketConfig.borderVisible}"
+						  backgroundAlpha="{GasketConfig.backgroundAlpha}"
+						  contentBackgroundAlpha="{GasketConfig.contentBackgroundAlpha}"
+						  borderAlpha="{GasketConfig.borderAlpha}" 
 						  xmlns:parsley="http://www.spicefactory.org/parsley"
 						  >
 	<fx:Script>
 		<![CDATA[
 			import com.godpaper.configs.GameConfig;
+			import com.godpaper.configs.GasketConfig;
 			import com.godpaper.consts.CcjConstants;
 			import com.godpaper.model.ChessPiecesModel;
 			import com.godpaper.model.plugin.MochiModel;
@@ -51,7 +52,7 @@
 			{
 				super.elementAddHandler(event);
 				//check indicate handler.
-				if (mochiModel.hasCheckIndicator && GameConfig.gameManager.isRunning)
+				if (mochiModel.hasCheckIndicator && GameConfig.gameStateManager.isRunning)
 				{
 					//Notice:after apply move ture flag changed immidiatly,but check indicator ongoing.
 					if (CcjConstants.FLAG_BLUE == GameConfig.turnFlag)
@@ -69,7 +70,7 @@
 			override protected function elementRemoveHandler(event:ElementExistenceEvent):void
 			{
 				//
-				if (mochiModel.hasCheckIndicator && GameConfig.gameManager.isRunning)
+				if (mochiModel.hasCheckIndicator && GameConfig.gameStateManager.isRunning)
 				{
 					//Notice:turn flag change after remove piece at apply move behavior.
 					if (CcjConstants.FLAG_BLUE == GameConfig.turnFlag)

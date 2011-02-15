@@ -119,7 +119,7 @@ package com.lookbackon.AI.searching
 			if(orderingMoves.length<=0)
 			{
 				//pluge to death.
-				GameConfig.gameManager.humanWin();
+				GameConfig.gameStateManager.humanWin();
 			}else
 			{
 				//
@@ -160,7 +160,7 @@ package com.lookbackon.AI.searching
 			if(orderingMoves.length<=0)
 			{
 				//pluge to death.
-				GameConfig.gameManager.humanWin();
+				GameConfig.gameStateManager.humanWin();
 			}else
 			{
 				for(var i:int=0;i<len;i++)
@@ -222,7 +222,7 @@ package com.lookbackon.AI.searching
 				//pluge to death.
 				if(0==orderingMoves.length)
 				{
-					GameConfig.gameManager.computerWin();
+					GameConfig.gameStateManager.computerWin();
 				}
 			}else
 			{
@@ -230,7 +230,7 @@ package com.lookbackon.AI.searching
 				//pluge to death.
 				if(0==orderingMoves.length)
 				{
-					GameConfig.gameManager.humanWin();
+					GameConfig.gameStateManager.humanWin();
 				}
 			}
 			LOG.debug("orderingMoves.length:{0}",orderingMoves.length);

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   xmlns:validation="com.adobe.cairngorm.validation.*"
+			   xmlns:util="com.godpaper.utils.*"
+			   xmlns:parsley="http://www.spicefactory.org/parsley"
+			   creationComplete="titlewindow1_creationCompleteHandler(event)">
+	<s:controlBarContent>
+		<s:HGroup width="100%"
+				  horizontalAlign="center">
+			<s:Button label="OK"
+					  click="button1_clickHandler(event)"
+					  enabled="{validatorGroup.isValid}"/>
+		</s:HGroup>
+	</s:controlBarContent>
+	<fx:Script>
+		<![CDATA[
+			import com.adobe.cairngorm.validation.ValidatorGroup;
+			import com.godpaper.configs.IndicatorConfig;
+			import com.godpaper.model.plugin.MochiModel;
+
+			import mx.core.FlexGlobals;
+			import mx.events.FlexEvent;
+
+			[Inject]
+			[Bindable]
+			public var mochiModel:MochiModel;
+
+			protected function titlewindow1_creationCompleteHandler(event:FlexEvent):void
+			{
+				// TODO Auto-generated method stub
+				this.closeButton.visible=false;
+			}
+
+			protected function button1_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				mochiModel.name=playerNameTI.text;
+				//close popup
+				IndicatorConfig.airportUtility=false;
+			}
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<parsley:Configure/>
+		<s:RadioButtonGroup id="radiogroupOfMode"/>
+		<s:RadioButtonGroup id="radiogroupOfTurn"/>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<validation:ValidatorGroup id="validatorGroup"
+								   preValidation="true">
+			<validation:validators>
+				<mx:StringValidator id="playerNameValidator"
+									source="{ playerNameTI }"
+									required="true"
+									minLength="3"
+									property="text"
+									triggerEvent="change"/>
+				<util:GeneralValidator id="modeValidator"
+									   source="{ radiogroupOfMode }"
+									   required="true"
+									   property="selectedValue"
+									   acceptedValues="['hVSc','hVSh']"/>
+				<util:GeneralValidator id="turnValidator"
+									   source="{ radiogroupOfTurn }"
+									   required="true"
+									   property="selectedValue"
+									   acceptedValues="['you','he']"/>
+			</validation:validators>
+		</validation:ValidatorGroup>
+	</fx:Declarations>
+
+	<s:Form width="100%"
+			height="100%">
+		<s:FormItem label="Player name:"
+					required="true"
+					toolTip="Input your  name here.">
+			<s:helpContent>
+				<s:Label>
+				</s:Label>
+			</s:helpContent>
+			<s:TextInput id="playerNameTI"
+						 width="100%"/>
+		</s:FormItem>
+		<s:FormItem label="Play mode:"
+					required="true"
+					toolTip="Determine play mode here.">
+			<s:helpContent>
+				<s:Label>
+				</s:Label>
+			</s:helpContent>
+			<s:HGroup>
+				<s:RadioButton label="Human vs Computer"
+							   groupName="radiogroupOfMode"
+							   selected="true"
+							   value="hVSc"/>
+				<s:RadioButton label="Human vs Human"
+							   groupName="radiogroupOfMode"
+							   value="hVSh"/>
+			</s:HGroup>
+		</s:FormItem>
+		<s:FormItem label="Turn first:"
+					required="true"
+					toolTip="Determine who's turn first here.">
+			<s:helpContent>
+				<s:Label>
+				</s:Label>
+			</s:helpContent>
+			<s:HGroup>
+				<s:RadioButton label="You"
+							   groupName="radiogroupOfTurn"
+							   selected="true"
+							   value="you"/>
+				<s:RadioButton label="Your opponent"
+							   groupName="radiogroupOfTurn"
+							   value="he"/>
+			</s:HGroup>
+		</s:FormItem>
+
+	</s:Form>
+</s:TitleWindow>

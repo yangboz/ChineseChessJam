@@ -60,7 +60,7 @@ package com.godpaper.business.fsm.states.game
 		//--------------------------------------------------------------------------
 		override public function enter():void
 		{
-			GameConfig.gameManager.isRunning = false;
+			GameConfig.gameStateManager.isRunning = false;
 			//
 			Alert.show("You play like a monkey,@-@","Computer Win!");
 		}

@@ -1,9 +1,9 @@
 package com.godpaper.configs
 {
-	import com.godpaper.impl.ChessPieceManagerDefault;
-	import com.godpaper.impl.GameStateManagerDefault;
 	import com.godpaper.core.IChessPieceManager;
 	import com.godpaper.core.IGameStateManager;
+	import com.godpaper.impl.ChessPieceManagerDefault;
+	import com.godpaper.impl.GameStateManagerDefault;
 
 	//--------------------------------------------------------------------------
 	//
@@ -31,12 +31,14 @@ package com.godpaper.configs
 		private static var _tollgateTips:Array;
 		//
 		private static var _chessPieceManager:IChessPieceManager = new ChessPieceManagerDefault();
-		private static var _gameManager:IGameStateManager = new GameStateManagerDefault();
-
+		private static var _gameStateManager:IGameStateManager = new GameStateManagerDefault();
+		//The game play mode(computer vs human,human vs human);
+		private static var _playMode:String = HUMAN_VS_COMPUTER;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-
+		public static const HUMAN_VS_COMPUTER:String = "human vs computer.";
+		public static const HUMAN_VS_HUMAN:String = "human vs human.";
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -82,16 +84,16 @@ package com.godpaper.configs
 		}
 
 		//----------------------------------
-		//  gameManager(read-write)
+		//  gameStateManager(read-write)
 		//----------------------------------
-		public static function get gameManager():IGameStateManager
+		public static function get gameStateManager():IGameStateManager
 		{
-			return _gameManager;
+			return _gameStateManager;
 		}
 
-		public static function set gameManager(value:IGameStateManager):void
+		public static function set gameStateManager(value:IGameStateManager):void
 		{
-			_gameManager=value;
+			_gameStateManager=value;
 		}
 
 		//----------------------------------
@@ -105,6 +107,17 @@ package com.godpaper.configs
 		public static function set chessPieceManager(value:IChessPieceManager):void
 		{
 			_chessPieceManager=value;
+		}
+		//----------------------------------
+		//  playMode(read-write)
+		//----------------------------------
+		public static function get playMode():String
+		{
+			return _playMode;
+		}
+		public static function set playMode(value:String):void
+		{
+			_playMode = value;
 		}
 		//--------------------------------------------------------------------------
 		//

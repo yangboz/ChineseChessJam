@@ -49,7 +49,7 @@
 					}
 					);
 				//
-				GameConfig.gameManager.restart();
+				GameConfig.gameStateManager.restart();
 			}
 			//
 			protected function titlewindow1_showHandler(event:FlexEvent):void
@@ -61,21 +61,21 @@
 			protected function nextRoundBtn_clickHandler(event:MouseEvent):void
 			{
 				//
-				GameConfig.gameManager.restart();
+				GameConfig.gameStateManager.restart();
 				//increase intelligence level.
-				GameConfig.gameManager.level++;
+				GameConfig.gameStateManager.level++;
 				//broad cast level up message.
-				dispatcher(new LevelUpMessage(GameConfig.gameManager.level));
+				dispatcher(new LevelUpMessage(GameConfig.gameStateManager.level));
 			}
 			//
 			protected function get currentScore():int
 			{
-				return (GameConfig.gameManager.level)*10;
+				return (GameConfig.gameStateManager.level)*10;
 			}
 			//
 			protected function get hasNextRound():Boolean
 			{
-				return GameConfig.gameManager.level<GameConfig.tollgates.length;
+				return GameConfig.gameStateManager.level<GameConfig.tollgates.length;
 			}
 		]]>
 	</fx:Script>

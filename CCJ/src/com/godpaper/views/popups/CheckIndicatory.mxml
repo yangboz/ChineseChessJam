@@ -12,7 +12,7 @@
 		<![CDATA[
 			import com.godpaper.configs.IndicatorConfig;
 			import com.godpaper.consts.CcjConstants;
-			import com.godpaper.consts.ChessPiecesConstants;
+			import com.godpaper.consts.CcjPiecesConstants;
 			import com.lookbackon.AI.FSM.Message;
 
 			import mx.events.FlexEvent;
@@ -43,7 +43,7 @@
 				_timer.start();
 				//broad cast check message.
 				var message:Message=new Message();
-				message.priority=ChessPiecesConstants.BLUE_MARSHAL.strength;
+				message.priority=CcjPiecesConstants.BLUE_MARSHAL.strength;
 //				message.data = chessPieceModel.BLUE_MARSHAL
 				dispatcher(message);
 			}

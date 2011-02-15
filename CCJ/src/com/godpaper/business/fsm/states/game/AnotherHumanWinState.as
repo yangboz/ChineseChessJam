@@ -1,32 +1,29 @@
-package com.godpaper.configs
+package com.godpaper.business.fsm.states.game
 {
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
+	import com.godpaper.configs.GameConfig;
+	import com.godpaper.configs.IndicatorConfig;
+	import com.lookbackon.AI.FSM.IAgent;
+	import com.lookbackon.AI.FSM.states.StateBase;
+
 	/**
-	 * IndicatorConfig.as class.All kinds of indicators configurations here.
+	 * AnotherHumanWinState.as class.
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
-	 * Created Jan 27, 2011 2:07:57 PM
+	 * Created Dec 23, 2010 1:01:43 PM
 	 */   	 
-	public class IndicatorConfig
+	public class AnotherHumanWinState extends StateBase
 	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		//default
-		[Bindable]public static var readOut:Boolean=false;
-		//
-		[Bindable]public static var check:Boolean=false;
-		//about mochi
-		[Bindable]public static var submitScore:Boolean=false;
-		//about airport(utility,extreme,etc..)
-		[Bindable]public static var airportUtility:Boolean=true;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -48,13 +45,32 @@ package com.godpaper.configs
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-
+		public function AnotherHumanWinState(agent:IAgent, resource:Object, description:String=null)
+		{
+			//TODO: implement function
+			super(agent, resource, description);
+		}     	
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
+		override public function enter():void
+		{
+			GameConfig.gameStateManager.isRunning = false;
+			IndicatorConfig.submitScore = true;
+		}
 
+		override public function update(time:Number=0):void
+		{
+
+		}
+
+		override public function exit():void
+		{
+			//
+			IndicatorConfig.submitScore = false;
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
@@ -66,7 +82,6 @@ package com.godpaper.configs
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
-
 	}
 
 }

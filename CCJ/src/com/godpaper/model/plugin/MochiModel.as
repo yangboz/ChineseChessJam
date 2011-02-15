@@ -30,7 +30,7 @@ package com.godpaper.model.plugin
 		//--------------------------------------------------------------------------
 		//
 		public var score:MochiDigits=new MochiDigits(); //the player's score to submit (integer, or time in milliseconds)
-		public var name:String; //the player's name
+		public var name:String=""; //the player's name
 		//
 		public var storeItemsRegister:HashMap=new HashMap();
 

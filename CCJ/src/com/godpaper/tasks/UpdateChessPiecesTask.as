@@ -8,7 +8,7 @@ package com.godpaper.tasks
 	import com.adobe.cairngorm.task.Task;
 	import com.godpaper.configs.GameConfig;
 	import com.godpaper.consts.CcjConstants;
-	import com.godpaper.consts.ChessPiecesConstants;
+	import com.godpaper.consts.CcjPiecesConstants;
 	import com.godpaper.core.IChessPiece;
 	import com.godpaper.model.ChessGasketsModel;
 	import com.godpaper.model.ChessPiecesModel;
@@ -87,13 +87,13 @@ package com.godpaper.tasks
 				var removedPiece:ChessPiece = cGasket.getElementAt(0) as ChessPiece;
 				var removedIndex:int = GameConfig.chessPieceManager.calculatePieceIndex(removedPiece);
 				LOG.info("Eat Off@{0} target:{1}",cGasket.position.toString(),removedPiece.toString());
-				if(ChessPiece(cGasket.getElementAt(0)).label==ChessPiecesConstants.BLUE_MARSHAL.label)
+				if(ChessPiece(cGasket.getElementAt(0)).label==CcjPiecesConstants.BLUE_MARSHAL.label)
 				{
-					GameConfig.gameManager.humanWin();	
+					GameConfig.gameStateManager.humanWin();	
 				}
-				if(ChessPiece(cGasket.getElementAt(0)).label==ChessPiecesConstants.RED_MARSHAL.label)
+				if(ChessPiece(cGasket.getElementAt(0)).label==CcjPiecesConstants.RED_MARSHAL.label)
 				{
-					GameConfig.gameManager.computerWin();
+					GameConfig.gameStateManager.computerWin();
 				}
 				//clean this bit at pieces.
 				BitBoard(ChessPiecesModel.getInstance()[removedPiece.type]).setBitt(removedPiece.position.y,removedPiece.position.x,false);

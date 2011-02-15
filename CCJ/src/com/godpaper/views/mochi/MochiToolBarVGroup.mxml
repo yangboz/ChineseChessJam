@@ -24,8 +24,8 @@
 			//
 			protected function tollgateIconView_addedToStageHandler(event:Event):void
 			{
-				getIconSerials(SWFLoader(event.target)).gotoAndStop(GameConfig.gameManager.level);
-				tollgateSWFLoader.toolTip = GameConfig.tollgateTips[GameConfig.gameManager.level-1];
+				getIconSerials(SWFLoader(event.target)).gotoAndStop(GameConfig.gameStateManager.level);
+				tollgateSWFLoader.toolTip = GameConfig.tollgateTips[GameConfig.gameStateManager.level-1];
 			}
 
 			//
@@ -85,8 +85,8 @@
 			[MessageHandler]
 			public function levelUpHandler(message:LevelUpMessage):void
 			{
-				getIconSerials(tollgateSWFLoader).gotoAndStop(GameConfig.gameManager.level);
-				tollgateSWFLoader.toolTip = GameConfig.tollgateTips[GameConfig.gameManager.level-1];
+				getIconSerials(tollgateSWFLoader).gotoAndStop(GameConfig.gameStateManager.level);
+				tollgateSWFLoader.toolTip = GameConfig.tollgateTips[GameConfig.gameStateManager.level-1];
 			}
 		]]>
 	</fx:Script>

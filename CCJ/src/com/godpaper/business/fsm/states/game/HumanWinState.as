@@ -57,7 +57,7 @@ package com.godpaper.business.fsm.states.game
 		//--------------------------------------------------------------------------
 		override public function enter():void
 		{
-			GameConfig.gameManager.isRunning = false;
+			GameConfig.gameStateManager.isRunning = false;
 			IndicatorConfig.submitScore = true;
 		}
 

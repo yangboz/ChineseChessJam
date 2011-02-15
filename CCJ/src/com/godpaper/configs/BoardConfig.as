@@ -34,6 +34,9 @@ package com.godpaper.configs
 		private static var _height:Number;
 		//board background
 //		private static var _backGround:Class;
+		//board x,y position adjust
+		private static var _xAdjust:Number = 0;
+		private static var _yAdjust:Number = 0;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -44,6 +47,30 @@ package com.godpaper.configs
 		//
 		//-------------------------------------------------------------------------- 
 		//
+		public static function get yAdjust():Number
+		{
+			return _yAdjust;
+		}
+		/**
+		 * @param value the user defined value(in pixel) for y-axis based position ajustment.
+		 */		
+		public static function set yAdjust(value:Number):void
+		{
+			_yAdjust = value;
+		}
+		//
+		public static function get xAdjust():Number
+		{
+			return _xAdjust;
+		}
+		/**
+		 * @param value the user defined value(in pixel) for x-axis based position ajustment.
+		 */
+		public static function set xAdjust(value:Number):void
+		{
+			_xAdjust = value;
+		}
+
 		public static function get height():Number
 		{
 			return _height;

@@ -1,7 +1,7 @@
 package com.godpaper.model.vos.ccjVO
 {
 	import com.godpaper.consts.CcjConstants;
-	import com.godpaper.consts.ChessPiecesConstants;
+	import com.godpaper.consts.CcjPiecesConstants;
 	import com.godpaper.model.ChessPiecesModel;
 	import com.godpaper.model.ZobristKeysModel;
 	import com.godpaper.model.vos.ZobristKeyVO;

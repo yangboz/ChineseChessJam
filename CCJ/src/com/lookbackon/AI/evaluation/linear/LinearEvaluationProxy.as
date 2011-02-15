@@ -2,7 +2,7 @@ package com.lookbackon.AI.evaluation.linear
 {
 	import com.lookbackon.AI.evaluation.IEvaluation;
 	import com.godpaper.consts.CcjConstants;
-	import com.godpaper.consts.ChessPiecesConstants;
+	import com.godpaper.consts.CcjPiecesConstants;
 	import com.godpaper.model.ChessPiecesModel;
 	import com.godpaper.model.vos.ConductVO;
 	import com.godpaper.model.vos.PositionVO;

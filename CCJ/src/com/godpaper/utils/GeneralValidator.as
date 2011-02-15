@@ -1,32 +1,40 @@
-package com.godpaper.configs
+package com.godpaper.utils
 {
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
+	import mx.validators.Validator;
+	import mx.validators.ValidationResult;
+
 	/**
-	 * IndicatorConfig.as class.All kinds of indicators configurations here.
+	 * GeneralValidator.as class.
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
-	 * Created Jan 27, 2011 2:07:57 PM
-	 */   	 
-	public class IndicatorConfig
-	{		
+	 * Created Nov 10, 2010 11:57:06 AM
+	 */
+	public class GeneralValidator extends Validator
+	{
+
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		//default
-		[Bindable]public static var readOut:Boolean=false;
-		//
-		[Bindable]public static var check:Boolean=false;
-		//about mochi
-		[Bindable]public static var submitScore:Boolean=false;
-		//about airport(utility,extreme,etc..)
-		[Bindable]public static var airportUtility:Boolean=true;
+		//You may either accept certain values and reject all others,
+		//or reject certain values and accept all others.
+		//We're too lazy to make sure you don't specify both, but don't.
+		[Inspectable]
+		public var acceptedValues:Array=null;
+
+		[Inspectable]
+		public var rejectedValues:Array=null;
+
+		[Inspectable]
+		public var errorMessage:String="Invalid option selected!!!";
+
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -48,25 +56,52 @@ package com.godpaper.configs
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
+		public function GeneralValidator()
+		{
+			//TODO: implement function
+			super();
+		}
 
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
+		override protected function doValidation(value:Object):Array
+		{
+			var results:Array=super.doValidation(value);
+
+			var invalid:Boolean=false;
+
+			if (acceptedValues)
+			{
+				if (acceptedValues.indexOf(value) == -1)
+					invalid=true;
+			}
+			else if (rejectedValues)
+			{
+				if (rejectedValues.indexOf(value) != -1)
+					invalid=true;
+			}
+
+			if (invalid)
+			{
+				results.push(new ValidationResult(true, "", "", errorMessage));
+			}
+
+			return results;
+		}
 
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
-
 	}
 
 }

@@ -12,8 +12,7 @@
 					 xmlns:task="com.adobe.cairngorm.task.*"
 					 xmlns:tasks="com.godpaper.tasks.*"
 					 xmlns:task1="org.spicefactory.lib.task.*"
-					 xmlns:mochi="com.godpaper.views.mochi.*"
-					 >
+					 xmlns:mochi="com.godpaper.views.mochi.*">
 	<fx:Script>
 		<![CDATA[
 			import com.godpaper.business.factory.CcjChessFactory;
@@ -37,10 +36,12 @@
 			//
 			//--------------------------------------------------------------------------
 			//For mochi.
-			public var _mochiads_game_id:String = "cc2fd3b3196f4281";
+			public var _mochiads_game_id:String="cc2fd3b3196f4281";
 			//
-			[Inject][Bindable]
+			[Inject]
+			[Bindable]
 			public var mochiModel:MochiModel;
+
 			//----------------------------------
 			//  CONSTANTS
 			//----------------------------------
@@ -56,20 +57,26 @@
 				BoardConfig.height=300;
 				BoardConfig.xScale=1;
 				BoardConfig.yScale=1;
+				BoardConfig.xAdjust=50;
+				BoardConfig.yAdjust=25;
 				//about piece:
-				PieceConfig.factory = ThoChessFactory;
+				PieceConfig.factory=ThoChessFactory;
 				//about plugin:
-				PluginConfig.mochiBoardID = "51c558cd0315f8e7";
-				PluginConfig.mochiGameID = "cc2fd3b3196f4281";
+				PluginConfig.mochiBoardID="51c558cd0315f8e7";
+				PluginConfig.mochiGameID="cc2fd3b3196f4281";
 			}
+
 			//	
 			override protected function initializeHandler(event:FlexEvent):void
 			{
 				//number of tollgate tips would be matched with tollgates!
 				GameConfig.tollgates=[RandomWalk];
 				GameConfig.tollgateTips=["baby intelligence"];
-				GameConfig.turnFlag=CcjConstants.FLAG_RED;//human first.
+				GameConfig.turnFlag=CcjConstants.FLAG_RED; //human first.
+				//
+				GameConfig.playMode=GameConfig.HUMAN_VS_COMPUTER;
 			}
+
 			//
 			override protected function creationCompleteHandler(event:FlexEvent):void
 			{
@@ -103,6 +110,12 @@
 			</s:filters>
 		</s:TraceTarget>
 		<!-- Popups here -->
+		<parsley:PopUp open="{IndicatorConfig.airportUtility}"
+					   center="true"
+					   modal="true">
+			<popups:AirportUtility/>
+		</parsley:PopUp>
+
 		<popup:PopUpWrapper open="{IndicatorConfig.readOut}"
 							center="true"
 							modal="true">
@@ -117,8 +130,7 @@
 
 		<parsley:PopUp open="{IndicatorConfig.submitScore}"
 					   center="true"
-					   modal="true"
-					   >
+					   modal="true">
 			<mochi:SubmitScoreAndNextRound id="submitScoreAndNamePopup"/>
 		</parsley:PopUp>
 
@@ -133,8 +145,7 @@
 			<tasks:CreateChessPieceTask label="create chess piece"
 										factory="{ThoChessFactory}"/>
 			<tasks:CreateChessVoTask label="create chess VO"
-									 factory="{ThoChessFactory}"
-									 />
+									 factory="{ThoChessFactory}"/>
 		</task:SequenceTask>
 
 		<!--<task:SequenceTask id="cleanUp" label="cleanUp">
@@ -155,10 +166,8 @@
 	<s:VGroup top="50"
 			  right="100"
 			  left="50"
-			  bottom="50"
-			  >
-		<impl:ChessBoardDefault id="defaultChessBoard"
-								/>
+			  bottom="50">
+		<impl:ChessBoardDefault id="defaultChessBoard"/>
 	</s:VGroup>
 
 	<!-- MochiMedia popup View -->
