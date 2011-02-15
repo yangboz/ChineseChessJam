@@ -47,6 +47,11 @@ package com.godpaper.consts
 		//indications
 		public static const INDICATION_THINK:String="Thinking..";
 		public static const INDICATION_CHECK:String="Eschequier";
+		//P2P connnections(Server,DevKey)
+		//Stratus:rtmfp://stratus.adobe.com/99ead580edaf280c060675f9-f614dd07a932
+		//Cirrus:rtmfp://p2p.rtmfp.net/40a1c5b634bc4f531ad7757f-2e3cf422214e/
+		public static const CIRRUS_SERVER:String = "rtmfp://stratus.adobe.com/";//"rtmfp://p2p.rtmfp.net/";
+		public static const CIRRUS_DEV_KEY:String = "99ead580edaf280c060675f9-f614dd07a932";//"40a1c5b634bc4f531ad7757f-2e3cf422214e";
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
