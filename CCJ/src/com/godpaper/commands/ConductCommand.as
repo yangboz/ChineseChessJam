@@ -83,8 +83,13 @@ package com.godpaper.commands
 		 */        
 		public function execute (message:ConductMessage) : void
 		{
-			service.initialization(DefaultConstants.CIRRUS_SERVER,DefaultConstants.CIRRUS_DEV_KEY);
-//			service.transforBrevity(message.brevity);
+			if(!service.connected)
+			{
+				service.initialization(DefaultConstants.CIRRUS_SERVER,DefaultConstants.CIRRUS_DEV_KEY);
+			}else
+			{
+				service.transforBrevity(message.brevity);
+			}
 		}
 		//--------------------------------------------------------------------------
 		//

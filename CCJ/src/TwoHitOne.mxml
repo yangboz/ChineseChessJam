@@ -12,12 +12,14 @@
 					 xmlns:task="com.adobe.cairngorm.task.*"
 					 xmlns:tasks="com.godpaper.tasks.*"
 					 xmlns:task1="org.spicefactory.lib.task.*"
-					 xmlns:mochi="com.godpaper.views.mochi.*">
+					 xmlns:mochi="com.godpaper.views.mochi.*"
+					 >
 	<fx:Script>
 		<![CDATA[
 			import com.godpaper.business.factory.CcjChessFactory;
 			import com.godpaper.business.factory.ChessFactoryBase;
 			import com.godpaper.business.factory.ThoChessFactory;
+			import com.godpaper.business.managers.ThoChessPieceManager;
 			import com.godpaper.configs.BoardConfig;
 			import com.godpaper.configs.CCJContextConfig;
 			import com.godpaper.configs.GameConfig;
@@ -75,6 +77,8 @@
 				GameConfig.turnFlag=CcjConstants.FLAG_RED; //human first.
 				//
 				GameConfig.playMode=GameConfig.HUMAN_VS_COMPUTER;
+				//
+				GameConfig.chessPieceManager = new ThoChessPieceManager();
 			}
 
 			//

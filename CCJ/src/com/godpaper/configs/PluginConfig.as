@@ -22,9 +22,6 @@ package com.godpaper.configs
 		//--------------------------------------------------------------------------
 		private static var _mochiGameID:String;
 		private static var _mochiBoardID:String;
-		//
-		public static var cirrusAddress:String="rtmfp://p2p.rtmfp.net/";
-		public static var developerKey:String="40a1c5b634bc4f531ad7757f-2e3cf422214e";
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------

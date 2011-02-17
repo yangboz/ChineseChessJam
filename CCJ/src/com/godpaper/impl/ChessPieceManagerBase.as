@@ -37,6 +37,7 @@ package com.godpaper.impl
 	import mx.logging.ILogger;
 
 	import spark.filters.GlowFilter;
+	import com.godpaper.business.managers.CcjChessPieceManager;
 
 	/**
 	 * The chess piece manager manage chess piece move's validation/makeMove/unMakeMove.</br>
@@ -44,7 +45,7 @@ package com.godpaper.impl
 	 * @author Knight.zhou
 	 * @history 2010-12-02 using memento design pattern to implment make/unmake functions.
 	 */
-	public class ChessPieceManagerDefault implements IChessPieceManager
+	public class ChessPieceManagerBase implements IChessPieceManager
 	{
 		//--------------------------------------------------------------------------
 		//
@@ -73,7 +74,7 @@ package com.godpaper.impl
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private const LOG:ILogger=LogUtil.getLogger(ChessPieceManagerDefault);
+		private const LOG:ILogger=LogUtil.getLogger(CcjChessPieceManager);
 
 		//--------------------------------------------------------------------------
 		//
@@ -287,53 +288,61 @@ package com.godpaper.impl
 //				ChessPieceManager.memento = mememto;
 //			}
 		}
-
-		//make move data and piece entity change behavior.
+		//Add this variable to simplify store current be removed piece with index.
+		//Notice:before using this variable,should clean up it.
+		protected var currentRemovedPieces:Vector.<ChessPiece> = new Vector.<ChessPiece>();
+		//
+		protected function get currentRemovedPieceIndexs():Vector.<int>
+		{
+			var _currentRemovedPieceIndexs:Vector.<int> = new Vector.<int>();
+			for each( var piece:ChessPiece in currentRemovedPieces)
+			{
+				_currentRemovedPieceIndexs.push(this.calculatePieceIndex(piece));
+			}
+			return _currentRemovedPieceIndexs;
+		}
 		/**
-		 *
+		 * Apply make move data and piece entity change behaviors,to be overrided.
 		 * @param conductVO
 		 */
 		public function applyMove(conductVO:ConductVO):void
 		{
 			//TODO:with roll back function support.
-			var cGasket:ChessGasket=ChessGasketsModel.getInstance().gaskets.gett(conductVO.nextPosition.x, conductVO.nextPosition.y) as ChessGasket;
-			if (cGasket.numElements >= 1)
+			//TODO:implement currentRemovedPieces,currentRemovedPieceIndexs.
+
+			//clean bits at current removed pieces.
+			for each( var piece:ChessPiece in currentRemovedPieces)
 			{
-				//TODO:chess piece eat off.
-				var removedPiece:ChessPiece=cGasket.getElementAt(0) as ChessPiece;
-				var removedIndex:int=this.calculatePieceIndex(removedPiece);
-				LOG.info("Eat Off@{0} target:{1}", cGasket.position.toString(), removedPiece.toString());
-				if (ChessPiece(cGasket.getElementAt(0)).label == CcjPiecesConstants.BLUE_MARSHAL.label)
-				{
-					GameConfig.gameStateManager.humanWin();
-				}
-				if (ChessPiece(cGasket.getElementAt(0)).label == CcjPiecesConstants.RED_MARSHAL.label)
-				{
-					GameConfig.gameStateManager.computerWin();
-				}
-				//clean this bit at pieces.
-				BitBoard(ChessPiecesModel.getInstance()[removedPiece.type]).setBitt(removedPiece.position.y, removedPiece.position.x, false);
+				BitBoard(ChessPiecesModel.getInstance()[piece.type]).setBitt(piece.position.y, piece.position.x, false);
+			}	
+			//clean this bit at pieces.
+			for each( var index:int in currentRemovedPieceIndexs)
+			{
 				//remove pieces data.
 				if (GameConfig.turnFlag == CcjConstants.FLAG_RED)
 				{
 					//clean this bit at bluePieces.
 					//notice array splice without copy
 //					chessPiecesModel.blues = 
-					chessPiecesModel.blues.splice(removedIndex, 1);
+					chessPiecesModel.blues.splice(index, 1);
 				}
 				else
 				{
 					//clean this bit at redPieces.
 					//notice array splice without copy
 //					chessPiecesModel.reds = 
-					chessPiecesModel.reds.splice(removedIndex, 1);
+					chessPiecesModel.reds.splice(index, 1);
 				}
-				//remove element from gasket.
-//				cGasket.removeElementAt(0);
+			}
+			//remove element from gasket.
+			for each( var piecee:ChessPiece in currentRemovedPieces)
+			{
+				var cGasket:ChessGasket=ChessGasketsModel.getInstance().gaskets.gett(piecee.position.x,piecee.position.y) as ChessGasket;
+				//cGasket.removeElementAt(0);
 				cGasket.chessPiece=null;
 			}
-			//
-			makeMove(conductVO);
+			//finally make move.
+			this.makeMove(conductVO);
 		}
 
 		//pluge to death.	
@@ -452,7 +461,7 @@ package com.godpaper.impl
 		 * @return whether or not blue/red check mated.
 		 *
 		 */
-		private function indicateCheckmate(gamePosition:PositionVO):Boolean
+		public function indicateCheckmate(gamePosition:PositionVO):Boolean
 		{
 			var checkmated:Boolean;
 			if (gamePosition.color == CcjConstants.FLAG_BLUE)
@@ -468,7 +477,7 @@ package com.godpaper.impl
 
 		//update-relatived tasks here.
 		//FIXME:cairngorm3 task can not restart,but parsley can do it.
-		private function updateTasksProcess():void
+		protected function updateTasksProcess():void
 		{
 			var task:ParallelTask=new ParallelTask();
 			//

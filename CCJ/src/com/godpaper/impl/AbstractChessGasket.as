@@ -8,7 +8,10 @@ package com.godpaper.impl
 	import com.godpaper.configs.GameConfig;
 	import com.godpaper.core.IChessGasket;
 	import com.godpaper.core.IChessPiece;
+	import com.godpaper.core.IXray;
+	import com.godpaper.model.ChessGasketsModel;
 	import com.godpaper.model.vos.ConductVO;
+	import com.godpaper.views.components.ChessGasket;
 	import com.godpaper.views.components.ChessPiece;
 	import com.lookbackon.ds.BitBoard;
 
@@ -32,14 +35,15 @@ package com.godpaper.impl
 	 * @playerVersion 9.0
 	 * Created Jan 21, 2011 3:51:25 PM
 	 */
-	public class AbstractChessGasket extends BorderContainer implements IChessGasket
+	public class AbstractChessGasket extends BorderContainer implements IChessGasket,IXray
 	{
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-
+		[Bindable]
+		private var chessGasketsModel:ChessGasketsModel = ChessGasketsModel.getInstance();
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -53,6 +57,7 @@ package com.godpaper.impl
 		//  position
 		//----------------------------------
 		private var _position:Point;
+
 
 		public function get position():Point
 		{
@@ -86,7 +91,28 @@ package com.godpaper.impl
 				this.removeElementAt(0);
 			}
 		}
+		//----------------------------------
+		//  X-Ray properties
+		//----------------------------------
+		public function get bottomNode():ChessGasket
+		{
+			return chessGasketsModel.gaskets.gett(this.position.x,this.position.y+1) as ChessGasket;
+		}
 
+		public function get rightNode():ChessGasket
+		{
+			return chessGasketsModel.gaskets.gett(this.position.x+1,this.position.y) as ChessGasket;
+		}
+
+		public function get upNode():ChessGasket
+		{
+			return chessGasketsModel.gaskets.gett(this.position.x,this.position.y-1) as ChessGasket;
+		}
+
+		public function get leftNode():ChessGasket
+		{
+			return chessGasketsModel.gaskets.gett(this.position.x-1,this.position.y) as ChessGasket;
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties

@@ -5,6 +5,7 @@ package com.godpaper.services
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
+	import com.godpaper.configs.BoardConfig;
 	import com.godpaper.model.plugin.MochiModel;
 
 	import flash.events.NetStatusEvent;
@@ -34,8 +35,7 @@ package com.godpaper.services
 		[Bindable]
 		private var user:String;
 
-		[Bindable]
-		private var connected:Boolean=false;
+		private var _connected:Boolean=false;
 
 		[Inject]
 		public var mochiModel:MochiModel;
@@ -48,7 +48,10 @@ package com.godpaper.services
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-
+		public function get connected():Boolean
+		{
+			return _connected;
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -107,7 +110,7 @@ package com.godpaper.services
 					break;
 
 				case "NetGroup.Connect.Success":
-					connected=true;
+					_connected=true;
 					break;
 
 				case "NetGroup.Posting.Notify":

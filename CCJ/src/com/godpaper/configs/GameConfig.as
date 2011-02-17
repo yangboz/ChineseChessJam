@@ -2,7 +2,7 @@ package com.godpaper.configs
 {
 	import com.godpaper.core.IChessPieceManager;
 	import com.godpaper.core.IGameStateManager;
-	import com.godpaper.impl.ChessPieceManagerDefault;
+	import com.godpaper.business.managers.CcjChessPieceManager;
 	import com.godpaper.impl.GameStateManagerDefault;
 
 	//--------------------------------------------------------------------------
@@ -30,7 +30,7 @@ package com.godpaper.configs
 		private static var _tollgates:Array;
 		private static var _tollgateTips:Array;
 		//
-		private static var _chessPieceManager:IChessPieceManager = new ChessPieceManagerDefault();
+		private static var _chessPieceManager:IChessPieceManager;
 		private static var _gameStateManager:IGameStateManager = new GameStateManagerDefault();
 		//The game play mode(computer vs human,human vs human);
 		private static var _playMode:String = HUMAN_VS_COMPUTER;

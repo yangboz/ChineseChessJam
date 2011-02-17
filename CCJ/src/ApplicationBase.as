@@ -6,6 +6,7 @@ package
 	//
 	//--------------------------------------------------------------------------
 	import com.godpaper.configs.GameConfig;
+	import com.godpaper.impl.CustomPreloaderDefault;
 	import com.godpaper.model.ChessPiecesModel;
 
 	import flash.display.MovieClip;
@@ -59,7 +60,6 @@ package
 		{
 			//TODO: implement function
 			super();
-			//popup 
 
 			//
 			this.addEventListener(FlexEvent.PREINITIALIZE,preinitializeHandler);

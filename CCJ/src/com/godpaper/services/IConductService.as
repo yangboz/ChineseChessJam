@@ -21,7 +21,7 @@ package com.godpaper.services
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-
+		function get connected():Boolean;
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties

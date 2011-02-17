@@ -16,12 +16,16 @@
 					 maxWidth="550"
 					 maxHeight="520"
 					 xmlns:task1="org.spicefactory.lib.task.*"
-					 xmlns:popups="com.godpaper.views.popups.*">
+					 xmlns:popups="com.godpaper.views.popups.*"
+					 usePreloader="true"
+					 preloader="com.godpaper.impl.CustomPreloaderDefault"
+					 >
 	<fx:Script>
 		<![CDATA[
 			import com.adobe.cairngorm.contract.Contract;
 			import com.godpaper.business.factory.CcjChessFactory;
 			import com.godpaper.business.factory.ChessFactoryBase;
+			import com.godpaper.business.managers.CcjChessPieceManager;
 			import com.godpaper.configs.BoardConfig;
 			import com.godpaper.configs.CCJContextConfig;
 			import com.godpaper.configs.GameConfig;
@@ -87,6 +91,7 @@
 				GameConfig.tollgateTips=["baby intelligence", "fellow intelligence", "man intelligence", "guru intelligence"];
 				GameConfig.turnFlag=CcjConstants.FLAG_RED;
 				//
+				GameConfig.chessPieceManager = new CcjChessPieceManager();
 			}
 
 			//  application1_creationCompleteHandler
