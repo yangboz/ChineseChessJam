@@ -58,7 +58,6 @@ package com.godpaper.impl
 		//----------------------------------
 		private var _position:Point;
 
-
 		public function get position():Point
 		{
 			return _position;
@@ -90,6 +89,15 @@ package com.godpaper.impl
 			{
 				this.removeElementAt(0);
 			}
+		}
+		//----------------------------------
+		//  conductVO
+		//----------------------------------
+		private var _conductVO:ConductVO;
+
+		public function get conductVO():ConductVO
+		{
+			return _conductVO;
 		}
 		//----------------------------------
 		//  X-Ray properties
@@ -157,10 +165,10 @@ package com.godpaper.impl
 		//dragEnterHandler
 		protected function dragEnterHandler(event:DragEvent):void
 		{
-			var myConductVO:ConductVO=new ConductVO();
-			myConductVO.target=event.dragInitiator as IChessPiece;
-			myConductVO.previousPosition=this.position;
-			if (GameConfig.chessPieceManager.doMoveValidation(myConductVO))
+			this._conductVO =new ConductVO();
+			_conductVO.target=event.dragInitiator as IChessPiece;
+			_conductVO.previousPosition=this.position;
+			if (GameConfig.chessPieceManager.doMoveValidation(_conductVO))
 			{
 				DragManager.acceptDragDrop(event.currentTarget as IUIComponent);
 				DragManager.showFeedback(DragManager.LINK);
@@ -172,12 +180,12 @@ package com.godpaper.impl
 		//dragDropHandler
 		protected function dragDropHandler(event:DragEvent):void
 		{
-			var myConductVO:ConductVO=new ConductVO();
-			myConductVO.target=event.dragInitiator as IChessPiece;
-			myConductVO.previousPosition=(event.dragInitiator as ChessPiece).position;
-			myConductVO.nextPosition=this.position;
-			//make move.
-			GameConfig.chessPieceManager.makeMove(myConductVO);
+			this._conductVO=new ConductVO();
+			_conductVO.target=event.dragInitiator as IChessPiece;
+			_conductVO.previousPosition=(event.dragInitiator as ChessPiece).position;
+			_conductVO.nextPosition=this.position;
+			//apply move.
+			GameConfig.chessPieceManager.applyMove(conductVO);
 			//
 			event.stopImmediatePropagation();
 		}

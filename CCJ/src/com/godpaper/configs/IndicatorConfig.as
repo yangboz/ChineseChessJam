@@ -26,7 +26,7 @@ package com.godpaper.configs
 		//about mochi
 		[Bindable]public static var submitScore:Boolean=false;
 		//about airport(utility,extreme,etc..)
-		[Bindable]public static var airportUtility:Boolean=true;
+		[Bindable]public static var airportUtility:Boolean=false;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------

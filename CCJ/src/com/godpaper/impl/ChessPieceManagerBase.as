@@ -74,7 +74,7 @@ package com.godpaper.impl
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private const LOG:ILogger=LogUtil.getLogger(CcjChessPieceManager);
+		private const LOG:ILogger=LogUtil.getLogger(ChessPieceManagerBase);
 
 		//--------------------------------------------------------------------------
 		//
@@ -341,7 +341,7 @@ package com.godpaper.impl
 				//cGasket.removeElementAt(0);
 				cGasket.chessPiece=null;
 			}
-			//finally make move.
+			//finally trigger make move.
 			this.makeMove(conductVO);
 		}
 
