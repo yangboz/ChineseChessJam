@@ -5,20 +5,20 @@ package com.lookbackon.ds
 	/**
 	 * <strong>Pros and Cons of Using BitBoard Flags:</strong></p>
 	 * <strong>Pros:</strong></p>
-     * Efficient: Very small storage space to hold a lot of information.</p>
-     * Efficient: Ultra-fast (actually fastest possible) for making programmatic decisions, 
+	 * Efficient: Very small storage space to hold a lot of information.</p>
+	 * Efficient: Ultra-fast (actually fastest possible) for making programmatic decisions,
 	 * especially when looking for combinations of attributes or options.</p>
-     * Efficient: Concise storage means fast data transfer.</p>
-     * Extensible:  New code does not "break" old code.  </p>
+	 * Efficient: Concise storage means fast data transfer.</p>
+	 * Extensible:  New code does not "break" old code.  </p>
 	 * Additional (new) data can be packed into the same variable without causing backward compatibility problems.</p>
-     * Extensible:  New data does not require new database schema or changed record layouts.  </p>
+	 * Extensible:  New data does not require new database schema or changed record layouts.  </p>
 	 * Only the program code changes.</p>
 	 * <strong>Cons:</strong></p>
-     * Idiomatic.  Not all programmers understand what's going on.  </p>
+	 * Idiomatic.  Not all programmers understand what's going on.  </p>
 	 * Possible increased documentation requirements.</p>
 	 * @see http://blog.lookbackon.com/?p=371
 	 * @author Knight.zhou
-	 * 
+	 *
 	 */	
 	public class BitBoard extends BitVector implements IBitBoard
 	{
@@ -38,10 +38,10 @@ package com.lookbackon.ds
 		//
 		//--------------------------------------------------------------------------
 		/**
-		 * 
+		 *
 		 * @param column the number column of bit board.
 		 * @param row the number row of bit board.
-		 *   
+		 *
 		 */
 		public function BitBoard(column:int,row:int)
 		{
@@ -190,7 +190,7 @@ package com.lookbackon.ds
 		 * @param row the row number.
 		 * @param column the column number.
 		 * @return the index bool value.
-		 * 
+		 *
 		 */		
 		public function getBitt(row:int,column:int):int
 		{
@@ -201,7 +201,7 @@ package com.lookbackon.ds
 		 * @param row the row number.
 		 * @param column the column number.
 		 * @param b the index bool value.
-		 * 
+		 *
 		 */
 		//----------------------------------
 		//  setBitt
@@ -250,9 +250,9 @@ package com.lookbackon.ds
 		//  celled
 		//----------------------------------
 		/**
-		 * 
+		 *
 		 * @return total cell be filled or cell-free.
-		 * 
+		 *
 		 */		
 		public function get celled():int
 		{
@@ -295,9 +295,9 @@ package com.lookbackon.ds
 		public function getRows(rowIndex:int):Array
 		{
 			var result:Array = [];
-			for(var r:int=0;r<this.row;r++)
+			for(var col:int=0;col<this.column;col++)
 			{
-				result.push(this.getBitt(r,rowIndex));
+				result.push(this.getBitt(rowIndex,col));
 			}
 			return result;
 		}
@@ -307,9 +307,9 @@ package com.lookbackon.ds
 		public function getCols(colIndex:int):Array
 		{
 			var result:Array = [];
-			for(var c:int=0;c<this.column;c++)
+			for(var row:int=0;row<this.row;row++)
 			{
-				result.push(this.getBitt(colIndex,c));
+				result.push(this.getBitt(row,colIndex));
 			}
 			return result;
 		}
@@ -318,7 +318,7 @@ package com.lookbackon.ds
 		//----------------------------------
 		/**
 		 * Dump out a string representing the current object.
-		 * 
+		 *
 		 * @return A "human-readable" string representing the current object.
 		 */	
 		public function dump():String
@@ -339,3 +339,4 @@ package com.lookbackon.ds
 		}
 	}
 }
+

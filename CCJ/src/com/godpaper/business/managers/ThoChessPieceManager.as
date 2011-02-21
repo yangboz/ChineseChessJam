@@ -5,11 +5,13 @@ package com.godpaper.business.managers
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
+	import com.godpaper.consts.DefaultConstants;
 	import com.godpaper.impl.ChessPieceManagerBase;
 	import com.godpaper.model.ChessGasketsModel;
 	import com.godpaper.model.ChessPiecesModel;
 	import com.godpaper.model.vos.ConductVO;
 	import com.godpaper.model.vos.PositionVO;
+	import com.godpaper.utils.FilterUtil;
 	import com.godpaper.views.components.ChessGasket;
 	import com.godpaper.views.components.ChessPiece;
 	import com.lookbackon.ds.BitBoard;
@@ -77,102 +79,116 @@ package com.godpaper.business.managers
 			var chessGasketModel:ChessGasketsModel = ChessGasketsModel.getInstance();
 			var chessPiecesModel:ChessPiecesModel = ChessPiecesModel.getInstance();
 			//
-			var rowOfGaskets:Array = chessGasketModel.gaskets.getRow(conductVO.nextPosition.y);
-			var colOfGaskets:Array = chessGasketModel.gaskets.getCol(conductVO.nextPosition.x);
+			var rowOfAllBitboards:Array = chessPiecesModel.allPieces.getRows(conductVO.nextPosition.y);
+			var colOfAllBitboards:Array = chessPiecesModel.allPieces.getCols(conductVO.nextPosition.x);
+			var rowOfTargetBitboard:Array = [];
+			var rowOfOrganizerBitboard:Array = [];
+			var colOfTargetBitboard:Array = [];
+			var colOfOrganizerBitboard:Array = [];
+			var rowOfTargetBitboardNonNull:Array = [];
+			var rowOfOrganizerBitboardNonNull:Array = [];
+			var colOfTargetBitboardNonNull:Array = [];
+			var colOfOrganizerBitboardNonNull:Array = [];
 			//
 			var currentGasket:ChessGasket = chessGasketModel.gaskets.gett(conductVO.nextPosition.x,conductVO.nextPosition.y) as ChessGasket;
-			//
-			var roCounter:int=0;//capture organzier counter in row.
-			var rtCounter:int=0;//capture target counter in row.
 			var rtGasket:ChessGasket;//captured chess gasket.
 			var roGasket:ChessGasket//capture organzier gasket in row.
-			for each( var rGasket:ChessGasket in rowOfGaskets)
-			{
-				if(rGasket.chessPiece)
-				{
-					if (conductVO.target.type == rGasket.chessPiece.type)
-					{
-						roCounter++;
-						//
-						roGasket = rGasket;
-					}else
-					{
-						rtCounter++;
-						//
-						rtGasket = rGasket;
-					}
-				}
-			}
-			if(roCounter==1 && rtCounter==1)
-			{
-				trace("row t:",rtGasket.position,"o:",currentGasket.position,"o':",roGasket.position);
-				if(rtGasket == currentGasket.rightNode &&  roGasket == currentGasket.leftNode)//o'-o-t
-				{
-					super.currentRemovedPieces.push( ChessGasket(rowOfGaskets[0]).chessPiece );
-				}
-				if(rtGasket == currentGasket.rightNode.rightNode &&  roGasket == currentGasket.rightNode)//o-o'-t
-				{
-					super.currentRemovedPieces.push( ChessGasket(rowOfGaskets[0]).chessPiece );
-				}
-				if(rtGasket == currentGasket.leftNode &&  roGasket == currentGasket.rightNode)//t-o-o'
-				{
-					super.currentRemovedPieces.push( ChessGasket(rowOfGaskets[0]).chessPiece );
-				}
-				if(rtGasket == currentGasket.leftNode.leftNode &&  roGasket == currentGasket.leftNode)//t-o'-o
-				{
-					super.currentRemovedPieces.push( ChessGasket(rowOfGaskets[0]).chessPiece );
-				}
-			}
-			//
-			var coCounter:int=0;//capture organzier counter in column.
-			var ctCounter:int=0;//capture target counter in column.
 			var ctGasket:ChessGasket;//captured chess gasket.
 			var coGasket:ChessGasket//capture organzier gasket in column.
-			for each( var cGasket:ChessGasket in colOfGaskets)
+			//
+			if (conductVO.target.type == DefaultConstants.BLUE)
 			{
-				if(cGasket.chessPiece)
-				{
-					if (conductVO.target.type == cGasket.chessPiece.type)
-					{
-						coCounter++;
-						//
-						coGasket = cGasket;
-					}else
-					{
-						ctCounter++;
-						//
-						ctGasket = cGasket;
-					}
-				}	
-			}
-			if(coCounter==1 && ctCounter==1)
+				rowOfTargetBitboard = chessPiecesModel.redPieces.getRows(conductVO.nextPosition.y);
+				rowOfOrganizerBitboard = chessPiecesModel.bluePieces.getRows(conductVO.nextPosition.y);
+				colOfTargetBitboard = chessPiecesModel.redPieces.getCols(conductVO.nextPosition.x);
+				colOfOrganizerBitboard = chessPiecesModel.bluePieces.getCols(conductVO.nextPosition.x);
+				//
+				rowOfTargetBitboardNonNull = chessPiecesModel.redPieces.getRows(conductVO.nextPosition.y).filter(FilterUtil.onNonNull);
+				rowOfOrganizerBitboardNonNull = chessPiecesModel.bluePieces.getRows(conductVO.nextPosition.y).filter(FilterUtil.onNonNull);
+				colOfTargetBitboardNonNull = chessPiecesModel.redPieces.getCols(conductVO.nextPosition.x).filter(FilterUtil.onNonNull);
+				colOfOrganizerBitboardNonNull = chessPiecesModel.bluePieces.getCols(conductVO.nextPosition.x).filter(FilterUtil.onNonNull);
+			}else
 			{
-				trace("column t:",ctGasket.position,"o:",currentGasket.position,"o':",coGasket.position);
-				if( ctGasket==currentGasket.bottomNode && coGasket==currentGasket.upNode  )		//o'
-				{
-					super.currentRemovedPieces.push( ChessGasket(colOfGaskets[0]).chessPiece ); //o
-
-				}																			    //t
+				rowOfTargetBitboard = chessPiecesModel.bluePieces.getRows(conductVO.nextPosition.y);
+				rowOfOrganizerBitboard = chessPiecesModel.redPieces.getRows(conductVO.nextPosition.y);
+				colOfTargetBitboard = chessPiecesModel.bluePieces.getCols(conductVO.nextPosition.x);
+				colOfOrganizerBitboard = chessPiecesModel.redPieces.getCols(conductVO.nextPosition.x);
 				//
-				if( ctGasket==currentGasket.bottomNode.bottomNode && coGasket==currentGasket.bottomNode  )		//o
-				{
-					super.currentRemovedPieces.push( ChessGasket(colOfGaskets[0]).chessPiece ); 				//o'
-
-				}																			    				//t
-				//
-				if( ctGasket==currentGasket.upNode && coGasket==currentGasket.bottomNode  )		//t
-				{
-					super.currentRemovedPieces.push( ChessGasket(colOfGaskets[0]).chessPiece ); //o
-
-				}																			    //o'
-				//
-				if( ctGasket==currentGasket.upNode.upNode && coGasket==currentGasket.upNode  )		//t
-				{
-					super.currentRemovedPieces.push( ChessGasket(colOfGaskets[0]).chessPiece ); 	//o'
-
-				}																			    	//o
+				rowOfTargetBitboardNonNull = chessPiecesModel.bluePieces.getRows(conductVO.nextPosition.y).filter(FilterUtil.onNonNull);
+				rowOfOrganizerBitboardNonNull = chessPiecesModel.redPieces.getRows(conductVO.nextPosition.y).filter(FilterUtil.onNonNull);
+				colOfTargetBitboardNonNull = chessPiecesModel.bluePieces.getCols(conductVO.nextPosition.x).filter(FilterUtil.onNonNull);
+				colOfOrganizerBitboardNonNull = chessPiecesModel.redPieces.getCols(conductVO.nextPosition.x).filter(FilterUtil.onNonNull);
 			}
 			//
+			trace("rowOfTargetBitboard:",rowOfTargetBitboard,"rowOfOrganizerBitboard:",rowOfOrganizerBitboard);
+			trace("colOfTargetBitboard:",colOfTargetBitboard,"colOfOrganizerBitboard:",colOfOrganizerBitboard);
+			trace("rowOfTargetBitboardNonNull:",rowOfTargetBitboardNonNull,"rowOfOrganizerBitboardNonNull:",rowOfOrganizerBitboardNonNull);
+			trace("colOfTargetBitboardNonNull:",colOfTargetBitboardNonNull,"colOfOrganizerBitboardNonNull:",colOfOrganizerBitboardNonNull);
+			//
+			if(rowOfTargetBitboardNonNull.length==1)
+			{
+				//
+				rtGasket = chessGasketModel.gaskets.gett(rowOfTargetBitboard.indexOf(1),conductVO.nextPosition.y) as ChessGasket;
+				roGasket = chessGasketModel.gaskets.gett(rowOfOrganizerBitboard.indexOf(1),conductVO.nextPosition.y) as ChessGasket;
+				//
+				trace("row t:",rtGasket.position,"o:",currentGasket.position,"o':",roGasket.position);
+				//
+				if(rowOfOrganizerBitboardNonNull.length>=1 && rowOfOrganizerBitboardNonNull.length<3)//insert the right position.//arrange the right position.
+				{
+					if(rtGasket == currentGasket.rightNode &&  roGasket == currentGasket.leftNode)//o'-o-t
+					{
+						super.currentRemovedPieces.push( rtGasket.chessPiece );
+					}
+					if(rtGasket == currentGasket.rightNode.rightNode &&  roGasket == currentGasket.rightNode)//o-o'-t
+					{
+						super.currentRemovedPieces.push( rtGasket.chessPiece );
+					}
+					if(rtGasket == currentGasket.leftNode &&  roGasket == currentGasket.rightNode)//t-o-o'
+					{
+						super.currentRemovedPieces.push( rtGasket.chessPiece );
+					}
+					if(rtGasket == currentGasket.leftNode.leftNode &&  roGasket == currentGasket.leftNode)//t-o'-o
+					{
+						super.currentRemovedPieces.push( rtGasket.chessPiece );
+					}
+				}
+			}
+			if(colOfTargetBitboardNonNull.length==1)
+			{
+				//
+				ctGasket = chessGasketModel.gaskets.gett( conductVO.nextPosition.x,colOfTargetBitboard.indexOf(1) ) as ChessGasket;
+				coGasket = chessGasketModel.gaskets.gett( conductVO.nextPosition.x,colOfOrganizerBitboard.indexOf(1) ) as ChessGasket;
+				//
+				trace("column t:",ctGasket.position,"o:",currentGasket.position,"o':",coGasket.position);
+				//
+				if(colOfOrganizerBitboardNonNull.length>=1 && colOfOrganizerBitboardNonNull.length<3)//insert the right position.//arrange the right position.
+				{
+					//
+					if( ctGasket==currentGasket.bottomNode && coGasket==currentGasket.upNode  )		//o'
+					{
+						super.currentRemovedPieces.push( ctGasket.chessPiece ); 					//o
+
+					}																			    //t
+					//
+					if( ctGasket==currentGasket.bottomNode.bottomNode && coGasket==currentGasket.bottomNode  )		//o
+					{
+						super.currentRemovedPieces.push( ctGasket.chessPiece ); 									//o'
+
+					}																			    				//t
+					//
+					if( ctGasket==currentGasket.upNode && coGasket==currentGasket.bottomNode  )		//t
+					{
+						super.currentRemovedPieces.push( ctGasket.chessPiece ); 					//o
+
+					}																			    //o'
+					//
+					if( ctGasket==currentGasket.upNode.upNode && coGasket==currentGasket.upNode  )		//t
+					{
+						super.currentRemovedPieces.push( ctGasket.chessPiece ); 						//o'
+
+					}																					//o				
+				}
+			}
 
 			//
 			super.applyMove(conductVO);
