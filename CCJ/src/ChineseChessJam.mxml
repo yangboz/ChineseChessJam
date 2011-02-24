@@ -18,14 +18,16 @@
 					 xmlns:task1="org.spicefactory.lib.task.*"
 					 xmlns:popups="com.godpaper.as3.views.popups.*"
 					 usePreloader="true"
-					 preloader="com.godpaper.as3.impl.CustomPreloaderDefault"
+					 preloader="com.godpaper.ccj.utils.CustomPreloaderDefault"
 					 >
 	<fx:Script>
 		<![CDATA[
+			import assets.EmbededAssets;
+
 			import com.adobe.cairngorm.contract.Contract;
-			import com.godpaper.as3.business.factory.CcjChessFactory;
+			import com.godpaper.ccj.business.factory.CcjChessFactory;
 			import com.godpaper.as3.business.factory.ChessFactoryBase;
-			import com.godpaper.as3.business.managers.CcjChessPieceManager;
+			import com.godpaper.ccj.business.managers.CcjChessPieceManager;
 			import com.godpaper.as3.configs.BoardConfig;
 			import com.godpaper.as3.configs.CCJContextConfig;
 			import com.godpaper.as3.configs.GameConfig;
@@ -81,6 +83,7 @@
 				//about plugin:
 				PluginConfig.mochiBoardID = "3a460211409897f4";
 				PluginConfig.mochiGameID = "47de4a85dd3e213a";
+				PluginConfig.mochiIcons = EmbededAssets.ICON_TOLL_GATE;
 			}
 
 			//application1_initializeHandler

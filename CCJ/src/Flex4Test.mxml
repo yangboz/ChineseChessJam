@@ -7,7 +7,7 @@
 	<fx:Script>
 		<![CDATA[
 			import com.godpaper.as3.consts.CcjPiecesConstants;
-			import com.godpaper.as3.model.vos.ccjVO.PawnVO;
+			import com.godpaper.ccj.vo.PawnVO;
 			import com.godpaper.as3.utils.LogUtil;
 			import com.lookbackon.ds.BitBoard;
 			

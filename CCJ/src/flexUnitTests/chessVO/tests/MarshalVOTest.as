@@ -1,7 +1,7 @@
 package flexUnitTests.chessVO.tests
 {
 	import com.godpaper.as3.consts.CcjConstants;
-	import com.godpaper.as3.model.vos.ccjVO.MarshalVO;
+	import com.godpaper.ccj.vo.MarshalVO;
 	import com.lookbackon.ds.BitBoard;
 	
 	import org.flexunit.Assert;

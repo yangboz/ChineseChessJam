@@ -1,6 +1,6 @@
 package flexUnitTests.chessVO.tests
 {
-	import com.godpaper.as3.model.vos.ccjVO.KnightVO;
+	import com.godpaper.ccj.vo.KnightVO;
 	import com.lookbackon.ds.BitBoard;
 	
 	import org.flexunit.Assert;
