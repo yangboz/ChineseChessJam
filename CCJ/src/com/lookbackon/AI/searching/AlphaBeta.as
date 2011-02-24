@@ -1,7 +1,7 @@
 package com.lookbackon.AI.searching
 {
-	import com.godpaper.model.vos.PositionVO;
-	import com.godpaper.utils.LogUtil;
+	import com.godpaper.as3.model.vos.PositionVO;
+	import com.godpaper.as3.utils.LogUtil;
 	
 	import de.polygonal.ds.Array2;
 	

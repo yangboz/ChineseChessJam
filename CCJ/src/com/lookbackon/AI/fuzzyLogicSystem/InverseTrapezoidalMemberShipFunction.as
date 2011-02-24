@@ -1,6 +1,6 @@
 package com.lookbackon.AI.fuzzyLogicSystem
 {
-	import com.godpaper.utils.LogUtil;
+	import com.godpaper.as3.utils.LogUtil;
 	
 	import mx.logging.ILogger;
 

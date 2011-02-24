@@ -47,7 +47,7 @@ package com.lookbackon.AI.evaluation.statical.nelderMeadSimplex
 		}
 	}
 }
-import com.godpaper.utils.Enum;
+import com.godpaper.as3.utils.Enum;
 
 internal class TerminationReason extends Enum
 {

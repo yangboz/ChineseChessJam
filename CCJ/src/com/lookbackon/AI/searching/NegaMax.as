@@ -1,10 +1,10 @@
 package com.lookbackon.AI.searching
 {
-	import com.godpaper.configs.GameConfig;
-	import com.godpaper.consts.CcjConstants;
-	import com.godpaper.model.vos.ConductVO;
-	import com.godpaper.model.vos.PositionVO;
-	import com.godpaper.utils.LogUtil;
+	import com.godpaper.as3.configs.GameConfig;
+	import com.godpaper.as3.consts.CcjConstants;
+	import com.godpaper.as3.model.vos.ConductVO;
+	import com.godpaper.as3.model.vos.PositionVO;
+	import com.godpaper.as3.utils.LogUtil;
 
 	import mx.logging.ILogger;
 

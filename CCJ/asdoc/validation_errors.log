@@ -13,16 +13,16 @@ org.xml.sax.SAXParseException: Attribute name "variable" associated with an elem
 Text for example in org.generalrelativity.thread:GreenThread is not valid.
 org.xml.sax.SAXParseException: The element type "IRunnable" must be terminated by the matching end-tag "</IRunnable>".
 
-Text for description in com.godpaper.consts:CcjConstants is not valid.
+Text for description in com.godpaper.as3.consts:CcjConstants is not valid.
 No matching start tag.
 
-Text for description in com.godpaper.consts:CcjPiecesConstants is not valid.
+Text for description in com.godpaper.as3.consts:CcjPiecesConstants is not valid.
 No matching start tag.
 
-Text for description in com.godpaper.model.vos:ConductVO is not valid.
+Text for description in com.godpaper.as3.model.vos:ConductVO is not valid.
 No matching start tag.
 
-Text for description in com.godpaper.tasks:CreateChessVoTask is not valid.
+Text for description in com.godpaper.as3.tasks:CreateChessVoTask is not valid.
 org.xml.sax.SAXParseException: Element type "conduct" must be followed by either attribute specifications, ">" or "/>".
 
 Text for description in de.polygonal.math.null is not valid.

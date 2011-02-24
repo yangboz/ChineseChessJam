@@ -16,11 +16,11 @@
     <sourceAttachmentPath/>
   </compiler>
   <applications>
+    <application path="com/godpaper/as3/utils/P2PChat.mxml"/>
     <application path="ChineseChessJam.mxml"/>
     <application path="TwoHitOne.mxml"/>
     <application path="Flex4Test.mxml"/>
     <application path="FlexUnitApplication.mxml"/>
-    <application path="com/godpaper/utils/P2PChat.mxml"/>
     <application path="FlexUnitCompilerApplication.mxml"/>
     <application path="ApplicationBase.as"/>
   </applications>

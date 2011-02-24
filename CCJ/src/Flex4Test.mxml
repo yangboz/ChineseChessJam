@@ -6,9 +6,9 @@
 			   xmlns:mx="library://ns.adobe.com/flex/mx" >
 	<fx:Script>
 		<![CDATA[
-			import com.godpaper.consts.CcjPiecesConstants;
-			import com.godpaper.model.vos.ccjVO.PawnVO;
-			import com.godpaper.utils.LogUtil;
+			import com.godpaper.as3.consts.CcjPiecesConstants;
+			import com.godpaper.as3.model.vos.ccjVO.PawnVO;
+			import com.godpaper.as3.utils.LogUtil;
 			import com.lookbackon.ds.BitBoard;
 			
 			import de.polygonal.ds.Array2;

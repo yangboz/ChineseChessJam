@@ -15,7 +15,7 @@
 -exclude-sources "src/com/lookbackon/AI/evaluation/statical/nelderMeadSimplex/RegressionResult.as"
 -exclude-sources "src/com/lookbackon/AI/evaluation/statical/nelderMeadSimplex/NelderMeadSimplex.as"
 -exclude-sources "src/com/lookbackon/AI/evaluation/statical/nelderMeadSimplex/SimplexConstants.as"
--exclude-sources "src\com\godpaper\utils\MochiPreloader.as"
+-exclude-sources "src\com\godpaper\as3\utils\MochiPreloader.as"
 -library-path "libs"
 -library-path "C:\Program Files\Adobe\Adobe Flash Builder 4\sdks\4.0.0AIR2\frameworks\libs"
 -library-path "C:\Program Files\Adobe\Adobe Flash Builder 4\sdks\4.0.0AIR2\frameworks\libs\air"

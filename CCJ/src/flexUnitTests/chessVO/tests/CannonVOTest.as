@@ -1,8 +1,8 @@
 package flexUnitTests.chessVO.tests
 {
-	import com.godpaper.model.ChessPiecesModel;
-	import com.godpaper.model.vos.ccjVO.CannonVO;
-	import com.godpaper.model.vos.ccjVO.RookVO;
+	import com.godpaper.as3.model.ChessPiecesModel;
+	import com.godpaper.as3.model.vos.ccjVO.CannonVO;
+	import com.godpaper.as3.model.vos.ccjVO.RookVO;
 	import com.lookbackon.ds.BitBoard;
 	
 	import org.flexunit.Assert;

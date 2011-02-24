@@ -6,28 +6,28 @@
 					 width="450"
 					 height="400"
 					 xmlns:parsley="http://www.spicefactory.org/parsley"
-					 xmlns:impl="com.godpaper.impl.*"
+					 xmlns:impl="com.godpaper.as3.impl.*"
 					 xmlns:popup="com.adobe.cairngorm.popup.*"
-					 xmlns:popups="com.godpaper.views.popups.*"
+					 xmlns:popups="com.godpaper.as3.views.popups.*"
 					 xmlns:task="com.adobe.cairngorm.task.*"
-					 xmlns:tasks="com.godpaper.tasks.*"
+					 xmlns:tasks="com.godpaper.as3.tasks.*"
 					 xmlns:task1="org.spicefactory.lib.task.*"
-					 xmlns:mochi="com.godpaper.views.mochi.*"
+					 xmlns:mochi="com.godpaper.as3.views.mochi.*"
 					 >
 	<fx:Script>
 		<![CDATA[
-			import com.godpaper.business.factory.CcjChessFactory;
-			import com.godpaper.business.factory.ChessFactoryBase;
-			import com.godpaper.business.factory.ThoChessFactory;
-			import com.godpaper.business.managers.ThoChessPieceManager;
-			import com.godpaper.configs.BoardConfig;
-			import com.godpaper.configs.CCJContextConfig;
-			import com.godpaper.configs.GameConfig;
-			import com.godpaper.configs.IndicatorConfig;
-			import com.godpaper.configs.PieceConfig;
-			import com.godpaper.configs.PluginConfig;
-			import com.godpaper.consts.CcjConstants;
-			import com.godpaper.model.plugin.MochiModel;
+			import com.godpaper.as3.business.factory.CcjChessFactory;
+			import com.godpaper.as3.business.factory.ChessFactoryBase;
+			import com.godpaper.as3.business.factory.ThoChessFactory;
+			import com.godpaper.as3.business.managers.ThoChessPieceManager;
+			import com.godpaper.as3.configs.BoardConfig;
+			import com.godpaper.as3.configs.CCJContextConfig;
+			import com.godpaper.as3.configs.GameConfig;
+			import com.godpaper.as3.configs.IndicatorConfig;
+			import com.godpaper.as3.configs.PieceConfig;
+			import com.godpaper.as3.configs.PluginConfig;
+			import com.godpaper.as3.consts.CcjConstants;
+			import com.godpaper.as3.model.plugin.MochiModel;
 			import com.lookbackon.AI.searching.*;
 
 			import mx.events.FlexEvent;

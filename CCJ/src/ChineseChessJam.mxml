@@ -3,12 +3,12 @@
 					 xmlns:s="library://ns.adobe.com/flex/spark"
 					 xmlns:mx="library://ns.adobe.com/flex/halo"
 					 xmlns:app="*"
-					 xmlns:components="com.godpaper.views.components.*"
+					 xmlns:components="com.godpaper.as3.views.components.*"
 					 xmlns:popup="com.adobe.cairngorm.popup.*"
 					 xmlns:controller="com.lookbackon.ccj.controller.*"
 					 xmlns:task="com.adobe.cairngorm.task.*"
-					 xmlns:tasks="com.godpaper.tasks.*"
-					 xmlns:mochi="com.godpaper.views.mochi.*"
+					 xmlns:tasks="com.godpaper.as3.tasks.*"
+					 xmlns:mochi="com.godpaper.as3.views.mochi.*"
 					 xmlns:parsley="http://www.spicefactory.org/parsley"
 					 xmlns:mx1="library://ns.adobe.com/flex/mx"
 					 width="550"
@@ -16,26 +16,26 @@
 					 maxWidth="550"
 					 maxHeight="520"
 					 xmlns:task1="org.spicefactory.lib.task.*"
-					 xmlns:popups="com.godpaper.views.popups.*"
+					 xmlns:popups="com.godpaper.as3.views.popups.*"
 					 usePreloader="true"
-					 preloader="com.godpaper.impl.CustomPreloaderDefault"
+					 preloader="com.godpaper.as3.impl.CustomPreloaderDefault"
 					 >
 	<fx:Script>
 		<![CDATA[
 			import com.adobe.cairngorm.contract.Contract;
-			import com.godpaper.business.factory.CcjChessFactory;
-			import com.godpaper.business.factory.ChessFactoryBase;
-			import com.godpaper.business.managers.CcjChessPieceManager;
-			import com.godpaper.configs.BoardConfig;
-			import com.godpaper.configs.CCJContextConfig;
-			import com.godpaper.configs.GameConfig;
-			import com.godpaper.configs.IndicatorConfig;
-			import com.godpaper.configs.PieceConfig;
-			import com.godpaper.configs.PluginConfig;
-			import com.godpaper.consts.CcjConstants;
-			import com.godpaper.model.ChessPiecesModel;
-			import com.godpaper.model.plugin.MochiModel;
-			import com.godpaper.utils.LogUtil;
+			import com.godpaper.as3.business.factory.CcjChessFactory;
+			import com.godpaper.as3.business.factory.ChessFactoryBase;
+			import com.godpaper.as3.business.managers.CcjChessPieceManager;
+			import com.godpaper.as3.configs.BoardConfig;
+			import com.godpaper.as3.configs.CCJContextConfig;
+			import com.godpaper.as3.configs.GameConfig;
+			import com.godpaper.as3.configs.IndicatorConfig;
+			import com.godpaper.as3.configs.PieceConfig;
+			import com.godpaper.as3.configs.PluginConfig;
+			import com.godpaper.as3.consts.CcjConstants;
+			import com.godpaper.as3.model.ChessPiecesModel;
+			import com.godpaper.as3.model.plugin.MochiModel;
+			import com.godpaper.as3.utils.LogUtil;
 			import com.lookbackon.AI.searching.AttackFalse;
 			import com.lookbackon.AI.searching.MiniMax;
 			import com.lookbackon.AI.searching.RandomWalk;
@@ -136,7 +136,7 @@
 		<!---
 		The context for bootstrapping the whole Parsley framework.
 		-->
-		<parsley:ContextBuilder config="com.godpaper.configs.CCJContextConfig">
+		<parsley:ContextBuilder config="com.godpaper.as3.configs.CCJContextConfig">
 
 		</parsley:ContextBuilder>
 

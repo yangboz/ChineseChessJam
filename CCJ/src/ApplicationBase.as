@@ -5,9 +5,9 @@ package
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.godpaper.configs.GameConfig;
-	import com.godpaper.impl.CustomPreloaderDefault;
-	import com.godpaper.model.ChessPiecesModel;
+	import com.godpaper.as3.configs.GameConfig;
+	import com.godpaper.as3.impl.CustomPreloaderDefault;
+	import com.godpaper.as3.model.ChessPiecesModel;
 
 	import flash.display.MovieClip;
 

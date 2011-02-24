@@ -1,12 +1,12 @@
 package com.lookbackon.AI.searching
 {
-	import com.godpaper.configs.GameConfig;
-	import com.godpaper.model.ChessPiecesModel;
-	import com.godpaper.model.vos.ConductVO;
-	import com.godpaper.model.vos.PositionVO;
-	import com.godpaper.utils.FilterUtil;
-	import com.godpaper.utils.SortUtil;
-	import com.godpaper.views.components.ChessPiece;
+	import com.godpaper.as3.configs.GameConfig;
+	import com.godpaper.as3.model.ChessPiecesModel;
+	import com.godpaper.as3.model.vos.ConductVO;
+	import com.godpaper.as3.model.vos.PositionVO;
+	import com.godpaper.as3.utils.FilterUtil;
+	import com.godpaper.as3.utils.SortUtil;
+	import com.godpaper.as3.views.components.ChessPiece;
 	import com.lookbackon.AI.evaluation.IEvaluation;
 	import com.lookbackon.AI.evaluation.linear.LinearEvaluationProxy;
 	import com.lookbackon.ds.BitBoard;
