@@ -67,12 +67,12 @@ package com.godpaper.business.managers
 		//
 		//--------------------------------------------------------------------------
 		/**
-		 *
 		 * @inheritDoc
-		 *
+		 * @see http://www.godpaper.com/godpaper/index.php/%E5%85%AD%E5%AD%90%E6%A3%8B
 		 */		
 		override public function applyMove(conductVO:ConductVO):void
 		{
+			//TODO:simply this game rule by bitboard magic and algorithem.
 			//clean up firstly.
 			super.currentRemovedPieces.length = 0;
 			//
@@ -91,10 +91,12 @@ package com.godpaper.business.managers
 			var colOfOrganizerBitboardNonNull:Array = [];
 			//
 			var currentGasket:ChessGasket = chessGasketModel.gaskets.gett(conductVO.nextPosition.x,conductVO.nextPosition.y) as ChessGasket;
-			var rtGasket:ChessGasket;//captured chess gasket.
-			var roGasket:ChessGasket//capture organzier gasket in row.
-			var ctGasket:ChessGasket;//captured chess gasket.
-			var coGasket:ChessGasket//capture organzier gasket in column.
+			var rtGasket:ChessGasket;//captured chess gasket in row.
+			var roGasket:ChessGasket;//capture organzier gasket in row.
+			var raGasket:ChessGasket;//capture assist gasket in row.
+			var ctGasket:ChessGasket;//captured chess gasket in column.
+			var coGasket:ChessGasket;//capture organzier gasket in column.
+			var caGasket:ChessGasket;//capture assist gasket in column.
 			//
 			if (conductVO.target.type == DefaultConstants.BLUE)
 			{
@@ -129,25 +131,36 @@ package com.godpaper.business.managers
 			{
 				//
 				rtGasket = chessGasketModel.gaskets.gett(rowOfTargetBitboard.indexOf(1),conductVO.nextPosition.y) as ChessGasket;
-				roGasket = chessGasketModel.gaskets.gett(rowOfOrganizerBitboard.indexOf(1),conductVO.nextPosition.y) as ChessGasket;
+				roGasket = currentGasket;
+				for(var i:int=0;i<rowOfOrganizerBitboardNonNull.length;i++)
+				{
+					if( conductVO.previousPosition.x != rowOfOrganizerBitboardNonNull[i])
+					{
+						raGasket = chessGasketModel.gaskets.gett(rowOfOrganizerBitboardNonNull[i],conductVO.nextPosition.y) as ChessGasket;
+					}
+				}
+				raGasket = chessGasketModel.gaskets.gett(rowOfOrganizerBitboard.indexOf(1),conductVO.nextPosition.y) as ChessGasket;
 				//
-				trace("row t:",rtGasket.position,"o:",currentGasket.position,"o':",roGasket.position);
+				if(raGasket)
+				{
+					trace("row t:",rtGasket.position,"o:",roGasket.position,"o':",raGasket.position);
+				}
 				//
 				if(rowOfOrganizerBitboardNonNull.length>=1 && rowOfOrganizerBitboardNonNull.length<3)//insert the right position.//arrange the right position.
 				{
-					if(rtGasket == currentGasket.rightNode &&  roGasket == currentGasket.leftNode)//o'-o-t
+					if(rtGasket == roGasket.rightNode &&  raGasket == roGasket.leftNode)//o'-o-t
 					{
 						super.currentRemovedPieces.push( rtGasket.chessPiece );
 					}
-					if(rtGasket == currentGasket.rightNode.rightNode &&  roGasket == currentGasket.rightNode)//o-o'-t
+					if(rtGasket == roGasket.rightNode.rightNode &&  raGasket == roGasket.rightNode)//o-o'-t
 					{
 						super.currentRemovedPieces.push( rtGasket.chessPiece );
 					}
-					if(rtGasket == currentGasket.leftNode &&  roGasket == currentGasket.rightNode)//t-o-o'
+					if(rtGasket == currentGasket.leftNode &&  raGasket == roGasket.rightNode)//t-o-o'
 					{
 						super.currentRemovedPieces.push( rtGasket.chessPiece );
 					}
-					if(rtGasket == currentGasket.leftNode.leftNode &&  roGasket == currentGasket.leftNode)//t-o'-o
+					if(rtGasket == currentGasket.leftNode.leftNode &&  raGasket == roGasket.leftNode)//t-o'-o
 					{
 						super.currentRemovedPieces.push( rtGasket.chessPiece );
 					}
@@ -158,31 +171,41 @@ package com.godpaper.business.managers
 				//
 				ctGasket = chessGasketModel.gaskets.gett( conductVO.nextPosition.x,colOfTargetBitboard.indexOf(1) ) as ChessGasket;
 				coGasket = chessGasketModel.gaskets.gett( conductVO.nextPosition.x,colOfOrganizerBitboard.indexOf(1) ) as ChessGasket;
+				for(var j:int=0;j<colOfOrganizerBitboardNonNull.length;j++)
+				{
+					if( conductVO.previousPosition.y != colOfOrganizerBitboardNonNull[j])
+					{
+						caGasket = chessGasketModel.gaskets.gett(conductVO.nextPosition.x,colOfOrganizerBitboardNonNull[j]) as ChessGasket;
+					}
+				}
 				//
-				trace("column t:",ctGasket.position,"o:",currentGasket.position,"o':",coGasket.position);
+				if(caGasket)
+				{
+					trace("column t:",ctGasket.position,"o:",coGasket.position,"o':",caGasket.position);
+				}
 				//
 				if(colOfOrganizerBitboardNonNull.length>=1 && colOfOrganizerBitboardNonNull.length<3)//insert the right position.//arrange the right position.
 				{
 					//
-					if( ctGasket==currentGasket.bottomNode && coGasket==currentGasket.upNode  )		//o'
+					if( ctGasket==currentGasket.bottomNode && caGasket==coGasket.upNode  )		//o'
 					{
 						super.currentRemovedPieces.push( ctGasket.chessPiece ); 					//o
 
 					}																			    //t
 					//
-					if( ctGasket==currentGasket.bottomNode.bottomNode && coGasket==currentGasket.bottomNode  )		//o
+					if( ctGasket==currentGasket.bottomNode.bottomNode && caGasket==coGasket.bottomNode  )		//o
 					{
 						super.currentRemovedPieces.push( ctGasket.chessPiece ); 									//o'
 
 					}																			    				//t
 					//
-					if( ctGasket==currentGasket.upNode && coGasket==currentGasket.bottomNode  )		//t
+					if( ctGasket==currentGasket.upNode && caGasket==coGasket.bottomNode  )		//t
 					{
 						super.currentRemovedPieces.push( ctGasket.chessPiece ); 					//o
 
 					}																			    //o'
 					//
-					if( ctGasket==currentGasket.upNode.upNode && coGasket==currentGasket.upNode  )		//t
+					if( ctGasket==currentGasket.upNode.upNode && caGasket==coGasket.upNode  )		//t
 					{
 						super.currentRemovedPieces.push( ctGasket.chessPiece ); 						//o'
 

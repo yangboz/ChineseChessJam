@@ -11,7 +11,7 @@ package com.godpaper.core
 	import com.godpaper.views.components.ChessPiece;
 	import com.lookbackon.ds.BitBoard;
 	/**
-	 * IChessPieceManager.as class.The interface of chess piece manager,which one delegate all kinds of chess piece command execution.
+	 * The interface of chess piece manager,which one delegate all kinds of chess piece command execution.
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0

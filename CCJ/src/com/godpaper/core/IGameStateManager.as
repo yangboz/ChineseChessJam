@@ -7,7 +7,7 @@ package com.godpaper.core
 	//--------------------------------------------------------------------------
 
 	/**
-	 * IGameManager.as class.The interface of game manager,which one deletate all kinds of game command executions.
+	 * The interface of game manager,which one deletate all kinds of game command executions.
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0

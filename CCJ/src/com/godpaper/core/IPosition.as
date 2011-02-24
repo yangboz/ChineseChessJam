@@ -3,9 +3,9 @@ package com.godpaper.core
 	import flash.geom.Point;
 
 	/**
-	 * The interface of chess piece and chess gasket.  
+	 * The interface of chess piece and chess gasket.With x,y position properties.
 	 * @author knight.zhou
-	 * 
+	 *
 	 */	
 	public interface IPosition
 	{
@@ -13,3 +13,4 @@ package com.godpaper.core
 		function get position():Point;
 	}
 }
+

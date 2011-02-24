@@ -1,23 +1,23 @@
 package com.lookbackon.AI.searching
 {
+	import com.godpaper.configs.GameConfig;
 	import com.godpaper.consts.CcjConstants;
 	import com.godpaper.consts.CcjPiecesConstants;
-	import com.godpaper.business.managers.GameManager;
 	import com.godpaper.model.ChessPiecesModel;
 	import com.godpaper.model.vos.ConductVO;
 	import com.godpaper.model.vos.PositionVO;
 	import com.godpaper.utils.LogUtil;
 	import com.godpaper.utils.MathUtil;
 	import com.lookbackon.ds.BitBoard;
-	
+
 	import de.polygonal.ds.Array2;
-	
+
 	import mx.logging.ILogger;
 
 	/**
 	 *
 	 * This essay is a detailed explanation of one of the most important
-	 * data structures ever created for Game Artificial Intelligence. 
+	 * data structures ever created for Game Artificial Intelligence.
 	 * The minimax tree is at the heart of almost every board game program in existence.
 	 */	
 	public class MinMax extends SearchingBase
@@ -27,13 +27,13 @@ package com.lookbackon.AI.searching
 		private static const MAX_DEPTH:int = 5;
 		//	
 		/**
-    	 * if(game over in current board position)
-         * return winner </br>
-         * children = all legal moves for player from this board</br>
-         * if(max's turn)
-         * return maximal score of calling minimax on all the children</br>
-         * else (min's turn)
-         * return minimal score of calling minimax on all the children</br>
+		 * if(game over in current board position)
+		 * return winner </br>
+		 * children = all legal moves for player from this board</br>
+		 * if(max's turn)
+		 * return maximal score of calling minimax on all the children</br>
+		 * else (min's turn)
+		 * return minimal score of calling minimax on all the children</br>
 		 * @see http://www.fierz.ch/strategy.htm
 		*/		
 		public function MinMax(gamePosition:PositionVO) 
@@ -45,7 +45,7 @@ package com.lookbackon.AI.searching
 		{
 			if( orderingMoves.length<=0 )
 			{
-				GameManager.humanWin();//pluge to death.
+				GameConfig.gameStateManager.humanWin();//pluge to death.
 			}else
 			{
 				this.bestMove = this.tempMove;
@@ -54,10 +54,10 @@ package com.lookbackon.AI.searching
 			}
 		}
 		/**
-		 * 
+		 *
 		 * @param gamePosition the current game position.
 		 * @return the MaxMove choose conductVO;
-		 * 
+		 *
 		 */		
 		private function MaxMove (gamePosition:PositionVO):ConductVO
 		{
@@ -83,7 +83,7 @@ package com.lookbackon.AI.searching
 			//
 			if( orderingMoves.length<=0 )
 			{
-				GameManager.humanWin();//pluge to death.
+				GameConfig.gameStateManager.humanWin();//pluge to death.
 			}
 			//
 			if(depthLimitReached)
@@ -128,10 +128,10 @@ package com.lookbackon.AI.searching
 			return bestMove;						   
 		}
 		/**
-		 * 
+		 *
 		 * @param gamePosition the current game position.
 		 * @return the MinMove choose conductVO;
-		 * 
+		 *
 		 */			
 		private function MinMove(gamePosition:PositionVO):ConductVO 
 		{
@@ -149,7 +149,7 @@ package com.lookbackon.AI.searching
 			//
 			if(orderingMoves.length<=0)
 			{
-				GameManager.computerWin();//pluge to death.
+				GameConfig.gameStateManager.computerWin();//pluge to death.
 			}
 			//
 			if(depthLimitReached)
@@ -192,18 +192,18 @@ package com.lookbackon.AI.searching
 			//
 			return bestMove;
 		}
-		
+
 		/*
-		How long does this(MinMax) algorithm take? 
+		How long does this(MinMax) algorithm take?
 		For a simple game like tic tac toe, not too long - it is certainly possible to search all possible positions.
 		For a game like Chess or Go however, the running time is prohibitively expensive.
-		In fact, to completely search either of these games, we would first need to develop interstellar travel, 
-		as by the time we finish analyzing a move the sun will have gone nova and the earth will no longer exist. 
-		Therefore, all real computer games will search, not to the end of the game, but only a few moves ahead. 
-		Of course, now the program must determine whether a certain board position is 'good' or 'bad' for a certainly player. 
-		This is often done using an evaluation function. This function is the key to a strong computer game; 
+		In fact, to completely search either of these games, we would first need to develop interstellar travel,
+		as by the time we finish analyzing a move the sun will have gone nova and the earth will no longer exist.
+		Therefore, all real computer games will search, not to the end of the game, but only a few moves ahead.
+		Of course, now the program must determine whether a certain board position is 'good' or 'bad' for a certainly player.
+		This is often done using an evaluation function. This function is the key to a strong computer game;
 		after all, it does little good to be able to look ahead 20 moves,
-		if, after we do, we decide that the position is good for us, when in fact, it is terrible! 
+		if, after we do, we decide that the position is good for us, when in fact, it is terrible!
 		*/
 		override public function doEvaluation(conductVO:ConductVO,gamePosition:PositionVO):int
 		{
@@ -222,5 +222,6 @@ package com.lookbackon.AI.searching
 			return depth>=MAX_DEPTH;
 		}
 	}	
-	
+
 }
+
