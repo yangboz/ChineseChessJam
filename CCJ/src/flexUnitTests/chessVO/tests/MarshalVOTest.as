@@ -1,10 +1,12 @@
 package flexUnitTests.chessVO.tests
 {
-	import com.godpaper.as3.consts.CcjConstants;
+	import com.godpaper.as3.consts.DefaultConstants;
+	import com.godpaper.ccj.consts.CcjConstants;
 	import com.godpaper.ccj.vo.MarshalVO;
 	import com.lookbackon.ds.BitBoard;
-	
+
 	import org.flexunit.Assert;
+
 	//note:
 	//test success:(rowIndex:0/9;colIndex:4 with initial bitboard.)
 	public class MarshalVOTest extends ChessVOTestBase
@@ -14,33 +16,32 @@ package flexUnitTests.chessVO.tests
 			//TODO: implement function
 			super();
 		}
-		
 		[Before]
 		public function setUp():void
 		{
 		}
-		
+
 		[After]
 		public function tearDown():void
 		{
 		}
-		
+
 		[BeforeClass]
 		public static function setUpBeforeClass():void
 		{
 		}
-		
+
 		[AfterClass]
 		public static function tearDownAfterClass():void
 		{
 		}
-		
+
 		override protected function initialization():void
 		{
 			super.initialization();
 			this.colIndexTest = 4;
 			this.rowIndexTest = 9;
-			this.iChessVO = new MarshalVO(9,10,rowIndexTest,colIndexTest,CcjConstants.FLAG_RED);
+			this.iChessVO = new MarshalVO(9,10,rowIndexTest,colIndexTest,DefaultConstants.FLAG_RED);
 		}
 		//
 		[Test(descrption="MarshalVO occuipes test")]
@@ -52,7 +53,7 @@ package flexUnitTests.chessVO.tests
 			occuipesExpect.setBitt(8,4,true);
 			Assert.assertTrue(occuipesExpect.xor(iChessVO.occupies).isEmpty);
 		}
-		
+
 		[Test(descrption="MarshalVO moves test")]
 		override public function moves():void
 		{
@@ -60,13 +61,14 @@ package flexUnitTests.chessVO.tests
 			movesExpect.setBitt(8,4,true);
 			Assert.assertTrue(movesExpect.xor(iChessVO.moves).isEmpty);
 		}
-		
+
 		[Test(descrption="MarshalVO captures test")]
 		override public function captures():void
 		{
 			var capturesExpect:BitBoard = new BitBoard(9,10);
 			Assert.assertTrue(capturesExpect.xor(iChessVO.captures).isEmpty);
 		}
-		
+
 	}
 }
+

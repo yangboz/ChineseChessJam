@@ -6,20 +6,19 @@
 			   xmlns:mx="library://ns.adobe.com/flex/mx" >
 	<fx:Script>
 		<![CDATA[
-			import com.godpaper.as3.consts.CcjPiecesConstants;
-			import com.godpaper.ccj.vo.PawnVO;
 			import com.godpaper.as3.utils.LogUtil;
+			import com.godpaper.ccj.vo.PawnVO;
 			import com.lookbackon.ds.BitBoard;
-			
+
 			import de.polygonal.ds.Array2;
-			
+
 			import mx.events.FlexEvent;
 			import mx.logging.ILogger;
 			import mx.logging.LogEventLevel;
 			import mx.managers.CursorManager;
-			
+
 			private static const LOG:ILogger  = LogUtil.getLogger(Flex4Test);
-			
+
 			private var blackPieces:BitBoard;
 			private var redPieces:Array2;
 			private var netConnection:NetConnection;
@@ -27,14 +26,14 @@
 			private var user:String;
 			[Bindable]
 			private var connected:Boolean;
-			
+
 			private var groupSpec:GroupSpecifier;
 			private var netGroup:NetGroup;
-			
+
 			//about p2p
 			public static const STRATUS_ADDRESS:String 	= "rtmfp://stratus.adobe.com/";
 			public static const STRATUS_DEV_KEY:String  = "40a1c5b634bc4f531ad7757f-2e3cf422214e";
-			
+
 			protected function application1_creationCompleteHandler(event:FlexEvent):void
 			{
 				// TODO Auto-generated method stub
@@ -77,12 +76,12 @@
 				//test p2p
 				this.setupNetConnection();
 			}
-			
+
 			/* File -> New -> Flex Project
-			Link new playerglobal.swc (FP10.1 API) to your project in Project Properties 
-			and set compiler version in Flex Compiler to 10.1.0			
+			Link new playerglobal.swc (FP10.1 API) to your project in Project Properties
+			and set compiler version in Flex Compiler to 10.1.0
 			Step 2: Connect to Stratus
-			First of all we need to setup NetConnection to Adobe Stratus. 
+			First of all we need to setup NetConnection to Adobe Stratus.
 			That’s easy part. */
 			private function setupNetConnection():void
 			{
@@ -92,32 +91,32 @@
 				CursorManager.setBusyCursor();
 				this.myLabel.text = "Connecting...";
 			}
-			/* We need to setup P2P group and connect to it. 
-			GroupSpecifier is a class, which let’s you 
-			to define all the parameters of the group. 
-			First you give it a name - in this case “myGroup/g1″. 
-			Then you set it to use serverChannel, to let it communicate with Stratus. 
+			/* We need to setup P2P group and connect to it.
+			GroupSpecifier is a class, which let’s you
+			to define all the parameters of the group.
+			First you give it a name - in this case “myGroup/g1″.
+			Then you set it to use serverChannel, to let it communicate with Stratus.
 			Finally we enable Posting. That’s all you have to do to define the P2P Group.
-			Then we have to define the actual NetGroup. 
-			groupspecWithAuthorizations() returns String 
-			- it’s a group identifier. Now you probably ask, 
-			what’s the difference between groupspecWithoutAuthorizations() 
-			and groupspecWithAuthorizations(). 
-			If you set a posting or multicast password, 
+			Then we have to define the actual NetGroup.
+			groupspecWithAuthorizations() returns String
+			- it’s a group identifier. Now you probably ask,
+			what’s the difference between groupspecWithoutAuthorizations()
+			and groupspecWithAuthorizations().
+			If you set a posting or multicast password,
 			the one “with” can post or multicast, the one “without” is receive-only. */
 			private function setupGroup():void
 			{
 				groupSpec = new GroupSpecifier("myGroup/g1");
 				groupSpec.serverChannelEnabled = true;
 				groupSpec.postingEnabled = true;
-				
+
 				this.netGroup = new NetGroup(this.netConnection,this.groupSpec.groupspecWithAuthorizations());
 				this.netGroup.addEventListener(NetStatusEvent.NET_STATUS,netStatusHandler);
-				
+
 				this.user = "user"+Math.round(Math.random()*10000);
-				
+
 			}
-			
+
 			private function netStatusHandler(event:NetStatusEvent):void
 			{
 				this.myLabel.text = event.info.code;
@@ -137,36 +136,36 @@
 						break;
 				}
 			}
-			
+
 			private function sendMessage():void
 			{
 				var message:Object = new Object();
 				message.sender = this.netGroup.convertPeerIDToGroupAddress(this.netConnection.nearID);
 				message.user = this.myUserLabel.text;
 				message.text = this.myTextInput.text;
-				
+
 				this.netGroup.post(message);
-				
+
 				this.receiveMessage(message);
-				
+
 				this.myTextInput.text = "";
 			}
-			
+
 			private function receiveMessage(message:Object):void{
 				write(message.user+": "+message.text);
 			}
-			
+
 			private function write(txt:String):void{
 				this.myTextArea.text += txt+"\n";
 			}
-			
+
 		]]>
 	</fx:Script>
-	
+
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 		<s:ArrayList id="arrList" source="[Red,Orange,Yellow,Green,Blue]"/>
-		
+
 		<fx:Component className="ico">
 			<s:Graphic>
 				<s:states>

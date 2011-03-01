@@ -25,19 +25,19 @@
 			import assets.EmbededAssets;
 
 			import com.adobe.cairngorm.contract.Contract;
-			import com.godpaper.ccj.business.factory.CcjChessFactory;
 			import com.godpaper.as3.business.factory.ChessFactoryBase;
-			import com.godpaper.ccj.business.managers.CcjChessPieceManager;
 			import com.godpaper.as3.configs.BoardConfig;
 			import com.godpaper.as3.configs.CCJContextConfig;
 			import com.godpaper.as3.configs.GameConfig;
 			import com.godpaper.as3.configs.IndicatorConfig;
 			import com.godpaper.as3.configs.PieceConfig;
 			import com.godpaper.as3.configs.PluginConfig;
-			import com.godpaper.as3.consts.CcjConstants;
+			import com.godpaper.as3.consts.DefaultConstants;
 			import com.godpaper.as3.model.ChessPiecesModel;
 			import com.godpaper.as3.model.plugin.MochiModel;
 			import com.godpaper.as3.utils.LogUtil;
+			import com.godpaper.ccj.business.factory.CcjChessFactory;
+			import com.godpaper.ccj.business.managers.CcjChessPieceManager;
 			import com.lookbackon.AI.searching.AttackFalse;
 			import com.lookbackon.AI.searching.MiniMax;
 			import com.lookbackon.AI.searching.RandomWalk;
@@ -92,7 +92,7 @@
 				//number of tollgate tips would be matched with tollgates!
 				GameConfig.tollgates=[RandomWalk, ShortSighted, AttackFalse, AttackFalse, MiniMax];
 				GameConfig.tollgateTips=["baby intelligence", "fellow intelligence", "man intelligence", "guru intelligence"];
-				GameConfig.turnFlag=CcjConstants.FLAG_RED;
+				GameConfig.turnFlag=DefaultConstants.FLAG_RED;
 				//
 				GameConfig.chessPieceManager = new CcjChessPieceManager();
 			}

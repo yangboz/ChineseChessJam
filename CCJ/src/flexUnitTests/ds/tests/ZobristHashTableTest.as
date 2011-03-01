@@ -1,22 +1,22 @@
 package flexUnitTests.ds.tests
 {
 	import com.godpaper.as3.configs.BoardConfig;
-	import com.godpaper.as3.consts.CcjConstants;
 	import com.godpaper.as3.consts.ZobristConstants;
 	import com.godpaper.as3.model.vos.ZobristKeyVO;
+	import com.godpaper.ccj.consts.CcjConstants;
 	import com.lookbackon.ds.ZobristHashTable;
-	
+
 	import de.polygonal.ds.Array2;
 	import de.polygonal.math.PM_PRNG;
-	
+
 	import flexunit.framework.Assert;
-	
+
 	public class ZobristHashTableTest
 	{		
 		private var _zobristHT:ZobristHashTable;
 		private var _pm_PRNG:PM_PRNG;
 		private var _zobristKeyVO:ZobristKeyVO;
-		
+
 		[Before]
 		public function setUp():void
 		{
@@ -24,22 +24,22 @@ package flexUnitTests.ds.tests
 			_zobristHT = new ZobristHashTable(BoardConfig.xLines*BoardConfig.yLines,ZobristConstants.BLUE_BISHOP.key);
 			_zobristKeyVO = new ZobristKeyVO();
 		}
-		
+
 		[After]
 		public function tearDown():void
 		{
 		}
-		
+
 		[BeforeClass]
 		public static function setUpBeforeClass():void
 		{
 		}
-		
+
 		[AfterClass]
 		public static function tearDownAfterClass():void
 		{
 		}
-		
+
 		[Test]
 		public function testXor():void
 		{
@@ -50,7 +50,7 @@ package flexUnitTests.ds.tests
 			//ZobristConstants.BLUE_BISHOP.position;
 			_zobristKeyVO.type =  new Array2(BoardConfig.xLines,BoardConfig.yLines);
 			//ZobristConstants.BLUE_BISHOP.type;
-			
+
 			_zobristHT.insert(ZobristConstants.BLUE_BISHOP.key,_zobristKeyVO);
 			_zobristHT.insert(ZobristConstants.BLUE_CANNON.key,_zobristKeyVO);
 			_zobristHT.insert(ZobristConstants.BLUE_KNIGHT.key,_zobristKeyVO);
@@ -60,3 +60,4 @@ package flexUnitTests.ds.tests
 		}
 	}
 }
+
