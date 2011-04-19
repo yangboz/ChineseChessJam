@@ -2,7 +2,7 @@
 <actionScriptProperties analytics="false" mainApplicationPath="ChineseChessJam.mxml" projectUUID="63170f75-37ba-4a1e-a503-ab4ebe061d42" version="7">
   <compiler additionalCompilerArguments="-locale en_US -define=CONFIG::debugging,true" autoRSLOrdering="true" copyDependentFiles="true" flex3CompatMode="false" flexSDK="Flex Hero" fteInMXComponents="false" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="true" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="bin-debug" sourceFolderPath="src" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="false" useDebugRSLSwfs="true" verifyDigests="true" warn="true">
     <compilerSourcePath/>
-    <libraryPath defaultLinkType="3">
+    <libraryPath defaultLinkType="1">
       <libraryPathEntry kind="4" path="">
         <excludedEntries>
           <libraryPathEntry kind="3" linkType="1" path="${PROJECT_FRAMEWORKS}/libs/flex.swc" useDefaultLinkType="false"/>
@@ -25,3 +25,4 @@
   <buildCSSFiles/>
   <flashCatalyst validateFlashCatalystCompatibility="false"/>
 </actionScriptProperties>
+

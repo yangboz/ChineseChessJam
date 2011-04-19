@@ -1,13 +1,16 @@
 package com.godpaper.ccj.business.managers
 {
+	import com.godpaper.as3.configs.GameConfig;
+	import com.godpaper.as3.impl.ChessPieceManagerBase;
+	import com.godpaper.as3.impl.GameStateManagerDefault;
 	import com.godpaper.as3.model.ChessGasketsModel;
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.as3.views.components.ChessGasket;
 	import com.godpaper.as3.views.components.ChessPiece;
+	import com.godpaper.ccj.consts.CcjPiecesConstants;
 
 	import mx.logging.ILogger;
-	import com.godpaper.as3.impl.ChessPieceManagerBase;
 
 	/**
 	 * The chess piece manager manage chess piece move's validation/makeMove/unMakeMove.</br>
@@ -48,7 +51,7 @@ package com.godpaper.ccj.business.managers
 		override public function applyMove(conductVO:ConductVO):void
 		{
 			//clean up firstly.
-			super.currentRemovedPieces.length = 0;
+			super.currentRemovedPieces.length=0;
 			//TODO:with roll back function support.
 			var cGasket:ChessGasket=ChessGasketsModel.getInstance().gaskets.gett(conductVO.nextPosition.x, conductVO.nextPosition.y) as ChessGasket;
 			if (cGasket.numElements >= 1)
@@ -58,7 +61,16 @@ package com.godpaper.ccj.business.managers
 				LOG.info("Eat Off@{0} target:{1}", cGasket.position.toString(), removedPiece.toString());
 				//
 				currentRemovedPieces.push(removedPiece);
-			}	
+				//Checkmate condition
+				if (ChessPiece(cGasket.getElementAt(0)).label == CcjPiecesConstants.BLUE_MARSHAL.label)
+				{
+					GameConfig.gameStateManager.humanWin();
+				}
+				if (ChessPiece(cGasket.getElementAt(0)).label == CcjPiecesConstants.RED_MARSHAL.label)
+				{
+					GameConfig.gameStateManager.computerWin();
+				}
+			}
 			//
 			super.applyMove(conductVO);
 		}

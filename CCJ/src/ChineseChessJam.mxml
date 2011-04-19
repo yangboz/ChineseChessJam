@@ -11,15 +11,14 @@
 					 xmlns:mochi="com.godpaper.as3.views.mochi.*"
 					 xmlns:parsley="http://www.spicefactory.org/parsley"
 					 xmlns:mx1="library://ns.adobe.com/flex/mx"
-					 width="550"
-					 height="520"
-					 maxWidth="550"
-					 maxHeight="520"
+					 width="500"
+					 height="575"
+					 maxWidth="500"
+					 maxHeight="575"
 					 xmlns:task1="org.spicefactory.lib.task.*"
 					 xmlns:popups="com.godpaper.as3.views.popups.*"
 					 usePreloader="true"
-					 preloader="com.godpaper.ccj.utils.CustomPreloaderDefault"
-					 >
+					 preloader="com.godpaper.ccj.utils.CustomPreloaderDefault">
 	<fx:Script>
 		<![CDATA[
 			import assets.EmbededAssets;
@@ -62,6 +61,7 @@
 			//  CONSTANTS
 			//----------------------------------
 			private static const LOG:Logger=LogContext.getLogger(ChineseChessJam);
+
 			//--------------------------------------------------------------------------
 			//
 			//  Methods
@@ -79,11 +79,11 @@
 				BoardConfig.xAdjust=50;
 				BoardConfig.yAdjust=-1;
 				//about piece:
-				PieceConfig.factory = CcjChessFactory;
+				PieceConfig.factory=CcjChessFactory;
 				//about plugin:
-				PluginConfig.mochiBoardID = "3a460211409897f4";
-				PluginConfig.mochiGameID = "47de4a85dd3e213a";
-				PluginConfig.mochiIcons = EmbededAssets.ICON_TOLL_GATE;
+				PluginConfig.mochiBoardID="3a460211409897f4";
+				PluginConfig.mochiGameID="47de4a85dd3e213a";
+				PluginConfig.mochiIcons=EmbededAssets.ICON_TOLL_GATE;
 			}
 
 			//application1_initializeHandler
@@ -94,7 +94,7 @@
 				GameConfig.tollgateTips=["baby intelligence", "fellow intelligence", "man intelligence", "guru intelligence"];
 				GameConfig.turnFlag=DefaultConstants.FLAG_RED;
 				//
-				GameConfig.chessPieceManager = new CcjChessPieceManager();
+				GameConfig.chessPieceManager=new CcjChessPieceManager();
 			}
 
 			//  application1_creationCompleteHandler
@@ -109,6 +109,7 @@
 				//init data struct.@see ChessPieceModel dump info.
 				this.dumpFootSprint();
 			}
+
 			//
 			override protected function applicationCompleteHandler(event:FlexEvent):void
 			{
@@ -155,8 +156,8 @@
 					   level="{LogEventLevel.INFO}">
 			<s:filters>
 				[
-					com.lookbackon.AI.searching.*,
-					*
+				com.lookbackon.AI.searching.*,
+				*
 				]
 			</s:filters>
 		</s:TraceTarget>
@@ -194,8 +195,8 @@
 		</task:SequenceTask>
 
 		<!--<task:SequenceTask id="cleanUp" label="cleanUp">
-			<tasks:CleanUpChessPieceTask label="clean up chess pieces"/>
-			<tasks:CleanUpPiecesBitboardTask label="clean up pieces bitboard"/>
+		<tasks:CleanUpChessPieceTask label="clean up chess pieces"/>
+		<tasks:CleanUpPiecesBitboardTask label="clean up pieces bitboard"/>
 		</task:SequenceTask>-->
 		<task1:SequentialTaskGroup id="cleanUpSequenceTask"
 								   autoStart="false">
@@ -207,9 +208,9 @@
 	<!-- Views here -->
 	<components:ChessBoard id="chessBoard"
 						   left="25"
-						   right="75"
+						   right="25"
 						   top="25"
-						   bottom="25"
+						   bottom="75"
 						   backgroundImage="@Embed('./assets/images/background/ChineseChessJam.png')"
 						   backgroundImageFillMode="scale"/>
 	<!-- MochiMedia popup View -->
@@ -217,6 +218,9 @@
 							x="0"
 							y="0"/>
 	<!-- MochiMedia toolbar View -->
-	<mochi:MochiToolBarVGroup right="0"/>
-
+	<!--<mochi:MochiToolBarVGroup right="0"/>-->
+	<mochi:MochiButtonBar bottom="0"
+						  width="100%"
+						  height="50"
+						  horizontalCenter="0"/>
 </app:ApplicationBase>
