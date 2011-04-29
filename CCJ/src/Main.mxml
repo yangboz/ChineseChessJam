@@ -33,7 +33,9 @@
 			import com.godpaper.as3.configs.PieceConfig;
 			import com.godpaper.as3.consts.DefaultConstants;
 			import com.godpaper.as3.plugins.come2play.Come2PlayPlugin;
+			import com.godpaper.as3.plugins.kongregate.KongregatePlugin;
 			import com.godpaper.as3.plugins.mochi.MochiPlugin;
+			import com.godpaper.as3.plugins.nonoba.NonobaPlugin;
 			import com.godpaper.ccj.business.factory.CcjChessFactory;
 			import com.godpaper.ccj.business.managers.CcjChessPieceManager;
 			import com.lookbackon.AI.searching.AttackFalse;
@@ -72,9 +74,12 @@
 				//about chess board:
 				BoardConfig.xLines=9;
 				BoardConfig.yLines=10;
-				BoardConfig.xOffset=50;
-				BoardConfig.yOffset=50;
-				BoardConfig.xAdjust=50;
+//				BoardConfig.xOffset=50;
+//				BoardConfig.yOffset=50;
+//				BoardConfig.xAdjust=50;
+				BoardConfig.xOffset=this.width/10;
+				BoardConfig.yOffset=this.height/11;
+				BoardConfig.xAdjust=this.width/10;
 				BoardConfig.yAdjust=-1;
 				//about piece:
 				PieceConfig.factory=CcjChessFactory;
@@ -209,14 +214,22 @@
 						   backgroundImage="@Embed('./assets/images/background/ChineseChessJam.png')"
 						   backgroundImageFillMode="scale"/>
 	<!-- Plugin popup View -->
-	<plugins:PluginUIComponent id="pluginUIComponent"
+	<!--<plugins:PluginUIComponent id="pluginUIComponent"
 							   provider="{new MochiPlugin('47de4a85dd3e213a','3a460211409897f4')}"
 							   x="0"
-							   y="0"/>
+							   y="0"/>-->
 	<!--<plugins:PluginUIComponent id="pluginUIComponent"
 							   provider="{new Come2PlayPlugin('','4407')}"
 							   x="0"
 							   y="0"/>-->
+	<!--<plugins:PluginUIComponent id="pluginUIComponent"
+							   provider="{new NonobaPlugin('','')}"
+							   x="0"
+							   y="0"/>-->
+	<plugins:PluginUIComponent id="pluginUIComponent"
+							   provider="{new KongregatePlugin('','')}"
+							   x="0"
+							   y="0"/>
 	<!-- Plugin toolbar View -->
 	<plugin:PluginButtonBar bottom="0"
 							width="100%"
