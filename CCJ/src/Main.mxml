@@ -29,6 +29,7 @@
 			import com.godpaper.as3.configs.BoardConfig;
 			import com.godpaper.as3.configs.CCJContextConfig;
 			import com.godpaper.as3.configs.GameConfig;
+			import com.godpaper.as3.configs.GasketConfig;
 			import com.godpaper.as3.configs.IndicatorConfig;
 			import com.godpaper.as3.configs.PieceConfig;
 			import com.godpaper.as3.consts.DefaultConstants;
@@ -80,10 +81,11 @@
 				BoardConfig.xOffset=this.width/10;
 				BoardConfig.yOffset=this.height/11;
 				BoardConfig.xAdjust=this.width/10;
-				BoardConfig.yAdjust=-1;
+				BoardConfig.yAdjust=8;
 				//about piece:
 				PieceConfig.factory=CcjChessFactory;
-				//about plugin:
+				//about gasket:
+				GasketConfig.backgroundAlpha = .1;
 			}
 
 			//application1_initializeHandler
@@ -210,7 +212,7 @@
 						   left="25"
 						   right="25"
 						   top="25"
-						   bottom="75"
+						   bottom="60"
 						   backgroundImage="@Embed('./assets/images/background/ChineseChessJam.png')"
 						   backgroundImageFillMode="scale"/>
 	<!-- Plugin popup View -->
