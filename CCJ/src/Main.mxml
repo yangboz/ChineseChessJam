@@ -81,11 +81,11 @@
 				BoardConfig.xOffset=this.width/10;
 				BoardConfig.yOffset=this.height/11;
 				BoardConfig.xAdjust=this.width/10;
-				BoardConfig.yAdjust=8;
+				BoardConfig.yAdjust=0;
 				//about piece:
 				PieceConfig.factory=CcjChessFactory;
 				//about gasket:
-				GasketConfig.backgroundAlpha = .1;
+//				GasketConfig.backgroundAlpha = .1;//for move indicator.
 			}
 
 			//application1_initializeHandler
@@ -224,14 +224,14 @@
 							   provider="{new Come2PlayPlugin('','4407')}"
 							   x="0"
 							   y="0"/>-->
-	<!--<plugins:PluginUIComponent id="pluginUIComponent"
+	<plugins:PluginUIComponent id="pluginUIComponent"
 							   provider="{new NonobaPlugin('','')}"
 							   x="0"
-							   y="0"/>-->
-	<plugins:PluginUIComponent id="pluginUIComponent"
+							   y="0"/>
+	<!--<plugins:PluginUIComponent id="pluginUIComponent"
 							   provider="{new KongregatePlugin('','')}"
 							   x="0"
-							   y="0"/>
+							   y="0"/>-->
 	<!-- Plugin toolbar View -->
 	<plugin:PluginButtonBar bottom="0"
 							width="100%"
