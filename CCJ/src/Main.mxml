@@ -84,6 +84,7 @@
 				BoardConfig.yAdjust=0;
 				//about piece:
 				PieceConfig.factory=CcjChessFactory;
+				PieceConfig.usingDragProxy=true;
 				//about gasket:
 //				GasketConfig.backgroundAlpha = .1;//for move indicator.
 			}
@@ -216,18 +217,18 @@
 						   backgroundImage="@Embed('./assets/images/background/ChineseChessJam.png')"
 						   backgroundImageFillMode="scale"/>
 	<!-- Plugin popup View -->
-	<!--<plugins:PluginUIComponent id="pluginUIComponent"
+	<plugins:PluginUIComponent id="pluginUIComponent"
 							   provider="{new MochiPlugin('47de4a85dd3e213a','3a460211409897f4')}"
 							   x="0"
-							   y="0"/>-->
+							   y="0"/>
 	<!--<plugins:PluginUIComponent id="pluginUIComponent"
 							   provider="{new Come2PlayPlugin('','4407')}"
 							   x="0"
 							   y="0"/>-->
-	<plugins:PluginUIComponent id="pluginUIComponent"
+	<!--<plugins:PluginUIComponent id="pluginUIComponent"
 							   provider="{new NonobaPlugin('','')}"
 							   x="0"
-							   y="0"/>
+							   y="0"/>-->
 	<!--<plugins:PluginUIComponent id="pluginUIComponent"
 							   provider="{new KongregatePlugin('','')}"
 							   x="0"
