@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<app:ApplicationBase xmlns:fx="http://ns.adobe.com/mxml/2009"
+<app:ApplicationDefault xmlns:fx="http://ns.adobe.com/mxml/2009"
 					 xmlns:s="library://ns.adobe.com/flex/spark"
 					 xmlns:mx="library://ns.adobe.com/flex/halo"
 					 xmlns:app="*"
@@ -22,30 +22,15 @@
 					 xmlns:plugin="com.godpaper.as3.views.plugin.*">
 	<fx:Script>
 		<![CDATA[
-			import assets.EmbededAssets;
-			
-			import com.adobe.cairngorm.contract.Contract;
-			import com.godpaper.as3.business.factory.ChessFactoryBase;
 			import com.godpaper.as3.configs.BoardConfig;
-			import com.godpaper.as3.configs.CCJContextConfig;
 			import com.godpaper.as3.configs.GameConfig;
-			import com.godpaper.as3.configs.GasketConfig;
-			import com.godpaper.as3.configs.IndicatorConfig;
 			import com.godpaper.as3.configs.PieceConfig;
-			import com.godpaper.as3.consts.DefaultConstants;
-			import com.godpaper.as3.plugins.come2play.Come2PlayPlugin;
-			import com.godpaper.as3.plugins.kongregate.KongregatePlugin;
 			import com.godpaper.as3.plugins.mochi.MochiPlugin;
-			import com.godpaper.as3.plugins.nonoba.NonobaPlugin;
+			import com.godpaper.as3.plugins.platogo.PlatogoPlugin;
 			import com.godpaper.ccj.business.factory.CcjChessFactory;
 			import com.godpaper.ccj.business.managers.CcjChessPieceManager;
-			import com.lookbackon.AI.searching.AttackFalse;
-			import com.lookbackon.AI.searching.MiniMax;
-			import com.lookbackon.AI.searching.RandomWalk;
-			import com.lookbackon.AI.searching.ShortSighted;
 			
 			import mx.events.FlexEvent;
-			import mx.logging.LogEventLevel;
 			
 			import org.spicefactory.lib.logging.LogContext;
 			import org.spicefactory.lib.logging.Logger;
@@ -90,119 +75,13 @@
 			//application1_initializeHandler
 			override protected function initializeHandler(event:FlexEvent):void
 			{
-				//number of tollgate tips would be matched with tollgates!
-				GameConfig.tollgates=[RandomWalk, ShortSighted, AttackFalse, AttackFalse, MiniMax];
-				GameConfig.tollgateTips=["baby intelligence", "fellow intelligence", "man intelligence", "guru intelligence"];
-				GameConfig.turnFlag=DefaultConstants.FLAG_RED;
 				//
 				GameConfig.chessPieceManager=new CcjChessPieceManager();
-			}
-
-			//  application1_creationCompleteHandler
-			override protected function creationCompleteHandler(event:FlexEvent):void
-			{
-				// TODO Auto-generated method stub
-				//create chess gaskets.
-				//create chess piece
-				//create chess pieces' chessVO;
-				//create chess pieces' omenVO;
-				this.startUpSequenceTask.start();
-				//init data struct.@see ChessPieceModel dump info.
-				this.dumpFootSprint();
-			}
-
-			//
-			override protected function applicationCompleteHandler(event:FlexEvent):void
-			{
-				super.applicationCompleteHandler(event);
-			}
-
-			//
-			override public function dumpFootSprint():void
-			{
-				//design by contract.
-				//@see http://opensource.adobe.com/wiki/display/cairngorm/HowToUseCairngormContract
-				try
-				{
-					var CONFIG:Namespace=new Namespace("CONFIG");
-					Contract.precondition(CONFIG::debugging);
-					this.traceTarget.level=LogEventLevel.DEBUG;
-					Contract.postcondition(CONFIG::debugging);
-				}
-				catch (error:Error)
-				{
-					LOG.warn("CONFIG::debugging {0}", error.toString());
-				}
 			}
 		]]>
 	</fx:Script>
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
-		<!---
-		The context for bootstrapping the whole Parsley framework.
-		-->
-		<parsley:ContextBuilder config="com.godpaper.as3.configs.CCJContextConfig">
-
-		</parsley:ContextBuilder>
-
-		<!---
-		The system unique logging component provider LOG.debug/info/warn/error/fatal avenues.
-		-->
-		<s:TraceTarget id="traceTarget"
-					   fieldSeparator="->"
-					   includeCategory="true"
-					   includeDate="false"
-					   includeLevel="true"
-					   includeTime="true"
-					   level="{LogEventLevel.INFO}">
-			<s:filters>
-				[
-				com.lookbackon.AI.searching.*,
-				*
-				]
-			</s:filters>
-		</s:TraceTarget>
-
-		<!-- Popups here -->
-		<popup:PopUpWrapper open="{IndicatorConfig.readOut}"
-							center="true"
-							modal="true">
-			<popups:ThinkIndicatory/>
-		</popup:PopUpWrapper>
-
-		<parsley:PopUp open="{IndicatorConfig.check}"
-					   center="true"
-					   modal="true">
-			<popups:CheckIndicatory/>
-		</parsley:PopUp>
-
-		<parsley:PopUp open="{IndicatorConfig.submitScore}"
-					   center="true"
-					   modal="true">
-			<plugin:SubmitScoreAndNextRound id="submitScoreAndNamePopup"/>
-		</parsley:PopUp>
-
-		<!-- Controllers here -->
-		<!-- Tasks -->
-		<task:SequenceTask id="startUpSequenceTask"
-						   label="startUp">
-			<tasks:CreateChessGasketTask id="ccgTask"
-										 label="create chess gasket"
-										 factory="{ChessFactoryBase}"/>
-			<tasks:CreateChessPieceTask label="create chess piece"
-										factory="{CcjChessFactory}"/>
-			<tasks:CreateChessVoTask label="create chess VO"
-									 factory="{CcjChessFactory}"/>
-		</task:SequenceTask>
-
-		<!--<task:SequenceTask id="cleanUp" label="cleanUp">
-		<tasks:CleanUpChessPieceTask label="clean up chess pieces"/>
-		<tasks:CleanUpPiecesBitboardTask label="clean up pieces bitboard"/>
-		</task:SequenceTask>-->
-		<task1:SequentialTaskGroup id="cleanUpSequenceTask"
-								   autoStart="false">
-
-		</task1:SequentialTaskGroup>
 
 		<!-- Services here -->
 	</fx:Declarations>
@@ -231,9 +110,13 @@
 							   provider="{new KongregatePlugin('','')}"
 							   x="0"
 							   y="0"/>-->
+	<!--<plugins:PluginUIComponent id="pluginUIComponent"
+							   provider="{new PlatogoPlugin('1426635437')}"
+							   x="0"
+							   y="0"/>-->
 	<!-- Plugin toolbar View -->
 	<plugin:PluginButtonBar bottom="0"
 							width="100%"
 							height="50"
 							horizontalCenter="0"/>
-</app:ApplicationBase>
+</app:ApplicationDefault>

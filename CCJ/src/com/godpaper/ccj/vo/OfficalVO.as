@@ -32,7 +32,7 @@ package com.godpaper.ccj.vo
 		/**
 		 * @inheritDoc
 		 */
-		public function OfficalVO(width:int, height:int, rowIndex:int, colIndex:int,flag:int=0)
+		public function OfficalVO(width:int, height:int, rowIndex:int, colIndex:int,flag:int=0,identifier:String="")
 		{
 			//TODO: implement function
 			super(width, height, rowIndex, colIndex, flag);
@@ -40,7 +40,7 @@ package com.godpaper.ccj.vo
 		/**
 		 * @inheritDoc
 		 */
-		override public function initialization(rowIndex:int, colIndex:int,flag:int=0) : void
+		override public function initialization( rowIndex:int, colIndex:int,flag:int=0,identifier:String="") : void
 		{
 			//* -
 			//- *

@@ -21,7 +21,7 @@ package com.godpaper.ccj.vo
 		/**
 		 * @inheritDoc
 		 */
-		public function MarshalVO(width:int, height:int, rowIndex:int, colIndex:int, flag:int=0)
+		public function MarshalVO(width:int, height:int, rowIndex:int, colIndex:int, flag:int=0,identifier:String="")
 		{
 			//TODO: implement function
 			super(width, height, rowIndex, colIndex, flag);
@@ -30,7 +30,7 @@ package com.godpaper.ccj.vo
 		/**
 		 * @inheritDoc
 		 */
-		override public function initialization(rowIndex:int, colIndex:int, flag:int=0):void
+		override public function initialization( rowIndex:int, colIndex:int,flag:int=0,identifier:String=""):void
 		{
 			//TODO: implement function
 			//serveral admental(将对面问题)

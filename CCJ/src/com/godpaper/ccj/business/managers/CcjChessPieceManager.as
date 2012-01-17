@@ -1,8 +1,7 @@
 package com.godpaper.ccj.business.managers
 {
 	import com.godpaper.as3.configs.GameConfig;
-	import com.godpaper.as3.impl.ChessPieceManagerBase;
-	import com.godpaper.as3.impl.GameStateManagerDefault;
+	import com.godpaper.as3.business.managers.ChessPieceManagerDefault;
 	import com.godpaper.as3.model.ChessGasketsModel;
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.utils.LogUtil;
@@ -18,7 +17,7 @@ package com.godpaper.ccj.business.managers
 	 * @author Knight.zhou
 	 * @history 2010-12-02 using memento design pattern to implment make/unmake functions.
 	 */
-	public class CcjChessPieceManager extends ChessPieceManagerBase
+	public class CcjChessPieceManager extends ChessPieceManagerDefault
 	{
 		//--------------------------------------------------------------------------
 		//

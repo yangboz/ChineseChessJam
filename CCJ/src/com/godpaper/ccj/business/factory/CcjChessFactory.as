@@ -186,7 +186,7 @@ package com.godpaper.ccj.business.factory
 			var oRowIndex:int=conductVO.currentPosition.y;
 			var chessVO:IChessVO;
 			//			LOG.info(conductVO.dump());
-			switch ((conductVO.target as ChessPiece).name)
+			switch ((conductVO.target as ChessPiece).label)
 			{
 				case CcjPiecesConstants.BLUE_BISHOP.label:
 					chessVO=new BishopVO(9, 10, oRowIndex, oColIndex, 1);
@@ -242,7 +242,7 @@ package com.godpaper.ccj.business.factory
 			var omenVO:OmenVO;
 			//TODO:importance initialization.
 			//			LOG.info(omenVO.dump());
-			switch ((conductVO.target as ChessPiece).name)
+			switch ((conductVO.target as ChessPiece).label)
 			{
 				case CcjPiecesConstants.BLUE_BISHOP.label:
 					omenVO=new OmenVO(CcjPiecesConstants.BLUE_BISHOP.strength, CcjPiecesConstants.BLUE_BISHOP.important, conductVO.target.chessVO.moves.celled, conductVO.target.chessVO.captures.celled, -1);

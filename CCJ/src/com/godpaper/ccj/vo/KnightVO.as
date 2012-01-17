@@ -19,15 +19,14 @@ package com.godpaper.ccj.vo
 		/**
 		 * @inheritDoc
 		 */
-		public function KnightVO(width:int, height:int, rowIndex:int, colIndex:int,flag:int=0)
+		public function KnightVO(width:int, height:int, rowIndex:int, colIndex:int,flag:int=0,identifier:String="")
 		{
-			//TODO: implement function
 			super(width, height, rowIndex, colIndex, flag);
 		}
 		/**
 		 * @inheritDoc
 		 */
-		override public function initialization(rowIndex:int, colIndex:int,flag:int=0) : void
+		override public function initialization( rowIndex:int, colIndex:int,flag:int=0,identifier:String="") : void
 		{
 			// - * - * -
 			// * - - - *
